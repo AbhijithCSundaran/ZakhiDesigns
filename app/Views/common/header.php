@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-	<title>Mega Able bootstrap admin template by codedthemes </title>
+	<title>Zakhi - Designs </title>
     <meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -107,7 +107,7 @@
                           </div>
                       </div>
                       <a href="index.html">
-                          <img class="img-fluid" src="assets/images/logo.png" alt="Theme-Logo" />
+                          <img class="img-fluid" src="<?php echo base_url().ASSET_PATH; ?>assets/images/logo.png" alt="Theme-Logo" />
                       </a>
                       <a class="mobile-options waves-effect waves-light">
                           <i class="ti-more"></i>

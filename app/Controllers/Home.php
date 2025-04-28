@@ -10,6 +10,7 @@ class Home extends BaseController
     }
 	public function dashboard(): string
     {
+    
 		$template = view('common/header');
 		$template.= view('common/leftmenu');
 		$template.= view('dashboard');

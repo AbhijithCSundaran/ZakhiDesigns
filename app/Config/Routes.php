@@ -5,17 +5,17 @@ use CodeIgniter\Router\RouteCollection;
 /**
  * @var RouteCollection $routes
  */
+/* GET METHODS */
 $routes->get('/', 'Home::index');
-$routes->get('dashboard', 'Home::dashboard');
 
+$routes->get('dashboard', 'Dashboard::index'); 
 
-// //category
+$routes->post('Auth', 'Auth::authenticate'); 
+
+//category
 $routes->get('category', 'Category::index');
 $routes->get('category/add', 'Category::addCategory');
 $routes->post('category/save', 'Category::saveCategory');
 
-
-
 //Products
 $routes->get('user/products', 'Product::index');
-

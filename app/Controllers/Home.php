@@ -8,13 +8,13 @@ class Home extends BaseController
     {
         return view('login');
     }
-	public function dashboard(): string
-    {
-    
-		$template = view('common/header');
-		$template.= view('common/leftmenu');
-		$template.= view('dashboard');
-		$template.= view('common/footer');
-        return $template;
-    }
+
+	// public function dashboard(): string
+    // {
+	// 	$template = view('common/header');
+	// 	$template.= view('common/leftmenu');
+	// 	$template.= view('dashboard');
+	// 	$template.= view('common/footer');
+    //     return $template;
+    // }
 }

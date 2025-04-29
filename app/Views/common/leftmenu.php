@@ -12,25 +12,13 @@
                               </div>
         
                               <div class="main-menu-content">
-                                  <ul>
-                                      <li class="more-details">
-                                          <a href="user-profile.html"><i class="ti-user"></i>View Profile</a>
-                                          <a href="#!"><i class="ti-settings"></i>Settings</a>
-                                          <a href="auth-normal-sign-in.html"><i class="ti-layout-sidebar-left"></i>Logout</a>
-                                      </li>
-                                  </ul>
+                                 
                               </div>
                           </div>    
                           <div class="p-15 p-b-0">
-                              <form class="form-material">
-                                  <div class="form-group form-primary">
-                                      <input type="text" name="footer-email" class="form-control" required="">
-                                      <span class="form-bar"></span>
-                                      <label class="float-label"><i class="fa fa-search m-r-10"></i>Search Friend</label>
-                                  </div>
-                              </form>
+                             
                           </div>
-                          <div class="pcoded-navigation-label" data-i18n="nav.category.navigation">Layout</div>
+                          <div class="pcoded-navigation-label" data-i18n="nav.category.navigation"></div>
                           <ul class="pcoded-item pcoded-left-item">
                               <li class="active">
                                   <a href="<?php echo base_url('dashboard') ?>" class="waves-effect waves-dark">
@@ -39,6 +27,18 @@
                                       <span class="pcoded-mcaret"></span>
                                   </a>
                               </li>
+
+                              
+                              <li>
+                                    <a href="bs-basic-table.html" class="waves-effect waves-dark">
+                                        <span class="pcoded-micon"><i class="ti-layers"></i><b>FC</b></span>
+                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main">Staff</span>
+                                        <span class="pcoded-mcaret"></span>
+                                    </a>
+                                </li>
+                                  
+                              
+
                               <!-- <li class="pcoded-hasmenu">
                                   <a href="javascript:void(0)" class="waves-effect waves-dark">
                                       <span class="pcoded-micon"><i class="ti-layout-grid2-alt"></i></span>
@@ -279,6 +279,8 @@
                 
                                   </ul>
                               </li>
+
                           </ul>
+                         
                       </div>
                   </nav>

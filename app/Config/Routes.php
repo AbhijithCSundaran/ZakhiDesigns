@@ -10,10 +10,12 @@ $routes->get('dashboard', 'Home::dashboard');
 
 
 // //category
-// $routes->get('user/category', 'Category::index');
-// $routes->post('category/add','ManageCategory::index');
+$routes->get('category', 'Category::index');
+$routes->get('category/add', 'Category::addCategory');
+$routes->post('category/save', 'Category::saveCategory');
 
 
-// //Products
-// $routes->get('user/products', 'Product::index');
+
+//Products
+$routes->get('user/products', 'Product::index');
 

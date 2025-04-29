@@ -33,7 +33,7 @@
                           <div class="pcoded-navigation-label" data-i18n="nav.category.navigation">Layout</div>
                           <ul class="pcoded-item pcoded-left-item">
                               <li class="active">
-                                  <a href="<?php echo base_url('user/dashboard') ?>" class="waves-effect waves-dark">
+                                  <a href="<?php echo base_url('dashboard') ?>" class="waves-effect waves-dark">
                                       <span class="pcoded-micon"><i class="ti-home"></i><b>D</b></span>
                                       <span class="pcoded-mtext" data-i18n="nav.dash.main">Dashboard</span>
                                       <span class="pcoded-mcaret"></span>
@@ -120,13 +120,10 @@
                                   </ul>
                               </li> -->
                           </ul>
-
-
-
                           <ul class="pcoded-item pcoded-left-item">
 
                           <li class="">
-                                  <a href="<?php echo base_url('user/category') ?>" class="waves-effect waves-dark">
+                                  <a href="<?php echo base_url('category') ?>" class="waves-effect waves-dark">
                                       <span class="pcoded-micon"><i class="ti-home"></i><b>D</b></span>
                                       <span class="pcoded-mtext" data-i18n="nav.dash.main">Category</span>
                                       <span class="pcoded-mcaret"></span>

@@ -14,6 +14,7 @@ class Category extends BaseController
 
     public function index()
     {
+        $getall = $this->categoryModel->getAllCategory();
         $template = view('common/header');
 		$template.= view('common/leftmenu');
 		$template.= view('category');

@@ -53,21 +53,21 @@
                                     <form name="createcategory" id="createCategory" method="post">
                                         <div class="form-group row">
                                             <label class="col-sm-2 col-form-label">Category Name</label>
-                                            <div class="col-sm-10">
+                                            <div class="col-sm-6">
                                                 <input type="text" name="category_name" id="categoryName" class="form-control"
                                                     placeholder="Enter the Category name">
                                             </div>
                                         </div>
                                         <div class="form-group row">
                                             <label class="col-sm-2 col-form-label">Discount Value</label>
-                                            <div class="col-sm-10">
+                                            <div class="col-sm-6">
                                                 <input type="text" class="form-control" name="discount_value" id="discountValue"
                                                     placeholder="Enter the Discount value">
                                             </div>
                                         </div>
                                         <div class="form-group row">
                                             <label class="col-sm-2 col-form-label">Discount Type</label>
-                                            <div class="col-sm-10">
+                                            <div class="col-sm-6">
                                                 <input type="text" class="form-control" name="discount_type" id="discountType" placeholder="Discount Type">
                                             </div>
                                         </div>

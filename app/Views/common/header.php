@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-	<title>Mega Able bootstrap admin template by codedthemes </title>
+	<title>Zakhi - Designs </title>
     <meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -91,6 +91,28 @@
       <div class="pcoded-container navbar-wrapper">
           <nav class="navbar header-navbar pcoded-header">
               <div class="navbar-wrapper">
+                  <div class="navbar-logo">
+                      <a class="mobile-menu waves-effect waves-light" id="mobile-collapse" href="#!">
+                          <i class="ti-menu"></i>
+                      </a>
+                      <div class="mobile-search waves-effect waves-light">
+                          <div class="header-search">
+                              <div class="main-search morphsearch-search">
+                                  <div class="input-group">
+                                      <span class="input-group-addon search-close"><i class="ti-close"></i></span>
+                                      <input type="text" class="form-control" placeholder="Enter Keyword">
+                                      <span class="input-group-addon search-btn"><i class="ti-search"></i></span>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                      <a href="index.html">
+                          <img class="img-fluid" src="<?php echo base_url().ASSET_PATH; ?>assets/images/logo.png" alt="Theme-Logo" />
+                      </a>
+                      <a class="mobile-options waves-effect waves-light">
+                          <i class="ti-more"></i>
+                      </a>
+                  </div>
                 
               </div>
           </nav>

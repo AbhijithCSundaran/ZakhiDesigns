@@ -8,6 +8,7 @@ class Home extends BaseController
     {
         return view('login');
     }
+
 	// public function dashboard(): string
     // {
 	// 	$template = view('common/header');

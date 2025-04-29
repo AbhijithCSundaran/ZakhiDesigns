@@ -7,8 +7,15 @@ use CodeIgniter\Router\RouteCollection;
  */
 /* GET METHODS */
 $routes->get('/', 'Home::index');
+
 $routes->get('dashboard', 'Dashboard::index'); 
-//$routes->get('/', 'Home::load');
-/* POST METHODS */
+
 $routes->post('Auth', 'Auth::authenticate'); 
-// $routes->post('Auth', 'Auth::login'); 
+
+//category
+$routes->get('category', 'Category::index');
+$routes->get('category/add', 'Category::addCategory');
+$routes->post('category/save', 'Category::saveCategory');
+
+//Products
+$routes->get('user/products', 'Product::index');

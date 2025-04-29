@@ -1,7 +1,4 @@
-
-
-          
-                  <div class="pcoded-content">
+ <div class="pcoded-content">
                       <!-- Page-header start -->
                       <div class="page-header">
                           <div class="page-block">
@@ -133,6 +130,7 @@
                                                         </div>
                                                     </div>
                                                 </div>
+                                                
                                             </div>
                                             <!-- task, page, download counter  end -->
     

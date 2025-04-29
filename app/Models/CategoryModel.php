@@ -13,8 +13,8 @@ class CategoryModel extends Model {
             return $this->db->table('category')->insert($data);
         }
         public function getAllCategory(){
-          $catgeory = $this->db->table('category')->get()->getResultArray();
-          echo $category;
+          $this->db->table('category')->get()->getResultArray();
+         
 
         }
     }

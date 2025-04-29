@@ -94,7 +94,7 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-sm-12">
-                    <form class="md-float-material form-material">
+                    <form class="md-float-material form-material" id="form-id" name="form-id">
                         <div class="text-center">
                             <img src="<?php echo base_url().ASSET_PATH; ?>assets/images/logo.png" alt="logo.png">
                         </div>
@@ -104,37 +104,25 @@
                                     <div class="col-md-12">
                                         <h3 class="text-center txt-primary">Sign up</h3>
                                     </div>
-                                </div>
+                                </div>                               
                                 <div class="form-group form-primary">
-                                    <input type="text" name="user-name" class="form-control" required="">
-                                    <span class="form-bar"></span>
-                                    <label class="float-label">Choose Username</label>
-                                </div>
-                                <div class="form-group form-primary">
-                                    <input type="text" name="email" class="form-control" required="">
+                                    <input type="text" name="email" id="email" class="form-control" required>
                                     <span class="form-bar"></span>
                                     <label class="float-label">Your Email Address</label>
                                 </div>
                                 <div class="row">
-                                    <div class="col-sm-6">
+                                    <div class="col-md-12">
                                         <div class="form-group form-primary">
-                                            <input type="password" name="password" class="form-control" required="">
+                                            <input type="password" name="password" id="password" class="form-control" required>
                                             <span class="form-bar"></span>
                                             <label class="float-label">Password</label>
                                         </div>
                                     </div>
-                                    <div class="col-sm-6">
-                                        <div class="form-group form-primary">
-                                            <input type="password" name="confirm-password" class="form-control" required="">
-                                            <span class="form-bar"></span>
-                                            <label class="float-label">Confirm Password</label>
-                                        </div>
-                                    </div>
                                 </div>
-                  
+                                
                                 <div class="row m-t-30">
                                     <div class="col-md-12">
-                                        <button type="button" class="btn btn-primary btn-md btn-block waves-effect text-center m-b-20">Sign up now</button>
+                                        <button type="button" name="submitBtn" id="submitBtn" class="btn btn-primary btn-md btn-block waves-effect text-center m-b-20">Sign In</button>
                                     </div>
                                 </div>
                                 <hr/>
@@ -149,17 +137,22 @@
         </div>
         <!-- end of container-fluid -->
     </section>
+
     <!-- Warning Section Starts -->
     <!-- Older IE warning message -->
 	<!-- Warning Section Ends -->
 	<!-- Required Jquery -->
-    <script type="text/javascript" src="<?php echo base_url().ASSET_PATH; ?>assets/js/jquery/jquery.min.js"></script>     <script type="text/javascript" src="assets/js/jquery-ui/jquery-ui.min.js "></script>     <script type="text/javascript" src="assets/js/popper.js/popper.min.js"></script>     <script type="text/javascript" src="assets/js/bootstrap/js/bootstrap.min.js "></script>
+    <script type="text/javascript" src="<?php echo base_url().ASSET_PATH; ?>assets/js/jquery/jquery.min.js"></script>     
+	<script type="text/javascript" src="<?php echo base_url().ASSET_PATH; ?>assets/js/jquery-ui/jquery-ui.min.js "></script>    
+	<script type="text/javascript" src="<?php echo base_url().ASSET_PATH; ?>assets/js/popper.js/popper.min.js"></script>     
+	<script type="text/javascript" src="<?php echo base_url().ASSET_PATH; ?>assets/js/bootstrap/js/bootstrap.min.js "></script>
 	<!-- waves js -->
 	<script src="<?php echo base_url().ASSET_PATH; ?>assets/pages/waves/js/waves.min.js"></script>
 	<!-- jquery slimscroll js -->
 	<script type="text/javascript" src="<?php echo base_url().ASSET_PATH; ?>assets/js/jquery-slimscroll/jquery.slimscroll.js "></script>
 	<!-- modernizr js -->
-		<script type="text/javascript" src="<?php echo base_url().ASSET_PATH; ?>assets/js/SmoothScroll.js"></script>     <script src="assets/js/jquery.mCustomScrollbar.concat.min.js "></script>
+		<!-- <script type="text/javascript" src="<?php echo base_url().ASSET_PATH; ?>assets/js/SmoothScroll.js"></script>      -->
+		<script src="<?php echo base_url().ASSET_PATH; ?>assets/js/jquery.mCustomScrollbar.concat.min.js "></script>
 	<!-- i18next.min.js 
 	<script type="text/javascript" src="bower_components/i18next/js/i18next.min.js"></script>
 	<script type="text/javascript" src="bower_components/i18next-xhr-backend/js/i18nextXHRBackend.min.js"></script>
@@ -167,4 +160,31 @@
 	<script type="text/javascript" src="bower_components/jquery-i18next/js/jquery-i18next.min.js"></script>-->
 	<script type="text/javascript" src="<?php echo base_url().ASSET_PATH; ?>assets/js/common-pages.js"></script>
 </body>
+<script>
+function authenticate() {
+
+    var url = '<?php echo base_url('Auth'); ?>';
+    $.post(url, $('#form-id').serialize(), function(data) {
+        if (data.status == 1) {
+            window.location.href = "<?php echo base_url('dashboard'); ?>";
+        } else {
+            $('#alertbox')
+                .html('<div>' + data.msg + '</div>')
+                .removeClass('success')
+                .addClass('error')
+                .show();
+            setTimeout(function() {
+                $('#alertbox').empty().hide();
+            }, 3000);
+        }
+    }, 'json');
+}
+
+$(document).ready(function() {
+    $('#submitBtn').click(function(event) {
+        event.preventDefault();
+        authenticate();
+    });
+});
+  </script>
 </html>

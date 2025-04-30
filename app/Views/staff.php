@@ -40,14 +40,16 @@
                                         <div class="col-md-7">
 
                                         </div>
-                                        <div class="col-md-2">
+										<div class="col-md-3">
                                             <div class="row">
                                                 <div class="col-lg-12 d-flex justify-content-end p-2">
-                                                    <a href="<?= base_url('staff/add'); ?>" class="btn btn-primary"> Add User
+                                                    <a href="<?= base_url('staff/add'); ?>" class="btn btn-primary">
+                                                        Add User
                                                     </a>
                                                 </div>
                                             </div>
                                         </div>
+                                        
                                     </div>
                                 </div>
                                 <div class="card-block">
@@ -61,25 +63,39 @@
                                                                 <th>Name</th>
                                                                 <th>Email</th>
                                                                 <th>Role</th>
-                                                                <th>Status</th>
+																<th>Status</th>
+																<th>Action</th>
                                                             </tr>
                                                         </thead>
                                                         <tbody>
                                                         <?php
-										  $slno = 1;
-										 foreach ($user as $user) { ?>
-										<tr>
-											<td><?php echo $slno; ?></td>
-											<td><?php echo $user->us_Name; ?></td>
-											<td><?php echo $user->us_Email; ?></td>
-                                           <td>Staff
-                                            </td>
-											<td>
-											</td>
-                                           
-										</tr>
-										<?php 
-										$slno++;} ?>
+														  $slno = 1;
+														 foreach ($user as $user) { ?>
+														<tr>
+															<td><?php echo $slno; ?></td>
+															<td><?php echo $user->us_Name; ?></td>
+															<td><?php echo $user->us_Email; ?></td>
+														   <td>Staff
+															</td>
+															 <td>
+                                                                <div class="form-check form-switch">
+                                                                    <input class="form-check-input checkactive"
+                                                                        type="checkbox"
+                                                                        id="statusSwitch-<?= $user->us_Status; ?>"
+                                                                        value="<?= $user->us_Id; ?>"
+                                                                        <?= ($user->us_Status == 1) ? 'checked' : ''; ?>>
+                                                                    <label class="form-check-label pl-0 label-check"
+                                                                        for="statusSwitch-<?= $user->us_Id; ?>">
+                                                                        
+                                                                    </label>
+                                                                </div>
+                                                            </td>
+                                                            <td>
+                                                            <i class="bi bi-pencil-square"></i>
+                                                            </td>                                           
+														</tr>
+														<?php 
+														$slno++;} ?>
                                                         </tbody>
                                                     </table>
                                                 </div>

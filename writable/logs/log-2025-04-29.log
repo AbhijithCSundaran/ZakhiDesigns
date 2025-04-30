@@ -275,3 +275,223 @@ in APPPATH\Controllers\Dashboard.php on line 17.
  4 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
  5 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
  6 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2025-04-29 05:48:35 --> ErrorException: Undefined variable $customer
+[Method: GET, Route: category]
+in APPPATH\Controllers\Category.php on line 19.
+ 1 APPPATH\Controllers\Category.php(19): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $customer', 'C:\\xampp\\htdocs\\ZakhiDesigns\\app\\Controllers\\Category.php', 19)
+ 2 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Category->index()
+ 3 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Category))
+ 4 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2025-04-29 06:09:35 --> ErrorException: Undefined variable $allcategory
+[Method: GET, Route: category]
+in APPPATH\Views\category.php on line 80.
+ 1 APPPATH\Views\category.php(80): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $allcategory', 'C:\\xampp\\htdocs\\ZakhiDesigns\\app\\Views\\category.php', 80)
+ 2 SYSTEMPATH\View\View.php(224): include('C:\\xampp\\htdocs\\ZakhiDesigns\\app\\Views\\category.php')
+ 3 SYSTEMPATH\View\View.php(227): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1173): CodeIgniter\View\View->render('category', [], true)
+ 5 APPPATH\Controllers\Category.php(25): view('category', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Category->index()
+ 7 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Category))
+ 8 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2025-04-29 06:10:53 --> ErrorException: Undefined variable $data
+[Method: GET, Route: category]
+in APPPATH\Views\category.php on line 80.
+ 1 APPPATH\Views\category.php(80): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $data', 'C:\\xampp\\htdocs\\ZakhiDesigns\\app\\Views\\category.php', 80)
+ 2 SYSTEMPATH\View\View.php(224): include('C:\\xampp\\htdocs\\ZakhiDesigns\\app\\Views\\category.php')
+ 3 SYSTEMPATH\View\View.php(227): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1173): CodeIgniter\View\View->render('category', [], true)
+ 5 APPPATH\Controllers\Category.php(25): view('category', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Category->index()
+ 7 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Category))
+ 8 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2025-04-29 06:10:56 --> ErrorException: Undefined variable $data
+[Method: GET, Route: category]
+in APPPATH\Views\category.php on line 80.
+ 1 APPPATH\Views\category.php(80): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $data', 'C:\\xampp\\htdocs\\ZakhiDesigns\\app\\Views\\category.php', 80)
+ 2 SYSTEMPATH\View\View.php(224): include('C:\\xampp\\htdocs\\ZakhiDesigns\\app\\Views\\category.php')
+ 3 SYSTEMPATH\View\View.php(227): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1173): CodeIgniter\View\View->render('category', [], true)
+ 5 APPPATH\Controllers\Category.php(25): view('category', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Category->index()
+ 7 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Category))
+ 8 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2025-04-29 06:11:49 --> ErrorException: Undefined variable $data
+[Method: GET, Route: category]
+in APPPATH\Views\category.php on line 80.
+ 1 APPPATH\Views\category.php(80): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $data', 'C:\\xampp\\htdocs\\ZakhiDesigns\\app\\Views\\category.php', 80)
+ 2 SYSTEMPATH\View\View.php(224): include('C:\\xampp\\htdocs\\ZakhiDesigns\\app\\Views\\category.php')
+ 3 SYSTEMPATH\View\View.php(227): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1173): CodeIgniter\View\View->render('category', [], true)
+ 5 APPPATH\Controllers\Category.php(25): view('category', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Category->index()
+ 7 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Category))
+ 8 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2025-04-29 06:11:53 --> ErrorException: Undefined variable $data
+[Method: GET, Route: category]
+in APPPATH\Views\category.php on line 80.
+ 1 APPPATH\Views\category.php(80): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $data', 'C:\\xampp\\htdocs\\ZakhiDesigns\\app\\Views\\category.php', 80)
+ 2 SYSTEMPATH\View\View.php(224): include('C:\\xampp\\htdocs\\ZakhiDesigns\\app\\Views\\category.php')
+ 3 SYSTEMPATH\View\View.php(227): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1173): CodeIgniter\View\View->render('category', [], true)
+ 5 APPPATH\Controllers\Category.php(25): view('category', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Category->index()
+ 7 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Category))
+ 8 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2025-04-29 06:12:32 --> ErrorException: Undefined variable $allcategory
+[Method: GET, Route: category]
+in APPPATH\Views\category.php on line 80.
+ 1 APPPATH\Views\category.php(80): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $allcategory', 'C:\\xampp\\htdocs\\ZakhiDesigns\\app\\Views\\category.php', 80)
+ 2 SYSTEMPATH\View\View.php(224): include('C:\\xampp\\htdocs\\ZakhiDesigns\\app\\Views\\category.php')
+ 3 SYSTEMPATH\View\View.php(227): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1173): CodeIgniter\View\View->render('category', [], true)
+ 5 APPPATH\Controllers\Category.php(25): view('category', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Category->index()
+ 7 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Category))
+ 8 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2025-04-29 06:13:47 --> ErrorException: Undefined variable $allcategory
+[Method: GET, Route: category]
+in APPPATH\Views\category.php on line 80.
+ 1 APPPATH\Views\category.php(80): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $allcategory', 'C:\\xampp\\htdocs\\ZakhiDesigns\\app\\Views\\category.php', 80)
+ 2 SYSTEMPATH\View\View.php(224): include('C:\\xampp\\htdocs\\ZakhiDesigns\\app\\Views\\category.php')
+ 3 SYSTEMPATH\View\View.php(227): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1173): CodeIgniter\View\View->render('category', [], true)
+ 5 APPPATH\Controllers\Category.php(22): view('category', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Category->index()
+ 7 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Category))
+ 8 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2025-04-29 06:13:50 --> ErrorException: Undefined variable $allcategory
+[Method: GET, Route: category]
+in APPPATH\Views\category.php on line 80.
+ 1 APPPATH\Views\category.php(80): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $allcategory', 'C:\\xampp\\htdocs\\ZakhiDesigns\\app\\Views\\category.php', 80)
+ 2 SYSTEMPATH\View\View.php(224): include('C:\\xampp\\htdocs\\ZakhiDesigns\\app\\Views\\category.php')
+ 3 SYSTEMPATH\View\View.php(227): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1173): CodeIgniter\View\View->render('category', [], true)
+ 5 APPPATH\Controllers\Category.php(22): view('category', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Category->index()
+ 7 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Category))
+ 8 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2025-04-29 06:17:08 --> ErrorException: Undefined array key "cat_Discount_type"
+[Method: GET, Route: category]
+in APPPATH\Views\category.php on line 85.
+ 1 APPPATH\Views\category.php(85): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key "cat_Discount_type"', 'C:\\xampp\\htdocs\\ZakhiDesigns\\app\\Views\\category.php', 85)
+ 2 SYSTEMPATH\View\View.php(224): include('C:\\xampp\\htdocs\\ZakhiDesigns\\app\\Views\\category.php')
+ 3 SYSTEMPATH\View\View.php(227): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1173): CodeIgniter\View\View->render('category', [], true)
+ 5 APPPATH\Controllers\Category.php(22): view('category', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Category->index()
+ 7 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Category))
+ 8 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2025-04-29 06:18:05 --> ErrorException: Undefined array key "cat_Discount_type"
+[Method: GET, Route: category]
+in APPPATH\Views\category.php on line 85.
+ 1 APPPATH\Views\category.php(85): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key "cat_Discount_type"', 'C:\\xampp\\htdocs\\ZakhiDesigns\\app\\Views\\category.php', 85)
+ 2 SYSTEMPATH\View\View.php(224): include('C:\\xampp\\htdocs\\ZakhiDesigns\\app\\Views\\category.php')
+ 3 SYSTEMPATH\View\View.php(227): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1173): CodeIgniter\View\View->render('category', [], true)
+ 5 APPPATH\Controllers\Category.php(22): view('category', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Category->index()
+ 7 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Category))
+ 8 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2025-04-29 06:19:31 --> ErrorException: Array to string conversion
+[Method: GET, Route: category]
+in APPPATH\Views\category.php on line 2.
+ 1 APPPATH\Views\category.php(2): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Array to string conversion', 'C:\\xampp\\htdocs\\ZakhiDesigns\\app\\Views\\category.php', 2)
+ 2 SYSTEMPATH\View\View.php(224): include('C:\\xampp\\htdocs\\ZakhiDesigns\\app\\Views\\category.php')
+ 3 SYSTEMPATH\View\View.php(227): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1173): CodeIgniter\View\View->render('category', [], true)
+ 5 APPPATH\Controllers\Category.php(22): view('category', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Category->index()
+ 7 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Category))
+ 8 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2025-04-29 06:20:06 --> ErrorException: Undefined variable $data
+[Method: GET, Route: category]
+in APPPATH\Views\category.php on line 2.
+ 1 APPPATH\Views\category.php(2): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $data', 'C:\\xampp\\htdocs\\ZakhiDesigns\\app\\Views\\category.php', 2)
+ 2 SYSTEMPATH\View\View.php(224): include('C:\\xampp\\htdocs\\ZakhiDesigns\\app\\Views\\category.php')
+ 3 SYSTEMPATH\View\View.php(227): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1173): CodeIgniter\View\View->render('category', [], true)
+ 5 APPPATH\Controllers\Category.php(22): view('category', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Category->index()
+ 7 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Category))
+ 8 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2025-04-29 06:31:22 --> ErrorException: Undefined variable $row
+[Method: GET, Route: category]
+in APPPATH\Views\category.php on line 94.
+ 1 APPPATH\Views\category.php(94): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $row', 'C:\\xampp\\htdocs\\ZakhiDesigns\\app\\Views\\category.php', 94)
+ 2 SYSTEMPATH\View\View.php(224): include('C:\\xampp\\htdocs\\ZakhiDesigns\\app\\Views\\category.php')
+ 3 SYSTEMPATH\View\View.php(227): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1173): CodeIgniter\View\View->render('category', [], true)
+ 5 APPPATH\Controllers\Category.php(24): view('category', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Category->index()
+ 7 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Category))
+ 8 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2025-04-29 06:33:14 --> ErrorException: Undefined array key "id"
+[Method: GET, Route: category]
+in APPPATH\Views\category.php on line 94.
+ 1 APPPATH\Views\category.php(94): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key "id"', 'C:\\xampp\\htdocs\\ZakhiDesigns\\app\\Views\\category.php', 94)
+ 2 SYSTEMPATH\View\View.php(224): include('C:\\xampp\\htdocs\\ZakhiDesigns\\app\\Views\\category.php')
+ 3 SYSTEMPATH\View\View.php(227): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1173): CodeIgniter\View\View->render('category', [], true)
+ 5 APPPATH\Controllers\Category.php(24): view('category', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Category->index()
+ 7 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Category))
+ 8 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2025-04-29 09:09:32 --> ErrorException: Undefined variable $row
+[Method: GET, Route: category]
+in APPPATH\Views\category.php on line 104.
+ 1 APPPATH\Views\category.php(104): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $row', 'C:\\xampp\\htdocs\\ZakhiDesigns\\app\\Views\\category.php', 104)
+ 2 SYSTEMPATH\View\View.php(224): include('C:\\xampp\\htdocs\\ZakhiDesigns\\app\\Views\\category.php')
+ 3 SYSTEMPATH\View\View.php(227): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1173): CodeIgniter\View\View->render('category', [], true)
+ 5 APPPATH\Controllers\Category.php(24): view('category', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Category->index()
+ 7 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Category))
+ 8 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))

@@ -14,11 +14,16 @@ class Category extends BaseController
 
     public function index()
     {
-        $getall = $this->categoryModel->getAllCategory();
+
+        $allcategory = $this->categoryModel->getAllCategory();
+        $data['category'] =  $allcategory;
+        // print_r($data['category']);
+        // exit;
         $template = view('common/header');
 		$template.= view('common/leftmenu');
-		$template.= view('category');
-		$template.= view('common/footer');
+		$template.= view('category', $data);
+        $template.= view('common/footer');
+        $template.= view('page_scripts/categoryjs');
         return $template;
 
         
@@ -28,8 +33,8 @@ class Category extends BaseController
         $template = view('common/header');
 		$template.= view('common/leftmenu');
 		$template.= view('category_add');
+        $template.= view('common/footer');
         $template.= view('page_scripts/categoryjs');
-		$template.= view('common/footer');
         return $template;
     }
     public function saveCategory()
@@ -66,6 +71,50 @@ class Category extends BaseController
             ]);
         }
     }
+
+    public function changeStatus()
+    {
+        $catId = $this->request->getPost('cat_Id');
+        $newStatus = $this->request->getPost('cat_Status');
+    
+        $categoryModel = new CategoryModel();
+        $category = $categoryModel->getCategoryByid($catId);
+    
+        if (!$category) {
+            return $this->response->setJSON([
+                'success' => false,
+                'message' => 'Category not found'
+            ]);
+        }
+    
+        $update = $categoryModel->updateCategory($catId, ['cat_Status' => $newStatus]);
+    
+        if ($update) {
+            return $this->response->setJSON([
+                'success' => true,
+                'message' => 'Status Updated Successfully!',
+                'new_status' => $newStatus
+            ]);
+        } else {
+            return $this->response->setJSON([
+                'success' => false,
+                'message' => 'Failed to update status'
+            ]);
+        }
+    }
+    
+    //Category Delete
+
+    public function deleteCategory($cat_id) {
+		if($cat_id) {
+			$modified_by = $this->session->get('us_Id');
+			$catStatus = $this->categoryModel->changeCategoryStatus(3, $cat_id, $modified_by);
+			echo json_encode(1);
+		}
+		else {
+			echo json_encode(2);
+		}
+	}
+
+
 }
-
-

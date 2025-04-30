@@ -60,14 +60,14 @@
                                         <div class="form-group row">
                                             <label class="col-sm-2 col-form-label">Email</label>
                                             <div class="col-sm-6">
-                                                <input type="text" class="form-control" name="staffemail" id="staffemail"
+                                                <input type="email" class="form-control" name="staffemail" id="staffemail"
                                                     placeholder="Enter the mail id">
                                             </div>
                                         </div>
 										 <div class="form-group row">
                                             <label class="col-sm-2 col-form-label">Alternate Email</label>
                                             <div class="col-sm-6">
-                                                <input type="text" class="form-control" name="staffotemail" id="staffotemail"
+                                                <input type="email" class="form-control" name="staffotemail" id="staffotemail"
                                                     placeholder="Enter alternate mailid">
                                             </div>
                                         </div>

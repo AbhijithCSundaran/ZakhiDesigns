@@ -75,7 +75,7 @@ function deleteCategory(){
         url: "<?php echo base_url('category/delete'); ?>/" + categoryId,
         method: "POST",
         success: function(response) {
-            if (response.success) {
+            if (response == 1){
                 alert("Deleted successfully");
                 location.reload();
             } else {

@@ -41,27 +41,27 @@ class Staff extends BaseController
 		$staffotemail = $this->input->getPost('staffotemail');
 		$password = $this->input->getPost('password');
 		$us_id = $this->input->getPost('us_id');
+		
 		if($staffname && $staffemail && $password) {
 			
 			$data = [
-				'us_Id'            => $us_id,
 				'us_Name'          => $staffname,
 				'us_Email'         => $staffemail,
 				'us_Email2'        => $staffotemail,
 				'us_Status'		   => 1,
 				'us_Role'		   => 2,
 				'us_Password'      => md5($password),
-				'us_Created_on'    => date("Y-m-d H:i:s"),
-				'us_Created_by'    => $this->session->get('zd_id'),
-				'us_Modified_by'   => $this->session->get('zd_id'),
+				'us_createdon'    => date("Y-m-d H:i:s"),
+				'us_createdby'    => $this->session->get('zd_id'),
+				'us_modifyon'   => $this->session->get('zd_id'),
 			];
 			if ($us_id!=0) {
+				
 				$modifyStaff = $this->StaffModel->modifyStaff($us_id, $data);
 				echo json_encode(array("status" => 1, "respmsg" => "Updated successfully."));
 			} else {
-				//$CreateStaff = $this->staffModel->createStaff($data);
+				$CreateStaff = $this->staffModel->createStaff($data);
 				echo json_encode(array("status" => 1, "respmsg" => "Created successfully."));
-				
 			}
 		}
 		else {

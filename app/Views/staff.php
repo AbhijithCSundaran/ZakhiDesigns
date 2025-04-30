@@ -54,7 +54,7 @@
                                 <div class="card">
                                             <div class="card-block table-border-style">
                                                 <div class="table-responsive">
-                                                    <table class="table table-hover">
+                                                    <table class="table table-hover" id="staffList">
                                                         <thead>
                                                             <tr>
                                                                 <th>Sl.No.</th>

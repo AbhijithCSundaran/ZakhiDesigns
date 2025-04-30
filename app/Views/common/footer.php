@@ -3,6 +3,8 @@
         </div>
     </div>
     <!-- Required Jquery -->
+
+      <!-- DataTables CSS -->
     <script type="text/javascript" src="<?php echo base_url().ASSET_PATH; ?>assets/js/jquery/jquery.min.js"></script>
     <script type="text/javascript" src="<?php echo base_url().ASSET_PATH; ?>assets/js/jquery-ui/jquery-ui.min.js "></script>
     <script type="text/javascript" src="<?php echo base_url().ASSET_PATH; ?>assets/js/popper.js/popper.min.js"></script>
@@ -32,7 +34,9 @@
     <!-- custom js -->
     <script type="text/javascript" src="<?php echo base_url().ASSET_PATH; ?>assets/pages/dashboard/custom-dashboard.js"></script>
     <script type="text/javascript" src="<?php echo base_url().ASSET_PATH; ?>assets/js/script.js "></script>
-   
+<!--Data table js -->
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 
 </html>

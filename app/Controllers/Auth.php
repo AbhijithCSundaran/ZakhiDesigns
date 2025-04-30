@@ -22,12 +22,12 @@ class Auth extends BaseController
 
     public function authenticate()
     {
+
         $email = $this->request->getPost('email');
-		 $password = $this->request->getPost('password');
-		//$recaptcha = $this->input->getPost('g-recaptcha-response');
+		 $password = md5($this->request->getPost('password'));
+		$recaptcha = $this->input->getPost('g-recaptcha-response');
       if ($email && $password) {
 			$userLog = $this->usModel->getLoginAccount($email, $password);
-          
 			if ($userLog) {
 				$this->session->set([
 					'zd_uid' => $userLog->us_Id,
@@ -59,10 +59,8 @@ class Auth extends BaseController
     $session = session();
     $session->destroy();
     return redirect()->to(base_url('/')); 
+	//return view('login');
 }
-
-
-
 	private function reCaptcha($recaptcha)
     {
         $secretKey = '6LeoL5UpAAAAANCPPYP_gZWrENl5vYFJIZytnUkD';

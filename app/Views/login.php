@@ -15,6 +15,8 @@
       <meta name="description" content="Mega Able Bootstrap admin template made using Bootstrap 4 and it has huge amount of ready made feature, UI components, pages which completely fulfills any dashboard needs." />
       <meta name="keywords" content="bootstrap, bootstrap admin template, admin theme, admin dashboard, dashboard template, admin template, responsive" />
       <meta name="author" content="codedthemes" />
+	  <!-----------Eye icon toggle style------------>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
       <!-- Favicon icon -->
 
       <link rel="icon" href="<?php echo base_url().ASSET_PATH; ?>assets/images/favicon.ico" type="image/x-icon">
@@ -95,11 +97,13 @@
             <div class="row">
                 <div class="col-sm-12">
                     <form class="md-float-material form-material" id="form-id" name="form-id">
+					
                         <div class="text-center">
                             <img src="<?php echo base_url().ASSET_PATH; ?>assets/images/logo.png" alt="logo.png">
                         </div>
                         <div class="auth-box card">
                             <div class="card-block">
+							<span class="alrt-msg" id="alertbox" style="display:none;"></span>
                                 <div class="row m-b-20">
                                     <div class="col-md-12">
                                         <h3 class="text-center txt-primary">Sign up</h3>
@@ -115,11 +119,18 @@
                                         <div class="form-group form-primary">
                                             <input type="password" name="password" id="password" class="form-control" required>
                                             <span class="form-bar"></span>
-                                            <label class="float-label">Password</label>
+                                            <label class="float-label">Password </label>
+											<i class="fa-solid fa-eye toggle-password" id="togglePassword"></i>
+											
+											
                                         </div>
+										 
                                     </div>
                                 </div>
-                                
+                                 <div class="form-group">
+									<div class="g-recaptcha brochure__form__captcha p-2"
+										data-sitekey="6LeoL5UpAAAAABy-sNgzr_XHc2vWl2Kpr45VHWey"></div>
+								</div>
                                 <div class="row m-t-30">
                                     <div class="col-md-12">
                                         <button type="button" name="submitBtn" id="submitBtn" class="btn btn-primary btn-md btn-block waves-effect text-center m-b-20">Sign In</button>
@@ -137,7 +148,12 @@
         </div>
         <!-- end of container-fluid -->
     </section>
-
+	<!--------alert box script------------>
+	
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+	
+	
+	<script src="https://www.google.com/recaptcha/api.js"></script>
     <!-- Warning Section Starts -->
     <!-- Older IE warning message -->
 	<!-- Warning Section Ends -->
@@ -175,7 +191,7 @@ function authenticate() {
                 .show();
             setTimeout(function() {
                 $('#alertbox').empty().hide();
-            }, 3000);
+            }, 2000);
         }
     }, 'json');
 }
@@ -187,4 +203,20 @@ $(document).ready(function() {
     });
 });
   </script>
+<script>
+document.getElementById('togglePassword').addEventListener('click', function () {
+    const passwordInput = document.getElementById('password');
+    const icon = this;
+
+    if (passwordInput.type === 'password') {
+        passwordInput.type = 'text';
+        icon.classList.remove('fa-eye');
+        icon.classList.add('fa-eye-slash');
+    } else {
+        passwordInput.type = 'password';
+        icon.classList.remove('fa-eye-slash');
+        icon.classList.add('fa-eye');
+    }
+});
+</script>
 </html>

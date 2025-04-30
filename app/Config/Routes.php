@@ -19,3 +19,11 @@ $routes->post('category/save', 'Category::saveCategory');
 
 //Products
 $routes->get('user/products', 'Product::index');
+
+//Staff
+$routes->get('staff', 'Staff::index');
+$routes->get('staff/add', 'Staff::addStaff');
+$routes->post('staff/save', 'Staff::createnew');
+
+//logout
+$routes->post('/logout', 'Auth::logout'); 

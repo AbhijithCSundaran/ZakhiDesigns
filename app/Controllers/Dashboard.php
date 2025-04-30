@@ -8,14 +8,13 @@ class Dashboard extends BaseController
 	{
 		$this->session = \Config\Services::session();
 		$this->input = \Config\Services::request();
-  // Load model here
-    }
-	public function index(): string
-	{
 
-		if (!$this->session->get('zd_uid')) {
-			return redirect()->to(base_url());
-        }
+	}
+	public function index(): string
+	 {
+	 	if (!$this->session->get('zd_uid')) {
+			redirect()->to(base_url());
+         }
 
 		$template = view('common/header');
 		$template.= view('common/leftmenu');

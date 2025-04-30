@@ -32,6 +32,7 @@
     <!-- custom js -->
     <script type="text/javascript" src="<?php echo base_url().ASSET_PATH; ?>assets/pages/dashboard/custom-dashboard.js"></script>
     <script type="text/javascript" src="<?php echo base_url().ASSET_PATH; ?>assets/js/script.js "></script>
+   
 </body>
 
 </html>

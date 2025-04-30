@@ -16458,3 +16458,10 @@ body.dark {
   bottom: 50px;
   opacity: 1;
 }
+
+/*# alert box css*/
+.alrt-msg{
+    color: #d8000c;
+    font-size: 16px;
+}
+

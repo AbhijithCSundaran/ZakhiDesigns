@@ -1,0 +1,63 @@
+CRITICAL - 2025-04-30 06:30:19 --> TypeError: Unsupported operand types: string + int
+[Method: GET, Route: category]
+in APPPATH\Views\category.php on line 85.
+ 1 SYSTEMPATH\View\View.php(224): include()
+ 2 SYSTEMPATH\View\View.php(227): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 3 SYSTEMPATH\Common.php(1173): CodeIgniter\View\View->render('category', [], true)
+ 4 APPPATH\Controllers\Category.php(24): view('category', [...])
+ 5 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Category->index()
+ 6 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Category))
+ 7 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 9 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+10 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2025-04-30 06:45:08 --> TypeError: Unsupported operand types: string + int
+[Method: GET, Route: category]
+in APPPATH\Views\category.php on line 85.
+ 1 SYSTEMPATH\View\View.php(224): include()
+ 2 SYSTEMPATH\View\View.php(227): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 3 SYSTEMPATH\Common.php(1173): CodeIgniter\View\View->render('category', [], true)
+ 4 APPPATH\Controllers\Category.php(24): view('category', [...])
+ 5 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Category->index()
+ 6 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Category))
+ 7 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 9 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+10 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2025-04-30 06:45:11 --> TypeError: Unsupported operand types: string + int
+[Method: GET, Route: category]
+in APPPATH\Views\category.php on line 85.
+ 1 SYSTEMPATH\View\View.php(224): include()
+ 2 SYSTEMPATH\View\View.php(227): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 3 SYSTEMPATH\Common.php(1173): CodeIgniter\View\View->render('category', [], true)
+ 4 APPPATH\Controllers\Category.php(24): view('category', [...])
+ 5 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Category->index()
+ 6 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Category))
+ 7 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 9 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+10 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2025-04-30 07:05:28 --> ErrorException: Undefined array key "id"
+[Method: GET, Route: category]
+in APPPATH\Views\category.php on line 105.
+ 1 APPPATH\Views\category.php(105): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key "id"', 'C:\\xampp\\htdocs\\ZakhiDesigns\\app\\Views\\category.php', 105)
+ 2 SYSTEMPATH\View\View.php(224): include('C:\\xampp\\htdocs\\ZakhiDesigns\\app\\Views\\category.php')
+ 3 SYSTEMPATH\View\View.php(227): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1173): CodeIgniter\View\View->render('category', [], true)
+ 5 APPPATH\Controllers\Category.php(24): view('category', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Category->index()
+ 7 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Category))
+ 8 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2025-04-30 07:58:36 --> ErrorException: Undefined variable $acc_id
+[Method: POST, Route: category/delete/1]
+in APPPATH\Controllers\Category.php on line 111.
+ 1 APPPATH\Controllers\Category.php(111): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $acc_id', 'C:\\xampp\\htdocs\\ZakhiDesigns\\app\\Controllers\\Category.php', 111)
+ 2 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Category->deleteCategory('1')
+ 3 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Category))
+ 4 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))

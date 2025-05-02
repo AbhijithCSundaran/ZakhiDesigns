@@ -31,7 +31,7 @@ class Auth extends BaseController
 			if ($userLog) {
 				$this->session->set([
 					'zd_uid' => $userLog->us_Id,
-					'zd_uname' => $userLog->us_Name
+					'zd_uname' => $userLog->us_Name,
 				]);
 				//$this->session->get('fav_user_name');
 				echo json_encode(array(

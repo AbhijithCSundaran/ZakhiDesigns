@@ -15,12 +15,19 @@ class StaffModel extends Model {
 		 public function createStaff($data) {
             return $this->db->table('user')->insert($data);
         }
-		public function modifyStaff($rid,$data) {
-		return $this->db->table('user')
-					->where(["us_Id" => $us_id])
-					->set($data)
-					->update();
-	}
+		public function modifyStaff($us_id,$data) {
+					
+			$this->db->table('user')->where('us_Id',$us_id)->update($data);
+			return $this->db->getLastQuery();
+		}
+		public function getStaffByid($us_id)
+		{
+			return $this->db->query("select * from user where us_Id = '".$us_id."'")->getRow();
+		}
+		public function deleteStaffById($us_status, $us_id, $modified_by)
+		{
+			return $this->db->query("update user set us_Status = '".$us_status."', us_modifyon=NOW(), us_modifyby='".$modified_by."' where us_Id = '".$us_id."'");
+		}
     }
 
 ?>

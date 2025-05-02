@@ -12,7 +12,7 @@
                 <div class="col-md-4">
                     <ul class="breadcrumb-title">
                         <li class="breadcrumb-item">
-                            <a href="index.html"> <i class="fa fa-home"></i> </a>
+                            <a href="<?php echo base_url('dashboard') ?>"> <i class="fa fa-home"></i> </a>
                         </li>
                         <li class="breadcrumb-item"><a href="#!">Add User</a>
                         </li>
@@ -49,50 +49,49 @@
                                     </div>
                                 </div>
                                 <div class="card-block">
-                                    <form name="createstaff" id="createstaff">
+								<div id="messageBox" class="alert alert-success" style="display: none;"></div>
+								
+                                    <form name="createstaff" id="createstaff" method="post">
+									
                                         <div class="form-group row">
                                             <label class="col-sm-2 col-form-label">Name</label>
                                             <div class="col-sm-6">
                                                 <input type="text" name="staffname" id="staffname" class="form-control"
-                                                    placeholder="Enter the staff name">
+                                                    value="<?= isset($staff) ? ($staff['us_Name']) : '' ?>" placeholder="Enter the staff name" required>
                                             </div>
                                         </div>
                                         <div class="form-group row">
                                             <label class="col-sm-2 col-form-label">Email</label>
                                             <div class="col-sm-6">
                                                 <input type="email" class="form-control" name="staffemail" id="staffemail"
-                                                    placeholder="Enter the mail id">
+                                                  value="<?= isset($staff) ? esc($staff['us_Email']) : '' ?>"   placeholder="Enter the mail id" required>
                                             </div>
                                         </div>
 										 <div class="form-group row">
                                             <label class="col-sm-2 col-form-label">Alternate Email</label>
                                             <div class="col-sm-6">
                                                 <input type="email" class="form-control" name="staffotemail" id="staffotemail"
-                                                    placeholder="Enter alternate mailid">
+                                                  value="<?= isset($staff) ? ($staff['us_Email2']) : '' ?>"   placeholder="Enter alternate mailid" required>
                                             </div>
                                         </div>
                                         <div class="form-group row">
                                             <label class="col-sm-2 col-form-label">Password</label>
                                             <div class="col-sm-6">
-                                                <input type="text" class="form-control" name="password" id="password" placeholder="Password">
+                                                <input type="Password" class="form-control" name="password" id="password"value="<?= isset($staff) ? ($staff['us_Password']) : '' ?>"  placeholder="Password" required>
                                             </div>
                                         </div>
 										
                                         <div class="row justify-content-center">
-										<input type="hidden" name="us_id" value="<?php echo (isset($us_id) && $us_id!="" ? $us_id : 0); ?>" />
+										<input type="hidden" name="us_id" value="<?= isset($staff['us_Id']) ? esc($staff['us_Id']) : '' ?>">
                                             <div class="button-group">
-                                                <button type="button" class="btn btn-secondary">
-												  <a href="<?= base_url('staff'); ?>"> 
-                                                   
+											 <button type="button" class="btn btn-secondary" onclick="window.location.href='<?= base_url('staff'); ?>'">
                                                     <i class="bi bi-x-circle"></i> Discard
-													</a>
                                                 </button>
                                                 <button type="button" class="btn btn-primary" id="staffSubmit" name="staffSubmit">
                                                     <i class="bi bi-check-circle"></i> Save
                                                 </button>
                                             </div>
                                         </div>
-									
                                     </form>
                                 </div>
                             </div>

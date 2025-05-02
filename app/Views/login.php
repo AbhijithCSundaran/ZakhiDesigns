@@ -116,16 +116,16 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-md-12">
-                                        <div class="form-group form-primary">
-                                            <input type="password" name="password" id="password" class="form-control" required>
-                                            <span class="form-bar"></span>
-                                            <label class="float-label">Password </label>
-											<i class="fa-solid fa-eye toggle-password" id="togglePassword"></i>
+										<div class="form-group form-primary position-relative">
+											<input type="password" name="password" id="password" class="form-control" required>
+											<span class="form-bar"></span>
+											<label class="float-label">Password</label>
 											
-											
-                                        </div>
-										 
-                                    </div>
+											<!-- Eye icon positioned inside input -->
+											<i class="fa-solid fa-eye toggle-password" id="togglePassword" 
+											   style="position: absolute; top: 50%; right: 15px; transform: translateY(-50%); cursor: pointer;"></i>
+										</div>
+									</div>
                                 </div>
                                  <div class="form-group">
 									<div class="g-recaptcha brochure__form__captcha p-2"
@@ -137,7 +137,6 @@
                                     </div>
                                 </div>
                                 <hr/>
-                               
                             </div>
                         </div>
                     </form>

@@ -129,7 +129,7 @@
                                 </div>
                                  <div class="form-group">
 									<div class="g-recaptcha brochure__form__captcha p-2"
-										data-sitekey="6LeoL5UpAAAAABy-sNgzr_XHc2vWl2Kpr45VHWey"></div>
+										data-sitekey="6LfUcCsrAAAAADm_xZWo8wfVu2YJh4bn4dR4Gvtc"></div>
 								</div>
                                 <div class="row m-t-30">
                                     <div class="col-md-12">

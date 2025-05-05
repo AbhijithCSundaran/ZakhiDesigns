@@ -24,8 +24,16 @@ $routes->get('user/products', 'Product::index');
 
 //Staff
 $routes->get('staff', 'Staff::index');
-$routes->get('staff/add', 'Staff::addStaff');
+$routes->get('staff/add', 'Staff::addStaff'); // Create
+$routes->get('staff/add/(:num)', 'Staff::addStaff/$1'); // Edit
 $routes->post('staff/save', 'Staff::createnew');
+$routes->post('staff/delete/(:any)', 'Staff::deleteStaff/$1');
+
+
+//Customers
+$routes->get('customer', 'Customer::index');
+$routes->get('customer/view', 'Customer::view_cust'); // Create
+$routes->get('customer/view/(:num)', 'Customer::view_cust/$1'); // View Page
 
 //logout
 $routes->post('/logout', 'Auth::logout'); 

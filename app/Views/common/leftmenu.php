@@ -4,10 +4,11 @@
                       <div class="sidebar_toggle"><a href="#"><i class="icon-close icons"></i></a></div>
                       <div class="pcoded-inner-navbar main-menu">
                           <div class="">
+						   
                               <div class="main-menu-header">
                                   <img class="img-80 img-radius" src="<?php echo base_url().ASSET_PATH; ?>assets/images/avatar-4.jpg" alt="User-Profile-Image">
                                   <div class="user-details">
-                                      <span id="more-details">John Doe<i class="fa fa-caret-down"></i></span>
+                                      <span id="more-details"><i class="fa fa-caret"></i></span>
                                   </div>
                               </div>
         
@@ -36,14 +37,15 @@
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                 </li>
-                                  
-                                      <span class="pcoded-mcaret"></span>
-                                          </a>
-                                      </li>
-                                      <li class=" ">
+                                <li>
+                                    <a href="<?php echo base_url('customer') ?>" class="waves-effect waves-dark">
+                                        <span class="pcoded-micon"><i class="ti-layers"></i><b>FC</b></span>
+                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main">Customer</span>
+                                        <span class="pcoded-mcaret"></span>
+                                    </a>
+                                </li>
                           </ul>
                           <ul class="pcoded-item pcoded-left-item">
-
                           <li class="">
                                   <a href="<?php echo base_url('category') ?>" class="waves-effect waves-dark">
                                       <span class="pcoded-micon"><i class="ti-home"></i><b>D</b></span>

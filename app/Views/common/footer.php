@@ -2,6 +2,12 @@
             </div>
         </div>
     </div>
+	
+	<!--------alert box script------------>
+	
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+	
+	
     <!-- Required Jquery -->
 
       <!-- DataTables CSS -->

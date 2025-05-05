@@ -6000,7 +6000,7 @@ table tbody .border-bottom-info td {
     .main-menu {
       height: 100% !important; } }
   .main-menu .main-menu-header {
-    padding: 15px 0;
+    padding: 25px 0;
     background-image: url("../images/user-bg.jpg");
     background-size: cover;
     text-align: center;
@@ -16464,4 +16464,8 @@ body.dark {
     color: #d8000c;
     font-size: 16px;
 }
-
+  	
+  .required {
+        color: red;
+        font-weight: bold;
+    }

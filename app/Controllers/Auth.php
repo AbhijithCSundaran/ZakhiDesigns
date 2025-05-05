@@ -24,35 +24,35 @@ class Auth extends BaseController
     {
 
         $email = $this->request->getPost('email');
-		 $password = md5($this->request->getPost('password'));
-		$recaptcha = $this->input->getPost('g-recaptcha-response');
-      if ($email && $password) {
-			$userLog = $this->usModel->getLoginAccount($email, $password);
-			if ($userLog) {
-				$this->session->set([
-					'zd_uid' => $userLog->us_Id,
-					'zd_uname' => $userLog->us_Name
-				]);
-				//$this->session->get('fav_user_name');
-				echo json_encode(array(
-					"status" => 1,
-					"msg" => null
-				));
-			} else {
+		$password = md5($this->request->getPost('password'));
+		//$recaptcha = $this->input->getPost('g-recaptcha-response');
+		if ($email && $password){
+				$userLog = $this->usModel->getLoginAccount($email, $password);
+				if ($userLog) {
+					$this->session->set([
+						'zd_uid' => $userLog->us_Id,
+						'zd_uname' => $userLog->us_Name,
+					]);
+					//$this->session->get('fav_user_name');
+					echo json_encode(array(
+						"status" => 1,
+						"msg" => null
+					));
+				} else {
+					echo json_encode(array(
+						"status" => 0,
+						"msg" => "Invalid Credentials"
+					));
+				}
+			} 
+		else {
 				echo json_encode(array(
 					"status" => 0,
-					"msg" => "Invalid Credentials"
+					"msg" => "Login credentials are mandatory"
 				));
 			}
-		} 
-	else {
-			echo json_encode(array(
-				"status" => 0,
-				"msg" => "Login credentials are mandatory"
-			));
+			
 		}
-		
-    }
 
 	public function logout()
 {

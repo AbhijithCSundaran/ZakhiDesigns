@@ -5,7 +5,7 @@
             <div class="row align-items-center">
                 <div class="col-md-8">
                     <div class="page-header-title">
-                        <h5 class="m-b-10">Add Staff</h5>
+                        <h5 class="m-b-10">Add Customer</h5>
                         <p class="m-b-0">Welcome to Zakhi Designs</p>
                     </div>
                 </div>
@@ -14,7 +14,7 @@
                         <li class="breadcrumb-item">
                             <a href="<?php echo base_url('dashboard') ?>"> <i class="fa fa-home"></i> </a>
                         </li>
-                        <li class="breadcrumb-item"><a href="#!">Add Staff</a>
+                        <li class="breadcrumb-item"><a href="#">Add Customer</a>
                         </li>
                     </ul>
                 </div>
@@ -50,13 +50,14 @@
                                 </div>
                                 <div class="card-block">
 								<div id="messageBox" class="alert alert-success" style="display: none;"></div>
+								
                                     <form name="createstaff" id="createstaff" method="post">
 									
                                         <div class="form-group row">
                                            <label class="col-sm-2 col-form-label">Name <span style="color: red;">*</span></label>
                                             <div class="col-sm-6">
                                                 <input type="text" name="staffname" id="staffname" class="form-control" size=30
-                                                    value="<?= isset($staff) ? ($staff['us_Name']) : '' ?>" placeholder="Enter the staff name" *>
+                                                    value="<?= isset($cust) ? ($cust['cust_Name']) : '' ?>" placeholder="Enter the customer name" *>
 											<span class="text-danger error-msg" id="error-staffname"></span>
 											</div>
 											
@@ -65,17 +66,8 @@
                                             <label class="col-sm-2 col-form-label">Email <span style="color: red;">*</span></label>
                                             <div class="col-sm-6">
                                                 <input type="email" class="form-control" name="staffemail" id="staffemail" size=30
-                                                  value="<?= isset($staff) ? esc($staff['us_Email']) : '' ?>"   placeholder="Enter the mail id"  required autocomplete="off">
+                                                  value="<?= isset($cust) ? ($cust['cust_Email']) : '' ?>"   placeholder="Enter the mail id"  required autocomplete="off">
                                             <span class="text-danger error-msg" id="error-staffemail"></span>
-											</div>
-											
-                                        </div>
-										 <div class="form-group row">
-                                            <label class="col-sm-2 col-form-label">Alternate Email</label>
-                                            <div class="col-sm-6">
-                                                <input type="email" class="form-control" name="staffotemail" id="staffotemail" size=30
-                                                  value="<?= isset($staff) ? ($staff['us_Email2']) : '' ?>"   placeholder="Enter alternate mail id" required>
-                                            <span class="text-danger error-msg" id="error-staffotemail"></span>
 											</div>
 											
                                         </div>
@@ -83,27 +75,18 @@
                                             <label class="col-sm-2 col-form-label">Contact Number <span style="color: red;">*</span></label>
                                             <div class="col-sm-6">
                                                 <input type="text" class="form-control" name="mobile" id="mobile" size=15
-                                                  value="<?= isset($staff) ? ($staff['us_Phone']) : '' ?>"   placeholder="Enter Contact Number"  required>
+                                                  value="<?= isset($cust) ? ($cust['cust_Phone']) : '' ?>"   placeholder="Enter Contact Number"  required>
                                             <span class="text-danger error-msg" id="error-mobile"></span>
 											</div>
 											
                                         </div>
-                                        <div class="form-group row">
-                                            <label class="col-sm-2 col-form-label">Password <span style="color: red;">*</span></label>
-                                            <div class="col-sm-6">
-                                                <input type="Password" class="form-control" name="password" id="password" size=15 value="<?= isset($staff) ? ($staff['us_Password']) : '' ?>" placeholder="Password" required autocomplete="off" >
-												<span class="text-danger error-msg" id="error-password"></span>
-										   </div>
-											
-                                        </div>
-										
-                                        <div class="row justify-content-center">
-										<input type="hidden" name="us_id" value="<?= isset($staff['us_Id']) ? esc($staff['us_Id']) : '' ?>">
+										 <div class="row justify-content-center">
+										<input type="hidden" name="cust_id" value="<?= isset($cust['cust_Id']) ? esc($cust['cust_Id']) : '' ?>">
                                             <div class="button-group">
-											 <button type="button" class="btn btn-secondary" onclick="window.location.href='<?= base_url('staff'); ?>'">
+											 <button type="button" class="btn btn-secondary" onclick="window.location.href='<?= base_url('customer'); ?>'">
                                                     <i class="bi bi-x-circle"></i> Discard
                                                 </button>
-													<button type="button" class="btn btn-primary" id="staffSubmit" name="staffSubmit">
+													<button type="button" class="btn btn-primary" id="custSubmit" name="custSubmit">
 														<i class="bi bi-check-circle"></i> Save
 													</button>
 													

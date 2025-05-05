@@ -1,67 +1,55 @@
 <?php
 namespace App\Controllers;
-use App\Models\StaffModel;
-
-class Staff extends BaseController
+use App\Models\CustomerModel;
+class Customer extends BaseController
 {
-
     public function __construct()
     {
         $this->session = \Config\Services::session();
         $this->input = \Config\Services::request();
-        $this->staffModel = new StaffModel();
+        $this->customerModel = new CustomerModel();
     }
 
     public function index()
     {
         //$getall['users'] = $this->staffModel->getAllStaff();
-        $staff = $this->staffModel->getAllStaff();
-        $data['user'] = $staff;
+        $customer = $this->customerModel->getAllCustomer();
+        $data['user'] = $customer;
         $template = view('common/header');
 		$template.= view('common/leftmenu');
-		$template.= view('staff', $data);
+		$template.= view('customers', $data);
 		$template.= view('common/footer');
-		$template.= view('page_scripts/staffjs');
+		//$template.= view('page_scripts/staffjs');
         return $template;
 
         
     }
-	public function addStaff($us_id = null)
-	{
-		if (!$this->session->get('zd_uid')) 
-		{
-			return redirect()->to(base_url());
-		}
-
+		public function view_cust($cust_Id = null) {
 		$data = [];
-		 if ($us_id) {
-			$staff_val = $this->staffModel->getStaffByid($us_id);
+		 if ($cust_Id) {
+			$cust_val = $this->customerModel->findCustomerById($cust_Id);
 		
-			if (!$staff_val) {
+			if (!$cust_val) {
 				return redirect()->to('staff')->with('error', 'Staff member not found');
 			}
-			// $data['staff'] = $staff_val;
-			 $data['staff'] = (array) $staff_val;
+			// $data['cust'] = $cust_val;
+		$data['cust'] = (array) $cust_val;
+		$template  = view('common/header');
+		$template .= view('common/leftmenu');
+		$template .= view('customer_view', $data);
+		$template .= view('common/footer');
+		return $template;
+		}
+		else{
+			// Load views
+			$template = view('common/header');
+			$template .= view('common/leftmenu');
+			$template .= view('customer_view');
+			$template .= view('common/footer');
+			//$template .= view('page_scripts/staffjs');
+			return $template;
 			
-			// Load views
-			$template = view('common/header');
-			$template .= view('common/leftmenu');
-			$template .= view('staff_add', $data);
-			$template .= view('common/footer');
-			$template .= view('page_scripts/staffjs');
-			return $template;
 		}
-		else
-		{
-			// Load views
-			$template = view('common/header');
-			$template .= view('common/leftmenu');
-			$template .= view('staff_add');
-			$template .= view('common/footer');
-			$template .= view('page_scripts/staffjs');
-			return $template;
-		}
-		
 	}
    public function createnew() {
 		$us_id = $this->input->getPost('us_id');
@@ -78,6 +66,12 @@ class Staff extends BaseController
 				]);
 			}
 
+			if (!filter_var($staffotemail, FILTER_VALIDATE_EMAIL)) {
+				return $this->response->setJSON([
+					'status' => 'error',
+					'message' => 'Invalid alternate email format.'
+				]);
+			}
 			if (!ctype_digit($mobile)) {
 				return $this->response->setJSON([
 					'status' => 'error',

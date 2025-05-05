@@ -30,5 +30,10 @@ $routes->post('staff/save', 'Staff::createnew');
 $routes->post('staff/delete/(:any)', 'Staff::deleteStaff/$1');
 
 
+//Customers
+$routes->get('customer', 'Customer::index');
+$routes->get('customer/view', 'Customer::view_cust'); // Create
+$routes->get('customer/view/(:num)', 'Customer::view_cust/$1'); // View Page
+
 //logout
 $routes->post('/logout', 'Auth::logout'); 

@@ -16464,4 +16464,8 @@ body.dark {
     color: #d8000c;
     font-size: 16px;
 }
-
+  	
+  .required {
+        color: red;
+        font-weight: bold;
+    }

@@ -5,7 +5,7 @@
             <div class="row align-items-center">
                 <div class="col-md-8">
                     <div class="page-header-title">
-                        <h5 class="m-b-10">Manage Staff</h5>
+                        <h5 class="m-b-10">Manage Customer</h5>
                         <p class="m-b-0">Welcome to Zakhi Designs</p>
                     </div>
                 </div>
@@ -14,7 +14,7 @@
                         <li class="breadcrumb-item">
                             <a href="#"> <i class="fa fa-home"></i> </a>
                         </li>
-                        <li class="breadcrumb-item"><a href="#!"> Staff</a>
+                        <li class="breadcrumb-item"><a href="#">Customer</a>
                         </li>
                     </ul>
                 </div>
@@ -43,8 +43,8 @@
 										<div class="col-md-3">
                                             <div class="row">
                                                 <div class="col-lg-12 d-flex justify-content-end p-2">
-                                                    <a href="<?= base_url('staff/add'); ?>" class="btn btn-primary">
-                                                        Add Staff
+                                                    <a href="<?= base_url('customer/view/'); ?>" class="btn btn-primary">
+                                                        Add Customer
                                                     </a>
                                                 </div>
                                             </div>
@@ -63,32 +63,38 @@
                                                             <tr>
                                                                 <th>Sl.No.</th>
                                                                 <th>Name</th>
-                                                                <th>Email</th>
-																<th>Alternate Email</th>
+                                                                <th>Address</th>
+																<th>Email</th>
 																<th>Contact Number</th>
 																<th>Action</th>
                                                             </tr>
                                                         </thead>
-                                                        <tbody>
-                                                        <?php
-														  $slno = 1;
-														 foreach ($user as $user) { ?>
-														<tr>
-															<td><?php echo $slno; ?></td>
-															<td><?php echo $user->us_Name; ?></td>
-															<td><?php echo $user->us_Email; ?></td>
-															<td><?php echo $user->us_Email2; ?></td>
-															<td><?php echo $user->us_Phone; ?></td> 
-                                                            <td>
-															<a href="<?= base_url('staff/add/'. $user->us_Id); ?>">
-																<i class="bi bi-pencil-square"></i>
-															</a>                                                 
-																<i class="bi bi-trash text-danger icon-clickable" onclick="confirmDelete(<?= $user->us_Id; ?>)"></i>
-                                                            </td>                                           
-														</tr>
-														<?php 
-														$slno++;} ?>
+														 <tbody>
+                                                       <?php
+															$slno = 1;
+															foreach ($user as $row) { ?>
+																<tr>
+																	<td><?= $slno++; ?></td>
+																	<td><?= esc($row['cust_Name']); ?></td>
+																	<td><?= esc($row['add_BuldingNo']); ?><br>
+																		<?= esc($row['add_Street']);?><br>
+																		<?= esc($row['add_City']);?>
+																	</td>
+																	<td><?= esc($row['cust_Email']); ?></td>
+																	<td><?= esc($row['cust_Phone']); ?></td> 
+																	<td>
+																		<a href="<?= base_url('customer/view/' . $row['cust_Id']); ?>" title="View">
+																			<i class="bi bi-eye text-info"></i>
+																		</a>
+																		<a href="#">
+																			<i class="bi bi-pencil-square"></i>
+																		</a>                                                 
+																		<i class="bi bi-trash text-danger icon-clickable"></i>
+																	</td>                                           
+																</tr>
+															<?php } ?>
                                                         </tbody>
+                                                       
                                                     </table>
                                                 </div>
                                             </div>
@@ -129,7 +135,7 @@
                 </div>
                 <div class="row justify-content-center">
                     <div class="col-auto">
-                        <p class="text-center">Your data will be lost.<br>
+                        <p class="text-center">
                             Are you sure you want to delete the Staff?</p>
                     </div>
 

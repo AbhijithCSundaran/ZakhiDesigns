@@ -37,14 +37,15 @@
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                 </li>
-                                  
-                                      <span class="pcoded-mcaret"></span>
-                                          </a>
-                                      </li>
-                                      <li class=" ">
+                                <li>
+                                    <a href="<?php echo base_url('customer') ?>" class="waves-effect waves-dark">
+                                        <span class="pcoded-micon"><i class="ti-layers"></i><b>FC</b></span>
+                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main">Customer</span>
+                                        <span class="pcoded-mcaret"></span>
+                                    </a>
+                                </li>
                           </ul>
                           <ul class="pcoded-item pcoded-left-item">
-
                           <li class="">
                                   <a href="<?php echo base_url('category') ?>" class="waves-effect waves-dark">
                                       <span class="pcoded-micon"><i class="ti-home"></i><b>D</b></span>

@@ -25,8 +25,8 @@ class Auth extends BaseController
 
         $email = $this->request->getPost('email');
 		$password = md5($this->request->getPost('password'));
-		$recaptcha = $this->input->getPost('g-recaptcha-response');
-		if ($email && $password) {
+		//$recaptcha = $this->input->getPost('g-recaptcha-response');
+		if ($email && $password){
 				$userLog = $this->usModel->getLoginAccount($email, $password);
 				if ($userLog) {
 					$this->session->set([

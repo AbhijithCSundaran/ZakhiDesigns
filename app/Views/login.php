@@ -106,18 +106,18 @@
 							<span class="alrt-msg" id="alertbox" style="display:none;"></span>
                                 <div class="row m-b-20">
                                     <div class="col-md-12">
-                                        <h3 class="text-center txt-primary">Sign up</h3>
+                                        <h3 class="text-center txt-primary">Please Login</h3>
                                     </div>
                                 </div>                               
                                 <div class="form-group form-primary">
-                                    <input type="text" name="email" id="email" class="form-control" required>
+                                    <input type="text" name="email" id="email" class="form-control" autocomplete="off" required>
                                     <span class="form-bar"></span>
                                     <label class="float-label">Your Email Address</label>
                                 </div>
                                 <div class="row">
                                     <div class="col-md-12">
 										<div class="form-group form-primary position-relative">
-											<input type="password" name="password" id="password" class="form-control" required>
+											<input type="password" name="password" id="password" class="form-control" autocomplete="off" required>
 											<span class="form-bar"></span>
 											<label class="float-label">Password</label>
 											
@@ -127,10 +127,6 @@
 										</div>
 									</div>
                                 </div>
-                                 <div class="form-group">
-									<div class="g-recaptcha brochure__form__captcha p-2"
-										data-sitekey="6LfUcCsrAAAAADm_xZWo8wfVu2YJh4bn4dR4Gvtc"></div>
-								</div>
                                 <div class="row m-t-30">
                                     <div class="col-md-12">
                                         <button type="button" name="submitBtn" id="submitBtn" class="btn btn-primary btn-md btn-block waves-effect text-center m-b-20">Sign In</button>

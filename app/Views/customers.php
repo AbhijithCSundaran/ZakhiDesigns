@@ -58,12 +58,12 @@
 											<div id="message" style="display:none;"></div>
 											<div id="messageBox" class="alert" style="display: none;"></div>
                                                 <div class="table-responsive">
-                                                    <table class="table table-hover" id="staffList">
+                                                    <table class="table table-hover" id="customerList">
                                                         <thead>
                                                             <tr>
                                                                 <th>Sl.No.</th>
                                                                 <th>Name</th>
-                                                                <th>Address</th>
+                                                                
 																<th>Email</th>
 																<th>Contact Number</th>
 																<th>Action</th>
@@ -76,21 +76,14 @@
 																<tr>
 																	<td><?= $slno++; ?></td>
 																	<td><?= esc($row['cust_Name']); ?></td>
-																	<td><?= esc($row['add_BuldingNo']); ?><br>
-																		<?= esc($row['add_Street']);?><br>
-																		<?= esc($row['add_City']);?>
-																	</td>
 																	<td><?= esc($row['cust_Email']); ?></td>
 																	<td><?= esc($row['cust_Phone']); ?></td> 
 																	<td>
-																		<a href="<?= base_url('customer/view/' . $row['cust_Id']); ?>" title="View">
-																			<i class="bi bi-eye text-info"></i>
-																		</a>
-																		<a href="#">
-																			<i class="bi bi-pencil-square"></i>
-																		</a>                                                 
-																		<i class="bi bi-trash text-danger icon-clickable"></i>
-																	</td>                                           
+																		<a href="<?= base_url('customer/view/'. $row['cust_Id']); ?>">
+																	<i class="bi bi-pencil-square"></i>
+															</a>                                                     
+																			<i class="bi bi-trash text-danger icon-clickable" onclick="confirmDelete(<?= $row['cust_Id']; ?>)"></i>
+                                                            </td>                                                  
 																</tr>
 															<?php } ?>
                                                         </tbody>

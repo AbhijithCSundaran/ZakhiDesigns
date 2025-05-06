@@ -19,7 +19,7 @@ class Customer extends BaseController
 		$template.= view('common/leftmenu');
 		$template.= view('customers', $data);
 		$template.= view('common/footer');
-		//$template.= view('page_scripts/staffjs');
+		$template.= view('page_scripts/customerjs');
         return $template;
 
         
@@ -30,7 +30,7 @@ class Customer extends BaseController
 			$cust_val = $this->customerModel->findCustomerById($cust_Id);
 		
 			if (!$cust_val) {
-				return redirect()->to('staff')->with('error', 'Staff member not found');
+				return redirect()->to('customer')->with('error', 'Staff member not found');
 			}
 			// $data['cust'] = $cust_val;
 		$data['cust'] = (array) $cust_val;
@@ -38,6 +38,7 @@ class Customer extends BaseController
 		$template .= view('common/leftmenu');
 		$template .= view('customer_view', $data);
 		$template .= view('common/footer');
+		$template.= view('page_scripts/customerjs');
 		return $template;
 		}
 		else{
@@ -46,30 +47,25 @@ class Customer extends BaseController
 			$template .= view('common/leftmenu');
 			$template .= view('customer_view');
 			$template .= view('common/footer');
-			//$template .= view('page_scripts/staffjs');
+			$template .= view('page_scripts/customerjs');
 			return $template;
 			
 		}
 	}
-   public function createnew() {
-		$us_id = $this->input->getPost('us_id');
-		$staffname = $this->input->getPost('staffname');
-		$staffemail = $this->input->getPost('staffemail');
-		$staffotemail = $this->input->getPost('staffotemail');
+    public function createnew() {
+		$cust_id = $this->input->getPost('cust_id');
+		$custname = $this->input->getPost('custname');
+		$custemail = $this->input->getPost('custemail');
 		$mobile = $this->input->getPost('mobile');
 		$password = $this->input->getPost('password');
+		echo $status = $this->input->getPost('custstatus');
+		//$status =	$this->input->getPost('custstatus');
+	
 		// Validate email formats
-			if (!filter_var($staffemail, FILTER_VALIDATE_EMAIL)) {
+			if (!filter_var($custemail, FILTER_VALIDATE_EMAIL)) {
 				return $this->response->setJSON([
 					'status' => 'error',
 					'message' => 'Invalid primary email format.'
-				]);
-			}
-
-			if (!filter_var($staffotemail, FILTER_VALIDATE_EMAIL)) {
-				return $this->response->setJSON([
-					'status' => 'error',
-					'message' => 'Invalid alternate email format.'
 				]);
 			}
 			if (!ctype_digit($mobile)) {
@@ -78,47 +74,44 @@ class Customer extends BaseController
 					'message' => 'Phone number must contain only digits.'
 				]);
 			}
-		if($staffname && $staffemail && $password && $mobile) {
-			if (empty($us_id)) {
+		
+		if($custname && $custemail && $password && $mobile) {
+			if (empty($cust_id)) {
 				$data = [
-				'us_Name'          => $staffname,
-				'us_Email'         => $staffemail,
-				'us_Email2'        => $staffotemail,
-				'us_Phone'		   => $mobile,
-				'us_Status'		   => 1,
-				'us_Role'		   => 2,
-				'us_Password'      => md5($password),
-				'us_createdon'     => date("Y-m-d H:i:s"),
-				'us_createdby'     => $this->session->get('zd_id'),
-				'us_modifyby'      => $this->session->get('zd_id'),
+				'cust_Name'          => $custname,
+				'cust_Email'         => $custemail,
+				'cust_Phone'	     => $mobile,
+				'cust_Password'      => md5($password),
+				'cust_Status'	   	 => $status,
+				'cust_createdon'     => date("Y-m-d H:i:s"),
+				'cust_createdby'     => $this->session->get('zd_id'),
+				'cust_modifyby'      => $this->session->get('zd_id'),
 			];
-				$CreateStaff = $this->staffModel->createStaff($data);
+				$CreateCust = $this->customerModel->createcust($data);
 				//echo json_encode(array("status" => 1, "msg" => "Created successfully."));
 				echo json_encode(array(
 					"status" => 1,
 					"msg" => "Created successfully.",
-					"redirect" => base_url('staff')
+					"redirect" => base_url('customer')
 				));
 				
 			} 
 			else {
 				$data = [
-				'us_Name'          => $staffname,
-				'us_Email'         => $staffemail,
-				'us_Email2'        => $staffotemail,
-				'us_Phone'		   => $mobile,
-				'us_Status'		   => 1,
-				'us_Role'		   => 2,
-				'us_Password'      => md5($password),
-				'us_createdby'     => $this->session->get('zd_uid'),
-				'us_modifyby'	   => $this->session->get('zd_uid'),     
+				'cust_Name'          => $custname,
+				'cust_Email'         => $custemail,
+				'cust_Phone'	     => $mobile,
+				'cust_Status'	     => $status,
+				'cust_createdon'     => date("Y-m-d H:i:s"),
+				'cust_createdby'     => $this->session->get('zd_id'),
+				'cust_modifyby'      => $this->session->get('zd_id'),  
 			];				
-				$modifyStaff = $this->staffModel->modifyStaff($us_id,$data);
+				$modifycust = $this->customerModel->modifycust($cust_id,$data);
 				//echo json_encode(array("status" => 1, "msg" => "Updated successfully."));	
 				echo json_encode(array(
 					"status" => 1,
 					"msg" => "Updated successfully.",
-					"redirect" => base_url('staff')
+					"redirect" => base_url('customer')
 				));
 			}
 		}
@@ -130,10 +123,10 @@ class Customer extends BaseController
 		}
 		
 	}
-	 public function deleteStaff($us_id) {
-		if ($us_id) {
+	 public function deleteCust($cust_id) {
+		if ($cust_id) {
 			$modified_by = $this->session->get('zd_uid');
-			$us_status = $this->staffModel->deleteStaffById(3, $us_id, $modified_by);
+			$us_status = $this->customerModel->deleteCustById(3, $cust_id, $modified_by);
 
 			if ($us_status) {
 				echo json_encode([
@@ -153,7 +146,18 @@ class Customer extends BaseController
 			]);
 		}
 	}
+	public function updateStatus()
+	{
+		//$id = $this->request->getPost('id');
+		$cust_id = $this->request->getPost('cust_id');
+		$status = $this->request->getPost('status');
+		if (!$cust_id) {
+			return $this->response->setJSON(['success' => false, 'msg' => 'Invalid ID']);
+		}
 
+		$this->customerModel->update($id, ['cust_Status' => $status]);
+		return $this->response->setJSON(['success' => true, 'msg' => 'Status updated']);
+	}
 	
 }
 

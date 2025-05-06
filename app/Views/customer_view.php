@@ -50,36 +50,55 @@
                                 </div>
                                 <div class="card-block">
 								<div id="messageBox" class="alert alert-success" style="display: none;"></div>
-								
-                                    <form name="createstaff" id="createstaff" method="post">
-									
+                                    <form name="createcust" id="createcust" method="post">
                                         <div class="form-group row">
                                            <label class="col-sm-2 col-form-label">Name <span style="color: red;">*</span></label>
                                             <div class="col-sm-6">
-                                                <input type="text" name="staffname" id="staffname" class="form-control" size=30
+                                                <input type="text" name="custname" id="custname" class="form-control" maxlength="30"
                                                     value="<?= isset($cust) ? ($cust['cust_Name']) : '' ?>" placeholder="Enter the customer name" *>
-											<span class="text-danger error-msg" id="error-staffname"></span>
+											<span class="text-danger error-msg" id="error-custname"></span>
 											</div>
 											
                                         </div>
                                         <div class="form-group row">
                                             <label class="col-sm-2 col-form-label">Email <span style="color: red;">*</span></label>
                                             <div class="col-sm-6">
-                                                <input type="email" class="form-control" name="staffemail" id="staffemail" size=30
+                                                <input type="email" class="form-control" name="custemail" id="custemail" maxlength="30"
                                                   value="<?= isset($cust) ? ($cust['cust_Email']) : '' ?>"   placeholder="Enter the mail id"  required autocomplete="off">
-                                            <span class="text-danger error-msg" id="error-staffemail"></span>
+                                            <span class="text-danger error-msg" id="error-custemail"></span>
 											</div>
 											
                                         </div>
 										<div class="form-group row">
                                             <label class="col-sm-2 col-form-label">Contact Number <span style="color: red;">*</span></label>
                                             <div class="col-sm-6">
-                                                <input type="text" class="form-control" name="mobile" id="mobile" size=15
+                                                <input type="text" class="form-control" name="mobile" id="mobile" maxlength="10" minlength="10"
                                                   value="<?= isset($cust) ? ($cust['cust_Phone']) : '' ?>"   placeholder="Enter Contact Number"  required>
                                             <span class="text-danger error-msg" id="error-mobile"></span>
 											</div>
 											
                                         </div>
+										<div class="form-group row">
+                                            <label class="col-sm-2 col-form-label">Password <span style="color: red;">*</span></label>
+                                            <div class="col-sm-6">
+                                                <input type="Password" class="form-control" name="password" id="password" maxlength="15"
+                                                  value="<?= isset($cust) ? ($cust['cust_Password']) : '' ?>"   placeholder="Enter Password"  required>
+                                            <span class="text-danger error-msg" id="error-mobile"></span>
+											</div>
+											
+                                        </div>
+										<div class="form-group row">
+											<label class="col-sm-2 col-form-label">Status</label>
+											<div class="col-sm-6">
+												<input type="hidden" name="custstatus" value="3">
+
+													<!-- If checked, this will override and send 1 -->
+													<input type="checkbox" name="custstatus" id="custstatus" value="1"
+														<?= isset($cust['cust_Status']) && $cust['cust_Status'] == 1 ? 'checked' : '' ?>>
+													<label for="custstatus">Active</label>
+											</div>
+										</div>
+										
 										 <div class="row justify-content-center">
 										<input type="hidden" name="cust_id" value="<?= isset($cust['cust_Id']) ? esc($cust['cust_Id']) : '' ?>">
                                             <div class="button-group">

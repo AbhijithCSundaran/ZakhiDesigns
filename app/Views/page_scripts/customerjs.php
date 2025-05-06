@@ -2,7 +2,7 @@
 <script>
 
 $(document).ready(function() {
-    $('#staffList').DataTable({
+    $('#customerList').DataTable({
         "processing": true,
         "serverSide": false,
         "searching": true,
@@ -12,29 +12,24 @@ $(document).ready(function() {
 
     });
 });
-
-
-
 $(document).ready(function () {
 	const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     const phonePattern = /^\d{10}$/;
 
-	$('#staffname').on('input', function () {
+	$('#custname').on('input', function () {
         const value = $(this).val().trim();
-        $('#error-staffname').text(value ? '' : 'Name is required.');
+        $('#error-custname').text(value ? '' : 'Name is required.');
     });
-    $('#staffemail').on('input', function () {
+    $('#custemail').on('input', function () {
         const value = $(this).val().trim();
         if (!value) {
-            $('#error-staffemail').text('Primary email is required.');
+            $('#error-custemail').text('Primary email is required.');
         } else if (!emailPattern.test(value)) {
-            $('#error-staffemail').text('Invalid email format.');
+            $('#error-custemail').text('Invalid email format.');
         } else {
-            $('#error-staffemail').text('');
+            $('#error-custemail').text('');
         }
     });
-
-
     $('#mobile').on('input', function () {
         const value = $(this).val().trim();
         if (!value) {
@@ -57,23 +52,23 @@ $(document).ready(function () {
 
 var baseUrl = "<?= base_url() ?>";
 
-$('#staffSubmit').click(function(e) {
-    e.preventDefault(); // Important to prevent normal form submit
-    var url = baseUrl + "staff/save"; // Correct route
+$('#custSubmit').click(function(e) {
 
-    $.post(url, $('#createstaff').serialize(), function(response) {
+    e.preventDefault(); // Important to prevent normal form submit
+    var url = baseUrl + "customer/save"; // Correct route
+
+    $.post(url, $('#createcust').serialize(), function(response) {
        // $('#createstaff')[0].reset();
 
         if (response.status == 1) { $('#messageBox')
                 .removeClass('alert-danger')
                 .addClass('alert-success')
-                .text(response.msg || 'Staff created successfully!')
+                .text(response.msg || 'Customer created successfully!')
                 .show();
-				
 
             // Wait, then redirect
             setTimeout(function() {
-                window.location.href = baseUrl + "staff/"; // Update this path to your Manage Staff page
+                window.location.href = baseUrl + "customer/"; // Update this path to your Manage Staff page
             }, 1500);
         } 
 		else {
@@ -82,7 +77,6 @@ $('#staffSubmit').click(function(e) {
                 .addClass('alert-danger')
                 .text(response.msg || 'Please enter data correctly')
                 .show();
-			$btn.prop('disabled', true).html('<i class="bi bi-hourglass-split"></i> Saving...');
         }
 		setTimeout(function() {
                 $('#messageBox').empty().hide();
@@ -104,7 +98,7 @@ function confirmDelete(userId) {
         if (result.isConfirmed) {
             // AJAX call to delete
             $.ajax({
-                url: "<?php echo base_url('staff/delete'); ?>/" + userId,
+                url: "<?php echo base_url('customer/delete'); ?>/" + userId,
                 method: "POST",
                 dataType: "json",
                 success: function (response) {
@@ -123,4 +117,5 @@ function confirmDelete(userId) {
     });
 }
 /*************************************/
+
 </script>

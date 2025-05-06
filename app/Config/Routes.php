@@ -33,7 +33,11 @@ $routes->post('staff/delete/(:any)', 'Staff::deleteStaff/$1');
 //Customers
 $routes->get('customer', 'Customer::index');
 $routes->get('customer/view', 'Customer::view_cust'); // Create
-$routes->get('customer/view/(:num)', 'Customer::view_cust/$1'); // View Page
+$routes->get('customer/view/(:num)', 'Customer::view_cust/$1'); // Edit Page
+$routes->post('customer/save', 'Customer::createnew');
+$routes->post('customer/delete/(:any)', 'Customer::deleteCust/$1');
+$routes->post('customer/updateStatus', 'Customer::updateStatus');
+
 
 //logout
 $routes->post('/logout', 'Auth::logout'); 

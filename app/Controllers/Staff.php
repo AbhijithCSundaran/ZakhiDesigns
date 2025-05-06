@@ -78,10 +78,10 @@ class Staff extends BaseController
 				]);
 			}
 
-			if (!ctype_digit($mobile)) {
+			if (!ctype_digit($mobile) || strlen($mobile) !== 10) {
 				return $this->response->setJSON([
 					'status' => 'error',
-					'message' => 'Phone number must contain only digits.'
+					'message' => 'Phone number must contain only 10 digits.'
 				]);
 			}
 		if($staffname && $staffemail && $password && $mobile) {

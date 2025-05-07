@@ -15,7 +15,7 @@ $routes->post('Auth', 'Auth::authenticate');
 //category
 $routes->get('category', 'Category::index');
 $routes->get('category/add', 'Category::addCategory');
-$routes->get('category/add/(:num)', 'Category::addCategory/$1'); 
+$routes->get('category/edit/(:num)', 'Category::addCategory/$1'); 
 $routes->post('category/save', 'Category::saveCategory');
 $routes->post('category/status', 'Category::changeStatus');
 $routes->post('category/delete/(:any)', 'Category::deleteCategory/$1');
@@ -24,14 +24,15 @@ $routes->post('category/delete/(:any)', 'Category::deleteCategory/$1');
 //Subcategory
 $routes->get('subcategory', 'Subcategory::index');
 $routes->get('subcategory/add', 'Subcategory::addSubcategory');
-$routes->get('subcategory/add/(:num)', 'Subcategory::addSubcategory/$1'); 
+$routes->get('subcategory/edit/(:num)', 'Subcategory::addSubcategory/$1'); 
 $routes->post('subcategory/save', 'Subcategory::saveSubcategory');
 $routes->post('subcategory/delete/(:any)', 'Subcategory::deleteSubcategory/$1');
 $routes->post('subcategory/status', 'Subcategory::changeStatus');
 
 
 //Products
-$routes->get('user/products', 'Product::index');
+$routes->get('product', 'Product::index');
+$routes->get('product/add', 'Product::addProduct');
 
 //Staff
 $routes->get('staff', 'Staff::index');

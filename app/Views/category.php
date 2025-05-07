@@ -92,7 +92,7 @@
                                                                 </div>
                                                             </td>
                                                             <td>
-                                                            <a href="<?= base_url('category/add/'. $cat['cat_Id']); ?>">
+                                                            <a href="<?= base_url('category/edit/'. $cat['cat_Id']); ?>">
 																<i class="bi bi-pencil-square"></i>
 															</a> 
                                                                 <i class="bi bi-trash text-danger icon-clickable" 

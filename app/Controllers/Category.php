@@ -42,10 +42,10 @@ class Category extends BaseController
 			if (!$cate) {
 				return redirect()->to('category')->with('error', 'Category not found');
 			}
-			// $data['staff'] = $staff_val;
+			
 			 $data['category'] = (array) $cate;
 			
-			// Load views
+			
 			$template = view('common/header');
 			$template .= view('common/leftmenu');
 			$template .= view('category_add', $data);
@@ -55,7 +55,6 @@ class Category extends BaseController
 		}
 		else
 		{
-			// Load views
 			$template = view('common/header');
 			$template .= view('common/leftmenu');
 			$template .= view('category_add');

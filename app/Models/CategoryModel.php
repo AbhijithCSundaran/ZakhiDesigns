@@ -25,19 +25,11 @@ class CategoryModel extends Model {
     {
         return $this->db->table('category')->where('cat_Id', $id) ->update($data);
     }
-     public function categoryStatus($id)
-     {
-        $category = $this->getCategoryByid($id);
-        if (!$category) {
-            return false;
-        }
-     $newStatus = ($category->cat_Status == 1) ? 1: 2;
-      return $this->updateCategory($cat_Id, ['cat_Status' => $newStatus]);
-    }
 
-    public function changeCategoryStatus($cat_status, $cat_id, $modified_by) {
-		return $this->db->query("update category set cat_Status = '".$cat_status."', cat_modifyon=NOW(), cat_modifyby='".$modified_by."' where cat_Id = '".$cat_id."'");
-	}
+    public function deleteCategoryById($cat_status, $cat_id, $modified_by)
+		{
+			return $this->db->query("update category set cat_Status = '".$cat_status."', cat_modifyon=NOW(), cat_modifyby='".$modified_by."' where cat_Id = '".$cat_id."'");
+		}
 
     }
 

@@ -37,7 +37,7 @@
 
                                         </div>
                                         <div class="col-md-7">
-
+                                        <div id="messageBox" class="alert alert-success" style="display: none;"></div>
                                         </div>
                                         <div class="col-md-3">
                                             <div class="row">
@@ -50,23 +50,27 @@
                                     </div>
                                 </div>
                                 <div class="card-block">
+                                
                                     <form name="createCategory" id="createCategory" method="post">
                                         <div class="form-group row">
-                                            <label class="col-sm-2 col-form-label">Category Name</label>
+                                            <label class="col-sm-2 col-form-label">Category Name <span
+                                            style="color: red;">*</span></label>
                                             <div class="col-sm-6">
                                                 <input type="text" name="category_name" id="categoryName" class="form-control"
                                                 value="<?= isset($category) ? ($category['cat_Name']) : '' ?>" placeholder="Enter the Category name">
                                             </div>
                                         </div>
                                         <div class="form-group row">
-                                            <label class="col-sm-2 col-form-label">Discount Value</label>
+                                            <label class="col-sm-2 col-form-label">Discount Value <span
+                                            style="color: red;">*</span></label>
                                             <div class="col-sm-6">
                                                 <input type="text" class="form-control" name="discount_value" id="discountValue"
                                                 value="<?= isset($category) ? ($category['cat_Discount_Value']) : '' ?>" placeholder="Enter the Discount value">
                                             </div>
                                         </div>
                                         <div class="form-group row">
-                                            <label class="col-sm-2 col-form-label">Discount Type</label>
+                                            <label class="col-sm-2 col-form-label">Discount Type <span
+                                            style="color: red;">*</span></label>
                                             <div class="col-sm-6">
                                                 <input type="text" class="form-control" name="discount_type" id="discountType" 
                                                  value="<?= isset($category) ? ($category['cat_Discount_Type']) : '' ?>"
@@ -80,7 +84,7 @@
                                                 <button type="button" class="btn btn-secondary">
                                                     <i class="bi bi-x-circle"></i> Discard
                                                 </button>
-                                                <button type="button" class="btn btn-success" id="categorySubmit" name="categorySubmit">
+                                                <button type="button" class="btn btn-primary" id="categorySubmit" name="categorySubmit">
                                                     <i class="bi bi-check-circle"></i> Save
                                                 </button>
                                             </div>

@@ -17,18 +17,15 @@ class SubcategoryModel extends Model {
             return $this->db->table('subcategory')->insert($data);
         }
        
-        // public function getAllsubCategory() {
-        //     return $this->db->query("SELECT * FROM subcategory WHERE sub_Status <> 3")->getResultArray();
-        // }
-
-        public function getAllsubcategory() {
+        public function getAllSubcategories() {
             return $this->db->table('subcategory')
-                ->select('subcategory.*, category.cat_Name, category.cat_status')
+                ->select('subcategory.*, category.cat_Name')
                 ->join('category', 'category.cat_Id = subcategory.cat_Id', 'left')
-                ->where('category.cat_Status <>', 3)
+                ->where('subcategory.sub_Status !=', 3)
                 ->get()
-                ->getResultArray();
+                ->getResult();
         }
+        
         
 
     public function getsubCategoryByid($id) {
@@ -41,26 +38,16 @@ class SubcategoryModel extends Model {
             ->getRow();
     }
     
-  
-
     public function updatesubCategory($id, $data)
     {
         return $this->db->table('subcategory')->where('sub_Id', $id) ->update($data);
     }
-    //  public function categoryStatus($id)
-    //  {
-    //     $category = $this->getCategoryByid($id);
-    //     if (!$category) {
-    //         return false;
-    //     }
-    //  $newStatus = ($category->cat_Status == 1) ? 1: 2;
-    //   return $this->updateCategory($cat_Id, ['cat_Status' => $newStatus]);
-    // }
+     
 
-    // public function changeCategoryStatus($cat_status, $cat_id, $modified_by) {
-	// 	return $this->db->query("update category set cat_Status = '".$cat_status."', cat_modifyon=NOW(), cat_modifyby='".$modified_by."' where cat_Id = '".$cat_id."'");
-	// }
-
+           public function deleteSubcategoryById($sub_status, $sub_id, $modified_by)
+		{
+			return $this->db->query("update subcategory set sub_Status = '".$sub_status."', sub_modifiyon=NOW(), sub_modifyby='".$modified_by."' where sub_Id = '".$sub_id."'");
+		}
     }
 
 ?>

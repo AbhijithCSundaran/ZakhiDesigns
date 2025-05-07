@@ -37,7 +37,7 @@
 
                                         </div>
                                         <div class="col-md-7">
-
+                                        <div id="messageBox" class="alert alert-success" style="display: none;"></div>
                                         </div>
                                         <div class="col-md-3">
                                             <div class="row">
@@ -53,7 +53,8 @@
                                 <div class="card-block">
                                     <form name="createSubcategory" id="createSubcategory" method="post">
                                         <div class="form-group row">
-                                            <label class="col-sm-2 col-form-label">Category Name</label>
+                                            <label class="col-sm-2 col-form-label">Category Name<span
+                                            style="color: red;">*</span></label>
                                             <div class="col-sm-6">
                                                 <select class="form-control fs-13" name="cat_id" id="categoryName"
                                                     required>
@@ -73,7 +74,8 @@
                                             </div>
                                         </div>
                                         <div class="form-group row">
-                                            <label class="col-sm-2 col-form-label">Subcategory Name</label>
+                                            <label class="col-sm-2 col-form-label">Subcategory Name <span
+                                            style="color: red;">*</span></label>
                                             <div class="col-sm-6">
                                                 <input type="text" name="subcategory_name" id="subcatName"
                                                     class="form-control"
@@ -82,7 +84,8 @@
                                             </div>
                                         </div>
                                         <div class="form-group row">
-                                            <label class="col-sm-2 col-form-label">Discount Value</label>
+                                            <label class="col-sm-2 col-form-label">Discount Value <span
+                                            style="color: red;">*</span></label>
                                             <div class="col-sm-6">
                                                 <input type="text" class="form-control" name="discount_value"
                                                     id="discountValue"
@@ -91,7 +94,8 @@
                                             </div>
                                         </div>
                                         <div class="form-group row">
-                                            <label class="col-sm-2 col-form-label">Discount Type</label>
+                                            <label class="col-sm-2 col-form-label">Discount Type <span
+                                            style="color: red;">*</span></label>
                                             <div class="col-sm-6">
                                                 <input type="text" class="form-control" name="discount_type"
                                                     id="discountType"
@@ -106,7 +110,7 @@
                                                 <button type="button" class="btn btn-secondary">
                                                     <i class="bi bi-x-circle"></i> Discard
                                                 </button>
-                                                <button type="button" class="btn btn-success" id="subcategorySubmit"
+                                                <button type="button" class="btn btn-primary" id="subcategorySubmit"
                                                     name="subcategorySubmit">
                                                     <i class="bi bi-check-circle"></i> Save
                                                 </button>

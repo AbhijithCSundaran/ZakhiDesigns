@@ -38,6 +38,8 @@
 
                                         </div>
                                         <div class="col-md-7">
+                                            <div id="message" style="display:none;"></div>
+                                            <div id="messageBox" class="alert" style="display: none;"></div>
 
                                         </div>
                                         <div class="col-md-3">
@@ -70,45 +72,38 @@
                                                         </tr>
                                                     </thead>
                                                     <tbody>
-
                                                         <?php foreach($subcategory as $index => $subcat) : ?>
-
                                                         <tr>
                                                             <td><?= $index + 1; ?></td>
-                                                            <td><?= ucwords($subcat['cat_Name']); ?></td>
-                                                            <td><?= ucwords($subcat['sub_Category_Name']); ?></td>
-                                                            <td><?= $subcat['sub_Discount_Value']; ?></td>
-                                                            <td><?= $subcat['sub_Discount_Type']; ?></td>
+                                                            <td><?= ucwords($subcat->cat_Name); ?></td>
+                                                            <td><?= ucwords($subcat->sub_Category_Name); ?></td>
+                                                            <td><?= $subcat->sub_Discount_Value; ?></td>
+                                                            <td><?= $subcat->sub_Discount_Type; ?></td>
                                                             <td>
                                                                 <div class="form-check form-switch">
                                                                     <input class="form-check-input checkactive"
                                                                         type="checkbox"
-                                                                        id="statusSwitch-<?= $subcat['sub_Id']; ?>"
-                                                                        value="<?= $subcat['sub_Id']; ?>"
-                                                                        <?= ($subcat['sub_Status'] == 1) ? 'checked' : ''; ?>>
+                                                                        id="statusSwitch-<?= $subcat->sub_Id; ?>"
+                                                                        value="<?= $subcat->sub_Id; ?>"
+                                                                        <?= ($subcat->sub_Status == 1) ? 'checked' : ''; ?>>
                                                                     <label class="form-check-label pl-0 label-check"
-                                                                        for="statusSwitch-<?= $subcat['sub_Id']; ?>">
-                                                                        
+                                                                        for="statusSwitch-<?= $subcat->sub_Id; ?>">
                                                                     </label>
                                                                 </div>
                                                             </td>
                                                             <td>
-                                                            <a href="<?= base_url('subcategory/add/'. $subcat['sub_Id']); ?>">
-																<i class="bi bi-pencil-square"></i>
-															</a> 
-                                                                <i class="bi bi-trash text-danger icon-clickable" data-toggle="modal"
-                                                                data-target="#deleteModal"  onclick="confirmDelete(<?= $subcat['sub_Id']; ?>)" 
-                                                                   ></i>
+                                                                <a
+                                                                    href="<?= base_url('subcategory/edit/'. $subcat->sub_Id); ?>">
+                                                                    <i class="bi bi-pencil-square"></i>
+                                                                </a>
+                                                                <i class="bi bi-trash text-danger icon-clickable"
+                                                                    onclick="confirmDelete(<?= $subcat->sub_Id; ?>)">
+                                                                </i>
                                                             </td>
-                                                            
-                                                          
-
                                                         </tr>
-
-
                                                         <?php endforeach; ?>
-
                                                     </tbody>
+
                                                 </table>
                                             </div>
                                         </div>
@@ -124,42 +119,6 @@
                 <!-- Page-body end -->
             </div>
             <div id="styleSelector"> </div>
-        </div>
-    </div>
-</div>
-
-<!--Delete Modal-->
-
-<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-    aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <div class="row justify-content-center">
-                    <div class="col-auto">
-                        <img src="<?= base_url('public/assets/images/delete_icon.gif'); ?>" alt="Delete Icon"
-                            class="img-fluid d-block mx-auto" style="width:100px;">
-                    </div>
-                </div>
-                <div class="row justify-content-center">
-                    <div class="col-auto">
-                        <p class="text-center">Your data will be lost.<br>
-                            Are you sure you want to delete the Category?</p>
-                    </div>
-
-                </div>
-            </div>
-            <div class="modal-footer d-flex justify-content-center">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                <button type="button" class="btn btn-danger" id="deleteCategory"
-                    onclick="deleteCategory()">Delete</button>
-            </div>
         </div>
     </div>
 </div>

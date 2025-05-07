@@ -26,6 +26,8 @@ $routes->get('subcategory', 'Subcategory::index');
 $routes->get('subcategory/add', 'Subcategory::addSubcategory');
 $routes->get('subcategory/add/(:num)', 'Subcategory::addSubcategory/$1'); 
 $routes->post('subcategory/save', 'Subcategory::saveSubcategory');
+$routes->post('subcategory/delete/(:any)', 'Subcategory::deleteSubcategory/$1');
+$routes->post('subcategory/status', 'Subcategory::changeStatus');
 
 
 //Products

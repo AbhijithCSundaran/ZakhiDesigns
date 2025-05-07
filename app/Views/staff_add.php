@@ -56,12 +56,11 @@
                                             <label class="col-sm-2 col-form-label">Name <span
                                                     style="color: red;">*</span></label>
                                             <div class="col-sm-6">
-                                                <input type="text" name="staffname" id="staffname" class="form-control"
-                                                    size=30 value="<?= isset($staff) ? ($staff['us_Name']) : '' ?>"
-                                                    placeholder="Enter the staff name" *>
-                                                <span class="text-danger error-msg" id="error-staffname"></span>
-                                            </div>
-
+                                                <input type="text" name="staffname" id="staffname" class="form-control" size=30
+                                                    value="<?= isset($staff) ? ($staff['us_Name']) : '' ?>" placeholder="Enter the staff name" * required autocomplete="off" >
+											<span class="text-danger error-msg" id="error-staffname"></span>
+											</div>
+											
                                         </div>
                                         <div class="form-group row">
                                             <label class="col-sm-2 col-form-label">Email <span
@@ -78,24 +77,29 @@
                                         <div class="form-group row">
                                             <label class="col-sm-2 col-form-label">Alternate Email</label>
                                             <div class="col-sm-6">
-                                                <input type="email" class="form-control" name="staffotemail"
-                                                    id="staffotemail" size=30
-                                                    value="<?= isset($staff) ? ($staff['us_Email2']) : '' ?>"
-                                                    placeholder="Enter alternate mail id" required>
-                                                <span class="text-danger error-msg" id="error-staffotemail"></span>
-                                            </div>
-
+                                                <input type="email" class="form-control" name="staffotemail" id="staffotemail" size=30
+                                                  value="<?= isset($staff) ? ($staff['us_Email2']) : '' ?>"   placeholder="Enter alternate mail id">
+                                            <span class="text-danger error-msg" id="error-staffotemail"></span>
+											</div>
+											
+                                        </div>
+										<div class="form-group row">
+                                            <label class="col-sm-2 col-form-label">Contact Number <span style="color: red;">*</span></label>
+                                            <div class="col-sm-6">
+                                                <input type="text" class="form-control" name="mobile" id="mobile" maxlength="10" minlength="10"
+                                                  value="<?= isset($staff) ? ($staff['us_Phone']) : '' ?>"   placeholder="Enter Contact Number" required autocomplete="off">
+                                            <span class="text-danger error-msg" id="error-mobile"></span>
+											</div>
+											
                                         </div>
                                         <div class="form-group row">
                                             <label class="col-sm-2 col-form-label">Contact Number <span
                                                     style="color: red;">*</span></label>
                                             <div class="col-sm-6">
-                                                <input type="text" class="form-control" name="mobile" id="mobile"
-                                                    size=15 value="<?= isset($staff) ? ($staff['us_Phone']) : '' ?>"
-                                                    placeholder="Enter Contact Number" required>
-                                                <span class="text-danger error-msg" id="error-mobile"></span>
-                                            </div>
-
+                                                <input type="Password" class="form-control" name="password" id="password" size=15 value="" placeholder="Password" required autocomplete="off" >
+												<span class="text-danger error-msg" id="error-password"></span>
+										   </div>
+											
                                         </div>
                                         <div class="form-group row">
                                             <label class="col-sm-2 col-form-label">Password <span
@@ -118,11 +122,11 @@
                                                     onclick="window.location.href='<?= base_url('staff'); ?>'">
                                                     <i class="bi bi-x-circle"></i> Discard
                                                 </button>
-                                                <button type="button" class="btn btn-primary" id="staffSubmit"
-                                                    name="staffSubmit">
-                                                    <i class="bi bi-check-circle"></i> Save
-                                                </button>
-
+													<button type="button" class="btn btn-primary" id="staffSubmit" name="staffSubmit" >
+														<i class="bi bi-check-circle"></i> Save
+														
+													</button>
+													
                                             </div>
                                         </div>
                                     </form>

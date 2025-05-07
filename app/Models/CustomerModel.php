@@ -9,27 +9,39 @@ class CustomerModel extends Model {
             $this->db = \Config\Database::connect();
         }
         public function getAllCustomer(){
-        $sql="select c.*,s.* from customer c, address s where c.cust_Id=s.add_CusId";
-		$query = $this->db->query($sql);
-		return $query->getResultArray();
+			$sql="select * from customer where cust_Status != 3";
+        //$sql="select c.*,s.* from customer c, address s where c.cust_Status = 1 and c.cust_Id=s.add_CusId ";
+			$query = $this->db->query($sql);
+			return $query->getResultArray();
         }
-		  public function findCustomerById($id)
-		  
+		  public function findCustomerById($id) 
 		{
 			return $this->db->query("select * from customer where cust_Id = '".$id."'and cust_Status=1")->getRow();
 			//return $this->db->table('customer')->where(['cust_Id' => $id, 'cust_Status' => 1])->first();
 		}
-		 public function createStaff($data) {
-            return $this->db->table('user')->insert($data);
+		 public function createcust($data) {
+            return $this->db->table('customer')->insert($data);
         }
-		public function modifyStaff($us_id,$data) {
+		public function modifycust($cust_id,$data) {
 					
-			$this->db->table('user')->where('us_Id',$us_id)->update($data);
+			$this->db->table('customer')->where('cust_Id',$cust_id)->update($data);
 			return $this->db->getLastQuery();
 		}
-		public function deleteStaffById($us_status, $us_id, $modified_by)
+		public function deleteCustById($cust_status, $cust_id, $modified_by)
 		{
-			return $this->db->query("update user set us_Status = '".$us_status."', us_modifyon=NOW(), us_modifyby='".$modified_by."' where us_Id = '".$us_id."'");
+			return $this->db->query("update customer set cust_Status = '".$cust_status."', cust_modifyon=NOW(), cust_modifyby='".$modified_by."' where cust_Id = '".$cust_id."'");
+		}
+		public function getAllCustomer_address(){
+			$sql="select c.*,s.* from customer c, address s where c.cust_Status = 1 and c.cust_Id=s.add_CusId ";
+			$query = $this->db->query($sql);
+			return $query->getResultArray();
+        }
+		public function updateCustomer($id, $data)
+		{
+			return $this->db->table('customer')->where('cust_Id', $id) ->update($data);
+		}
+		public function getCustomerByid($id){
+            return $this->db->table('customer')->where('cust_Id', $id)->get()->getRow(); 
 		}
     }
 

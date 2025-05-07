@@ -9,6 +9,7 @@
 	
 	
     <!-- Required Jquery -->
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
       <!-- DataTables CSS -->
     <script type="text/javascript" src="<?php echo base_url().ASSET_PATH; ?>assets/js/jquery/jquery.min.js"></script>

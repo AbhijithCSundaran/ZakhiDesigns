@@ -146,7 +146,7 @@
                               </a>
                               <ul class="show-notification profile-notification">
 									<li class="waves-effect waves-light">
-                                      <a href="user-profile.html">
+                                      <a href="<?php echo base_url('admin') ?> ">
                                           <i class="ti-user"></i> Profile
                                       </a>
                                   </li>

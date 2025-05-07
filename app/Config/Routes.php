@@ -26,6 +26,7 @@ $routes->get('user/products', 'Product::index');
 $routes->get('staff', 'Staff::index');
 $routes->get('staff/add', 'Staff::addStaff'); // Create
 $routes->get('staff/add/(:num)', 'Staff::addStaff/$1'); // Edit
+$routes->post('staff/status', 'Staff::updateStatus');// Update status of a staff
 $routes->post('staff/save', 'Staff::createnew');
 $routes->post('staff/delete/(:any)', 'Staff::deleteStaff/$1');
 
@@ -36,8 +37,15 @@ $routes->get('customer/view', 'Customer::view_cust'); // Create
 $routes->get('customer/view/(:num)', 'Customer::view_cust/$1'); // Edit Page
 $routes->post('customer/save', 'Customer::createnew');
 $routes->post('customer/delete/(:any)', 'Customer::deleteCust/$1');
-$routes->post('customer/updateStatus', 'Customer::updateStatus');
+//$routes->post('customer/updateStatus', 'Customer::updateStatus');
+$routes->post('customer/status', 'Customer::updateStatus');
+$routes->get('customer/location/(:num)', 'Customer_address::index');//customer address edit
 
 
 //logout
 $routes->post('/logout', 'Auth::logout'); 
+
+
+//admin_updation
+$routes->get('admin', 'Admin::index');
+$routes->post('admin/save', 'Admin::createnew');

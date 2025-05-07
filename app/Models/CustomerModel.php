@@ -9,7 +9,7 @@ class CustomerModel extends Model {
             $this->db = \Config\Database::connect();
         }
         public function getAllCustomer(){
-			$sql="select * from customer where cust_Status = 1";
+			$sql="select * from customer where cust_Status != 3";
         //$sql="select c.*,s.* from customer c, address s where c.cust_Status = 1 and c.cust_Id=s.add_CusId ";
 			$query = $this->db->query($sql);
 			return $query->getResultArray();
@@ -30,6 +30,18 @@ class CustomerModel extends Model {
 		public function deleteCustById($cust_status, $cust_id, $modified_by)
 		{
 			return $this->db->query("update customer set cust_Status = '".$cust_status."', cust_modifyon=NOW(), cust_modifyby='".$modified_by."' where cust_Id = '".$cust_id."'");
+		}
+		public function getAllCustomer_address(){
+			$sql="select c.*,s.* from customer c, address s where c.cust_Status = 1 and c.cust_Id=s.add_CusId ";
+			$query = $this->db->query($sql);
+			return $query->getResultArray();
+        }
+		public function updateCustomer($id, $data)
+		{
+			return $this->db->table('customer')->where('cust_Id', $id) ->update($data);
+		}
+		public function getCustomerByid($id){
+            return $this->db->table('customer')->where('cust_Id', $id)->get()->getRow(); 
 		}
     }
 

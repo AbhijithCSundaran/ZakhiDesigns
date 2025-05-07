@@ -46,10 +46,10 @@ $(document).ready(function () {
         }
     });
 
-    $('#password').on('input', function () {
-        const value = $(this).val().trim();
-        $('#error-password').text(value ? '' : 'Password is required.');
-    });
+    // $('#password').on('input', function () {
+     //   const value = $(this).val().trim();
+     //   $('#error-password').text(value ? '' : 'Password is required.');
+    // });
 });
 
 
@@ -123,4 +123,59 @@ function confirmDelete(userId) {
     });
 }
 /*************************************/
+//Active and Inactive status
+$(document).ready(function() {
+    $('.checkactive').on('change', function() {
+        let us_Id = $(this).val();
+        let status = $(this).prop('checked') ? 1 : 2;
+        $.ajax({
+            url: '<?= base_url('staff/status'); ?>',
+            type: 'POST',
+            data: {
+                us_Id: us_Id,
+                us_Status: status
+            },
+            headers: {
+                'X-CSRF-TOKEN': '<?= csrf_hash(); ?>'
+            },
+            success: function(response) {
+    const messageBox = $('#messageBox');
+    
+    if (response.status === 'success') {
+        messageBox
+            .removeClass('alert-danger')
+            .addClass('alert alert-success')
+            .text(response.message)
+            .fadeIn();
+
+    } else {
+        messageBox
+            .removeClass('alert-success')
+            .addClass('alert alert-danger')
+            .text(response.message)
+            .fadeIn();
+    }
+
+    // Auto-hide the message after 1 seconds
+    setTimeout(() => {
+        messageBox.fadeOut();
+    }, 1000);
+},
+
+error: function(xhr) {
+    $('#messageBox')
+        .removeClass('alert-success')
+        .addClass('alert alert-danger')
+        .text('Error updating status. Please try again later.')
+        .fadeIn();
+
+    setTimeout(() => {
+        $('#messageBox').fadeOut();
+    }, 1000);
+
+    console.error(xhr.responseText);
+}
+        });
+    });
+});
 </script>

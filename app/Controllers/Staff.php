@@ -84,56 +84,62 @@ class Staff extends BaseController
 					'message' => 'Phone number must contain only 10 digits.'
 				]);
 			}
-		if($staffname && $staffemail && $password && $mobile) {
 			if (empty($us_id)) {
-				$data = [
-				'us_Name'          => $staffname,
-				'us_Email'         => $staffemail,
-				'us_Email2'        => $staffotemail,
-				'us_Phone'		   => $mobile,
-				'us_Status'		   => 1,
-				'us_Role'		   => 2,
-				'us_Password'      => md5($password),
-				'us_createdon'     => date("Y-m-d H:i:s"),
-				'us_createdby'     => $this->session->get('zd_id'),
-				'us_modifyby'      => $this->session->get('zd_id'),
-			];
-				$CreateStaff = $this->staffModel->createStaff($data);
-				//echo json_encode(array("status" => 1, "msg" => "Created successfully."));
-				echo json_encode(array(
-					"status" => 1,
-					"msg" => "Created successfully.",
-					"redirect" => base_url('staff')
-				));
-				
+				if($staffname && $staffemail && $password && $mobile) {
+					$data = [
+						'us_Name'          => $staffname,
+						'us_Email'         => $staffemail,
+						'us_Email2'        => $staffotemail,
+						'us_Phone'		   => $mobile,
+						'us_Status'		   => 1,
+						'us_Role'		   => 2,
+						'us_Password'      => md5($password),
+						'us_createdon'     => date("Y-m-d H:i:s"),
+						'us_createdby'     => $this->session->get('zd_id'),
+						'us_modifyby'      => $this->session->get('zd_id'),
+						];
+						$CreateStaff = $this->staffModel->createStaff($data);
+						//echo json_encode(array("status" => 1, "msg" => "Created successfully."));
+						echo json_encode(array(
+							"status" => 1,
+							"msg" => "Created successfully.",
+							"redirect" => base_url('staff')
+						));
+				}
 			} 
 			else {
-				$data = [
-				'us_Name'          => $staffname,
-				'us_Email'         => $staffemail,
-				'us_Email2'        => $staffotemail,
-				'us_Phone'		   => $mobile,
-				'us_Status'		   => 1,
-				'us_Role'		   => 2,
-				'us_Password'      => md5($password),
-				'us_createdby'     => $this->session->get('zd_uid'),
-				'us_modifyby'	   => $this->session->get('zd_uid'),     
-			];				
-				$modifyStaff = $this->staffModel->modifyStaff($us_id,$data);
-				//echo json_encode(array("status" => 1, "msg" => "Updated successfully."));	
-				echo json_encode(array(
-					"status" => 1,
-					"msg" => "Updated successfully.",
-					"redirect" => base_url('staff')
-				));
+				if($staffname && $staffemail && $mobile) {
+						$data = [
+					'us_Name'          => $staffname,
+					'us_Email'         => $staffemail,
+					'us_Email2'        => $staffotemail,
+					'us_Phone'		   => $mobile,
+					'us_Status'		   => 1,
+					'us_Role'		   => 2,
+					// 'us_Password'      => md5($password),
+					'us_createdby'     => $this->session->get('zd_uid'),
+					'us_modifyby'	   => $this->session->get('zd_uid'),     
+					];
+
+					if($password){
+						$data['us_Password']= md5($password);
+					}
+
+					$modifyStaff = $this->staffModel->modifyStaff($us_id,$data);
+					//echo json_encode(array("status" => 1, "msg" => "Updated successfully."));	
+					echo json_encode(array(
+						"status" => 1,
+						"msg" => "Updated successfully.",
+						"redirect" => base_url('staff')
+					));
+				}
 			}
-		}
-		else {
-			return $this->response->setJSON([
-				'status' => 'error',
-				'message' => 'All fields are required.'
-			]);
-		}
+		// else {
+		// 	return $this->response->setJSON([
+		// 		'status' => 'error',
+		// 		'message' => 'All fields are required.'
+		// 	]);
+		// }
 		
 	}
 	 public function deleteStaff($us_id) {
@@ -158,6 +164,34 @@ class Staff extends BaseController
 				'msg' => 'Invalid request.'
 			]);
 		}
+	}
+	public function updateStatus()
+	{
+	
+		$us_Id = $this->request->getPost('us_Id');
+        $newStatus = $this->request->getPost('us_Status');
+        $staffModel = new StaffModel();
+        $staff = $staffModel->getStaffByid($us_Id);
+    
+        if (!$staff) {
+            return $this->response->setJSON([
+                'success' => false,
+                'message' => 'Customer not found'
+            ]);
+        }
+        $update = $staffModel->updateStaff($us_Id, ['us_Status' => $newStatus]);
+        if ($update) {
+            return $this->response->setJSON([
+                'success' => true,
+                'message' => 'Status Updated Successfully!',
+                'new_status' => $newStatus
+            ]);
+        } else {
+            return $this->response->setJSON([
+                'success' => false,
+                'message' => 'Failed to update status'
+            ]);
+        }
 	}
 
 	

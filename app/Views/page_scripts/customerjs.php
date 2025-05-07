@@ -56,11 +56,13 @@ $('#custSubmit').click(function(e) {
 
     e.preventDefault(); // Important to prevent normal form submit
     var url = baseUrl + "customer/save"; // Correct route
-
+console.log("response");
     $.post(url, $('#createcust').serialize(), function(response) {
        // $('#createstaff')[0].reset();
-
-        if (response.status == 1) { $('#messageBox')
+		console.log("response");
+		console.log(response);
+        if (response.status == 1) { 
+		$('#messageBox')
                 .removeClass('alert-danger')
                 .addClass('alert-success')
                 .text(response.msg || 'Customer created successfully!')
@@ -117,5 +119,59 @@ function confirmDelete(userId) {
     });
 }
 /*************************************/
+//Active and Inactive status
+$(document).ready(function() {
+    $('.checkactive').on('change', function() {
+        let custId = $(this).val();
+        let status = $(this).prop('checked') ? 1 : 2;
+        $.ajax({
+            url: '<?= base_url('customer/status'); ?>',
+            type: 'POST',
+            data: {
+                cust_Id: custId,
+                cust_Status: status
+            },
+            headers: {
+                'X-CSRF-TOKEN': '<?= csrf_hash(); ?>'
+            },
+            success: function(response) {
+    const messageBox = $('#messageBox');
+    
+    if (response.status === 'success') {
+        messageBox
+            .removeClass('alert-danger')
+            .addClass('alert alert-success')
+            .text(response.message)
+            .fadeIn();
 
+    } else {
+        messageBox
+            .removeClass('alert-success')
+            .addClass('alert alert-danger')
+            .text(response.message)
+            .fadeIn();
+    }
+
+    // Auto-hide the message after 1 seconds
+    setTimeout(() => {
+        messageBox.fadeOut();
+    }, 1000);
+},
+
+error: function(xhr) {
+    $('#messageBox')
+        .removeClass('alert-success')
+        .addClass('alert alert-danger')
+        .text('Error updating status. Please try again later.')
+        .fadeIn();
+
+    setTimeout(() => {
+        $('#messageBox').fadeOut();
+    }, 1000);
+
+    console.error(xhr.responseText);
+}
+        });
+    });
+});
 </script>

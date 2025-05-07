@@ -58,7 +58,7 @@ class Customer extends BaseController
 		$custemail = $this->input->getPost('custemail');
 		$mobile = $this->input->getPost('mobile');
 		$password = $this->input->getPost('password');
-		echo $status = $this->input->getPost('custstatus');
+		//$status = $this->input->getPost('custstatus');
 		//$status =	$this->input->getPost('custstatus');
 	
 		// Validate email formats
@@ -82,7 +82,7 @@ class Customer extends BaseController
 				'cust_Email'         => $custemail,
 				'cust_Phone'	     => $mobile,
 				'cust_Password'      => md5($password),
-				'cust_Status'	   	 => $status,
+				'cust_Status'	   	 => 1,
 				'cust_createdon'     => date("Y-m-d H:i:s"),
 				'cust_createdby'     => $this->session->get('zd_id'),
 				'cust_modifyby'      => $this->session->get('zd_id'),
@@ -101,11 +101,13 @@ class Customer extends BaseController
 				'cust_Name'          => $custname,
 				'cust_Email'         => $custemail,
 				'cust_Phone'	     => $mobile,
-				'cust_Status'	     => $status,
 				'cust_createdon'     => date("Y-m-d H:i:s"),
 				'cust_createdby'     => $this->session->get('zd_id'),
 				'cust_modifyby'      => $this->session->get('zd_id'),  
-			];				
+			];	
+			if($password){
+					$data['us_Password']= md5($password);
+			}			
 				$modifycust = $this->customerModel->modifycust($cust_id,$data);
 				//echo json_encode(array("status" => 1, "msg" => "Updated successfully."));	
 				echo json_encode(array(
@@ -148,15 +150,32 @@ class Customer extends BaseController
 	}
 	public function updateStatus()
 	{
-		//$id = $this->request->getPost('id');
-		$cust_id = $this->request->getPost('cust_id');
-		$status = $this->request->getPost('status');
-		if (!$cust_id) {
-			return $this->response->setJSON(['success' => false, 'msg' => 'Invalid ID']);
-		}
-
-		$this->customerModel->update($id, ['cust_Status' => $status]);
-		return $this->response->setJSON(['success' => true, 'msg' => 'Status updated']);
+	
+		$custId = $this->request->getPost('cust_Id');
+        $newStatus = $this->request->getPost('cust_Status');
+    
+        $customerModel = new CustomerModel();
+        $customer = $customerModel->getCustomerByid($custId);
+    
+        if (!$customer) {
+            return $this->response->setJSON([
+                'success' => false,
+                'message' => 'Customer not found'
+            ]);
+        }
+        $update = $customerModel->updateCustomer($custId, ['cust_Status' => $newStatus]);
+        if ($update) {
+            return $this->response->setJSON([
+                'success' => true,
+                'message' => 'Status Updated Successfully!',
+                'new_status' => $newStatus
+            ]);
+        } else {
+            return $this->response->setJSON([
+                'success' => false,
+                'message' => 'Failed to update status'
+            ]);
+        }
 	}
 	
 }

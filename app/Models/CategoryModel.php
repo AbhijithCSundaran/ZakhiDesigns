@@ -19,6 +19,7 @@ class CategoryModel extends Model {
          public function getCategoryByid($id){
             return $this->db->table('category')->where('cat_Id', $id)->get()->getRow(); 
     }
+  
 
     public function updateCategory($id, $data)
     {

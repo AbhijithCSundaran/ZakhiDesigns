@@ -5,7 +5,7 @@
             <div class="row align-items-center">
                 <div class="col-md-8">
                     <div class="page-header-title">
-                        <h5 class="m-b-10">Add Category</h5>
+                        <h5 class="m-b-10">Add Subcategory</h5>
                         <p class="m-b-0">Welcome to Zakhi Designs</p>
                     </div>
                 </div>
@@ -14,7 +14,7 @@
                         <li class="breadcrumb-item">
                             <a href="index.html"> <i class="fa fa-home"></i> </a>
                         </li>
-                        <li class="breadcrumb-item"><a href="#!">Add Category</a>
+                        <li class="breadcrumb-item"><a href="#!">Add Subcategory</a>
                         </li>
                     </ul>
                 </div>
@@ -42,7 +42,8 @@
                                         <div class="col-md-3">
                                             <div class="row">
                                                 <div class="col-lg-12 d-flex justify-content-end p-2">
-                                                    <a href="<?= base_url('category'); ?>" class="btn btn-primary"> Back
+                                                    <a href="<?= base_url('subcategory'); ?>" class="btn btn-primary">
+                                                        Back
                                                     </a>
                                                 </div>
                                             </div>
@@ -50,42 +51,68 @@
                                     </div>
                                 </div>
                                 <div class="card-block">
-                                    <form name="createCategory" id="createCategory" method="post">
+                                    <form name="createSubcategory" id="createSubcategory" method="post">
                                         <div class="form-group row">
                                             <label class="col-sm-2 col-form-label">Category Name</label>
                                             <div class="col-sm-6">
-                                                <input type="text" name="category_name" id="categoryName" class="form-control"
-                                                value="<?= isset($category) ? ($category['cat_Name']) : '' ?>" placeholder="Enter the Category name">
+                                                <select class="form-control fs-13" name="cat_id" id="categoryName"
+                                                    required>
+                                                    <option value="">-- Select Category --</option>
+                                                    <?php if (!empty($category)) : ?>
+                                                    <?php foreach ($category as $cate): ?>
+                                                    <option value="<?= esc($cate->cat_Id); ?>"
+                                                        <?= (isset($subcategory) && $subcategory['cat_Id'] == $cate->cat_Id) ? 'selected' : ''; ?>>
+                                                        <?= esc($cate->cat_Name); ?>
+                                                    </option>
+                                                    <?php endforeach; ?>
+                                                    <?php else : ?>
+                                                    <option value="">No Category Available</option>
+                                                    <?php endif; ?>
+
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-sm-2 col-form-label">Subcategory Name</label>
+                                            <div class="col-sm-6">
+                                                <input type="text" name="subcategory_name" id="subcatName"
+                                                    class="form-control"
+                                                    value="<?= isset($subcategory) ? ($subcategory['sub_Category_Name']) : '' ?>"
+                                                    placeholder="Enter the Subcategory name">
                                             </div>
                                         </div>
                                         <div class="form-group row">
                                             <label class="col-sm-2 col-form-label">Discount Value</label>
                                             <div class="col-sm-6">
-                                                <input type="text" class="form-control" name="discount_value" id="discountValue"
-                                                value="<?= isset($category) ? ($category['cat_Discount_Value']) : '' ?>" placeholder="Enter the Discount value">
+                                                <input type="text" class="form-control" name="discount_value"
+                                                    id="discountValue"
+                                                    value="<?= isset($subcategory) ? ($subcategory['sub_Discount_Value']) : '' ?>"
+                                                    placeholder="Enter the Discount value">
                                             </div>
                                         </div>
                                         <div class="form-group row">
                                             <label class="col-sm-2 col-form-label">Discount Type</label>
                                             <div class="col-sm-6">
-                                                <input type="text" class="form-control" name="discount_type" id="discountType" 
-                                                 value="<?= isset($category) ? ($category['cat_Discount_Type']) : '' ?>"
-                                                placeholder="Discount Type">
+                                                <input type="text" class="form-control" name="discount_type"
+                                                    id="discountType"
+                                                    value="<?= isset($subcategory) ? ($subcategory['sub_Discount_Type']) : '' ?>"
+                                                    placeholder="Discount Type">
                                             </div>
                                         </div>
                                         <div class="row justify-content-center">
-                                        <input type="hidden" name="cat_id"
-                                        value="<?= isset($category['cat_Id']) ? esc($category['cat_Id']) : '' ?>">
+                                            <input type="hidden" name="sub_id"
+                                                value="<?= isset($subcategory) ? ($subcategory['sub_Id']) : '' ?>">
                                             <div class="button-group">
                                                 <button type="button" class="btn btn-secondary">
                                                     <i class="bi bi-x-circle"></i> Discard
                                                 </button>
-                                                <button type="button" class="btn btn-success" id="categorySubmit" name="categorySubmit">
+                                                <button type="button" class="btn btn-success" id="subcategorySubmit"
+                                                    name="subcategorySubmit">
                                                     <i class="bi bi-check-circle"></i> Save
                                                 </button>
                                             </div>
                                         </div>
-                                     </form>
+                                    </form>
 
 
                                 </div>

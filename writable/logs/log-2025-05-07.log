@@ -1,0 +1,1357 @@
+CRITICAL - 2025-05-07 04:03:23 --> ErrorException: Undefined property: stdClass::$us_Phone
+[Method: GET, Route: staff]
+in APPPATH\Views\staff.php on line 81.
+ 1 APPPATH\Views\staff.php(81): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined property: stdClass::$us_Phone', 'C:\\xampp\\htdocs\\ZakhiDesigns\\app\\Views\\staff.php', 81)
+ 2 SYSTEMPATH\View\View.php(224): include('C:\\xampp\\htdocs\\ZakhiDesigns\\app\\Views\\staff.php')
+ 3 SYSTEMPATH\View\View.php(227): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1173): CodeIgniter\View\View->render('staff', [], true)
+ 5 APPPATH\Controllers\Staff.php(22): view('staff', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Staff->index()
+ 7 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Staff))
+ 8 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2025-05-07 04:26:55 --> ErrorException: Attempt to read property "cat_Id" on array
+[Method: GET, Route: category]
+in APPPATH\Views\category.php on line 93.
+ 1 APPPATH\Views\category.php(93): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Attempt to read property "cat_Id" on array', 'C:\\xampp\\htdocs\\ZakhiDesigns\\app\\Views\\category.php', 93)
+ 2 SYSTEMPATH\View\View.php(224): include('C:\\xampp\\htdocs\\ZakhiDesigns\\app\\Views\\category.php')
+ 3 SYSTEMPATH\View\View.php(227): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1173): CodeIgniter\View\View->render('category', [], true)
+ 5 APPPATH\Controllers\Category.php(24): view('category', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Category->index()
+ 7 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Category))
+ 8 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2025-05-07 04:27:08 --> ErrorException: Attempt to read property "cat_Id" on array
+[Method: GET, Route: category]
+in APPPATH\Views\category.php on line 93.
+ 1 APPPATH\Views\category.php(93): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Attempt to read property "cat_Id" on array', 'C:\\xampp\\htdocs\\ZakhiDesigns\\app\\Views\\category.php', 93)
+ 2 SYSTEMPATH\View\View.php(224): include('C:\\xampp\\htdocs\\ZakhiDesigns\\app\\Views\\category.php')
+ 3 SYSTEMPATH\View\View.php(227): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1173): CodeIgniter\View\View->render('category', [], true)
+ 5 APPPATH\Controllers\Category.php(24): view('category', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Category->index()
+ 7 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Category))
+ 8 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2025-05-07 04:29:51 --> ErrorException: Attempt to read property "cat_Id" on array
+[Method: GET, Route: category]
+in APPPATH\Views\category.php on line 93.
+ 1 APPPATH\Views\category.php(93): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Attempt to read property "cat_Id" on array', 'C:\\xampp\\htdocs\\ZakhiDesigns\\app\\Views\\category.php', 93)
+ 2 SYSTEMPATH\View\View.php(224): include('C:\\xampp\\htdocs\\ZakhiDesigns\\app\\Views\\category.php')
+ 3 SYSTEMPATH\View\View.php(227): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1173): CodeIgniter\View\View->render('category', [], true)
+ 5 APPPATH\Controllers\Category.php(24): view('category', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Category->index()
+ 7 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Category))
+ 8 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2025-05-07 04:30:24 --> ErrorException: Attempt to read property "cat_Id" on array
+[Method: GET, Route: category]
+in APPPATH\Views\category.php on line 93.
+ 1 APPPATH\Views\category.php(93): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Attempt to read property "cat_Id" on array', 'C:\\xampp\\htdocs\\ZakhiDesigns\\app\\Views\\category.php', 93)
+ 2 SYSTEMPATH\View\View.php(224): include('C:\\xampp\\htdocs\\ZakhiDesigns\\app\\Views\\category.php')
+ 3 SYSTEMPATH\View\View.php(227): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1173): CodeIgniter\View\View->render('category', [], true)
+ 5 APPPATH\Controllers\Category.php(24): view('category', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Category->index()
+ 7 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Category))
+ 8 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2025-05-07 04:31:56 --> ErrorException: Attempt to read property "cat_Id" on array
+[Method: GET, Route: category]
+in APPPATH\Views\category.php on line 93.
+ 1 APPPATH\Views\category.php(93): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Attempt to read property "cat_Id" on array', 'C:\\xampp\\htdocs\\ZakhiDesigns\\app\\Views\\category.php', 93)
+ 2 SYSTEMPATH\View\View.php(224): include('C:\\xampp\\htdocs\\ZakhiDesigns\\app\\Views\\category.php')
+ 3 SYSTEMPATH\View\View.php(227): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1173): CodeIgniter\View\View->render('category', [], true)
+ 5 APPPATH\Controllers\Category.php(24): view('category', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Category->index()
+ 7 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Category))
+ 8 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2025-05-07 04:34:11 --> ErrorException: Undefined property: App\Controllers\Category::$CategoryModel
+[Method: GET, Route: category/add/3]
+in APPPATH\Controllers\Category.php on line 50.
+ 1 APPPATH\Controllers\Category.php(50): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined property: App\\Controllers\\Category::$CategoryModel', 'C:\\xampp\\htdocs\\ZakhiDesigns\\app\\Controllers\\Category.php', 50)
+ 2 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Category->addCategory('3')
+ 3 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Category))
+ 4 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ERROR - 2025-05-07 04:50:56 --> mysqli_sql_exception: Column 'cat_createdby' cannot be null in C:\xampp\htdocs\ZakhiDesigns\system\Database\MySQLi\Connection.php:327
+Stack trace:
+#0 C:\xampp\htdocs\ZakhiDesigns\system\Database\MySQLi\Connection.php(327): mysqli->query('INSERT INTO `ca...', 0)
+#1 C:\xampp\htdocs\ZakhiDesigns\system\Database\BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `ca...')
+#2 C:\xampp\htdocs\ZakhiDesigns\system\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `ca...')
+#3 C:\xampp\htdocs\ZakhiDesigns\system\Database\BaseBuilder.php(2345): CodeIgniter\Database\BaseConnection->query('INSERT INTO `ca...', Array, false)
+#4 C:\xampp\htdocs\ZakhiDesigns\app\Models\CategoryModel.php(13): CodeIgniter\Database\BaseBuilder->insert(Array)
+#5 C:\xampp\htdocs\ZakhiDesigns\app\Controllers\Category.php(132): App\Models\CategoryModel->categoryInsert(Array)
+#6 C:\xampp\htdocs\ZakhiDesigns\system\CodeIgniter.php(933): App\Controllers\Category->saveCategory()
+#7 C:\xampp\htdocs\ZakhiDesigns\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Category))
+#8 C:\xampp\htdocs\ZakhiDesigns\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 C:\xampp\htdocs\ZakhiDesigns\system\Boot.php(334): CodeIgniter\CodeIgniter->run()
+#10 C:\xampp\htdocs\ZakhiDesigns\system\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#11 C:\xampp\htdocs\ZakhiDesigns\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#12 {main}
+CRITICAL - 2025-05-07 04:50:56 --> CodeIgniter\Database\Exceptions\DatabaseException: Column 'cat_createdby' cannot be null
+[Method: POST, Route: category/save]
+in SYSTEMPATH\Database\BaseConnection.php on line 692.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(2345): CodeIgniter\Database\BaseConnection->query('INSERT INTO `category` (`cat_Name`, `cat_Discount_Value`, `cat_Discount_Type`, `cat_Status`, `cat_createdon`, `cat_createdby`, `cat_modifyby`) VALUES (:cat_Name:, :cat_Discount_Value:, :cat_Discount_Type:, :cat_Status:, :cat_createdon:, :cat_createdby:, :cat_modifyby:)', [...], false)
+ 2 APPPATH\Models\CategoryModel.php(13): CodeIgniter\Database\BaseBuilder->insert([...])
+ 3 APPPATH\Controllers\Category.php(132): App\Models\CategoryModel->categoryInsert([...])
+ 4 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Category->saveCategory()
+ 5 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Category))
+ 6 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 9 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2025-05-07 04:50:56 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Column 'cat_createdby' cannot be null
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 332.
+ 1 SYSTEMPATH\Database\BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `category` (`cat_Name`, `cat_Discount_Value`, `cat_Discount_Type`, `cat_Status`, `cat_createdon`, `cat_createdby`, `cat_modifyby`) VALUES (\'Kitchen fittings\', \'13\', \'amount\', 1, \'2025-05-07 04:50:56\', NULL, NULL)')
+ 2 SYSTEMPATH\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `category` (`cat_Name`, `cat_Discount_Value`, `cat_Discount_Type`, `cat_Status`, `cat_createdon`, `cat_createdby`, `cat_modifyby`) VALUES (\'Kitchen fittings\', \'13\', \'amount\', 1, \'2025-05-07 04:50:56\', NULL, NULL)')
+ 3 SYSTEMPATH\Database\BaseBuilder.php(2345): CodeIgniter\Database\BaseConnection->query('INSERT INTO `category` (`cat_Name`, `cat_Discount_Value`, `cat_Discount_Type`, `cat_Status`, `cat_createdon`, `cat_createdby`, `cat_modifyby`) VALUES (:cat_Name:, :cat_Discount_Value:, :cat_Discount_Type:, :cat_Status:, :cat_createdon:, :cat_createdby:, :cat_modifyby:)', [...], false)
+ 4 APPPATH\Models\CategoryModel.php(13): CodeIgniter\Database\BaseBuilder->insert([...])
+ 5 APPPATH\Controllers\Category.php(132): App\Models\CategoryModel->categoryInsert([...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Category->saveCategory()
+ 7 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Category))
+ 8 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2025-05-07 04:50:56 --> [Caused by] mysqli_sql_exception: Column 'cat_createdby' cannot be null
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 327.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(327): mysqli->query('INSERT INTO `category` (`cat_Name`, `cat_Discount_Value`, `cat_Discount_Type`, `cat_Status`, `cat_createdon`, `cat_createdby`, `cat_modifyby`) VALUES (\'Kitchen fittings\', \'13\', \'amount\', 1, \'2025-05-07 04:50:56\', NULL, NULL)', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `category` (`cat_Name`, `cat_Discount_Value`, `cat_Discount_Type`, `cat_Status`, `cat_createdon`, `cat_createdby`, `cat_modifyby`) VALUES (\'Kitchen fittings\', \'13\', \'amount\', 1, \'2025-05-07 04:50:56\', NULL, NULL)')
+ 3 SYSTEMPATH\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `category` (`cat_Name`, `cat_Discount_Value`, `cat_Discount_Type`, `cat_Status`, `cat_createdon`, `cat_createdby`, `cat_modifyby`) VALUES (\'Kitchen fittings\', \'13\', \'amount\', 1, \'2025-05-07 04:50:56\', NULL, NULL)')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(2345): CodeIgniter\Database\BaseConnection->query('INSERT INTO `category` (`cat_Name`, `cat_Discount_Value`, `cat_Discount_Type`, `cat_Status`, `cat_createdon`, `cat_createdby`, `cat_modifyby`) VALUES (:cat_Name:, :cat_Discount_Value:, :cat_Discount_Type:, :cat_Status:, :cat_createdon:, :cat_createdby:, :cat_modifyby:)', [...], false)
+ 5 APPPATH\Models\CategoryModel.php(13): CodeIgniter\Database\BaseBuilder->insert([...])
+ 6 APPPATH\Controllers\Category.php(132): App\Models\CategoryModel->categoryInsert([...])
+ 7 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Category->saveCategory()
+ 8 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Category))
+ 9 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+11 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+12 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ERROR - 2025-05-07 04:50:57 --> mysqli_sql_exception: Column 'cat_createdby' cannot be null in C:\xampp\htdocs\ZakhiDesigns\system\Database\MySQLi\Connection.php:327
+Stack trace:
+#0 C:\xampp\htdocs\ZakhiDesigns\system\Database\MySQLi\Connection.php(327): mysqli->query('INSERT INTO `ca...', 0)
+#1 C:\xampp\htdocs\ZakhiDesigns\system\Database\BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `ca...')
+#2 C:\xampp\htdocs\ZakhiDesigns\system\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `ca...')
+#3 C:\xampp\htdocs\ZakhiDesigns\system\Database\BaseBuilder.php(2345): CodeIgniter\Database\BaseConnection->query('INSERT INTO `ca...', Array, false)
+#4 C:\xampp\htdocs\ZakhiDesigns\app\Models\CategoryModel.php(13): CodeIgniter\Database\BaseBuilder->insert(Array)
+#5 C:\xampp\htdocs\ZakhiDesigns\app\Controllers\Category.php(132): App\Models\CategoryModel->categoryInsert(Array)
+#6 C:\xampp\htdocs\ZakhiDesigns\system\CodeIgniter.php(933): App\Controllers\Category->saveCategory()
+#7 C:\xampp\htdocs\ZakhiDesigns\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Category))
+#8 C:\xampp\htdocs\ZakhiDesigns\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 C:\xampp\htdocs\ZakhiDesigns\system\Boot.php(334): CodeIgniter\CodeIgniter->run()
+#10 C:\xampp\htdocs\ZakhiDesigns\system\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#11 C:\xampp\htdocs\ZakhiDesigns\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#12 {main}
+CRITICAL - 2025-05-07 04:50:57 --> CodeIgniter\Database\Exceptions\DatabaseException: Column 'cat_createdby' cannot be null
+[Method: POST, Route: category/save]
+in SYSTEMPATH\Database\BaseConnection.php on line 692.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(2345): CodeIgniter\Database\BaseConnection->query('INSERT INTO `category` (`cat_Name`, `cat_Discount_Value`, `cat_Discount_Type`, `cat_Status`, `cat_createdon`, `cat_createdby`, `cat_modifyby`) VALUES (:cat_Name:, :cat_Discount_Value:, :cat_Discount_Type:, :cat_Status:, :cat_createdon:, :cat_createdby:, :cat_modifyby:)', [...], false)
+ 2 APPPATH\Models\CategoryModel.php(13): CodeIgniter\Database\BaseBuilder->insert([...])
+ 3 APPPATH\Controllers\Category.php(132): App\Models\CategoryModel->categoryInsert([...])
+ 4 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Category->saveCategory()
+ 5 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Category))
+ 6 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 9 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2025-05-07 04:50:57 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Column 'cat_createdby' cannot be null
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 332.
+ 1 SYSTEMPATH\Database\BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `category` (`cat_Name`, `cat_Discount_Value`, `cat_Discount_Type`, `cat_Status`, `cat_createdon`, `cat_createdby`, `cat_modifyby`) VALUES (\'Kitchen fittings\', \'13\', \'amount\', 1, \'2025-05-07 04:50:57\', NULL, NULL)')
+ 2 SYSTEMPATH\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `category` (`cat_Name`, `cat_Discount_Value`, `cat_Discount_Type`, `cat_Status`, `cat_createdon`, `cat_createdby`, `cat_modifyby`) VALUES (\'Kitchen fittings\', \'13\', \'amount\', 1, \'2025-05-07 04:50:57\', NULL, NULL)')
+ 3 SYSTEMPATH\Database\BaseBuilder.php(2345): CodeIgniter\Database\BaseConnection->query('INSERT INTO `category` (`cat_Name`, `cat_Discount_Value`, `cat_Discount_Type`, `cat_Status`, `cat_createdon`, `cat_createdby`, `cat_modifyby`) VALUES (:cat_Name:, :cat_Discount_Value:, :cat_Discount_Type:, :cat_Status:, :cat_createdon:, :cat_createdby:, :cat_modifyby:)', [...], false)
+ 4 APPPATH\Models\CategoryModel.php(13): CodeIgniter\Database\BaseBuilder->insert([...])
+ 5 APPPATH\Controllers\Category.php(132): App\Models\CategoryModel->categoryInsert([...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Category->saveCategory()
+ 7 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Category))
+ 8 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2025-05-07 04:50:57 --> [Caused by] mysqli_sql_exception: Column 'cat_createdby' cannot be null
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 327.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(327): mysqli->query('INSERT INTO `category` (`cat_Name`, `cat_Discount_Value`, `cat_Discount_Type`, `cat_Status`, `cat_createdon`, `cat_createdby`, `cat_modifyby`) VALUES (\'Kitchen fittings\', \'13\', \'amount\', 1, \'2025-05-07 04:50:57\', NULL, NULL)', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `category` (`cat_Name`, `cat_Discount_Value`, `cat_Discount_Type`, `cat_Status`, `cat_createdon`, `cat_createdby`, `cat_modifyby`) VALUES (\'Kitchen fittings\', \'13\', \'amount\', 1, \'2025-05-07 04:50:57\', NULL, NULL)')
+ 3 SYSTEMPATH\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `category` (`cat_Name`, `cat_Discount_Value`, `cat_Discount_Type`, `cat_Status`, `cat_createdon`, `cat_createdby`, `cat_modifyby`) VALUES (\'Kitchen fittings\', \'13\', \'amount\', 1, \'2025-05-07 04:50:57\', NULL, NULL)')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(2345): CodeIgniter\Database\BaseConnection->query('INSERT INTO `category` (`cat_Name`, `cat_Discount_Value`, `cat_Discount_Type`, `cat_Status`, `cat_createdon`, `cat_createdby`, `cat_modifyby`) VALUES (:cat_Name:, :cat_Discount_Value:, :cat_Discount_Type:, :cat_Status:, :cat_createdon:, :cat_createdby:, :cat_modifyby:)', [...], false)
+ 5 APPPATH\Models\CategoryModel.php(13): CodeIgniter\Database\BaseBuilder->insert([...])
+ 6 APPPATH\Controllers\Category.php(132): App\Models\CategoryModel->categoryInsert([...])
+ 7 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Category->saveCategory()
+ 8 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Category))
+ 9 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+11 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+12 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ERROR - 2025-05-07 05:05:31 --> mysqli_sql_exception: Column 'cat_createdby' cannot be null in C:\xampp\htdocs\ZakhiDesigns\system\Database\MySQLi\Connection.php:327
+Stack trace:
+#0 C:\xampp\htdocs\ZakhiDesigns\system\Database\MySQLi\Connection.php(327): mysqli->query('INSERT INTO `ca...', 0)
+#1 C:\xampp\htdocs\ZakhiDesigns\system\Database\BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `ca...')
+#2 C:\xampp\htdocs\ZakhiDesigns\system\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `ca...')
+#3 C:\xampp\htdocs\ZakhiDesigns\system\Database\BaseBuilder.php(2345): CodeIgniter\Database\BaseConnection->query('INSERT INTO `ca...', Array, false)
+#4 C:\xampp\htdocs\ZakhiDesigns\app\Models\CategoryModel.php(13): CodeIgniter\Database\BaseBuilder->insert(Array)
+#5 C:\xampp\htdocs\ZakhiDesigns\app\Controllers\Category.php(132): App\Models\CategoryModel->categoryInsert(Array)
+#6 C:\xampp\htdocs\ZakhiDesigns\system\CodeIgniter.php(933): App\Controllers\Category->saveCategory()
+#7 C:\xampp\htdocs\ZakhiDesigns\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Category))
+#8 C:\xampp\htdocs\ZakhiDesigns\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 C:\xampp\htdocs\ZakhiDesigns\system\Boot.php(334): CodeIgniter\CodeIgniter->run()
+#10 C:\xampp\htdocs\ZakhiDesigns\system\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#11 C:\xampp\htdocs\ZakhiDesigns\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#12 {main}
+CRITICAL - 2025-05-07 05:05:31 --> CodeIgniter\Database\Exceptions\DatabaseException: Column 'cat_createdby' cannot be null
+[Method: POST, Route: category/save]
+in SYSTEMPATH\Database\BaseConnection.php on line 692.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(2345): CodeIgniter\Database\BaseConnection->query('INSERT INTO `category` (`cat_Name`, `cat_Discount_Value`, `cat_Discount_Type`, `cat_Status`, `cat_createdon`, `cat_createdby`, `cat_modifyby`) VALUES (:cat_Name:, :cat_Discount_Value:, :cat_Discount_Type:, :cat_Status:, :cat_createdon:, :cat_createdby:, :cat_modifyby:)', [...], false)
+ 2 APPPATH\Models\CategoryModel.php(13): CodeIgniter\Database\BaseBuilder->insert([...])
+ 3 APPPATH\Controllers\Category.php(132): App\Models\CategoryModel->categoryInsert([...])
+ 4 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Category->saveCategory()
+ 5 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Category))
+ 6 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 9 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2025-05-07 05:05:31 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Column 'cat_createdby' cannot be null
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 332.
+ 1 SYSTEMPATH\Database\BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `category` (`cat_Name`, `cat_Discount_Value`, `cat_Discount_Type`, `cat_Status`, `cat_createdon`, `cat_createdby`, `cat_modifyby`) VALUES (\'testttg\', \'12\', \'per\', 1, \'2025-05-07 05:05:31\', NULL, NULL)')
+ 2 SYSTEMPATH\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `category` (`cat_Name`, `cat_Discount_Value`, `cat_Discount_Type`, `cat_Status`, `cat_createdon`, `cat_createdby`, `cat_modifyby`) VALUES (\'testttg\', \'12\', \'per\', 1, \'2025-05-07 05:05:31\', NULL, NULL)')
+ 3 SYSTEMPATH\Database\BaseBuilder.php(2345): CodeIgniter\Database\BaseConnection->query('INSERT INTO `category` (`cat_Name`, `cat_Discount_Value`, `cat_Discount_Type`, `cat_Status`, `cat_createdon`, `cat_createdby`, `cat_modifyby`) VALUES (:cat_Name:, :cat_Discount_Value:, :cat_Discount_Type:, :cat_Status:, :cat_createdon:, :cat_createdby:, :cat_modifyby:)', [...], false)
+ 4 APPPATH\Models\CategoryModel.php(13): CodeIgniter\Database\BaseBuilder->insert([...])
+ 5 APPPATH\Controllers\Category.php(132): App\Models\CategoryModel->categoryInsert([...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Category->saveCategory()
+ 7 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Category))
+ 8 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2025-05-07 05:05:31 --> [Caused by] mysqli_sql_exception: Column 'cat_createdby' cannot be null
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 327.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(327): mysqli->query('INSERT INTO `category` (`cat_Name`, `cat_Discount_Value`, `cat_Discount_Type`, `cat_Status`, `cat_createdon`, `cat_createdby`, `cat_modifyby`) VALUES (\'testttg\', \'12\', \'per\', 1, \'2025-05-07 05:05:31\', NULL, NULL)', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `category` (`cat_Name`, `cat_Discount_Value`, `cat_Discount_Type`, `cat_Status`, `cat_createdon`, `cat_createdby`, `cat_modifyby`) VALUES (\'testttg\', \'12\', \'per\', 1, \'2025-05-07 05:05:31\', NULL, NULL)')
+ 3 SYSTEMPATH\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `category` (`cat_Name`, `cat_Discount_Value`, `cat_Discount_Type`, `cat_Status`, `cat_createdon`, `cat_createdby`, `cat_modifyby`) VALUES (\'testttg\', \'12\', \'per\', 1, \'2025-05-07 05:05:31\', NULL, NULL)')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(2345): CodeIgniter\Database\BaseConnection->query('INSERT INTO `category` (`cat_Name`, `cat_Discount_Value`, `cat_Discount_Type`, `cat_Status`, `cat_createdon`, `cat_createdby`, `cat_modifyby`) VALUES (:cat_Name:, :cat_Discount_Value:, :cat_Discount_Type:, :cat_Status:, :cat_createdon:, :cat_createdby:, :cat_modifyby:)', [...], false)
+ 5 APPPATH\Models\CategoryModel.php(13): CodeIgniter\Database\BaseBuilder->insert([...])
+ 6 APPPATH\Controllers\Category.php(132): App\Models\CategoryModel->categoryInsert([...])
+ 7 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Category->saveCategory()
+ 8 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Category))
+ 9 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+11 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+12 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ERROR - 2025-05-07 05:09:38 --> mysqli_sql_exception: Column 'cat_createdby' cannot be null in C:\xampp\htdocs\ZakhiDesigns\system\Database\MySQLi\Connection.php:327
+Stack trace:
+#0 C:\xampp\htdocs\ZakhiDesigns\system\Database\MySQLi\Connection.php(327): mysqli->query('INSERT INTO `ca...', 0)
+#1 C:\xampp\htdocs\ZakhiDesigns\system\Database\BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `ca...')
+#2 C:\xampp\htdocs\ZakhiDesigns\system\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `ca...')
+#3 C:\xampp\htdocs\ZakhiDesigns\system\Database\BaseBuilder.php(2345): CodeIgniter\Database\BaseConnection->query('INSERT INTO `ca...', Array, false)
+#4 C:\xampp\htdocs\ZakhiDesigns\app\Models\CategoryModel.php(13): CodeIgniter\Database\BaseBuilder->insert(Array)
+#5 C:\xampp\htdocs\ZakhiDesigns\app\Controllers\Category.php(132): App\Models\CategoryModel->categoryInsert(Array)
+#6 C:\xampp\htdocs\ZakhiDesigns\system\CodeIgniter.php(933): App\Controllers\Category->saveCategory()
+#7 C:\xampp\htdocs\ZakhiDesigns\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Category))
+#8 C:\xampp\htdocs\ZakhiDesigns\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 C:\xampp\htdocs\ZakhiDesigns\system\Boot.php(334): CodeIgniter\CodeIgniter->run()
+#10 C:\xampp\htdocs\ZakhiDesigns\system\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#11 C:\xampp\htdocs\ZakhiDesigns\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#12 {main}
+CRITICAL - 2025-05-07 05:09:38 --> CodeIgniter\Database\Exceptions\DatabaseException: Column 'cat_createdby' cannot be null
+[Method: POST, Route: category/save]
+in SYSTEMPATH\Database\BaseConnection.php on line 692.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(2345): CodeIgniter\Database\BaseConnection->query('INSERT INTO `category` (`cat_Name`, `cat_Discount_Value`, `cat_Discount_Type`, `cat_Status`, `cat_createdon`, `cat_createdby`, `cat_modifyby`) VALUES (:cat_Name:, :cat_Discount_Value:, :cat_Discount_Type:, :cat_Status:, :cat_createdon:, :cat_createdby:, :cat_modifyby:)', [...], false)
+ 2 APPPATH\Models\CategoryModel.php(13): CodeIgniter\Database\BaseBuilder->insert([...])
+ 3 APPPATH\Controllers\Category.php(132): App\Models\CategoryModel->categoryInsert([...])
+ 4 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Category->saveCategory()
+ 5 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Category))
+ 6 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 9 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2025-05-07 05:09:38 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Column 'cat_createdby' cannot be null
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 332.
+ 1 SYSTEMPATH\Database\BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `category` (`cat_Name`, `cat_Discount_Value`, `cat_Discount_Type`, `cat_Status`, `cat_createdon`, `cat_createdby`, `cat_modifyby`) VALUES (\'Kitchen fittings\', \'13\', \'12\', 1, \'2025-05-07 05:09:38\', NULL, NULL)')
+ 2 SYSTEMPATH\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `category` (`cat_Name`, `cat_Discount_Value`, `cat_Discount_Type`, `cat_Status`, `cat_createdon`, `cat_createdby`, `cat_modifyby`) VALUES (\'Kitchen fittings\', \'13\', \'12\', 1, \'2025-05-07 05:09:38\', NULL, NULL)')
+ 3 SYSTEMPATH\Database\BaseBuilder.php(2345): CodeIgniter\Database\BaseConnection->query('INSERT INTO `category` (`cat_Name`, `cat_Discount_Value`, `cat_Discount_Type`, `cat_Status`, `cat_createdon`, `cat_createdby`, `cat_modifyby`) VALUES (:cat_Name:, :cat_Discount_Value:, :cat_Discount_Type:, :cat_Status:, :cat_createdon:, :cat_createdby:, :cat_modifyby:)', [...], false)
+ 4 APPPATH\Models\CategoryModel.php(13): CodeIgniter\Database\BaseBuilder->insert([...])
+ 5 APPPATH\Controllers\Category.php(132): App\Models\CategoryModel->categoryInsert([...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Category->saveCategory()
+ 7 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Category))
+ 8 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2025-05-07 05:09:38 --> [Caused by] mysqli_sql_exception: Column 'cat_createdby' cannot be null
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 327.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(327): mysqli->query('INSERT INTO `category` (`cat_Name`, `cat_Discount_Value`, `cat_Discount_Type`, `cat_Status`, `cat_createdon`, `cat_createdby`, `cat_modifyby`) VALUES (\'Kitchen fittings\', \'13\', \'12\', 1, \'2025-05-07 05:09:38\', NULL, NULL)', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `category` (`cat_Name`, `cat_Discount_Value`, `cat_Discount_Type`, `cat_Status`, `cat_createdon`, `cat_createdby`, `cat_modifyby`) VALUES (\'Kitchen fittings\', \'13\', \'12\', 1, \'2025-05-07 05:09:38\', NULL, NULL)')
+ 3 SYSTEMPATH\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `category` (`cat_Name`, `cat_Discount_Value`, `cat_Discount_Type`, `cat_Status`, `cat_createdon`, `cat_createdby`, `cat_modifyby`) VALUES (\'Kitchen fittings\', \'13\', \'12\', 1, \'2025-05-07 05:09:38\', NULL, NULL)')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(2345): CodeIgniter\Database\BaseConnection->query('INSERT INTO `category` (`cat_Name`, `cat_Discount_Value`, `cat_Discount_Type`, `cat_Status`, `cat_createdon`, `cat_createdby`, `cat_modifyby`) VALUES (:cat_Name:, :cat_Discount_Value:, :cat_Discount_Type:, :cat_Status:, :cat_createdon:, :cat_createdby:, :cat_modifyby:)', [...], false)
+ 5 APPPATH\Models\CategoryModel.php(13): CodeIgniter\Database\BaseBuilder->insert([...])
+ 6 APPPATH\Controllers\Category.php(132): App\Models\CategoryModel->categoryInsert([...])
+ 7 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Category->saveCategory()
+ 8 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Category))
+ 9 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+11 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+12 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2025-05-07 06:00:57 --> Error: Class "App\Models\SubcategoryModel" not found
+[Method: GET, Route: subcategory]
+in APPPATH\Controllers\Subcategory.php on line 12.
+ 1 SYSTEMPATH\CodeIgniter.php(903): App\Controllers\Subcategory->__construct()
+ 2 SYSTEMPATH\CodeIgniter.php(498): CodeIgniter\CodeIgniter->createController()
+ 3 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 5 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 6 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2025-05-07 06:01:44 --> ErrorException: Undefined variable $data
+[Method: GET, Route: subcategory]
+in APPPATH\Controllers\Subcategory.php on line 24.
+ 1 APPPATH\Controllers\Subcategory.php(24): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $data', 'C:\\xampp\\htdocs\\ZakhiDesigns\\app\\Controllers\\Subcategory.php', 24)
+ 2 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Subcategory->index()
+ 3 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Subcategory))
+ 4 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2025-05-07 06:01:57 --> CodeIgniter\View\Exceptions\ViewException: Invalid file: "page_scripts/subcategoryjs.php"
+[Method: GET, Route: subcategory]
+in SYSTEMPATH\Exceptions\FrameworkException.php on line 39.
+ 1 SYSTEMPATH\View\View.php(212): CodeIgniter\Exceptions\FrameworkException::forInvalidFile('page_scripts/subcategoryjs.php')
+ 2 SYSTEMPATH\Common.php(1173): CodeIgniter\View\View->render('page_scripts/subcategoryjs', [], true)
+ 3 APPPATH\Controllers\Subcategory.php(26): view('page_scripts/subcategoryjs')
+ 4 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Subcategory->index()
+ 5 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Subcategory))
+ 6 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 9 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2025-05-07 06:02:00 --> CodeIgniter\View\Exceptions\ViewException: Invalid file: "page_scripts/subcategoryjs.php"
+[Method: GET, Route: subcategory]
+in SYSTEMPATH\Exceptions\FrameworkException.php on line 39.
+ 1 SYSTEMPATH\View\View.php(212): CodeIgniter\Exceptions\FrameworkException::forInvalidFile('page_scripts/subcategoryjs.php')
+ 2 SYSTEMPATH\Common.php(1173): CodeIgniter\View\View->render('page_scripts/subcategoryjs', [], true)
+ 3 APPPATH\Controllers\Subcategory.php(26): view('page_scripts/subcategoryjs')
+ 4 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Subcategory->index()
+ 5 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Subcategory))
+ 6 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 9 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ERROR - 2025-05-07 06:38:51 --> mysqli_sql_exception: Unknown column 'cat_Status' in 'where clause' in C:\xampp\htdocs\ZakhiDesigns\system\Database\MySQLi\Connection.php:327
+Stack trace:
+#0 C:\xampp\htdocs\ZakhiDesigns\system\Database\MySQLi\Connection.php(327): mysqli->query('SELECT * FROM s...', 0)
+#1 C:\xampp\htdocs\ZakhiDesigns\system\Database\BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('SELECT * FROM s...')
+#2 C:\xampp\htdocs\ZakhiDesigns\system\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT * FROM s...')
+#3 C:\xampp\htdocs\ZakhiDesigns\app\Models\SubcategoryModel.php(20): CodeIgniter\Database\BaseConnection->query('SELECT * FROM s...')
+#4 C:\xampp\htdocs\ZakhiDesigns\app\Controllers\Subcategory.php(18): App\Models\SubcategoryModel->getAllsubCategory()
+#5 C:\xampp\htdocs\ZakhiDesigns\system\CodeIgniter.php(933): App\Controllers\Subcategory->index()
+#6 C:\xampp\htdocs\ZakhiDesigns\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Subcategory))
+#7 C:\xampp\htdocs\ZakhiDesigns\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 C:\xampp\htdocs\ZakhiDesigns\system\Boot.php(334): CodeIgniter\CodeIgniter->run()
+#9 C:\xampp\htdocs\ZakhiDesigns\system\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#10 C:\xampp\htdocs\ZakhiDesigns\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#11 {main}
+CRITICAL - 2025-05-07 06:38:51 --> CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'cat_Status' in 'where clause'
+[Method: GET, Route: subcategory]
+in SYSTEMPATH\Database\BaseConnection.php on line 692.
+ 1 APPPATH\Models\SubcategoryModel.php(20): CodeIgniter\Database\BaseConnection->query('SELECT * FROM subcategory WHERE cat_Status <> 3')
+ 2 APPPATH\Controllers\Subcategory.php(18): App\Models\SubcategoryModel->getAllsubCategory()
+ 3 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Subcategory->index()
+ 4 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Subcategory))
+ 5 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 7 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 8 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2025-05-07 06:38:51 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'cat_Status' in 'where clause'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 332.
+ 1 SYSTEMPATH\Database\BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('SELECT * FROM subcategory WHERE cat_Status <> 3')
+ 2 SYSTEMPATH\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT * FROM subcategory WHERE cat_Status <> 3')
+ 3 APPPATH\Models\SubcategoryModel.php(20): CodeIgniter\Database\BaseConnection->query('SELECT * FROM subcategory WHERE cat_Status <> 3')
+ 4 APPPATH\Controllers\Subcategory.php(18): App\Models\SubcategoryModel->getAllsubCategory()
+ 5 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Subcategory->index()
+ 6 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Subcategory))
+ 7 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 9 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+10 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2025-05-07 06:38:51 --> [Caused by] mysqli_sql_exception: Unknown column 'cat_Status' in 'where clause'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 327.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(327): mysqli->query('SELECT * FROM subcategory WHERE cat_Status <> 3', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('SELECT * FROM subcategory WHERE cat_Status <> 3')
+ 3 SYSTEMPATH\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT * FROM subcategory WHERE cat_Status <> 3')
+ 4 APPPATH\Models\SubcategoryModel.php(20): CodeIgniter\Database\BaseConnection->query('SELECT * FROM subcategory WHERE cat_Status <> 3')
+ 5 APPPATH\Controllers\Subcategory.php(18): App\Models\SubcategoryModel->getAllsubCategory()
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Subcategory->index()
+ 7 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Subcategory))
+ 8 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ERROR - 2025-05-07 06:41:06 --> mysqli_sql_exception: Unknown column 'cat_Status' in 'where clause' in C:\xampp\htdocs\ZakhiDesigns\system\Database\MySQLi\Connection.php:327
+Stack trace:
+#0 C:\xampp\htdocs\ZakhiDesigns\system\Database\MySQLi\Connection.php(327): mysqli->query('SELECT * FROM s...', 0)
+#1 C:\xampp\htdocs\ZakhiDesigns\system\Database\BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('SELECT * FROM s...')
+#2 C:\xampp\htdocs\ZakhiDesigns\system\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT * FROM s...')
+#3 C:\xampp\htdocs\ZakhiDesigns\app\Models\SubcategoryModel.php(20): CodeIgniter\Database\BaseConnection->query('SELECT * FROM s...')
+#4 C:\xampp\htdocs\ZakhiDesigns\app\Controllers\Subcategory.php(18): App\Models\SubcategoryModel->getAllsubCategory()
+#5 C:\xampp\htdocs\ZakhiDesigns\system\CodeIgniter.php(933): App\Controllers\Subcategory->index()
+#6 C:\xampp\htdocs\ZakhiDesigns\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Subcategory))
+#7 C:\xampp\htdocs\ZakhiDesigns\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 C:\xampp\htdocs\ZakhiDesigns\system\Boot.php(334): CodeIgniter\CodeIgniter->run()
+#9 C:\xampp\htdocs\ZakhiDesigns\system\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#10 C:\xampp\htdocs\ZakhiDesigns\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#11 {main}
+CRITICAL - 2025-05-07 06:41:06 --> CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'cat_Status' in 'where clause'
+[Method: GET, Route: subcategory]
+in SYSTEMPATH\Database\BaseConnection.php on line 692.
+ 1 APPPATH\Models\SubcategoryModel.php(20): CodeIgniter\Database\BaseConnection->query('SELECT * FROM subcategory WHERE cat_Status <> 3')
+ 2 APPPATH\Controllers\Subcategory.php(18): App\Models\SubcategoryModel->getAllsubCategory()
+ 3 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Subcategory->index()
+ 4 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Subcategory))
+ 5 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 7 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 8 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2025-05-07 06:41:06 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'cat_Status' in 'where clause'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 332.
+ 1 SYSTEMPATH\Database\BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('SELECT * FROM subcategory WHERE cat_Status <> 3')
+ 2 SYSTEMPATH\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT * FROM subcategory WHERE cat_Status <> 3')
+ 3 APPPATH\Models\SubcategoryModel.php(20): CodeIgniter\Database\BaseConnection->query('SELECT * FROM subcategory WHERE cat_Status <> 3')
+ 4 APPPATH\Controllers\Subcategory.php(18): App\Models\SubcategoryModel->getAllsubCategory()
+ 5 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Subcategory->index()
+ 6 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Subcategory))
+ 7 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 9 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+10 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2025-05-07 06:41:06 --> [Caused by] mysqli_sql_exception: Unknown column 'cat_Status' in 'where clause'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 327.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(327): mysqli->query('SELECT * FROM subcategory WHERE cat_Status <> 3', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('SELECT * FROM subcategory WHERE cat_Status <> 3')
+ 3 SYSTEMPATH\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT * FROM subcategory WHERE cat_Status <> 3')
+ 4 APPPATH\Models\SubcategoryModel.php(20): CodeIgniter\Database\BaseConnection->query('SELECT * FROM subcategory WHERE cat_Status <> 3')
+ 5 APPPATH\Controllers\Subcategory.php(18): App\Models\SubcategoryModel->getAllsubCategory()
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Subcategory->index()
+ 7 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Subcategory))
+ 8 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ERROR - 2025-05-07 06:41:39 --> mysqli_sql_exception: Unknown column 'cat_Status' in 'where clause' in C:\xampp\htdocs\ZakhiDesigns\system\Database\MySQLi\Connection.php:327
+Stack trace:
+#0 C:\xampp\htdocs\ZakhiDesigns\system\Database\MySQLi\Connection.php(327): mysqli->query('SELECT * FROM s...', 0)
+#1 C:\xampp\htdocs\ZakhiDesigns\system\Database\BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('SELECT * FROM s...')
+#2 C:\xampp\htdocs\ZakhiDesigns\system\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT * FROM s...')
+#3 C:\xampp\htdocs\ZakhiDesigns\app\Models\SubcategoryModel.php(20): CodeIgniter\Database\BaseConnection->query('SELECT * FROM s...')
+#4 C:\xampp\htdocs\ZakhiDesigns\app\Controllers\Subcategory.php(18): App\Models\SubcategoryModel->getAllsubCategory()
+#5 C:\xampp\htdocs\ZakhiDesigns\system\CodeIgniter.php(933): App\Controllers\Subcategory->index()
+#6 C:\xampp\htdocs\ZakhiDesigns\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Subcategory))
+#7 C:\xampp\htdocs\ZakhiDesigns\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 C:\xampp\htdocs\ZakhiDesigns\system\Boot.php(334): CodeIgniter\CodeIgniter->run()
+#9 C:\xampp\htdocs\ZakhiDesigns\system\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#10 C:\xampp\htdocs\ZakhiDesigns\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#11 {main}
+CRITICAL - 2025-05-07 06:41:39 --> CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'cat_Status' in 'where clause'
+[Method: GET, Route: subcategory]
+in SYSTEMPATH\Database\BaseConnection.php on line 692.
+ 1 APPPATH\Models\SubcategoryModel.php(20): CodeIgniter\Database\BaseConnection->query('SELECT * FROM subcategory WHERE cat_Status <> 3')
+ 2 APPPATH\Controllers\Subcategory.php(18): App\Models\SubcategoryModel->getAllsubCategory()
+ 3 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Subcategory->index()
+ 4 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Subcategory))
+ 5 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 7 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 8 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2025-05-07 06:41:39 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'cat_Status' in 'where clause'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 332.
+ 1 SYSTEMPATH\Database\BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('SELECT * FROM subcategory WHERE cat_Status <> 3')
+ 2 SYSTEMPATH\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT * FROM subcategory WHERE cat_Status <> 3')
+ 3 APPPATH\Models\SubcategoryModel.php(20): CodeIgniter\Database\BaseConnection->query('SELECT * FROM subcategory WHERE cat_Status <> 3')
+ 4 APPPATH\Controllers\Subcategory.php(18): App\Models\SubcategoryModel->getAllsubCategory()
+ 5 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Subcategory->index()
+ 6 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Subcategory))
+ 7 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 9 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+10 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2025-05-07 06:41:39 --> [Caused by] mysqli_sql_exception: Unknown column 'cat_Status' in 'where clause'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 327.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(327): mysqli->query('SELECT * FROM subcategory WHERE cat_Status <> 3', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('SELECT * FROM subcategory WHERE cat_Status <> 3')
+ 3 SYSTEMPATH\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT * FROM subcategory WHERE cat_Status <> 3')
+ 4 APPPATH\Models\SubcategoryModel.php(20): CodeIgniter\Database\BaseConnection->query('SELECT * FROM subcategory WHERE cat_Status <> 3')
+ 5 APPPATH\Controllers\Subcategory.php(18): App\Models\SubcategoryModel->getAllsubCategory()
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Subcategory->index()
+ 7 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Subcategory))
+ 8 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ERROR - 2025-05-07 06:43:14 --> mysqli_sql_exception: Unknown column 'cat_Status' in 'where clause' in C:\xampp\htdocs\ZakhiDesigns\system\Database\MySQLi\Connection.php:327
+Stack trace:
+#0 C:\xampp\htdocs\ZakhiDesigns\system\Database\MySQLi\Connection.php(327): mysqli->query('SELECT * FROM s...', 0)
+#1 C:\xampp\htdocs\ZakhiDesigns\system\Database\BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('SELECT * FROM s...')
+#2 C:\xampp\htdocs\ZakhiDesigns\system\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT * FROM s...')
+#3 C:\xampp\htdocs\ZakhiDesigns\app\Models\SubcategoryModel.php(20): CodeIgniter\Database\BaseConnection->query('SELECT * FROM s...')
+#4 C:\xampp\htdocs\ZakhiDesigns\app\Controllers\Subcategory.php(18): App\Models\SubcategoryModel->getAllsubCategory()
+#5 C:\xampp\htdocs\ZakhiDesigns\system\CodeIgniter.php(933): App\Controllers\Subcategory->index()
+#6 C:\xampp\htdocs\ZakhiDesigns\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Subcategory))
+#7 C:\xampp\htdocs\ZakhiDesigns\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 C:\xampp\htdocs\ZakhiDesigns\system\Boot.php(334): CodeIgniter\CodeIgniter->run()
+#9 C:\xampp\htdocs\ZakhiDesigns\system\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#10 C:\xampp\htdocs\ZakhiDesigns\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#11 {main}
+CRITICAL - 2025-05-07 06:43:14 --> CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'cat_Status' in 'where clause'
+[Method: GET, Route: subcategory]
+in SYSTEMPATH\Database\BaseConnection.php on line 692.
+ 1 APPPATH\Models\SubcategoryModel.php(20): CodeIgniter\Database\BaseConnection->query('SELECT * FROM subcategory WHERE cat_Status <> 3')
+ 2 APPPATH\Controllers\Subcategory.php(18): App\Models\SubcategoryModel->getAllsubCategory()
+ 3 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Subcategory->index()
+ 4 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Subcategory))
+ 5 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 7 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 8 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2025-05-07 06:43:14 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'cat_Status' in 'where clause'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 332.
+ 1 SYSTEMPATH\Database\BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('SELECT * FROM subcategory WHERE cat_Status <> 3')
+ 2 SYSTEMPATH\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT * FROM subcategory WHERE cat_Status <> 3')
+ 3 APPPATH\Models\SubcategoryModel.php(20): CodeIgniter\Database\BaseConnection->query('SELECT * FROM subcategory WHERE cat_Status <> 3')
+ 4 APPPATH\Controllers\Subcategory.php(18): App\Models\SubcategoryModel->getAllsubCategory()
+ 5 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Subcategory->index()
+ 6 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Subcategory))
+ 7 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 9 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+10 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2025-05-07 06:43:14 --> [Caused by] mysqli_sql_exception: Unknown column 'cat_Status' in 'where clause'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 327.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(327): mysqli->query('SELECT * FROM subcategory WHERE cat_Status <> 3', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('SELECT * FROM subcategory WHERE cat_Status <> 3')
+ 3 SYSTEMPATH\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT * FROM subcategory WHERE cat_Status <> 3')
+ 4 APPPATH\Models\SubcategoryModel.php(20): CodeIgniter\Database\BaseConnection->query('SELECT * FROM subcategory WHERE cat_Status <> 3')
+ 5 APPPATH\Controllers\Subcategory.php(18): App\Models\SubcategoryModel->getAllsubCategory()
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Subcategory->index()
+ 7 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Subcategory))
+ 8 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ERROR - 2025-05-07 06:43:17 --> mysqli_sql_exception: Unknown column 'cat_Status' in 'where clause' in C:\xampp\htdocs\ZakhiDesigns\system\Database\MySQLi\Connection.php:327
+Stack trace:
+#0 C:\xampp\htdocs\ZakhiDesigns\system\Database\MySQLi\Connection.php(327): mysqli->query('SELECT * FROM s...', 0)
+#1 C:\xampp\htdocs\ZakhiDesigns\system\Database\BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('SELECT * FROM s...')
+#2 C:\xampp\htdocs\ZakhiDesigns\system\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT * FROM s...')
+#3 C:\xampp\htdocs\ZakhiDesigns\app\Models\SubcategoryModel.php(20): CodeIgniter\Database\BaseConnection->query('SELECT * FROM s...')
+#4 C:\xampp\htdocs\ZakhiDesigns\app\Controllers\Subcategory.php(18): App\Models\SubcategoryModel->getAllsubCategory()
+#5 C:\xampp\htdocs\ZakhiDesigns\system\CodeIgniter.php(933): App\Controllers\Subcategory->index()
+#6 C:\xampp\htdocs\ZakhiDesigns\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Subcategory))
+#7 C:\xampp\htdocs\ZakhiDesigns\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 C:\xampp\htdocs\ZakhiDesigns\system\Boot.php(334): CodeIgniter\CodeIgniter->run()
+#9 C:\xampp\htdocs\ZakhiDesigns\system\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#10 C:\xampp\htdocs\ZakhiDesigns\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#11 {main}
+CRITICAL - 2025-05-07 06:43:17 --> CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'cat_Status' in 'where clause'
+[Method: GET, Route: subcategory]
+in SYSTEMPATH\Database\BaseConnection.php on line 692.
+ 1 APPPATH\Models\SubcategoryModel.php(20): CodeIgniter\Database\BaseConnection->query('SELECT * FROM subcategory WHERE cat_Status <> 3')
+ 2 APPPATH\Controllers\Subcategory.php(18): App\Models\SubcategoryModel->getAllsubCategory()
+ 3 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Subcategory->index()
+ 4 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Subcategory))
+ 5 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 7 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 8 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2025-05-07 06:43:17 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'cat_Status' in 'where clause'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 332.
+ 1 SYSTEMPATH\Database\BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('SELECT * FROM subcategory WHERE cat_Status <> 3')
+ 2 SYSTEMPATH\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT * FROM subcategory WHERE cat_Status <> 3')
+ 3 APPPATH\Models\SubcategoryModel.php(20): CodeIgniter\Database\BaseConnection->query('SELECT * FROM subcategory WHERE cat_Status <> 3')
+ 4 APPPATH\Controllers\Subcategory.php(18): App\Models\SubcategoryModel->getAllsubCategory()
+ 5 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Subcategory->index()
+ 6 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Subcategory))
+ 7 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 9 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+10 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2025-05-07 06:43:17 --> [Caused by] mysqli_sql_exception: Unknown column 'cat_Status' in 'where clause'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 327.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(327): mysqli->query('SELECT * FROM subcategory WHERE cat_Status <> 3', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('SELECT * FROM subcategory WHERE cat_Status <> 3')
+ 3 SYSTEMPATH\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT * FROM subcategory WHERE cat_Status <> 3')
+ 4 APPPATH\Models\SubcategoryModel.php(20): CodeIgniter\Database\BaseConnection->query('SELECT * FROM subcategory WHERE cat_Status <> 3')
+ 5 APPPATH\Controllers\Subcategory.php(18): App\Models\SubcategoryModel->getAllsubCategory()
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Subcategory->index()
+ 7 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Subcategory))
+ 8 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ERROR - 2025-05-07 06:44:20 --> mysqli_sql_exception: Unknown column 'cat_Status' in 'where clause' in C:\xampp\htdocs\ZakhiDesigns\system\Database\MySQLi\Connection.php:327
+Stack trace:
+#0 C:\xampp\htdocs\ZakhiDesigns\system\Database\MySQLi\Connection.php(327): mysqli->query('SELECT * FROM s...', 0)
+#1 C:\xampp\htdocs\ZakhiDesigns\system\Database\BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('SELECT * FROM s...')
+#2 C:\xampp\htdocs\ZakhiDesigns\system\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT * FROM s...')
+#3 C:\xampp\htdocs\ZakhiDesigns\app\Models\SubcategoryModel.php(23): CodeIgniter\Database\BaseConnection->query('SELECT * FROM s...')
+#4 C:\xampp\htdocs\ZakhiDesigns\app\Controllers\Subcategory.php(18): App\Models\SubcategoryModel->getAllsubCategory()
+#5 C:\xampp\htdocs\ZakhiDesigns\system\CodeIgniter.php(933): App\Controllers\Subcategory->index()
+#6 C:\xampp\htdocs\ZakhiDesigns\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Subcategory))
+#7 C:\xampp\htdocs\ZakhiDesigns\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 C:\xampp\htdocs\ZakhiDesigns\system\Boot.php(334): CodeIgniter\CodeIgniter->run()
+#9 C:\xampp\htdocs\ZakhiDesigns\system\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#10 C:\xampp\htdocs\ZakhiDesigns\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#11 {main}
+CRITICAL - 2025-05-07 06:44:20 --> CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'cat_Status' in 'where clause'
+[Method: GET, Route: subcategory]
+in SYSTEMPATH\Database\BaseConnection.php on line 692.
+ 1 APPPATH\Models\SubcategoryModel.php(23): CodeIgniter\Database\BaseConnection->query('SELECT * FROM subcategory WHERE cat_Status <> 3')
+ 2 APPPATH\Controllers\Subcategory.php(18): App\Models\SubcategoryModel->getAllsubCategory()
+ 3 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Subcategory->index()
+ 4 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Subcategory))
+ 5 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 7 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 8 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2025-05-07 06:44:20 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'cat_Status' in 'where clause'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 332.
+ 1 SYSTEMPATH\Database\BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('SELECT * FROM subcategory WHERE cat_Status <> 3')
+ 2 SYSTEMPATH\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT * FROM subcategory WHERE cat_Status <> 3')
+ 3 APPPATH\Models\SubcategoryModel.php(23): CodeIgniter\Database\BaseConnection->query('SELECT * FROM subcategory WHERE cat_Status <> 3')
+ 4 APPPATH\Controllers\Subcategory.php(18): App\Models\SubcategoryModel->getAllsubCategory()
+ 5 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Subcategory->index()
+ 6 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Subcategory))
+ 7 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 9 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+10 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2025-05-07 06:44:20 --> [Caused by] mysqli_sql_exception: Unknown column 'cat_Status' in 'where clause'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 327.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(327): mysqli->query('SELECT * FROM subcategory WHERE cat_Status <> 3', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('SELECT * FROM subcategory WHERE cat_Status <> 3')
+ 3 SYSTEMPATH\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT * FROM subcategory WHERE cat_Status <> 3')
+ 4 APPPATH\Models\SubcategoryModel.php(23): CodeIgniter\Database\BaseConnection->query('SELECT * FROM subcategory WHERE cat_Status <> 3')
+ 5 APPPATH\Controllers\Subcategory.php(18): App\Models\SubcategoryModel->getAllsubCategory()
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Subcategory->index()
+ 7 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Subcategory))
+ 8 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ERROR - 2025-05-07 06:44:24 --> mysqli_sql_exception: Unknown column 'cat_Status' in 'where clause' in C:\xampp\htdocs\ZakhiDesigns\system\Database\MySQLi\Connection.php:327
+Stack trace:
+#0 C:\xampp\htdocs\ZakhiDesigns\system\Database\MySQLi\Connection.php(327): mysqli->query('SELECT * FROM s...', 0)
+#1 C:\xampp\htdocs\ZakhiDesigns\system\Database\BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('SELECT * FROM s...')
+#2 C:\xampp\htdocs\ZakhiDesigns\system\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT * FROM s...')
+#3 C:\xampp\htdocs\ZakhiDesigns\app\Models\SubcategoryModel.php(23): CodeIgniter\Database\BaseConnection->query('SELECT * FROM s...')
+#4 C:\xampp\htdocs\ZakhiDesigns\app\Controllers\Subcategory.php(18): App\Models\SubcategoryModel->getAllsubCategory()
+#5 C:\xampp\htdocs\ZakhiDesigns\system\CodeIgniter.php(933): App\Controllers\Subcategory->index()
+#6 C:\xampp\htdocs\ZakhiDesigns\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Subcategory))
+#7 C:\xampp\htdocs\ZakhiDesigns\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 C:\xampp\htdocs\ZakhiDesigns\system\Boot.php(334): CodeIgniter\CodeIgniter->run()
+#9 C:\xampp\htdocs\ZakhiDesigns\system\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#10 C:\xampp\htdocs\ZakhiDesigns\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#11 {main}
+CRITICAL - 2025-05-07 06:44:24 --> CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'cat_Status' in 'where clause'
+[Method: GET, Route: subcategory]
+in SYSTEMPATH\Database\BaseConnection.php on line 692.
+ 1 APPPATH\Models\SubcategoryModel.php(23): CodeIgniter\Database\BaseConnection->query('SELECT * FROM subcategory WHERE cat_Status <> 3')
+ 2 APPPATH\Controllers\Subcategory.php(18): App\Models\SubcategoryModel->getAllsubCategory()
+ 3 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Subcategory->index()
+ 4 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Subcategory))
+ 5 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 7 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 8 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2025-05-07 06:44:24 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'cat_Status' in 'where clause'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 332.
+ 1 SYSTEMPATH\Database\BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('SELECT * FROM subcategory WHERE cat_Status <> 3')
+ 2 SYSTEMPATH\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT * FROM subcategory WHERE cat_Status <> 3')
+ 3 APPPATH\Models\SubcategoryModel.php(23): CodeIgniter\Database\BaseConnection->query('SELECT * FROM subcategory WHERE cat_Status <> 3')
+ 4 APPPATH\Controllers\Subcategory.php(18): App\Models\SubcategoryModel->getAllsubCategory()
+ 5 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Subcategory->index()
+ 6 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Subcategory))
+ 7 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 9 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+10 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2025-05-07 06:44:24 --> [Caused by] mysqli_sql_exception: Unknown column 'cat_Status' in 'where clause'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 327.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(327): mysqli->query('SELECT * FROM subcategory WHERE cat_Status <> 3', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('SELECT * FROM subcategory WHERE cat_Status <> 3')
+ 3 SYSTEMPATH\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT * FROM subcategory WHERE cat_Status <> 3')
+ 4 APPPATH\Models\SubcategoryModel.php(23): CodeIgniter\Database\BaseConnection->query('SELECT * FROM subcategory WHERE cat_Status <> 3')
+ 5 APPPATH\Controllers\Subcategory.php(18): App\Models\SubcategoryModel->getAllsubCategory()
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Subcategory->index()
+ 7 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Subcategory))
+ 8 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ERROR - 2025-05-07 06:45:50 --> mysqli_sql_exception: Unknown column 'cat_Status' in 'where clause' in C:\xampp\htdocs\ZakhiDesigns\system\Database\MySQLi\Connection.php:327
+Stack trace:
+#0 C:\xampp\htdocs\ZakhiDesigns\system\Database\MySQLi\Connection.php(327): mysqli->query('SELECT * FROM s...', 0)
+#1 C:\xampp\htdocs\ZakhiDesigns\system\Database\BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('SELECT * FROM s...')
+#2 C:\xampp\htdocs\ZakhiDesigns\system\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT * FROM s...')
+#3 C:\xampp\htdocs\ZakhiDesigns\app\Models\SubcategoryModel.php(20): CodeIgniter\Database\BaseConnection->query('SELECT * FROM s...')
+#4 C:\xampp\htdocs\ZakhiDesigns\app\Controllers\Subcategory.php(18): App\Models\SubcategoryModel->getAllsubCategory()
+#5 C:\xampp\htdocs\ZakhiDesigns\system\CodeIgniter.php(933): App\Controllers\Subcategory->index()
+#6 C:\xampp\htdocs\ZakhiDesigns\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Subcategory))
+#7 C:\xampp\htdocs\ZakhiDesigns\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 C:\xampp\htdocs\ZakhiDesigns\system\Boot.php(334): CodeIgniter\CodeIgniter->run()
+#9 C:\xampp\htdocs\ZakhiDesigns\system\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#10 C:\xampp\htdocs\ZakhiDesigns\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#11 {main}
+CRITICAL - 2025-05-07 06:45:50 --> CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'cat_Status' in 'where clause'
+[Method: GET, Route: subcategory]
+in SYSTEMPATH\Database\BaseConnection.php on line 692.
+ 1 APPPATH\Models\SubcategoryModel.php(20): CodeIgniter\Database\BaseConnection->query('SELECT * FROM subcategory WHERE cat_Status <> 3')
+ 2 APPPATH\Controllers\Subcategory.php(18): App\Models\SubcategoryModel->getAllsubCategory()
+ 3 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Subcategory->index()
+ 4 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Subcategory))
+ 5 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 7 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 8 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2025-05-07 06:45:50 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'cat_Status' in 'where clause'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 332.
+ 1 SYSTEMPATH\Database\BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('SELECT * FROM subcategory WHERE cat_Status <> 3')
+ 2 SYSTEMPATH\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT * FROM subcategory WHERE cat_Status <> 3')
+ 3 APPPATH\Models\SubcategoryModel.php(20): CodeIgniter\Database\BaseConnection->query('SELECT * FROM subcategory WHERE cat_Status <> 3')
+ 4 APPPATH\Controllers\Subcategory.php(18): App\Models\SubcategoryModel->getAllsubCategory()
+ 5 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Subcategory->index()
+ 6 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Subcategory))
+ 7 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 9 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+10 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2025-05-07 06:45:50 --> [Caused by] mysqli_sql_exception: Unknown column 'cat_Status' in 'where clause'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 327.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(327): mysqli->query('SELECT * FROM subcategory WHERE cat_Status <> 3', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('SELECT * FROM subcategory WHERE cat_Status <> 3')
+ 3 SYSTEMPATH\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT * FROM subcategory WHERE cat_Status <> 3')
+ 4 APPPATH\Models\SubcategoryModel.php(20): CodeIgniter\Database\BaseConnection->query('SELECT * FROM subcategory WHERE cat_Status <> 3')
+ 5 APPPATH\Controllers\Subcategory.php(18): App\Models\SubcategoryModel->getAllsubCategory()
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Subcategory->index()
+ 7 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Subcategory))
+ 8 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ERROR - 2025-05-07 06:49:04 --> mysqli_sql_exception: Unknown column 'cat_Status' in 'where clause' in C:\xampp\htdocs\ZakhiDesigns\system\Database\MySQLi\Connection.php:327
+Stack trace:
+#0 C:\xampp\htdocs\ZakhiDesigns\system\Database\MySQLi\Connection.php(327): mysqli->query('SELECT * FROM s...', 0)
+#1 C:\xampp\htdocs\ZakhiDesigns\system\Database\BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('SELECT * FROM s...')
+#2 C:\xampp\htdocs\ZakhiDesigns\system\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT * FROM s...')
+#3 C:\xampp\htdocs\ZakhiDesigns\app\Models\SubcategoryModel.php(20): CodeIgniter\Database\BaseConnection->query('SELECT * FROM s...')
+#4 C:\xampp\htdocs\ZakhiDesigns\app\Controllers\Subcategory.php(18): App\Models\SubcategoryModel->getAllsubCategory()
+#5 C:\xampp\htdocs\ZakhiDesigns\system\CodeIgniter.php(933): App\Controllers\Subcategory->index()
+#6 C:\xampp\htdocs\ZakhiDesigns\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Subcategory))
+#7 C:\xampp\htdocs\ZakhiDesigns\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 C:\xampp\htdocs\ZakhiDesigns\system\Boot.php(334): CodeIgniter\CodeIgniter->run()
+#9 C:\xampp\htdocs\ZakhiDesigns\system\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#10 C:\xampp\htdocs\ZakhiDesigns\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#11 {main}
+CRITICAL - 2025-05-07 06:49:04 --> CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'cat_Status' in 'where clause'
+[Method: GET, Route: subcategory]
+in SYSTEMPATH\Database\BaseConnection.php on line 692.
+ 1 APPPATH\Models\SubcategoryModel.php(20): CodeIgniter\Database\BaseConnection->query('SELECT * FROM subcategory WHERE cat_Status <> 3')
+ 2 APPPATH\Controllers\Subcategory.php(18): App\Models\SubcategoryModel->getAllsubCategory()
+ 3 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Subcategory->index()
+ 4 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Subcategory))
+ 5 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 7 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 8 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2025-05-07 06:49:04 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'cat_Status' in 'where clause'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 332.
+ 1 SYSTEMPATH\Database\BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('SELECT * FROM subcategory WHERE cat_Status <> 3')
+ 2 SYSTEMPATH\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT * FROM subcategory WHERE cat_Status <> 3')
+ 3 APPPATH\Models\SubcategoryModel.php(20): CodeIgniter\Database\BaseConnection->query('SELECT * FROM subcategory WHERE cat_Status <> 3')
+ 4 APPPATH\Controllers\Subcategory.php(18): App\Models\SubcategoryModel->getAllsubCategory()
+ 5 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Subcategory->index()
+ 6 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Subcategory))
+ 7 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 9 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+10 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2025-05-07 06:49:04 --> [Caused by] mysqli_sql_exception: Unknown column 'cat_Status' in 'where clause'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 327.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(327): mysqli->query('SELECT * FROM subcategory WHERE cat_Status <> 3', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('SELECT * FROM subcategory WHERE cat_Status <> 3')
+ 3 SYSTEMPATH\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT * FROM subcategory WHERE cat_Status <> 3')
+ 4 APPPATH\Models\SubcategoryModel.php(20): CodeIgniter\Database\BaseConnection->query('SELECT * FROM subcategory WHERE cat_Status <> 3')
+ 5 APPPATH\Controllers\Subcategory.php(18): App\Models\SubcategoryModel->getAllsubCategory()
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Subcategory->index()
+ 7 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Subcategory))
+ 8 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ERROR - 2025-05-07 06:51:59 --> mysqli_sql_exception: Unknown column 'cat_Status' in 'where clause' in C:\xampp\htdocs\ZakhiDesigns\system\Database\MySQLi\Connection.php:327
+Stack trace:
+#0 C:\xampp\htdocs\ZakhiDesigns\system\Database\MySQLi\Connection.php(327): mysqli->query('SELECT * FROM s...', 0)
+#1 C:\xampp\htdocs\ZakhiDesigns\system\Database\BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('SELECT * FROM s...')
+#2 C:\xampp\htdocs\ZakhiDesigns\system\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT * FROM s...')
+#3 C:\xampp\htdocs\ZakhiDesigns\app\Models\SubcategoryModel.php(21): CodeIgniter\Database\BaseConnection->query('SELECT * FROM s...')
+#4 C:\xampp\htdocs\ZakhiDesigns\app\Controllers\Subcategory.php(18): App\Models\SubcategoryModel->getAllsubCategory()
+#5 C:\xampp\htdocs\ZakhiDesigns\system\CodeIgniter.php(933): App\Controllers\Subcategory->index()
+#6 C:\xampp\htdocs\ZakhiDesigns\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Subcategory))
+#7 C:\xampp\htdocs\ZakhiDesigns\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 C:\xampp\htdocs\ZakhiDesigns\system\Boot.php(334): CodeIgniter\CodeIgniter->run()
+#9 C:\xampp\htdocs\ZakhiDesigns\system\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#10 C:\xampp\htdocs\ZakhiDesigns\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#11 {main}
+CRITICAL - 2025-05-07 06:51:59 --> CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'cat_Status' in 'where clause'
+[Method: GET, Route: subcategory]
+in SYSTEMPATH\Database\BaseConnection.php on line 692.
+ 1 APPPATH\Models\SubcategoryModel.php(21): CodeIgniter\Database\BaseConnection->query('SELECT * FROM subcategory WHERE cat_Status <> 3')
+ 2 APPPATH\Controllers\Subcategory.php(18): App\Models\SubcategoryModel->getAllsubCategory()
+ 3 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Subcategory->index()
+ 4 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Subcategory))
+ 5 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 7 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 8 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2025-05-07 06:51:59 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'cat_Status' in 'where clause'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 332.
+ 1 SYSTEMPATH\Database\BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('SELECT * FROM subcategory WHERE cat_Status <> 3')
+ 2 SYSTEMPATH\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT * FROM subcategory WHERE cat_Status <> 3')
+ 3 APPPATH\Models\SubcategoryModel.php(21): CodeIgniter\Database\BaseConnection->query('SELECT * FROM subcategory WHERE cat_Status <> 3')
+ 4 APPPATH\Controllers\Subcategory.php(18): App\Models\SubcategoryModel->getAllsubCategory()
+ 5 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Subcategory->index()
+ 6 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Subcategory))
+ 7 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 9 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+10 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2025-05-07 06:51:59 --> [Caused by] mysqli_sql_exception: Unknown column 'cat_Status' in 'where clause'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 327.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(327): mysqli->query('SELECT * FROM subcategory WHERE cat_Status <> 3', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('SELECT * FROM subcategory WHERE cat_Status <> 3')
+ 3 SYSTEMPATH\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT * FROM subcategory WHERE cat_Status <> 3')
+ 4 APPPATH\Models\SubcategoryModel.php(21): CodeIgniter\Database\BaseConnection->query('SELECT * FROM subcategory WHERE cat_Status <> 3')
+ 5 APPPATH\Controllers\Subcategory.php(18): App\Models\SubcategoryModel->getAllsubCategory()
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Subcategory->index()
+ 7 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Subcategory))
+ 8 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ERROR - 2025-05-07 06:52:10 --> mysqli_sql_exception: Unknown column 'cat_Status' in 'where clause' in C:\xampp\htdocs\ZakhiDesigns\system\Database\MySQLi\Connection.php:327
+Stack trace:
+#0 C:\xampp\htdocs\ZakhiDesigns\system\Database\MySQLi\Connection.php(327): mysqli->query('SELECT * FROM s...', 0)
+#1 C:\xampp\htdocs\ZakhiDesigns\system\Database\BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('SELECT * FROM s...')
+#2 C:\xampp\htdocs\ZakhiDesigns\system\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT * FROM s...')
+#3 C:\xampp\htdocs\ZakhiDesigns\app\Models\SubcategoryModel.php(21): CodeIgniter\Database\BaseConnection->query('SELECT * FROM s...')
+#4 C:\xampp\htdocs\ZakhiDesigns\app\Controllers\Subcategory.php(18): App\Models\SubcategoryModel->getAllsubCategory()
+#5 C:\xampp\htdocs\ZakhiDesigns\system\CodeIgniter.php(933): App\Controllers\Subcategory->index()
+#6 C:\xampp\htdocs\ZakhiDesigns\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Subcategory))
+#7 C:\xampp\htdocs\ZakhiDesigns\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 C:\xampp\htdocs\ZakhiDesigns\system\Boot.php(334): CodeIgniter\CodeIgniter->run()
+#9 C:\xampp\htdocs\ZakhiDesigns\system\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#10 C:\xampp\htdocs\ZakhiDesigns\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#11 {main}
+CRITICAL - 2025-05-07 06:52:10 --> CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'cat_Status' in 'where clause'
+[Method: GET, Route: subcategory]
+in SYSTEMPATH\Database\BaseConnection.php on line 692.
+ 1 APPPATH\Models\SubcategoryModel.php(21): CodeIgniter\Database\BaseConnection->query('SELECT * FROM subcategory WHERE cat_Status <> 3')
+ 2 APPPATH\Controllers\Subcategory.php(18): App\Models\SubcategoryModel->getAllsubCategory()
+ 3 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Subcategory->index()
+ 4 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Subcategory))
+ 5 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 7 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 8 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2025-05-07 06:52:10 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'cat_Status' in 'where clause'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 332.
+ 1 SYSTEMPATH\Database\BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('SELECT * FROM subcategory WHERE cat_Status <> 3')
+ 2 SYSTEMPATH\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT * FROM subcategory WHERE cat_Status <> 3')
+ 3 APPPATH\Models\SubcategoryModel.php(21): CodeIgniter\Database\BaseConnection->query('SELECT * FROM subcategory WHERE cat_Status <> 3')
+ 4 APPPATH\Controllers\Subcategory.php(18): App\Models\SubcategoryModel->getAllsubCategory()
+ 5 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Subcategory->index()
+ 6 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Subcategory))
+ 7 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 9 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+10 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2025-05-07 06:52:10 --> [Caused by] mysqli_sql_exception: Unknown column 'cat_Status' in 'where clause'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 327.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(327): mysqli->query('SELECT * FROM subcategory WHERE cat_Status <> 3', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('SELECT * FROM subcategory WHERE cat_Status <> 3')
+ 3 SYSTEMPATH\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT * FROM subcategory WHERE cat_Status <> 3')
+ 4 APPPATH\Models\SubcategoryModel.php(21): CodeIgniter\Database\BaseConnection->query('SELECT * FROM subcategory WHERE cat_Status <> 3')
+ 5 APPPATH\Controllers\Subcategory.php(18): App\Models\SubcategoryModel->getAllsubCategory()
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Subcategory->index()
+ 7 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Subcategory))
+ 8 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ERROR - 2025-05-07 06:52:12 --> mysqli_sql_exception: Unknown column 'cat_Status' in 'where clause' in C:\xampp\htdocs\ZakhiDesigns\system\Database\MySQLi\Connection.php:327
+Stack trace:
+#0 C:\xampp\htdocs\ZakhiDesigns\system\Database\MySQLi\Connection.php(327): mysqli->query('SELECT * FROM s...', 0)
+#1 C:\xampp\htdocs\ZakhiDesigns\system\Database\BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('SELECT * FROM s...')
+#2 C:\xampp\htdocs\ZakhiDesigns\system\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT * FROM s...')
+#3 C:\xampp\htdocs\ZakhiDesigns\app\Models\SubcategoryModel.php(21): CodeIgniter\Database\BaseConnection->query('SELECT * FROM s...')
+#4 C:\xampp\htdocs\ZakhiDesigns\app\Controllers\Subcategory.php(18): App\Models\SubcategoryModel->getAllsubCategory()
+#5 C:\xampp\htdocs\ZakhiDesigns\system\CodeIgniter.php(933): App\Controllers\Subcategory->index()
+#6 C:\xampp\htdocs\ZakhiDesigns\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Subcategory))
+#7 C:\xampp\htdocs\ZakhiDesigns\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 C:\xampp\htdocs\ZakhiDesigns\system\Boot.php(334): CodeIgniter\CodeIgniter->run()
+#9 C:\xampp\htdocs\ZakhiDesigns\system\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#10 C:\xampp\htdocs\ZakhiDesigns\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#11 {main}
+CRITICAL - 2025-05-07 06:52:12 --> CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'cat_Status' in 'where clause'
+[Method: GET, Route: subcategory]
+in SYSTEMPATH\Database\BaseConnection.php on line 692.
+ 1 APPPATH\Models\SubcategoryModel.php(21): CodeIgniter\Database\BaseConnection->query('SELECT * FROM subcategory WHERE cat_Status <> 3')
+ 2 APPPATH\Controllers\Subcategory.php(18): App\Models\SubcategoryModel->getAllsubCategory()
+ 3 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Subcategory->index()
+ 4 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Subcategory))
+ 5 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 7 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 8 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2025-05-07 06:52:12 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'cat_Status' in 'where clause'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 332.
+ 1 SYSTEMPATH\Database\BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('SELECT * FROM subcategory WHERE cat_Status <> 3')
+ 2 SYSTEMPATH\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT * FROM subcategory WHERE cat_Status <> 3')
+ 3 APPPATH\Models\SubcategoryModel.php(21): CodeIgniter\Database\BaseConnection->query('SELECT * FROM subcategory WHERE cat_Status <> 3')
+ 4 APPPATH\Controllers\Subcategory.php(18): App\Models\SubcategoryModel->getAllsubCategory()
+ 5 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Subcategory->index()
+ 6 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Subcategory))
+ 7 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 9 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+10 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2025-05-07 06:52:12 --> [Caused by] mysqli_sql_exception: Unknown column 'cat_Status' in 'where clause'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 327.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(327): mysqli->query('SELECT * FROM subcategory WHERE cat_Status <> 3', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('SELECT * FROM subcategory WHERE cat_Status <> 3')
+ 3 SYSTEMPATH\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT * FROM subcategory WHERE cat_Status <> 3')
+ 4 APPPATH\Models\SubcategoryModel.php(21): CodeIgniter\Database\BaseConnection->query('SELECT * FROM subcategory WHERE cat_Status <> 3')
+ 5 APPPATH\Controllers\Subcategory.php(18): App\Models\SubcategoryModel->getAllsubCategory()
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Subcategory->index()
+ 7 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Subcategory))
+ 8 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ERROR - 2025-05-07 06:52:29 --> mysqli_sql_exception: Unknown column 'cat_Status' in 'where clause' in C:\xampp\htdocs\ZakhiDesigns\system\Database\MySQLi\Connection.php:327
+Stack trace:
+#0 C:\xampp\htdocs\ZakhiDesigns\system\Database\MySQLi\Connection.php(327): mysqli->query('SELECT * FROM s...', 0)
+#1 C:\xampp\htdocs\ZakhiDesigns\system\Database\BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('SELECT * FROM s...')
+#2 C:\xampp\htdocs\ZakhiDesigns\system\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT * FROM s...')
+#3 C:\xampp\htdocs\ZakhiDesigns\app\Models\SubcategoryModel.php(21): CodeIgniter\Database\BaseConnection->query('SELECT * FROM s...')
+#4 C:\xampp\htdocs\ZakhiDesigns\app\Controllers\Subcategory.php(18): App\Models\SubcategoryModel->getAllsubCategory()
+#5 C:\xampp\htdocs\ZakhiDesigns\system\CodeIgniter.php(933): App\Controllers\Subcategory->index()
+#6 C:\xampp\htdocs\ZakhiDesigns\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Subcategory))
+#7 C:\xampp\htdocs\ZakhiDesigns\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 C:\xampp\htdocs\ZakhiDesigns\system\Boot.php(334): CodeIgniter\CodeIgniter->run()
+#9 C:\xampp\htdocs\ZakhiDesigns\system\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#10 C:\xampp\htdocs\ZakhiDesigns\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#11 {main}
+CRITICAL - 2025-05-07 06:52:29 --> CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'cat_Status' in 'where clause'
+[Method: GET, Route: subcategory]
+in SYSTEMPATH\Database\BaseConnection.php on line 692.
+ 1 APPPATH\Models\SubcategoryModel.php(21): CodeIgniter\Database\BaseConnection->query('SELECT * FROM subcategory WHERE cat_Status <> 3')
+ 2 APPPATH\Controllers\Subcategory.php(18): App\Models\SubcategoryModel->getAllsubCategory()
+ 3 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Subcategory->index()
+ 4 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Subcategory))
+ 5 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 7 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 8 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2025-05-07 06:52:29 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'cat_Status' in 'where clause'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 332.
+ 1 SYSTEMPATH\Database\BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('SELECT * FROM subcategory WHERE cat_Status <> 3')
+ 2 SYSTEMPATH\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT * FROM subcategory WHERE cat_Status <> 3')
+ 3 APPPATH\Models\SubcategoryModel.php(21): CodeIgniter\Database\BaseConnection->query('SELECT * FROM subcategory WHERE cat_Status <> 3')
+ 4 APPPATH\Controllers\Subcategory.php(18): App\Models\SubcategoryModel->getAllsubCategory()
+ 5 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Subcategory->index()
+ 6 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Subcategory))
+ 7 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 9 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+10 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2025-05-07 06:52:29 --> [Caused by] mysqli_sql_exception: Unknown column 'cat_Status' in 'where clause'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 327.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(327): mysqli->query('SELECT * FROM subcategory WHERE cat_Status <> 3', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('SELECT * FROM subcategory WHERE cat_Status <> 3')
+ 3 SYSTEMPATH\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT * FROM subcategory WHERE cat_Status <> 3')
+ 4 APPPATH\Models\SubcategoryModel.php(21): CodeIgniter\Database\BaseConnection->query('SELECT * FROM subcategory WHERE cat_Status <> 3')
+ 5 APPPATH\Controllers\Subcategory.php(18): App\Models\SubcategoryModel->getAllsubCategory()
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Subcategory->index()
+ 7 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Subcategory))
+ 8 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ERROR - 2025-05-07 06:52:43 --> mysqli_sql_exception: Unknown column 'cat_Status' in 'where clause' in C:\xampp\htdocs\ZakhiDesigns\system\Database\MySQLi\Connection.php:327
+Stack trace:
+#0 C:\xampp\htdocs\ZakhiDesigns\system\Database\MySQLi\Connection.php(327): mysqli->query('SELECT * FROM s...', 0)
+#1 C:\xampp\htdocs\ZakhiDesigns\system\Database\BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('SELECT * FROM s...')
+#2 C:\xampp\htdocs\ZakhiDesigns\system\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT * FROM s...')
+#3 C:\xampp\htdocs\ZakhiDesigns\app\Models\SubcategoryModel.php(21): CodeIgniter\Database\BaseConnection->query('SELECT * FROM s...')
+#4 C:\xampp\htdocs\ZakhiDesigns\app\Controllers\Subcategory.php(18): App\Models\SubcategoryModel->getAllsubCategory()
+#5 C:\xampp\htdocs\ZakhiDesigns\system\CodeIgniter.php(933): App\Controllers\Subcategory->index()
+#6 C:\xampp\htdocs\ZakhiDesigns\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Subcategory))
+#7 C:\xampp\htdocs\ZakhiDesigns\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 C:\xampp\htdocs\ZakhiDesigns\system\Boot.php(334): CodeIgniter\CodeIgniter->run()
+#9 C:\xampp\htdocs\ZakhiDesigns\system\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#10 C:\xampp\htdocs\ZakhiDesigns\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#11 {main}
+CRITICAL - 2025-05-07 06:52:43 --> CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'cat_Status' in 'where clause'
+[Method: GET, Route: subcategory]
+in SYSTEMPATH\Database\BaseConnection.php on line 692.
+ 1 APPPATH\Models\SubcategoryModel.php(21): CodeIgniter\Database\BaseConnection->query('SELECT * FROM subcategory WHERE cat_Status <> 3')
+ 2 APPPATH\Controllers\Subcategory.php(18): App\Models\SubcategoryModel->getAllsubCategory()
+ 3 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Subcategory->index()
+ 4 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Subcategory))
+ 5 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 7 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 8 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2025-05-07 06:52:43 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'cat_Status' in 'where clause'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 332.
+ 1 SYSTEMPATH\Database\BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('SELECT * FROM subcategory WHERE cat_Status <> 3')
+ 2 SYSTEMPATH\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT * FROM subcategory WHERE cat_Status <> 3')
+ 3 APPPATH\Models\SubcategoryModel.php(21): CodeIgniter\Database\BaseConnection->query('SELECT * FROM subcategory WHERE cat_Status <> 3')
+ 4 APPPATH\Controllers\Subcategory.php(18): App\Models\SubcategoryModel->getAllsubCategory()
+ 5 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Subcategory->index()
+ 6 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Subcategory))
+ 7 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 9 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+10 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2025-05-07 06:52:43 --> [Caused by] mysqli_sql_exception: Unknown column 'cat_Status' in 'where clause'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 327.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(327): mysqli->query('SELECT * FROM subcategory WHERE cat_Status <> 3', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('SELECT * FROM subcategory WHERE cat_Status <> 3')
+ 3 SYSTEMPATH\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT * FROM subcategory WHERE cat_Status <> 3')
+ 4 APPPATH\Models\SubcategoryModel.php(21): CodeIgniter\Database\BaseConnection->query('SELECT * FROM subcategory WHERE cat_Status <> 3')
+ 5 APPPATH\Controllers\Subcategory.php(18): App\Models\SubcategoryModel->getAllsubCategory()
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Subcategory->index()
+ 7 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Subcategory))
+ 8 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ERROR - 2025-05-07 06:52:45 --> mysqli_sql_exception: Unknown column 'cat_Status' in 'where clause' in C:\xampp\htdocs\ZakhiDesigns\system\Database\MySQLi\Connection.php:327
+Stack trace:
+#0 C:\xampp\htdocs\ZakhiDesigns\system\Database\MySQLi\Connection.php(327): mysqli->query('SELECT * FROM s...', 0)
+#1 C:\xampp\htdocs\ZakhiDesigns\system\Database\BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('SELECT * FROM s...')
+#2 C:\xampp\htdocs\ZakhiDesigns\system\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT * FROM s...')
+#3 C:\xampp\htdocs\ZakhiDesigns\app\Models\SubcategoryModel.php(21): CodeIgniter\Database\BaseConnection->query('SELECT * FROM s...')
+#4 C:\xampp\htdocs\ZakhiDesigns\app\Controllers\Subcategory.php(18): App\Models\SubcategoryModel->getAllsubCategory()
+#5 C:\xampp\htdocs\ZakhiDesigns\system\CodeIgniter.php(933): App\Controllers\Subcategory->index()
+#6 C:\xampp\htdocs\ZakhiDesigns\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Subcategory))
+#7 C:\xampp\htdocs\ZakhiDesigns\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 C:\xampp\htdocs\ZakhiDesigns\system\Boot.php(334): CodeIgniter\CodeIgniter->run()
+#9 C:\xampp\htdocs\ZakhiDesigns\system\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#10 C:\xampp\htdocs\ZakhiDesigns\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#11 {main}
+CRITICAL - 2025-05-07 06:52:45 --> CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'cat_Status' in 'where clause'
+[Method: GET, Route: subcategory]
+in SYSTEMPATH\Database\BaseConnection.php on line 692.
+ 1 APPPATH\Models\SubcategoryModel.php(21): CodeIgniter\Database\BaseConnection->query('SELECT * FROM subcategory WHERE cat_Status <> 3')
+ 2 APPPATH\Controllers\Subcategory.php(18): App\Models\SubcategoryModel->getAllsubCategory()
+ 3 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Subcategory->index()
+ 4 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Subcategory))
+ 5 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 7 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 8 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2025-05-07 06:52:45 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'cat_Status' in 'where clause'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 332.
+ 1 SYSTEMPATH\Database\BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('SELECT * FROM subcategory WHERE cat_Status <> 3')
+ 2 SYSTEMPATH\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT * FROM subcategory WHERE cat_Status <> 3')
+ 3 APPPATH\Models\SubcategoryModel.php(21): CodeIgniter\Database\BaseConnection->query('SELECT * FROM subcategory WHERE cat_Status <> 3')
+ 4 APPPATH\Controllers\Subcategory.php(18): App\Models\SubcategoryModel->getAllsubCategory()
+ 5 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Subcategory->index()
+ 6 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Subcategory))
+ 7 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 9 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+10 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2025-05-07 06:52:45 --> [Caused by] mysqli_sql_exception: Unknown column 'cat_Status' in 'where clause'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 327.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(327): mysqli->query('SELECT * FROM subcategory WHERE cat_Status <> 3', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('SELECT * FROM subcategory WHERE cat_Status <> 3')
+ 3 SYSTEMPATH\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT * FROM subcategory WHERE cat_Status <> 3')
+ 4 APPPATH\Models\SubcategoryModel.php(21): CodeIgniter\Database\BaseConnection->query('SELECT * FROM subcategory WHERE cat_Status <> 3')
+ 5 APPPATH\Controllers\Subcategory.php(18): App\Models\SubcategoryModel->getAllsubCategory()
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Subcategory->index()
+ 7 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Subcategory))
+ 8 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ERROR - 2025-05-07 06:53:04 --> mysqli_sql_exception: Unknown column 'cat_Status' in 'where clause' in C:\xampp\htdocs\ZakhiDesigns\system\Database\MySQLi\Connection.php:327
+Stack trace:
+#0 C:\xampp\htdocs\ZakhiDesigns\system\Database\MySQLi\Connection.php(327): mysqli->query('SELECT * FROM s...', 0)
+#1 C:\xampp\htdocs\ZakhiDesigns\system\Database\BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('SELECT * FROM s...')
+#2 C:\xampp\htdocs\ZakhiDesigns\system\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT * FROM s...')
+#3 C:\xampp\htdocs\ZakhiDesigns\app\Models\SubcategoryModel.php(21): CodeIgniter\Database\BaseConnection->query('SELECT * FROM s...')
+#4 C:\xampp\htdocs\ZakhiDesigns\app\Controllers\Subcategory.php(18): App\Models\SubcategoryModel->getAllsubCategory()
+#5 C:\xampp\htdocs\ZakhiDesigns\system\CodeIgniter.php(933): App\Controllers\Subcategory->index()
+#6 C:\xampp\htdocs\ZakhiDesigns\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Subcategory))
+#7 C:\xampp\htdocs\ZakhiDesigns\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 C:\xampp\htdocs\ZakhiDesigns\system\Boot.php(334): CodeIgniter\CodeIgniter->run()
+#9 C:\xampp\htdocs\ZakhiDesigns\system\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#10 C:\xampp\htdocs\ZakhiDesigns\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#11 {main}
+CRITICAL - 2025-05-07 06:53:04 --> CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'cat_Status' in 'where clause'
+[Method: GET, Route: subcategory]
+in SYSTEMPATH\Database\BaseConnection.php on line 692.
+ 1 APPPATH\Models\SubcategoryModel.php(21): CodeIgniter\Database\BaseConnection->query('SELECT * FROM subcategory WHERE cat_Status <> 3')
+ 2 APPPATH\Controllers\Subcategory.php(18): App\Models\SubcategoryModel->getAllsubCategory()
+ 3 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Subcategory->index()
+ 4 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Subcategory))
+ 5 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 7 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 8 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2025-05-07 06:53:04 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'cat_Status' in 'where clause'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 332.
+ 1 SYSTEMPATH\Database\BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('SELECT * FROM subcategory WHERE cat_Status <> 3')
+ 2 SYSTEMPATH\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT * FROM subcategory WHERE cat_Status <> 3')
+ 3 APPPATH\Models\SubcategoryModel.php(21): CodeIgniter\Database\BaseConnection->query('SELECT * FROM subcategory WHERE cat_Status <> 3')
+ 4 APPPATH\Controllers\Subcategory.php(18): App\Models\SubcategoryModel->getAllsubCategory()
+ 5 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Subcategory->index()
+ 6 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Subcategory))
+ 7 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 9 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+10 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2025-05-07 06:53:04 --> [Caused by] mysqli_sql_exception: Unknown column 'cat_Status' in 'where clause'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 327.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(327): mysqli->query('SELECT * FROM subcategory WHERE cat_Status <> 3', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('SELECT * FROM subcategory WHERE cat_Status <> 3')
+ 3 SYSTEMPATH\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT * FROM subcategory WHERE cat_Status <> 3')
+ 4 APPPATH\Models\SubcategoryModel.php(21): CodeIgniter\Database\BaseConnection->query('SELECT * FROM subcategory WHERE cat_Status <> 3')
+ 5 APPPATH\Controllers\Subcategory.php(18): App\Models\SubcategoryModel->getAllsubCategory()
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Subcategory->index()
+ 7 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Subcategory))
+ 8 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ERROR - 2025-05-07 06:53:11 --> mysqli_sql_exception: Unknown column 'cat_Status' in 'where clause' in C:\xampp\htdocs\ZakhiDesigns\system\Database\MySQLi\Connection.php:327
+Stack trace:
+#0 C:\xampp\htdocs\ZakhiDesigns\system\Database\MySQLi\Connection.php(327): mysqli->query('SELECT * FROM s...', 0)
+#1 C:\xampp\htdocs\ZakhiDesigns\system\Database\BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('SELECT * FROM s...')
+#2 C:\xampp\htdocs\ZakhiDesigns\system\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT * FROM s...')
+#3 C:\xampp\htdocs\ZakhiDesigns\app\Models\SubcategoryModel.php(21): CodeIgniter\Database\BaseConnection->query('SELECT * FROM s...')
+#4 C:\xampp\htdocs\ZakhiDesigns\app\Controllers\Subcategory.php(18): App\Models\SubcategoryModel->getAllsubCategory()
+#5 C:\xampp\htdocs\ZakhiDesigns\system\CodeIgniter.php(933): App\Controllers\Subcategory->index()
+#6 C:\xampp\htdocs\ZakhiDesigns\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Subcategory))
+#7 C:\xampp\htdocs\ZakhiDesigns\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 C:\xampp\htdocs\ZakhiDesigns\system\Boot.php(334): CodeIgniter\CodeIgniter->run()
+#9 C:\xampp\htdocs\ZakhiDesigns\system\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#10 C:\xampp\htdocs\ZakhiDesigns\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#11 {main}
+CRITICAL - 2025-05-07 06:53:11 --> CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'cat_Status' in 'where clause'
+[Method: GET, Route: subcategory]
+in SYSTEMPATH\Database\BaseConnection.php on line 692.
+ 1 APPPATH\Models\SubcategoryModel.php(21): CodeIgniter\Database\BaseConnection->query('SELECT * FROM subcategory WHERE cat_Status <> 3')
+ 2 APPPATH\Controllers\Subcategory.php(18): App\Models\SubcategoryModel->getAllsubCategory()
+ 3 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Subcategory->index()
+ 4 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Subcategory))
+ 5 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 7 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 8 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2025-05-07 06:53:11 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'cat_Status' in 'where clause'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 332.
+ 1 SYSTEMPATH\Database\BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('SELECT * FROM subcategory WHERE cat_Status <> 3')
+ 2 SYSTEMPATH\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT * FROM subcategory WHERE cat_Status <> 3')
+ 3 APPPATH\Models\SubcategoryModel.php(21): CodeIgniter\Database\BaseConnection->query('SELECT * FROM subcategory WHERE cat_Status <> 3')
+ 4 APPPATH\Controllers\Subcategory.php(18): App\Models\SubcategoryModel->getAllsubCategory()
+ 5 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Subcategory->index()
+ 6 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Subcategory))
+ 7 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 9 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+10 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2025-05-07 06:53:11 --> [Caused by] mysqli_sql_exception: Unknown column 'cat_Status' in 'where clause'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 327.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(327): mysqli->query('SELECT * FROM subcategory WHERE cat_Status <> 3', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('SELECT * FROM subcategory WHERE cat_Status <> 3')
+ 3 SYSTEMPATH\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT * FROM subcategory WHERE cat_Status <> 3')
+ 4 APPPATH\Models\SubcategoryModel.php(21): CodeIgniter\Database\BaseConnection->query('SELECT * FROM subcategory WHERE cat_Status <> 3')
+ 5 APPPATH\Controllers\Subcategory.php(18): App\Models\SubcategoryModel->getAllsubCategory()
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Subcategory->index()
+ 7 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Subcategory))
+ 8 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ERROR - 2025-05-07 06:53:28 --> mysqli_sql_exception: Unknown column 'cat_Status' in 'where clause' in C:\xampp\htdocs\ZakhiDesigns\system\Database\MySQLi\Connection.php:327
+Stack trace:
+#0 C:\xampp\htdocs\ZakhiDesigns\system\Database\MySQLi\Connection.php(327): mysqli->query('SELECT * FROM s...', 0)
+#1 C:\xampp\htdocs\ZakhiDesigns\system\Database\BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('SELECT * FROM s...')
+#2 C:\xampp\htdocs\ZakhiDesigns\system\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT * FROM s...')
+#3 C:\xampp\htdocs\ZakhiDesigns\app\Models\SubcategoryModel.php(21): CodeIgniter\Database\BaseConnection->query('SELECT * FROM s...')
+#4 C:\xampp\htdocs\ZakhiDesigns\app\Controllers\Subcategory.php(18): App\Models\SubcategoryModel->getAllsubCategory()
+#5 C:\xampp\htdocs\ZakhiDesigns\system\CodeIgniter.php(933): App\Controllers\Subcategory->index()
+#6 C:\xampp\htdocs\ZakhiDesigns\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Subcategory))
+#7 C:\xampp\htdocs\ZakhiDesigns\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 C:\xampp\htdocs\ZakhiDesigns\system\Boot.php(334): CodeIgniter\CodeIgniter->run()
+#9 C:\xampp\htdocs\ZakhiDesigns\system\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#10 C:\xampp\htdocs\ZakhiDesigns\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#11 {main}
+CRITICAL - 2025-05-07 06:53:28 --> CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'cat_Status' in 'where clause'
+[Method: GET, Route: subcategory]
+in SYSTEMPATH\Database\BaseConnection.php on line 692.
+ 1 APPPATH\Models\SubcategoryModel.php(21): CodeIgniter\Database\BaseConnection->query('SELECT * FROM subcategory WHERE cat_Status <> 3')
+ 2 APPPATH\Controllers\Subcategory.php(18): App\Models\SubcategoryModel->getAllsubCategory()
+ 3 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Subcategory->index()
+ 4 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Subcategory))
+ 5 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 7 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 8 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2025-05-07 06:53:28 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'cat_Status' in 'where clause'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 332.
+ 1 SYSTEMPATH\Database\BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('SELECT * FROM subcategory WHERE cat_Status <> 3')
+ 2 SYSTEMPATH\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT * FROM subcategory WHERE cat_Status <> 3')
+ 3 APPPATH\Models\SubcategoryModel.php(21): CodeIgniter\Database\BaseConnection->query('SELECT * FROM subcategory WHERE cat_Status <> 3')
+ 4 APPPATH\Controllers\Subcategory.php(18): App\Models\SubcategoryModel->getAllsubCategory()
+ 5 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Subcategory->index()
+ 6 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Subcategory))
+ 7 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 9 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+10 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2025-05-07 06:53:28 --> [Caused by] mysqli_sql_exception: Unknown column 'cat_Status' in 'where clause'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 327.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(327): mysqli->query('SELECT * FROM subcategory WHERE cat_Status <> 3', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('SELECT * FROM subcategory WHERE cat_Status <> 3')
+ 3 SYSTEMPATH\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT * FROM subcategory WHERE cat_Status <> 3')
+ 4 APPPATH\Models\SubcategoryModel.php(21): CodeIgniter\Database\BaseConnection->query('SELECT * FROM subcategory WHERE cat_Status <> 3')
+ 5 APPPATH\Controllers\Subcategory.php(18): App\Models\SubcategoryModel->getAllsubCategory()
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Subcategory->index()
+ 7 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Subcategory))
+ 8 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ERROR - 2025-05-07 06:53:56 --> mysqli_sql_exception: Unknown column 'cat_Status' in 'where clause' in C:\xampp\htdocs\ZakhiDesigns\system\Database\MySQLi\Connection.php:327
+Stack trace:
+#0 C:\xampp\htdocs\ZakhiDesigns\system\Database\MySQLi\Connection.php(327): mysqli->query('SELECT * FROM s...', 0)
+#1 C:\xampp\htdocs\ZakhiDesigns\system\Database\BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('SELECT * FROM s...')
+#2 C:\xampp\htdocs\ZakhiDesigns\system\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT * FROM s...')
+#3 C:\xampp\htdocs\ZakhiDesigns\app\Models\SubcategoryModel.php(21): CodeIgniter\Database\BaseConnection->query('SELECT * FROM s...')
+#4 C:\xampp\htdocs\ZakhiDesigns\app\Controllers\Subcategory.php(18): App\Models\SubcategoryModel->getAllsubCategory()
+#5 C:\xampp\htdocs\ZakhiDesigns\system\CodeIgniter.php(933): App\Controllers\Subcategory->index()
+#6 C:\xampp\htdocs\ZakhiDesigns\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Subcategory))
+#7 C:\xampp\htdocs\ZakhiDesigns\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 C:\xampp\htdocs\ZakhiDesigns\system\Boot.php(334): CodeIgniter\CodeIgniter->run()
+#9 C:\xampp\htdocs\ZakhiDesigns\system\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#10 C:\xampp\htdocs\ZakhiDesigns\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#11 {main}
+CRITICAL - 2025-05-07 06:53:56 --> CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'cat_Status' in 'where clause'
+[Method: GET, Route: subcategory]
+in SYSTEMPATH\Database\BaseConnection.php on line 692.
+ 1 APPPATH\Models\SubcategoryModel.php(21): CodeIgniter\Database\BaseConnection->query('SELECT * FROM subcategory WHERE cat_Status <> 3')
+ 2 APPPATH\Controllers\Subcategory.php(18): App\Models\SubcategoryModel->getAllsubCategory()
+ 3 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Subcategory->index()
+ 4 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Subcategory))
+ 5 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 7 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 8 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2025-05-07 06:53:56 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'cat_Status' in 'where clause'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 332.
+ 1 SYSTEMPATH\Database\BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('SELECT * FROM subcategory WHERE cat_Status <> 3')
+ 2 SYSTEMPATH\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT * FROM subcategory WHERE cat_Status <> 3')
+ 3 APPPATH\Models\SubcategoryModel.php(21): CodeIgniter\Database\BaseConnection->query('SELECT * FROM subcategory WHERE cat_Status <> 3')
+ 4 APPPATH\Controllers\Subcategory.php(18): App\Models\SubcategoryModel->getAllsubCategory()
+ 5 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Subcategory->index()
+ 6 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Subcategory))
+ 7 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 9 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+10 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2025-05-07 06:53:56 --> [Caused by] mysqli_sql_exception: Unknown column 'cat_Status' in 'where clause'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 327.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(327): mysqli->query('SELECT * FROM subcategory WHERE cat_Status <> 3', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('SELECT * FROM subcategory WHERE cat_Status <> 3')
+ 3 SYSTEMPATH\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT * FROM subcategory WHERE cat_Status <> 3')
+ 4 APPPATH\Models\SubcategoryModel.php(21): CodeIgniter\Database\BaseConnection->query('SELECT * FROM subcategory WHERE cat_Status <> 3')
+ 5 APPPATH\Controllers\Subcategory.php(18): App\Models\SubcategoryModel->getAllsubCategory()
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Subcategory->index()
+ 7 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Subcategory))
+ 8 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2025-05-07 06:54:53 --> CodeIgniter\Database\Exceptions\DatabaseException: You must set the database table to be used with your query.
+[Method: GET, Route: subcategory/add]
+in SYSTEMPATH\Database\BaseConnection.php on line 941.
+ 1 SYSTEMPATH\Model.php(714): CodeIgniter\Database\BaseConnection->table(null)
+ 2 SYSTEMPATH\Model.php(920): CodeIgniter\Model->builder()
+ 3 APPPATH\Controllers\Subcategory.php(36): CodeIgniter\Model->__call('getAllCategory', [])
+ 4 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Subcategory->addSubcategory()
+ 5 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Subcategory))
+ 6 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 9 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2025-05-07 07:48:54 --> ErrorException: Undefined variable $category
+[Method: GET, Route: subcategory]
+in APPPATH\Views\subcategory.php on line 74.
+ 1 APPPATH\Views\subcategory.php(74): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $category', 'C:\\xampp\\htdocs\\ZakhiDesigns\\app\\Views\\subcategory.php', 74)
+ 2 SYSTEMPATH\View\View.php(224): include('C:\\xampp\\htdocs\\ZakhiDesigns\\app\\Views\\subcategory.php')
+ 3 SYSTEMPATH\View\View.php(227): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1173): CodeIgniter\View\View->render('subcategory', [], true)
+ 5 APPPATH\Controllers\Subcategory.php(22): view('subcategory', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Subcategory->index()
+ 7 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Subcategory))
+ 8 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2025-05-07 08:25:16 --> ErrorException: Undefined array key "cat_Name"
+[Method: GET, Route: subcategory/add/1]
+in APPPATH\Views\subcategory_add.php on line 60.
+ 1 APPPATH\Views\subcategory_add.php(60): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key "cat_Name"', 'C:\\xampp\\htdocs\\ZakhiDesigns\\app\\Views\\subcategory_add.php', 60)
+ 2 SYSTEMPATH\View\View.php(224): include('C:\\xampp\\htdocs\\ZakhiDesigns\\app\\Views\\subcategory_add.php')
+ 3 SYSTEMPATH\View\View.php(227): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1173): CodeIgniter\View\View->render('subcategory_add', [], true)
+ 5 APPPATH\Controllers\Subcategory.php(52): view('subcategory_add', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Subcategory->addSubcategory('1')
+ 7 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Subcategory))
+ 8 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2025-05-07 08:25:34 --> ErrorException: Undefined array key ""
+[Method: GET, Route: subcategory/add/1]
+in APPPATH\Views\subcategory_add.php on line 60.
+ 1 APPPATH\Views\subcategory_add.php(60): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key ""', 'C:\\xampp\\htdocs\\ZakhiDesigns\\app\\Views\\subcategory_add.php', 60)
+ 2 SYSTEMPATH\View\View.php(224): include('C:\\xampp\\htdocs\\ZakhiDesigns\\app\\Views\\subcategory_add.php')
+ 3 SYSTEMPATH\View\View.php(227): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1173): CodeIgniter\View\View->render('subcategory_add', [], true)
+ 5 APPPATH\Controllers\Subcategory.php(52): view('subcategory_add', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Subcategory->addSubcategory('1')
+ 7 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Subcategory))
+ 8 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))

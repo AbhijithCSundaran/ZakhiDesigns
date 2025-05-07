@@ -58,14 +58,14 @@
 											<div id="message" style="display:none;"></div>
 											<div id="messageBox" class="alert" style="display: none;"></div>
                                                 <div class="table-responsive">
-                                                    <table class="table table-hover" id="staffList">
+                                                    <table class="table table-hover" id="customerList">
                                                         <thead>
                                                             <tr>
                                                                 <th>Sl.No.</th>
                                                                 <th>Name</th>
-                                                                <th>Address</th>
 																<th>Email</th>
 																<th>Contact Number</th>
+																<th>Status</th>
 																<th>Action</th>
                                                             </tr>
                                                         </thead>
@@ -76,21 +76,30 @@
 																<tr>
 																	<td><?= $slno++; ?></td>
 																	<td><?= esc($row['cust_Name']); ?></td>
-																	<td><?= esc($row['add_BuldingNo']); ?><br>
-																		<?= esc($row['add_Street']);?><br>
-																		<?= esc($row['add_City']);?>
-																	</td>
 																	<td><?= esc($row['cust_Email']); ?></td>
 																	<td><?= esc($row['cust_Phone']); ?></td> 
 																	<td>
-																		<a href="<?= base_url('customer/view/' . $row['cust_Id']); ?>" title="View">
-																			<i class="bi bi-eye text-info"></i>
-																		</a>
-																		<a href="#">
+																	 <div class="form-check form-switch">
+                                                                    <input class="form-check-input checkactive"
+                                                                        type="checkbox"
+                                                                        id="statusSwitch-<?= $row['cust_Id']; ?>"
+                                                                        value="<?= $row['cust_Id']; ?>"
+                                                                        <?= ($row['cust_Status'] == 1) ? 'checked' : ''; ?>>
+                                                                    <label class="form-check-label pl-0 label-check"
+                                                                        for="statusSwitch-<?= $row['cust_Id']; ?>">
+                                                                        
+                                                                    </label>
+                                                                </div>
+																</td>
+																	<td>
+																	  <a href="<?= base_url('customer/location/' . $row['cust_Id']); ?>">
+																		<i class="bi bi-geo-alt text-primary ms-2"></i>
+																	  </a>
+																		<a href="<?= base_url('customer/view/'. $row['cust_Id']); ?>">
 																			<i class="bi bi-pencil-square"></i>
-																		</a>                                                 
-																		<i class="bi bi-trash text-danger icon-clickable"></i>
-																	</td>                                           
+																		</a>                                                     
+																			<i class="bi bi-trash text-danger icon-clickable" onclick="confirmDelete(<?= $row['cust_Id']; ?>)"></i>
+																	</td>                                                  
 																</tr>
 															<?php } ?>
                                                         </tbody>

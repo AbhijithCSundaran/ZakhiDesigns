@@ -5,7 +5,7 @@
             <div class="row align-items-center">
                 <div class="col-md-8">
                     <div class="page-header-title">
-                        <h5 class="m-b-10">Add Customer</h5>
+                        <h5 class="m-b-10">Manage Admin</h5>
                         <p class="m-b-0">Welcome to Zakhi Designs</p>
                     </div>
                 </div>
@@ -14,7 +14,7 @@
                         <li class="breadcrumb-item">
                             <a href="<?php echo base_url('dashboard') ?>"> <i class="fa fa-home"></i> </a>
                         </li>
-                        <li class="breadcrumb-item"><a href="#">Add Customer</a>
+                        <li class="breadcrumb-item"><a href="#!">Manage Admin</a>
                         </li>
                     </ul>
                 </div>
@@ -50,22 +50,32 @@
                                 </div>
                                 <div class="card-block">
 								<div id="messageBox" class="alert alert-success" style="display: none;"></div>
-                                    <form name="createcust" id="createcust" method="post">
+                                    <form name="createstaff" id="createstaff" method="post">
+									
                                         <div class="form-group row">
                                            <label class="col-sm-2 col-form-label">Name <span style="color: red;">*</span></label>
                                             <div class="col-sm-6">
-                                                <input type="text" name="custname" id="custname" class="form-control" maxlength="30"
-                                                    value="<?= isset($cust) ? ($cust['cust_Name']) : '' ?>" placeholder="Enter the customer name" *>
-											<span class="text-danger error-msg" id="error-custname"></span>
+                                                <input type="text" name="staffname" id="staffname" class="form-control" maxlength=30
+                                                    value="<?= isset($staff) ? ($staff['us_Name']) : '' ?>" placeholder="Enter the staff name" * required autocomplete="off" >
+											<span class="text-danger error-msg" id="error-staffname"></span>
 											</div>
 											
                                         </div>
                                         <div class="form-group row">
                                             <label class="col-sm-2 col-form-label">Email <span style="color: red;">*</span></label>
                                             <div class="col-sm-6">
-                                                <input type="email" class="form-control" name="custemail" id="custemail" maxlength="30"
-                                                  value="<?= isset($cust) ? ($cust['cust_Email']) : '' ?>"   placeholder="Enter the mail id"  required autocomplete="off">
-                                            <span class="text-danger error-msg" id="error-custemail"></span>
+                                                <input type="email" class="form-control" name="staffemail" id="staffemail" maxlength=30
+                                                  value="<?= isset($staff) ? esc($staff['us_Email']) : '' ?>"   placeholder="Enter the mail id"  required autocomplete="off">
+                                            <span class="text-danger error-msg" id="error-staffemail"></span>
+											</div>
+											
+                                        </div>
+										 <div class="form-group row">
+                                            <label class="col-sm-2 col-form-label">Alternate Email</label>
+                                            <div class="col-sm-6">
+                                                <input type="email" class="form-control" name="staffotemail" id="staffotemail" maxlength=30
+                                                  value="<?= isset($staff) ? ($staff['us_Email2']) : '' ?>"   placeholder="Enter alternate mail id">
+                                            <span class="text-danger error-msg" id="error-staffotemail"></span>
 											</div>
 											
                                         </div>
@@ -73,30 +83,30 @@
                                             <label class="col-sm-2 col-form-label">Contact Number <span style="color: red;">*</span></label>
                                             <div class="col-sm-6">
                                                 <input type="text" class="form-control" name="mobile" id="mobile" maxlength="10" minlength="10"
-                                                  value="<?= isset($cust) ? ($cust['cust_Phone']) : '' ?>"   placeholder="Enter Contact Number"  required>
+                                                  value="<?= isset($staff) ? ($staff['us_Phone']) : '' ?>"   placeholder="Enter Contact Number" required autocomplete="off">
                                             <span class="text-danger error-msg" id="error-mobile"></span>
 											</div>
 											
                                         </div>
-										<div class="form-group row">
+                                        <div class="form-group row">
                                             <label class="col-sm-2 col-form-label">Password <span style="color: red;">*</span></label>
                                             <div class="col-sm-6">
-                                                <input type="Password" class="form-control" name="password" id="password" maxlength="15"
-                                                  value=""   placeholder="Enter Password"  required>
-                                            <span class="text-danger error-msg" id="error-mobile"></span>
-											</div>
+                                                <input type="Password" class="form-control" name="password" id="password" maxlength=15 value="" placeholder="Password" required autocomplete="off" >
+												<span class="text-danger error-msg" id="error-password"></span>
+										   </div>
 											
-                                        </div>			
-										 <div class="row justify-content-center">
-										<input type="hidden" name="cust_id" value="<?= isset($cust['cust_Id']) ? esc($cust['cust_Id']) : '' ?>">
+                                        </div>
+										
+                                        <div class="row justify-content-center">
+										<input type="hidden" name="us_id" value="<?= isset($staff['us_Id']) ? esc($staff['us_Id']) : '' ?>">
                                             <div class="button-group">
-											 <button type="button" class="btn btn-secondary" onclick="window.location.href='<?= base_url('customer'); ?>'">
+											 <button type="button" class="btn btn-secondary" onclick="window.location.href='<?= base_url('dashboard'); ?>'">
                                                     <i class="bi bi-x-circle"></i> Discard
                                                 </button>
-													<button type="button" class="btn btn-primary" id="custSubmit" name="custSubmit">
+													<button type="button" class="btn btn-primary" id="staffSubmit" name="staffSubmit" >
 														<i class="bi bi-check-circle"></i> Save
+														
 													</button>
-													
                                             </div>
                                         </div>
                                     </form>

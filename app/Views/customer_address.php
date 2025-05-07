@@ -5,7 +5,7 @@
             <div class="row align-items-center">
                 <div class="col-md-8">
                     <div class="page-header-title">
-                        <h5 class="m-b-10">Manage Staff</h5>
+                        <h5 class="m-b-10">Manage Customer</h5>
                         <p class="m-b-0">Welcome to Zakhi Designs</p>
                     </div>
                 </div>
@@ -14,7 +14,7 @@
                         <li class="breadcrumb-item">
                             <a href="#"> <i class="fa fa-home"></i> </a>
                         </li>
-                        <li class="breadcrumb-item"><a href="#!"> Staff</a>
+                        <li class="breadcrumb-item"><a href="#">Customer</a>
                         </li>
                     </ul>
                 </div>
@@ -43,8 +43,8 @@
 										<div class="col-md-3">
                                             <div class="row">
                                                 <div class="col-lg-12 d-flex justify-content-end p-2">
-                                                    <a href="<?= base_url('staff/add'); ?>" class="btn btn-primary">
-                                                        Add Staff
+                                                    <a href="<?= base_url('customer/view/'); ?>" class="btn btn-primary">
+                                                        Add Customer
                                                     </a>
                                                 </div>
                                             </div>
@@ -58,52 +58,40 @@
 											<div id="message" style="display:none;"></div>
 											<div id="messageBox" class="alert" style="display: none;"></div>
                                                 <div class="table-responsive">
-                                                    <table class="table table-hover" id="staffList">
-                                                        <thead>
-                                                            <tr>
-                                                                <th>Sl.No.</th>
-                                                                <th>Name</th>
-                                                                <th>Email</th>
-																<th>Alternate Email</th>
-																<th>Contact Number</th>
-																<th>Status</th>
-																<th>Action</th>
-                                                            </tr>
-                                                        </thead>
-                                                        <tbody>
-                                                        <?php
-														  $slno = 1;
-														 foreach ($user as $user) { ?>
-														<tr>
-															<td><?php echo $slno; ?></td>
-															<td><?php echo $user->us_Name; ?></td>
-															<td><?php echo $user->us_Email; ?></td>
-															<td><?php echo $user->us_Email2; ?></td>
-															<td><?php echo $user->us_Phone; ?></td> 
-															<td>
-																	 <div class="form-check form-switch">
-                                                                    <input class="form-check-input checkactive"
-                                                                        type="checkbox"
-                                                                        id="statusSwitch-<?= $user->us_Id; ?>"
-                                                                        value="<?= $user->us_Id; ?>"
-                                                                        <?= ($user->us_Status == 1) ? 'checked' : ''; ?>>
-                                                                    <label class="form-check-label pl-0 label-check"
-                                                                        for="statusSwitch-<?= $user->us_Id; ?>">
-                                                                        
-                                                                    </label>
-                                                                </div>
-																</td>
-                                                            <td>
-															<a href="<?= base_url('staff/add/'. $user->us_Id); ?>">
-																<i class="bi bi-pencil-square"></i>
-															</a>                                                 
-																<i class="bi bi-trash text-danger icon-clickable" onclick="confirmDelete(<?= $user->us_Id; ?>)"></i>
-                                                            </td>                                           
-														</tr>
-														<?php 
-														$slno++;} ?>
-                                                        </tbody>
-                                                    </table>
+                                                    <div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h4>Manage Addresses</h4>
+        <a href="<?= base_url('address/add') ?>" class="btn btn-primary">Add New Address</a>
+    </div>
+
+    <div class="row">
+        <?php foreach ($user as $user): ?>
+            <div class="col-md-6 mb-4">
+                <div class="card border <?php if ($address['is_default']) echo 'border-primary'; ?>">
+                    <div class="card-body">
+                        <h5 class="card-title"><?= esc($address['name']) ?>
+                            <?php if ($address['is_default']): ?>
+                                <span class="badge bg-primary">Default</span>
+                            <?php endif; ?>
+                        </h5>
+                        <p class="card-text mb-1"><?= esc($address['address_line1']) ?></p>
+                        <p class="card-text mb-1"><?= esc($address['address_line2']) ?></p>
+                        <p class="card-text mb-1"><?= esc($address['city']) ?>, <?= esc($address['state']) ?> - <?= esc($address['zip']) ?></p>
+                        <p class="card-text">Phone: <?= esc($address['phone']) ?></p>
+                        
+                        <div class="d-flex justify-content-between">
+                            <a href="<?= base_url('address/edit/' . $address['id']) ?>" class="btn btn-sm btn-outline-secondary">Edit</a>
+                            <a href="javascript:void(0);" onclick="confirmDelete(<?= $address['id'] ?>)" class="btn btn-sm btn-outline-danger">Delete</a>
+                            <?php if (!$address['is_default']): ?>
+                                <a href="<?= base_url('address/setdefault/' . $address['id']) ?>" class="btn btn-sm btn-outline-primary">Set as Default</a>
+                            <?php endif; ?>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <?php endforeach; ?>
+    </div>
+</div>
                                                 </div>
                                             </div>
                                         </div>
@@ -143,7 +131,7 @@
                 </div>
                 <div class="row justify-content-center">
                     <div class="col-auto">
-                        <p class="text-center">Your data will be lost.<br>
+                        <p class="text-center">
                             Are you sure you want to delete the Staff?</p>
                     </div>
 

@@ -1,3 +1,9 @@
+<?php
+function is_active($uri_segment) {
+    return uri_string() == $uri_segment || strpos(uri_string(), $uri_segment) === 0 ? 'active' : '';
+}
+?>
+
 <div class="pcoded-main-container">
               <div class="pcoded-wrapper">
                   <nav class="pcoded-navbar">
@@ -21,7 +27,7 @@
                           </div>
                           <div class="pcoded-navigation-label" data-i18n="nav.category.navigation"></div>
                           <ul class="pcoded-item pcoded-left-item">
-                              <li class="active">
+                              <li class="<?= is_active('dashboard') ?>">
                                   <a href="<?php echo base_url('dashboard') ?>" class="waves-effect waves-dark">
                                       <span class="pcoded-micon"><i class="ti-home"></i><b>D</b></span>
                                       <span class="pcoded-mtext" data-i18n="nav.dash.main">Dashboard</span>
@@ -30,14 +36,14 @@
                               </li>
 
                               
-                              <li>
+                              <li class="<?= is_active('staff') ?>">
                                     <a href="<?php echo base_url('staff') ?>" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-layers"></i><b>FC</b></span>
                                         <span class="pcoded-mtext" data-i18n="nav.form-components.main">Staff</span>
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                 </li>
-                                <li>
+                                <li class="<?= is_active('customer') ?>">
                                     <a href="<?php echo base_url('customer') ?>" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-layers"></i><b>FC</b></span>
                                         <span class="pcoded-mtext" data-i18n="nav.form-components.main">Customer</span>
@@ -46,7 +52,7 @@
                                 </li>
                           </ul>
                           <ul class="pcoded-item pcoded-left-item">
-                            <li class="">
+                            <li class="<?= is_active('category') ?>">
                                   <a href="<?php echo base_url('category') ?>" class="waves-effect waves-dark">
                                       <span class="pcoded-micon"><i class="ti-home"></i><b>D</b></span>
                                       <span class="pcoded-mtext" data-i18n="nav.dash.main">Category</span>
@@ -54,19 +60,21 @@
                                   </a>
                               </li>
                               
-                            <li class="">
+                            <li class="<?= is_active('subcategory') ?>">
                                 <a href="<?php echo base_url('subcategory') ?>" class="waves-effect waves-dark">
                                     <span class="pcoded-micon"><i class="ti-home"></i><b>D</b></span>
                                     <span class="pcoded-mtext" data-i18n="nav.dash.main">Sub Category</span>
                                     <span class="pcoded-mcaret"></span>
                                 </a>
                             </li>
-                            <li class="">
-                                <a href="<?php echo base_url('user/products') ?>" class="waves-effect waves-dark">
+                            <li class="<?= is_active('product') ?>">
+                                <a href="<?php echo base_url('product') ?>" class="waves-effect waves-dark">
                                     <span class="pcoded-micon"><i class="ti-home"></i><b>D</b></span>
                                     <span class="pcoded-mtext" data-i18n="nav.dash.main">Products</span>
                                     <span class="pcoded-mcaret"></span>
                                 </a>
                             </li>
                           </ul>
+                     
+                          
                   </nav>

@@ -81,7 +81,8 @@
                                         <input type="hidden" name="cat_id"
                                         value="<?= isset($category['cat_Id']) ? esc($category['cat_Id']) : '' ?>">
                                             <div class="button-group">
-                                                <button type="button" class="btn btn-secondary">
+                                                <button type="button" class="btn btn-secondary"
+                                                onclick="window.location.href='<?= base_url('category'); ?>'">
                                                     <i class="bi bi-x-circle"></i> Discard
                                                 </button>
                                                 <button type="button" class="btn btn-primary" id="categorySubmit" name="categorySubmit">

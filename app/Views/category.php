@@ -38,8 +38,8 @@
 
                                         </div>
                                         <div class="col-md-7">
-                                            <div id="message" style="display:none;"></div>
-                                            <div id="messageBox" class="alert" style="display: none;"></div>
+                                        <div id="message" style="display:none;"></div>
+                                        <div id="messageBox" class="alert" style="display: none;"></div>
                                         </div>
                                         <div class="col-md-3">
                                             <div class="row">
@@ -54,8 +54,8 @@
                                 </div>
                                 <div class="card-block">
                                     <div class="card">
-
-
+                                    
+                                      
                                         <div class="card-block table-border-style">
                                             <div class="table-responsive">
                                                 <table class="table table-hover" id="categoryList">
@@ -70,37 +70,42 @@
                                                         </tr>
                                                     </thead>
                                                     <tbody>
+
                                                         <?php foreach($category as $index => $cat) : ?>
+
                                                         <tr>
                                                             <td><?= $index + 1; ?></td>
-                                                            <td><?= ucwords($cat->cat_Name); ?></td>
-                                                            <td><?= $cat->cat_Discount_Value; ?></td>
-                                                            <td><?= $cat->cat_Discount_Type; ?></td>
+                                                            <td><?= ucwords($cat['cat_Name']); ?></td>
+                                                            <td><?= $cat['cat_Discount_Value']; ?></td>
+                                                            <td><?= $cat['cat_Discount_Type']; ?></td>
                                                             <td>
                                                                 <div class="form-check form-switch">
                                                                     <input class="form-check-input checkactive"
                                                                         type="checkbox"
-                                                                        id="statusSwitch-<?= $cat->cat_Id; ?>"
-                                                                        value="<?= $cat->cat_Id; ?>"
-                                                                        <?= ($cat->cat_Status == 1) ? 'checked' : ''; ?>>
+                                                                        id="statusSwitch-<?= $cat['cat_Id']; ?>"
+                                                                        value="<?= $cat['cat_Id']; ?>"
+                                                                        <?= ($cat['cat_Status'] == 1) ? 'checked' : ''; ?>>
                                                                     <label class="form-check-label pl-0 label-check"
-                                                                        for="statusSwitch-<?= $cat->cat_Id; ?>">
+                                                                        for="statusSwitch-<?= $cat['cat_Id']; ?>">
+                                                                        
                                                                     </label>
                                                                 </div>
                                                             </td>
                                                             <td>
-                                                                <a
-                                                                    href="<?= base_url('category/add/'. $cat->cat_Id); ?>">
-                                                                    <i class="bi bi-pencil-square"></i>
-                                                                </a>
-                                                                <i class="bi bi-trash text-danger icon-clickable"
-                                                                    onclick="confirmDelete(<?= $cat->cat_Id; ?>)">
-                                                                </i>
+                                                            <a href="<?= base_url('category/edit/'. $cat['cat_Id']); ?>">
+																<i class="bi bi-pencil-square"></i>
+															</a> 
+                                                                <i class="bi bi-trash text-danger icon-clickable" 
+                                                                 onclick="confirmDelete(<?= $cat['cat_Id']; ?>)" 
+                                                                   ></i>
                                                             </td>
-                                                        </tr>
-                                                        <?php endforeach; ?>
-                                                    </tbody>
 
+                                                        </tr>
+
+
+                                                        <?php endforeach; ?>
+
+                                                    </tbody>
                                                 </table>
                                             </div>
                                         </div>
@@ -119,3 +124,4 @@
         </div>
     </div>
 </div>
+

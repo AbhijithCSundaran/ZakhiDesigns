@@ -20,6 +20,41 @@ class Product extends BaseController
 		$template.= view('common/footer');
         return $template;
 
-        
     }
+    public function addProduct($pr_id = null)
+	{
+		if (!$this->session->get('zd_uid')) 
+		{
+			return redirect()->to(base_url());
+		}
+
+		$data = [];
+		 if ($pr_id) {
+			//$cate = $this->categoryModel->getCategoryByid($cat_id);
+		
+			// if (!$cate) {
+			// 	return redirect()->to('category')->with('error', 'Category not found');
+			// }
+			
+			// $data['category'] = (array) $cate;
+			
+			
+			$template = view('common/header');
+			$template .= view('common/leftmenu');
+			$template .= view('product_add', $data);
+			$template .= view('common/footer');
+			//$template .= view('page_scripts/productjs');
+			return $template;
+		}
+		else
+		{
+			$template = view('common/header');
+			$template .= view('common/leftmenu');
+			$template .= view('product_add');
+			$template .= view('common/footer');
+			//$template .= view('page_scripts/productjs');
+			return $template;
+		}
+		
+	}
 }

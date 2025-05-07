@@ -46,12 +46,27 @@
                                 </li>
                           </ul>
                           <ul class="pcoded-item pcoded-left-item">
-                          <li class="">
+                            <li class="">
                                   <a href="<?php echo base_url('category') ?>" class="waves-effect waves-dark">
                                       <span class="pcoded-micon"><i class="ti-home"></i><b>D</b></span>
                                       <span class="pcoded-mtext" data-i18n="nav.dash.main">Category</span>
                                       <span class="pcoded-mcaret"></span>
                                   </a>
                               </li>
+                              
+                            <li class="">
+                                <a href="<?php echo base_url('subcategory') ?>" class="waves-effect waves-dark">
+                                    <span class="pcoded-micon"><i class="ti-home"></i><b>D</b></span>
+                                    <span class="pcoded-mtext" data-i18n="nav.dash.main">Sub Category</span>
+                                    <span class="pcoded-mcaret"></span>
+                                </a>
+                            </li>
+                            <li class="">
+                                <a href="<?php echo base_url('user/products') ?>" class="waves-effect waves-dark">
+                                    <span class="pcoded-micon"><i class="ti-home"></i><b>D</b></span>
+                                    <span class="pcoded-mtext" data-i18n="nav.dash.main">Products</span>
+                                    <span class="pcoded-mcaret"></span>
+                                </a>
+                            </li>
                           </ul>
                   </nav>

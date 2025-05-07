@@ -15,9 +15,18 @@ $routes->post('Auth', 'Auth::authenticate');
 //category
 $routes->get('category', 'Category::index');
 $routes->get('category/add', 'Category::addCategory');
+$routes->get('category/add/(:num)', 'Category::addCategory/$1'); 
 $routes->post('category/save', 'Category::saveCategory');
 $routes->post('category/status', 'Category::changeStatus');
 $routes->post('category/delete/(:any)', 'Category::deleteCategory/$1');
+
+
+//Subcategory
+$routes->get('subcategory', 'Subcategory::index');
+$routes->get('subcategory/add', 'Subcategory::addSubcategory');
+$routes->get('subcategory/add/(:num)', 'Subcategory::addSubcategory/$1'); 
+$routes->post('subcategory/save', 'Subcategory::saveSubcategory');
+
 
 //Products
 $routes->get('user/products', 'Product::index');

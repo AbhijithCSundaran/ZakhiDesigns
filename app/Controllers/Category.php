@@ -28,50 +28,96 @@ class Category extends BaseController
 
         
     }
-    public function addCategory()
-    {
-        $template = view('common/header');
-		$template.= view('common/leftmenu');
-		$template.= view('category_add');
-        $template.= view('common/footer');
-        $template.= view('page_scripts/categoryjs');
-        return $template;
-    }
-    public function saveCategory()
-    {
-        $categoryname = $this->request->getPost('category_name');
-        $discountvalue = $this->request->getPost('discount_value');
-        $discounttype = $this->request->getPost('discount_type');
+    public function addCategory($cat_id = null)
+	{
+		if (!$this->session->get('zd_uid')) 
+		{
+			return redirect()->to(base_url());
+		}
 
-        if (empty($categoryname) || empty($discountvalue) || empty($discounttype)) {
-            return $this->response->setJSON([
-                'status' => 'error',
-                'message' => 'All fields are required.'
-            ]);
-        }
+		$data = [];
+		 if ($cat_id) {
+			$cate = $this->categoryModel->getCategoryByid($cat_id);
+		
+			if (!$cate) {
+				return redirect()->to('category')->with('error', 'Category not found');
+			}
+			// $data['staff'] = $staff_val;
+			 $data['category'] = (array) $cate;
+			
+			// Load views
+			$template = view('common/header');
+			$template .= view('common/leftmenu');
+			$template .= view('category_add', $data);
+			$template .= view('common/footer');
+			$template .= view('page_scripts/categoryjs');
+			return $template;
+		}
+		else
+		{
+			// Load views
+			$template = view('common/header');
+			$template .= view('common/leftmenu');
+			$template .= view('category_add');
+			$template .= view('common/footer');
+			$template .= view('page_scripts/categoryjs');
+			return $template;
+		}
+		
+	}
 
-    
-        $data = [
-            'cat_Name' => $categoryname,
-            'cat_Discount_Value' => $discountvalue,
-            'cat_Discount_Type' => $discounttype,
-            'cat_Status' => 1
-
-        ];
-       
-       if ($this->categoryModel->categoryInsert($data)) {
-            return $this->response->setJSON([
-                'status' => 'success',
-                'message' => 'Category inserted successfully.'
-            ]);
-        } else {
-            return $this->response->setJSON([
-                'status' => 'error',
-                'message' => 'Failed to insert category.'
-            ]);
-        }
-    }
-
+    public function saveCategory() {
+		$cat_id = $this->input->getPost('cat_id');
+		$category_name = $this->input->getPost('category_name');
+		$discount_value = $this->input->getPost('discount_value');
+		$discount_type = $this->input->getPost('discount_type');
+	
+		if($category_name && $discount_value && $discount_type) {
+			if (empty($cat_id)) {
+				$data = [
+				'cat_Name' => $category_name,
+				'cat_Discount_Value' => $discount_value,
+				'cat_Discount_Type' => $discount_type,
+				'cat_Status' => 1,
+				'cat_createdon' => date("Y-m-d H:i:s"),
+				'cat_createdby' => $this->session->get('zd_uid'),
+				'cat_modifyby' => $this->session->get('zd_uid'),
+			];
+				$CreateCategory = $this->categoryModel->categoryInsert($data);
+				
+				echo json_encode(array(
+					"status" => 1,
+					"msg" => "Created successfully.",
+					"redirect" => base_url('category')
+				));
+				
+			} 
+			else {
+				$data = [
+				'cat_Name' => $category_name,
+				'cat_Discount_Value' => $discount_value,
+				'cat_Discount_Type' => $discount_type,
+				'cat_Status' => 1,
+				'cat_createdon' => date("Y-m-d H:i:s"),
+				'cat_createdby' => $this->session->get('zd_uid'),
+				'cat_modifyby'  => $this->session->get('zd_uid'),   
+			];				
+				$modifyCategory = $this->categoryModel->updateCategory($cat_id,$data);
+				echo json_encode(array(
+					"status" => 1,
+					"msg" => "Updated successfully.",
+					"redirect" => base_url('category')
+				));
+			}
+		}
+		else {
+			return $this->response->setJSON([
+				'status' => 'error',
+				'message' => 'All fields are required.'
+			]);
+		}
+		
+	}
     public function changeStatus()
     {
         $catId = $this->request->getPost('cat_Id');

@@ -17,20 +17,35 @@ $(document).ready(function() {
 var baseUrl = "<?= base_url() ?>";
 
 $('#categorySubmit').click(function(e) {
-    e.preventDefault(); 
-    var url = baseUrl + "category/save"; 
+    e.preventDefault(); // Important to prevent normal form submit
+    var url = baseUrl + "category/save"; // Correct route
 
-    $.post(url, $('#createCategory').serialize(), function(data) {
-        $('#createCategory')[0].reset();
+    $.post(url, $('#createCategory').serialize(), function(response) {
+       
 
-        if (data.status === 'success') {
-            alert('Data stored successfully!');
-        } else {
-            alert('Failed to store data: ' + data.message);
+        if (response.status == 1) { $('#messageBox')
+                .removeClass('alert-danger')
+                .addClass('alert-success')
+                .text(response.msg || 'Category created successfully!')
+                .show();
+
+            // Wait, then redirect
+            setTimeout(function() {
+                window.location.href = baseUrl + "category/"; // Update this path to your Manage Staff page
+            }, 1500);
+        } 
+		else {
+            $('#messageBox')
+                .removeClass('alert-success')
+                .addClass('alert-danger')
+                .text(response.msg || 'Please enter data correctly')
+                .show();
         }
+		setTimeout(function() {
+                $('#messageBox').empty().hide();
+            }, 2000);
     }, 'json');
 });
-
 //Active and Inactive status
 $(document).ready(function() {
     $('.checkactive').on('change', function() {

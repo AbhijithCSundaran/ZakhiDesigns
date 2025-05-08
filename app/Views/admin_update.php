@@ -91,7 +91,7 @@
                                         <div class="form-group row">
                                             <label class="col-sm-2 col-form-label">Password <span style="color: red;">*</span></label>
                                             <div class="col-sm-6">
-                                                <input type="Password" class="form-control" name="password" id="password" maxlength=15 value="" placeholder="Password" required autocomplete="off" >
+                                                <input type="Password" class="form-control" name="password" id="password" maxlength=15 value="<?= isset($staff) ? ($staff['us_Password']) : '' ?>" placeholder="Password" required autocomplete="off" >
 												<span class="text-danger error-msg" id="error-password"></span>
 										   </div>
 											

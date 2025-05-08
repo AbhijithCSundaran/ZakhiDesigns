@@ -75,9 +75,9 @@
 															foreach ($user as $row) { ?>
 																<tr>
 																	<td><?= $slno++; ?></td>
-																	<td><?= esc($row['cust_Name']); ?></td>
-																	<td><?= esc($row['cust_Email']); ?></td>
-																	<td><?= esc($row['cust_Phone']); ?></td> 
+																	<td><?= wordwrap(esc($row['cust_Name']), 20, '<br>'); ?></td>
+																	<td><?= wordwrap(esc($row['cust_Email']), 20, '<br>') ;?> </td>
+																	<td><?= wordwrap(esc($row['cust_Phone']), 20, '<br>') ;?> </td> 
 																	<td>
 																	 <div class="form-check form-switch">
                                                                     <input class="form-check-input checkactive"

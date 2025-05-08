@@ -70,76 +70,101 @@ class Staff extends BaseController
 		$staffotemail = $this->input->getPost('staffotemail');
 		$mobile = $this->input->getPost('mobile');
 		$password = $this->input->getPost('password');
+		// Validate customer name
+		if (!preg_match('/^[a-zA-Z0-9\s]+$/', $staffname)) {
+			return $this->response->setJSON([
+				'status' => 'error',
+				'msg' => 'Please enter name correctly.'
+			]);
+		}
 		// Validate email formats
 			if (!filter_var($staffemail, FILTER_VALIDATE_EMAIL)) {
 				return $this->response->setJSON([
 					'status' => 'error',
-					'message' => 'Invalid primary email format.'
+					'msg' => 'Please enter a valid mail id.'
 				]);
 			}
 
 			if (!ctype_digit($mobile) || strlen($mobile) !== 10) {
 				return $this->response->setJSON([
 					'status' => 'error',
-					'message' => 'Phone number must contain only 10 digits.'
+					'msg' => 'Phone number must contain 10 digits.'
 				]);
 			}
-			if (empty($us_id)) {
-				if($staffname && $staffemail && $password && $mobile) {
-					$data = [
+			if($staffname && $staffemail && $password && $mobile) {
+				if (empty($us_id)) {
+					 $staffModel = new StaffModel();
+						// Check if the email already exists
+						$existingStaff = $staffModel->getStaffByEmail($staffemail);
+						if ($existingStaff) {
+							// Email exists, return an error message
+							return $this->response->setJSON([
+								'status' => 'error',
+								'msg' => 'Email already exists. Please enter another.'
+							]);
+							
+						}
+					
+						$data = [
+							'us_Name'          => $staffname,
+							'us_Email'         => $staffemail,
+							'us_Email2'        => $staffotemail,
+							'us_Phone'		   => $mobile,
+							'us_Status'		   => 1,
+							'us_Role'		   => 2,
+							'us_Password'      => md5($password),
+							'us_createdon'     => date("Y-m-d H:i:s"),
+							'us_createdby'     => $this->session->get('zd_id'),
+							'us_modifyby'      => $this->session->get('zd_id'),
+							];
+							$CreateStaff = $this->staffModel->createStaff($data);
+							//echo json_encode(array("status" => 1, "msg" => "Created successfully."));
+							echo json_encode(array(
+								"status" => 1,
+								"msg" => "Created successfully.",
+								"redirect" => base_url('staff')
+							));
+					}
+				
+				else {
+					$staffModel = new StaffModel();
+					$staff = $staffModel->getStaffByid($us_id);
+					$oldPassword = $staff->us_Password;
+					$newPassword = $password;
+					if ($password != $oldPassword) {
+						$newPassword = md5($password); // If not same password, keep the old one
+					}
+					else{
+						$newPassword = $oldPassword;
+					}
+					
+							$data = [
 						'us_Name'          => $staffname,
 						'us_Email'         => $staffemail,
 						'us_Email2'        => $staffotemail,
 						'us_Phone'		   => $mobile,
 						'us_Status'		   => 1,
 						'us_Role'		   => 2,
-						'us_Password'      => md5($password),
-						'us_createdon'     => date("Y-m-d H:i:s"),
-						'us_createdby'     => $this->session->get('zd_id'),
-						'us_modifyby'      => $this->session->get('zd_id'),
+						'us_Password'      =>  $newPassword,
+						'us_createdby'     => $this->session->get('zd_uid'),
+						'us_modifyby'	   => $this->session->get('zd_uid'),     
 						];
-						$CreateStaff = $this->staffModel->createStaff($data);
-						//echo json_encode(array("status" => 1, "msg" => "Created successfully."));
+						$modifyStaff = $this->staffModel->modifyStaff($us_id,$data);
+						//echo json_encode(array("status" => 1, "msg" => "Updated successfully."));	
 						echo json_encode(array(
 							"status" => 1,
-							"msg" => "Created successfully.",
+							"msg" => "Updated successfully.",
 							"redirect" => base_url('staff')
 						));
-				}
-			} 
-			else {
-				if($staffname && $staffemail && $mobile) {
-						$data = [
-					'us_Name'          => $staffname,
-					'us_Email'         => $staffemail,
-					'us_Email2'        => $staffotemail,
-					'us_Phone'		   => $mobile,
-					'us_Status'		   => 1,
-					'us_Role'		   => 2,
-					// 'us_Password'      => md5($password),
-					'us_createdby'     => $this->session->get('zd_uid'),
-					'us_modifyby'	   => $this->session->get('zd_uid'),     
-					];
-
-					if($password){
-						$data['us_Password']= md5($password);
-					}
-
-					$modifyStaff = $this->staffModel->modifyStaff($us_id,$data);
-					//echo json_encode(array("status" => 1, "msg" => "Updated successfully."));	
-					echo json_encode(array(
-						"status" => 1,
-						"msg" => "Updated successfully.",
-						"redirect" => base_url('staff')
-					));
+					
 				}
 			}
-		// else {
-		// 	return $this->response->setJSON([
-		// 		'status' => 'error',
-		// 		'message' => 'All fields are required.'
-		// 	]);
-		// }
+		else {
+			return $this->response->setJSON([
+				'status' => 'error',
+				'message' => 'All fields are required.'
+			]);
+		}
 		
 	}
 	 public function deleteStaff($us_id) {

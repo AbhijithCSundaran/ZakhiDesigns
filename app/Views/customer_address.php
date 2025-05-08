@@ -38,7 +38,6 @@
 
                                         </div>
                                         <div class="col-md-7">
-
                                         </div>
 										<div class="col-md-3">
                                             <div class="row">
@@ -49,59 +48,30 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        
                                     </div>
                                 </div>
-                                <div class="card-block">
-                                <div class="card">
-                                            <div class="card-block table-border-style">
-											<div id="message" style="display:none;"></div>
-											<div id="messageBox" class="alert" style="display: none;"></div>
-                                                <div class="table-responsive">
-                                                    <div class="container mt-4">
-    <div class="d-flex justify-content-between align-items-center mb-3">
-        <h4>Manage Addresses</h4>
-        <a href="<?= base_url('address/add') ?>" class="btn btn-primary">Add New Address</a>
-    </div>
-
-    <div class="row">
-        <?php foreach ($user as $user): ?>
-            <div class="col-md-6 mb-4">
-                <div class="card border <?php if ($address['is_default']) echo 'border-primary'; ?>">
-                    <div class="card-body">
-                        <h5 class="card-title"><?= esc($address['name']) ?>
-                            <?php if ($address['is_default']): ?>
-                                <span class="badge bg-primary">Default</span>
-                            <?php endif; ?>
-                        </h5>
-                        <p class="card-text mb-1"><?= esc($address['address_line1']) ?></p>
-                        <p class="card-text mb-1"><?= esc($address['address_line2']) ?></p>
-                        <p class="card-text mb-1"><?= esc($address['city']) ?>, <?= esc($address['state']) ?> - <?= esc($address['zip']) ?></p>
-                        <p class="card-text">Phone: <?= esc($address['phone']) ?></p>
-                        
-                        <div class="d-flex justify-content-between">
-                            <a href="<?= base_url('address/edit/' . $address['id']) ?>" class="btn btn-sm btn-outline-secondary">Edit</a>
-                            <a href="javascript:void(0);" onclick="confirmDelete(<?= $address['id'] ?>)" class="btn btn-sm btn-outline-danger">Delete</a>
-                            <?php if (!$address['is_default']): ?>
-                                <a href="<?= base_url('address/setdefault/' . $address['id']) ?>" class="btn btn-sm btn-outline-primary">Set as Default</a>
-                            <?php endif; ?>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        <?php endforeach; ?>
-    </div>
-</div>
-                                                </div>
-                                            </div>
-                                        </div>
+								<div class="card-block table-border-style">
+								<div id="message" style="display:none;"></div>
+								<div id="messageBox" class="alert" style="display: none;"></div>
+								<?php foreach ($user as $row){ ?>
+									 <div class="col-xl-4">
+								<!-- Tooltip style 9 card start -->
+											<div class="card o-visible">
+												<div class="card-header">
+													<h5><?= esc($row['cust_Name']); ?></h5>
+												</div>
+												<div class="card-block">
+													<p>Use class  to use this </p><a class="mytooltip tooltip-effect-9" href="#">Work<span class="tooltip-content2"><i class="icofont icofont-bag-alt"></i></span></a> 
+												</div>
+											</div>
+											<!-- Tooltip style 9 card end -->
+										</div>  
+								<?php } 
+								?>
                                 </div>
                             </div>
                         </div>
-
                     </div>
-
-
                 </div>
                 <!-- Page-body end -->
             </div>

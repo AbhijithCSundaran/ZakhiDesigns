@@ -28,7 +28,7 @@ class Admin extends BaseController
 			// Load views
 			$template = view('common/header');
 			$template .= view('common/leftmenu');
-			$template .= view('staff_add', $data);
+			$template .= view('admin_update', $data);
 			$template .= view('common/footer');
 			$template .= view('page_scripts/adminjs');
 			return $template;
@@ -40,7 +40,14 @@ class Admin extends BaseController
 		$staffotemail = $this->input->getPost('staffotemail');
 		$mobile = $this->input->getPost('mobile');
 		$password = $this->input->getPost('password');
-		$passcode	=	$this->input->getPost('pswd');
+
+		$adminModel = new AdminModel();
+		$staff = $adminModel->getStaffByid($us_id);
+		$oldPassword = $staff->us_Password;
+		$newPassword = $password;
+		if ($password != $oldPassword) {
+			$newPassword = md5($password); // If not same password, keep the old one
+		}
 		// Validate email formats
 			if (!filter_var($staffemail, FILTER_VALIDATE_EMAIL)) {
 				return $this->response->setJSON([
@@ -61,14 +68,12 @@ class Admin extends BaseController
 				'us_Email'         => $staffemail,
 				'us_Email2'        => $staffotemail,
 				'us_Phone'		   => $mobile,
+				'us_Password'	   => $newPassword,
 				'us_Status'		   => 1,
 				'us_Role'		   => 1,
 				'us_createdby'     => $this->session->get('zd_uid'),
 				'us_modifyby'	   => $this->session->get('zd_uid'),     
 			];	
-				if($password){
-						$data['us_Password']= md5($password);
-					}
 				$modifyStaff = $this->adminModel->modifyAdmin($us_id,$data);
 				//echo json_encode(array("status" => 1, "msg" => "Updated successfully."));	
 				echo json_encode(array(

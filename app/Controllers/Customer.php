@@ -20,19 +20,16 @@ class Customer extends BaseController
 		$template.= view('customers', $data);
 		$template.= view('common/footer');
 		$template.= view('page_scripts/customerjs');
-        return $template;
-
-        
+        return $template;   
     }
 		public function view_cust($cust_Id = null) {
 		$data = [];
 		 if ($cust_Id) {
 			$cust_val = $this->customerModel->findCustomerById($cust_Id);
-		
 			if (!$cust_val) {
 				return redirect()->to('customer')->with('error', 'Staff member not found');
 			}
-			// $data['cust'] = $cust_val;
+		// $data['cust'] = $cust_val;
 		$data['cust'] = (array) $cust_val;
 		$template  = view('common/header');
 		$template .= view('common/leftmenu');
@@ -57,57 +54,87 @@ class Customer extends BaseController
 		$custname = $this->input->getPost('custname');
 		$custemail = $this->input->getPost('custemail');
 		$mobile = $this->input->getPost('mobile');
-		$password = $this->input->getPost('password');
-		//$status = $this->input->getPost('custstatus');
-		//$status =	$this->input->getPost('custstatus');
-	
+	    $password =$this->input->getPost('password');
+		// Validate customer name
+		if (!preg_match('/^[a-zA-Z0-9\s]+$/', $custname)) {
+			return $this->response->setJSON([
+				'status' => 'error',
+				'msg' => 'Customer name should not contain special characters.'
+			]);
+		}
 		// Validate email formats
 			if (!filter_var($custemail, FILTER_VALIDATE_EMAIL)) {
 				return $this->response->setJSON([
 					'status' => 'error',
-					'message' => 'Invalid primary email format.'
+					'msg' => 'Invalid primary email format.'
+				]);
+			}
+			if (!preg_match('/^\d{10}$/', $mobile)) {
+				return $this->response->setJSON([
+					'status' => 'error',
+					'msg' => 'Phone number must be exactly 10 digits.'
 				]);
 			}
 			if (!ctype_digit($mobile)) {
 				return $this->response->setJSON([
 					'status' => 'error',
-					'message' => 'Phone number must contain only digits.'
+					'msg' => 'Phone number must contain only digits.'
 				]);
 			}
 		
 		if($custname && $custemail && $password && $mobile) {
 			if (empty($cust_id)) {
-				$data = [
-				'cust_Name'          => $custname,
-				'cust_Email'         => $custemail,
-				'cust_Phone'	     => $mobile,
-				'cust_Password'      => md5($password),
-				'cust_Status'	   	 => 1,
-				'cust_createdon'     => date("Y-m-d H:i:s"),
-				'cust_createdby'     => $this->session->get('zd_id'),
-				'cust_modifyby'      => $this->session->get('zd_id'),
-			];
-				$CreateCust = $this->customerModel->createcust($data);
-				//echo json_encode(array("status" => 1, "msg" => "Created successfully."));
-				echo json_encode(array(
-					"status" => 1,
-					"msg" => "Created successfully.",
-					"redirect" => base_url('customer')
-				));
-				
-			} 
+				  $customerModel = new CustomerModel();
+					// Check if the email already exists
+					$existingCustomer = $customerModel->getCustomerByEmail($custemail);
+					if ($existingCustomer) {
+						// Email exists, return an error message
+						return $this->response->setJSON([
+							'status' => 'error',
+							'msg' => 'Email already exists. Please enter another.'
+						]);
+						
+					}
+					$data = [
+					'cust_Name'          => $custname,
+					'cust_Email'         => $custemail,
+					'cust_Phone'	     => $mobile,
+					'cust_Password'      => md5($password),
+					'cust_Status'	   	 => 1,
+					'cust_createdon'     => date("Y-m-d H:i:s"),
+					'cust_createdby'     => $this->session->get('zd_uid'),
+					'cust_modifyby'      => $this->session->get('zd_uid'),
+				];
+					$CreateCust = $this->customerModel->createcust($data);
+					//echo json_encode(array("status" => 1, "msg" => "Created successfully."));
+					echo json_encode(array(
+						"status" => 1,
+						"msg" => "Created successfully.",
+						"redirect" => base_url('customer')
+					));
+				}
 			else {
+				$customerModel = new CustomerModel();
+				$customer = $customerModel->getCustomerByid($cust_id);
+				$oldPassword = $customer->cust_Password;
+				$newPassword = $password;
+				if ($password != $oldPassword) {
+					$newPassword = md5($password); // If not same password, keep the old one
+				}
+				else{
+					$newPassword = $oldPassword;
+				}
+				// Compare hashed passwords (check if the passwords match)
 				$data = [
 				'cust_Name'          => $custname,
 				'cust_Email'         => $custemail,
 				'cust_Phone'	     => $mobile,
+				'cust_Password'		 => $newPassword,
 				'cust_createdon'     => date("Y-m-d H:i:s"),
-				'cust_createdby'     => $this->session->get('zd_id'),
-				'cust_modifyby'      => $this->session->get('zd_id'),  
+				'cust_createdby'     => $this->session->get('zd_uid'),
+				'cust_modifyby'      => $this->session->get('zd_uid'),  
 			];	
-			if($password){
-					$data['us_Password']= md5($password);
-			}			
+					
 				$modifycust = $this->customerModel->modifycust($cust_id,$data);
 				//echo json_encode(array("status" => 1, "msg" => "Updated successfully."));	
 				echo json_encode(array(

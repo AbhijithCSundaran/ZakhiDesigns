@@ -81,7 +81,7 @@
 										<div class="form-group row">
                                             <label class="col-sm-2 col-form-label">Password <span style="color: red;">*</span></label>
                                             <div class="col-sm-6">
-                                                <input type="Password" class="form-control" name="password" id="password" maxlength="15"
+                                                <input type="Password" class="form-control" name="password" id="password" value="<?= isset($cust['cust_Password']) ? esc($cust['cust_Password']) : '' ?>" maxlength="15"
                                                   value=""   placeholder="Enter Password"  required>
                                             <span class="text-danger error-msg" id="error-mobile"></span>
 											</div>
@@ -94,7 +94,8 @@
                                                     <i class="bi bi-x-circle"></i> Discard
                                                 </button>
 													<button type="button" class="btn btn-primary" id="custSubmit" name="custSubmit">
-														<i class="bi bi-check-circle"></i> Save
+														<i class="bi bi-check-circle"></i> 
+														<?= isset($cust['cust_Id']) && !empty($cust['cust_Id']) ? 'Update' : 'Save'; ?>
 													</button>
 													
                                             </div>

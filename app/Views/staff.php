@@ -76,10 +76,10 @@
 														 foreach ($user as $user) { ?>
 														<tr>
 															<td><?php echo $slno; ?></td>
-															<td><?php echo $user->us_Name; ?></td>
-															<td><?php echo $user->us_Email; ?></td>
-															<td><?php echo $user->us_Email2; ?></td>
-															<td><?php echo $user->us_Phone; ?></td> 
+															<td><?php echo wordwrap($user->us_Name); ?></td>
+															<td><?php echo wordwrap($user->us_Email); ?></td>
+															<td><?php echo wordwrap($user->us_Email2); ?></td>
+															<td><?php echo wordwrap($user->us_Phone); ?></td> 
 															<td>
 																	 <div class="form-check form-switch">
                                                                     <input class="form-check-input checkactive"

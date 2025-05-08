@@ -58,6 +58,7 @@ $(document).ready(function () {
 var baseUrl = "<?= base_url() ?>";
 
 $('#staffSubmit').click(function(e) {
+	$('#staffSubmit').prop('disabled', true);
     e.preventDefault(); // Important to prevent normal form submit
     var url = baseUrl + "staff/save"; // Correct route
 
@@ -73,6 +74,7 @@ $('#staffSubmit').click(function(e) {
 
             // Wait, then redirect
             setTimeout(function() {
+				$('#staffSubmit').prop('disabled', false);
                 window.location.href = baseUrl + "staff/"; // Update this path to your Manage Staff page
             }, 1500);
         } 
@@ -82,9 +84,11 @@ $('#staffSubmit').click(function(e) {
                 .addClass('alert-danger')
                 .text(response.msg || 'Please enter data correctly')
                 .show();
-			$btn.prop('disabled', true).html('<i class="bi bi-hourglass-split"></i> Saving...');
+				$('#staffSubmit').prop('disabled', false);
+				
         }
 		setTimeout(function() {
+			
                 $('#messageBox').empty().hide();
             }, 2000);
     }, 'json');

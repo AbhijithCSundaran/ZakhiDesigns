@@ -23,7 +23,7 @@ $(document).ready(function () {
     $('#custemail').on('input', function () {
         const value = $(this).val().trim();
         if (!value) {
-            $('#error-custemail').text('Primary email is required.');
+            $('#error-custemail').text('Email is required.');
         } else if (!emailPattern.test(value)) {
             $('#error-custemail').text('Invalid email format.');
         } else {
@@ -53,7 +53,7 @@ $(document).ready(function () {
 var baseUrl = "<?= base_url() ?>";
 
 $('#custSubmit').click(function(e) {
-
+	$('#custSubmit').prop('disabled', true);
     e.preventDefault(); // Important to prevent normal form submit
     var url = baseUrl + "customer/save"; // Correct route
 console.log("response");
@@ -70,6 +70,7 @@ console.log("response");
 
             // Wait, then redirect
             setTimeout(function() {
+				$('#custSubmit').prop('disabled', false);
                 window.location.href = baseUrl + "customer/"; // Update this path to your Manage Staff page
             }, 1500);
         } 
@@ -79,8 +80,10 @@ console.log("response");
                 .addClass('alert-danger')
                 .text(response.msg || 'Please enter data correctly')
                 .show();
+				$('#custSubmit').prop('disabled', false);
+				
         }
-		setTimeout(function() {
+		setTimeout(function() {	
                 $('#messageBox').empty().hide();
             }, 2000);
     }, 'json');

@@ -93,27 +93,16 @@
 											
                                         </div>
                                         <div class="form-group row">
-                                            <label class="col-sm-2 col-form-label">Contact Number <span
+                                            <label class="col-sm-2 col-form-label">Password <span
                                                     style="color: red;">*</span></label>
                                             <div class="col-sm-6">
-                                                <input type="Password" class="form-control" name="password" id="password" size=15 value="" placeholder="Password" required autocomplete="off" >
+                                                <input type="Password" class="form-control" name="password" value="<?= isset($staff) ? ($staff['us_Password']) : '' ?>"
+												id="password" size=15 value="" placeholder="Password" required autocomplete="off" >
 												<span class="text-danger error-msg" id="error-password"></span>
 										   </div>
 											
                                         </div>
-                                        <div class="form-group row">
-                                            <label class="col-sm-2 col-form-label">Password <span
-                                                    style="color: red;">*</span></label>
-                                            <div class="col-sm-6">
-                                                <input type="Password" class="form-control" name="password"
-                                                    id="password" size=15
-                                                    value="<?= isset($staff) ? ($staff['us_Password']) : '' ?>"
-                                                    placeholder="Password" required autocomplete="off">
-                                                <span class="text-danger error-msg" id="error-password"></span>
-                                            </div>
-
-                                        </div>
-
+                                       
                                         <div class="row justify-content-center">
                                             <input type="hidden" name="us_id"
                                                 value="<?= isset($staff['us_Id']) ? esc($staff['us_Id']) : '' ?>">
@@ -123,8 +112,8 @@
                                                     <i class="bi bi-x-circle"></i> Discard
                                                 </button>
 													<button type="button" class="btn btn-primary" id="staffSubmit" name="staffSubmit" >
-														<i class="bi bi-check-circle"></i> Save
-														
+														<i class="bi bi-check-circle"></i>
+														<?= isset($cust['us_Id']) && !empty($cust['us_Id']) ? 'Update' : 'Save'; ?>
 													</button>
 													
                                             </div>

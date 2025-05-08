@@ -42,6 +42,7 @@ $(document).ready(function () {
 var baseUrl = "<?= base_url() ?>";
 
 $('#staffSubmit').click(function(e) {
+	$('#staffSubmit').prop('disabled', true);
     e.preventDefault(); // Important to prevent normal form submit
     var url = baseUrl + "admin/save"; // Correct route
 
@@ -60,9 +61,9 @@ $('#staffSubmit').click(function(e) {
                 .addClass('alert-danger')
                 .text(response.msg || 'Please enter data correctly')
                 .show();
-			$btn.prop('disabled', true).html('<i class="bi bi-hourglass-split"></i> Saving...');
         }
 		setTimeout(function() {
+			//$('#staffSubmit').prop('disabled', false);
                 $('#messageBox').empty().hide();
             }, 2000);
     }, 'json');

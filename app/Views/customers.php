@@ -94,10 +94,10 @@
 																	<td>
 																	  <a href="<?= base_url('customer/location/' . $row['cust_Id']); ?>">
 																		<i class="bi bi-geo-alt text-primary ms-2"></i>
-																	  </a>
+																	  </a>&nbsp;
 																		<a href="<?= base_url('customer/view/'. $row['cust_Id']); ?>">
 																			<i class="bi bi-pencil-square"></i>
-																		</a>                                                     
+																		</a>   &nbsp;                                                  
 																			<i class="bi bi-trash text-danger icon-clickable" onclick="confirmDelete(<?= $row['cust_Id']; ?>)"></i>
 																	</td>                                                  
 																</tr>

@@ -17,8 +17,15 @@ $(document).ready(function () {
             $('#error-staffemail').text('');
         }
     });
-
-
+	$('#staffotemail').on('input', function () {
+        const value = $(this).val().trim();
+		if (!emailPattern.test(value)) {
+            $('#error-staffotemail').text('Invalid email format.');
+        }
+		else {
+			$('#error-staffotemail').text('');
+		}		
+    });
     $('#mobile').on('input', function () {
         const value = $(this).val().trim();
         if (!value) {
@@ -42,6 +49,14 @@ $(document).ready(function () {
 var baseUrl = "<?= base_url() ?>";
 
 $('#staffSubmit').click(function(e) {
+	let pswd = $('#old_password').val();
+    let cpswd = $('#new_password').val();
+    if (pswd !== cpswd) {
+        $('#error-new-password').text('Passwords do not match');
+        return false;
+    } else {
+        $('#error-new-password').text('');
+    }
 	$('#staffSubmit').prop('disabled', true);
     e.preventDefault(); // Important to prevent normal form submit
     var url = baseUrl + "admin/save"; // Correct route
@@ -59,13 +74,13 @@ $('#staffSubmit').click(function(e) {
             $('#messageBox')
                 .removeClass('alert-success')
                 .addClass('alert-danger')
-                .text(response.msg || 'Please enter data correctly')
+                .text(response.msg || 'All mandatory fields are required')
                 .show();
         }
 		setTimeout(function() {
-			//$('#staffSubmit').prop('disabled', false);
+			$('#staffSubmit').prop('disabled', false);
                 $('#messageBox').empty().hide();
-            }, 2000);
+            }, 3000);
     }, 'json');
 });
 </script>

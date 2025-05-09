@@ -26,12 +26,21 @@ $(document).ready(function () {
     $('#staffemail').on('input', function () {
         const value = $(this).val().trim();
         if (!value) {
-            $('#error-staffemail').text('Primary email is required.');
+            $('#error-staffemail').text('Email is required.');
         } else if (!emailPattern.test(value)) {
             $('#error-staffemail').text('Invalid email format.');
         } else {
             $('#error-staffemail').text('');
         }
+    });
+	$('#staffotemail').on('input', function () {
+        const value = $(this).val().trim();
+		if (!emailPattern.test(value)) {
+            $('#error-staffotemail').text('Invalid email format.');
+        }
+		else {
+			$('#error-staffotemail').text('');
+		}		
     });
 
 
@@ -58,6 +67,23 @@ $(document).ready(function () {
 var baseUrl = "<?= base_url() ?>";
 
 $('#staffSubmit').click(function(e) {
+    let pwd = $('#password').val();
+    let cpwd = $('#confirm_password').val();
+    if (pwd !== cpwd) {
+        $('#error-confirm-password').text('Passwords do not match');
+        return false;
+    } else {
+        $('#error-confirm-password').text('');
+    }
+	let pswd = $('#old_password').val();
+    let cpswd = $('#new_password').val();
+    if (pswd !== cpswd) {
+        $('#error-new-password').text('Passwords do not match');
+        return false;
+    } else {
+        $('#error-new-password').text('');
+    }
+
 	$('#staffSubmit').prop('disabled', true);
     e.preventDefault(); // Important to prevent normal form submit
     var url = baseUrl + "staff/save"; // Correct route
@@ -76,13 +102,13 @@ $('#staffSubmit').click(function(e) {
             setTimeout(function() {
 				$('#staffSubmit').prop('disabled', false);
                 window.location.href = baseUrl + "staff/"; // Update this path to your Manage Staff page
-            }, 1500);
+            },300);
         } 
 		else {
             $('#messageBox')
                 .removeClass('alert-success')
                 .addClass('alert-danger')
-                .text(response.msg || 'Please enter data correctly')
+                .text(response.msg || 'All mandatory fields are required')
                 .show();
 				$('#staffSubmit').prop('disabled', false);
 				
@@ -90,7 +116,7 @@ $('#staffSubmit').click(function(e) {
 		setTimeout(function() {
 			
                 $('#messageBox').empty().hide();
-            }, 2000);
+            },3000);
     }, 'json');
 });
 
@@ -99,7 +125,7 @@ $('#staffSubmit').click(function(e) {
 function confirmDelete(userId) {
     Swal.fire({
         title: 'Are you sure?',
-        text: 'Do you want to delete this staff member?',
+        text: 'You want to delete this staff ?',
         icon: 'warning',
         showCancelButton: true,
         confirmButtonText: 'Delete',

@@ -41,6 +41,15 @@ class StaffModel extends Model {
 			$query = $builder->get();
 			return $query->getRowArray(); // This will return a single record or null if not found
 		}
+		public function emailExistsExcept($email, $excludeId)
+		{
+			$builder = $this->db->table('user');
+			$builder->where('us_Email', $email);
+			$builder->where('us_Id !=', $excludeId);
+			$builder->where('us_Status !=', 3);
+			$query = $builder->get();
+			return $query->getNumRows() > 0;
+		}
     }
 
 ?>

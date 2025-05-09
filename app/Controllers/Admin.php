@@ -22,16 +22,16 @@ class Admin extends BaseController
 
 		$data = [];
 		$val =	$this->session->get('zd_uid');
-			$staff_val = $this->adminModel->getdata($val);
-			 $data['staff'] = (array) $staff_val;
-			
-			// Load views
-			$template = view('common/header');
-			$template .= view('common/leftmenu');
-			$template .= view('admin_update', $data);
-			$template .= view('common/footer');
-			$template .= view('page_scripts/adminjs');
-			return $template;
+		$staff_val = $this->adminModel->getdata($val);
+		$data['staff'] = (array) $staff_val;
+		
+		// Load views
+		$template = view('common/header');
+		$template .= view('common/leftmenu');
+		$template .= view('admin_update', $data);
+		$template .= view('common/footer');
+		$template .= view('page_scripts/adminjs');
+		return $template;
     }
    public function createnew() {
 		$us_id = $this->input->getPost('us_id');
@@ -39,36 +39,40 @@ class Admin extends BaseController
 		$staffemail = $this->input->getPost('staffemail');
 		$staffotemail = $this->input->getPost('staffotemail');
 		$mobile = $this->input->getPost('mobile');
-		$password = $this->input->getPost('password');
-
-		$adminModel = new AdminModel();
-		$staff = $adminModel->getStaffByid($us_id);
-		$oldPassword = $staff->us_Password;
-		$newPassword = $password;
-		if ($password != $oldPassword) {
-			$newPassword = md5($password); // If not same password, keep the old one
+		$newPassword = $this->input->getPost('new_password');
+		    // Validate name
+		if (!preg_match('/^[a-zA-Z0-9\s]+$/', $staffname)) {
+			return $this->response->setJSON(['status' => 'error', 'msg' => 'Please enter name correctly.']);
 		}
 		// Validate email formats
 			if (!filter_var($staffemail, FILTER_VALIDATE_EMAIL)) {
 				return $this->response->setJSON([
 					'status' => 'error',
-					'message' => 'Invalid primary email format.'
+					'msg' => 'Invalid email format.'
 				]);
 			}
 			if (!ctype_digit($mobile) || strlen($mobile) !== 10) {
 				return $this->response->setJSON([
 					'status' => 'error',
-					'message' => 'Phone number must contain only 10 digits.'
+					'msg' => 'Phone number must contain only 10 digits.'
 				]);
 			}
-		if($staffname && $staffemail && $password && $mobile) {
+			
+				   // Allow only letters, numbers, @ and _
+		if (!preg_match('/^[a-zA-Z0-9@_]+$/', $newPassword)) {
+			return $this->response->setJSON([
+				'status' => 'error',
+				'msg' => 'Password can only contain letters, numbers, @, and _.'
+			]);
+		}
+		if($staffname && $staffemail && $mobile) {
 
 				$data = [
 				'us_Name'          => $staffname,
 				'us_Email'         => $staffemail,
 				'us_Email2'        => $staffotemail,
 				'us_Phone'		   => $mobile,
-				'us_Password'	   => $newPassword,
+				'us_Password'	   => md5($newPassword),
 				'us_Status'		   => 1,
 				'us_Role'		   => 1,
 				'us_createdby'     => $this->session->get('zd_uid'),

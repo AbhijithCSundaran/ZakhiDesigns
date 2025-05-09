@@ -61,7 +61,14 @@
 													<h5><?= esc($row['cust_Name']); ?></h5>
 												</div>
 												<div class="card-block">
-													<p>Use class  to use this </p><a class="mytooltip tooltip-effect-9" href="#">Work<span class="tooltip-content2"><i class="icofont icofont-bag-alt"></i></span></a> 
+													<p><?= esc($row['add_Name']); ?> <br>
+														<?= esc($row['add_BuldingNo']); ?> , <?= esc($row['add_Landmark']); ?><br>
+														<?= esc($row['add_Street']); ?> , <?= esc($row['add_City']); ?><br>
+														<?= esc($row['add_State']); ?> , <?= esc($row['add_Pincode']); ?><br>
+														<?= esc($row['add_Phone']); ?>
+														
+													</p><a href="">Edit<span class="tooltip-content2"><i class="icofont icofont-bag-alt"></i></span></a>&nbsp;&nbsp;   |   &nbsp;&nbsp;
+													<a href="#">Remove<span class="tooltip-content2"><i class="icofont icofont-bag-alt"></i></span></a>
 												</div>
 											</div>
 											<!-- Tooltip style 9 card end -->

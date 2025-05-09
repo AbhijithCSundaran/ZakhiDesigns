@@ -48,6 +48,16 @@ class CustomerModel extends Model {
 			
 			return $query->getRowArray(); // This will return a single record or null if not found
 		}
-    }
+
+	public function emailExistsExcept($email, $excludeId)
+	{
+		$builder = $this->db->table('customer');
+		$builder->where('cust_Email', $email);
+		$builder->where('cust_Id !=', $excludeId);
+		$builder->where('cust_Status !=', 3);
+		$query = $builder->get();
+		return $query->getNumRows() > 0;
+	}
+}
 
 ?>

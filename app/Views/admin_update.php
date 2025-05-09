@@ -5,7 +5,7 @@
             <div class="row align-items-center">
                 <div class="col-md-8">
                     <div class="page-header-title">
-                        <h5 class="m-b-10">Manage Admin</h5>
+                        <h5 class="m-b-10">My Profile</h5>
                         <p class="m-b-0">Welcome to Zakhi Designs</p>
                     </div>
                 </div>
@@ -14,7 +14,7 @@
                         <li class="breadcrumb-item">
                             <a href="<?php echo base_url('dashboard') ?>"> <i class="fa fa-home"></i> </a>
                         </li>
-                        <li class="breadcrumb-item"><a href="#!">Manage Admin</a>
+                        <li class="breadcrumb-item"><a href="#!">My Profile</a>
                         </li>
                     </ul>
                 </div>
@@ -88,15 +88,26 @@
 											</div>
 											
                                         </div>
-                                        <div class="form-group row">
-                                            <label class="col-sm-2 col-form-label">Password <span style="color: red;">*</span></label>
-                                            <div class="col-sm-6">
-                                                <input type="Password" class="form-control" name="password" id="password" maxlength=15 value="<?= isset($staff) ? ($staff['us_Password']) : '' ?>" placeholder="Password" required autocomplete="off" >
-												<span class="text-danger error-msg" id="error-password"></span>
-										   </div>
-											
-                                        </div>
-										
+                                        <h5 class="mb-3">Change Password</h5>
+										<!-- Old Password Field -->
+										<div class="form-group row">
+											<label class="col-sm-2 col-form-label">Old Password <span style="color: red;">*</span></label>
+											<div class="col-sm-6">
+												<input type="password" class="form-control" name="old_password"
+													id="old_password" placeholder="Enter old password" required autocomplete="off">
+												<span class="text-danger error-msg" id="error-old-password"></span>
+											</div>
+										</div>
+
+										<!-- New Password Field -->
+										<div class="form-group row">
+											<label class="col-sm-2 col-form-label">New Password <span style="color: red;">*</span></label>
+											<div class="col-sm-6">
+												<input type="password" class="form-control" name="new_password"
+													id="new_password" placeholder="Enter new password" required autocomplete="off">
+												<span class="text-danger error-msg" id="error-new-password"></span>
+											</div>
+										</div>
                                         <div class="row justify-content-center">
 										<input type="hidden" name="us_id" value="<?= isset($staff['us_Id']) ? esc($staff['us_Id']) : '' ?>">
                                             <div class="button-group">

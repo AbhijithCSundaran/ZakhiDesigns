@@ -5,7 +5,7 @@
             <div class="row align-items-center">
                 <div class="col-md-8">
                     <div class="page-header-title">
-                        <h5 class="m-b-10">Add Customer</h5>
+                        <h5 class="m-b-10"><?= isset($cust) ? 'Update Customer' : 'Add Customer'; ?></h5>
                         <p class="m-b-0">Welcome to Zakhi Designs</p>
                     </div>
                 </div>
@@ -14,7 +14,7 @@
                         <li class="breadcrumb-item">
                             <a href="<?php echo base_url('dashboard') ?>"> <i class="fa fa-home"></i> </a>
                         </li>
-                        <li class="breadcrumb-item"><a href="#">Add Customer</a>
+                        <li class="breadcrumb-item"><a href="#"><?= isset($cust) ? 'Update Customer' : 'Add Customer'; ?></a>
                         </li>
                     </ul>
                 </div>
@@ -78,15 +78,26 @@
 											</div>
 											
                                         </div>
+										<?php if (empty($cust)) : ?>
+										 <!-- Default Add Password Fields -->
 										<div class="form-group row">
-                                            <label class="col-sm-2 col-form-label">Password <span style="color: red;">*</span></label>
-                                            <div class="col-sm-6">
-                                                <input type="Password" class="form-control" name="password" id="password" value="<?= isset($cust['cust_Password']) ? esc($cust['cust_Password']) : '' ?>" maxlength="15"
-                                                  value=""   placeholder="Enter Password"  required>
-                                            <span class="text-danger error-msg" id="error-mobile"></span>
+											<label class="col-sm-2 col-form-label">Password <span style="color: red;">*</span></label>
+											<div class="col-sm-6">
+												<input type="password" class="form-control" name="password"
+													id="password" placeholder="Enter password" required autocomplete="off">
+												<span class="text-danger error-msg" id="error-password"></span>
 											</div>
-											
-                                        </div>			
+										</div>
+
+										<div class="form-group row">
+											<label class="col-sm-2 col-form-label">Confirm Password <span style="color: red;">*</span></label>
+											<div class="col-sm-6">
+												<input type="password" class="form-control" name="confirm_password"
+													id="confirm_password" placeholder="Confirm password" required autocomplete="off">
+												<span class="text-danger error-msg" id="error-confirm-password"></span>
+											</div>
+										</div>
+										<?php endif ?>
 										 <div class="row justify-content-center">
 										<input type="hidden" name="cust_id" value="<?= isset($cust['cust_Id']) ? esc($cust['cust_Id']) : '' ?>">
                                             <div class="button-group">
@@ -96,8 +107,7 @@
 													<button type="button" class="btn btn-primary" id="custSubmit" name="custSubmit">
 														<i class="bi bi-check-circle"></i> 
 														<?= isset($cust['cust_Id']) && !empty($cust['cust_Id']) ? 'Update' : 'Save'; ?>
-													</button>
-													
+													</button>	
                                             </div>
                                         </div>
                                     </form>

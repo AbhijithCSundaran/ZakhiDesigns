@@ -30,15 +30,12 @@
                 <div class="page-body">
                     <div class="row">
                         <div class="col-sm-12">
-
                             <div class="card">
                                 <div class="card-header">
                                     <div class="row">
                                         <div class="col-md-2">
-
                                         </div>
                                         <div class="col-md-7">
-
                                         </div>
 										<div class="col-md-3">
                                             <div class="row">
@@ -49,7 +46,6 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        
                                     </div>
                                 </div>
                                 <div class="card-block">
@@ -89,14 +85,13 @@
                                                                         <?= ($user->us_Status == 1) ? 'checked' : ''; ?>>
                                                                     <label class="form-check-label pl-0 label-check"
                                                                         for="statusSwitch-<?= $user->us_Id; ?>">
-                                                                        
                                                                     </label>
                                                                 </div>
 																</td>
                                                             <td>
 															<a href="<?= base_url('staff/add/'. $user->us_Id); ?>">
 																<i class="bi bi-pencil-square"></i>
-															</a>                                                 
+															</a> &nbsp;                                                
 																<i class="bi bi-trash text-danger icon-clickable" onclick="confirmDelete(<?= $user->us_Id; ?>)"></i>
                                                             </td>                                           
 														</tr>
@@ -110,10 +105,7 @@
                                 </div>
                             </div>
                         </div>
-
                     </div>
-
-
                 </div>
                 <!-- Page-body end -->
             </div>

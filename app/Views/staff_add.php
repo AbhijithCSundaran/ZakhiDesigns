@@ -5,7 +5,7 @@
             <div class="row align-items-center">
                 <div class="col-md-8">
                     <div class="page-header-title">
-                        <h5 class="m-b-10">Add Staff</h5>
+                        <h5 class="m-b-10"><?= isset($staff) ? 'Update Staff' : 'Add Staff'; ?></h5>
                         <p class="m-b-0">Welcome to Zakhi Designs</p>
                     </div>
                 </div>
@@ -14,7 +14,7 @@
                         <li class="breadcrumb-item">
                             <a href="<?php echo base_url('dashboard') ?>"> <i class="fa fa-home"></i> </a>
                         </li>
-                        <li class="breadcrumb-item"><a href="#!">Add Staff</a>
+                        <li class="breadcrumb-item"><a href="#!"><?= isset($staff) ? 'Update Staff' : 'Add Staff'; ?></a>
                         </li>
                     </ul>
                 </div>
@@ -78,8 +78,9 @@
                                             <label class="col-sm-2 col-form-label">Alternate Email</label>
                                             <div class="col-sm-6">
                                                 <input type="email" class="form-control" name="staffotemail" id="staffotemail" size=30
-                                                  value="<?= isset($staff) ? ($staff['us_Email2']) : '' ?>"   placeholder="Enter alternate mail id">
-                                            <span class="text-danger error-msg" id="error-staffotemail"></span>
+                                                  value="<?= isset($staff) ? ($staff['us_Email2']) : '' ?>"   placeholder="Enter alternate mail id"><span class="text-danger error-msg"> (Order details will receive to this mail id)</span>
+                                           <br/> <span class="text-danger error-msg" id="error-staffotemail"></span>
+											
 											</div>
 											
                                         </div>
@@ -92,17 +93,50 @@
 											</div>
 											
                                         </div>
-                                        <div class="form-group row">
-                                            <label class="col-sm-2 col-form-label">Password <span
-                                                    style="color: red;">*</span></label>
-                                            <div class="col-sm-6">
-                                                <input type="Password" class="form-control" name="password" value="<?= isset($staff) ? ($staff['us_Password']) : '' ?>"
-												id="password" size=15 value="" placeholder="Password" required autocomplete="off" >
-												<span class="text-danger error-msg" id="error-password"></span>
-										   </div>
-											
-                                        </div>
-                                       
+                                       <!-- Heading -->
+										<?php if (isset($staff)) : ?>
+											<h5 class="mb-3">Change Password</h5>
+
+											<!-- Old Password Field -->
+											<div class="form-group row">
+												<label class="col-sm-2 col-form-label">Old Password <span style="color: red;">*</span></label>
+												<div class="col-sm-6">
+													<input type="password" class="form-control" name="old_password"
+														id="old_password" placeholder="Enter old password" required autocomplete="off">
+													<span class="text-danger error-msg" id="error-old-password"></span>
+												</div>
+											</div>
+
+											<!-- New Password Field -->
+											<div class="form-group row">
+												<label class="col-sm-2 col-form-label">New Password <span style="color: red;">*</span></label>
+												<div class="col-sm-6">
+													<input type="password" class="form-control" name="new_password"
+														id="new_password" placeholder="Enter new password" required autocomplete="off">
+													<span class="text-danger error-msg" id="error-new-password"></span>
+												</div>
+											</div>
+										<?php else : ?>
+											<!-- Default Add Password Fields -->
+											<div class="form-group row">
+												<label class="col-sm-2 col-form-label">Password <span style="color: red;">*</span></label>
+												<div class="col-sm-6">
+													<input type="password" class="form-control" name="password"
+														id="password" placeholder="Enter password" required autocomplete="off">
+													<span class="text-danger error-msg" id="error-password"></span>
+												</div>
+											</div>
+
+											<div class="form-group row">
+												<label class="col-sm-2 col-form-label">Confirm Password <span style="color: red;">*</span></label>
+												<div class="col-sm-6">
+													<input type="password" class="form-control" name="confirm_password"
+														id="confirm_password" placeholder="Confirm password" required autocomplete="off">
+													<span class="text-danger error-msg" id="error-confirm-password"></span>
+												</div>
+											</div>
+										<?php endif; ?>
+
                                         <div class="row justify-content-center">
                                             <input type="hidden" name="us_id"
                                                 value="<?= isset($staff['us_Id']) ? esc($staff['us_Id']) : '' ?>">
@@ -113,7 +147,8 @@
                                                 </button>
 													<button type="button" class="btn btn-primary" id="staffSubmit" name="staffSubmit" >
 														<i class="bi bi-check-circle"></i>
-														<?= isset($cust['us_Id']) && !empty($cust['us_Id']) ? 'Update' : 'Save'; ?>
+														<?= isset($staff) ? 'Update Staff' : 'Add Staff'; ?>
+														
 													</button>
 													
                                             </div>

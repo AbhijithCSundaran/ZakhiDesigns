@@ -9,23 +9,13 @@
                                   <img class="img-80 img-radius" src="<?php echo base_url().ASSET_PATH; ?>assets/images/avatar-4.jpg" alt="User-Profile-Image">
                                  
                                   <div class="user-details">
-                                    <?php
-                                        $session = session();
-                                        $username = $session->get('zd_uname');
-                                    ?>  
-                                      <span id="more-details"><?= esc($username); ?><i class="fa fa-caret-down"></i></span>
+                                    
+                                      
                                   </div>
                               </div>
                               <div class="main-menu-content">
                                   <ul>
-                                      <li class="more-details">
-                                          <a href="<?php echo base_url('admin') ?> "><i class="ti-user"></i>View Profile</a>
-                                      
-                                          <a href="#" data-toggle="modal" data-target="#logoutModal">
-                                                <i class="ti-layout-sidebar-left"></i>Logout
-                                            </a>
-                                         
-                                      </li>
+                                     
                                   </ul>
                               </div>
                           </div>    
@@ -78,8 +68,8 @@
                                     <span class="pcoded-mcaret"></span>
                                 </a>
                             </li>
-                            <li class="<?= ($segment == 'products') ? 'active' : '' ?>">
-                                <a href="<?php echo base_url('products') ?>" class="waves-effect waves-dark">
+                            <li class="<?= ($segment == 'product') ? 'active' : '' ?>">
+                                <a href="<?php echo base_url('product') ?>" class="waves-effect waves-dark">
                                     <span class="pcoded-micon"><i class="ti-home"></i><b>D</b></span>
                                     <span class="pcoded-mtext" data-i18n="nav.dash.main">Products</span>
                                     <span class="pcoded-mcaret"></span>

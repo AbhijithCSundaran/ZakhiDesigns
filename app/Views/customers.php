@@ -75,9 +75,9 @@
 															foreach ($user as $row) { ?>
 																<tr>
 																	<td><?= $slno++; ?></td>
-																	<td><?= esc($row['cust_Name']); ?></td>
-																	<td><?= esc($row['cust_Email']); ?></td>
-																	<td><?= esc($row['cust_Phone']); ?></td> 
+																	<td><?= wordwrap(esc($row['cust_Name']), 20, '<br>'); ?></td>
+																	<td><?= wordwrap(esc($row['cust_Email']), 20, '<br>') ;?> </td>
+																	<td><?= wordwrap(esc($row['cust_Phone']), 20, '<br>') ;?> </td> 
 																	<td>
 																	 <div class="form-check form-switch">
                                                                     <input class="form-check-input checkactive"
@@ -94,10 +94,10 @@
 																	<td>
 																	  <a href="<?= base_url('customer/location/' . $row['cust_Id']); ?>">
 																		<i class="bi bi-geo-alt text-primary ms-2"></i>
-																	  </a>
+																	  </a>&nbsp;
 																		<a href="<?= base_url('customer/view/'. $row['cust_Id']); ?>">
 																			<i class="bi bi-pencil-square"></i>
-																		</a>                                                     
+																		</a>   &nbsp;                                                  
 																			<i class="bi bi-trash text-danger icon-clickable" onclick="confirmDelete(<?= $row['cust_Id']; ?>)"></i>
 																	</td>                                                  
 																</tr>

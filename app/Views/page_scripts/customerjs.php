@@ -23,7 +23,7 @@ $(document).ready(function () {
     $('#custemail').on('input', function () {
         const value = $(this).val().trim();
         if (!value) {
-            $('#error-custemail').text('Primary email is required.');
+            $('#error-custemail').text('Email is required.');
         } else if (!emailPattern.test(value)) {
             $('#error-custemail').text('Invalid email format.');
         } else {
@@ -53,14 +53,19 @@ $(document).ready(function () {
 var baseUrl = "<?= base_url() ?>";
 
 $('#custSubmit').click(function(e) {
+	 let pwd = $('#password').val();
+    let cpwd = $('#confirm_password').val();
+    if (pwd !== cpwd) {
+        $('#error-confirm-password').text('Passwords do not match');
+        return false;
+    } else {
+        $('#error-confirm-password').text('');
+    }
 
     e.preventDefault(); // Important to prevent normal form submit
     var url = baseUrl + "customer/save"; // Correct route
-console.log("response");
     $.post(url, $('#createcust').serialize(), function(response) {
        // $('#createstaff')[0].reset();
-		console.log("response");
-		console.log(response);
         if (response.status == 1) { 
 		$('#messageBox')
                 .removeClass('alert-danger')
@@ -71,18 +76,18 @@ console.log("response");
             // Wait, then redirect
             setTimeout(function() {
                 window.location.href = baseUrl + "customer/"; // Update this path to your Manage Staff page
-            }, 1500);
+            }, 3000);
         } 
 		else {
             $('#messageBox')
                 .removeClass('alert-success')
                 .addClass('alert-danger')
-                .text(response.msg || 'Please enter data correctly')
+                .text(response.msg || 'All mandatory fields are required')
                 .show();
         }
 		setTimeout(function() {
                 $('#messageBox').empty().hide();
-            }, 2000);
+            }, 3000);
     }, 'json');
 });
 
@@ -91,7 +96,7 @@ console.log("response");
 function confirmDelete(userId) {
     Swal.fire({
         title: 'Are you sure?',
-        text: 'Do you want to delete this staff member?',
+        text: 'You want to delete this customer ?',
         icon: 'warning',
         showCancelButton: true,
         confirmButtonText: 'Delete',

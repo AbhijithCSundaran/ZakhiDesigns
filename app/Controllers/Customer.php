@@ -20,9 +20,7 @@ class Customer extends BaseController
 		$template.= view('customers', $data);
 		$template.= view('common/footer');
 		$template.= view('page_scripts/customerjs');
-        return $template;
-
-        
+        return $template;   
     }
 		public function view_cust($cust_Id = null) {
 		$data = [];
@@ -32,7 +30,7 @@ class Customer extends BaseController
 			if (!$cust_val) {
 				return redirect()->to('customer')->with('error', 'Staff member not found');
 			}
-			// $data['cust'] = $cust_val;
+		// $data['cust'] = $cust_val;
 		$data['cust'] = (array) $cust_val;
 		$template  = view('common/header');
 		$template .= view('common/leftmenu');
@@ -53,30 +51,51 @@ class Customer extends BaseController
 		}
 	}
     public function createnew() {
+	
+		
 		$cust_id = $this->input->getPost('cust_id');
 		$custname = $this->input->getPost('custname');
 		$custemail = $this->input->getPost('custemail');
 		$mobile = $this->input->getPost('mobile');
-		$password = $this->input->getPost('password');
-		//$status = $this->input->getPost('custstatus');
-		//$status =	$this->input->getPost('custstatus');
-	
+	    $password =$this->input->getPost('password');
+		 if (!preg_match('/^[a-zA-Z0-9\s]+$/', $custname)) {
+			return $this->response->setJSON(['status' => 'error', 'msg' => 'Please enter name correctly.']);
+		}
+
 		// Validate email formats
 			if (!filter_var($custemail, FILTER_VALIDATE_EMAIL)) {
 				return $this->response->setJSON([
 					'status' => 'error',
-					'message' => 'Invalid primary email format.'
+					'msg' => 'Invalid email format.'
 				]);
 			}
-			if (!ctype_digit($mobile)) {
+			// Validate mobile
+			if (!ctype_digit($mobile) || strlen($mobile) !== 10) {
+				return $this->response->setJSON(['status' => 'error', 'msg' => 'Phone number must contain exactly 10 digits.']);
+			}
+			//validate password length
+			
+			if (!empty($password) && (strlen($password) < 6 || strlen($password) > 15)) {
 				return $this->response->setJSON([
 					'status' => 'error',
-					'message' => 'Phone number must contain only digits.'
+					'msg' => 'Password must be between 6 to 15 characters.'
 				]);
 			}
-		
-		if($custname && $custemail && $password && $mobile) {
+				   // Allow only letters, numbers, @ and _
+			if (!preg_match('/^[a-zA-Z0-9@_]+$/', $password)) {
+				return $this->response->setJSON([
+					'status' => 'error',
+					'msg' => 'Password can only contain letters, numbers, @, and _.'
+				]);
+			}
+			$customerModel = new CustomerModel();
+			if($custname && $custemail && $mobile) {
 			if (empty($cust_id)) {
+				// INSERT
+			// Check if email already exists
+				if ($customerModel->getCustomerByEmail($custemail)) {
+					return $this->response->setJSON(['status' => 'error', 'msg' => 'Email already exists.']);
+				}
 				$data = [
 				'cust_Name'          => $custname,
 				'cust_Email'         => $custemail,
@@ -84,35 +103,40 @@ class Customer extends BaseController
 				'cust_Password'      => md5($password),
 				'cust_Status'	   	 => 1,
 				'cust_createdon'     => date("Y-m-d H:i:s"),
-				'cust_createdby'     => $this->session->get('zd_id'),
-				'cust_modifyby'      => $this->session->get('zd_id'),
+				'cust_createdby'     => $this->session->get('zd_uid'),
+				'cust_modifyby'      => $this->session->get('zd_uid'),
 			];
 				$CreateCust = $this->customerModel->createcust($data);
-				//echo json_encode(array("status" => 1, "msg" => "Created successfully."));
+				//echo json_encode(array("status" => 1, "msg" => "Customer Created successfully."));
 				echo json_encode(array(
 					"status" => 1,
-					"msg" => "Created successfully.",
+					"msg" => "Customer Created successfully.",
 					"redirect" => base_url('customer')
 				));
 				
 			} 
 			else {
+				 // UPDATE
+				$existing = $customerModel->getCustomerById($cust_id);
+					// Check if email changed and already exists for another user
+				if ($custemail !== $existing->cust_Email && $customerModel->emailExistsExcept($custemail, $cust_id)) {
+					return $this->response->setJSON(['status' => 'error', 'msg' => 'Email already exists.']);
+				}
+				// Compare hashed passwords (check if the passwords match)
 				$data = [
 				'cust_Name'          => $custname,
 				'cust_Email'         => $custemail,
 				'cust_Phone'	     => $mobile,
 				'cust_createdon'     => date("Y-m-d H:i:s"),
-				'cust_createdby'     => $this->session->get('zd_id'),
-				'cust_modifyby'      => $this->session->get('zd_id'),  
+				'cust_createdby'     => $this->session->get('zd_uid'),
+				'cust_modifyby'      => $this->session->get('zd_uid'),  
 			];	
-			if($password){
-					$data['us_Password']= md5($password);
-			}			
+					
 				$modifycust = $this->customerModel->modifycust($cust_id,$data);
-				//echo json_encode(array("status" => 1, "msg" => "Updated successfully."));	
+				//echo json_encode(array("status" => 1, "msg" => "Customer details updated successfully."));	
 				echo json_encode(array(
 					"status" => 1,
-					"msg" => "Updated successfully.",
+					"msg" => "Customer details updated successfully.",
 					"redirect" => base_url('customer')
 				));
 			}
@@ -120,7 +144,7 @@ class Customer extends BaseController
 		else {
 			return $this->response->setJSON([
 				'status' => 'error',
-				'message' => 'All fields are required.'
+				'msg' => 'All mandatory fields are required.'
 			]);
 		}
 		

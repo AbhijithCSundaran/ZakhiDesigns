@@ -17,6 +17,9 @@ class AdminModel extends Model {
 			$this->db->table('user')->where('us_Id',$us_id)->update($data);
 			return $this->db->getLastQuery();
 		}
+		public function getStaffByid($id){
+            return $this->db->table('user')->where('us_Id', $id)->get()->getRow(); 
+		}
     }
 
 ?>

@@ -103,7 +103,7 @@
                         </div>
                         <div class="auth-box card">
                             <div class="card-block">
-							<span class="alrt-msg" id="alertbox" style="display:none;"></span>
+							<div id="alertbox" class="alert alert-danger" style="display:none;"></div>
                                 <div class="row m-b-20">
                                     <div class="col-md-12">
                                         <h3 class="text-center txt-primary">Please Login</h3>
@@ -178,15 +178,16 @@ function authenticate() {
     $.post(url, $('#form-id').serialize(), function(data) {
         if (data.status == 1) {
             window.location.href = "<?php echo base_url('dashboard'); ?>";
-        } else {
-            $('#alertbox')
-                .html('<div>' + data.msg + '</div>')
-                .removeClass('success')
-                .addClass('error')
-                .show();
+        }
+        else{ $('#alertbox')
+                .html(data.msg)
+                .removeClass('alert-success')
+                .addClass('alert-danger')
+                .fadeIn();
+
             setTimeout(function() {
-                $('#alertbox').empty().hide();
-            }, 2000);
+                $('#alertbox').fadeOut().empty();
+            }, 2000); 
         }
     }, 'json');
 }

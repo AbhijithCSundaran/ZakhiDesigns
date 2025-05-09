@@ -49,14 +49,6 @@ $(document).ready(function () {
 var baseUrl = "<?= base_url() ?>";
 
 $('#staffSubmit').click(function(e) {
-	let pswd = $('#old_password').val();
-    let cpswd = $('#new_password').val();
-    if (pswd !== cpswd) {
-        $('#error-new-password').text('Passwords do not match');
-        return false;
-    } else {
-        $('#error-new-password').text('');
-    }
 	$('#staffSubmit').prop('disabled', true);
     e.preventDefault(); // Important to prevent normal form submit
     var url = baseUrl + "admin/save"; // Correct route

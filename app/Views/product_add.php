@@ -61,7 +61,7 @@
                                             style="color: red;">*</span></label>
                                             <div class="col-sm-7">
                                             <textarea rows="5" cols="5" class="form-control" name="product_description" id="productDes"
-                                            placeholder="Default textarea"></textarea>
+                                            placeholder=""></textarea>
                                             </div>
                                         </div>
                                         <div class="form-group row">
@@ -72,15 +72,7 @@
                                                  placeholder="Enter the MRP">
                                             </div>
                                         </div>
-                                        <div class="form-group row">
-                                            <label class="col-sm-3 col-form-label">Selling Price<span
-                                            style="color: red;">*</span></label>
-                                            <div class="col-sm-7">
-                                                <input type="text" class="form-control" name="selling_price" id="sellingPrice"
-                                                 placeholder="Enter the Selling Price">
-                                            </div>
-                                        </div>
-                                        <div class="form-group row">
+                                      <div class="form-group row">
                                             <label class="col-sm-3 col-form-label">Discount Type <span
                                                     style="color: red;">*</span></label>
                                             <div class="col-sm-7">
@@ -103,7 +95,14 @@
                                                  placeholder="Enter the Discount value">
                                             </div>
                                         </div>
-
+                                        <div class="form-group row">
+                                            <label class="col-sm-3 col-form-label">Selling Price<span
+                                            style="color: red;">*</span></label>
+                                            <div class="col-sm-7">
+                                                <input type="text" class="form-control" name="selling_price" id="sellingPrice" readonly
+                                                 placeholder="0">
+                                            </div>
+                                        </div>
 
 
                                         <div class="form-group row">

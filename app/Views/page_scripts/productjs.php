@@ -46,6 +46,31 @@ $('#productSubmit').click(function(e) {
     }, 'json');
 });
 
+    function calculateSellingPrice() {
+        const mrp = parseFloat(document.getElementById('mRp').value) || 0;
+        const discountType = document.getElementById('discountType').value;
+        const discountValue = parseFloat(document.getElementById('discountValue').value) || 0;
+
+        let sellingPrice = mrp;
+
+        if (discountType === '%') {
+            sellingPrice = mrp - (mrp * discountValue / 100);
+        } else if (discountType === 'Rs') {
+            sellingPrice = mrp - discountValue;
+        }
+
+        
+        if (sellingPrice < 0) sellingPrice = 0;
+
+        
+        document.getElementById('sellingPrice').value = sellingPrice.toFixed(2);
+    }
+
+   document.getElementById('mRp').addEventListener('input', calculateSellingPrice);
+    document.getElementById('discountType').addEventListener('change', calculateSellingPrice);
+    document.getElementById('discountValue').addEventListener('input', calculateSellingPrice);
+
+
 
 
 

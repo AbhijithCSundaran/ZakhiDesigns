@@ -14,8 +14,11 @@ class Subcategory extends BaseController
 
     public function index()
     {
-		$allsubcategory = $this->subcategoryModel->getAllsubCategory();
+		$allsubcategory = $this->subcategoryModel->getAllSubcategories();
+		
+
         $data['subcategory'] =  $allsubcategory;
+		
 
         $template = view('common/header');
 		$template.= view('common/leftmenu');
@@ -32,8 +35,6 @@ public function addSubcategory($sub_id = null)
     }
 
     $data = [];
-
-    // Always load category data
     $data['category'] = $this->subcategoryModel->getAllCategory();
 
     if ($sub_id) {
@@ -47,10 +48,9 @@ public function addSubcategory($sub_id = null)
         $data['subcategory'] = (array) $subcat;
     }
 
-    // Load views with $data always
     $template = view('common/header');
     $template .= view('common/leftmenu');
-    $template .= view('subcategory_add', $data); // <-- now always includes category data
+    $template .= view('subcategory_add', $data); 
     $template .= view('common/footer');
     $template .= view('page_scripts/subcategoryjs');
     return $template;
@@ -111,17 +111,61 @@ public function saveSubcategory() {
 	}
 	
 }
+public function changeStatus()
+{
+	$subId = $this->request->getPost('sub_Id');
+	$newStatus = $this->request->getPost('sub_Status');
+
+	$subcategoryModel = new SubcategoryModel();
+	$subcategory = $subcategoryModel->getsubCategoryByid($subId);
+
+	if (!$subcategory) {
+		return $this->response->setJSON([
+			'success' => false,
+			'message' => 'Subcategory not found'
+		]);
+	}
+
+	$update = $subcategoryModel->updatesubCategory($subId, ['sub_Status' => $newStatus]);
+
+	if ($update) {
+		return $this->response->setJSON([
+			'success' => true,
+			'message' => 'Status Updated Successfully!',
+			'new_status' => $newStatus
+		]);
+	} else {
+		return $this->response->setJSON([
+			'success' => false,
+			'message' => 'Failed to update status'
+		]);
+	}
+}
+//Category Delete
 
 
-
-
-
-    
-    
-    
-  
-
-  
-
+public function deleteSubcategory($sub_id) {
+	if ($sub_id) {
+		$modified_by = $this->session->get('zd_uid');
+		$sub_status = $this->subcategoryModel->deleteSubcategoryById(3, $sub_id, $modified_by);
+		if ($sub_status) {
+			echo json_encode([
+				'success' => true,
+				'msg' => 'Subcategory Deleted Successfully.'
+			]);
+		} else {
+			echo json_encode([
+				'success' => false,
+				'msg' => 'Failed to Delete Subcategory.'
+			]);
+		}
+	} else {
+		echo json_encode([
+			'success' => false,
+			'msg' => 'Invalid request.'
+		]);
+	}
+}
 
 }
+?>

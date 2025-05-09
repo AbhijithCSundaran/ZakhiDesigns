@@ -17,13 +17,14 @@ $(document).ready(function() {
 var baseUrl = "<?= base_url() ?>";
 
 $('#categorySubmit').click(function(e) {
-    e.preventDefault(); // Important to prevent normal form submit
-    var url = baseUrl + "category/save"; // Correct route
+    e.preventDefault(); 
+    var url = baseUrl + "category/save"; 
 
     $.post(url, $('#createCategory').serialize(), function(response) {
-       
 
-        if (response.status == 1) { $('#messageBox')
+
+        if (response.status == 1) {
+            $('#messageBox')
                 .removeClass('alert-danger')
                 .addClass('alert-success')
                 .text(response.msg || 'Category created successfully!')
@@ -31,19 +32,18 @@ $('#categorySubmit').click(function(e) {
 
             // Wait, then redirect
             setTimeout(function() {
-                window.location.href = baseUrl + "category/"; // Update this path to your Manage Staff page
+                window.location.href = baseUrl + "category/"; 
             }, 1500);
-        } 
-		else {
+        } else {
             $('#messageBox')
                 .removeClass('alert-success')
                 .addClass('alert-danger')
-                .text(response.msg || 'Please enter data correctly')
+                .text(response.msg || 'Please Fill all the Data')
                 .show();
         }
-		setTimeout(function() {
-                $('#messageBox').empty().hide();
-            }, 2000);
+        setTimeout(function() {
+            $('#messageBox').empty().hide();
+        }, 2000);
     }, 'json');
 });
 //Active and Inactive status
@@ -62,47 +62,74 @@ $(document).ready(function() {
                 'X-CSRF-TOKEN': '<?= csrf_hash(); ?>'
             },
             success: function(response) {
-                if (response.success) {
-                   alert('Status Updated Successfully');
+                const messageBox = $('#messageBox');
+
+                if (response.message === 'Status Updated Successfully!') {
+                    messageBox
+                        .removeClass('alert-danger')
+                        .addClass('alert alert-success')
+                        .text(response.message)
+                        .fadeIn();
+
                 } else {
-                    alert('Failed to update status. Try again.');
+                    messageBox
+                        .removeClass('alert-success')
+                        .addClass('alert alert-danger')
+                        .text(response.message)
+                        .fadeIn();
                 }
+
+                setTimeout(() => {
+                    messageBox.fadeOut();
+                }, 1000);
             },
+
             error: function(xhr) {
+                $('#messageBox')
+                    .removeClass('alert-success')
+                    .addClass('alert alert-danger')
+                    .text('Error updating status. Please try again later.')
+                    .fadeIn();
+
+                setTimeout(() => {
+                    $('#messageBox').fadeOut();
+                }, 1000);
+
                 console.error(xhr.responseText);
-                alert('Error updating status.');
             }
         });
     });
 });
 
 //Delete
-
-let categoryId = null;
-function confirmDelete(cat_id) {
-    categoryId = cat_id;
-    const deleteModal = new bootstrap.Modal(document.getElementById('deleteModal'));
-    deleteModal.show();
-}
-
-function deleteCategory(){
-    $.ajax({
-        url: "<?php echo base_url('category/delete'); ?>/" + categoryId,
-        method: "POST",
-        success: function(response) {
-            if (response == 1){
-                alert("Deleted successfully");
-                location.reload();
-            } else {
-                alert("Failed to delete: " + response.message);
-            }
-        },
-        error: function() {
-            alert("An error occurred while trying to delete the customer.");
-        },
+function confirmDelete(catId) {
+    Swal.fire({
+        title: 'Are you sure?',
+        text: 'Do you want to delete this Category?',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Delete',
+        cancelButtonText: 'Cancel',
+    }).then((result) => {
+        if (result.isConfirmed) {
+            // AJAX call to delete
+            $.ajax({
+                url: "<?php echo base_url('category/delete'); ?>/" + catId,
+                method: "POST",
+                dataType: "json",
+                success: function(response) {
+                    if (response.success) {
+                        Swal.fire('Deleted!', response.msg, 'success');
+                        setTimeout(() => location.reload(), 1000);
+                    } else {
+                        Swal.fire('Error', response.msg, 'error');
+                    }
+                },
+                error: function() {
+                    Swal.fire('Error', 'Something went wrong.', 'error');
+                }
+            });
+        }
     });
 }
-
-
-
 </script>

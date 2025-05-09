@@ -38,7 +38,8 @@
 
                                         </div>
                                         <div class="col-md-7">
-
+                                        <div id="message" style="display:none;"></div>
+                                        <div id="messageBox" class="alert" style="display: none;"></div>
                                         </div>
                                         <div class="col-md-3">
                                             <div class="row">
@@ -53,6 +54,7 @@
                                 </div>
                                 <div class="card-block">
                                     <div class="card">
+                                    
                                       
                                         <div class="card-block table-border-style">
                                             <div class="table-responsive">
@@ -90,11 +92,11 @@
                                                                 </div>
                                                             </td>
                                                             <td>
-                                                            <a href="<?= base_url('category/add/'. $cat['cat_Id']); ?>">
+                                                            <a href="<?= base_url('category/edit/'. $cat['cat_Id']); ?>">
 																<i class="bi bi-pencil-square"></i>
 															</a> 
-                                                                <i class="bi bi-trash text-danger icon-clickable" data-toggle="modal"
-                                                                data-target="#deleteModal"  onclick="confirmDelete(<?= $cat['cat_Id']; ?>)" 
+                                                                <i class="bi bi-trash text-danger icon-clickable" 
+                                                                 onclick="confirmDelete(<?= $cat['cat_Id']; ?>)" 
                                                                    ></i>
                                                             </td>
 
@@ -123,38 +125,3 @@
     </div>
 </div>
 
-<!--Delete Modal-->
-
-<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-    aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <div class="row justify-content-center">
-                    <div class="col-auto">
-                        <img src="<?= base_url('public/assets/images/delete_icon.gif'); ?>" alt="Delete Icon"
-                            class="img-fluid d-block mx-auto" style="width:100px;">
-                    </div>
-                </div>
-                <div class="row justify-content-center">
-                    <div class="col-auto">
-                        <p class="text-center">Your data will be lost.<br>
-                            Are you sure you want to delete the Category?</p>
-                    </div>
-
-                </div>
-            </div>
-            <div class="modal-footer d-flex justify-content-center">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                <button type="button" class="btn btn-danger" id="deleteCategory"
-                    onclick="deleteCategory()">Delete</button>
-            </div>
-        </div>
-    </div>
-</div>

@@ -42,10 +42,10 @@ class Category extends BaseController
 			if (!$cate) {
 				return redirect()->to('category')->with('error', 'Category not found');
 			}
-			// $data['staff'] = $staff_val;
+			
 			 $data['category'] = (array) $cate;
 			
-			// Load views
+			
 			$template = view('common/header');
 			$template .= view('common/leftmenu');
 			$template .= view('category_add', $data);
@@ -55,7 +55,6 @@ class Category extends BaseController
 		}
 		else
 		{
-			// Load views
 			$template = view('common/header');
 			$template .= view('common/leftmenu');
 			$template .= view('category_add');
@@ -152,13 +151,26 @@ class Category extends BaseController
     //Category Delete
 
     public function deleteCategory($cat_id) {
-		if($cat_id) {
-			$modified_by = $this->session->get('us_Id');
-			$catStatus = $this->categoryModel->changeCategoryStatus(3, $cat_id, $modified_by);
-			echo json_encode(1);
-		}
-		else {
-			echo json_encode(2);
+		if ($cat_id) {
+			$modified_by = $this->session->get('zd_uid');
+			$cat_status = $this->categoryModel->deleteCategoryById(3, $cat_id, $modified_by);
+	
+			if ($cat_status) {
+				echo json_encode([
+					'success' => true,
+					'msg' => 'category deleted successfully.'
+				]);
+			} else {
+				echo json_encode([
+					'success' => false,
+					'msg' => 'Failed to delete Category.'
+				]);
+			}
+		} else {
+			echo json_encode([
+				'success' => false,
+				'msg' => 'Invalid request.'
+			]);
 		}
 	}
 

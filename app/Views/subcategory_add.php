@@ -5,7 +5,8 @@
             <div class="row align-items-center">
                 <div class="col-md-8">
                     <div class="page-header-title">
-                        <h5 class="m-b-10">Add Subcategory</h5>
+                        <!-- <h5 class="m-b-10">Add Subcategory</h5> -->
+                        <h5 class="m-b-10"><?= isset($subcategory) ? 'Update Subcategory' : 'Add Subcategory'; ?></h5>
                         <p class="m-b-0">Welcome to Zakhi Designs</p>
                     </div>
                 </div>
@@ -14,8 +15,9 @@
                         <li class="breadcrumb-item">
                             <a href="index.html"> <i class="fa fa-home"></i> </a>
                         </li>
-                        <li class="breadcrumb-item"><a href="#!">Add Subcategory</a>
-                        </li>
+                        <li class="breadcrumb-item"><a
+                                href="#!"><?= isset($subcategory) ? 'Update Subcategory' : 'Add Subcategory'; ?></a>
+                            </li>
                     </ul>
                 </div>
             </div>
@@ -33,21 +35,10 @@
                             <div class="card">
                                 <div class="card-header">
                                     <div class="row">
-                                        <div class="col-md-2">
-
-                                        </div>
-                                        <div class="col-md-7">
-                                        <div id="messageBox" class="alert alert-success" style="display: none;"></div>
-                                        </div>
-                                        <div class="col-md-3">
-                                            <div class="row">
-                                                <div class="col-lg-12 d-flex justify-content-end p-2">
-                                                    <a href="<?= base_url('subcategory'); ?>" class="btn btn-primary">
-                                                        Back
-                                                    </a>
-                                                </div>
-                                            </div>
-                                        </div>
+                                        
+                                         <div id="messageBox" class="alert alert-success" style="display: none;"></div>
+                                       
+                                    
                                     </div>
                                 </div>
                                 <div class="card-block">
@@ -83,6 +74,23 @@
                                                     placeholder="Enter the Subcategory name">
                                             </div>
                                         </div>
+
+                                        <div class="form-group row">
+                                            <label class="col-sm-2 col-form-label">Discount Type <span
+                                                    style="color: red;">*</span></label>
+                                            <div class="col-sm-6">
+                                                <select class="form-control fs-13" name="discount_type"
+                                                    id="discountType" required>
+                                                    <option value="">-- Select Discount Type --</option>
+                                                    <option value="%"
+                                                        <?= (isset($subcategory) && $subcategory['sub_Discount_Type'] == '%') ? 'selected' : '' ?>>
+                                                        %</option>
+                                                    <option value="Rs"
+                                                        <?= (isset($subcategory) && $subcategory['sub_Discount_Type'] == 'Rs') ? 'selected' : '' ?>>
+                                                        Rs</option>
+                                                </select>
+                                            </div>
+                                        </div>
                                         <div class="form-group row">
                                             <label class="col-sm-2 col-form-label">Discount Value <span
                                             style="color: red;">*</span></label>
@@ -93,16 +101,7 @@
                                                     placeholder="Enter the Discount value">
                                             </div>
                                         </div>
-                                        <div class="form-group row">
-                                            <label class="col-sm-2 col-form-label">Discount Type <span
-                                            style="color: red;">*</span></label>
-                                            <div class="col-sm-6">
-                                                <input type="text" class="form-control" name="discount_type"
-                                                    id="discountType"
-                                                    value="<?= isset($subcategory) ? ($subcategory['sub_Discount_Type']) : '' ?>"
-                                                    placeholder="Discount Type">
-                                            </div>
-                                        </div>
+                                     
                                         <div class="row justify-content-center">
                                             <input type="hidden" name="sub_id"
                                                 value="<?= isset($subcategory) ? ($subcategory['sub_Id']) : '' ?>">
@@ -113,7 +112,8 @@
                                                 </button>
                                                 <button type="button" class="btn btn-primary" id="subcategorySubmit"
                                                     name="subcategorySubmit">
-                                                    <i class="bi bi-check-circle"></i> Save
+                                                    <i class="bi bi-check-circle"></i>
+                                                    <?= isset($subcategory) ? 'Update' : 'Save'; ?>
                                                 </button>
                                             </div>
                                         </div>

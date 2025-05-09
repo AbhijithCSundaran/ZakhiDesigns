@@ -32,7 +32,7 @@ $('#subcategorySubmit').click(function(e) {
             // Wait, then redirect
             setTimeout(function() {
                 window.location.href = baseUrl + "subcategory/"; 
-            }, 1500);
+            }, 3000);
         } 
 		else {
             $('#messageBox')

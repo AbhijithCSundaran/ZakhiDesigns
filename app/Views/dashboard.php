@@ -36,15 +36,15 @@
                                                     <div class="card-block">
                                                         <div class="row align-items-center">
                                                             <div class="col-8">
-                                                                <h4 class="text-c-purple">$30200</h4>
-                                                                <h6 class="text-muted m-b-0">All Earnings</h6>
+                                                                <h4 class="text-c-purple">150</h4>
+                                                                <h6 class="text-muted m-b-0">Latest Orders</h6>
                                                             </div>
                                                             <div class="col-4 text-right">
-                                                                <i class="fa fa-bar-chart f-28"></i>
+                                                            <i class="bi bi-box-seam f-28"></i>
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <div class="card-footer bg-c-purple">
+                                                    <!-- <div class="card-footer bg-c-purple">
                                                         <div class="row align-items-center">
                                                             <div class="col-9">
                                                                 <p class="text-white m-b-0">% change</p>
@@ -54,7 +54,7 @@
                                                             </div>
                                                         </div>
             
-                                                    </div>
+                                                    </div> -->
                                                 </div>
                                             </div>
                                             <div class="col-xl-3 col-md-6">
@@ -62,15 +62,15 @@
                                                     <div class="card-block">
                                                         <div class="row align-items-center">
                                                             <div class="col-8">
-                                                                <h4 class="text-c-green">290+</h4>
-                                                                <h6 class="text-muted m-b-0">Page Views</h6>
+                                                                <h4 class="text-c-green">82</h4>
+                                                                <h6 class="text-muted m-b-0">Total Orders</h6>
                                                             </div>
                                                             <div class="col-4 text-right">
-                                                                <i class="fa fa-file-text-o f-28"></i>
+                                                            <i class="bi bi-box-seam f-28"></i>
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <div class="card-footer bg-c-green">
+                                                    <!-- <div class="card-footer bg-c-green">
                                                         <div class="row align-items-center">
                                                             <div class="col-9">
                                                                 <p class="text-white m-b-0">% change</p>
@@ -79,7 +79,7 @@
                                                                 <i class="fa fa-line-chart text-white f-16"></i>
                                                             </div>
                                                         </div>
-                                                    </div>
+                                                    </div> -->
                                                 </div>
                                             </div>
                                             <div class="col-xl-3 col-md-6">
@@ -88,14 +88,14 @@
                                                         <div class="row align-items-center">
                                                             <div class="col-8">
                                                                 <h4 class="text-c-red">145</h4>
-                                                                <h6 class="text-muted m-b-0">Task Completed</h6>
+                                                                <h6 class="text-muted m-b-0">Total  Visitors</h6>
                                                             </div>
                                                             <div class="col-4 text-right">
-                                                                <i class="fa fa-calendar-check-o f-28"></i>
+                                                            <i class="bi bi-eyeglasses f-28"></i>
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <div class="card-footer bg-c-red">
+                                                    <!-- <div class="card-footer bg-c-red">
                                                         <div class="row align-items-center">
                                                             <div class="col-9">
                                                                 <p class="text-white m-b-0">% change</p>
@@ -104,7 +104,7 @@
                                                                 <i class="fa fa-line-chart text-white f-16"></i>
                                                             </div>
                                                         </div>
-                                                    </div>
+                                                    </div> -->
                                                 </div>
                                             </div>
                                             <div class="col-xl-3 col-md-6">
@@ -112,15 +112,16 @@
                                                     <div class="card-block">
                                                         <div class="row align-items-center">
                                                             <div class="col-8">
-                                                                <h4 class="text-c-blue">500</h4>
-                                                                <h6 class="text-muted m-b-0">Downloads</h6>
+                                                                <h4 class="text-c-blue"><i class="bi bi-currency-rupee"></i>2,00,000</h4>
+                                                                <h6 class="text-muted m-b-0">Annual Revenue</h6>
                                                             </div>
                                                             <div class="col-4 text-right">
-                                                                <i class="fa fa-hand-o-down f-28"></i>
+                                                            <i class="bi bi-wallet f-28"></i>
+                                                            
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <div class="card-footer bg-c-blue">
+                                                    <!-- <div class="card-footer bg-c-blue">
                                                         <div class="row align-items-center">
                                                             <div class="col-9">
                                                                 <p class="text-white m-b-0">% change</p>
@@ -129,7 +130,7 @@
                                                                 <i class="fa fa-line-chart text-white f-16"></i>
                                                             </div>
                                                         </div>
-                                                    </div>
+                                                    </div> -->
                                                 </div>
                                                 
                                             </div>
@@ -137,8 +138,8 @@
                                             <div class="col-xl-12 col-md-12">
                                                 <div class="card table-card">
                                                     <div class="card-header">
-                                                        <h5>Projects</h5>
-                                                        <div class="card-header-right">
+                                                        <h5>Today's Order</h5>
+                                                        <!-- <div class="card-header-right">
                                                             <ul class="list-unstyled card-option">
                                                                 <li><i class="fa fa fa-wrench open-card-option"></i></li>
                                                                 <li><i class="fa fa-window-maximize full-card"></i></li>
@@ -146,131 +147,77 @@
                                                                 <li><i class="fa fa-refresh reload-card"></i></li>
                                                                 <li><i class="fa fa-trash close-card"></i></li>
                                                             </ul>
-                                                        </div>
+                                                        </div> -->
                                                     </div>
                                                     <div class="card-block">
                                                         <div class="table-responsive">
                                                             <table class="table table-hover">
                                                                 <thead>
                                                                 <tr>
-                                                                    <th>
-                                                                        <div class="chk-option">
-                                                                            <div class="checkbox-fade fade-in-primary">
-                                                                                <label class="check-task">
-                                                                                    <input type="checkbox" value="">
-                                                                                    <span class="cr">
-                                                                                            <i class="cr-icon fa fa-check txt-default"></i>
-                                                                                        </span>
-                                                                                </label>
-                                                                            </div>
-                                                                        </div>
-                                                                        Assigned</th>
-                                                                    <th>Name</th>
-                                                                    <th>Due Date</th>
-                                                                    <th class="text-right">Priority</th>
+                                                                  
+                                                                    <th>Order Id</th>
+                                                                    <th>Customer Name</th>
+                                                                    <th>Product Name</th>
+                                                                    <th>Total Price</th>
+                                                                    <th>Selling Price</th>
+                                                                    <th>Discount</th>
+                                                                    <th>Order Status</th>
                                                                 </tr>
                                                                 </thead>
                                                                 <tbody>
-                                                                <tr>
-                                                                    <td>
-                                                                        <div class="chk-option">
-                                                                            <div class="checkbox-fade fade-in-primary">
-                                                                                <label class="check-task">
-                                                                                    <input type="checkbox" value="">
-                                                                                    <span class="cr">
-                                                                                                <i class="cr-icon fa fa-check txt-default"></i>
-                                                                                            </span>
-                                                                                </label>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="d-inline-block align-middle">
-                                                                            <img src="assets/images/avatar-4.jpg" alt="user image" class="img-radius img-40 align-top m-r-15">
-                                                                            <div class="d-inline-block">
-                                                                                <h6>John Deo</h6>
-                                                                                <p class="text-muted m-b-0">Graphics Designer</p>
-                                                                            </div>
-                                                                        </div>
-                                                                    </td>
-                                                                    <td>Able Pro</td>
-                                                                    <td>Jun, 26</td>
-                                                                    <td class="text-right"><label class="label label-danger">Low</label></td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td>
-                                                                        <div class="chk-option">
-                                                                            <div class="checkbox-fade fade-in-primary">
-                                                                                <label class="check-task">
-                                                                                    <input type="checkbox" value="">
-                                                                                    <span class="cr">
-                                                                                                <i class="cr-icon fa fa-check txt-default"></i>
-                                                                                            </span>
-                                                                                </label>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="d-inline-block align-middle">
-                                                                            <img src="assets/images/avatar-5.jpg" alt="user image" class="img-radius img-40 align-top m-r-15">
-                                                                            <div class="d-inline-block">
-                                                                                <h6>Jenifer Vintage</h6>
-                                                                                <p class="text-muted m-b-0">Web Designer</p>
-                                                                            </div>
-                                                                        </div>
-                                                                    </td>
-                                                                    <td>Mashable</td>
-                                                                    <td>March, 31</td>
-                                                                    <td class="text-right"><label class="label label-primary">high</label></td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td>
-                                                                        <div class="chk-option">
-                                                                            <div class="checkbox-fade fade-in-primary">
-                                                                                <label class="check-task">
-                                                                                    <input type="checkbox" value="">
-                                                                                    <span class="cr">
-                                                                                                <i class="cr-icon fa fa-check txt-default"></i>
-                                                                                            </span>
-                                                                                </label>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="d-inline-block align-middle">
-                                                                            <img src="assets/images/avatar-3.jpg" alt="user image" class="img-radius img-40 align-top m-r-15">
-                                                                            <div class="d-inline-block">
-                                                                                <h6>William Jem</h6>
-                                                                                <p class="text-muted m-b-0">Developer</p>
-                                                                            </div>
-                                                                        </div>
-                                                                    </td>
-                                                                    <td>Flatable</td>
-                                                                    <td>Aug, 02</td>
-                                                                    <td class="text-right"><label class="label label-success">medium</label></td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td>
-                                                                        <div class="chk-option">
-                                                                            <div class="checkbox-fade fade-in-primary">
-                                                                                <label class="check-task">
-                                                                                    <input type="checkbox" value="">
-                                                                                    <span class="cr">
-                                                                                                <i class="cr-icon fa fa-check txt-default"></i>
-                                                                                            </span>
-                                                                                </label>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="d-inline-block align-middle">
-                                                                            <img src="assets/images/avatar-2.jpg" alt="user image" class="img-radius img-40 align-top m-r-15">
-                                                                            <div class="d-inline-block">
-                                                                                <h6>David Jones</h6>
-                                                                                <p class="text-muted m-b-0">Developer</p>
-                                                                            </div>
-                                                                        </div>
-                                                                    </td>
-                                                                    <td>Guruable</td>
-                                                                    <td>Sep, 22</td>
-                                                                    <td class="text-right"><label class="label label-primary">high</label></td>
-                                                                </tr>
+                                                                    <tr>
+                                                                        <td>0001</td>
+                                                                        <td>Vinu</td>
+                                                                        <td>Embroidered Kurta</td>
+                                                                        <td><i class="bi bi-currency-rupee"></i>499</td>
+                                                                        <td><i class="bi bi-currency-rupee"></i>292</td>
+                                                                        <td>70% off</td>
+                                                                        <td><span class="badge badge-info">Packing</span></td>
+                                                                    </tr>   
+                                                                    <tr>
+                                                                        <td>0002</td>
+                                                                        <td>Ishwarya</td>
+                                                                        <td>Lehenga Choli Ethnic</td>
+                                                                        <td><i class="bi bi-currency-rupee"></i>999</td>
+                                                                        <td><i class="bi bi-currency-rupee"></i>407</td>
+                                                                        <td>59% off</td>
+                                                                        <td><span class="badge badge-success">Courier Send</span></td>
+                                                                    </tr>  
+                                                                    <tr>
+                                                                        <td>0003</td>
+                                                                        <td>Varsha</td>
+                                                                        <td>Anarkali Gown</td>
+                                                                        <td><i class="bi bi-currency-rupee"></i>1299</td>
+                                                                        <td><i class="bi bi-currency-rupee"></i>315</td>
+                                                                        <td>75% off</td>
+                                                                        <td><span class="badge badge-primary">New</span></td>
+                                                                    </tr>  
+                                                                    <tr>
+                                                                        <td>0004</td>
+                                                                        <td>Dharani</td>
+                                                                        <td>Embroidered Kurta</td>
+                                                                        <td><i class="bi bi-currency-rupee"></i>500</td>
+                                                                        <td><i class="bi bi-currency-rupee"></i>200</td>
+                                                                        <td>60% off</td>
+                                                                        <td><span class="badge badge-info">Packing</span></td>
+                                                                    </tr>  
+                                                                    <tr>
+                                                                        <td>0005</td>
+                                                                        <td>Ragini</td>
+                                                                        <td>Salwar</td>
+                                                                        <td><i class="bi bi-currency-rupee"></i>799</td>
+                                                                        <td><i class="bi bi-currency-rupee"></i>399</td>
+                                                                        <td>62% off</td>
+                                                                        <td><span class="badge badge-info">Packing</span></td>
+                                                                    </tr>  
+                                                                
+                                                            
+                                                               
+                                                                
                                                                 </tbody>
                                                             </table>
                                                             <div class="text-right m-r-20">
-                                                                <a href="#!" class=" b-b-primary text-primary">View all Projects</a>
+                                                                <a href="#!" class=" b-b-primary text-primary">View all Orders</a>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -278,6 +225,84 @@
                                             </div>
                                            
                                             <!--  project and team member end -->
+
+                                            <div class="col-xl-12 col-md-12">
+                                                <div class="card table-card">
+                                                    <div class="card-header">
+                                                        <h5>Latest Products</h5>
+                                                        <!-- <div class="card-header-right">
+                                                            <ul class="list-unstyled card-option">
+                                                                <li><i class="fa fa fa-wrench open-card-option"></i></li>
+                                                                <li><i class="fa fa-window-maximize full-card"></i></li>
+                                                                <li><i class="fa fa-minus minimize-card"></i></li>
+                                                                <li><i class="fa fa-refresh reload-card"></i></li>
+                                                                <li><i class="fa fa-trash close-card"></i></li>
+                                                            </ul>
+                                                        </div> -->
+                                                    </div>
+                                                    <div class="card-block">
+                                                        <div class="table-responsive">
+                                                            <table class="table table-hover">
+                                                                <thead>
+                                                                <tr>
+                                                                  
+                                                                    <th>Product Name</th>
+                                                                    <th>Product Image</th>
+                                                                    <th>MRP</th>
+                                                                    <th>Selling Price</th>
+                                                                    <th>Product Stock</th>
+                                                                   
+                                                                </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                    <tr>
+                                                                        <td>saree</td>
+                                                                        <td><img style="height:80px;"src="<?php echo base_url().ASSET_PATH; ?>assets/images/product-images/saree.jpg" alt="saree"></td>
+                                                                        <td><i class="bi bi-currency-rupee"></i>400</td>
+                                                                        <td><i class="bi bi-currency-rupee"></i>292</td>
+                                                                        <td>30</td>
+                                                                    </tr>   
+                                                                    <tr>
+                                                                        <td>Kurties</td>
+                                                                        <td><img style="height:80px;"src="<?php echo base_url().ASSET_PATH; ?>assets/images/product-images/kurties.jpg" alt="Kurties"></td>
+                                                                        <td><i class="bi bi-currency-rupee"></i>599</td>
+                                                                        <td><i class="bi bi-currency-rupee"></i>400</td>
+                                                                        <td>52</td>
+                                                                    </tr> 
+                                                                    <tr>
+                                                                        <td>Lehenga Choli</td>
+                                                                        <td><img style="height:80px;"src="<?php echo base_url().ASSET_PATH; ?>assets/images/product-images/lehenga_choli.jpg" alt="lehenga_choli"></td>
+                                                                        <td><i class="bi bi-currency-rupee"></i>1700</td>
+                                                                        <td><i class="bi bi-currency-rupee"></i>1399</td>
+                                                                        <td>12</td>
+                                                                    </tr> 
+                                                                    <tr>
+                                                                        <td>Gowns</td>
+                                                                        <td><img style="height:80px;"src="<?php echo base_url().ASSET_PATH; ?>assets/images/product-images/gowns.jpg" alt="gowns"></td>
+                                                                        <td><i class="bi bi-currency-rupee"></i>429</td>
+                                                                        <td><i class="bi bi-currency-rupee"></i>300</td>
+                                                                        <td>20</td>
+                                                                    </tr> 
+                                                                    <tr>
+                                                                        <td>Palazzos</td>
+                                                                        <td><img style="height:80px;"src="<?php echo base_url().ASSET_PATH; ?>assets/images/product-images/palazzos.jpg" alt="palazzos"></td>
+                                                                        <td><i class="bi bi-currency-rupee"></i>252</td>
+                                                                        <td><i class="bi bi-currency-rupee"></i>160</td>
+                                                                        <td>77</td>
+                                                                    </tr> 
+                                                                
+                                                            
+                                                               
+                                                                
+                                                                </tbody>
+                                                            </table>
+                                                            <div class="text-right m-r-20">
+                                                                <a href="#!" class=" b-b-primary text-primary">View all Products</a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                     <!-- Page-body end -->

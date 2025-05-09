@@ -93,7 +93,7 @@
                                                             </td>
                                                             <td>
                                                             <a href="<?= base_url('category/edit/'. $cat['cat_Id']); ?>">
-																<i class="bi bi-pencil-square"></i>
+																<i class="bi bi-pencil-square p-2"></i>
 															</a> 
                                                                 <i class="bi bi-trash text-danger icon-clickable" 
                                                                  onclick="confirmDelete(<?= $cat['cat_Id']; ?>)" 

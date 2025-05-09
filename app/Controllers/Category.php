@@ -86,7 +86,7 @@ class Category extends BaseController
 				
 				echo json_encode(array(
 					"status" => 1,
-					"msg" => "Created successfully.",
+					"msg" => "Category Created successfully.",
 					"redirect" => base_url('category')
 				));
 				
@@ -104,7 +104,7 @@ class Category extends BaseController
 				$modifyCategory = $this->categoryModel->updateCategory($cat_id,$data);
 				echo json_encode(array(
 					"status" => 1,
-					"msg" => "Updated successfully.",
+					"msg" => "Category Updated successfully.",
 					"redirect" => base_url('category')
 				));
 			}
@@ -137,7 +137,7 @@ class Category extends BaseController
         if ($update) {
             return $this->response->setJSON([
                 'success' => true,
-                'message' => 'Status Updated Successfully!',
+                'message' => 'Category Status Updated Successfully!',
                 'new_status' => $newStatus
             ]);
         } else {

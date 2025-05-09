@@ -59,20 +59,50 @@
 
                                         <div class="card-block table-border-style">
                                             <div class="table-responsive">
-                                                <table class="table table-hover" id="ProductList">
+                                                <table class="table table-hover" id="productList">
                                                     <thead>
                                                         <tr>
                                                             <th>Slno</th>
-                                                            <th>Category Name</th>
-                                                            <th>Subcategory Name</th>
-                                                            <th>Discount Value</th>
+                                                            <th>Product Name</th>
+                                                            <th>MRP</th>
+                                                            <th>Selling Price</th>
                                                             <th>Discount Type</th>
+                                                            <th>Discount Value</th>
+                                                            <th>Product Stock</th>
                                                             <th>Status</th>
                                                             <th>Action</th>
                                                         </tr>
                                                     </thead>
                                                     <tbody>
-                                                       
+                                                    <?php foreach($product as $index => $prod) : ?>
+                                                        <tr>
+                                                            <td><?= $index + 1; ?></td>
+                                                            <td><?= ucwords($prod->pr_Name); ?></td>
+                                                            <td><?= ucwords($prod->mrp); ?></td>
+                                                            <td><?= $prod->pr_Selling_Price; ?></td>
+                                                            <td><?= $prod->pr_Discount_Type; ?></td>
+                                                            <td><?= $prod->pr_Discount_Value; ?></td>
+                                                            <td><?= $prod->pr_Stock; ?></td>
+                                                            <td>
+                                                                <div class="form-check form-switch">
+                                                                    <input class="form-check-input checkactive"
+                                                                        type="checkbox"
+                                                                        id="statusSwitch-<?= $prod->pr_Id; ?>"
+                                                                        value="<?= $prod->pr_Id; ?>"
+                                                                        <?= ($prod->pr_Status == 1) ? 'checked' : ''; ?>>
+                                                                    <label class="form-check-label pl-0 label-check"
+                                                                        for="statusSwitch-<?= $prod->pr_Id; ?>">
+                                                                    </label>
+                                                                </div>
+                                                            </td>
+                                                            <td>
+                                                              
+                                                                <i class="bi bi-trash text-danger icon-clickable"
+                                                                    onclick="confirmDelete(<?= $prod->pr_Id; ?>)">
+                                                                </i>
+                                                            </td>
+                                                        </tr>
+                                                        <?php endforeach; ?>
                                                     </tbody>
 
                                                 </table>

@@ -33,6 +33,12 @@ $routes->post('subcategory/status', 'Subcategory::changeStatus');
 //Products
 $routes->get('product', 'Product::index');
 $routes->get('product/add', 'Product::addProduct');
+$routes->post('product/save', 'Product::saveProduct');
+
+//Product images
+$routes->get('productimage','Productimage::index');
+$routes->get('productimage/add', 'ProductImage::addProductImage');
+
 
 //Staff
 $routes->get('staff', 'Staff::index');

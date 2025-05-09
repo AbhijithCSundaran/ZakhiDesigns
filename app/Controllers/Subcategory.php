@@ -79,7 +79,7 @@ public function saveSubcategory() {
 			
 			echo json_encode(array(
 				"status" => 1,
-				"msg" => "Created successfully.",
+				"msg" => "Subcategory Created successfully.",
 				"redirect" => base_url('subcategory')
 			));
 			
@@ -98,7 +98,7 @@ public function saveSubcategory() {
 			$modifyCategory = $this->subcategoryModel->updateSubcategory($sub_id,$data);
 			echo json_encode(array(
 				"status" => 1,
-				"msg" => "Updated successfully.",
+				"msg" => "Subcategory Updated successfully.",
 				"redirect" => base_url('subcategory')
 			));
 		}
@@ -131,7 +131,7 @@ public function changeStatus()
 	if ($update) {
 		return $this->response->setJSON([
 			'success' => true,
-			'message' => 'Status Updated Successfully!',
+			'message' => 'Subcategory Status Updated Successfully!',
 			'new_status' => $newStatus
 		]);
 	} else {

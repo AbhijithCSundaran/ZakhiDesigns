@@ -19,6 +19,20 @@ class CategoryModel extends Model {
          public function getCategoryByid($id){
             return $this->db->table('category')->where('cat_Id', $id)->get()->getRow(); 
     }
+    
+public function isCategoryExists($categoryName, $excludeId = null) {
+    $builder = $this->db->table('category');
+    $builder->where('cat_Name', $categoryName);
+    $builder->where('cat_Status !=', 3); // Ignore soft-deleted categories
+
+    if ($excludeId) {
+        $builder->where('cat_Id !=', $excludeId);
+    }
+
+    return $builder->get()->getRow();
+}
+
+
   
 
     public function updateCategory($id, $data)

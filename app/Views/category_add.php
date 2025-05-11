@@ -56,6 +56,7 @@
                                                     value="<?= isset($category) ? ($category['cat_Name']) : '' ?>"
                                                     placeholder="Enter the Category name">
                                             </div>
+                                           
                                         </div>
                                         <div class="form-group row">
                                             <label class="col-sm-2 col-form-label">Discount Type <span

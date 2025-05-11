@@ -66,57 +66,55 @@ class Category extends BaseController
 	}
 
     public function saveCategory() {
-		$cat_id = $this->input->getPost('cat_id');
-		$category_name = $this->input->getPost('category_name');
-		$discount_value = $this->input->getPost('discount_value');
-		$discount_type = $this->input->getPost('discount_type');
-	
-		if($category_name && $discount_value && $discount_type) {
-			if (empty($cat_id)) {
-				$data = [
-				'cat_Name' => $category_name,
-				'cat_Discount_Value' => $discount_value,
-				'cat_Discount_Type' => $discount_type,
-				'cat_Status' => 1,
-				'cat_createdon' => date("Y-m-d H:i:s"),
-				'cat_createdby' => $this->session->get('zd_uid'),
-				'cat_modifyby' => $this->session->get('zd_uid'),
-			];
-				$CreateCategory = $this->categoryModel->categoryInsert($data);
-				
-				echo json_encode(array(
-					"status" => 1,
-					"msg" => "Category Created successfully.",
-					"redirect" => base_url('category')
-				));
-				
-			} 
-			else {
-				$data = [
-				'cat_Name' => $category_name,
-				'cat_Discount_Value' => $discount_value,
-				'cat_Discount_Type' => $discount_type,
-				'cat_Status' => 1,
-				'cat_createdon' => date("Y-m-d H:i:s"),
-				'cat_createdby' => $this->session->get('zd_uid'),
-				'cat_modifyby'  => $this->session->get('zd_uid'),   
-			];				
-				$modifyCategory = $this->categoryModel->updateCategory($cat_id,$data);
-				echo json_encode(array(
-					"status" => 1,
-					"msg" => "Category Updated successfully.",
-					"redirect" => base_url('category')
-				));
-			}
-		}
-		else {
-			return $this->response->setJSON([
-				'status' => 'error',
-				'message' => 'All fields are required.'
-			]);
-		}
-		
-	}
+    $cat_id = $this->input->getPost('cat_id');
+    $category_name = $this->input->getPost('category_name');
+    $discount_value = $this->input->getPost('discount_value');
+    $discount_type = $this->input->getPost('discount_type');
+
+    if ($category_name && $discount_value && $discount_type) {
+        // 🔍 Check if category name already exists
+        $exists = $this->categoryModel->isCategoryExists($category_name, $cat_id);
+        if ($exists) {
+            return $this->response->setJSON([
+                'status' => 'error',
+                'field' => 'category_name',
+                'message' => 'Category name already exists.'
+            ]);
+        }
+
+        $data = [
+            'cat_Name' => $category_name,
+            'cat_Discount_Value' => $discount_value,
+            'cat_Discount_Type' => $discount_type,
+            'cat_Status' => 1,
+            'cat_createdon' => date("Y-m-d H:i:s"),
+            'cat_createdby' => $this->session->get('zd_uid'),
+            'cat_modifyby' => $this->session->get('zd_uid'),
+        ];
+
+        if (empty($cat_id)) {
+            $CreateCategory = $this->categoryModel->categoryInsert($data);
+            return $this->response->setJSON([
+                "status" => 1,
+                "msg" => "Category Created successfully.",
+                "redirect" => base_url('category')
+            ]);
+        } else {
+            $modifyCategory = $this->categoryModel->updateCategory($cat_id, $data);
+            return $this->response->setJSON([
+                "status" => 1,
+                "msg" => "Category Updated successfully.",
+                "redirect" => base_url('category')
+            ]);
+        }
+    } else {
+        return $this->response->setJSON([
+            'status' => 'error',
+            'message' => 'All fields are required.'
+        ]);
+    }
+}
+
     public function changeStatus()
     {
         $catId = $this->request->getPost('cat_Id');

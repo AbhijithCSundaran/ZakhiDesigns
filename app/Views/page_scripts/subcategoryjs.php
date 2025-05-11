@@ -21,31 +21,30 @@ $('#subcategorySubmit').click(function(e) {
     var url = baseUrl + "subcategory/save"; 
 
     $.post(url, $('#createSubcategory').serialize(), function(response) {
-       
-
-        if (response.status == 1) { $('#messageBox')
+        if (response.status == 1) {
+            $('#messageBox')
                 .removeClass('alert-danger')
                 .addClass('alert-success')
-                .text(response.msg || 'Sub category created successfully!')
+                .text(response.msg || 'Subcategory created successfully!')
                 .show();
 
-            // Wait, then redirect
             setTimeout(function() {
-                window.location.href = baseUrl + "subcategory/"; 
+                window.location.href = baseUrl + "subcategory/";
             }, 3000);
-        } 
-		else {
+        } else {
             $('#messageBox')
                 .removeClass('alert-success')
                 .addClass('alert-danger')
-                .text(response.msg || 'Please Fill all the Data')
+                .text(response.message || 'Please fill all the data')
                 .show();
         }
-		setTimeout(function() {
-                $('#messageBox').empty().hide();
-            }, 2000);
+
+        setTimeout(function() {
+            $('#messageBox').empty().hide();
+        }, 2000);
     }, 'json');
 });
+
 
 //Delete Sub category
 function confirmDelete(subId) {

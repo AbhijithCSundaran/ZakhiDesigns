@@ -34,6 +34,8 @@ $routes->post('subcategory/status', 'Subcategory::changeStatus');
 $routes->get('product', 'Product::index');
 $routes->get('product/add', 'Product::addProduct');
 $routes->post('product/save', 'Product::saveProduct');
+$routes->post('product/get-subcategories', 'Product::getSubcategories');
+
 
 //Product images
 $routes->get('productimage','Productimage::index');

@@ -12,6 +12,17 @@ class SubcategoryModel extends Model {
             return $this->db->table('category')->where('cat_Status', 1)->get()->getResult();
         }
         
+       public function issubCategoryExists($sub_Name, $excludeId = null) {
+    $builder = $this->db->table('subcategory');
+    $builder->where('sub_Category_Name', $sub_Name);
+    $builder->where('sub_Status !=', 3); 
+
+    if ($excludeId) {
+        $builder->where('sub_Id !=', $excludeId);
+    }
+
+    return $builder->get()->getRow(); 
+}
        
         public function subcategoryInsert($data) {
             return $this->db->table('subcategory')->insert($data);

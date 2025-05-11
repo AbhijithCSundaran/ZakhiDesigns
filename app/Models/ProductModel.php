@@ -10,9 +10,7 @@ class ProductModel extends Model {
         }
         
 
-        
-
-        public function getAllProducts()
+ public function getAllProducts()
 {
     return $this->db->table('product')
         ->select('product.*, subcategory.sub_Category_Name, category.cat_Name')
@@ -43,6 +41,22 @@ class ProductModel extends Model {
             return $this->db->table('product')->where('pr_Id', $id) ->update($data);
         }
 
+        public function getSubcategoriesByCatId($catId)
+{
+    return $this->db->table('subcategory')
+        ->where('cat_Id', $catId)
+        ->where('sub_Status !=', 3)
+        ->get()
+        ->getResult();
+}
+
+public function getAllCategories()
+{
+    return $this->db->table('category')
+        ->where('cat_Status !=', 3)
+        ->get()
+        ->getResult();
+}
         
   
         

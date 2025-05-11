@@ -27,34 +27,29 @@ class Product extends BaseController
 
     }
    
-	public function addProduct($pr_id = null)
+public function addProduct($pr_id = null)
 {
     if (!$this->session->get('zd_uid')) {
         return redirect()->to(base_url());
     }
 
     $data = [];
-    $data['category'] = $this->productModel->getAllCatandSub();
-	
-
-    // if ($pr_id) {
-    //     $product = $this->productModel->getSubcategoryByid($sub_id);
-		
-
-    //     if (!$subcat) {
-    //         return redirect()->to('subcategory')->with('error', 'subcategory not found');
-    //     }
-
-    //     $data['subcategory'] = (array) $subcat;
-    // }
-
+   $data['categories'] = $this->productModel->getAllCategories(); // NEW function
     $template = view('common/header');
     $template .= view('common/leftmenu');
-    $template .= view('product_add', $data); 
+    $template .= view('product_add', $data);
     $template .= view('common/footer');
     $template .= view('page_scripts/productjs');
     return $template;
 }
+
+public function getSubcategories()
+{
+    $cat_id = $this->request->getPost('cat_id');
+    $subcategories = $this->productModel->getSubcategoriesByCatId($cat_id);
+    return $this->response->setJSON($subcategories);
+}
+
 
 
 public function saveProduct() {

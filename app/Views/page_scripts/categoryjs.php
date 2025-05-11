@@ -15,14 +15,11 @@ $(document).ready(function() {
 //Add category
 
 var baseUrl = "<?= base_url() ?>";
-
 $('#categorySubmit').click(function(e) {
     e.preventDefault(); 
     var url = baseUrl + "category/save"; 
 
     $.post(url, $('#createCategory').serialize(), function(response) {
-
-
         if (response.status == 1) {
             $('#messageBox')
                 .removeClass('alert-danger')
@@ -30,7 +27,6 @@ $('#categorySubmit').click(function(e) {
                 .text(response.msg || 'Category created successfully!')
                 .show();
 
-            // Wait, then redirect
             setTimeout(function() {
                 window.location.href = baseUrl + "category/"; 
             }, 1500);
@@ -38,14 +34,16 @@ $('#categorySubmit').click(function(e) {
             $('#messageBox')
                 .removeClass('alert-success')
                 .addClass('alert-danger')
-                .text(response.msg || 'Please Fill all the Data')
+                .text(response.message || 'Please Fill all the Data')
                 .show();
         }
+
         setTimeout(function() {
             $('#messageBox').empty().hide();
         }, 2000);
     }, 'json');
 });
+
 //Active and Inactive status
 $(document).ready(function() {
     $('.checkactive').on('change', function() {

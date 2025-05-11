@@ -57,60 +57,58 @@ public function addSubcategory($sub_id = null)
 }
 
 public function saveSubcategory() {
-	$sub_id = $this->input->getPost('sub_id');
-	$cat_id = $this->input->getPost('cat_id');
+    $sub_id = $this->input->getPost('sub_id');
+    $cat_id = $this->input->getPost('cat_id');
     $subcategory_name = $this->input->getPost('subcategory_name');
-	$discount_value = $this->input->getPost('discount_value');
-	$discount_type = $this->input->getPost('discount_type');
+    $discount_value = $this->input->getPost('discount_value');
+    $discount_type = $this->input->getPost('discount_type');
 
-	if($cat_id && $subcategory_name && $discount_value && $discount_type) {
-		if (empty($sub_id)) {
-			$data = [
-			'cat_Id' => $cat_id,
-			'sub_Category_Name' => $subcategory_name,
-			'sub_Discount_Value' => $discount_value,
-			'sub_Discount_Type' => $discount_type,
-			'sub_Status' => 1,
-			'sub_createdon' => date("Y-m-d H:i:s"),
-			'sub_createdby' => $this->session->get('zd_uid'),
-			'sub_modifyby' => $this->session->get('zd_uid'),
-		];
-			$CreateSubcategory = $this->subcategoryModel->subcategoryInsert($data);
-			
-			echo json_encode(array(
-				"status" => 1,
-				"msg" => "Subcategory Created successfully.",
-				"redirect" => base_url('subcategory')
-			));
-			
-		} 
-		else {
-			$data = [
-			'cat_Id' => $cat_id,
-			'sub_Category_Name' => $subcategory_name,
-			'sub_Discount_Value' => $discount_value,
-			'sub_Discount_Type' => $discount_type,
-			'sub_Status' => 1,
-			'sub_createdon' => date("Y-m-d H:i:s"),
-			'sub_createdby' => $this->session->get('zd_uid'),
-			'sub_modifyby' => $this->session->get('zd_uid'),  
-		];				
-			$modifyCategory = $this->subcategoryModel->updateSubcategory($sub_id,$data);
-			echo json_encode(array(
-				"status" => 1,
-				"msg" => "Subcategory Updated successfully.",
-				"redirect" => base_url('subcategory')
-			));
-		}
-	}
-	else {
-		return $this->response->setJSON([
-			'status' => 'error',
-			'message' => 'All fields are required.'
-		]);
-	}
-	
+    if ($cat_id && $subcategory_name && $discount_value && $discount_type) {
+
+        // Check if subcategory name already exists
+        $exists = $this->subcategoryModel->issubCategoryExists($subcategory_name, $sub_id);
+        if ($exists) {
+            return $this->response->setJSON([
+                'status' => 'error',
+                'field' => 'subcategory_name',
+                'message' => 'Subcategory name already exists.'
+            ]);
+        }
+
+        $data = [
+            'cat_Id' => $cat_id,
+            'sub_Category_Name' => $subcategory_name,
+            'sub_Discount_Value' => $discount_value,
+            'sub_Discount_Type' => $discount_type,
+            'sub_Status' => 1,
+            'sub_createdon' => date("Y-m-d H:i:s"),
+            'sub_createdby' => $this->session->get('zd_uid'),
+            'sub_modifyby' => $this->session->get('zd_uid'),
+        ];
+
+        if (empty($sub_id)) {
+            $this->subcategoryModel->subcategoryInsert($data);
+            return $this->response->setJSON([
+                "status" => 1,
+                "msg" => "Subcategory Created successfully.",
+                "redirect" => base_url('subcategory')
+            ]);
+        } else {
+            $this->subcategoryModel->updateSubcategory($sub_id, $data);
+            return $this->response->setJSON([
+                "status" => 1,
+                "msg" => "Subcategory Updated successfully.",
+                "redirect" => base_url('subcategory')
+            ]);
+        }
+    } else {
+        return $this->response->setJSON([
+            'status' => 'error',
+            'message' => 'All fields are required.'
+        ]);
+    }
 }
+
 public function changeStatus()
 {
 	$subId = $this->request->getPost('sub_Id');

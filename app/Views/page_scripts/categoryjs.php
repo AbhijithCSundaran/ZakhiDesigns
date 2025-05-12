@@ -24,7 +24,7 @@ $('#categorySubmit').click(function(e) {
             $('#messageBox')
                 .removeClass('alert-danger')
                 .addClass('alert-success')
-                .text(response.msg || 'Category created successfully!')
+                .text(response.msg || 'Category Created Successfully!')
                 .show();
 
             setTimeout(function() {
@@ -103,7 +103,7 @@ $(document).ready(function() {
 function confirmDelete(catId) {
     Swal.fire({
         title: 'Are you sure?',
-        text: 'Do you want to delete this Category?',
+        text: 'You want to delete this Category?',
         icon: 'warning',
         showCancelButton: true,
         confirmButtonText: 'Delete',

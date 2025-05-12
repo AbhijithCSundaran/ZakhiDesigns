@@ -90,14 +90,14 @@ public function saveSubcategory() {
             $this->subcategoryModel->subcategoryInsert($data);
             return $this->response->setJSON([
                 "status" => 1,
-                "msg" => "Subcategory Created successfully.",
+                "msg" => "Subcategory Created Successfully.",
                 "redirect" => base_url('subcategory')
             ]);
         } else {
             $this->subcategoryModel->updateSubcategory($sub_id, $data);
             return $this->response->setJSON([
                 "status" => 1,
-                "msg" => "Subcategory Updated successfully.",
+                "msg" => "Subcategory Updated Successfully.",
                 "redirect" => base_url('subcategory')
             ]);
         }

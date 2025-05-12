@@ -25,7 +25,7 @@ $('#subcategorySubmit').click(function(e) {
             $('#messageBox')
                 .removeClass('alert-danger')
                 .addClass('alert-success')
-                .text(response.msg || 'Subcategory created successfully!')
+                .text(response.msg || 'Subcategory Created Successfully!')
                 .show();
 
             setTimeout(function() {
@@ -50,7 +50,7 @@ $('#subcategorySubmit').click(function(e) {
 function confirmDelete(subId) {
     Swal.fire({
         title: 'Are you sure?',
-        text: 'Do you want to delete this SubCategory?',
+        text: 'You want to delete this SubCategory?',
         icon: 'warning',
         showCancelButton: true,
         confirmButtonText: 'Delete',

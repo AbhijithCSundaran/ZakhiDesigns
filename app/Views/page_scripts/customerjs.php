@@ -61,7 +61,7 @@ $('#custSubmit').click(function(e) {
     } else {
         $('#error-confirm-password').text('');
     }
-
+	$('#custSubmit').prop('disabled', true);
     e.preventDefault(); // Important to prevent normal form submit
     var url = baseUrl + "customer/save"; // Correct route
     $.post(url, $('#createcust').serialize(), function(response) {
@@ -75,6 +75,7 @@ $('#custSubmit').click(function(e) {
 
             // Wait, then redirect
             setTimeout(function() {
+				$('#custSubmit').prop('disabled', false);
                 window.location.href = baseUrl + "customer/"; // Update this path to your Manage Staff page
             }, 3000);
         } 
@@ -84,6 +85,7 @@ $('#custSubmit').click(function(e) {
                 .addClass('alert-danger')
                 .text(response.msg || 'All mandatory fields are required')
                 .show();
+				$('#custSubmit').prop('disabled', false);
         }
 		setTimeout(function() {
                 $('#messageBox').empty().hide();
@@ -93,7 +95,8 @@ $('#custSubmit').click(function(e) {
 
 /*********************************/
 
-function confirmDelete(userId) {
+function confirmDelete(addId) {
+	console.log("Deleting ID:", addId);
     Swal.fire({
         title: 'Are you sure?',
         text: 'You want to delete this customer ?',
@@ -105,7 +108,7 @@ function confirmDelete(userId) {
         if (result.isConfirmed) {
             // AJAX call to delete
             $.ajax({
-                url: "<?php echo base_url('customer/delete'); ?>/" + userId,
+                url: "<?php echo base_url('customer/delete'); ?>/" + addId,
                 method: "POST",
                 dataType: "json",
                 success: function (response) {

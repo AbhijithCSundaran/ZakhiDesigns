@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <title>Mega Able bootstrap admin template by codedthemes </title>
+    <title>Zakhi Designs </title>
     <!-- HTML5 Shim and Respond.js IE10 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 10]>
@@ -43,7 +43,7 @@
 
     <!-- DataTables CSS -->
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
-    
+    <link rel="stylesheet" href="<?php echo base_url().ASSET_PATH; ?>assets/css/custom.css" />
 </head>
   <body>
   <!-- Pre-loader start -->
@@ -121,7 +121,7 @@
                           </div>
                       </div>
                       <a href="<?php echo base_url('dashboard');?>">
-                     <h1 class="navbar-brand mb-0 h1">ZakhiDesigns</h1>
+                     <h1 class="navbar-brand mb-0 h1" >Zakhi Designs</h1>
                       </a>
                       <a class="mobile-options waves-effect waves-light">
                           <i class="ti-more"></i>

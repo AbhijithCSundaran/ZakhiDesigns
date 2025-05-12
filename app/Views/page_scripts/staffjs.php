@@ -75,15 +75,6 @@ $('#staffSubmit').click(function(e) {
     } else {
         $('#error-confirm-password').text('');
     }
-	let pswd = $('#old_password').val();
-    let cpswd = $('#new_password').val();
-    if (pswd !== cpswd) {
-        $('#error-new-password').text('Passwords do not match');
-        return false;
-    } else {
-        $('#error-new-password').text('');
-    }
-
 	$('#staffSubmit').prop('disabled', true);
     e.preventDefault(); // Important to prevent normal form submit
     var url = baseUrl + "staff/save"; // Correct route

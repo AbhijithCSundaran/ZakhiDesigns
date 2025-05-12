@@ -1,3 +1,4 @@
+
 <div class="pcoded-main-container">
               <div class="pcoded-wrapper">
                   <nav class="pcoded-navbar">
@@ -9,24 +10,12 @@
                                   <img class="img-80 img-radius" src="<?php echo base_url().ASSET_PATH; ?>assets/images/avatar-4.jpg" alt="User-Profile-Image">
                                  
                                   <div class="user-details">
-                                    <?php
-                                        $session = session();
-                                        $username = $session->get('zd_uname');
-                                    ?>  
-                                      <span id="more-details"><?= esc($username); ?><i class="fa fa-caret-down"></i></span>
+                                    
+                                      <span id="more-details"><i class="fa fa-caret"></i></span>
                                   </div>
                               </div>
                               <div class="main-menu-content">
-                                  <ul>
-                                      <li class="more-details">
-                                          <a href="<?php echo base_url('admin') ?> "><i class="ti-user"></i>View Profile</a>
-                                      
-                                          <a href="#" data-toggle="modal" data-target="#logoutModal">
-                                                <i class="ti-layout-sidebar-left"></i>Logout
-                                            </a>
-                                         
-                                      </li>
-                                  </ul>
+                          
                               </div>
                           </div>    
                           <div class="p-15 p-b-0">
@@ -86,4 +75,6 @@
                                 </a>
                             </li>
                           </ul>
+                     
+                          
                   </nav>

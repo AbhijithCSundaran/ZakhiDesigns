@@ -20,6 +20,15 @@ class AdminModel extends Model {
 		public function getStaffByid($id){
             return $this->db->table('user')->where('us_Id', $id)->get()->getRow(); 
 		}
+		public function emailExistsExcept($email, $excludeId)
+		{
+			$builder = $this->db->table('user');
+			$builder->where('us_Email', $email);
+			$builder->where('us_Id !=', $excludeId);
+			$builder->where('us_Status !=', 3);
+			$query = $builder->get();
+			return $query->getNumRows() > 0;
+		}
     }
 
 ?>

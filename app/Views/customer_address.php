@@ -1,3 +1,4 @@
+
 <div class="pcoded-content">
     <!-- Page-header start -->
     <div class="page-header">
@@ -5,7 +6,7 @@
             <div class="row align-items-center">
                 <div class="col-md-8">
                     <div class="page-header-title">
-                        <h5 class="m-b-10">Manage Customer</h5>
+                        <h5 class="m-b-10">Manage Customer Address</h5>
                         <p class="m-b-0">Welcome to Zakhi Designs</p>
                     </div>
                 </div>
@@ -14,7 +15,7 @@
                         <li class="breadcrumb-item">
                             <a href="#"> <i class="fa fa-home"></i> </a>
                         </li>
-                        <li class="breadcrumb-item"><a href="#">Customer</a>
+                        <li class="breadcrumb-item"><a href="#">Customer Address</a>
                         </li>
                     </ul>
                 </div>
@@ -28,64 +29,63 @@
             <div class="page-wrapper">
                 <!-- Page-body start -->
                 <div class="page-body">
-                    <div class="row">
-                        <div class="col-sm-12">
-
-                            <div class="card">
-                                <div class="card-header">
-                                    <div class="row">
-                                        <div class="col-md-2">
-
-                                        </div>
-                                        <div class="col-md-7">
-                                        </div>
-										<div class="col-md-3">
-                                            <div class="row">
-                                                <div class="col-lg-12 d-flex justify-content-end p-2">
-                                                    <a href="<?= base_url('customer/view/'); ?>" class="btn btn-primary">
-                                                        Add Customer
-                                                    </a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-								<div class="card-block table-border-style">
-								<div id="message" style="display:none;"></div>
-								<div id="messageBox" class="alert" style="display: none;"></div>
-								<?php foreach ($user as $row){ ?>
-									 <div class="col-xl-4">
-								<!-- Tooltip style 9 card start -->
-											<div class="card o-visible">
-												<div class="card-header">
-													<h5><?= esc($row['cust_Name']); ?></h5>
-												</div>
-												<div class="card-block">
-													<p><?= esc($row['add_Name']); ?> <br>
-														<?= esc($row['add_BuldingNo']); ?> , <?= esc($row['add_Landmark']); ?><br>
-														<?= esc($row['add_Street']); ?> , <?= esc($row['add_City']); ?><br>
-														<?= esc($row['add_State']); ?> , <?= esc($row['add_Pincode']); ?><br>
-														<?= esc($row['add_Phone']); ?>
-														
-													</p><a href="">Edit<span class="tooltip-content2"><i class="icofont icofont-bag-alt"></i></span></a>&nbsp;&nbsp;   |   &nbsp;&nbsp;
-													<a href="#">Remove<span class="tooltip-content2"><i class="icofont icofont-bag-alt"></i></span></a>
-												</div>
-											</div>
-											<!-- Tooltip style 9 card end -->
-										</div>  
-								<?php } 
+				  <div class="row">	
+				  <div class="col-xl-4">
+						
+							<!-- Tooltip style 2 card start -->
+							<div class="card o-visible">
+								<div class="card-header">
+									<h5>Name</h5>
+								</div>
+								<div class="card-block">
+								
+									<p>
+									</p>
+										
+										<a href="<?= base_url('customer_address/view/'. $add_CustId); ?>" class="btn btn-outline-primary">
+											<i class="fa fa-plus"></i> Add Address
+										</a>
+									</div>
+								</div>
+								
+								<!-- Tooltip style 2 card end -->
+						</div>
+				  <?php foreach ($user as $rows){ ?>
+						<div class="col-xl-4">
+						
+							<!-- Tooltip style 2 card start -->
+							<div class="card o-visible">
+								<div class="card-header">
+									<h5><?= esc($rows['add_Name']); ?></h5>
+								</div>
+								<div class="card-block">
+									<p><?= esc($rows['add_Name']); ?> <br>
+										<?= esc($rows['add_BuldingNo']); ?> , <?= esc($rows['add_Landmark']); ?><br>
+										<?= esc($rows['add_Street']); ?> , <?= esc($rows['add_City']); ?><br>
+										<?= esc($rows['add_State']); ?> , <?= esc($rows['add_Pincode']); ?><br>
+										<?= esc($rows['add_Phone']); ?>
+									</p>
+									<input type="hidden" name="cust_id" value=<?= esc($rows['add_CustId']);?>>
+												<a href="<?= base_url('customer_address/view/' . esc($rows['cust_Id']) . '/' . esc($rows['add_Id'])); ?>">
+												<i class="bi bi-pencil-square"></i></a>
+												<i class="icofont icofont-bag-alt"></i></span></a>&nbsp;&nbsp;   |   &nbsp;&nbsp;
+												<i class="bi bi-trash text-danger icon-clickable" onclick="confirmDelete(<?= $rows['add_Id']; ?>)"></i>
+									</div>
+								</div>
+								
+								<!-- Tooltip style 2 card end -->
+						</div>
+							<?php } 
 								?>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- Page-body end -->
+					</div>
+				</div>
             </div>
-            <div id="styleSelector"> </div>
+                <!-- Page-body end -->
         </div>
+            <div id="styleSelector"> </div>
     </div>
 </div>
+
 
 <!--Delete Modal-->
 
@@ -109,15 +109,15 @@
                 <div class="row justify-content-center">
                     <div class="col-auto">
                         <p class="text-center">
-                            Are you sure you want to delete the Staff?</p>
+                            Are you sure you want to delete the Address?</p>
                     </div>
 
                 </div>
             </div>
             <div class="modal-footer d-flex justify-content-center">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                <button type="button" class="btn btn-danger" id="deleteStaff"
-                    onclick="deleteStaff()">Delete</button>
+                <button type="button" class="btn btn-danger" id="deleteaddress"
+                    onclick="deleteAddress()">Delete</button>
             </div>
         </div>
     </div>

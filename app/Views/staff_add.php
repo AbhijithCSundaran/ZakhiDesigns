@@ -85,7 +85,7 @@
 											
                                         </div>
 										<div class="form-group row">
-                                            <label class="col-sm-2 col-form-label">Contact Number <span style="color: red;">*</span></label>
+                                            <label class="col-sm-2 col-form-label">Contact Number</label>
                                             <div class="col-sm-6">
                                                 <input type="text" class="form-control" name="mobile" id="mobile" maxlength="10" minlength="10"
                                                   value="<?= isset($staff) ? ($staff['us_Phone']) : '' ?>"   placeholder="Enter Contact Number" required autocomplete="off">

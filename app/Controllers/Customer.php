@@ -58,7 +58,7 @@ class Customer extends BaseController
 		$custemail = $this->input->getPost('custemail');
 		$mobile = $this->input->getPost('mobile');
 	    $password =$this->input->getPost('password');
-		 if (!preg_match('/^[a-zA-Z0-9\s]+$/', $custname)) {
+		 if (!preg_match('/^[a-zA-Z]+$/', $custname)) {
 			return $this->response->setJSON(['status' => 'error', 'msg' => 'Please enter name correctly.']);
 		}
 
@@ -81,13 +81,13 @@ class Customer extends BaseController
 					'msg' => 'Password must be between 6 to 15 characters.'
 				]);
 			}
-				   // Allow only letters, numbers, @ and _
+/* 				   // Allow only letters, numbers, @ and _
 			if (!preg_match('/^[a-zA-Z0-9@_]+$/', $password)) {
 				return $this->response->setJSON([
 					'status' => 'error',
 					'msg' => 'Password can only contain letters, numbers, @, and _.'
 				]);
-			}
+			} */
 			$customerModel = new CustomerModel();
 			if($custname && $custemail && $mobile) {
 			if (empty($cust_id)) {

@@ -77,6 +77,37 @@ class Customer_address extends BaseController
 		$city		=	$this->input->getPost('city');
 		$pincode	=	$this->input->getPost('pincode');
 		$state		=	$this->input->getPost('state');
+		// Validate name
+		if (!preg_match('/^[a-zA-Z ]+$/', $custname)) {
+			return $this->response->setJSON(['status' => 'error', 'msg' => 'Please enter name correctly.']);
+		}
+		if (empty($mobile)) {
+			return $this->response->setJSON(['status' => 'error', 'msg' => 'Phone number is required.']);
+		} elseif (!ctype_digit($mobile) || strlen($mobile) !== 10) {
+			return $this->response->setJSON(['status' => 'error', 'msg' => 'Phone number must contain exactly 10 digits.']);
+		}
+		// Validate name
+		if (!preg_match('/^[a-zA-Z0-9.,\/\-_ ]+$/', $hname)) {
+			return $this->response->setJSON(['status' => 'error', 'msg' => 'Please enter housename/building no. correctly.']);
+		}
+		if (!preg_match('/^[a-zA-Z0-9.,\/\-_ ]+$/', $street)) {
+			return $this->response->setJSON(['status' => 'error', 'msg' => 'Please enter street name correctly.']);
+		}
+		if (!preg_match('/^[a-zA-Z0-9.,\/\-_ ]+$/', $landmark)) {
+			return $this->response->setJSON(['status' => 'error', 'msg' => 'Please enter landmark correctly.']);
+		}
+		if (!preg_match('/^[a-zA-Z0-9.,\/\-_ ]+$/', $city)) {
+			return $this->response->setJSON(['status' => 'error', 'msg' => 'Please enter city correctly.']);
+		}
+		if (!preg_match('/^[a-zA-Z0-9.,\/\-_ ]+$/', $state)) {
+			return $this->response->setJSON(['status' => 'error', 'msg' => 'Please enter state correctly.']);
+		}
+		// Validate pincode
+		if (empty($pincode)) {
+			return $this->response->setJSON(['status' => 'error', 'msg' => 'Pincode is required.']);
+		} elseif (!ctype_digit($pincode) || strlen($pincode) !== 6) {
+			return $this->response->setJSON(['status' => 'error', 'msg' => 'Pincode must contain exactly 6 digits.']);
+		}
 		
 				$addressModel = new AddressModel();
 				if($custname && $mobile && $hname && $street && $city && $pincode && $state){
@@ -96,18 +127,17 @@ class Customer_address extends BaseController
 						'add_createdby'    		=> $this->session->get('zd_uid'),
 						'add_modifyby'     		=> $this->session->get('zd_uid'),
 					];
-						$CreateCust = $this->addressModel->createcust($data);
+						$Createaddress = $this->addressModel->createcust($data);
 						//echo json_encode(array("status" => 1, "msg" => "Customer address Created successfully."));
 						echo json_encode(array(
 							"status" => 1,
-							"msg" => "Customer Created successfully."
+							"msg" => "Customer address created successfully.",
+							'redirect' => base_url('customer/location/' .$cust_id)
 							
 						));
 					}
 					else {
-		
-				
-				$data = [
+					$data = [
 						'add_Id'				=> $add_id,
 						'add_CustId'			=> $cust_id,
 						'add_Name'          	=> $custname,
@@ -129,10 +159,18 @@ class Customer_address extends BaseController
 				echo json_encode(array(
 					"status" => 1,
 					"msg" => "Customer address details updated successfully.",
-					"redirect" => base_url('customer')
+					"redirect" => base_url('customer/location/' .$cust_id)
 				));
 			}
 				}
+				else
+				{
+					echo json_encode(array(
+					"status" => 1,
+					"msg" => "All mandatory fields are required.",
+					//"redirect" => base_url('customer/location/' .$cust_id)
+				));
+			}
 				
 			} 
 		/***************************************/

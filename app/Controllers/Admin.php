@@ -39,7 +39,8 @@ class Admin extends BaseController
 		$staffemail = $this->input->getPost('staffemail');
 		$staffotemail = $this->input->getPost('staffotemail');
 		$mobile = $this->input->getPost('mobile');
-		$newPassword = $this->input->getPost('new_password');
+		$oldpass	=	$this->input->getPost('old_password');
+		$newPass = $this->input->getPost('new_password');
 		    // Validate name
 		if (!preg_match('/^[a-zA-Z0-9\s]+$/', $staffname)) {
 			return $this->response->setJSON(['status' => 'error', 'msg' => 'Please enter name correctly.']);
@@ -59,12 +60,41 @@ class Admin extends BaseController
 			}
 			
 				   // Allow only letters, numbers, @ and _
-		if (!preg_match('/^[a-zA-Z0-9@_]+$/', $newPassword)) {
+/* 		if (!preg_match('/^[a-zA-Z0-9@_]+$/', $newPassword)) {
 			return $this->response->setJSON([
 				'status' => 'error',
 				'msg' => 'Password can only contain letters, numbers, @, and _.'
 			]);
+		} */
+		$adminModel		=	new AdminModel;
+		$existing = $adminModel->getStaffById($us_id);
+		if(empty($oldpass)&& empty($newPass))
+		{
+			$newPassword	=	$existing->us_Password;
 		}
+		else{
+		
+			if (!empty($oldpass) && $existing->us_Password !== md5($oldpass)) {
+				return $this->response->setJSON([
+					'status' => 'error',
+					'msg' => 'Password not matching with old password.'
+				]);
+			}
+			else{
+				
+				if (empty($newPass) && md5($newPass) !== md5($oldpass)|| md5($newPass) === md5($oldpass)) {
+				return $this->response->setJSON([
+					'status' => 'error',
+					'msg' => 'Please check your new password.'
+				]);
+				}
+				else{
+				$newPassword	=	md5($newPass);
+				}
+			}
+		}
+		
+		
 		if($staffname && $staffemail && $mobile) {
 
 				$data = [
@@ -72,7 +102,7 @@ class Admin extends BaseController
 				'us_Email'         => $staffemail,
 				'us_Email2'        => $staffotemail,
 				'us_Phone'		   => $mobile,
-				'us_Password'	   => md5($newPassword),
+				'us_Password'	   => $newPassword,
 				'us_Status'		   => 1,
 				'us_Role'		   => 1,
 				'us_createdby'     => $this->session->get('zd_uid'),

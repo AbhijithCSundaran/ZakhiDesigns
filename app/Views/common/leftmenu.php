@@ -1,3 +1,4 @@
+
 <div class="pcoded-main-container">
               <div class="pcoded-wrapper">
                   <nav class="pcoded-navbar">
@@ -10,13 +11,11 @@
                                  
                                   <div class="user-details">
                                     
-                                      
+                                      <span id="more-details"><i class="fa fa-caret"></i></span>
                                   </div>
                               </div>
                               <div class="main-menu-content">
-                                  <ul>
-                                     
-                                  </ul>
+                          
                               </div>
                           </div>    
                           <div class="p-15 p-b-0">
@@ -83,4 +82,6 @@
                                 </a>
                             </li>
                           </ul>
+                     
+                          
                   </nav>

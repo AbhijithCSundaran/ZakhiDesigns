@@ -59,9 +59,11 @@ $routes->post('customer/save', 'Customer::createnew');
 $routes->post('customer/delete/(:any)', 'Customer::deleteCust/$1');
 //$routes->post('customer/updateStatus', 'Customer::updateStatus');
 $routes->post('customer/status', 'Customer::updateStatus');
-$routes->get('customer/location/(:num)', 'Customer_address::index');//customer address edit
-
-
+$routes->get('customer/location/(:num)', 'Customer_address::location/$1');//customer address edit
+$routes->get('customer_address/view/(:num)', 'Customer_address::view_address/$1');
+$routes->get('customer_address/view/(:num)/(:num)', 'Customer_address::view_address/$1/$2');
+$routes->post('customer_address/save', 'Customer_address::createnew');
+$routes->post('customer_address/delete/(:any)', 'Customer_address::deleteAddress/$1');
 //logout
 $routes->post('/logout', 'Auth::logout'); 
 

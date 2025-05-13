@@ -96,14 +96,17 @@
                                                             </td>
                                                             <td>
 
-                                                                <i class="bi bi-trash text-danger icon-clickable"
-                                                                    onclick="confirmDeleteimg-size(<?= $prod->pr_Id; ?>)">
+                                                                 <i class="bi bi-trash text-danger icon-clickable"
+                                                                    onclick="confirmDelete(<?= $prod->pr_Id; ?>)">
                                                                 </i>
+
+
                                                                 <img class="img-size open-image-modal"
                                                                     src="<?php echo base_url().ASSET_PATH; ?>assets/images/image_add.ico"
                                                                     alt="Image-add"  data-toggle="modal" data-target="#exampleModal"
                                                                     data-product-id="<?= $prod->pr_Id; ?>"
                                                                     data-product-name="<?= $prod->pr_Name; ?>"
+                                                                    onclick="openProductModal(<?= $prod->pr_Id ?>, '<?= $prod->pr_Name ?>')"
                                                                     style="cursor: pointer;">
 
                                                                 <img class="img-size"

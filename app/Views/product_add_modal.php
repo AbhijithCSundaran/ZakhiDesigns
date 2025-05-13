@@ -30,8 +30,16 @@
                         </div>
                     </div>
 
-                  <input type="hidden" id="productId" name="product_id">
-               </form>
+                    <input type="hidden" id="productId" name="product_id">
+                </form>
+
+                <div class="mt-3" id="imagePreviewContainer">
+                    <h6 class="text-center">Uploaded Images</h6>
+                    <div id="imagePreview" class="d-flex flex-wrap justify-content-center gap-2">
+                        <!-- Images will be inserted here -->
+                    </div>
+                </div>
+
             </div>
             <div class="modal-footer justify-content-between">
                 <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Close</button>

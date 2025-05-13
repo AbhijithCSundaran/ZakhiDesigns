@@ -53,6 +53,7 @@ public function getSubcategories()
 }
 
 
+//Product save
 
 public function saveProduct() {
     $pr_id = $this->input->getPost('pr_id');
@@ -118,6 +119,7 @@ public function saveProduct() {
     }
 }
 
+//Media upload
 public function uploadMedia()
 {
     $productId = $this->request->getPost('product_id');
@@ -129,16 +131,17 @@ public function uploadMedia()
         foreach ($files as $file) {
             if ($file->isValid() && !$file->hasMoved()) {
                 $name = $file->getRandomName();
-                $file->move(WRITEPATH . 'uploads/productmedia/', $name);
+                $file->move(FCPATH . 'uploads/productmedia/', $name);
                 $newFileNames[] = $name;
             }
         }
 
-        $model = new ProductModel();
-        $existingMediaJson = $model->getProductImages($productId);
-        print_r($existingMediaJson);
-        exit;
-        $existingMedia = json_decode($existingMediaJson, true);
+       $productModel = new ProductModel();
+      
+	   $existingMediaJson = $productModel->getProductImages($productId);
+
+
+      $existingMedia = json_decode($existingMediaJson, true);
 
         $allNames = [];
 
@@ -152,13 +155,87 @@ public function uploadMedia()
             ['name' => $allNames]
         ];
 
-        $model->updateProductImages($productId, json_encode($updatedJson));
+        $productModel->updateProductImages($productId, json_encode($updatedJson));
 
         return $this->response->setJSON(['success' => true]);
     }
 
     return $this->response->setJSON(['success' => false]);
 }
+
+//get product images
+public function getProductImages($productId)
+{
+    $productModel = new ProductModel();
+    $imagesJson = $productModel->getProductImages($productId);
+    $images = json_decode($imagesJson, true);
+    
+    // Extract image names
+    $imageList = $images[0]['name'] ?? [];
+
+    return $this->response->setJSON($imageList);
+}
+
+//Delte the whole product
+public function deleteProduct($pr_id) {
+	if ($pr_id) {
+		$modified_by = $this->session->get('zd_uid');
+		$pr_status = $this->productModel->deleteProductById(3, $pr_id, $modified_by);
+		if ($pr_status) {
+			echo json_encode([
+				'success' => true,
+				'msg' => 'Product Deleted Successfully.'
+			]);
+		} else {
+			echo json_encode([
+				'success' => false,
+				'msg' => 'Failed to Delete Product.'
+			]);
+		}
+	} else {
+		echo json_encode([
+			'success' => false,
+			'msg' => 'Invalid request.'
+		]);
+	}
+}
+
+//Delete the single product
+
+
+public function deleteProductImage()
+{
+    $request = $this->request->getJSON(true);
+
+    $productId = $request['product_id'] ?? null;
+    $image = $request['image'] ?? null;
+
+    if (!$productId || !$image) {
+        return $this->response->setJSON(['success' => false, 'message' => 'Missing product_id or image.']);
+    }
+
+    // Delete from folder
+    $imagePath = FCPATH . 'uploads/productmedia/' . $image;
+
+    if (file_exists($imagePath)) {
+        unlink($imagePath);
+    }
+
+    // Delete from database
+    $productModel = new \App\Models\ProductModel();
+    $deleted = $productModel->delete_image($productId, $image);
+
+    return $this->response->setJSON([
+        'success' => $deleted,
+        'message' => $deleted ? 'Image deleted successfully.' : 'Image not deleted from DB.'
+    ]);
+}
+
+
+
+
+
+
 
 
 

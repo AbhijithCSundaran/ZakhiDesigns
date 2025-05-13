@@ -75,7 +75,7 @@ class Staff extends BaseController
 		$newPass   	   = $this->input->getPost('new_password');
 
 		// Validate name
-		if (!preg_match('/^[a-zA-Z]+$/', $staffname)) {
+		if (!preg_match('/^[a-zA-Z ]+$/', $staffname)) {
 			return $this->response->setJSON(['status' => 'error', 'msg' => 'Please enter name correctly.']);
 		}
 

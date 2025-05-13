@@ -42,7 +42,7 @@ class Admin extends BaseController
 		$oldpass	=	$this->input->getPost('old_password');
 		$newPass = $this->input->getPost('new_password');
 		    // Validate name
-		if (!preg_match('/^[a-zA-Z0-9\s]+$/', $staffname)) {
+		if (!preg_match('/^[a-zA-Z0-9\s ]+$/', $staffname)) {
 			return $this->response->setJSON(['status' => 'error', 'msg' => 'Please enter name correctly.']);
 		}
 		// Validate email formats

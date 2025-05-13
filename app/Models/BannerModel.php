@@ -3,13 +3,18 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class ProductImageModel extends Model {
+class BannerModel extends Model {
 	
         public function __construct() {
             $this->db = \Config\Database::connect();
         }
-        public function getAllProducts() {
-            return $this->db->table('product')->where('pr_Status', 1)->get()->getResult();
+        public function getAllBanners() {
+			return $this->db->table('theme')
+			->where('the_Status !=', 3)
+			->where('the_CatId IS NULL', null, false)
+			->where('the_SubId IS NULL', null, false)
+			->get()
+			->getResultArray();
         }
         public function productimageInsert($data) {
             return $this->db->table('product_image')->insert($data);

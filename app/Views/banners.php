@@ -30,22 +30,17 @@
                 <div class="page-body">
                     <div class="row">
                         <div class="col-sm-12">
-
                             <div class="card">
                                 <div class="card-header">
                                     <div class="row">
                                         <div class="col-md-2">
-
                                         </div>
                                         <div class="col-md-7">
-                                            <div id="message" style="display:none;"></div>
-                                            <div id="messageBox" class="alert" style="display: none;"></div>
-
                                         </div>
                                         <div class="col-md-3">
                                             <div class="row">
                                                 <div class="col-lg-12 d-flex justify-content-end p-2">
-                                                    <a href="<?= base_url('productimage/add'); ?>"
+                                                    <a href="<?= base_url('banner/add'); ?>"
                                                         class="btn btn-primary">
                                                         Add Banners
                                                     </a>
@@ -58,6 +53,8 @@
                                     <div class="card">
 
                                         <div class="card-block table-border-style">
+										<div id="message" style="display:none;"></div>
+											<div id="messageBox" class="alert" style="display: none;"></div>
                                             <div class="table-responsive">
                                                 <table class="table table-hover" id="productList">
                                                     <thead>
@@ -68,7 +65,7 @@
                                                             <th>Action</th>
                                                         </tr>
                                                     </thead>
-                                                   														 <tbody>
+                                                   	<tbody>
                                                        <?php
 															$slno = 1;
 															foreach ($user as $row) { ?>
@@ -84,12 +81,10 @@
                                                                         <?= ($row['the_Status'] == 1) ? 'checked' : ''; ?>>
                                                                     <label class="form-check-label pl-0 label-check"
                                                                         for="statusSwitch-<?= $row['the_Id']; ?>">
-                                                                        
                                                                     </label>
                                                                 </div>
 																</td>
 																	<td>
-																	 
 																		<a href="<?= base_url('banner/view/'. $row['the_Id']); ?>">
 																			<i class="bi bi-pencil-square"></i>
 																		</a>   &nbsp;                                                  
@@ -98,7 +93,6 @@
 																</tr>
 															<?php } ?>
                                                         </tbody>
-                                                       
                                                 </table>
                                             </div>
                                         </div>

@@ -19,7 +19,7 @@ function confirmDelete(addId) {
 	console.log("Deleting ID:", addId);
     Swal.fire({
         title: 'Are you sure?',
-        text: 'You want to delete this customer ?',
+        text: 'You want to delete this banner ?',
         icon: 'warning',
         showCancelButton: true,
         confirmButtonText: 'Delete',
@@ -28,7 +28,7 @@ function confirmDelete(addId) {
         if (result.isConfirmed) {
             // AJAX call to delete
             $.ajax({
-                url: "<?php echo base_url('customer/delete'); ?>/" + addId,
+                url: "<?php echo base_url('banner/delete'); ?>/" + addId,
                 method: "POST",
                 dataType: "json",
                 success: function (response) {
@@ -50,14 +50,14 @@ function confirmDelete(addId) {
 //Active and Inactive status
 $(document).ready(function() {
     $('.checkactive').on('change', function() {
-        let custId = $(this).val();
+        let theId = $(this).val();
         let status = $(this).prop('checked') ? 1 : 2;
         $.ajax({
-            url: '<?= base_url('customer/status'); ?>',
+            url: '<?= base_url('banner/status'); ?>',
             type: 'POST',
             data: {
-                cust_Id: custId,
-                cust_Status: status
+                the_Id: theId,
+                the_Status: status
             },
             headers: {
                 'X-CSRF-TOKEN': '<?= csrf_hash(); ?>'

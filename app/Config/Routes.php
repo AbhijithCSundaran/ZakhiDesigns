@@ -35,12 +35,14 @@ $routes->get('product', 'Product::index');
 $routes->get('product/add', 'Product::addProduct');
 $routes->post('product/save', 'Product::saveProduct');
 $routes->post('product/get-subcategories', 'Product::getSubcategories');
+$routes->post('product/upload-media', 'Product::uploadMedia');
+
 
 
 //Product images
 $routes->get('productimage','Productimage::index');
 $routes->get('productimage/add', 'ProductImage::addProductImage');
-
+$routes->post('productimage/save', 'ProductImage::saveProductImage');
 
 //Staff
 $routes->get('staff', 'Staff::index');

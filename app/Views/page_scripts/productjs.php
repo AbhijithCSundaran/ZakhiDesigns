@@ -86,6 +86,54 @@ $('#categoryName').on('change', function() {
     }
 });
 
+$(document).ready(function () {
+    $('.open-image-modal').on('click', function () {
+        var productName = $(this).data('product-name');
+        var productId = $(this).data('product-id');
+        $('#productName').text(productName);          
+        $('#productId').val(productId);                     
+    });
+});
+
+  function handleFiles(files) {
+        const formData = new FormData();
+        const productId = document.getElementById('productId').value;
+
+        for (let i = 0; i < files.length; i++) {
+            formData.append('files[]', files[i]);
+        }
+
+        
+        formData.append('product_id', productId);
+
+        fetch("<?= base_url('product/upload-media') ?>", {
+            method: 'POST',
+            body: formData,
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.status == 1) {
+                alert(data.msg || 'Images uploaded successfully!');
+            
+            } else {
+                alert(data.msg || 'Upload failed.');
+            }
+        })
+        .catch(error => {
+            console.error('Upload error:', error);
+            alert('Something went wrong. Try again later.');
+        });
+    }
+
+    function handleDrop(event) {
+        event.preventDefault();
+        handleFiles(event.dataTransfer.files);
+    }
+
+    // File input change listener
+    document.getElementById('fileElem').addEventListener('change', function () {
+        handleFiles(this.files);
+    });
 
 
 function calculateSellingPrice() {

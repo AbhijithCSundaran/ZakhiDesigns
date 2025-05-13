@@ -22,7 +22,9 @@ class Product extends BaseController
         $template = view('common/header');
 		$template.= view('common/leftmenu');
 		$template.= view('product', $data);
+        $template.= view('product_add_modal');
 		$template.= view('common/footer');
+        $template .= view('page_scripts/productjs');
         return $template;
 
     }
@@ -93,7 +95,7 @@ public function saveProduct() {
     ];
 
     if (empty($pr_id)) {
-        // Create new product
+        
         $data['pr_createdon'] = date("Y-m-d H:i:s");
         $data['pr_createdby'] = $this->session->get('zd_uid');
 
@@ -115,6 +117,50 @@ public function saveProduct() {
         ]);
     }
 }
+
+public function uploadMedia()
+{
+    $productId = $this->request->getPost('product_id');
+    $files = $this->request->getFileMultiple('files'); // Corrected
+
+    $newFileNames = [];
+
+    if ($files) {
+        foreach ($files as $file) {
+            if ($file->isValid() && !$file->hasMoved()) {
+                $name = $file->getRandomName();
+                $file->move(WRITEPATH . 'uploads/productmedia/', $name);
+                $newFileNames[] = $name;
+            }
+        }
+
+        $model = new ProductModel();
+        $existingMediaJson = $model->getProductImages($productId);
+        print_r($existingMediaJson);
+        exit;
+        $existingMedia = json_decode($existingMediaJson, true);
+
+        $allNames = [];
+
+        if (!empty($existingMedia) && isset($existingMedia[0]['name'])) {
+            $allNames = $existingMedia[0]['name'];
+        }
+
+        $allNames = array_merge($allNames, $newFileNames);
+
+        $updatedJson = [
+            ['name' => $allNames]
+        ];
+
+        $model->updateProductImages($productId, json_encode($updatedJson));
+
+        return $this->response->setJSON(['success' => true]);
+    }
+
+    return $this->response->setJSON(['success' => false]);
+}
+
+
 
 
 

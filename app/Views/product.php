@@ -45,8 +45,7 @@
                                         <div class="col-md-3">
                                             <div class="row">
                                                 <div class="col-lg-12 d-flex justify-content-end p-2">
-                                                    <a href="<?= base_url('product/add'); ?>"
-                                                        class="btn btn-primary">
+                                                    <a href="<?= base_url('product/add'); ?>" class="btn btn-primary">
                                                         Add Product
                                                     </a>
                                                 </div>
@@ -66,7 +65,7 @@
                                                             <th>Product Name</th>
                                                             <th>MRP</th>
                                                             <th>Selling Price</th>
-                                                            <th>Discount Type</th>
+                                                            <!-- <th>Discount Type</th> -->
                                                             <th>Discount Value</th>
                                                             <th>Product Stock</th>
                                                             <th>Status</th>
@@ -74,13 +73,13 @@
                                                         </tr>
                                                     </thead>
                                                     <tbody>
-                                                    <?php foreach($product as $index => $prod) : ?>
+                                                        <?php foreach($product as $index => $prod) : ?>
                                                         <tr>
                                                             <td><?= $index + 1; ?></td>
                                                             <td><?= ucwords($prod->pr_Name); ?></td>
                                                             <td><?= ucwords($prod->mrp); ?></td>
                                                             <td><?= $prod->pr_Selling_Price; ?></td>
-                                                            <td><?= $prod->pr_Discount_Type; ?></td>
+                                                            <!-- <td><?= $prod->pr_Discount_Type; ?></td> -->
                                                             <td><?= $prod->pr_Discount_Value; ?></td>
                                                             <td><?= $prod->pr_Stock; ?></td>
                                                             <td>
@@ -96,10 +95,21 @@
                                                                 </div>
                                                             </td>
                                                             <td>
-                                                              
+
                                                                 <i class="bi bi-trash text-danger icon-clickable"
-                                                                    onclick="confirmDelete(<?= $prod->pr_Id; ?>)">
+                                                                    onclick="confirmDeleteimg-size(<?= $prod->pr_Id; ?>)">
                                                                 </i>
+                                                                <img class="img-size open-image-modal"
+                                                                    src="<?php echo base_url().ASSET_PATH; ?>assets/images/image_add.ico"
+                                                                    alt="Image-add"  data-toggle="modal" data-target="#exampleModal"
+                                                                    data-product-id="<?= $prod->pr_Id; ?>"
+                                                                    data-product-name="<?= $prod->pr_Name; ?>"
+                                                                    style="cursor: pointer;">
+
+                                                                <img class="img-size"
+                                                                    src="<?php echo base_url().ASSET_PATH; ?>assets/images/video_add.ico"
+                                                                    alt="video-add">
+
                                                             </td>
                                                         </tr>
                                                         <?php endforeach; ?>

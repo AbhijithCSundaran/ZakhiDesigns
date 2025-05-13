@@ -58,6 +58,21 @@ public function getAllCategories()
         ->getResult();
 }
         
+
+     public function getProductImages($productId)
+    {
+        return $this->db->table('product')
+                    ->where('pr_Id', $productId)
+                    ->select('product_images')
+                    ->first()['product_images'] ?? '[]';
+    }
+
+    public function updateProductImages($productId, $mediaJson)
+    {
+        return $this->db->table('product')
+        ->where('pr_Id', $productId)->set(['product_images' => $mediaJson])->update();
+
+    }
   
         
         

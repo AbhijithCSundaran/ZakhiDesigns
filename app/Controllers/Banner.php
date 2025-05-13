@@ -22,39 +22,21 @@ class Banner extends BaseController
 		$template.= view('common/footer');
 		$template.= view('page_scripts/bannerjs');
         return $template;
-
     }
-    public function addProductImage($pri_id = null)
-    {
-        if (!$this->session->get('zd_uid')) {
-            return redirect()->to(base_url());
-        }
-    
-        $data = [];
-        $data['products'] = $this->productimageModel->getAllProducts();
-        
-        $template = view('common/header');
-        $template .= view('common/leftmenu');
-        $template .= view('productimage_add',$data); 
-        $template .= view('common/footer');
-        $template .= view('page_scripts/productimagejs');
-        return $template;
-    }
+ 
 	public function updateStatus()
 	{
-		$custId = $this->request->getPost('cust_Id');
-        $newStatus = $this->request->getPost('cust_Status');
-    
-        $customerModel = new CustomerModel();
-        $customer = $customerModel->getCustomerByid($custId);
-    
-        if (!$customer) {
+		$theId = $this->request->getPost('the_Id');
+        $newStatus = $this->request->getPost('the_Status');
+        $bannerModel = new BannerModel();
+        $theme = $bannerModel->getThemeByid($theId);   
+        if (!$theme) {
             return $this->response->setJSON([
                 'success' => false,
-                'message' => 'Customer not found'
+                'message' => 'Theme not found'
             ]);
         }
-        $update = $customerModel->updateCustomer($custId, ['cust_Status' => $newStatus]);
+        $update = $bannerModel->updateTheme($theId, ['the_Status' => $newStatus]);
         if ($update) {
             return $this->response->setJSON([
                 'success' => true,
@@ -68,15 +50,26 @@ class Banner extends BaseController
             ]);
         }
 	}
-    
-   
-
-
-
-
-
-
-
-
-
+     public function deleteBanner($the_id) {
+		if ($the_id) {
+			$modified_by = $this->session->get('zd_uid');
+			$the_status = $this->bannerModel->deleteBannerById(3, $the_id, $modified_by);
+			if ($the_status) {
+				echo json_encode([
+					'success' => true,
+					'msg' => 'Banner deleted successfully.'
+				]);
+			} else {
+				echo json_encode([
+					'success' => false,
+					'msg' => 'Failed to delete banner.'
+				]);
+			}
+		} else {
+			echo json_encode([
+				'success' => false,
+				'msg' => 'Invalid request.'
+			]);
+		}
+	}
 }

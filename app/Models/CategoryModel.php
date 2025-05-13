@@ -32,9 +32,6 @@ public function isCategoryExists($categoryName, $excludeId = null) {
     return $builder->get()->getRow();
 }
 
-
-  
-
     public function updateCategory($id, $data)
     {
         return $this->db->table('category')->where('cat_Id', $id) ->update($data);

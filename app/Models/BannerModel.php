@@ -16,12 +16,12 @@ class BannerModel extends Model {
 			->get()
 			->getResultArray();
         }
-        public function productimageInsert($data) {
-            return $this->db->table('product_image')->insert($data);
+        public function createBanner($data) {
+            return $this->db->table('theme')->insert($data);
         }
-        public function updateProductimage($id, $data)
+        public function modifyBanner($id, $data)
         {
-            return $this->db->table('product_image')->where('pri_Id', $id) ->update($data);
+            return $this->db->table('theme')->where('the_Id', $id) ->update($data);
         }
 
 		public function getThemeByid($id){
@@ -31,9 +31,9 @@ class BannerModel extends Model {
 		{
 			return $this->db->table('theme')->where('the_Id', $id) ->update($data);
 		}
-        public function deleteBanner($the_status, $the_id, $modified_by)
+        public function deleteBannerById($the_status, $the_id, $modified_by)
 		{
-			return $this->db->query("update theme set the_Status = '".$the_status."', the_modifyon=NOW(), the_modifyby='".$modified_by."' where add_Id = '".$the_id."'");
+			return $this->db->query("update theme set the_Status = '".$the_status."', the_modifyon=NOW(), the_modifyby='".$modified_by."' where the_Id = '".$the_id."'");
 		}
   
         

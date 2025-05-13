@@ -67,6 +67,9 @@ $routes->post('customer_address/delete/(:any)', 'Customer_address::deleteAddress
 //banners
 $routes->get('banner', 'Banner::index');
 $routes->post('banner/status', 'Banner::updateStatus');
+$routes->get('banner/add', 'Banner::addbanner'); // Create
+$routes->get('banner/add/(:num)', 'Banner::addbanner/$1'); // Edit
+$routes->post('banner/save', 'Banner::createnew');
 $routes->post('banner/delete/(:any)', 'Banner::deleteBanner/$1');
 //logout
 $routes->post('/logout', 'Auth::logout'); 

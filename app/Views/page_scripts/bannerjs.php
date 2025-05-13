@@ -15,8 +15,8 @@ $(document).ready(function() {
 
 /*********************************/
 
-function confirmDelete(addId) {
-	console.log("Deleting ID:", addId);
+function confirmDelete(theId) {
+	console.log("Deleting ID:", theId);
     Swal.fire({
         title: 'Are you sure?',
         text: 'You want to delete this banner ?',
@@ -28,7 +28,7 @@ function confirmDelete(addId) {
         if (result.isConfirmed) {
             // AJAX call to delete
             $.ajax({
-                url: "<?php echo base_url('banner/delete'); ?>/" + addId,
+                url: "<?php echo base_url('banner/delete'); ?>/" + theId,
                 method: "POST",
                 dataType: "json",
                 success: function (response) {
@@ -101,5 +101,46 @@ error: function(xhr) {
 }
         });
     });
+});
+/************************************************/
+
+
+var baseUrl = "<?= base_url() ?>";
+
+$('#imageSubmit').click(function(e) {
+	$('#imageSubmit').prop('disabled', true);
+    e.preventDefault(); // Important to prevent normal form submit
+    var url = baseUrl + "banner/save"; // Correct route
+
+    $.post(url, $('#banner_add').serialize(), function(response) {
+       // $('#createstaff')[0].reset();
+
+        if (response.status == 1) { $('#messageBox')
+                .removeClass('alert-danger')
+                .addClass('alert-success')
+                .text(response.msg || 'Banner created successfully!')
+                .show();
+				
+
+            // Wait, then redirect
+            setTimeout(function() {
+				$('#imageSubmit').prop('disabled', false);
+                window.location.href = baseUrl + "banner/"; // Update this path to your Manage Staff page
+            },300);
+        } 
+		else {
+            $('#messageBox')
+                .removeClass('alert-success')
+                .addClass('alert-danger')
+                .text(response.msg || 'Please upload the image')
+                .show();
+				$('#imageSubmit').prop('disabled', false);
+				
+        }
+		setTimeout(function() {
+			
+                $('#messageBox').empty().hide();
+            },3000);
+    }, 'json');
 });
 </script>

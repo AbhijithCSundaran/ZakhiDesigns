@@ -85,7 +85,7 @@
                                                                 </div>
 																</td>
 																	<td>
-																		<a href="<?= base_url('banner/view/'. $row['the_Id']); ?>">
+																		<a href="<?= base_url('banner/add/'. $row['the_Id']); ?>">
 																			<i class="bi bi-pencil-square"></i>
 																		</a>   &nbsp;                                                  
 																			<i class="bi bi-trash text-danger icon-clickable" onclick="confirmDelete(<?= $row['the_Id']; ?>)"></i>

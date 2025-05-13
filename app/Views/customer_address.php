@@ -29,22 +29,27 @@
             <div class="page-wrapper">
                 <!-- Page-body start -->
                 <div class="page-body">
+					<?php if (!empty($user)) : ?>
+						<h5>Delivery address by <?= esc($user[0]['cust_Name']); ?></h5>
+					<?php endif; ?>
 				  <div class="row">	
 				  <div class="col-xl-4">
 						
 							<!-- Tooltip style 2 card start -->
 							<div class="card o-visible">
 								<div class="card-header">
-									<h5>Name</h5>
+									
 								</div>
 								<div class="card-block">
 								
 									<p>
 									</p>
+										<div class="card-block d-flex justify-content-center align-items-center" style="height: 140px;">
+											<a href="<?= base_url('customer_address/view/' . $add_CustId); ?>" class="btn btn-outline-primary">
+												<i class="fa fa-plus"></i> Add Address
+											</a>
+										</div>
 										
-										<a href="<?= base_url('customer_address/view/'. $add_CustId); ?>" class="btn btn-outline-primary">
-											<i class="fa fa-plus"></i> Add Address
-										</a>
 									</div>
 								</div>
 								

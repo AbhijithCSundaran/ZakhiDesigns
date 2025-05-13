@@ -75,7 +75,7 @@ class Staff extends BaseController
 		$newPass   	   = $this->input->getPost('new_password');
 
 		// Validate name
-		if (!preg_match('/^[a-zA-Z]+$/', $staffname)) {
+		if (!preg_match('/^[a-zA-Z ]+$/', $staffname)) {
 			return $this->response->setJSON(['status' => 'error', 'msg' => 'Please enter name correctly.']);
 		}
 
@@ -133,8 +133,8 @@ class Staff extends BaseController
 				'us_Role'       => 2,
 				'us_Password'   => md5($password),
 				'us_createdon'  => date("Y-m-d H:i:s"),
-				'us_createdby'  => $this->session->get('zd_id'),
-				'us_modifyby'   => $this->session->get('zd_id'),
+				'us_createdby'  => $this->session->get('zd_uid'),
+				'us_modifyby'   => $this->session->get('zd_uid'),
 			];
 
 			$staffModel->createStaff($data);

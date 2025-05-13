@@ -27,8 +27,6 @@ class ProductImageModel extends Model {
          public function productimageInsert($data) {
             return $this->db->table('product_image')->insert($data);
         }
-       
-     
         public function updateProductimage($id, $data)
         {
             return $this->db->table('product_image')->where('pri_Id', $id) ->update($data);

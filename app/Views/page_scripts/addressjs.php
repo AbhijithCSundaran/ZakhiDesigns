@@ -2,7 +2,7 @@
 function confirmDelete(addId) {
     Swal.fire({
         title: 'Are you sure?',
-        text: 'You want to delete this customer ?',
+        text: 'You want to delete this customer address ?',
         icon: 'warning',
         showCancelButton: true,
         confirmButtonText: 'Delete',
@@ -45,10 +45,14 @@ $('#custSubmit').prop('disabled', true);
                 .addClass('alert-success')
                 .text(response.msg || 'Customer address created successfully!')
                 .show();
-
+				 // Extract cust_id from the redirect URL
+				let redirectUrl = response.redirect;
+				let parts = redirectUrl.split('/');
+				let cust_id = parts[parts.length - 1]; // "1"
             // Wait, then redirect
             setTimeout(function() {
 				$('#custSubmit').prop('disabled', false);
+				window.location.href = baseUrl + "customer/location/" + cust_id;
             }, 3000);
         } 
 		else {

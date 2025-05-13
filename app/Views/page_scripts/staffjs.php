@@ -46,9 +46,7 @@ $(document).ready(function () {
 
     $('#mobile').on('input', function () {
         const value = $(this).val().trim();
-        if (!value) {
-            $('#error-mobile').text('Phone number is required.');
-        } else if (!phonePattern.test(value)) {
+		if (!phonePattern.test(value)) {
             $('#error-mobile').text('Phone number must be 10 digits.');
         } else {
             $('#error-mobile').text('');

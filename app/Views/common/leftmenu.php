@@ -34,8 +34,6 @@
                                       <span class="pcoded-mcaret"></span>
                                   </a>
                               </li>
-
-                              
                               <li class="<?= ($segment == 'staff') ? 'active' : '' ?>">
                                     <a href="<?php echo base_url('staff') ?>" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-layers"></i><b>FC</b></span>

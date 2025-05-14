@@ -52,10 +52,6 @@ $routes->post('product/deletevideo','product::deleteVideo');
 
 
 
-//Product images
-$routes->get('productimage','Productimage::index');
-$routes->get('productimage/add', 'ProductImage::addProductImage');
-$routes->post('productimage/save', 'ProductImage::saveProductImage');
 
 //Staff
 $routes->get('staff', 'Staff::index');

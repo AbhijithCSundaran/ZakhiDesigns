@@ -95,6 +95,9 @@
                                                                 </div>
                                                             </td>
                                                             <td>
+                                                                 <a href="<?= base_url('product/edit/'. $prod->pr_Id); ?>">
+																<i class="bi bi-pencil-square p-2"></i>
+															</a> 
 
                                                                  <i class="bi bi-trash text-danger icon-clickable"
                                                                     onclick="confirmDelete(<?= $prod->pr_Id; ?>)">
@@ -109,9 +112,13 @@
                                                                     onclick="openProductModal(<?= $prod->pr_Id ?>, '<?= $prod->pr_Name ?>')"
                                                                     style="cursor: pointer;">
 
-                                                                <img class="img-size"
+                                                                  <img class="img-size open-video-modal"
                                                                     src="<?php echo base_url().ASSET_PATH; ?>assets/images/video_add.ico"
-                                                                    alt="video-add">
+                                                                    alt="video-add"  data-toggle="modal" data-target="#videoModal"
+                                                                    data-product-id="<?= $prod->pr_Id; ?>"
+                                                                    data-product-name="<?= $prod->pr_Name; ?>"
+                                                                    onclick="openvideoModal(<?= $prod->pr_Id ?>, '<?= $prod->pr_Name ?>')"
+                                                                    style="cursor: pointer;">
 
                                                             </td>
                                                         </tr>

@@ -21,6 +21,13 @@ class ProductModel extends Model {
         ->getResult();
 }
 
+ public function getProductByid($id){
+            return $this->db->table('product')
+            ->where('pr_Id', $id)
+            ->get()
+            ->getRow(); 
+    }
+
         
         
        
@@ -113,11 +120,30 @@ public function delete_image($product_id, $image_name)
 		}
   
         
-        
+         public function updateProductVideo($productId, $video)
+    {
+       return $this->db->table('product')
+        ->where('pr_Id', $productId)
+        ->set(['product_video' => $video])
+        ->update();
 
- 
-    
-   
     }
+
+    public function getVideo($productId)
+    {
+        return $this->db->table('product')
+        ->select('product_video')
+        ->where('pr_Id', $productId)
+        ->get()
+        ->getRow();
+    }
+
+    public function deleteProductVideo($productId)
+    {
+        return $this->db->table('product')
+    ->where('pr_Id', $productId)
+    ->update(['product_video' => null]);
+     }
+}
 
 ?>

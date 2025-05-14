@@ -23,6 +23,7 @@ class Product extends BaseController
 		$template.= view('common/leftmenu');
 		$template.= view('product', $data);
         $template.= view('product_add_modal');
+        $template.= view('product_video_modal');
 		$template.= view('common/footer');
         $template .= view('page_scripts/productjs');
         return $template;
@@ -36,7 +37,20 @@ public function addProduct($pr_id = null)
     }
 
     $data = [];
-   $data['categories'] = $this->productModel->getAllCategories(); // NEW function
+   $data['categories'] = $this->productModel->getAllCategories(); 
+
+      if ($pr_id) {
+        $product = $this->productModel->getProductByid($pr_id);
+        
+		
+
+        if (!$pr_id) {
+            return redirect()->to('product')->with('error', 'product not found');
+        }
+
+        $data['product'] = (array) $product;
+    }
+
     $template = view('common/header');
     $template .= view('common/leftmenu');
     $template .= view('product_add', $data);
@@ -68,9 +82,15 @@ public function saveProduct() {
     $reset_stock = $this->input->getPost('reset_stock');
     $discount_value = $this->input->getPost('discount_value');
     $discount_type = $this->input->getPost('discount_type');
+    $available_color = $this->input->getPost('aval_colors');
+    $size = $this->input->getPost('size');
+    $sleeve_style = $this->input->getPost('sleeve_style');
+    $fabric = $this->input->getPost('fabric');
+    $stitching = $this->input->getPost('stitching');
+
 
     // Validate required fields
-    if (!$cat_id || !$sub_id || !$discount_value || !$discount_type || !$product_name || !$product_code || !$mrp || !$selling_price) {
+    if (!$cat_id || !$product_name || !$product_code || !$mrp) {
         return $this->response->setJSON([
             'status' => 'error',
             'message' => 'All required fields must be filled.'
@@ -90,6 +110,11 @@ public function saveProduct() {
         'sub_Id' => $sub_id,
         'pr_Stock' => $product_stock,
         'pr_Reset_Stock' => $reset_stock,
+        'pr_Aval_Colors' => $available_color,
+        'pr_Size' => is_array($size) ? implode(',', $size) : '',
+        'pr_Sleeve_Style' => $sleeve_style,
+        'pr_Fabric' => $fabric,
+        'pr_Stitch_Type' => $stitching,
         'pr_Status' => 1,
         'pr_modifyby' => $this->session->get('zd_uid'),
         'pr_modifyon' => date("Y-m-d H:i:s"),
@@ -230,6 +255,101 @@ public function deleteProductImage()
         'message' => $deleted ? 'Image deleted successfully.' : 'Image not deleted from DB.'
     ]);
 }
+
+
+public function ProductuploadVideo()
+{
+    $productId = $this->request->getPost('product_id');
+    $videoFile = $this->request->getFile('video');
+
+    if ($videoFile && $videoFile->isValid() && !$videoFile->hasMoved()) {
+        $newName = $videoFile->getRandomName();
+        $videoFile->move('uploads/productmedia', $newName); 
+
+        
+        $productModel =new ProductModel();
+        $videoproduct =  $productModel->updateProductVideo($productId, $newName); 
+
+        return $this->response->setJSON([
+            'status' => 'success',
+            'message' => 'Video uploaded successfully.',
+            'video' => $newName
+        ]);
+    } else {
+        return $this->response->setStatusCode(400)->setJSON([
+            'status' => 'error',
+            'message' => 'Invalid video file.'
+        ]);
+    }
+}
+
+// public function getVideo()
+// {
+//     $productId = $this->request->getPost('product_id');
+
+//     $productModel = new \App\Models\ProductModel();
+//     $product = $productModel->getVideo($productId);
+
+//     if ($product && $product->product_video) {
+//         return $this->response->setJSON([
+//             'status' => 'success',
+//             'video' => $product->product_video
+//         ]);
+//     } else {
+//         return $this->response->setJSON([
+//             'status' => 'success',
+//             'video' => null
+//         ]);
+//     }
+// }
+
+
+public function deleteVideo()
+{
+    $request = service('request');
+    $productId = $request->getPost('product_id');
+    $videoName = $request->getPost('video_name');
+
+    if (!$productId || !$videoName) {
+        return $this->response->setJSON([
+            'status' => 'error',
+            'message' => 'Missing product_id or video_name'
+        ]);
+    }
+
+    $filePath = FCPATH . 'uploads/productmedia/' . $videoName;
+
+    if (file_exists($filePath)) {
+        unlink($filePath);
+    }
+
+    $productModel = new \App\Models\ProductModel();
+    $productModel->deleteProductVideo($productId);
+
+    return $this->response->setJSON(['status' => 'success']);
+}
+
+public function getVideo()
+{
+    $request = service('request');
+    $productId = $request->getPost('product_id');
+
+    $productModel = new \App\Models\ProductModel();
+    $product = $productModel->getVideo($productId);
+
+    if ($product && $product->product_video) {
+        return $this->response->setJSON([
+            'status' => 'success',
+            'video' => $product->product_video
+        ]);
+    }
+
+    return $this->response->setJSON(['status' => 'error', 'message' => 'No video found']);
+}
+
+
+
+
 
 
 

@@ -55,11 +55,11 @@ $('#categoryName').on('change', function() {
     var subSelect = $('#subcategoryName');
     var messageElement = $('#noSubcategoryMsg');
 
-    subSelect.empty(); 
+    subSelect.empty();
 
     if (categoryId) {
         $.ajax({
-            url: baseUrl + "product/get-subcategories", 
+            url: baseUrl + "product/get-subcategories",
             type: "POST",
             data: {
                 cat_id: categoryId
@@ -68,14 +68,14 @@ $('#categoryName').on('change', function() {
             success: function(response) {
                 if (response.length === 0) {
                     subSelect.append('<option value="">-- No Subcategory Available --</option>');
-                    messageElement.show(); 
+                    messageElement.show();
                 } else {
                     subSelect.append('<option value="">-- Select Subcategory --</option>');
                     $.each(response, function(index, sub) {
                         subSelect.append('<option value="' + sub.sub_Id + '">' + sub
                             .sub_Category_Name + '</option>');
                     });
-                    messageElement.hide(); 
+                    messageElement.hide();
                 }
             },
             error: function(xhr) {
@@ -110,9 +110,9 @@ function handleFiles(files) {
     formData.append('product_id', productId);
 
     fetch("<?= base_url('product/upload-media') ?>", {
-        method: 'POST',
-        body: formData,
-    })
+            method: 'POST',
+            body: formData,
+        })
         .then(response => response.json())
         .then(data => {
             if (data.success === true) {
@@ -145,12 +145,20 @@ function openProductModal(productId, productName) {
 }
 
 //modal does' not close properly
-$(document).ready(function () {
-    $('#exampleModal').on('hidden.bs.modal', function () {
+$(document).ready(function() {
+    $('#exampleModal').on('hidden.bs.modal', function() {
         $('body').removeClass('modal-open');
         $('.modal-backdrop').remove();
     });
 });
+//modal does' not close properly
+$(document).ready(function() {
+    $('#videoModal').on('hidden.bs.modal', function() {
+        $('body').removeClass('modal-open');
+        $('.modal-backdrop').remove();
+    });
+});
+
 
 
 //Image listed the Modal
@@ -179,36 +187,39 @@ function loadProductImages(productId) {
                     const delIcon = document.createElement('span');
                     delIcon.innerHTML = '&times;';
                     delIcon.style.position = 'absolute';
-                    delIcon.style.top = '5px';
-                    delIcon.style.right = '10px';
+                    delIcon.style.top = '-21px';
+                    delIcon.style.right = '-8px';
                     delIcon.style.cursor = 'pointer';
                     delIcon.style.color = 'red';
                     delIcon.style.fontSize = '24px';
                     delIcon.title = 'Delete this image';
 
                     // Delete click event
-                    delIcon.onclick = function () {
+                    delIcon.onclick = function() {
                         if (confirm('Are you sure you want to delete this image?')) {
                             fetch(`<?= base_url('product/delete-product-image') ?>`, {
-                                method: 'POST',
-                                headers: {
-                                    'Content-Type': 'application/json',
-                                    'X-Requested-With': 'XMLHttpRequest'
-                                },
-                                body: JSON.stringify({ product_id: productId, image: imgName })
-                            })
-                            .then(res => res.json())
-                            .then(result => {
-                                if (result.success) {
-                                    wrapper.remove(); // Remove image from DOM
-                                } else {
-                                    alert('Failed to delete image.');
-                                }
-                            })
-                            .catch(err => {
-                                console.error('Delete error:', err);
-                                alert('Error deleting image.');
-                            });
+                                    method: 'POST',
+                                    headers: {
+                                        'Content-Type': 'application/json',
+                                        'X-Requested-With': 'XMLHttpRequest'
+                                    },
+                                    body: JSON.stringify({
+                                        product_id: productId,
+                                        image: imgName
+                                    })
+                                })
+                                .then(res => res.json())
+                                .then(result => {
+                                    if (result.success) {
+                                        wrapper.remove(); // Remove image from DOM
+                                    } else {
+                                        alert('Failed to delete image.');
+                                    }
+                                })
+                                .catch(err => {
+                                    console.error('Delete error:', err);
+                                    alert('Error deleting image.');
+                                });
                         }
                     };
 
@@ -242,7 +253,7 @@ function confirmDelete(prId) {
                 url: "<?php echo base_url('product/delete'); ?>/" + prId,
                 method: "POST",
                 dataType: "json",
-                success: function (response) {
+                success: function(response) {
                     if (response.success) {
                         Swal.fire('Deleted!', response.msg, 'success');
                         setTimeout(() => location.reload(), 1000);
@@ -250,14 +261,125 @@ function confirmDelete(prId) {
                         Swal.fire('Error', response.msg, 'error');
                     }
                 },
-                error: function () {
+                error: function() {
                     Swal.fire('Error', 'Something went wrong.', 'error');
                 }
             });
         }
     });
-   
+
 }
+
+function openvideoModal(productVideoId, productsName) {
+    document.getElementById('productVideoId').value = productVideoId;
+    document.getElementById('productsName').textContent = productsName;
+    $('#videoModal').modal('show');
+}
+
+// vide AJAX Upload
+
+$(document).ready(function() {
+    $('#filevideo').on('change', function() {
+        var formData = new FormData($('#videoUploadForm')[0]);
+
+        $.ajax({
+            url: '<?= base_url('product/video') ?>',
+            type: 'POST',
+            data: formData,
+            contentType: false,
+            processData: false,
+            success: function(response) {
+                if (response.status === 'success') {
+                    alert(response.message);
+                    // optionally preview video
+                } else {
+                    alert(response.message);
+                }
+            },
+            error: function(xhr) {
+                alert('Upload failed: ' + xhr.responseJSON?.message || 'Unknown error');
+            }
+        });
+    });
+});
+
+
+
+function openvideoModal(productId, productName) {
+    $('#productVideoId').val(productId);
+    $('#productsName').text(productName);
+
+
+    $('#vidoPreview').empty();
+    $.ajax({
+        url: '<?= base_url('product/getVideo') ?>',
+        method: 'POST',
+        data: {
+            product_id: productId
+        },
+        success: function(response) {
+            if (response.status === 'success' && response.video) {
+                const videoUrl = '<?= base_url('uploads/productmedia/') ?>' + response.video;
+                const videoElement = `
+    <div class="position-relative video-file d-inline-block">
+        <video width="300" height="200" controls>
+            <source src="${videoUrl}" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+        <span 
+        class="delete-video-btn" 
+        data-product-id="${productId}" 
+        data-video-name="${response.video}" 
+        title="Delete this video"
+        style="position: absolute; top: -10px; right: -13px; cursor: pointer; color: red; font-size: 30px;"
+    >
+        ×
+    </span>
+
+    </div>
+`;
+                $('#videoPreview').append(videoElement);
+            } else {
+                $('#videoPreview').append;
+            }
+        }
+    });
+
+    $('#videoModal').modal('show');
+}
+
+$(document).on('click', '.delete-video-btn', function(e) {
+    e.preventDefault();
+
+    if (!confirm("Are you sure you want to delete this video?")) return;
+
+    const productId = $(this).data('product-id');
+    const videoName = $(this).data('video-name');
+
+    $.ajax({
+        url: '<?= base_url('product/deletevideo') ?>',
+        type: 'POST',
+        data: {
+            product_id: productId,
+            video_name: videoName
+        },
+        success: function(response) {
+            if (response.status === 'success') {
+                $(e.target).closest('.video-file').remove();
+            } else {
+                alert('Failed to delete video');
+            }
+        },
+        error: function() {
+            alert('Error while deleting the video');
+        }
+    });
+});
+
+
+
+
+
 
 //Calculate the selling price depends on the discount value
 function calculateSellingPrice() {

@@ -33,12 +33,20 @@ $routes->post('subcategory/status', 'Subcategory::changeStatus');
 //Products
 $routes->get('product', 'Product::index');
 $routes->get('product/add', 'Product::addProduct');
+$routes->get('product/edit/(:num)', 'Product::addProduct/$1'); 
 $routes->post('product/save', 'Product::saveProduct');
 $routes->post('product/delete/(:any)', 'Product::deleteProduct/$1');
 $routes->post('product/get-subcategories', 'Product::getSubcategories');
 $routes->post('product/upload-media', 'Product::uploadMedia');
 $routes->get('product/get-product-images/(:num)', 'Product::getProductImages/$1');
 $routes->post('product/delete-product-image', 'Product::deleteProductImage');
+$routes->post('product/video', 'Product::ProductuploadVideo');
+$routes->post('product/getVideo', 'Product::getVideo');
+$routes->post('product/deletevideo','product::deleteVideo');
+
+
+
+
 
 
 

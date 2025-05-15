@@ -133,7 +133,7 @@ public function saveProduct() {
             'redirect' => base_url('product')
         ]);
     } else {
-        // Update existing product
+        
         $this->productModel->updateProduct($pr_id, $data);
 
         return $this->response->setJSON([
@@ -262,13 +262,32 @@ public function ProductuploadVideo()
     $productId = $this->request->getPost('product_id');
     $videoFile = $this->request->getFile('video');
 
+    // Check if video file is uploaded, valid, and not moved
     if ($videoFile && $videoFile->isValid() && !$videoFile->hasMoved()) {
-        $newName = $videoFile->getRandomName();
-        $videoFile->move('uploads/productmedia', $newName); 
 
-        
-        $productModel =new ProductModel();
-        $videoproduct =  $productModel->updateProductVideo($productId, $newName); 
+        // Check file size (max 4MB = 4 * 1024 * 1024 = 4194304 bytes)
+        if ($videoFile->getSize() > 4194304) {
+            return $this->response->setStatusCode(400)->setJSON([
+                'status' => 'error',
+                'message' => 'Your video size is too large. Please upload a video within 4MB.'
+            ]);
+        }
+
+        // Check MIME type (allow only video formats)
+        $allowedMimeTypes = ['video/mp4', 'video/avi', 'video/mpeg', 'video/quicktime', 'video/x-matroska'];
+        if (!in_array($videoFile->getMimeType(), $allowedMimeTypes)) {
+            return $this->response->setStatusCode(400)->setJSON([
+                'status' => 'error',
+                'message' => 'Only video files are allowed. Please upload a valid video format.'
+            ]);
+        }
+
+        // Proceed with storing the file
+        $newName = $videoFile->getRandomName();
+        $videoFile->move('uploads/productmedia', $newName);
+
+        $productModel = new ProductModel();
+        $productModel->updateProductVideo($productId, $newName);
 
         return $this->response->setJSON([
             'status' => 'success',
@@ -283,25 +302,8 @@ public function ProductuploadVideo()
     }
 }
 
-// public function getVideo()
-// {
-//     $productId = $this->request->getPost('product_id');
 
-//     $productModel = new \App\Models\ProductModel();
-//     $product = $productModel->getVideo($productId);
 
-//     if ($product && $product->product_video) {
-//         return $this->response->setJSON([
-//             'status' => 'success',
-//             'video' => $product->product_video
-//         ]);
-//     } else {
-//         return $this->response->setJSON([
-//             'status' => 'success',
-//             'video' => null
-//         ]);
-//     }
-// }
 
 
 public function deleteVideo()
@@ -317,17 +319,37 @@ public function deleteVideo()
         ]);
     }
 
+    // Build the full path
     $filePath = FCPATH . 'uploads/productmedia/' . $videoName;
 
     if (file_exists($filePath)) {
-        unlink($filePath);
+        if (!unlink($filePath)) {
+            return $this->response->setJSON([
+                'status' => 'error',
+                'message' => 'Failed to delete file. Check permissions.'
+            ]);
+        }
+    } else {
+        return $this->response->setJSON([
+            'status' => 'error',
+            'message' => 'File not found on server.'
+        ]);
     }
 
+    // Update DB to null the video field
     $productModel = new \App\Models\ProductModel();
-    $productModel->deleteProductVideo($productId);
+    $updateResult = $productModel->deleteProductVideo($productId);
 
-    return $this->response->setJSON(['status' => 'success']);
+    if ($updateResult) {
+        return $this->response->setJSON(['status' => 'success']);
+    } else {
+        return $this->response->setJSON([
+            'status' => 'error',
+            'message' => 'Failed to update database.'
+        ]);
+    }
 }
+
 
 public function getVideo()
 {
@@ -345,6 +367,39 @@ public function getVideo()
     }
 
     return $this->response->setJSON(['status' => 'error', 'message' => 'No video found']);
+}
+
+//ChangeStatus
+
+public function changeStatus()
+{
+	$prId = $this->request->getPost('pr_Id');
+	$newStatus = $this->request->getPost('pr_Status');
+
+	$productModel = new ProductModel();
+	$product = $productModel->getProductByid($prId);
+
+	if (!$product) {
+		return $this->response->setJSON([
+			'success' => false,
+			'message' => 'Product not found'
+		]);
+	}
+
+	$update = $productModel->updateProduct($prId, ['pr_Status' => $newStatus]);
+
+	if ($update) {
+		return $this->response->setJSON([
+			'success' => true,
+			'message' => 'Product Status Updated Successfully!',
+			'new_status' => $newStatus
+		]);
+	} else {
+		return $this->response->setJSON([
+			'success' => false,
+			'message' => 'Failed to update status'
+		]);
+	}
 }
 
 

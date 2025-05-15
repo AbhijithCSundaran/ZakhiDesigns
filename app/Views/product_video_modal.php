@@ -26,7 +26,7 @@
                         </div>
                     </div>
 
-                    <input type="hidden" id="productVideoId" name="product_id">
+                    <input type="hidden" id="productVideoId" name="product_id" value="">
                 </form>
 
                 <div class="mt-3" id="imagePreviewContainer">

@@ -5,17 +5,18 @@
             <div class="row align-items-center">
                 <div class="col-md-8">
                     <div class="page-header-title">
-                        <h5 class="m-b-10">Add Products</h5>
+                         <h5 class="m-b-10"><?= isset($product) ? 'Update Product' : 'Add Product'; ?></h5>
                         <p class="m-b-0">Welcome to Zakhi Designs</p>
                     </div>
                 </div>
                 <div class="col-md-4">
                     <ul class="breadcrumb-title">
                         <li class="breadcrumb-item">
-                            <a href="index.html"> <i class="fa fa-home"></i> </a>
+                            <a href="<?= base_url('dashboard'); ?>"> <i class="fa fa-home"></i> </a>
                         </li>
-                        <li class="breadcrumb-item"><a href="#!">Add Product</a>
-                        </li>
+                         <li class="breadcrumb-item"><a
+                                href="#"><?= isset($product) ? 'Update Product' : 'Add Product'; ?></a>
+                            </li>
                     </ul>
                 </div>
             </div>
@@ -57,8 +58,7 @@
                                                 <input type="text" class="form-control" name="product_code"
                                                     id="productCode"
                                                     value="<?= isset($product) ? ($product['pr_Code']) : '' ?>"
-                                                    placeholder="Enter the Product Code"
-                                                    oninput="this.value = this.value.replace(/[^0-9.]/g, '')">
+                                                    placeholder="Enter the Product Code">
                                             </div>
                                         </div>
                                         <div class="form-group row">
@@ -116,7 +116,6 @@
                                             </div>
                                         </div>
 
-
                                         <div class="form-group row">
                                             <label class="col-sm-3 col-form-label">Category Name<span
                                                     style="color: red;">*</span></label>
@@ -125,8 +124,10 @@
                                                     required>
                                                     <option value="">-- Select Category --</option>
                                                     <?php foreach ($categories as $cate): ?>
-                                                    <option value="<?= esc($cate->cat_Id); ?>">
-                                                        <?= esc($cate->cat_Name); ?></option>
+                                                    <option value="<?= esc($cate->cat_Id); ?>"
+                                                        <?= isset($product) && $product['cat_Id']  == $cate->cat_Id ? 'selected' : '' ?>>
+                                                        <?= esc($cate->cat_Name); ?>
+                                                    </option>
                                                     <?php endforeach; ?>
                                                 </select>
                                             </div>
@@ -136,13 +137,10 @@
                                         <div class="form-group row">
                                             <label class="col-sm-3 col-form-label">Subcategory Name</label>
                                             <div class="col-sm-7">
-                                                <select class="form-control fs-13" name="sub_id" id="subcategoryName"
-                                                    required>
+                                                <select class="form-control fs-13" name="sub_id" id="subcategoryName">
                                                     <option value="">-- Select Subcategory --</option>
                                                 </select>
-                                                <small id="noSubcategoryMsg" class="text-danger" style="display: none;">
-                                                    This category has no subcategory.
-                                                </small>
+                                               
                                             </div>
 
                                         </div>
@@ -176,14 +174,17 @@
                                                 <input type="text" class="form-control"
                                                     value="<?= isset($product) ? ($product['pr_Aval_Colors']) : '' ?>"
                                                     name="aval_colors" id="avalColors"
-                                                    placeholder="Enter avalilabe colors (Comma Sepereated)" />
-                                                <small>Colors seperated with comma. Hash code not requred.</small>
+                                                    placeholder="Enter avalilabe colors (Comma Seperated)" />
+                                                <small>Colors seperated with comma. Hash code not required.</small>
                                             </div>
                                         </div>
-                                        
+
                                         <?php
-                        $sizes = isset($product->pr_Size) ? array_map('trim', explode(',', $product->pr_Size)) : [];
-                            ?>
+                                        $sizes = isset($product['pr_Size']) ? 
+                                        array_map('trim', explode(',',$product['pr_Size'])) 
+                                        : [];
+                                        ?>
+
 
                                         <div class="form-group row">
                                             <label class="col-sm-3 col-form-label">Available Size</label>
@@ -237,7 +238,8 @@
                                             </div>
                                         </div>
                                         <div class="row justify-content-center">
-                                            <input type="hidden" name="pr_id">
+                                            <input type="hidden" name="pr_id" id="pr_id" value="<?= isset($product) ? $product['pr_Id'] : '' ?>">
+
                                             <div class="button-group">
                                                 <button type="button" class="btn btn-secondary"
                                                     onclick="window.location.href='<?= base_url('product'); ?>'">
@@ -245,7 +247,8 @@
                                                 </button>
                                                 <button type="button" class="btn btn-primary" id="productSubmit"
                                                     name="productSubmit">
-                                                    <i class="bi bi-check-circle"></i> Save
+                                                    <i class="bi bi-check-circle"></i>
+                                                    <?= isset($product) ? 'Update' : 'Save'; ?>
                                                 </button>
                                             </div>
                                         </div>

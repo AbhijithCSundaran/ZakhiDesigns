@@ -50,43 +50,65 @@ $('#productSubmit').click(function(e) {
 
 //Category and Subactegory listed the dropdown
 
-$('#categoryName').on('change', function() {
-    var categoryId = $(this).val();
-    var subSelect = $('#subcategoryName');
-    var messageElement = $('#noSubcategoryMsg');
+$(document).ready(function() {
+    var selectedCatId = "<?= $product['cat_Id'] ?? '' ?>";
+    var selectedSubId = "<?= $product['sub_Id'] ?? '' ?>";
 
-    subSelect.empty();
+    // Function to load subcategories based on category ID
+    function loadSubcategories(catId, preselectSubId = '') {
+        var subSelect = $('#subcategoryName');
+        var messageElement = $('#noSubcategoryMsg');
+        subSelect.empty();
 
-    if (categoryId) {
+        if (!catId) {
+            subSelect.append('<option value="">-- Select Subcategory --</option>');
+            return;
+        }
+
         $.ajax({
             url: baseUrl + "product/get-subcategories",
             type: "POST",
             data: {
-                cat_id: categoryId
+                cat_id: catId
             },
             dataType: "json",
             success: function(response) {
                 if (response.length === 0) {
                     subSelect.append('<option value="">-- No Subcategory Available --</option>');
-                    messageElement.show();
+                    if (messageElement) messageElement.show();
                 } else {
                     subSelect.append('<option value="">-- Select Subcategory --</option>');
+
                     $.each(response, function(index, sub) {
-                        subSelect.append('<option value="' + sub.sub_Id + '">' + sub
-                            .sub_Category_Name + '</option>');
+                        let selected = (sub.sub_Id == preselectSubId) ? 'selected' : '';
+                        subSelect.append('<option value="' + sub.sub_Id + '" ' + selected +
+                            '>' + sub.sub_Category_Name + '</option>');
                     });
-                    messageElement.hide();
+
+                    if (messageElement) messageElement.hide();
                 }
             },
             error: function(xhr) {
                 console.error("Error fetching subcategories:", xhr.responseText);
             }
         });
-    } else {
-        subSelect.append('<option value="">-- Select Subcategory --</option>');
-        messageElement.hide();
     }
+
+    // Prepopulate (on edit)
+    if (selectedCatId) {
+        $('#categoryName').val(selectedCatId);
+        loadSubcategories(selectedCatId, selectedSubId);
+    }
+
+    // Handle category change (on add)
+    $('#categoryName').on('change', function() {
+        var catId = $(this).val();
+        loadSubcategories(catId);
+    });
 });
+
+
+
 
 
 //File Upload
@@ -148,13 +170,16 @@ function openProductModal(productId, productName) {
 $(document).ready(function() {
     $('#exampleModal').on('hidden.bs.modal', function() {
         $('body').removeClass('modal-open');
+        $('body').css('overflow', 'auto');
         $('.modal-backdrop').remove();
     });
 });
 //modal does' not close properly
 $(document).ready(function() {
     $('#videoModal').on('hidden.bs.modal', function() {
+        $('#videoPreview').empty();
         $('body').removeClass('modal-open');
+        $('body').css('overflow', 'auto');
         $('.modal-backdrop').remove();
     });
 });
@@ -276,41 +301,62 @@ function openvideoModal(productVideoId, productsName) {
     $('#videoModal').modal('show');
 }
 
+
+
 // vide AJAX Upload
+$('#filevideo').on('change', function() {
+    var file = this.files[0];
 
-$(document).ready(function() {
-    $('#filevideo').on('change', function() {
-        var formData = new FormData($('#videoUploadForm')[0]);
+    if (file) {
+        var maxSizeMB = 4;
+        var allowedTypes = ['video/mp4', 'video/avi', 'video/mpeg', 'video/quicktime', 'video/x-matroska'];
 
-        $.ajax({
-            url: '<?= base_url('product/video') ?>',
-            type: 'POST',
-            data: formData,
-            contentType: false,
-            processData: false,
-            success: function(response) {
-                if (response.status === 'success') {
-                    alert(response.message);
-                    // optionally preview video
-                } else {
-                    alert(response.message);
-                }
-            },
-            error: function(xhr) {
-                alert('Upload failed: ' + xhr.responseJSON?.message || 'Unknown error');
+        if (file.size > maxSizeMB * 1024 * 1024) {
+            alert('Your video size is too large. Please upload a video within 4MB.');
+            this.value = '';
+            return;
+        }
+
+        if (!allowedTypes.includes(file.type)) {
+            alert('Only video files are allowed. Please upload a valid video format.');
+            this.value = ''; 
+            return;
+        }
+    }
+
+    // Proceed to upload via AJAX
+    var formData = new FormData($('#videoUploadForm')[0]);
+
+    $.ajax({
+        url: '<?= base_url('product/video') ?>',
+        type: 'POST',
+        data: formData,
+        contentType: false,
+        processData: false,
+        success: function(response) {
+            if (response.status === 'success') {
+                alert(response.message);
+                const productId = $('#productVideoId').val();
+                loadProductVideo(productId);
+            } else {
+                alert(response.message);
             }
-        });
+        },
+        error: function(xhr) {
+            alert('Upload failed: ' + (xhr.responseJSON?.message || 'Unknown error'));
+        }
     });
 });
 
 
 
+//Load video on modal
+
 function openvideoModal(productId, productName) {
     $('#productVideoId').val(productId);
     $('#productsName').text(productName);
+    $('#videoPreview').empty(); // Clear previous video
 
-
-    $('#vidoPreview').empty();
     $.ajax({
         url: '<?= base_url('product/getVideo') ?>',
         method: 'POST',
@@ -321,32 +367,43 @@ function openvideoModal(productId, productName) {
             if (response.status === 'success' && response.video) {
                 const videoUrl = '<?= base_url('uploads/productmedia/') ?>' + response.video;
                 const videoElement = `
-    <div class="position-relative video-file d-inline-block">
-        <video width="300" height="200" controls>
-            <source src="${videoUrl}" type="video/mp4">
-            Your browser does not support the video tag.
-        </video>
-        <span 
-        class="delete-video-btn" 
-        data-product-id="${productId}" 
-        data-video-name="${response.video}" 
-        title="Delete this video"
-        style="position: absolute; top: -10px; right: -13px; cursor: pointer; color: red; font-size: 30px;"
-    >
-        ×
-    </span>
-
-    </div>
-`;
-                $('#videoPreview').append(videoElement);
+                    <div class="position-relative video-file d-inline-block">
+                        <video width="300" height="200" controls>
+                            <source src="${videoUrl}" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                        <span 
+                            class="delete-video-btn" 
+                            data-product-id="${productId}" 
+                            data-video-name="${response.video}" 
+                            title="Delete this video"
+                            style="position: absolute; top: -10px; right: -13px; cursor: pointer; color: red; font-size: 30px;">
+                            ×
+                        </span>
+                    </div>
+                `;
+                $('#videoPreview').append(videoElement).show();
+                $('#drop-area').hide();
             } else {
-                $('#videoPreview').append;
+                $('#videoPreview').hide();
+                $('#drop-area').show();
             }
+
+            $('#videoModal').modal('show');
+        },
+        error: function() {
+            // Fallback
+            $('#videoPreview').hide();
+            $('#drop-area').show();
+            $('#videoModal').modal('show');
         }
     });
-
-    $('#videoModal').modal('show');
 }
+
+
+
+
+//Delete video single video
 
 $(document).on('click', '.delete-video-btn', function(e) {
     e.preventDefault();
@@ -377,9 +434,63 @@ $(document).on('click', '.delete-video-btn', function(e) {
 });
 
 
+//Active Inactive status Change
+$(document).ready(function() {
+    $('.checkactive').on('change', function() {
+        let prId = $(this).val();
+        let status = $(this).prop('checked') ? 1 : 2;
+        $.ajax({
+            url: '<?= base_url('product/status'); ?>',
+            type: 'POST',
+            data: {
+                pr_Id: prId,
+                pr_Status: status
+            },
+            headers: {
+                'X-CSRF-TOKEN': '<?= csrf_hash(); ?>'
+            },
+            success: function(response) {
+                const messageBox = $('#messageBox');
+                $('html, body').animate({
+                    scrollTop: 0
+                }, 'fast');
 
+                if (response.message === 'Product Status Updated Successfully!') {
+                    messageBox
+                        .removeClass('alert-danger')
+                        .addClass('alert alert-success')
+                        .text(response.message)
+                        .fadeIn();
 
+                } else {
+                    messageBox
+                        .removeClass('alert-success')
+                        .addClass('alert alert-danger')
+                        .text(response.message)
+                        .fadeIn();
+                }
 
+                setTimeout(() => {
+                    messageBox.fadeOut();
+                }, 1000);
+            },
+
+            error: function(xhr) {
+                $('#messageBox')
+                    .removeClass('alert-success')
+                    .addClass('alert alert-danger')
+                    .text('Error updating status. Please try again later.')
+                    .fadeIn();
+
+                setTimeout(() => {
+                    $('#messageBox').fadeOut();
+                }, 1000);
+
+                console.error(xhr.responseText);
+            }
+        });
+    });
+});
 
 //Calculate the selling price depends on the discount value
 function calculateSellingPrice() {

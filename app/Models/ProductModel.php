@@ -21,17 +21,21 @@ class ProductModel extends Model {
         ->getResult();
 }
 
- public function getProductByid($id){
-            return $this->db->table('product')
-            ->where('pr_Id', $id)
-            ->get()
-            ->getRow(); 
-    }
 
-        
-        
-       
-        public function productInsert($data) {
+
+public function getProductByid($id)
+{
+    return $this->db->table('product p')
+        ->select('p.*, c.cat_Name, s.sub_Category_Name')
+        ->join('category c', 'c.cat_Id = p.cat_id', 'left')
+        ->join('subcategory s', 's.sub_Id = p.sub_id', 'left')
+        ->where('p.pr_Id', $id)
+        ->get()
+        ->getRow(); 
+}
+
+
+       public function productInsert($data) {
             return $this->db->table('product')->insert($data);
         }
        

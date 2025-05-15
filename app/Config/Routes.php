@@ -42,7 +42,8 @@ $routes->get('product/get-product-images/(:num)', 'Product::getProductImages/$1'
 $routes->post('product/delete-product-image', 'Product::deleteProductImage');
 $routes->post('product/video', 'Product::ProductuploadVideo');
 $routes->post('product/getVideo', 'Product::getVideo');
-$routes->post('product/deletevideo','product::deleteVideo');
+$routes->post('product/deletevideo','Product::deleteVideo');
+$routes->post('product/status', 'Product::changeStatus');
 
 
 

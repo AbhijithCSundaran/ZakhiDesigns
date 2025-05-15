@@ -12,9 +12,9 @@
                 <div class="col-md-4">
                     <ul class="breadcrumb-title">
                         <li class="breadcrumb-item">
-                            <a href="index.html"> <i class="fa fa-home"></i> </a>
+                             <a href="<?= base_url('dashboard'); ?>"> <i class="fa fa-home"></i> </a>
                         </li>
-                        <li class="breadcrumb-item"><a href="#!">Product</a>
+                        <li class="breadcrumb-item"><a href="#">Product</a>
                         </li>
                     </ul>
                 </div>
@@ -66,8 +66,8 @@
                                                             <th>MRP</th>
                                                             <th>Selling Price</th>
                                                             <!-- <th>Discount Type</th> -->
-                                                            <th>Discount Value</th>
-                                                            <th>Product Stock</th>
+                                                            <th>Discount</th>
+                                                            <th>Stock</th>
                                                             <th>Status</th>
                                                             <th>Action</th>
                                                         </tr>
@@ -101,7 +101,7 @@
 
                                                                  <i class="bi bi-trash text-danger icon-clickable"
                                                                     onclick="confirmDelete(<?= $prod->pr_Id; ?>)">
-                                                                </i>
+                                                                </i> 
 
 
                                                                 <img class="img-size open-image-modal"

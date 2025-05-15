@@ -39,7 +39,8 @@
                                 </div>
                                 <div class="card-block">
 
-                                    <form name="createProductImage" id="createProductImage" method="post">
+                                    <form name="createProductImage" id="createProductImage" method="post"
+                                        action="<?= base_url('productimage/save') ?>" enctype="multipart/form-data">
                                         <div class="form-group row">
                                             <label class="col-sm-3 col-form-label">Product Name <span
                                                     style="color: red;">*</span></label>
@@ -61,52 +62,37 @@
                                             </div>
                                         </div>
                                         <div class="form-group row">
-                                            <label class="col-sm-3 col-form-label">Upload the Product Image<span
-                                            style="color: red;">*</span></label>
-                                            <div class="col-sm-7">
-                                                <input type="file" class="form-control">
-                                            </div>
-                                        </div>
-                                        <div class="form-group row">
                                             <label class="col-sm-3 col-form-label">Product File Type <span
                                                     style="color: red;">*</span></label>
                                             <div class="col-sm-7">
-                                                <select class="form-control fs-13" name="file_type"
-                                                    id="fileType" required>
+                                                <select class="form-control fs-13" name="file_type" id="fileType"
+                                                    required>
                                                     <option value="">-- Select File Type --</option>
                                                     <option value="image">
                                                         Image</option>
-                                                    <option value="video"
-                                                       >
+                                                    <option value="video">
                                                         Video</option>
                                                 </select>
                                             </div>
                                         </div>
                                         <div class="form-group row">
-                                            <label class="col-sm-3 col-form-label">Product File Name<span
-                                            style="color: red;">*</span></label>
+                                            <label class="col-sm-3 col-form-label">Upload the Product Image<span
+                                                    style="color: red;">*</span></label>
                                             <div class="col-sm-7">
-                                                <input type="text" class="form-control" name="file_name" id="fileName"
-                                                 placeholder="Enter the product File Name">
+                                                <input type="file" class="form-control" name="media_files[]"
+                                                    id="media_files" multiple required>
                                             </div>
+
                                         </div>
-                                          
-
-
-
-
-
-
-
-
-
-
-
+                                        <div class="form-group row">
+                                            <div class="col-sm-7 offset-sm-3" id="imagePreview"
+                                                style="display: flex; flex-wrap: wrap; gap: 10px;"></div>
+                                        </div>
 
 
 
                                         <div class="row justify-content-center">
-                                            <input type="hidden" name="pr_id">
+                                            <input type="hidden" name="pri_id">
                                             <div class="button-group">
                                                 <button type="button" class="btn btn-secondary"
                                                     onclick="window.location.href='<?= base_url('productimage'); ?>'">
@@ -119,19 +105,20 @@
                                             </div>
                                         </div>
                                     </form>
-
-
                                 </div>
+
+
                             </div>
                         </div>
-
                     </div>
 
-
                 </div>
-                <!-- Page-body end -->
+
+
             </div>
-            <div id="styleSelector"> </div>
+            <!-- Page-body end -->
         </div>
+        <div id="styleSelector"> </div>
     </div>
+</div>
 </div>

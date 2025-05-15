@@ -65,15 +65,39 @@
                                                             <th>Slno</th>
                                                             <th>Product Name</th>
                                                             <th>Thumbnail image</th>
-                                                            <th>File Name</th>
                                                             <th>File Type</th>
-                                                           
                                                             <th>Status</th>
                                                             <th>Action</th>
                                                         </tr>
                                                     </thead>
                                                     <tbody>
-                                                   
+                                                        <?php foreach($productimages as $index => $prodimg) : ?>
+                                                        <tr>
+                                                            <td><?= $index + 1; ?></td>
+                                                            <td><?= ucwords($prodimg->pr_Name); ?></td>
+                                                            <td>
+                                                                <?php 
+                                                               $thumbnails = json_decode($prodimg->pri_Thumbnail, true);
+                                                                if (!empty($thumbnails)) {
+                                                                    foreach ($thumbnails as $thumb) {
+                                                                         echo '<img src="' . base_url('uploads/productmedia/' . $thumb['name']) . '" width="80" height="80" style="object-fit: cover; margin-right: 5px;" />';
+                                                                        }
+                                                                    }
+                                                                ?>
+                                                            </td>
+
+                                                            <td><?= $prodimg->pri_File_Type; ?></td>
+                                                            <td>
+
+                                                            </td>
+                                                            <td>
+
+
+                                                            </td>
+                                                        </tr>
+                                                        <?php endforeach; ?>
+                                                    </tbody>
+
                                                     </tbody>
 
                                                 </table>

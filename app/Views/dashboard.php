@@ -12,10 +12,8 @@
                                   </div>
                                   <div class="col-md-4">
                                       <ul class="breadcrumb-title">
-                                          <li class="breadcrumb-item">
-                                              <a href="index.html"> <i class="fa fa-home"></i> </a>
-                                          </li>
-                                          <li class="breadcrumb-item"><a href="#!">Dashboard</a>
+                                         
+                                          <li class="breadcrumb-item"><a href="#">Dashboard</a>
                                           </li>
                                       </ul>
                                   </div>
@@ -113,7 +111,7 @@
                                                         <div class="row align-items-center">
                                                             <div class="col-8">
                                                                 <h4 class="text-c-blue"><i class="bi bi-currency-rupee"></i>2,00,000</h4>
-                                                                <h6 class="text-muted m-b-0">Annual Sales Revenue</h6>
+                                                                <h6 class="text-muted m-b-0">Annual Revenue</h6>
                                                             </div>
                                                             <div class="col-4 text-right">
                                                             <i class="bi bi-wallet f-28"></i>

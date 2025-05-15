@@ -13,10 +13,10 @@
                 <div class="col-md-4">
                     <ul class="breadcrumb-title">
                         <li class="breadcrumb-item">
-                            <a href="index.html"> <i class="fa fa-home"></i> </a>
+                            <a href="<?= base_url('dashboard'); ?>"> <i class="fa fa-home"></i> </a>
                         </li>
                         <li class="breadcrumb-item"><a
-                                href="#!"><?= isset($subcategory) ? 'Update Subcategory' : 'Add Subcategory'; ?></a>
+                                href="#"><?= isset($subcategory) ? 'Update Subcategory' : 'Add Subcategory'; ?></a>
                             </li>
                     </ul>
                 </div>

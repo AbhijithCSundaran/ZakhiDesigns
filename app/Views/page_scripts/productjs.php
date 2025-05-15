@@ -107,10 +107,6 @@ $(document).ready(function() {
     });
 });
 
-
-
-
-
 //File Upload
 
 function handleFiles(files) {
@@ -319,7 +315,7 @@ $('#filevideo').on('change', function() {
 
         if (!allowedTypes.includes(file.type)) {
             alert('Only video files are allowed. Please upload a valid video format.');
-            this.value = ''; 
+            this.value = '';
             return;
         }
     }
@@ -348,14 +344,12 @@ $('#filevideo').on('change', function() {
     });
 });
 
-
-
 //Load video on modal
 
 function openvideoModal(productId, productName) {
     $('#productVideoId').val(productId);
     $('#productsName').text(productName);
-    $('#videoPreview').empty(); // Clear previous video
+    $('#videoPreview').empty(); // Clear previous preview
 
     $.ajax({
         url: '<?= base_url('product/getVideo') ?>',
@@ -382,23 +376,24 @@ function openvideoModal(productId, productName) {
                         </span>
                     </div>
                 `;
-                $('#videoPreview').append(videoElement).show();
-                $('#drop-area').hide();
+                $('#videoPreview').html(videoElement).show();
+                $('#uploadSection').hide(); // hide upload area
             } else {
                 $('#videoPreview').hide();
-                $('#drop-area').show();
+                $('#uploadSection').show(); // show upload area
             }
 
             $('#videoModal').modal('show');
         },
         error: function() {
-            // Fallback
             $('#videoPreview').hide();
-            $('#drop-area').show();
+            $('#uploadSection').show();
             $('#videoModal').modal('show');
         }
     });
 }
+
+
 
 
 

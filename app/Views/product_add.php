@@ -46,7 +46,7 @@
                                                     style="color: red;">*</span></label>
                                             <div class="col-sm-7">
                                                 <input type="text" name="product_name" id="productName"
-                                                    class="form-control"
+                                                    class="form-control"  maxlength="50" 
                                                     value="<?= isset($product) ? ($product['pr_Name']) : '' ?>"
                                                     placeholder="Enter the Product Name">
                                             </div>

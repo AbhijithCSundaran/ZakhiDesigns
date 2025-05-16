@@ -108,42 +108,96 @@ class Banner extends BaseController
 		}
 		
 	}
-	 public function createnew()
+	public function createnew()
 	{
+		$bannerModel = new BannerModel();
 
-    $image = $this->request->getFile('banner_image');
+		$the_id      = $this->request->getPost('the_id');
+		$bannerName  = $this->request->getPost('file_name');
+		$description = $this->request->getPost('description');
+		$image       = $this->request->getFile('banner_image');
+		$newName     = null;
 
-    if ($image && $image->isValid() && !$image->hasMoved()) {
-        $newName = $image->getRandomName();
-        $image->move(ROOTPATH . 'public/uploads', $newName);
+		// Validate name format
+		if (!preg_match('/^[a-zA-Z ]+$/', $bannerName)) {
+			return $this->response->setJSON(['status' => 'error', 'msg' => 'Please enter name correctly.']);
+		}
 
-        // Get additional form data properly (CI4 syntax)
-        $the_id         = $this->request->getPost('the_id');
-        $bannerName     = $this->request->getPost('file_name');
-        $description    = $this->request->getPost('description');
+		// Check if image is uploaded
+		if ($image && $image->getError() == UPLOAD_ERR_OK && !$image->hasMoved()) {
+			$newName = $image->getRandomName();
+			$image->move(ROOTPATH . 'public/uploads', $newName);
+		}
+		if($bannerName && $newName) {
+		// Create
+		if (empty($the_id)) {
+			$data = [
+				'the_Name'         => $bannerName,
+				'the_Description'  => $description,
+				'the_Home_Banner'  => $newName ?? '',
+				'the_Status'       => 1,
+				'the_createdon'    => date("Y-m-d H:i:s"),
+				'the_createdby'    => $this->session->get('zd_uid'),
+				'the_modifyby'     => $this->session->get('zd_uid'),
+			];
 
-        // Save to database (assuming you have a BannerModel)
-        //$model = new \App\Models\BannerModel();
-        $data([
-            'the_id'      		 => $the_id,
-            'the_Home_Banner'    => $newName,
-            'file_name'   => $bannerName,
-            'description' => $description,
-        ]);
+			$bannerModel->createBanner($data);
 
-        return $this->response->setJSON([
-            'status' => 1,
-            'msg'    => 'Image and data uploaded successfully.',
-        ]);
+			return $this->response->setJSON([
+				'status' => 1,
+				'msg'    => 'Banner uploaded successfully.'
+			]);
+		} 
+		
+		// Update
+		else {
+			$existing = $bannerModel->getThemesByid($the_id);
+			
+				if (!$existing) {
+				return $this->response->setJSON([
+					'status' => 0,
+					'msg'    => 'Banner not found for update.'
+				]);
+			}
+			
+			
+			if ($newName && !empty($existing->the_Home_Banner)) {
+        $oldPath = ROOTPATH . 'public/uploads/' . $existing->the_Home_Banner;
+        if (file_exists($oldPath)) {
+            unlink($oldPath);
+        }
     }
 
-    // Return error if file is not valid
-    return $this->response->setJSON([
-        'status' => 0,
-        'msg'    => 'Image upload failed or no file selected.',
-    ]);
 
+		
 
+			$data = [
+				'the_Name'         => $bannerName,
+				'the_Description'  => $description,
+				'the_modifyby'     => $this->session->get('zd_uid'),
+				//'the_Home_Banner'  => $newName ?? $existing['the_Home_Banner']  // retain old name if no new image
+			   	'the_Home_Banner' => $newName ?? $existing->the_Home_Banner
+
+			];
+
+			$bannerModel->modifyBanner($the_id, $data);
+
+			return $this->response->setJSON([
+				'status'   => 1,
+				'msg'      => 'Banner updated successfully.',
+				'redirect' => base_url('banner')
+			]);
+		}
 	}
+		else {
+			return $this->response->setJSON([
+				'status' => 'error',
+				'msg' => 'All mandatory fields are required.'
+			]);
+		}
+	}
+
+
+
 }
 

@@ -42,7 +42,7 @@
                                             <label class="col-sm-3 col-form-label">Banner File Name<span
                                             style="color: red;">*</span></label>
                                             <div class="col-sm-7">
-                                                <input type="text" class="form-control" name="file_name" value="<?= isset($banner) ? ($banner['the_Name']) : '' ?>" id="fileName"
+                                                <input type="text" class="form-control" name="file_name" value="" id="fileName"
                                                  placeholder="Enter the Banner Name">
                                             </div>
                                         </div>
@@ -50,7 +50,7 @@
                                             <label class="col-sm-3 col-form-label">Upload the Image<span
                                             style="color: red;">*</span></label>
                                             <div class="col-sm-7">
-                                                <input type="file" name="banner_image" id="banner_image" value="<?= isset($banner) ? ($banner['the_Home_Banner']) : '' ?>" class="form-control">
+                                                <input type="file" name="banner_image" id="banner_image" value="" class="form-control">
                                             <?php if (isset($banner) && !empty($banner['the_Home_Banner'])): ?>
 												<img id="preview"
 													 src="<?= base_url('/public/uploads/' . $banner['the_Home_Banner']); ?>"
@@ -65,15 +65,50 @@
 											
                                         </div>
 										<div class="form-group row">
+                                            <label class="col-sm-3 col-form-label">Category Name<span
+                                            style="color: red;">*</span></label>
+                                            <div class="col-sm-7">
+                                                <select class="form-control fs-13" name="cat_id" id="categoryName" 
+                                                    required>
+                                                    <option value="">-- Select Category --</option>
+                                                    <?php if (!empty($category)) : ?>
+                                                    <?php foreach ($category as $cate): ?>
+                                                    <option value="<?= esc($cate->cat_Id); ?>"
+                                                        <?= (isset($subcategory) && $subcategory['cat_Id'] == $cate->cat_Id) ? 'selected' : ''; ?>>
+                                                        <?= esc($cate->cat_Name); ?>
+                                                    </option>
+                                                    <?php endforeach; ?>
+                                                    <?php else : ?>
+                                                    <option value="">No Category Available</option>
+                                                    <?php endif; ?>
+
+                                                </select>
+                                            </div>
+                                        </div>
+										 <div class="form-group row">
+                                            <label class="col-sm-3 col-form-label">Subcategory Name<span
+                                                    style="color: red;">*</span></label>
+                                            <div class="col-sm-7">
+                                                <select class="form-control fs-13" name="sub_id" id="subcategoryName"
+                                                    required>
+                                                    <option value="">-- Select Subcategory --</option>
+                                                </select>
+                                                <small id="noSubcategoryMsg" class="text-danger" style="display: none;">
+                                                    This category has no subcategory.
+                                                </small>
+                                            </div>
+
+                                        </div>
+										<div class="form-group row">
                                             <label class="col-sm-3 col-form-label">Description</label>
                                             <div class="col-sm-7">
-                                                <input type="text" class="form-control" value="<?= isset($banner) ? ($banner['the_Description']) : '' ?>" name="description" id="description"
+                                                <input type="text" class="form-control" value="" name="description" id="description"
                                                  placeholder="Enter the description">
                                             </div>
                                         </div>
                                         
                                         <div class="row justify-content-center">
-                                            <input type="hidden" name="the_id" value="<?= isset($banner) ? $banner['the_Id'] : '' ?>">
+                                            <input type="hidden" name="the_id" value="">
                                             <div class="button-group">
                                                 <button type="button" class="btn btn-secondary"
                                                     onclick="window.location.href='<?= base_url('banner'); ?>'">

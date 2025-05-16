@@ -32,7 +32,7 @@ $('#productSubmit').click(function(e) {
                 .text(response.msg || 'Product created successfully!')
                 .show();
             setTimeout(function() {
-                window.location.href = baseUrl + "product/";
+                //window.location.href = baseUrl + "product/";
             }, 3000);
         } else {
             $('#messageBox')

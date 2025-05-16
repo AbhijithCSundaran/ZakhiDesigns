@@ -152,6 +152,7 @@
                                                     id="resetStock" placeholder="Enter the Product Reset Stock">
                                             </div>
                                         </div>
+										
                                         <div class="row justify-content-center">
                                             <input type="hidden" name="pr_id">
                                             <div class="button-group">

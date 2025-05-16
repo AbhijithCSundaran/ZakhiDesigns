@@ -96,10 +96,10 @@ class Customer_address extends BaseController
 		if (!preg_match('/^[a-zA-Z0-9.,\/\-_ ]+$/', $landmark)) {
 			return $this->response->setJSON(['status' => 'error', 'msg' => 'Please enter landmark correctly.']);
 		}
-		if (!preg_match('/^[a-zA-Z0-9.,\/\-_ ]+$/', $city)) {
+		if (!preg_match('/^[a-zA-Z.,\/\-_ ]+$/', $city)) {
 			return $this->response->setJSON(['status' => 'error', 'msg' => 'Please enter city correctly.']);
 		}
-		if (!preg_match('/^[a-zA-Z0-9.,\/\-_ ]+$/', $state)) {
+		if (!preg_match('/^[a-zA-Z.,\/\-_ ]+$/', $state)) {
 			return $this->response->setJSON(['status' => 'error', 'msg' => 'Please enter state correctly.']);
 		}
 		// Validate pincode

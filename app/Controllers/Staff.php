@@ -89,16 +89,16 @@ class Staff extends BaseController
 		}
 		//validate password length
 		
-		if (!empty($password) && (strlen($password) < 6 || strlen($password) > 15)) {
+		if (!empty($password) && (strlen($password) < 4 || strlen($password) > 10)) {
 			return $this->response->setJSON([
 				'status' => 'error',
-				'msg' => 'Password must be between 6 to 15 characters.'
+				'msg' => 'Password must be between 4 to 10 characters.'
 			]);
 		}
-		if (!empty($newPass) && (strlen($newPass) < 6 || strlen($newPass) > 15)) {
+		if (!empty($newPass) && (strlen($newPass) < 4 || strlen($newPass) > 10)) {
 			return $this->response->setJSON([
 				'status' => 'error',
-				'msg' => 'Password must be between 6 to 15 characters.'
+				'msg' => 'Password must be between 4 to 10 characters.'
 			]);
 		}
 	/* 	   // Allow only letters, numbers, @ and _
@@ -152,7 +152,7 @@ class Staff extends BaseController
 			if (!empty($oldpass) && $existing->us_Password !== md5($oldpass)) {
 				return $this->response->setJSON([
 					'status' => 'error',
-					'msg' => 'Password not matching with old password.'
+					'msg' => 'Old Password is incorrect.'
 				]);
 			}
 			else{

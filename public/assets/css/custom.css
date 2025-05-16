@@ -1,3 +1,9 @@
 .navbar-brand {
 	color:#FFF !important;
 }
+.prod-size input {
+	margin-left:10px;
+}
+.no-gutters {
+	margin:0px !important;
+}

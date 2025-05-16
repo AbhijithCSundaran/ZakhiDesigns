@@ -24,4 +24,9 @@ td {
   overflow: hidden;
   text-overflow: ellipsis;
   max-width: 250px; /* Adjust to your design */
+.prod-size input {
+	margin-left:10px;
+}
+.no-gutters {
+	margin:0px !important;
 }

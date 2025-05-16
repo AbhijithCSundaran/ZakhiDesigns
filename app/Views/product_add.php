@@ -237,6 +237,7 @@
                                                     placeholder="Enter the Stitching Style">
                                             </div>
                                         </div>
+										
                                         <div class="row justify-content-center">
                                             <input type="hidden" name="pr_id" id="pr_id" value="<?= isset($product) ? $product['pr_Id'] : '' ?>">
 

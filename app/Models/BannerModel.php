@@ -19,11 +19,9 @@ class BannerModel extends Model {
         public function createBanner($data) {
             return $this->db->table('theme')->insert($data);
         }
-        public function modifyBanner($id, $data)
-        {
-            return $this->db->table('theme')->where('the_Id', $id) ->update($data);
-        }
-
+		public function getThemesByid($id){
+            return $this->db->table('theme')->where('the_Id', $id)->get()->getRow(); 
+		}
 		public function getThemeByid($id){
             return $this->db->table('theme')->where('the_Id', $id)->get()->getRow(); 
 		}
@@ -34,6 +32,11 @@ class BannerModel extends Model {
         public function deleteBannerById($the_status, $the_id, $modified_by)
 		{
 			return $this->db->query("update theme set the_Status = '".$the_status."', the_modifyon=NOW(), the_modifyby='".$modified_by."' where the_Id = '".$the_id."'");
+		}
+		public function modifyBanner($the_id,$data) {
+					
+			$this->db->table('theme')->where('the_Id',$the_id)->update($data);
+			return $this->db->getLastQuery();
 		}
   
         

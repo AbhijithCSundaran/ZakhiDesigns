@@ -5,7 +5,7 @@
             <div class="row align-items-center">
                 <div class="col-md-8">
                     <div class="page-header-title">
-                        <h5 class="m-b-10">Banners</h5>
+                        <h5 class="m-b-10">Offer Banners</h5>
                         <p class="m-b-0">Welcome to Zakhi Designs</p>
                     </div>
                 </div>
@@ -14,7 +14,7 @@
                         <li class="breadcrumb-item">
                             <a href="index.html"> <i class="fa fa-home"></i> </a>
                         </li>
-                        <li class="breadcrumb-item"><a href="#!">Banners</a>
+                        <li class="breadcrumb-item"><a href="#!">Offer Banners</a>
                         </li>
                     </ul>
                 </div>
@@ -40,9 +40,9 @@
                                         <div class="col-md-3">
                                             <div class="row">
                                                 <div class="col-lg-12 d-flex justify-content-end p-2">
-                                                    <a href="<?= base_url('banner/add'); ?>"
+                                                    <a href="<?= base_url('offer_banner/add'); ?>"
                                                         class="btn btn-primary">
-                                                        Add Banners
+                                                        Add Offer Banners
                                                     </a>
                                                 </div>
                                             </div>
@@ -56,52 +56,18 @@
 										<div id="message" style="display:none;"></div>
 											<div id="messageBox" class="alert" style="display: none;"></div>
                                             <div class="table-responsive">
-                                                <table class="table table-hover" id="productList">
-                                                    <thead>
-                                                        <tr>
-                                                            <th>Slno</th>
-                                                            <th>File Name</th>
-															<th>Image</th>
-                                                            <th>Status</th>
-                                                            <th>Action</th>
-                                                        </tr>
-                                                    </thead>
-                                                   	<tbody>
-                                                       <?php
-															$slno = 1;
-															foreach ($user as $row) { ?>
-																<tr>
-																	<td><?= $slno++; ?></td>
-																	<td><?= wordwrap(esc($row['the_Name']), 20, '<br>'); ?></td>
-																	 <td>
-																		<?php if (!empty($row['the_Home_Banner'])): ?>
-																			<img src="<?= base_url('public/uploads/' . $row['the_Home_Banner']); ?>" alt="Banner Image" style="height: 25px; width: auto; border-radius: 4px;">
-																		<?php else: ?>
-																			<span class="text-muted">No image</span>
-																		<?php endif; ?>
-																	</td>
-																	<td>
-																	 <div class="form-check form-switch">
-                                                                    <input class="form-check-input checkactive"
-                                                                        type="checkbox"
-                                                                        id="statusSwitch-<?= $row['the_Id']; ?>"
-                                                                        value="<?= $row['the_Id']; ?>"
-                                                                        <?= ($row['the_Status'] == 1) ? 'checked' : ''; ?>>
-                                                                    <label class="form-check-label pl-0 label-check"
-                                                                        for="statusSwitch-<?= $row['the_Id']; ?>">
-                                                                    </label>
-                                                                </div>
-																</td>
-																	<td>
-																		<a href="<?= base_url('banner/add/'. $row['the_Id']); ?>">
-																			<i class="bi bi-pencil-square"></i>
-																		</a>   &nbsp;                                                  
-																			<i class="bi bi-trash text-danger icon-clickable" onclick="confirmDelete(<?= $row['the_Id']; ?>)"></i>
-																	</td>                                                  
-																</tr>
-															<?php } ?>
-                                                        </tbody>
-                                                </table>
+                                               <table class="table table-hover" id="productList" style="width:100%">
+													<thead>
+														<tr>
+															<th>#</th>
+															<th>Name</th>
+															<th>Category</th>
+															<th>Subcategory</th>
+															<th>Status</th>
+															<th>Actions</th>
+														</tr>
+													</thead>
+												</table>
                                             </div>
                                         </div>
                                     </div>
@@ -145,7 +111,7 @@
             <div class="modal-footer d-flex justify-content-center">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
                 <button type="button" class="btn btn-danger" id="deleteStaff"
-                    onclick="deleteStaff()">Delete</button>
+                    onclick="deleteStaff()">Delete </button>
             </div>
         </div>
     </div>

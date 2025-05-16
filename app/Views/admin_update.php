@@ -50,13 +50,13 @@
                                 </div>
                                 <div class="card-block">
 								<div id="messageBox" class="alert alert-success" style="display: none;"></div>
-                                    <form name="createstaff" id="createstaff" method="post">
+                                    <form name="createstaff" id="createstaff" method="post"  autocomplete="off">
 									
                                         <div class="form-group row">
                                            <label class="col-sm-2 col-form-label">Name <span style="color: red;">*</span></label>
                                             <div class="col-sm-6">
                                                 <input type="text" name="staffname" id="staffname" class="form-control" maxlength=30
-                                                    value="<?= isset($staff) ? ($staff['us_Name']) : '' ?>" placeholder="Enter the staff name" * required autocomplete="off" >
+                                                    value="<?= isset($staff) ? ($staff['us_Name']) : '' ?>" placeholder="Enter the staff name" * required >
 											<span class="text-danger error-msg" id="error-staffname"></span>
 											</div>
 											
@@ -65,7 +65,7 @@
                                             <label class="col-sm-2 col-form-label">Email <span style="color: red;">*</span></label>
                                             <div class="col-sm-6">
                                                 <input type="email" class="form-control" name="staffemail" id="staffemail" maxlength=30
-                                                  value="<?= isset($staff) ? esc($staff['us_Email']) : '' ?>"   placeholder="Enter the mail id"  required autocomplete="off">
+                                                  value="<?= isset($staff) ? esc($staff['us_Email']) : '' ?>"   placeholder="Enter the mail id"  required >
                                             <span class="text-danger error-msg" id="error-staffemail"></span>
 											</div>
 											
@@ -91,7 +91,7 @@
                                         <h5 class="mb-3">Change Password</h5>
 										<!-- Old Password Field -->
 										<div class="form-group row">
-											<label class="col-sm-2 col-form-label">Old Password <span style="color: red;">*</span></label>
+											<label class="col-sm-2 col-form-label">Old Password </label>
 											<div class="col-sm-6">
 												<input type="password" class="form-control" name="old_password"
 													id="old_password" placeholder="Enter old password" required autocomplete="off">
@@ -101,10 +101,10 @@
 
 										<!-- New Password Field -->
 										<div class="form-group row">
-											<label class="col-sm-2 col-form-label">New Password <span style="color: red;">*</span></label>
+											<label class="col-sm-2 col-form-label">New Password </label>
 											<div class="col-sm-6">
 												<input type="password" class="form-control" name="new_password"
-													id="new_password" placeholder="Enter new password" required autocomplete="off">
+													id="new_password" placeholder="Enter new password" required>
 												<span class="text-danger error-msg" id="error-new-password"></span>
 											</div>
 										</div>

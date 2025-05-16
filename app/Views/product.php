@@ -12,7 +12,7 @@
                 <div class="col-md-4">
                     <ul class="breadcrumb-title">
                         <li class="breadcrumb-item">
-                             <a href="<?= base_url('dashboard'); ?>"> <i class="fa fa-home"></i> </a>
+                            <a href="<?= base_url('dashboard'); ?>"> <i class="fa fa-home"></i> </a>
                         </li>
                         <li class="breadcrumb-item"><a href="#">Product</a>
                         </li>
@@ -78,9 +78,16 @@
                                                             <td><?= $index + 1; ?></td>
                                                             <td><?= ucwords($prod->pr_Name); ?></td>
                                                             <td><?= ucwords($prod->mrp); ?></td>
-                                                            <td><?= $prod->pr_Selling_Price; ?></td>
+                                                            <td><?= $prod->pr_Selling_Price; ?> </td>
                                                             <!-- <td><?= $prod->pr_Discount_Type; ?></td> -->
-                                                            <td><?= $prod->pr_Discount_Value; ?></td>
+                                                            <td>
+                                                                <?php if (!empty($prod->pr_Discount_Type) && !empty($prod->pr_Discount_Value)): ?>
+                                                                <?= $prod->pr_Discount_Value; ?>
+                                                                (<?= $prod->pr_Discount_Type; ?>)
+                                                                <?php else: ?>
+                                                                0
+                                                                <?php endif; ?>
+                                                            </td>
                                                             <td><?= $prod->pr_Stock; ?></td>
                                                             <td>
                                                                 <div class="form-check form-switch">
@@ -95,26 +102,29 @@
                                                                 </div>
                                                             </td>
                                                             <td>
-                                                                 <a href="<?= base_url('product/edit/'. $prod->pr_Id); ?>">
-																<i class="bi bi-pencil-square p-2"></i>
-															</a> 
+                                                                <a
+                                                                    href="<?= base_url('product/edit/'. $prod->pr_Id); ?>">
+                                                                    <i class="bi bi-pencil-square p-2"></i>
+                                                                </a>
 
-                                                                 <i class="bi bi-trash text-danger icon-clickable"
+                                                                <i class="bi bi-trash text-danger icon-clickable"
                                                                     onclick="confirmDelete(<?= $prod->pr_Id; ?>)">
-                                                                </i> 
+                                                                </i>
 
 
                                                                 <img class="img-size open-image-modal"
                                                                     src="<?php echo base_url().ASSET_PATH; ?>assets/images/image_add.ico"
-                                                                    alt="Image-add"  data-toggle="modal" data-target="#exampleModal"
+                                                                    alt="Image-add" data-toggle="modal"
+                                                                    data-target="#exampleModal"
                                                                     data-product-id="<?= $prod->pr_Id; ?>"
                                                                     data-product-name="<?= $prod->pr_Name; ?>"
                                                                     onclick="openProductModal(<?= $prod->pr_Id ?>, '<?= $prod->pr_Name ?>')"
                                                                     style="cursor: pointer;">
 
-                                                                  <img class="img-size open-video-modal"
+                                                                <img class="img-size open-video-modal"
                                                                     src="<?php echo base_url().ASSET_PATH; ?>assets/images/video_add.ico"
-                                                                    alt="video-add"  data-toggle="modal" data-target="#videoModal"
+                                                                    alt="video-add" data-toggle="modal"
+                                                                    data-target="#videoModal"
                                                                     data-product-id="<?= $prod->pr_Id; ?>"
                                                                     data-product-name="<?= $prod->pr_Name; ?>"
                                                                     onclick="openvideoModal(<?= $prod->pr_Id ?>, '<?= $prod->pr_Name ?>')"

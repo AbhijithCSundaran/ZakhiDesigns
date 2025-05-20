@@ -1,17 +1,35 @@
 
 <script>
 
-$(document).ready(function() {
-    $('#customerList').DataTable({
-        "processing": true,
-        "serverSide": false,
-        "searching": true,
-        "paging": true,
-        "ordering": true,
-        "info": true,
+$('#productsLists').DataTable({
+    processing: true,
+    serverSide: true,
+    ajax: {
+        url: "<?= base_url('banner/List') ?>",
+        type: "POST",
+        data: function (d) {
+            d['<?= csrf_token() ?>'] = "<?= csrf_hash() ?>";
+        }
+    },
+		columns: [
+		{ data: 'DT_RowIndex', orderable: false, searchable: false },
+		{ data: 'the_Name' },
+		{ data: 'the_Home_Banner' },
+		{ data: 'status_switch' },
+		{ data: 'actions' }
+	],
 
-    });
+    columnDefs: [
+        { targets: [3,4], orderable: false, searchable: false },
+        { targets: 2, render: function (data, type, row) {
+            return data; // Render raw HTML for image thumbnail
+        }}
+    ]
 });
+
+
+</script>
+<script>
 
 /*********************************/
 
@@ -146,7 +164,7 @@ $('#imageSubmit').click(function (e) {
         },
 		
 		error: function (xhr, status, error) {
-    console.error("AJAX Error:", xhr.responseText);
+    
     $('#messageBox')
         .removeClass('alert-success')
         .addClass('alert-danger')
@@ -169,5 +187,7 @@ $('#banner_image').on('change', function () {
         reader.readAsDataURL(file);
     }
 });
+/*******************************************************************************/
+
 
 </script>

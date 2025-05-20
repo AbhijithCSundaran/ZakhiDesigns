@@ -96,7 +96,7 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-sm-12">
-                    <form class="md-float-material form-material" id="form-id" name="form-id">
+                    <form class="md-float-material form-material" id="form-id" name="form-id" autocomplete="off">
 					
                         <div class="text-center">
                             <img src="<?php echo base_url().ASSET_PATH; ?>assets/images/logo.png" alt="logo.png">

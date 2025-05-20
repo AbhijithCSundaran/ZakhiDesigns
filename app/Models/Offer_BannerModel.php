@@ -34,10 +34,21 @@ class Offer_BannerModel extends Model {
 		}
 		public function getSubcategoriesByCatId($cat_id)
 		{
-			return $this->db->table('subcategory') // or your actual subcategory table
-				->where('cat_id', $cat_id)
-				->get()
-				 ->getResultArray(); // returns array of objects
+			return $this->db->table('subcategory') // Use your actual table name
+			->where('cat_id', $cat_id)
+			->where('sub_Status', 1) // Only active subcategories
+			->get()
+			->getResultArray(); // Return as array
+		}
+		public function getProductByCategoryAndSubcategory($cat_id, $sub_id)
+		{
+			return $this->db->table('product')
+			->select('pr_Id, pr_Name')  
+			->where('cat_id', $cat_id)
+			->where('sub_id', $sub_id)
+			->where('pr_Status', 1) // Only active products
+			->get()
+			->getResult(); // Returns array of objects
 		}
 		public function getThemeByid($id){
              return $this->db->table('theme')->where('the_Id', $id)->get()->getRow(); 
@@ -55,6 +66,8 @@ class Offer_BannerModel extends Model {
 			$this->db->table('theme')->where('the_Id',$the_id)->update($data);
 			return $this->db->getLastQuery();
 		}
+		
+
   ////////////////////////////////////////////////////////
     protected $table = 'theme';
     protected $primaryKey = 'the_Id';
@@ -66,18 +79,21 @@ class Offer_BannerModel extends Model {
     $builder = $this->db->table('theme t');
     
     // Select required fields including category and subcategory names
-    $builder->select('t.*, c.cat_Name as category_name, s.sub_Category_Name as subcategory_name');
+    $builder->select('t.*, c.cat_Name as category_name, s.sub_Category_Name as subcategory_name, p.pr_Name as product_name');
 
     // Join category and subcategory tables
     $builder->join('category c', 'c.cat_Id = t.the_CatId', 'left');
     $builder->join('subcategory s', 's.sub_Id = t.the_SubId', 'left');
+	$builder->join('product p', ' p.pr_Id = t.the_PrId', 'left'); 
 
     // Only fetch rows where either category or subcategory exists
     $builder->where('t.the_Status !=', 3);
     $builder->groupStart()
             ->where('t.the_CatId IS NOT NULL')
             ->orWhere('t.the_SubId IS NOT NULL')
+			->orWhere('t.the_PrId IS NOT NULL')
             ->groupEnd();
+     
 
     // Add search logic if required
     $postData = service('request')->getPost();
@@ -86,6 +102,7 @@ class Offer_BannerModel extends Model {
                 ->like('t.the_Name', $postData['search']['value'])
                 ->orLike('c.cat_Name', $postData['search']['value'])
                 ->orLike('s.sub_Category_Name', $postData['search']['value'])
+				->orLike('p.pr_Name', $postData['search']['value'])
                 ->groupEnd();
     }
 
@@ -96,7 +113,7 @@ class Offer_BannerModel extends Model {
 
     // Apply ordering if provided
     if (!empty($postData['order'])) {
-        $columns = ['t.the_Id', 't.the_Name', 'c.cat_Name', 's.sub_Category_Name', 't.the_Status'];
+        $columns = ['t.the_Id', 't.the_Name', 'c.cat_Name', 's.sub_Category_Name', 'p.pr_Name','t.the_Offer_Banner','t.the_Status'];
         $orderCol = $columns[$postData['order'][0]['column']];
         $orderDir = $postData['order'][0]['dir'];
         $builder->orderBy($orderCol, $orderDir);
@@ -121,12 +138,14 @@ class Offer_BannerModel extends Model {
     // Join category and subcategory tables
     $builder->join('category c', 'c.cat_Id = t.the_CatId', 'left');
     $builder->join('subcategory s', 's.sub_Id = t.the_SubId', 'left');
+	$builder->join('product p', ' p.pr_Id = t.the_PrId', 'left');  
 
-    // Only fetch rows where either category or subcategory exists
+    // Only fetch rows where either category or subcategory or products exists
     $builder->where('t.the_Status !=', 3);
     $builder->groupStart()
             ->where('t.the_CatId IS NOT NULL')
             ->orWhere('t.the_SubId IS NOT NULL')
+			->orWhere('t.the_PrId IS NOT NULL')
             ->groupEnd();
 
     $postData = service('request')->getPost();
@@ -135,16 +154,16 @@ class Offer_BannerModel extends Model {
                 ->like('t.the_Name', $postData['search']['value'])
                 ->orLike('c.cat_Name', $postData['search']['value'])
                 ->orLike('s.sub_Category_Name', $postData['search']['value'])
+				->orLike('p.pr_Name', $postData['search']['value'])
                 ->groupEnd();
     }
-
     return $builder->countAllResults();
 }
 
-}
+
 
 
   ///////////////////////////////////////////////////////
 
-
+}
 ?>

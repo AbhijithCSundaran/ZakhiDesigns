@@ -65,6 +65,9 @@ $('#custSubmit').click(function(e) {
     e.preventDefault(); // Important to prevent normal form submit
     var url = baseUrl + "customer/save"; // Correct route
     $.post(url, $('#createcust').serialize(), function(response) {
+		$('html, body').animate({
+            scrollTop: 0
+        }, 'fast');
        // $('#createstaff')[0].reset();
         if (response.status == 1) { 
 		$('#messageBox')

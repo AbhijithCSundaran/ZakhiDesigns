@@ -63,6 +63,8 @@
 															<th>Name</th>
 															<th>Category</th>
 															<th>Subcategory</th>
+															<th>Product</th>
+															<th>Image</th>
 															<th>Status</th>
 															<th>Actions</th>
 														</tr>

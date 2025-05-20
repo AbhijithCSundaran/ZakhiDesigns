@@ -21,6 +21,19 @@ class ProductModel extends Model {
         ->getResult();
 }
 
+public function isProductExists($productName, $excludeId = null) {
+    $builder = $this->db->table('product');
+    $builder->where('pr_Name', $productName);
+    $builder->where('pr_Status !=', 3); 
+
+    if ($excludeId) {
+        $builder->where('pr_Id !=', $excludeId);
+    }
+
+    return $builder->get()->getRow();
+}
+
+
 
 
 public function getProductByid($id)

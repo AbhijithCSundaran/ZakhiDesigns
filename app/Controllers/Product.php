@@ -73,8 +73,8 @@ public function saveProduct() {
     $pr_id = $this->input->getPost('pr_id');
     $sub_id = $this->input->getPost('sub_id');
     $cat_id = $this->input->getPost('cat_id');
-    $product_name = $this->input->getPost('product_name');
-    $product_code = $this->input->getPost('product_code');
+    $product_name = trim($this->input->getPost('product_name'));
+    $product_code = trim($this->input->getPost('product_code'));
     $product_description = $this->input->getPost('product_description');
     $mrp = $this->input->getPost('mrp');
     $selling_price = $this->input->getPost('selling_price');
@@ -88,16 +88,25 @@ public function saveProduct() {
     $fabric = $this->input->getPost('fabric');
     $stitching = $this->input->getPost('stitching');
 
-
-    // Validate required fields
-    if (!$cat_id || !$product_name || !$product_code || !$mrp) {
+   
+    if (empty($cat_id) || empty($product_name) || empty($product_code) || empty($mrp)) {
         return $this->response->setJSON([
             'status' => 'error',
             'message' => 'All required fields must be filled.'
         ]);
     }
 
-    // Common data array
+   
+    $exists = $this->productModel->isProductExists($product_name, $pr_id);
+    if ($exists) {
+        return $this->response->setJSON([
+            'status' => 'error',
+            'field' => 'product_name',
+            'message' => 'Product name already exists.'
+        ]);
+    }
+
+    
     $data = [
         'pr_Name' => $product_name,
         'pr_Code' => $product_code,
@@ -121,7 +130,7 @@ public function saveProduct() {
     ];
 
     if (empty($pr_id)) {
-        
+        // Insert new product
         $data['pr_createdon'] = date("Y-m-d H:i:s");
         $data['pr_createdby'] = $this->session->get('zd_uid');
 
@@ -129,20 +138,21 @@ public function saveProduct() {
 
         return $this->response->setJSON([
             'status' => 1,
-            'msg' => 'Product Created successfully.',
+            'msg' => 'Product created successfully.',
             'redirect' => base_url('product')
         ]);
     } else {
-        
+        // Update existing product
         $this->productModel->updateProduct($pr_id, $data);
 
         return $this->response->setJSON([
             'status' => 1,
-            'msg' => 'Product Updated successfully.',
+            'msg' => 'Product updated successfully.',
             'redirect' => base_url('product')
         ]);
     }
 }
+
 
 //Media upload
 public function uploadMedia()

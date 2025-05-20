@@ -24,28 +24,36 @@ $('#productSubmit').click(function(e) {
             scrollTop: 0
         }, 'fast');
 
-
         if (response.status == 1) {
             $('#messageBox')
                 .removeClass('alert-danger')
                 .addClass('alert-success')
                 .text(response.msg || 'Product created successfully!')
                 .show();
+
             setTimeout(function() {
-                //window.location.href = baseUrl + "product/";
+                window.location.href = baseUrl + "product/";
             }, 3000);
         } else {
+            
+            let message = response.message || 'Please fill all the required fields.';
+            if (response.field === 'product_name') {
+                message = response.message;
+            }
+
             $('#messageBox')
                 .removeClass('alert-success')
                 .addClass('alert-danger')
-                .text(response.msg || 'Please Fill all the Data')
+                .text(message)
                 .show();
         }
+
         setTimeout(function() {
             $('#messageBox').empty().hide();
-        }, 2000);
+        }, 3000);
     }, 'json');
 });
+
 
 
 //Category and Subactegory listed the dropdown
@@ -299,7 +307,7 @@ function confirmDelete(prId) {
 //     $('#videoModal').modal('show');
 // }
 
-$('#videoModal').on('hidden.bs.modal', function () {
+$('#videoModal').on('hidden.bs.modal', function() {
     $('#filevideo').val('');
     $('#videoUploadForm')[0].reset();
 });

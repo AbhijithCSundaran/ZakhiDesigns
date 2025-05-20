@@ -4,13 +4,14 @@
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content rounded">
             <div class="modal-header">
-                <h5 class="modal-title" id="productsName"></h5>
+                 <h5 class="modal-title"></h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
 
             <div class="modal-body">
+                <h5 class="mb-3">Video upload for: <span id="productsName" class="text-primary"></span></h5>
                 <form class="fileUpload" method="post" id="videoUploadForm" enctype="multipart/form-data">
 
                     <!-- Upload Section -->
@@ -26,6 +27,7 @@
                         </div>
                     </div>
 
+                    <input type="hidden" id="productVideoName" name="product_name" value="">
                     <input type="hidden" id="productVideoId" name="product_id" value="">
                 </form>
 
@@ -33,6 +35,7 @@
                 <div class="mt-3" id="imagePreviewContainer">
                     <div id="videoPreview" class="d-flex flex-wrap justify-content-center gap-2" style="display:none;">
                         <!-- Previewed video will be inserted here via JS -->
+                        
                     </div>
                 </div>
             </div>

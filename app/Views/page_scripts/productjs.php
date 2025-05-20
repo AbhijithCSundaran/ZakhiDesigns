@@ -205,15 +205,17 @@ function loadProductImages(productId) {
                     img.classList.add('rounded', 'border');
 
                     // Create delete icon
-                    const delIcon = document.createElement('span');
-                    delIcon.innerHTML = '&times;';
+
+                    const delIcon = document.createElement('i');
+                    delIcon.className = 'fa fa-trash';
                     delIcon.style.position = 'absolute';
-                    delIcon.style.top = '-21px';
-                    delIcon.style.right = '-8px';
+                    delIcon.style.top = '-10px';
+                    delIcon.style.right = '-10px';
                     delIcon.style.cursor = 'pointer';
                     delIcon.style.color = 'red';
-                    delIcon.style.fontSize = '24px';
+                    delIcon.style.fontSize = '18px';
                     delIcon.title = 'Delete this image';
+
 
                     // Delete click event
                     delIcon.onclick = function() {
@@ -291,12 +293,16 @@ function confirmDelete(prId) {
 
 }
 
-function openvideoModal(productVideoId, productsName) {
-    document.getElementById('productVideoId').value = productVideoId;
-    document.getElementById('productsName').textContent = productsName;
-    $('#videoModal').modal('show');
-}
+// function openvideoModal(productVideoId, productsName) {
+//     document.getElementById('productVideoId').value = productVideoId;
+//     document.getElementById('productsName').textContent = productsName;
+//     $('#videoModal').modal('show');
+// }
 
+$('#videoModal').on('hidden.bs.modal', function () {
+    $('#filevideo').val('');
+    $('#videoUploadForm')[0].reset();
+});
 
 
 // vide AJAX Upload
@@ -333,7 +339,8 @@ $('#filevideo').on('change', function() {
             if (response.status === 'success') {
                 alert(response.message);
                 const productId = $('#productVideoId').val();
-                loadProductVideo(productId);
+                const productName = $('#productVideoName').val();
+                openvideoModal(productId, productName);
             } else {
                 alert(response.message);
             }
@@ -345,11 +352,16 @@ $('#filevideo').on('change', function() {
 });
 
 //Load video on modal
-
 function openvideoModal(productId, productName) {
     $('#productVideoId').val(productId);
+    $('#productVideoName').val(productName);
     $('#productsName').text(productName);
-    $('#videoPreview').empty(); // Clear previous preview
+
+    // Clear previous state
+    $('#filevideo').val(''); // Clear file input
+    $('#videoUploadForm')[0].reset(); // Reset the form
+
+    $('#videoPreview').empty();
 
     $.ajax({
         url: '<?= base_url('product/getVideo') ?>',
@@ -371,16 +383,16 @@ function openvideoModal(productId, productName) {
                             data-product-id="${productId}" 
                             data-video-name="${response.video}" 
                             title="Delete this video"
-                            style="position: absolute; top: -10px; right: -13px; cursor: pointer; color: red; font-size: 30px;">
-                            ×
+                            style="position: absolute; top: -6px; right: -2px; cursor: pointer; color: red; font-size: 17px;">
+                            <i class="fa fa-trash"></i>
                         </span>
                     </div>
                 `;
                 $('#videoPreview').html(videoElement).show();
-                $('#uploadSection').hide(); // hide upload area
+                $('#uploadSection').hide();
             } else {
                 $('#videoPreview').hide();
-                $('#uploadSection').show(); // show upload area
+                $('#uploadSection').show();
             }
 
             $('#videoModal').modal('show');
@@ -392,10 +404,6 @@ function openvideoModal(productId, productName) {
         }
     });
 }
-
-
-
-
 
 
 //Delete video single video
@@ -417,7 +425,9 @@ $(document).on('click', '.delete-video-btn', function(e) {
         },
         success: function(response) {
             if (response.status === 'success') {
-                $(e.target).closest('.video-file').remove();
+                //  $(e.target).closest('.video-file').remove();
+                $('#videoPreview').empty().hide();
+                $('#uploadSection').show();
             } else {
                 alert('Failed to delete video');
             }

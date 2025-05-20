@@ -36,14 +36,14 @@
                               </li>
                               <li class="<?= ($segment == 'staff') ? 'active' : '' ?>">
                                     <a href="<?php echo base_url('staff') ?>" class="waves-effect waves-dark">
-                                        <span class="pcoded-micon"><i class="ti-layers"></i><b>FC</b></span>
+                                        <span class="pcoded-micon"><i class="bi bi-person-add"></i><b>FC</b></span>
                                         <span class="pcoded-mtext" data-i18n="nav.form-components.main">Staff</span>
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                 </li>
                                 <li class="<?= ($segment == 'customer') ? 'active' : '' ?>">
                                     <a href="<?php echo base_url('customer') ?>" class="waves-effect waves-dark">
-                                        <span class="pcoded-micon"><i class="ti-layers"></i><b>FC</b></span>
+                                        <span class="pcoded-micon"><i class="bi bi-people"></i><b>FC</b></span>
                                         <span class="pcoded-mtext" data-i18n="nav.form-components.main">Customer</span>
                                         <span class="pcoded-mcaret"></span>
                                     </a>
@@ -52,7 +52,7 @@
                           <ul class="pcoded-item pcoded-left-item">
                           <li class="<?= ($segment == 'category') ? 'active' : '' ?>">
                                   <a href="<?php echo base_url('category') ?>" class="waves-effect waves-dark">
-                                      <span class="pcoded-micon"><i class="ti-home"></i><b>D</b></span>
+                                      <span class="pcoded-micon"><i class="bi bi-bookmark"></i><b>D</b></span>
                                       <span class="pcoded-mtext" data-i18n="nav.dash.main">Category</span>
                                       <span class="pcoded-mcaret"></span>
                                   </a>
@@ -60,14 +60,14 @@
                               
                               <li class="<?= ($segment == 'subcategory') ? 'active' : '' ?>">
                                 <a href="<?php echo base_url('subcategory') ?>" class="waves-effect waves-dark">
-                                    <span class="pcoded-micon"><i class="ti-home"></i><b>D</b></span>
+                                    <span class="pcoded-micon"><i class="bi bi-bookmark-plus"></i><b>D</b></span>
                                     <span class="pcoded-mtext" data-i18n="nav.dash.main">Sub Category</span>
                                     <span class="pcoded-mcaret"></span>
                                 </a>
                             </li>
                             <li class="<?= ($segment == 'product') ? 'active' : '' ?>">
                                 <a href="<?php echo base_url('product') ?>" class="waves-effect waves-dark">
-                                    <span class="pcoded-micon"><i class="ti-home"></i><b>D</b></span>
+                                    <span class="pcoded-micon"><i class="bi bi-box-seam"></i><b>D</b></span>
                                     <span class="pcoded-mtext" data-i18n="nav.dash.main">Products</span>
                                     <span class="pcoded-mcaret"></span>
                                 </a>
@@ -75,14 +75,14 @@
                            
                             <li class="<?= ($segment == 'banner') ? 'active' : '' ?>">
                                 <a href="<?php echo base_url('banner') ?>" class="waves-effect waves-dark">
-                                    <span class="pcoded-micon"><i class="ti-home"></i><b>D</b></span>
+                                    <span class="pcoded-micon"><i class="bi bi-bounding-box-circles"></i><b>D</b></span>
                                     <span class="pcoded-mtext" data-i18n="nav.dash.main">Banners</span>
                                     <span class="pcoded-mcaret"></span>
                                 </a>
                             </li>
 							  <li class="<?= ($segment == 'offer_banner') ? 'active' : '' ?>">
                                 <a href="<?php echo base_url('offer_banner') ?>" class="waves-effect waves-dark">
-                                    <span class="pcoded-micon"><i class="ti-home"></i><b>D</b></span>
+                                    <span class="pcoded-micon"><i class="bi bi-bounding-box"></i><b>D</b></span>
                                     <span class="pcoded-mtext" data-i18n="nav.dash.main">Offer Banners</span>
                                     <span class="pcoded-mcaret"></span>
                                 </a>

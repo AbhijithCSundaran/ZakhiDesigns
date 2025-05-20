@@ -15,13 +15,11 @@ class ProductImage extends BaseController
     public function index()
     {
 
-        // $allproducts = $this->productModel->getAllProducts();
-		
-       
-        // $data['product'] =  $allproducts;
+        $allproductimages = $this->productimageModel->getAllProductImages();
+        $data['productimages'] =  $allproductimages;
         $template = view('common/header');
 		$template.= view('common/leftmenu');
-		$template.= view('productimage' );
+		$template.= view('productimage', $data );
 		$template.= view('common/footer');
         return $template;
 
@@ -42,15 +40,53 @@ class ProductImage extends BaseController
         $template .= view('page_scripts/productimagejs');
         return $template;
     }
+
+
+
+    public function saveProductImage()
+    {
+        $pr_id = $this->request->getPost('pr_id');
+        $file_type = $this->request->getPost('file_type');
+        $files = $this->request->getFiles();
     
-   
-
-
-
-
-
-
-
-
-
+        if (!$pr_id || empty($files['media_files'])) {
+            return $this->response->setJSON(['status' => 0, 'msg' => 'Product and files are required.']);
+        }
+    
+        $mediaFiles = $files['media_files'];
+        $uploadData = [];
+    
+        if (is_array($mediaFiles)) {
+            foreach ($mediaFiles as $file) {
+                if ($file->isValid() && !$file->hasMoved()) {
+                    $newName = $file->getRandomName();
+                    $file->move(FCPATH . 'uploads/productmedia/', $newName);
+    
+                    $uploadData[] = [
+                        'name' => $newName,
+                        'type' => $file_type
+                    ];
+                }
+            }
+        }
+    
+        if (!empty($uploadData)) {
+            $data = [
+                'pr_id' => $pr_id,
+                'pri_File_Type'=> $file_type,
+                'pri_Thumbnail' => json_encode($uploadData),
+                'pri_Status' =>1,
+                'pri_createdon' => date('Y-m-d H:i:s'),
+                'pri_createdby' => $this->session->get('zd_uid')
+            ];
+    
+            $this->productimageModel->productimageInsert($data);
+    
+            return $this->response->setJSON(['status' => 1, 'msg' => 'Media uploaded successfully.']);
+        } else {
+            return $this->response->setJSON(['status' => 0, 'msg' => 'No valid files uploaded.']);
+        }
+    }
+    
+    
 }

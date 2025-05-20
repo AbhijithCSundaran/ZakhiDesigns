@@ -21,10 +21,21 @@ class ProductModel extends Model {
         ->getResult();
 }
 
-        
-        
-       
-        public function productInsert($data) {
+
+
+public function getProductByid($id)
+{
+    return $this->db->table('product p')
+        ->select('p.*, c.cat_Name, s.sub_Category_Name')
+        ->join('category c', 'c.cat_Id = p.cat_id', 'left')
+        ->join('subcategory s', 's.sub_Id = p.sub_id', 'left')
+        ->where('p.pr_Id', $id)
+        ->get()
+        ->getRow(); 
+}
+
+
+       public function productInsert($data) {
             return $this->db->table('product')->insert($data);
         }
        
@@ -58,13 +69,85 @@ public function getAllCategories()
         ->getResult();
 }
         
+
+   public function getProductImages($productId)
+{
+    return $this->db->table('product')
+                ->where('pr_Id', $productId)
+                ->select('product_images')
+                ->get()
+                ->getRowArray()['product_images'] ?? '[]';
+}
+
+
+public function delete_image($product_id, $image_name)
+{
+    $builder = $this->db->table('product');
+    $product = $builder->where('pr_Id', $product_id)->get()->getRow();
+
+    if ($product && $product->product_images) {
+        
+        $imageData = json_decode($product->product_images, true);
+
+        if (!empty($imageData) && isset($imageData[0]['name'])) {
+            
+            $filteredImages = array_filter($imageData[0]['name'], function ($img) use ($image_name) {
+                return trim($img) !== trim($image_name);
+            });
+
+    
+            $newImageData = [['name' => array_values($filteredImages)]];
+            $builder->where('pr_Id', $product_id)
+                    ->update(['product_images' => json_encode($newImageData)]);
+
+            return true;
+        }
+    }
+
+    return false;
+}
+
+
+
+
+
+    public function updateProductImages($productId, $mediaJson)
+    {
+        return $this->db->table('product')
+           ->where('pr_Id', $productId)->set(['product_images' => $mediaJson])->update();
+
+    }
+
+        public function deleteProductById($pr_status, $pr_id, $modified_by) 
+		{
+			return $this->db->query("update product set pr_Status = '".$pr_status."', pr_modifyon=NOW(), pr_modifyby='".$modified_by."' where pr_Id = '".$pr_id."'");
+		}
   
         
-        
+         public function updateProductVideo($productId, $video)
+    {
+       return $this->db->table('product')
+        ->where('pr_Id', $productId)
+        ->set(['product_video' => $video])
+        ->update();
 
- 
-    
-   
     }
+
+    public function getVideo($productId)
+    {
+        return $this->db->table('product')
+        ->select('product_video')
+        ->where('pr_Id', $productId)
+        ->get()
+        ->getRow();
+    }
+
+    public function deleteProductVideo($productId)
+    {
+        return $this->db->table('product')
+    ->where('pr_Id', $productId)
+    ->update(['product_video' => null]);
+     }
+}
 
 ?>

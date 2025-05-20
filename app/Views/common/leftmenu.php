@@ -72,13 +72,7 @@
                                     <span class="pcoded-mcaret"></span>
                                 </a>
                             </li>
-                            <li class="<?= ($segment == 'productimage') ? 'active' : '' ?>">
-                                <a href="<?php echo base_url('productimage') ?>" class="waves-effect waves-dark">
-                                    <span class="pcoded-micon"><i class="ti-home"></i><b>D</b></span>
-                                    <span class="pcoded-mtext" data-i18n="nav.dash.main">Product Image</span>
-                                    <span class="pcoded-mcaret"></span>
-                                </a>
-                            </li>
+                           
                             <li class="<?= ($segment == 'banner') ? 'active' : '' ?>">
                                 <a href="<?php echo base_url('banner') ?>" class="waves-effect waves-dark">
                                     <span class="pcoded-micon"><i class="ti-home"></i><b>D</b></span>

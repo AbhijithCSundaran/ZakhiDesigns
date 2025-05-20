@@ -1,4 +1,3 @@
-
 <script>
 
 $(document).ready(function() {
@@ -88,7 +87,7 @@ $('#imageSubmit').click(function (e) {
     var formData = new FormData(form);
 
     $.ajax({
-        url: baseUrl + "banner/save", // Route to your controller method
+        url: baseUrl + "offer_banner/save", // Route to your controller method
         type: 'POST',
         data: formData,
         contentType: false,
@@ -104,7 +103,7 @@ $('#imageSubmit').click(function (e) {
 
                 setTimeout(function () {
                     $('#imageSubmit').prop('disabled', false);
-                    window.location.href = baseUrl + "banner";
+                    window.location.href = baseUrl + "offer_banner";
                 }, 1000);
             } else {
                 $('#messageBox')
@@ -144,6 +143,50 @@ $('#banner_image').on('change', function () {
 /***************************************/
 
 
+$(document).ready(function () {
+    var selectedSubId = "<?= isset($banner['the_SubId']) ? $banner['the_SubId'] : '' ?>";
+    var selectedPrId = "<?= isset($banner['the_PrId']) ? $banner['the_PrId'] : '' ?>";
+
+    var selectedCatId = $('#categoryName').val();
+
+    if (selectedCatId) {
+        $.ajax({
+            url: baseUrl + "offer_banner/get-subcategories",
+            type: "POST",
+            data: { cat_id: selectedCatId },
+            dataType: "json",
+            success: function (response) {
+                var subSelect = $('#subcategoryName');
+                subSelect.empty().append('<option value="">-- Select Subcategory --</option>');
+
+                $.each(response, function (i, item) {
+                    subSelect.append('<option value="' + item.sub_Id + '" ' +
+                        (item.sub_Id == selectedSubId ? 'selected' : '') + '>' + item.sub_Category_Name + '</option>');
+                });
+
+                if (selectedSubId) {
+					$.ajax({
+						url: baseUrl + "offer_banner/get-products",
+						type: "POST",
+						data: { sub_id: selectedSubId },
+						dataType: "json",
+						success: function (response) {
+							var prSelect = $('#productName');
+							prSelect.empty().append('<option value="">-- Select Product --</option>');
+
+							$.each(response, function (i, item) {
+								prSelect.append('<option value="' + item.pr_Id + '" ' +
+									(item.pr_Id == selectedPrId ? 'selected' : '') + '>' + item.pr_Name + '</option>');
+							});
+						}
+					});
+				}
+
+            }
+        });
+    }
+});
+
 $('#categoryName').on('change', function() {
     var categoryId = $(this).val();
     var subSelect = $('#subcategoryName');
@@ -169,6 +212,7 @@ $('#categoryName').on('change', function() {
                         subSelect.append('<option value="' + sub.sub_Id + '">' + sub
                             .sub_Category_Name + '</option>');
                     });
+                  
                     messageElement.hide(); // Hide the message
                 }
             },
@@ -184,6 +228,58 @@ $('#categoryName').on('change', function() {
 
 /************************************************************/
 
+
+// Load products when subcategory changes
+  
+    var preselectedProductId = "<?= isset($selected_pr_id) ? $selected_pr_id : '' ?>";
+
+    $(document).ready(function () {
+        $('#subcategoryName').on('change', function () {
+            var categoryId = $('#categoryName').val();
+            var subcategoryId = $(this).val();
+            var productSelect = $('#productName');
+            var productMessage = $('#noproductMsg');
+
+            productSelect.empty().append('<option value="">-- Select Product Name --</option>');
+            productMessage.hide();
+
+            if (subcategoryId) {
+                $.ajax({
+                    url: baseUrl + "offer_banner/get-products",
+                    type: "POST",
+                    data: {
+                        cat_id: categoryId,
+                        sub_id: subcategoryId
+                    },
+                    dataType: "json",
+                    success: function (response) {
+                        if (response.length === 0) {
+                            productSelect.append('<option value="">-- No Products Available --</option>');
+                            productMessage.show();
+                        } else {
+                            $.each(response, function (index, product) {
+                                productSelect.append('<option value="' + product.pr_Id + '">' + product.pr_Name + '</option>');
+                            });
+
+                            // Set the preselected value *after* populating options
+                            if (preselectedProductId) {
+                                productSelect.val(preselectedProductId);
+                            }
+                        }
+                    },
+                    error: function (xhr) {
+                        console.error("Error fetching products:", xhr.responseText);
+                    }
+                });
+            }
+        });
+
+        // Trigger change on page load to load products if subcategory is already selected
+        if ($('#subcategoryName').val()) {
+            $('#subcategoryName').trigger('change');
+        }
+    });
+
 /***************************************/
 $('#productList').DataTable({
     processing: true,
@@ -195,18 +291,29 @@ $('#productList').DataTable({
             d['<?= csrf_token() ?>'] = "<?= csrf_hash() ?>";
         }
     },
-  columns: [
-    { data: 'the_Id' },
-    { data: 'the_Name' },
-    { data: 'category_name' },
-    { data: 'subcategory_name' },
-    { data: 'status_switch' },
-    { data: 'actions' }
-],
-columnDefs: [
-    { targets: [4, 5], orderable: false, searchable: false }
-]
-
+    columns: [
+        {
+            data: null,
+            render: function (data, type, row, meta) {
+                return meta.row + meta.settings._iDisplayStart + 1; // Serial number
+            },
+            orderable: false,
+            searchable: false
+        },
+        { data: 'the_Name' },
+        { data: 'category_name' },
+        { data: 'subcategory_name' },
+        { data: 'product_name' },
+        { data: 'the_Offer_Banner' },
+        { data: 'status_switch' },
+        { data: 'actions' }
+    ],
+    columnDefs: [
+        { targets: [6,7], orderable: false, searchable: false },
+        { targets: 5, render: function (data, type, row) {
+            return data; // Render raw HTML for image thumbnail
+        }}
+    ]
 });
 
 </script>

@@ -80,6 +80,7 @@ $routes->post('customer_address/delete/(:any)', 'Customer_address::deleteAddress
 
 //banners
 $routes->get('banner', 'Banner::index');
+$routes->post('banner/List', 'Banner::ajaxList');
 $routes->post('banner/status', 'Banner::updateStatus');
 $routes->get('banner/add', 'Banner::addbanner'); // Create
 $routes->get('banner/add/(:num)', 'Banner::addbanner/$1'); // Edit
@@ -96,6 +97,18 @@ $routes->get('offer_banner/add/(:num)', 'Offer_Banner::addbanner/$1'); // Edit
 $routes->post('offer_banner/save', 'Offer_Banner::createnew');
 $routes->post('offer_banner/delete/(:any)', 'Offer_Banner::deleteBanner/$1');
 $routes->post('offer_banner/get-subcategories', 'Offer_Banner::getSubcategories');
+$routes->post('offer_banner/get-products', 'Offer_Banner::getProducts');
+
+//Themes
+$routes->get('banner', 'Banner::index');
+$routes->post('banner/List', 'Banner::ajaxList');
+$routes->post('banner/status', 'Banner::updateStatus');
+$routes->get('banner/add', 'Banner::addbanner'); // Create
+$routes->get('banner/add/(:num)', 'Banner::addbanner/$1'); // Edit
+$routes->post('banner/save', 'Banner::createnew');
+$routes->post('banner/delete/(:any)', 'Banner::deleteBanner/$1');
+
+
 
 
 //logout

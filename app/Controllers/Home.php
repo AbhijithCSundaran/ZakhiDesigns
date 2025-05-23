@@ -1,20 +1,30 @@
 <?php
 
 namespace App\Controllers;
+use App\Models\Admin\ProductModel;
 
 class Home extends BaseController
 {
-    public function index(): string
+
+    public function __construct()
     {
-        return view('login');
+        $this->session = \Config\Services::session();
+        $this->input = \Config\Services::request();
+        $this->productModel = new \App\Models\Admin\ProductModel();
     }
 
-	// public function dashboard(): string
-    // {
-	// 	$template = view('common/header');
-	// 	$template.= view('common/leftmenu');
-	// 	$template.= view('dashboard');
-	// 	$template.= view('common/footer');
-    //     return $template;
-    // }
+    public function index(): string
+    {
+       $allproducts = $this->productModel->getAllProducts();
+		$data['product'] =  $allproducts;
+
+	 	    $template = view('common/header');
+            $template.= view('banner');
+            $template.= view('category');
+            $template.= view('top_products',$data);
+            $template.= view('common/footer');       
+			return $template;
+            
+	
+    }
 }

@@ -30,7 +30,7 @@
     <script type="text/javascript" src="<?php echo base_url().ASSET_PATH; ?>admin/assets/js/modernizr/modernizr.js "></script>
     <!-- slimscroll js -->
     <script type="text/javascript" src="<?php echo base_url().ASSET_PATH; ?>admin/assets/js/SmoothScroll.js"></script>
-    <script src="<?php echo base_url().ASSET_PATH; ?>assets/js/jquery.mCustomScrollbar.concat.min.js "></script>
+    <script src="<?php echo base_url().ASSET_PATH; ?>admin/assets/js/jquery.mCustomScrollbar.concat.min.js "></script>
     <!-- Chart js -->
     <script type="text/javascript" src="<?php echo base_url().ASSET_PATH; ?>admin/assets/js/chart.js/Chart.js"></script>
     <!-- amchart js -->

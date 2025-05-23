@@ -50,7 +50,7 @@
                                 </div>
                                 <div class="card-block">
                                     <div id="messageBox" class="alert alert-success" style="display: none;"></div>
-                                    <form name="createstaff" id="createstaff" method="post">
+                                    <form name="createstaff" id="createstaff" method="post" autocomplete="off">
 
                                         <div class="form-group row">
                                             <label class="col-sm-2 col-form-label">Name <span
@@ -99,17 +99,17 @@
 
 											<!-- Old Password Field -->
 											<div class="form-group row">
-												<label class="col-sm-2 col-form-label">Old Password <span style="color: red;">*</span></label>
+												<label class="col-sm-2 col-form-label">Old Password</label>
 												<div class="col-sm-6">
 													<input type="password" class="form-control" name="old_password"
-														id="old_password" placeholder="Enter old password" required autocomplete="off">
+														id="old_password" placeholder="Enter old password" required >
 													<span class="text-danger error-msg" id="error-old-password"></span>
 												</div>
 											</div>
 
 											<!-- New Password Field -->
 											<div class="form-group row">
-												<label class="col-sm-2 col-form-label">New Password <span style="color: red;">*</span></label>
+												<label class="col-sm-2 col-form-label">New Password </label>
 												<div class="col-sm-6">
 													<input type="password" class="form-control" name="new_password"
 														id="new_password" placeholder="Enter new password" required autocomplete="off">

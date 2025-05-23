@@ -8,9 +8,10 @@ use CodeIgniter\Router\RouteCollection;
 /* GET METHODS */
 $routes->get('/', 'Home::index');
 
-$routes->get('dashboard', 'Dashboard::index'); 
+
 
 $routes->post('Auth', 'Auth::authenticate'); 
+$routes->get('dashboard', 'Dashboard::index'); 
 
 //category
 $routes->get('category', 'Category::index');
@@ -76,13 +77,42 @@ $routes->get('customer_address/view/(:num)', 'Customer_address::view_address/$1'
 $routes->get('customer_address/view/(:num)/(:num)', 'Customer_address::view_address/$1/$2');
 $routes->post('customer_address/save', 'Customer_address::createnew');
 $routes->post('customer_address/delete/(:any)', 'Customer_address::deleteAddress/$1');
+
+
 //banners
 $routes->get('banner', 'Banner::index');
+$routes->post('banner/List', 'Banner::ajaxList');
 $routes->post('banner/status', 'Banner::updateStatus');
 $routes->get('banner/add', 'Banner::addbanner'); // Create
 $routes->get('banner/add/(:num)', 'Banner::addbanner/$1'); // Edit
 $routes->post('banner/save', 'Banner::createnew');
 $routes->post('banner/delete/(:any)', 'Banner::deleteBanner/$1');
+
+
+//offer banners
+$routes->get('offer_banner', 'Offer_Banner::index');
+$routes->post('offer_banner/List', 'Offer_Banner::ajaxList');
+$routes->post('offer_banner/changeStatus', 'Offer_Banner::updateStatus');
+$routes->get('offer_banner/add', 'Offer_Banner::addbanner'); // Create
+$routes->get('offer_banner/add/(:num)', 'Offer_Banner::addbanner/$1'); // Edit
+$routes->post('offer_banner/save', 'Offer_Banner::createnew');
+$routes->post('offer_banner/delete/(:any)', 'Offer_Banner::deleteBanner/$1');
+$routes->post('offer_banner/get-subcategories', 'Offer_Banner::getSubcategories');
+$routes->post('offer_banner/get-products', 'Offer_Banner::getProducts');
+
+//Themes
+$routes->get('themes', 'Themes::index');
+$routes->post('themes/List', 'Themes::ajaxList');
+$routes->post('themes/status', 'Themes::updateStatus');
+$routes->get('themes/add', 'Themes::addbanner'); // Create
+$routes->get('themes/add/(:num)', 'Themes::addbanner/$1'); // Edit
+//$routes->post('themes/save', 'Themes::save_file');
+$routes->post('themes/delete/(:any)', 'Themes::deleteBanner/$1');
+$routes->post('themes/save_file', 'Themes::save_file');
+
+
+
+
 //logout
 $routes->post('/logout', 'Auth::logout'); 
 

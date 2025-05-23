@@ -1,17 +1,35 @@
 
 <script>
 
-$(document).ready(function() {
-    $('#customerList').DataTable({
-        "processing": true,
-        "serverSide": false,
-        "searching": true,
-        "paging": true,
-        "ordering": true,
-        "info": true,
+$('#productsLists').DataTable({
+    processing: true,
+    serverSide: true,
+    ajax: {
+        url: "<?= base_url('banner/List') ?>",
+        type: "POST",
+        data: function (d) {
+            d['<?= csrf_token() ?>'] = "<?= csrf_hash() ?>";
+        }
+    },
+		columns: [
+		{ data: 'DT_RowIndex', orderable: false, searchable: false },
+		{ data: 'the_Name' },
+		{ data: 'the_Home_Banner' },
+		{ data: 'status_switch' },
+		{ data: 'actions' }
+	],
 
-    });
+    columnDefs: [
+        { targets: [3,4], orderable: false, searchable: false },
+        { targets: 2, render: function (data, type, row) {
+            return data; // Render raw HTML for image thumbnail
+        }}
+    ]
 });
+
+
+</script>
+<script>
 
 /*********************************/
 
@@ -103,44 +121,73 @@ error: function(xhr) {
     });
 });
 /************************************************/
-
-
 var baseUrl = "<?= base_url() ?>";
 
-$('#imageSubmit').click(function(e) {
-	$('#imageSubmit').prop('disabled', true);
-    e.preventDefault(); // Important to prevent normal form submit
-    var url = baseUrl + "banner/save"; // Correct route
+$('#imageSubmit').click(function (e) {
+    e.preventDefault();
+    $('#imageSubmit').prop('disabled', true);
 
-    $.post(url, $('#banner_add').serialize(), function(response) {
-       // $('#createstaff')[0].reset();
+    var form = $('#banner_add')[0];
+    var formData = new FormData(form);
 
-        if (response.status == 1) { $('#messageBox')
-                .removeClass('alert-danger')
-                .addClass('alert-success')
-                .text(response.msg || 'Banner created successfully!')
-                .show();
-				
+    $.ajax({
+        url: baseUrl + "banner/save", // Route to your controller method
+        type: 'POST',
+        data: formData,
+        contentType: false,
+        processData: false,
+        dataType: 'json',
+        success: function (response) {
+            if (response.status == 1) {
+                $('#messageBox')
+                    .removeClass('alert-danger')
+                    .addClass('alert-success')
+                    .text(response.msg)
+                    .show();
 
-            // Wait, then redirect
-            setTimeout(function() {
-				$('#imageSubmit').prop('disabled', false);
-                window.location.href = baseUrl + "banner/"; // Update this path to your Manage Staff page
-            },300);
-        } 
-		else {
-            $('#messageBox')
-                .removeClass('alert-success')
-                .addClass('alert-danger')
-                .text(response.msg || 'Please upload the image')
-                .show();
-				$('#imageSubmit').prop('disabled', false);
-				
-        }
-		setTimeout(function() {
-			
-                $('#messageBox').empty().hide();
-            },3000);
-    }, 'json');
+                setTimeout(function () {
+                    $('#imageSubmit').prop('disabled', false);
+                    window.location.href = baseUrl + "banner";
+                }, 3000);
+            } else {
+                $('#messageBox')
+                    .removeClass('alert-success')
+                    .addClass('alert-danger')
+                    .text(response.msg)
+                    .show();
+                $('#imageSubmit').prop('disabled', false);
+            }
+
+            setTimeout(function () {
+                $('#messageBox').hide();
+            }, 3000);
+        },
+		
+		error: function (xhr, status, error) {
+    
+    $('#messageBox')
+        .removeClass('alert-success')
+        .addClass('alert-danger')
+        .text('Server error. Please try again.')
+        .show();
+    $('#imageSubmit').prop('disabled', false);
+}
+
+    });
 });
+
+/*********************************/
+$('#banner_image').on('change', function () {
+    const [file] = this.files;
+    if (file) {
+        const reader = new FileReader();
+        reader.onload = function (e) {
+            $('#imagePreview').attr('src', e.target.result).show();
+        };
+        reader.readAsDataURL(file);
+    }
+});
+/*******************************************************************************/
+
+
 </script>

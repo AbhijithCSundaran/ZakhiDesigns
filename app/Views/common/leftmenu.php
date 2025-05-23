@@ -80,6 +80,20 @@
                                     <span class="pcoded-mcaret"></span>
                                 </a>
                             </li>
+							  <li class="<?= ($segment == 'offer_banner') ? 'active' : '' ?>">
+                                <a href="<?php echo base_url('offer_banner') ?>" class="waves-effect waves-dark">
+                                    <span class="pcoded-micon"><i class="ti-home"></i><b>D</b></span>
+                                    <span class="pcoded-mtext" data-i18n="nav.dash.main">Offer Banners</span>
+                                    <span class="pcoded-mcaret"></span>
+                                </a>
+                            </li>
+							<li class="<?= ($segment == 'Themes') ? 'active' : '' ?>">
+                                <a href="<?php echo base_url('themes') ?>" class="waves-effect waves-dark">
+                                    <span class="pcoded-micon"><i class="ti-home"></i><b>D</b></span>
+                                    <span class="pcoded-mtext" data-i18n="nav.dash.main">Themes</span>
+                                    <span class="pcoded-mcaret"></span>
+                                </a>
+                            </li>
                           </ul>
                      
                           

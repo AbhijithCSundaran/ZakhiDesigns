@@ -10,6 +10,7 @@
 	
     <!-- Required Jquery -->
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	
 
       <!-- DataTables CSS -->
     <script type="text/javascript" src="<?php echo base_url().ASSET_PATH; ?>assets/js/jquery/jquery.min.js"></script>
@@ -17,6 +18,10 @@
     <script type="text/javascript" src="<?php echo base_url().ASSET_PATH; ?>assets/js/popper.js/popper.min.js"></script>
     <script type="text/javascript" src="<?php echo base_url().ASSET_PATH; ?>assets/js/bootstrap/js/bootstrap.min.js "></script>
     <script type="text/javascript" src="<?php echo base_url().ASSET_PATH; ?>assets/pages/widget/excanvas.js "></script>
+	<!-- DataTables JS -->
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+<!-- DataTables Responsive JS (Optional) -->
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/responsive/2.3.0/js/dataTables.responsive.min.js"></script>
     <!-- waves js -->
     <script src="<?php echo base_url().ASSET_PATH; ?>assets/pages/waves/js/waves.min.js"></script>
     <!-- jquery slimscroll js -->
@@ -42,8 +47,12 @@
     <script type="text/javascript" src="<?php echo base_url().ASSET_PATH; ?>assets/pages/dashboard/custom-dashboard.js"></script>
     <script type="text/javascript" src="<?php echo base_url().ASSET_PATH; ?>assets/js/script.js "></script>
 <!--Data table js -->
+
     <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+	
+	<!--POP UP FORM -->
+
 </body>
 
 </html>

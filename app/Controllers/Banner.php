@@ -108,42 +108,158 @@ class Banner extends BaseController
 		}
 		
 	}
-	 public function createnew()
+	public function createnew()
 	{
+		$bannerModel = new BannerModel();
 
-    $image = $this->request->getFile('banner_image');
+		$the_id      = $this->request->getPost('the_id');
+		$bannerName  = $this->request->getPost('file_name');
+		$description = $this->request->getPost('description');
+		$image       = $this->request->getFile('banner_image');
+		$newName     = null;
+		// Validate name format
+		if (!preg_match('/^[a-zA-Z ]+$/', $bannerName)) {
+			return $this->response->setJSON(['status' => 'error', 'msg' => 'Please enter name correctly.']);
+		}
+		
+		// If creating new banner (no ID), image is required
+		if (empty($the_id) && (!$image || $image->getError() !== UPLOAD_ERR_OK)) {
+			return $this->response->setJSON([
+				'status' => 'error',
+				'msg'    => 'Please upload the image.'
+			]);
+		}
 
-    if ($image && $image->isValid() && !$image->hasMoved()) {
-        $newName = $image->getRandomName();
-        $image->move(ROOTPATH . 'public/uploads', $newName);
+		// Check if image is uploaded
+		if ($image && $image->getError() == UPLOAD_ERR_OK && !$image->hasMoved()) {
+			$newName = $image->getRandomName();
+			$image->move(ROOTPATH . 'public/uploads', $newName);
+		}
+		if($bannerName && $image) {
+		// Create
+		if (empty($the_id)) {
+			// $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
+			$data = [
+				'the_Name'         => $bannerName,
+				'the_Description'  => $description,
+				'the_Home_Banner'  => $newName ?? '',
+				'the_Status'       => 1,
+				'the_createdon'    => date("Y-m-d H:i:s"),
+				'the_createdby'    => $this->session->get('zd_uid'),
+				'the_modifyby'     => $this->session->get('zd_uid'),
+			];
 
-        // Get additional form data properly (CI4 syntax)
-        $the_id         = $this->request->getPost('the_id');
-        $bannerName     = $this->request->getPost('file_name');
-        $description    = $this->request->getPost('description');
+			$bannerModel->createBanner($data);
 
-        // Save to database (assuming you have a BannerModel)
-        //$model = new \App\Models\BannerModel();
-        $data([
-            'the_id'      		 => $the_id,
-            'the_Home_Banner'    => $newName,
-            'file_name'   => $bannerName,
-            'description' => $description,
-        ]);
-
-        return $this->response->setJSON([
-            'status' => 1,
-            'msg'    => 'Image and data uploaded successfully.',
-        ]);
+			return $this->response->setJSON([
+				'status' => 1,
+				'msg'    => 'Banner uploaded successfully.'
+			]);
+		} 
+		
+		// Update
+		else {
+			$existing = $bannerModel->getThemesByid($the_id);
+			
+				if (!$existing) {
+				return $this->response->setJSON([
+					'status' => 0,
+					'msg'    => 'Banner not found for update.'
+				]);
+			}
+			
+			
+			if ($newName && !empty($existing->the_Home_Banner)) {
+        $oldPath = ROOTPATH . 'public/uploads/' . $existing->the_Home_Banner;
+        if (file_exists($oldPath)) {
+            unlink($oldPath);
+        }
     }
 
-    // Return error if file is not valid
-    return $this->response->setJSON([
-        'status' => 0,
-        'msg'    => 'Image upload failed or no file selected.',
-    ]);
 
+		
 
+			$data = [
+				'the_Name'         => $bannerName,
+				'the_Description'  => $description,
+				'the_modifyby'     => $this->session->get('zd_uid'),
+				//'the_Home_Banner'  => $newName ?? $existing['the_Home_Banner']  // retain old name if no new image
+			   	'the_Home_Banner' => $newName ?? $existing->the_Home_Banner
+
+			];
+
+			$bannerModel->modifyBanner($the_id, $data);
+
+			return $this->response->setJSON([
+				'status'   => 1,
+				'msg'      => 'Banner updated successfully.',
+				'redirect' => base_url('banner')
+			]);
+		}
+		
 	}
+		else {
+			return $this->response->setJSON([
+				'status' => 'error',
+				'msg' => 'All mandatory fields are required.'
+			]);
+		}
+	}
+
+/***************************************************************************************************/
+
+public function ajaxList()
+{
+    $model = new BannerModel();
+    $data = $model->getDatatables();
+    $total = $model->countAll();
+    $filtered = $model->countFiltered();
+
+    $start = $this->request->getPost('start'); // DataTables offset
+
+    foreach ($data as $key => &$row) {
+        // Add serial number (DT_RowIndex)
+        $row['DT_RowIndex'] = $start + $key + 1;
+
+        // Default fallback
+        $row['the_Name'] = $row['the_Name'] ?? 'N/A';
+
+        // Image thumbnail
+        if (!empty($row['the_Home_Banner'])) {
+            $imgUrl = base_url('public/uploads/' . $row['the_Home_Banner']);
+            $row['the_Home_Banner'] = '<img src="' . $imgUrl . '" alt="Banner" style="height: 40px;">';
+        } else {
+            $row['the_Home_Banner'] = '<span>No image</span>';
+        }
+
+        // Status toggle switch (checkbox using the_Status)
+        $row['status_switch'] = '<div class="form-check form-switch">
+            <input class="form-check-input checkactive"
+                   type="checkbox"
+                   id="statusSwitch-' . $row['the_Id'] . '"
+                   value="' . $row['the_Status'] . '" ' . ($row['the_Status'] == 1 ? 'checked' : '') . '>
+            <label class="form-check-label pl-0 label-check"
+                   for="statusSwitch-' . $row['the_Id'] . '"></label>
+        </div>';
+
+        // Action buttons
+        $row['actions'] = '<a href="' . base_url('banner/add/' . $row['the_Id']) . '">
+                <i class="bi bi-pencil-square"></i>
+            </a>&nbsp;
+            <i class="bi bi-trash text-danger icon-clickable"
+               onclick="confirmDelete(' . $row['the_Id'] . ')"></i>';
+    }
+
+    return $this->response->setJSON([
+        'draw' => intval($this->request->getPost('draw')),
+        'recordsTotal' => $total,
+        'recordsFiltered' => $filtered,
+        'data' => $data
+    ]);
+}
+
+
+/***************************************************************************************************/
+
 }
 

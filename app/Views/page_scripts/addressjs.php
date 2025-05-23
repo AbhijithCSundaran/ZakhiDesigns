@@ -38,6 +38,10 @@ $('#custSubmit').prop('disabled', true);
     e.preventDefault(); // Important to prevent normal form submit
     var url = baseUrl + "customer_address/save"; // Correct route
     $.post(url, $('#createcustaddress').serialize(), function(response) {
+		    $('html, body').animate({
+            scrollTop: 0
+        }, 'fast');
+ 
        // $('#createstaff')[0].reset();
         if (response.status == 1) { 
 		$('#messageBox')

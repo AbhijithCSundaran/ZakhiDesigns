@@ -5,16 +5,16 @@
             <div class="row align-items-center">
                 <div class="col-md-8">
                     <div class="page-header-title">
-                        <h5 class="m-b-10">Add Product Image</h5>
+                        <h5 class="m-b-10"><?= isset($banner) ? 'Update Home Banner' : 'Add Home Banner'; ?></h5>
                         <p class="m-b-0">Welcome to Zakhi Designs</p>
                     </div>
                 </div>
                 <div class="col-md-4">
                     <ul class="breadcrumb-title">
                         <li class="breadcrumb-item">
-                            <a href="index.html"> <i class="fa fa-home"></i> </a>
+                            <a href="<?= base_url('dashboard'); ?>"> <i class="fa fa-home"></i> </a>
                         </li>
-                        <li class="breadcrumb-item"><a href="#!">Add Product Image</a>
+                        <li class="breadcrumb-item"><a href="#!"><?= isset($banner) ? 'Update Home Banner' : 'Add Home Banner'; ?></a>
                         </li>
                     </ul>
                 </div>
@@ -39,31 +39,41 @@
                                 <div class="card-block">
                                     <form name="banner_add" id="banner_add" method="post" enctype="multipart/form-data">
                                        <div class="form-group row">
-                                            <label class="col-sm-3 col-form-label">Banner File Name<span
+                                            <label class="col-sm-3 col-form-label">Banner Name<span
                                             style="color: red;">*</span></label>
                                             <div class="col-sm-7">
-                                                <input type="text" class="form-control" name="file_name" id="fileName"
-                                                 placeholder="Enter the product File Name">
+                                                <input type="text" class="form-control" name="file_name" value="<?= isset($banner) ? ($banner['the_Name']) : '' ?>" id="fileName" maxlength="20"
+                                                 placeholder="Enter the Banner Name" required>
                                             </div>
                                         </div>
                                         <div class="form-group row">
                                             <label class="col-sm-3 col-form-label">Upload the Image<span
                                             style="color: red;">*</span></label>
                                             <div class="col-sm-7">
-                                                <input type="file" name="banner_image" id="banner_image" class="form-control">
-                                            </div>
+                                                <input type="file" name="banner_image" id="banner_image" value="<?= isset($banner) ? ($banner['the_Home_Banner']) : '' ?>" class="form-control" required>
+                                            <?php if (isset($banner) && !empty($banner['the_Home_Banner'])): ?>
+												<img id="preview"
+													 src="<?= base_url('/public/uploads/' . $banner['the_Home_Banner']); ?>"
+													 alt="Image Preview"
+													 style="max-height: 50px; margin-top: 10px; display: block;" />
+											<?php else: ?>
+												<img id="preview"
+													 src="#"
+													 alt="Image Preview"
+													 style="max-height: 50px; margin-top: 10px; display: none;" />
+											<?php endif; ?></div>
+											
                                         </div>
 										<div class="form-group row">
-                                            <label class="col-sm-3 col-form-label">Description<span
-                                            style="color: red;">*</span></label>
+                                            <label class="col-sm-3 col-form-label">Description</label>
                                             <div class="col-sm-7">
-                                                <input type="text" class="form-control" name="description" id="description"
-                                                 placeholder="Enter the product description">
+                                                <input type="text" class="form-control" value="<?= isset($banner) ? ($banner['the_Description']) : '' ?>" name="description" id="description"
+                                                 placeholder="Enter the description">
                                             </div>
                                         </div>
                                         
                                         <div class="row justify-content-center">
-                                            <input type="hidden" name="the_id">
+                                            <input type="hidden" name="the_id" value="<?= isset($banner) ? $banner['the_Id'] : '' ?>">
                                             <div class="button-group">
                                                 <button type="button" class="btn btn-secondary"
                                                     onclick="window.location.href='<?= base_url('banner'); ?>'">
@@ -71,7 +81,7 @@
                                                 </button>
                                                 <button type="button" class="btn btn-primary" id="imageSubmit"
                                                     name="imageSubmit">
-                                                    <i class="bi bi-check-circle"></i> Save
+                                                    <i class="bi bi-check-circle"></i> <?= isset($banner) ? 'Update' : 'Save'; ?>
                                                 </button>
                                             </div>
                                         </div>

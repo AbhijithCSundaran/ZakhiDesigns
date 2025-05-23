@@ -58,7 +58,7 @@ class Customer extends BaseController
 		$custemail = $this->input->getPost('custemail');
 		$mobile = $this->input->getPost('mobile');
 	    $password =$this->input->getPost('password');
-		 if (!preg_match('/^[a-zA-Z]+$/', $custname)) {
+		 if (!preg_match('/^[a-zA-Z ]+$/', $custname)) {
 			return $this->response->setJSON(['status' => 'error', 'msg' => 'Please enter name correctly.']);
 		}
 

@@ -30,7 +30,7 @@
                 <!-- Page-body start -->
                 <div class="page-body">
 					<?php if (!empty($user)) : ?>
-						<h5>Delivery address by <?= esc($user[0]['cust_Name']); ?></h5>
+						<h5>Delivery Address By <?= esc($user[0]['cust_Name']); ?></h5>
 					<?php endif; ?>
 				  <div class="row">	
 				  <div class="col-xl-4">

@@ -7,7 +7,7 @@
                           <div class="">
 						   
                               <div class="main-menu-header">
-                                  <img class="img-80 img-radius" src="<?php echo base_url().ASSET_PATH; ?>admin/assets/images/avatar-4.jpg" alt="User-Profile-Image">
+                                  <img class="img-80 img-radius" src="<?php echo base_url().ASSET_PATH; ?>Admin/assets/images/avatar-4.jpg" alt="User-Profile-Image">
                                  
                                   <div class="user-details">
                                     

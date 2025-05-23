@@ -1,212 +1,45 @@
 <!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <title>Zakhi Designs </title>
-    <!-- HTML5 Shim and Respond.js IE10 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 10]>
-      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-      <![endif]-->
-      <!-- Meta -->
-      <meta charset="utf-8">
-      <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
-      <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-      <meta name="description" content="Mega Able Bootstrap admin template made using Bootstrap 4 and it has huge amount of ready made feature, UI components, pages which completely fulfills any dashboard needs." />
-      <meta name="keywords" content="bootstrap, bootstrap admin template, admin theme, admin dashboard, dashboard template, admin template, responsive" />
-      <meta name="author" content="codedthemes" />
-      <!-- Favicon icon -->
-      <link rel="icon" href="<?php echo base_url().ASSET_PATH; ?>assets/images/favicon.ico" type="image/x-icon">
-    <!-- Google font-->
-    <link href="https://fonts.googleapis.com/css?family=Roboto:400,500" rel="stylesheet">
-    <!-- waves.css -->
-    <link rel="stylesheet" href="<?php echo base_url().ASSET_PATH; ?>assets/pages/waves/css/waves.min.css" type="text/css" media="all">
-      <!-- Required Fremwork -->
-      <link rel="stylesheet" type="text/css" href="<?php echo base_url().ASSET_PATH; ?>assets/css/bootstrap/css/bootstrap.min.css">
-      <!-- waves.css -->
-      <link rel="stylesheet" href="<?php echo base_url().ASSET_PATH; ?>assets/pages/waves/css/waves.min.css" type="text/css" media="all">
-      <!-- themify icon -->
-      <link rel="stylesheet" type="text/css" href="<?php echo base_url().ASSET_PATH; ?>assets/icon/themify-icons/themify-icons.css">
-      <!-- Font Awesome -->
-      <link rel="stylesheet" type="text/css" href="<?php echo base_url().ASSET_PATH; ?>assets/icon/font-awesome/css/font-awesome.min.css">
-      <!-- scrollbar.css -->
-      <link rel="stylesheet" type="text/css" href="<?php echo base_url().ASSET_PATH; ?>assets/css/jquery.mCustomScrollbar.css">
-        <!-- am chart export.css -->
-     <link rel="stylesheet" href="https://www.amcharts.com/lib/3/plugins/export/export.css" type="text/css" media="all" />
-    <!-- Style.css -->
-    <link rel="stylesheet" type="text/css" href="<?php echo base_url().ASSET_PATH; ?>assets/css/style.css">
-    <!--Boostrap CSS-->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!--Boostrap Icons -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-
-    <!-- DataTables CSS -->
-	
-	<!-- DataTables CSS -->
-<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css">
-
-
-<!-- DataTables Responsive CSS (Optional) -->
-<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/2.3.0/css/responsive.dataTables.min.css">
-
-
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
-    <link rel="stylesheet" href="<?php echo base_url().ASSET_PATH; ?>assets/css/custom.css" />
-</head>
-  <body>
-  <!-- Pre-loader start -->
-  <div class="theme-loader">
-      <div class="loader-track">
-          <div class="preloader-wrapper">
-              <div class="spinner-layer spinner-blue">
-                  <div class="circle-clipper left">
-                      <div class="circle"></div>
-                  </div>
-                  <div class="gap-patch">
-                      <div class="circle"></div>
-                  </div>
-                  <div class="circle-clipper right">
-                      <div class="circle"></div>
-                  </div>
-              </div>
-              <div class="spinner-layer spinner-red">
-                  <div class="circle-clipper left">
-                      <div class="circle"></div>
-                  </div>
-                  <div class="gap-patch">
-                      <div class="circle"></div>
-                  </div>
-                  <div class="circle-clipper right">
-                      <div class="circle"></div>
-                  </div>
-              </div>
-            
-              <div class="spinner-layer spinner-yellow">
-                  <div class="circle-clipper left">
-                      <div class="circle"></div>
-                  </div>
-                  <div class="gap-patch">
-                      <div class="circle"></div>
-                  </div>
-                  <div class="circle-clipper right">
-                      <div class="circle"></div>
-                  </div>
-              </div>
-            
-              <div class="spinner-layer spinner-green">
-                  <div class="circle-clipper left">
-                      <div class="circle"></div>
-                  </div>
-                  <div class="gap-patch">
-                      <div class="circle"></div>
-                  </div>
-                  <div class="circle-clipper right">
-                      <div class="circle"></div>
-                  </div>
-              </div>
-          </div>
-      </div>
-  </div>
-  <!-- Pre-loader end -->
-  <div id="pcoded" class="pcoded">
-      <div class="pcoded-overlay-box"></div>
-      <div class="pcoded-container navbar-wrapper">
-          <nav class="navbar header-navbar pcoded-header">
-              <div class="navbar-wrapper">
-                  <div class="navbar-logo">
-                      <a class="mobile-menu waves-effect waves-light" id="mobile-collapse" href="#!">
-                          <i class="ti-menu"></i>
-                      </a>
-                      <div class="mobile-search waves-effect waves-light">
-                          <div class="header-search">
-                              <div class="main-search morphsearch-search">
-                                  <div class="input-group">
-                                      <span class="input-group-addon search-close"><i class="ti-close"></i></span>
-                                      <input type="text" class="form-control" placeholder="Enter Keyword">
-                                      <span class="input-group-addon search-btn"><i class="ti-search"></i></span>
-                                  </div>
-                              </div>
-                          </div>
-                      </div>
-                      <a href="<?php echo base_url('dashboard');?>">
-                     <h1 class="navbar-brand mb-0 h1" >Zakhi Designs</h1>
-                      </a>
-                      <a class="mobile-options waves-effect waves-light">
-                          <i class="ti-more"></i>
-                      </a>
-                  </div>
-                
-                  <div class="navbar-container container-fluid">
-                      <ul class="nav-left">
-                          <li>
-                            <div class="sidebar_toggle"><a href="javascript:void(0)"><i class="ti-menu"></i></a></div>
-                          </li>
-                          <li class="header-search">
-                              <div class="main-search morphsearch-search">
-                                  <div class="input-group">
-                                      <span class="input-group-addon search-close"><i class="ti-close"></i></span>
-                                      <input type="text" class="form-control">
-                                      
-                                  </div>
-                              </div>
-                          </li>
-                          <li>
-                              
-                          </li>
-                      </ul>
-                      <ul class="nav-right">
-                         
-                          <li class="user-profile header-notification">
-                              <a href="#!" class="waves-effect waves-light">
-									<?php
-                                        $session = session();
-                                        $username = $session->get('zd_uname');
-                                    ?>  
-                                  <span><?= esc($username); ?></span>
-                                  <i class="ti-angle-down"></i>
-                              </a>
-                              <ul class="show-notification profile-notification">
-                                
-                                  <li class="waves-effect waves-light">
-                                      <a href="<?php echo base_url('admin') ?>">
-                                          <i class="ti-user"></i> Profile
-                                      </a>
-                                  </li>
-                                  <li class="waves-effect waves-light">
-                                      <a href="#" data-toggle="modal" data-target="#logoutModal">
-                                          <i class="ti-layout-sidebar-left"></i> Logout
-                                      </a>
-                                  </li>
-                              </ul>
-                          </li>
-                      </ul>
-                  </div>
-              </div>
-          </nav>
-
-
-
-          <!-- Logout Modal -->
-<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="logoutModalLabel"
-    aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="logoutModalLabel">Are you sure you want to logout?</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-footer">
-                <form id="logout-form" action="<?= base_url('logout') ?>" method="POST">
-                    <?= csrf_field() ?>
-                    <button type="submit" class="btn btn-primary">Logout</button>
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
- 
- 
+<html>
+	<head>
+		<title>Zakhi Designs</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" href="<?php echo base_url().ASSET_PATH;?>assets/css/bootstrap.min.css">
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+		<link rel="stylesheet" href="<?php echo base_url().ASSET_PATH; ?>assets/css/styles.css">
+		<link rel="stylesheet" href="<?php echo base_url().ASSET_PATH;?>assets/vendors/owlcarousel/assets/owl.carousel.min.css">
+		<link rel="stylesheet" href="<?php echo base_url().ASSET_PATH; ?>assets/vendors/owlcarousel/assets/owl.theme.default.min.css">
+	</head>
+	<body>
+		<header>
+			<div class="container-lg">
+				<div class="row head-row">
+					<div class="col-6 logo">
+						<img src="<?php echo base_url().ASSET_PATH; ?>assets/images/logo.jpg" />
+					</div>
+					<div class="col-6">
+						<div class="row">
+							<div class="col-12 callnow tel-ico">
+								<i class="bi bi-telephone-fill"></i>
+								<span>Call Us Now</span><br/>
+								<small>+91 70348 53219</small>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-12">
+						<div class="topnav" id="respTopnav">
+						  <a href="#home" class="active">Home</a>
+						  <a href="#news">About Us</a>
+						  <a href="#contact">Fashion</a>
+						  <a href="#about">Contact</a>
+						  <a href="javascript:void(0);" class="searchbox"><input type="text" name="search" id="search" placeholder="Search products" /></a>
+						  <a href="javascript:void(0);"><i class="bi bi-search"></i></a>
+						  <a href="javascript:void(0);" class="icon" onclick="openRespMenu()">
+							<i class="bi bi-list"></i>
+						  </a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</header>

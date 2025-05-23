@@ -8,84 +8,108 @@ use CodeIgniter\Router\RouteCollection;
 /* GET METHODS */
 $routes->get('/', 'Home::index');
 
-$routes->get('dashboard', 'Dashboard::index'); 
 
-$routes->post('Auth', 'Auth::authenticate'); 
+
+
+
+
+// $routes->group('admin', ['namespace' => 'App\Controllers\admin'], function($routes) {
+
+$routes->get('admin', 'Admin\Home::index'); 
+$routes->post('admin/Auth', 'Admin\Auth::authenticate'); 
+$routes->get('admin/dashboard', 'Admin\Dashboard::index'); 
+
+
 
 //category
-$routes->get('category', 'Category::index');
-$routes->get('category/add', 'Category::addCategory');
-$routes->get('category/edit/(:num)', 'Category::addCategory/$1'); 
-$routes->post('category/save', 'Category::saveCategory');
-$routes->post('category/status', 'Category::changeStatus');
-$routes->post('category/delete/(:any)', 'Category::deleteCategory/$1');
+$routes->get('admin/category', 'Admin\Category::index');
+$routes->get('admin/category/add', 'Admin\Category::addCategory');
+$routes->get('admin/category/edit/(:num)', 'Admin\Category::addCategory/$1'); 
+$routes->post('admin/category/save', 'Admin\Category::saveCategory');
+$routes->post('admin/category/status', 'Admin\Category::changeStatus');
+$routes->post('admin/category/delete/(:any)', 'Admin\Category::deleteCategory/$1');
 
 
 //Subcategory
-$routes->get('subcategory', 'Subcategory::index');
-$routes->get('subcategory/add', 'Subcategory::addSubcategory');
-$routes->get('subcategory/edit/(:num)', 'Subcategory::addSubcategory/$1'); 
-$routes->post('subcategory/save', 'Subcategory::saveSubcategory');
-$routes->post('subcategory/delete/(:any)', 'Subcategory::deleteSubcategory/$1');
-$routes->post('subcategory/status', 'Subcategory::changeStatus');
+$routes->get('admin/subcategory', 'Admin\Subcategory::index');
+$routes->post('admin/subcategory/List', 'Admin\Subcategory::ajaxList');
+$routes->get('admin/subcategory/add', 'Admin\Subcategory::addSubcategory');
+$routes->get('admin/subcategory/edit/(:num)', 'Admin\Subcategory::addSubcategory/$1'); 
+$routes->post('admin/subcategory/save', 'Admin\Subcategory::saveSubcategory');
+$routes->post('admin/subcategory/delete/(:any)', 'Admin\Subcategory::deleteSubcategory/$1');
+$routes->post('admin/subcategory/status', 'Admin\Subcategory::changeStatus');
 
 
 //Products
-$routes->get('product', 'Product::index');
-$routes->get('product/add', 'Product::addProduct');
-$routes->get('product/edit/(:num)', 'Product::addProduct/$1'); 
-$routes->post('product/save', 'Product::saveProduct');
-$routes->post('product/delete/(:any)', 'Product::deleteProduct/$1');
-$routes->post('product/get-subcategories', 'Product::getSubcategories');
-$routes->post('product/upload-media', 'Product::uploadMedia');
-$routes->get('product/get-product-images/(:num)', 'Product::getProductImages/$1');
-$routes->post('product/delete-product-image', 'Product::deleteProductImage');
-$routes->post('product/video', 'Product::ProductuploadVideo');
-$routes->post('product/getVideo', 'Product::getVideo');
-$routes->post('product/deletevideo','Product::deleteVideo');
-$routes->post('product/status', 'Product::changeStatus');
-
-
-
-
-
-
+$routes->get('admin/product', 'Admin\Product::index');
+$routes->post('admin/product/List', 'Admin\Product::ajaxList');
+$routes->get('admin/product/add', 'Admin\Product::addProduct');
+$routes->get('admin/product/edit/(:num)', 'Admin\Product::addProduct/$1'); 
+$routes->post('admin/product/save', 'Admin\Product::saveProduct');
+$routes->post('admin/product/delete/(:any)', 'Admin\Product::deleteProduct/$1');
+$routes->post('admin/product/get-subcategories', 'Admin\Product::getSubcategories');
+$routes->post('admin/product/upload-media', 'Admin\Product::uploadMedia');
+$routes->get('admin/product/get-product-images/(:num)', 'Admin\Product::getProductImages/$1');
+$routes->post('admin/product/delete-product-image', 'Admin\Product::deleteProductImage');
+$routes->post('admin/product/video', 'Admin\Product::ProductuploadVideo');
+$routes->post('admin/product/getVideo', 'Admin\Product::getVideo');
+$routes->post('admin/product/deletevideo','Admin\Product::deleteVideo');
+$routes->post('admin/product/status', 'Admin\Product::changeStatus');
 
 
 
 
 //Staff
-$routes->get('staff', 'Staff::index');
-$routes->get('staff/add', 'Staff::addStaff'); // Create
-$routes->get('staff/add/(:num)', 'Staff::addStaff/$1'); // Edit
-$routes->post('staff/status', 'Staff::updateStatus');// Update status of a staff
-$routes->post('staff/save', 'Staff::createnew');
-$routes->post('staff/delete/(:any)', 'Staff::deleteStaff/$1');
+$routes->get('admin/staff', 'Admin\Staff::index');
+$routes->post('admin/staff/List', 'Admin\Staff::ajaxList');
+$routes->get('admin/staff/add', 'Admin\Staff::addStaff'); // Create
+$routes->get('admin/staff/add/(:num)', 'Admin\Staff::addStaff/$1'); // Edit
+$routes->post('admin/staff/status', 'Admin\Staff::updateStatus');// Update status of a staff
+$routes->post('admin/staff/save', 'Admin\Staff::createnew');
+$routes->post('admin/staff/delete/(:any)', 'Admin\Staff::deleteStaff/$1');
 
 
 //Customers
-$routes->get('customer', 'Customer::index');
-$routes->get('customer/view', 'Customer::view_cust'); // Create
-$routes->get('customer/view/(:num)', 'Customer::view_cust/$1'); // Edit Page
-$routes->post('customer/save', 'Customer::createnew');
-$routes->post('customer/delete/(:any)', 'Customer::deleteCust/$1');
+$routes->get('admin/customer', 'Admin\Customer::index');
+$routes->get('admin/customer/view', 'Admin\Customer::view_cust'); // Create
+$routes->get('admin/customer/view/(:num)', 'Admin\Customer::view_cust/$1'); // Edit Page
+$routes->post('admin/customer/save', 'Admin\Customer::createnew');
+$routes->post('admin/customer/delete/(:any)', 'Admin\Customer::deleteCust/$1');
 //$routes->post('customer/updateStatus', 'Customer::updateStatus');
-$routes->post('customer/status', 'Customer::updateStatus');
-$routes->get('customer/location/(:num)', 'Customer_address::location/$1');//customer address edit
-$routes->get('customer_address/view/(:num)', 'Customer_address::view_address/$1');
-$routes->get('customer_address/view/(:num)/(:num)', 'Customer_address::view_address/$1/$2');
-$routes->post('customer_address/save', 'Customer_address::createnew');
-$routes->post('customer_address/delete/(:any)', 'Customer_address::deleteAddress/$1');
+$routes->post('admin/customer/status', 'Admin\Customer::updateStatus');
+$routes->get('admin/customer/location/(:num)', 'Admin\Customer_address::location/$1');//customer address edit
+$routes->get('admin/customer_address/view/(:num)', 'Admin\Customer_address::view_address/$1');
+$routes->get('admin/customer_address/view/(:num)/(:num)', 'Admin\Customer_address::view_address/$1/$2');
+$routes->post('admin/customer_address/save', 'Admin\Customer_address::createnew');
+$routes->post('admin/customer_address/delete/(:any)', 'Admin\Customer_address::deleteAddress/$1');
+
+
+
+//Themes
+$routes->get('admin/themes', 'Admin\Themes::index');
+$routes->post('admin/themes/List', 'Admin\Themes::ajaxList');
+$routes->post('admin/themes/status', 'Admin\Themes::updateStatus');
+$routes->get('admin/themes/add', 'Admin\Themes::addbanner'); // Create
+$routes->get('admin/themes/add/(:num)', 'Admin\Themes::addbanner/$1'); // Edit
+//$routes->post('themes/save', 'Themes::save_file');
+$routes->post('admin/themes/delete/(:any)', 'Admin\Themes::deleteBanner/$1');
+$routes->post('admin/themes/save_file', 'Admin\Themes::save_file');
+
+//logout
+$routes->post('admin/logout', 'Admin\Auth::logout'); 
+
+
+
 
 
 //banners
-$routes->get('banner', 'Banner::index');
-$routes->post('banner/List', 'Banner::ajaxList');
-$routes->post('banner/status', 'Banner::updateStatus');
-$routes->get('banner/add', 'Banner::addbanner'); // Create
-$routes->get('banner/add/(:num)', 'Banner::addbanner/$1'); // Edit
-$routes->post('banner/save', 'Banner::createnew');
-$routes->post('banner/delete/(:any)', 'Banner::deleteBanner/$1');
+$routes->get('admin/banner', 'Admin\Banner::index');
+$routes->post('admin/banner/List', 'Admin\Banner::ajaxList');
+$routes->post('admin/banner/status', 'Admin\Banner::updateStatus');
+$routes->get('admin/banner/add', 'Admin\Banner::addbanner'); // Create
+$routes->get('admin/banner/add/(:num)', 'Admin\Banner::addbanner/$1'); // Edit
+$routes->post('admin/banner/save', 'Admin\Banner::createnew');
+$routes->post('admin/banner/delete/(:any)', 'Admin\Banner::deleteBanner/$1');
 
 
 //offer banners
@@ -98,23 +122,7 @@ $routes->post('offer_banner/save', 'Offer_Banner::createnew');
 $routes->post('offer_banner/delete/(:any)', 'Offer_Banner::deleteBanner/$1');
 $routes->post('offer_banner/get-subcategories', 'Offer_Banner::getSubcategories');
 $routes->post('offer_banner/get-products', 'Offer_Banner::getProducts');
-
-//Themes
-$routes->get('banner', 'Banner::index');
-$routes->post('banner/List', 'Banner::ajaxList');
-$routes->post('banner/status', 'Banner::updateStatus');
-$routes->get('banner/add', 'Banner::addbanner'); // Create
-$routes->get('banner/add/(:num)', 'Banner::addbanner/$1'); // Edit
-$routes->post('banner/save', 'Banner::createnew');
-$routes->post('banner/delete/(:any)', 'Banner::deleteBanner/$1');
-
-
-
-
-//logout
-$routes->post('/logout', 'Auth::logout'); 
-
-
 //admin_updation
-$routes->get('admin', 'Admin::index');
+$routes->get('/admin', 'Admin::index');
 $routes->post('admin/save', 'Admin::createnew');
+//});

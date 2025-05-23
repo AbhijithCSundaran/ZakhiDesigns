@@ -3,56 +3,82 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class BannerModel extends Model {
+class Theme_Model extends Model {
 	
         public function __construct() {
             $this->db = \Config\Database::connect();
         }
         public function getAllBanners() {
-			return $this->db->table('theme')
-			->where('the_Status !=', 3)
-			->where('the_CatId IS NULL', null, false)
-			->where('the_SubId IS NULL', null, false)
+			return $this->db->table('themes')
+			->where('theme_Status !=', 3)
 			->get()
 			->getResultArray();
         }
-        public function createBanner($data) {
+        /* public function createBanner($data) {
             return $this->db->table('theme')->insert($data);
-        }
-		public function getThemesByid($id){
-            return $this->db->table('theme')->where('the_Id', $id)->get()->getRow(); 
+        } */
+		
+		public function insert_data($data)
+		{
+			return $this->db->table('themes')->insert($data);
 		}
+
+		public function modifyThemes($id, $data)
+		{
+			return $this->db->table('themes')->where('theme_Id', $id)->update($data);
+		}
+
+		public function getThemesByid($id)
+		{
+			return $this->db->table('themes')->where('theme_Id', $id)->get()->getRow();
+		}
+
+		 /* public function insert_data($data) {
+            return $this->db->table('themes')->insert($data);
+        }*/
+		
 		public function getThemeByid($id){
-            return $this->db->table('theme')->where('the_Id', $id)->get()->getRow(); 
+            return $this->db->table('themes')->where('theme_Id', $id)->get()->getRow(); 
+		} 
+		public function getThemeStatusByid($themeId){
+            return $this->db->table('themes')->where('theme_Id', $themeId)->get()->getRow(); 
 		}
-		public function updateTheme($id, $data)
+		public function deactivateAllThemesExcept($themeId)
 		{
-			return $this->db->table('theme')->where('the_Id', $id) ->update($data);
+			
+			return $this->db->table('themes')
+				->where('theme_Id !=', $themeId)
+				->where('theme_Status !=',3)
+				->update(['theme_Status' => 2]);
 		}
-        public function deleteBannerById($the_status, $the_id, $modified_by)
+		public function updateTheme($themeId, $data)
 		{
-			return $this->db->query("update theme set the_Status = '".$the_status."', the_modifyon=NOW(), the_modifyby='".$modified_by."' where the_Id = '".$the_id."'");
+			return $this->db->table('themes')->where('theme_Id', $themeId) ->update($data);
 		}
-		public function modifyBanner($the_id,$data) {
+        public function deleteBannerById($theme_Status, $theme_id, $modified_by)
+		{
+			return $this->db->query("update themes set theme_Status = '".$theme_Status."', theme_modifyon=NOW(), theme_modifyby='".$modified_by."' where theme_Id = '".$theme_id."'");
+		}
+		/* public function modifyThemes($theme_id,$data) {
 					
-			$this->db->table('theme')->where('the_Id',$the_id)->update($data);
+			$this->db->table('themes')->where('theme_Id',$theme_id)->update($data);
 			return $this->db->getLastQuery();
-		}
+		} */
   /****************************************************************************************************************/
-   protected $table = 'theme';
-    protected $primaryKey = 'the_Id';
-    protected $allowedFields = ['the_Name', 'the_Home_Banner', 'the_Status']; // Adjust to your table
+   protected $table = 'themes';
+    protected $primaryKey = 'theme_Id';
+    protected $allowedFields = ['theme_Name', 'theme_Home_Banner', 'theme_Status']; // Adjust to your table
 
     // For DataTables
    public function getDatatables()
 {
-    $builder = $this->db->table('theme t');
+    $builder = $this->db->table('themes t');
     
     // Select required fields including category and subcategory names
     $builder->select('t.*');
 	
     // Only fetch rows where either category or subcategory exists
-    $builder->where('t.the_Status !=', 3);
+    $builder->where('t.theme_Status !=', 3);
 
     // Add search logic if required
     $postData = service('request')->getPost();
@@ -69,7 +95,7 @@ class BannerModel extends Model {
 
     // Apply ordering if provided
     if (!empty($postData['order'])) {
-        $columns = ['t.the_Id', 't.the_Name', 't.the_Home_Banner','t.the_Status'];
+        $columns = ['t.theme_Id', 't.theme_Name', 't.theme_Decsription','t.theme_Status'];
         $orderCol = $columns[$postData['order'][0]['column']];
         $orderDir = $postData['order'][0]['dir'];
         $builder->orderBy($orderCol, $orderDir);
@@ -82,22 +108,22 @@ class BannerModel extends Model {
 
 	public function countAll()
 	{
-		return $this->db->table('theme')
-			->where('the_Status !=', 3)
+		return $this->db->table('themes')
+			->where('theme_Status !=', 3)
 			->countAllResults();
 	}
 
 	public function countFiltered()
 {
-    $builder = $this->db->table('theme t');
+    $builder = $this->db->table('themes t');
 
     // Only fetch rows where either category or subcategory or products exists
-    $builder->where('t.the_Status !=', 3);
+    $builder->where('t.theme_Status !=', 3);
  
     $postData = service('request')->getPost();
     if (!empty($postData['search']['value'])) {
         $builder->groupStart()
-                ->like('t.the_Name', $postData['search']['value'])
+                ->like('t.theme_Name', $postData['search']['value'])
                 ->groupEnd();
     }
     return $builder->countAllResults();

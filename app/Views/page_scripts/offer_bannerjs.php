@@ -1,17 +1,4 @@
 <script>
-
-$(document).ready(function() {
-    $('#customerList').DataTable({
-        "processing": true,
-        "serverSide": false,
-        "searching": true,
-        "paging": true,
-        "ordering": true,
-        "info": true,
-
-    });
-});
-
 /*********************************/
 
 function confirmDelete(theId) {
@@ -230,55 +217,40 @@ $('#categoryName').on('change', function() {
 
 
 // Load products when subcategory changes
-  
-    var preselectedProductId = "<?= isset($selected_pr_id) ? $selected_pr_id : '' ?>";
+$('#subcategoryName').on('change', function () {
+    var categoryId = $('#categoryName').val(); // optional if needed in filtering
+    var subcategoryId = $(this).val();
+    var productSelect = $('#productName');
+    var productMessage = $('#noproductMsg');
 
-    $(document).ready(function () {
-        $('#subcategoryName').on('change', function () {
-            var categoryId = $('#categoryName').val();
-            var subcategoryId = $(this).val();
-            var productSelect = $('#productName');
-            var productMessage = $('#noproductMsg');
+    productSelect.empty().append('<option value="">-- Select Product Name --</option>');
+    productMessage.hide();
 
-            productSelect.empty().append('<option value="">-- Select Product Name --</option>');
-            productMessage.hide();
-
-            if (subcategoryId) {
-                $.ajax({
-                    url: baseUrl + "offer_banner/get-products",
-                    type: "POST",
-                    data: {
-                        cat_id: categoryId,
-                        sub_id: subcategoryId
-                    },
-                    dataType: "json",
-                    success: function (response) {
-                        if (response.length === 0) {
-                            productSelect.append('<option value="">-- No Products Available --</option>');
-                            productMessage.show();
-                        } else {
-                            $.each(response, function (index, product) {
-                                productSelect.append('<option value="' + product.pr_Id + '">' + product.pr_Name + '</option>');
-                            });
-
-                            // Set the preselected value *after* populating options
-                            if (preselectedProductId) {
-                                productSelect.val(preselectedProductId);
-                            }
-                        }
-                    },
-                    error: function (xhr) {
-                        console.error("Error fetching products:", xhr.responseText);
-                    }
-                });
+    if (subcategoryId) {
+        $.ajax({
+            url: baseUrl + "offer_banner/get-products",
+            type: "POST",
+            data: {
+                cat_id: categoryId,   // optional, depends on your controller logic
+                sub_id: subcategoryId
+            },
+            dataType: "json",
+            success: function (response) {
+                if (response.length === 0) {
+                    productSelect.append('<option value="">-- No Products Available --</option>');
+                    productMessage.show();
+                } else {
+                    $.each(response, function (index, product) {
+                        productSelect.append('<option value="' + product.pr_Id + '">' + product.pr_Name + '</option>');
+                    });
+                }
+            },
+            error: function (xhr) {
+                console.error("Error fetching products:", xhr.responseText);
             }
         });
-
-        // Trigger change on page load to load products if subcategory is already selected
-        if ($('#subcategoryName').val()) {
-            $('#subcategoryName').trigger('change');
-        }
-    });
+    }
+});
 
 /***************************************/
 $('#productList').DataTable({

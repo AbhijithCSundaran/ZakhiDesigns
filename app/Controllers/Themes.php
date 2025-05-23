@@ -1,60 +1,71 @@
 <?php
 namespace App\Controllers;
-use App\Models\BannerModel;
+use App\Models\Theme_Model;
 
-class Banner extends BaseController
+class Themes extends BaseController
 {
 
     public function __construct()
     {
         $this->session = \Config\Services::session();
         $this->input = \Config\Services::request();
-        $this->bannerModel = new BannerModel();
+        $this->theme_Model = new Theme_Model();
     }
 
     public function index()
     {
-		$banner = $this->bannerModel->getAllBanners();
+		$banner = $this->theme_Model->getAllBanners();
         $data['user'] = $banner;
         $template = view('common/header');
 		$template.= view('common/leftmenu');
-		$template.= view('banners',$data);
+		$template.= view('themes',$data);
 		$template.= view('common/footer');
-		$template.= view('page_scripts/bannerjs');
+		$template.= view('page_scripts/themejs');
         return $template;
     }
  
 	public function updateStatus()
 	{
-		$theId = $this->request->getPost('the_Id');
-        $newStatus = $this->request->getPost('the_Status');
-        $bannerModel = new BannerModel();
-        $theme = $bannerModel->getThemeByid($theId);   
-        if (!$theme) {
-            return $this->response->setJSON([
-                'success' => false,
-                'message' => 'Theme not found'
-            ]);
-        }
-        $update = $bannerModel->updateTheme($theId, ['the_Status' => $newStatus]);
-        if ($update) {
-            return $this->response->setJSON([
-                'success' => true,
-                'message' => 'Status Updated Successfully!',
-                'new_status' => $newStatus
-            ]);
-        } else {
-            return $this->response->setJSON([
-                'success' => false,
-                'message' => 'Failed to update status'
-            ]);
-        }
+		$themeId = $this->request->getPost('theme_Id');
+		$newStatus = $this->request->getPost('theme_Status');
+		$theme_Model = new Theme_Model();
+
+		if (!$themeId || !in_array($newStatus, [1, 2])) {
+			return $this->response->setJSON([
+				'success' => false,
+				'message' => 'Invalid request.'
+			]);
+		}
+
+		$theme = $theme_Model->getThemeStatusByid($themeId);
+		if (!$theme) {
+			return $this->response->setJSON([
+				'success' => false,
+				'message' => 'Theme not found.'
+			]);
+		}
+
+		// If setting to active, deactivate all other themes first
+		if ($newStatus == 1) {
+			$theme_Model->deactivateAllThemesExcept($themeId);
+		}
+
+		// Now update the current theme
+		$update = $theme_Model->updateTheme($themeId, ['theme_Status' => $newStatus]);
+
+		return $this->response->setJSON([
+			'success' => $update,
+			'message' => $update ? 'Status updated successfully.' : 'Failed to update status.',
+			'new_status' => $newStatus
+		]);
 	}
-     public function deleteBanner($the_id) {
-		if ($the_id) {
+
+
+     public function deleteBanner($theme_id) {
+		if ($theme_id) {
 			$modified_by = $this->session->get('zd_uid');
-			$the_status = $this->bannerModel->deleteBannerById(3, $the_id, $modified_by);
-			if ($the_status) {
+			$theme_Status = $this->theme_Model->deleteBannerById(3, $theme_id, $modified_by);
+			if ($theme_Status) {
 				echo json_encode([
 					'success' => true,
 					'msg' => 'Banner deleted successfully.'
@@ -72,190 +83,262 @@ class Banner extends BaseController
 			]);
 		}
 	}
-	public function addbanner($the_id = null)
+	public function addbanner($theme_id = null)
 	{
-		if (!$this->session->get('zd_uid')) 
-		{
+		if (!$this->session->get('zd_uid')) {
 			return redirect()->to(base_url());
 		}
 
 		$data = [];
-		 if ($the_id) {
-			$banner = $this->bannerModel->getThemeByid($the_id);
-		
+
+		if ($theme_id) {
+			$banner = $this->theme_Model->getThemeByid($theme_id);
+
 			if (!$banner) {
-				return redirect()->to('banner')->with('error', 'Banner not found');
+				return redirect()->to('themes')->with('error', 'Banner not found');
 			}
-			 $data['banner'] = (array) $banner;
-			
-			// Load views
-			$template = view('common/header');
-			$template .= view('common/leftmenu');
-			$template .= view('banner_add', $data);
-			$template .= view('common/footer');
-			$template .= view('page_scripts/bannerjs');
-			return $template;
+
+			// Decode section JSON data
+			$banner = (array) $banner;
+			$banner['theme_Section1'] = json_decode($banner['theme_Section1'], true) ?? [];
+			$banner['theme_Section2'] = json_decode($banner['theme_Section2'], true) ?? [];
+			$banner['theme_Section3'] = json_decode($banner['theme_Section3'], true) ?? [];
+
+			$data['banner'] = $banner;
 		}
-		else
-		{
-			// Load views
-			$template = view('common/header');
-			$template .= view('common/leftmenu');
-			$template .= view('banner_add');
-			$template .= view('common/footer');
-			$template .= view('page_scripts/bannerjs');
-			return $template;
-		}
-		
+		//print_r($data);exit;
+
+		// Load views
+		$template = view('common/header');
+		$template .= view('common/leftmenu');
+		$template .= view('themes_add', $data); // Pass $banner data if editing
+		$template .= view('common/footer');
+		$template .= view('page_scripts/themejs');
+		return $template;
 	}
-	public function createnew()
+
+public function save_file()
+{
+    $theme_Model = new Theme_Model();
+    $theme_id = $this->request->getPost('theme_id');
+    $mainData = $this->request->getPost();
+    $files = $this->request->getFiles();
+    $mainData['theme_name'] = trim($mainData['theme_name']);
+    $mainData['description'] = trim($mainData['description']);
+
+    $section1 = json_decode($mainData['theme_Section1'], true) ?? [];
+    $section2 = json_decode($mainData['theme_Section2'], true) ?? [];
+    $section3 = json_decode($mainData['theme_Section3'], true) ?? [];
+
+    $errors = [];
+	
+	
+    foreach (['Section1' => $section1, 'Section2' => $section2, 'Section3' => $section3] as $label => $section) {
+        if (empty($section)) {
+            $errors[] = "$label must have at least one item.";
+        }
+        foreach ($section as $index => $item) {
+            if (array_filter($item) === [] && empty(($mainData['theme_name'])) ) {
+                $errors[] = "$label, item " . ($index + 1) . ": All fields are empty.";
+            }
+        }
+    }
+	if(empty($mainData['theme_name']) && empty($mainData['description']))
 	{
-		$bannerModel = new BannerModel();
+		return $this->response->setJSON([
+			'status' => 0,
+			'msg' => 'All Mandatory fields are Required.'
+		]);
+	}
+   if (!isset($mainData['theme_name']) || !preg_match('/^[a-zA-Z\s ]+$/', $mainData['theme_name'])) {
+		return $this->response->setJSON([
+			'status' => 0,
+			'msg' => 'Theme name must contain only letters and spaces.'
+		]);
+	} 
 
-		$the_id      = $this->request->getPost('the_id');
-		$bannerName  = $this->request->getPost('file_name');
-		$description = $this->request->getPost('description');
-		$image       = $this->request->getFile('banner_image');
-		$newName     = null;
-		// Validate name format
-		if (!preg_match('/^[a-zA-Z ]+$/', $bannerName)) {
-			return $this->response->setJSON(['status' => 'error', 'msg' => 'Please enter name correctly.']);
-		}
-		
-		// If creating new banner (no ID), image is required
-		if (empty($the_id) && (!$image || $image->getError() !== UPLOAD_ERR_OK)) {
-			return $this->response->setJSON([
-				'status' => 'error',
-				'msg'    => 'Please upload the image.'
-			]);
-		}
+	if (!preg_match('/^[a-zA-Z0-9\s,\.\'\"\\\\;: ]+$/', $mainData['description'])) {
+		return $this->response->setJSON([
+			'status' => 0,
+			'msg' => 'Please enter Description Correctly.'
+		]);
+	}
 
-		// Check if image is uploaded
-		if ($image && $image->getError() == UPLOAD_ERR_OK && !$image->hasMoved()) {
-			$newName = $image->getRandomName();
-			$image->move(ROOTPATH . 'public/uploads', $newName);
-		}
-		if($bannerName && $image) {
-		// Create
-		if (empty($the_id)) {
-			// $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
-			$data = [
-				'the_Name'         => $bannerName,
-				'the_Description'  => $description,
-				'the_Home_Banner'  => $newName ?? '',
-				'the_Status'       => 1,
-				'the_createdon'    => date("Y-m-d H:i:s"),
-				'the_createdby'    => $this->session->get('zd_uid'),
-				'the_modifyby'     => $this->session->get('zd_uid'),
-			];
-
-			$bannerModel->createBanner($data);
-
-			return $this->response->setJSON([
-				'status' => 1,
-				'msg'    => 'Banner uploaded successfully.'
-			]);
-		} 
-		
-		// Update
-		else {
-			$existing = $bannerModel->getThemesByid($the_id);
-			
-				if (!$existing) {
-				return $this->response->setJSON([
-					'status' => 0,
-					'msg'    => 'Banner not found for update.'
-				]);
-			}
-			
-			
-			if ($newName && !empty($existing->the_Home_Banner)) {
-        $oldPath = ROOTPATH . 'public/uploads/' . $existing->the_Home_Banner;
-        if (file_exists($oldPath)) {
-            unlink($oldPath);
+    //  Validate Section 1
+    foreach ($section1 as $i => $item) {
+        if (!empty($item['link']) && !filter_var($item['link'], FILTER_VALIDATE_URL)) {
+            $errors[] = "Section 1, item " . ($i + 1) . ": Link must be a valid URL.";
         }
     }
 
+    //  Validate Section 2
+    foreach ($section2 as $i => $item) {
+        if (!empty($item['name']) && !preg_match('/^[a-zA-Z\s ]+$/', $item['name'])) {
+            $errors[] = "Section 2, item " . ($i + 1) . ": Name must contain only letters.";
+        }
+        if (!empty($item['link']) && !filter_var($item['link'], FILTER_VALIDATE_URL)) {
+            $errors[] = "Section 2, item " . ($i + 1) . ": Link must be a valid URL.";
+        }
+    }
 
-		
+    // Validate Section 3
+    foreach ($section3 as $i => $item) {
+        if (!empty($item['link']) && !filter_var($item['link'], FILTER_VALIDATE_URL)) {
+            $errors[] = "Section 3, item " . ($i + 1) . ": Link must be a valid URL.";
+        }
+    }
 
-			$data = [
-				'the_Name'         => $bannerName,
-				'the_Description'  => $description,
-				'the_modifyby'     => $this->session->get('zd_uid'),
-				//'the_Home_Banner'  => $newName ?? $existing['the_Home_Banner']  // retain old name if no new image
-			   	'the_Home_Banner' => $newName ?? $existing->the_Home_Banner
-
-			];
-
-			$bannerModel->modifyBanner($the_id, $data);
-
-			return $this->response->setJSON([
-				'status'   => 1,
-				'msg'      => 'Banner updated successfully.',
-				'redirect' => base_url('banner')
-			]);
+    //  Validate and Upload Images
+    $validateImage = function($file, $section, $index) use (&$errors) {
+        if ($file->isValid() && !$file->hasMoved()) {
+            $mime = $file->getMimeType();
+            if (!str_starts_with($mime, 'image/')) {
+                $errors[] = "$section, item " . ($index + 1) . ": Only image files are allowed.";
+            }
+        }
+    };
+    // Section 1 Images
+	if (isset($files['section1_image'])) {
+		foreach ($files['section1_image'] as $i => $file) {
+			if ($file->isValid() && !$file->hasMoved()) {
+				$newName = $file->getRandomName();
+				$file->move(ROOTPATH . 'public/uploads/themes', $newName);
+				$section1[$i]['image'] = $newName;
+			} else {
+				// No new image uploaded, retain old
+				$section1[$i]['image'] = $mainData['section1_image_old'][$i] ?? '';
+			}
 		}
 	}
-		else {
-			return $this->response->setJSON([
-				'status' => 'error',
-				'msg' => 'All mandatory fields are required.'
-			]);
+
+
+    // Section 2 Images
+	if (isset($files['section2_image'])) {
+		foreach ($files['section2_image'] as $i => $file) {
+			if ($file->isValid() && !$file->hasMoved()) {
+				$newName = $file->getRandomName();
+				$file->move(ROOTPATH . 'public/uploads/themes', $newName);
+				$section2[$i]['image'] = $newName;
+			} else {
+				// No new image uploaded, retain old
+				$section2[$i]['image'] = $mainData['section2_image_old'][$i] ?? '';
+			}
 		}
 	}
+
+    // Section 3 Images
+	if (isset($files['section3_image'])) {
+		foreach ($files['section3_image'] as $i => $file) {
+			if ($file->isValid() && !$file->hasMoved()) {
+				$newName = $file->getRandomName();
+				$file->move(ROOTPATH . 'public/uploads/themes', $newName);
+				$section3[$i]['image'] = $newName;
+			} else {
+				// No new image uploaded, retain old
+				$section3[$i]['image'] = $mainData['section3_image_old'][$i] ?? '';
+			}
+		}
+	}
+
+    // Stop if errors
+    if (!empty($errors)) {
+        return $this->response->setJSON([
+            'status' => 0,
+            'msg' => implode('/', $errors)
+        ]);
+    }
+
+    //  Prepare data to save
+    $data = [
+        'theme_Name'        => $mainData['theme_name'],
+        'theme_Description' => $mainData['description'],
+        'theme_Section1'    => json_encode($section1),
+        'theme_Section2'    => json_encode($section2),
+        'theme_Section3'    => json_encode($section3),
+        'theme_Status'      => 1,
+        'theme_modifyby'    => $this->session->get('zd_uid'),
+        'theme_modifyon'    => date('Y-m-d H:i:s'),
+    ];
+
+    //  Insert or Update
+    if (empty($theme_id)) {
+        $data['theme_createdon'] = date('Y-m-d H:i:s');
+        $data['theme_createdby'] = $this->session->get('zd_uid');
+        $this->theme_Model->insert_data($data);
+
+        // Get last inserted ID
+        $themeId = $this->theme_Model->insertID();
+
+        // Deactivate others
+        $this->theme_Model->deactivateAllThemesExcept($themeId);
+
+        return $this->response->setJSON([
+            'status' => 1,
+            'msg' => 'Theme created successfully.'
+        ]);
+    } else {
+        $existing = $this->theme_Model->getThemeByid($theme_id);
+        if (!$existing) {
+            return $this->response->setJSON(['status' => 0, 'msg' => 'Theme not found.']);
+        }
+
+        $this->theme_Model->modifyThemes($theme_id, $data);
+        $this->theme_Model->deactivateAllThemesExcept($theme_id);
+
+        return $this->response->setJSON([
+            'status' => 1,
+            'msg'   => 'Theme updated successfully.',
+            'redirect' => base_url('themes')
+        ]);
+    }
+}
+
 
 /***************************************************************************************************/
 
-public function ajaxList()
-{
-    $model = new BannerModel();
-    $data = $model->getDatatables();
-    $total = $model->countAll();
-    $filtered = $model->countFiltered();
+	public function ajaxList()
+	{
+		$model = new Theme_Model();
+		$data = $model->getDatatables();
+		$total = $model->countAll();
+		$filtered = $model->countFiltered();
 
-    $start = $this->request->getPost('start'); // DataTables offset
+		$start = $this->request->getPost('start'); // DataTables offset
 
-    foreach ($data as $key => &$row) {
-        // Add serial number (DT_RowIndex)
-        $row['DT_RowIndex'] = $start + $key + 1;
+		foreach ($data as $key => &$row) {
+			// Add serial number (DT_RowIndex)
+			$row['DT_RowIndex'] = $start + $key + 1;
 
-        // Default fallback
-        $row['the_Name'] = $row['the_Name'] ?? 'N/A';
+			// Default fallback
+			$row['theme_Name'] = $row['theme_Name'] ?? 'N/A';
+			$row['theme_Description'] = $row['theme_Description'] ?? 'N/A';
 
-        // Image thumbnail
-        if (!empty($row['the_Home_Banner'])) {
-            $imgUrl = base_url('public/uploads/' . $row['the_Home_Banner']);
-            $row['the_Home_Banner'] = '<img src="' . $imgUrl . '" alt="Banner" style="height: 40px;">';
-        } else {
-            $row['the_Home_Banner'] = '<span>No image</span>';
-        }
+			// Status toggle switch (checkbox using theme_Status)
+		   $row['status_switch'] = '
+		<div class="form-check form-switch">
+			<input class="form-check-input checkactive"
+				   type="checkbox"
+				   id="statusSwitch-' . $row['theme_Id'] . '"
+				   value="' . $row['theme_Id'] . '" ' . ($row['theme_Status'] == 1 ? 'checked' : '') . '>
+			<label class="form-check-label pl-0 label-check"
+				   for="statusSwitch-' . $row['theme_Id'] . '"></label>
+		</div>';
 
-        // Status toggle switch (checkbox using the_Status)
-        $row['status_switch'] = '<div class="form-check form-switch">
-            <input class="form-check-input checkactive"
-                   type="checkbox"
-                   id="statusSwitch-' . $row['the_Id'] . '"
-                   value="' . $row['the_Status'] . '" ' . ($row['the_Status'] == 1 ? 'checked' : '') . '>
-            <label class="form-check-label pl-0 label-check"
-                   for="statusSwitch-' . $row['the_Id'] . '"></label>
-        </div>';
+			// Action buttons
+			$row['actions'] = '<a href="' . base_url('themes/add/' . $row['theme_Id']) . '">
+					<i class="bi bi-pencil-square"></i>
+				</a>&nbsp;
+				<i class="bi bi-trash text-danger icon-clickable"
+				   onclick="confirmDelete(' . $row['theme_Id'] . ')"></i>';
+		}
 
-        // Action buttons
-        $row['actions'] = '<a href="' . base_url('banner/add/' . $row['the_Id']) . '">
-                <i class="bi bi-pencil-square"></i>
-            </a>&nbsp;
-            <i class="bi bi-trash text-danger icon-clickable"
-               onclick="confirmDelete(' . $row['the_Id'] . ')"></i>';
-    }
-
-    return $this->response->setJSON([
-        'draw' => intval($this->request->getPost('draw')),
-        'recordsTotal' => $total,
-        'recordsFiltered' => $filtered,
-        'data' => $data
-    ]);
-}
+		return $this->response->setJSON([
+			'draw' => intval($this->request->getPost('draw')),
+			'recordsTotal' => $total,
+			'recordsFiltered' => $filtered,
+			'data' => $data
+		]);
+	}
 
 
 /***************************************************************************************************/

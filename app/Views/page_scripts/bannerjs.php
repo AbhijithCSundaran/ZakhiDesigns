@@ -148,7 +148,7 @@ $('#imageSubmit').click(function (e) {
                 setTimeout(function () {
                     $('#imageSubmit').prop('disabled', false);
                     window.location.href = baseUrl + "banner";
-                }, 1000);
+                }, 3000);
             } else {
                 $('#messageBox')
                     .removeClass('alert-success')

@@ -5,7 +5,7 @@
             <div class="row align-items-center">
                 <div class="col-md-8">
                     <div class="page-header-title">
-                        <h5 class="m-b-10">Manage Banners</h5>
+                        <h5 class="m-b-10">Manage Themes</h5>
                         <p class="m-b-0">Welcome to Zakhi Designs</p>
                     </div>
                 </div>
@@ -14,7 +14,7 @@
                         <li class="breadcrumb-item">
                             <a href="<?= base_url('dashboard'); ?>"> <i class="fa fa-home"></i> </a>
                         </li>
-                        <li class="breadcrumb-item"><a href="#!">Manage Banners</a>
+                        <li class="breadcrumb-item"><a href="#!">Manage Themes</a>
                         </li>
                     </ul>
                 </div>
@@ -40,9 +40,9 @@
                                         <div class="col-md-3">
                                             <div class="row">
                                                 <div class="col-lg-12 d-flex justify-content-end p-2">
-                                                    <a href="<?= base_url('banner/add'); ?>"
+                                                    <a href="<?= base_url('themes/add'); ?>"
                                                         class="btn btn-primary">
-                                                        Add Banners
+                                                        Add Themes
                                                     </a>
                                                 </div>
                                             </div>
@@ -60,8 +60,8 @@
 												  <thead>
 													<tr>
 													  <th>Slno</th>
-													  <th>File Name</th>
-													  <th>Image</th>
+													  <th>Name</th>
+													  <th>Description</th>
 													  <th>Status</th>
 													  <th>Action</th>
 													</tr>

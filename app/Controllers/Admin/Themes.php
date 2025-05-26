@@ -24,44 +24,52 @@ class Themes extends BaseController
 		$template.= view('Admin/page_scripts/themejs');
         return $template;
     }
- 
+	 public function fetch_theme()
+	 {
+		 if (!$this->session->get('zd_uid')) {
+				return redirect()->to(base_url('admin'));
+			}
+				$themes = $this->theme_Model->fetchTheme();
+	} 
 	public function updateStatus()
-{
-    $themeId = $this->request->getPost('theme_Id');
-    $newStatus = $this->request->getPost('theme_Status');
-    $theme_Model = new \App\Models\Admin\Theme_Model();
+	{
+		
+		$themeId = $this->request->getPost('theme_Id');
+		$newStatus = $this->request->getPost('theme_Status');
+		$theme_Model = new \App\Models\Admin\Theme_Model();
+		$themes = $theme_Model->getUpdateAllStatus();
+		// Validate input
+		if (!$themeId || !in_array($newStatus, [1, 2])) {
+			return $this->response->setJSON([
+				'success' => false,
+				'message' => 'Invalid request.'
+			]);
+		}
 
-    // Validate input
-    if (!$themeId || !in_array($newStatus, [1, 2])) {
-        return $this->response->setJSON([
-            'success' => false,
-            'message' => 'Invalid request.'
-        ]);
-    }
+		// Check if theme exists
+		//$theme = $theme_Model->getThemeStatusByid($themeId);
+		
+/* 		if (!$theme) {
+			return $this->response->setJSON([
+				'success' => false,
+				'message' => 'Theme not found.'
+			]);
+		}
 
-    // Check if theme exists
-    $theme = $theme_Model->getThemeStatusByid($themeId);
-    if (!$theme) {
-        return $this->response->setJSON([
-            'success' => false,
-            'message' => 'Theme not found.'
-        ]);
-    }
+		// If setting to active, deactivate all other themes
+		if ($newStatus == 1) {
+			$theme_Model->deactivateAllThemesExcept($themeId);
+		} */
 
-    // If setting to active, deactivate all other themes
-    if ($newStatus == 1) {
-        $theme_Model->deactivateAllThemesExcept($themeId);
-    }
+		// Update current theme's status
+		$update = $theme_Model->updateTheme($themeId, ['theme_Status' => $newStatus]);
 
-    // Update current theme's status
-    $update = $theme_Model->updateTheme($themeId, ['theme_Status' => $newStatus]);
-
-    return $this->response->setJSON([
-        'success' => $update,
-        'message' => $update ? 'Status updated successfully.' : 'Failed to update status.',
-        'new_status' => $newStatus
-    ]);
-}
+		return $this->response->setJSON([
+			'success' => $update,
+			'message' => $update ? 'Status updated successfully.' : 'Failed to update status.',
+			'new_status' => $newStatus
+		]);
+	}
 
 
      public function deleteBanner($theme_id) {
@@ -149,30 +157,45 @@ public function save_file()
             'msg' => 'Please enter Description correctly.'
         ]);
     }
+    $errors = [];
+	$emptySections = [];
+	$hasEmptyItem = false;
 
-	
-    foreach (['Section1' => $section1, 'Section2' => $section2, 'Section3' => $section3] as $label => $section) {
-        if (empty($section)) {
-            $errors[] = "$label must have at least one item.";
-        }
-        foreach ($section as $index => $item) {
-            if (array_filter($item) === []) {
-                $errors[] = "$label, item " . ($index + 1) . ": All fields are empty.";
-            }
-        }
-    }
+	foreach (['Section1' => $section1, 'Section2' => $section2, 'Section3' => $section3] as $label => $section) {
+		if (empty($section)) {
+			$emptySections[] = $label;
+			continue;
+		}
+
+		foreach ($section as $index => $item) {
+			if (array_filter($item) === []) {
+				$hasEmptyItem = true;
+			}
+		}
+	}
+
+	// Show one message if any section is completely empty
+	if (!empty($emptySections)) {
+		$errors[] = "All sections must have at least one item.";
+	}
+
+	// Show one message if any item across sections is completely empty
+	if ($hasEmptyItem) {
+		$errors[] = "All Mandatory Fields are Required.";
+	}
+
 
    if (!isset($mainData['theme_name']) || !preg_match('/^[a-zA-Z\s ]+$/', $mainData['theme_name'])) {
 		return $this->response->setJSON([
 			'status' => 0,
-			'msg' => 'Theme name must contain only letters and spaces.'
+			'msg' => 'Please Enter Theme Name Correctly.'
 		]);
 	} 
 
 	if (!preg_match('/^[a-zA-Z0-9\s,\.\'\"\\\\;: ]+$/', $mainData['description'])) {
 		return $this->response->setJSON([
 			'status' => 0,
-			'msg' => 'Please enter Description Correctly.'
+			'msg' => 'Please Enter Description Correctly.'
 		]);
 	}
 

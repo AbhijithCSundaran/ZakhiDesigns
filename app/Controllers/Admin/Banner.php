@@ -196,6 +196,7 @@ class Banner extends BaseController
 				'redirect' => base_url('banner')
 			]);
 		}
+		
 	}
 		else {
 			return $this->response->setJSON([

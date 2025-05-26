@@ -7,6 +7,8 @@ use CodeIgniter\Router\RouteCollection;
  */
 /* GET METHODS */
 $routes->get('/', 'Home::index');
+$routes->get('ordernow','OrderNow::index');
+$routes->get('product/details','ProductDetails::index');
 
 
 

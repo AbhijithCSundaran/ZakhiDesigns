@@ -3,7 +3,7 @@
 namespace App\Controllers;
 use App\Models\Admin\ProductModel;
 
-class Home extends BaseController
+class ProductDetails extends BaseController
 {
 
     public function __construct()
@@ -17,12 +17,10 @@ class Home extends BaseController
     {
        $allproducts = $this->productModel->getAllProducts();
 		$data['product'] =  $allproducts;
-
-	 	    $template = view('common/header');
-            $template.= view('banner');
-            $template.= view('category');
+          $template = view('common/header');
+           
+            $template.= view('product_details',$data);
             $template.= view('top_products',$data);
-             $template.= view('footer_banner',$data);
             $template.= view('common/footer');       
 			return $template;
             

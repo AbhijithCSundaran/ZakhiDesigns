@@ -17,7 +17,13 @@ class Theme_Model extends Model {
         /* public function createBanner($data) {
             return $this->db->table('theme')->insert($data);
         } */
-		
+		 public function fetchTheme() 
+		 {
+			return $this->db->table('themes')
+			->where('theme_Status ==', 1)
+			->get()
+			->getResultArray();
+        }
 		public function insert_data($data)
 		{
 			return $this->db->table('themes')->insert($data);
@@ -27,9 +33,14 @@ class Theme_Model extends Model {
 		{
 			return $this->db->table('themes')->where('theme_Id', $id)->update($data);
 		}
+		public function getUpdateAllStatus()
+		{
+			return $this->db->query("UPDATE themes SET theme_Status ='2'");
+		}
 
 		public function getThemesByid($id)
 		{
+            
 			return $this->db->table('themes')->where('theme_Id', $id)->get()->getRow();
 		}
 
@@ -65,67 +76,59 @@ class Theme_Model extends Model {
   /****************************************************************************************************************/
    protected $table = 'themes';
     protected $primaryKey = 'theme_Id';
-    protected $allowedFields = ['theme_Name', 'theme_Home_Banner', 'theme_Status']; // Adjust to your table
-
-    // For DataTables
-   public function getDatatables()
-{
-    $builder = $this->db->table('themes t');
-    
-    // Select required fields including category and subcategory names
-    $builder->select('t.*');
-	
-    // Only fetch rows where either category or subcategory exists
-    $builder->where('t.theme_Status !=', 3);
-
-    // Add search logic if required
-    $postData = service('request')->getPost();
-    if (!empty($postData['search']['value'])) {
-        $builder->groupStart()
-                ->like('t.the_Name', $postData['search']['value'])
-                ->groupEnd();
-    }
-
-    // Add pagination (limit and offset)
-    if (!empty($postData['length']) && $postData['length'] != -1) {
-        $builder->limit($postData['length'], $postData['start']);
-    }
-
-    // Apply ordering if provided
-    if (!empty($postData['order'])) {
-        $columns = ['t.theme_Id', 't.theme_Name', 't.theme_Decsription','t.theme_Status'];
-        $orderCol = $columns[$postData['order'][0]['column']];
-        $orderDir = $postData['order'][0]['dir'];
-        $builder->orderBy($orderCol, $orderDir);
-    }
-
-    // Execute the query and return the result
-    return $builder->get()->getResultArray();
-}
-
-
-	public function countAll()
+    protected $allowedFields = ['theme_Name', 'theme_Description', 'theme_Status']; // Adjust to your table
+  public function getDatatables()
 	{
-		return $this->db->table('themes')
-			->where('theme_Status !=', 3)
-			->countAllResults();
+		$builder = $this->db->table('themes t');
+		
+		// Select required fields
+		$builder->select('t.*');
+
+		// Exclude deleted records
+		$builder->where('t.theme_Status !=', 3);
+
+		$postData = service('request')->getPost();
+
+		// Fix search to work on both theme_Name and theme_Description
+		if (!empty($postData['search']['value'])) {
+			$search = $postData['search']['value'];
+			$builder->groupStart()
+					->like('t.theme_Name', $search)
+					->orLike('t.theme_Description', $search)
+					->groupEnd();
+		}
+
+		// Pagination
+		if (!empty($postData['length']) && $postData['length'] != -1) {
+			$builder->limit($postData['length'], $postData['start']);
+		}
+
+		// Ordering
+		if (!empty($postData['order'])) {
+			$columns = ['t.theme_Id', 't.theme_Name', 't.theme_Description', 't.theme_Status'];
+			$orderCol = $columns[$postData['order'][0]['column']] ?? 't.theme_Id';
+			$orderDir = $postData['order'][0]['dir'] ?? 'DESC';
+			$builder->orderBy($orderCol, $orderDir);
+		}
+
+		return $builder->get()->getResultArray();
 	}
-
 	public function countFiltered()
-{
-    $builder = $this->db->table('themes t');
+	{
+		$builder = $this->db->table('themes t');
+		$builder->where('t.theme_Status !=', 3);
 
-    // Only fetch rows where either category or subcategory or products exists
-    $builder->where('t.theme_Status !=', 3);
- 
-    $postData = service('request')->getPost();
-    if (!empty($postData['search']['value'])) {
-        $builder->groupStart()
-                ->like('t.theme_Name', $postData['search']['value'])
-                ->groupEnd();
-    }
-    return $builder->countAllResults();
-}
+		$postData = service('request')->getPost();
+		if (!empty($postData['search']['value'])) {
+			$search = $postData['search']['value'];
+			$builder->groupStart()
+					->like('t.theme_Name', $search)
+					->orLike('t.theme_Description', $search)
+					->groupEnd();
+		}
+
+		return $builder->countAllResults();
+	}
 
 
 

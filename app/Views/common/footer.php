@@ -1,18 +1,4 @@
-		<section class="footerbanner" style="background-image:url('<?php echo base_url().ASSET_PATH; ?>assets/images/footerbanner.png')">
-			<div class="container-lg">
-				<div class="row">
-					<div class="col-md-6 leftbox">
-						New<br/>Style
-					</div>
-					<div class="col-md-6 rightbox">
-						<div class="yearblock">2025</div>
-						<button class="btn btn-black">View Collection</button>
-					</div>
-				</div>
-			</div>
-		</section>
-        
-        <footer>
+ <footer>
 		    <div class="container-lg">
 		        <div class="row">
 		            <div class="col-md-3">
@@ -103,5 +89,11 @@ $(document).ready(function() {
     });
 })
 		</script>
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+	
+	<!--POP UP FORM -->
+
+</body>
 
 		</html>

@@ -20,9 +20,10 @@
 
                     <div class="item">
                         <div class="col-md-12">
-                            <img class="product-img"
-                                src="<?php echo base_url('uploads/productmedia/') . $firstImage; ?>"
-                                alt="<?php echo $item->pr_Name; ?>" />
+                            <a href="<?= base_url('product/details'); ?>">
+                                <img class="product-img" src="<?= base_url('uploads/productmedia/') . $firstImage; ?>"
+                                    alt="<?= $item->pr_Name; ?>" />
+                            </a>
                             <!-- <img src="<?php echo base_url().ASSET_PATH; ?>assets/images/slides/s1.png" /> -->
                         </div>
                         <div class="star-rate p-1">
@@ -32,10 +33,13 @@
                             <i class="bi bi-star-fill"></i>
                             <i class="bi bi-star-fill"></i>
                         </div>
-                        <div class="item-name p-1"><?php echo $item->pr_Description; ?></div>
+                        <div class="item-name p-1"><a
+                                href="<?= base_url('product/details'); ?>"><?php echo $item->pr_Description; ?></a>
+                        </div>
                         <div class="item-price"><i
                                 class="bi bi-currency-rupee"></i>&nbsp;<?php echo $item->pr_Selling_Price; ?></div>
-                        <div class="col-md-12 text-center"><button class="order-btn"></button></div>
+                        <div class="col-md-12 text-center"><button class="order-btn"
+                                onclick="window.location.href='<?= base_url('ordernow'); ?>'"></button></div>
                     </div>
                     <?php endforeach; ?>
 

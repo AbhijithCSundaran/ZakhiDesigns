@@ -16,6 +16,7 @@
       <meta name="description" content="Mega Able Bootstrap admin template made using Bootstrap 4 and it has huge amount of ready made feature, UI components, pages which completely fulfills any dashboard needs." />
       <meta name="keywords" content="bootstrap, bootstrap admin template, admin theme, admin dashboard, dashboard template, admin template, responsive" />
       <meta name="author" content="codedthemes" />
+	  <meta name="csrf-token" content="<?= csrf_hash() ?>">
       <!-- Favicon icon -->
       <link rel="icon" href="<?php echo base_url().ASSET_PATH; ?>admin/assets/images/favicon.ico" type="image/x-icon">
     <!-- Google font-->

@@ -54,7 +54,7 @@
 									</div>
 
 									<div class="form-group row">
-											<label class="col-sm-3 col-form-label">Description</label>
+											<label class="col-sm-3 col-form-label">Description<span style="color: red;">*</span></label>
 											<div class="col-sm-7">
 												<input type="text" class="form-control"
 													value="<?= isset($banner) ? ($banner['theme_Description']) : '' ?>" name="description"
@@ -64,7 +64,7 @@
 
 										<!-- Accordion Section -->
 										<div class="form-group row">
-											<label class="col-sm-3 col-form-label">Theme Sections</label>
+											<label class="col-sm-3 col-form-label">Theme Sections<span style="color: red;">*</span></label>
 											<div class="col-sm-7">
 												<div class="accordion" id="themeAccordion">
 													<!-- Section 1 -->
@@ -84,13 +84,20 @@
 																					<input type="text" class="form-control" name="section1_link[]" value="<?= esc($entry['link'] ?? '') ?>" placeholder="Link">
 																				</div>
 																				<div class="col-6">
-																					<input type="file" class="form-control" name="section1_image[]" accept="image/*" onchange="previewImage(this)">
+																				<input type="file" class="form-control" name="section1_image[]" accept="image/*" onchange="previewImage(this)">
+
+																					
 																					<input type="hidden" name="section1_image_old[]" value="<?= esc($entry['image'] ?? '') ?>">
 																				</div>
-																				<div class="col-12">
+																				<div class="col-12 mt-2">
 																					<?php if (!empty($entry['image'])): ?>
 																						<img src="<?= base_url('/public/uploads/themes/' . $entry['image']) ?>" class="preview img-thumbnail" style="width: 100px; height: 100px;">
+																					<?php else: ?>
+																						<img class="preview img-thumbnail" style="width: 100px; height: 100px; display: none;">
 																					<?php endif; ?>
+																				</div>
+																				<div class="col-12 mt-2 text-end">
+																					<button type="button" class="btn btn-danger btn-sm" onclick="removeEntry(this)">−</button>
 																				</div>
 																			</div>
 																		<?php endforeach; ?>
@@ -101,78 +108,92 @@
 																			</div>
 																			<div class="col-6">
 																				<input type="file" class="form-control" name="section1_image[]" accept="image/*" onchange="previewImage(this)">
+																				<input type="hidden" name="section1_image_old[]" value="">
 																			</div>
 																			<div class="col-12 mt-2">
 																				<img class="preview img-thumbnail" style="width: 100px; height: 100px; display: none;">
 																			</div>
+																			<div class="col-12 mt-2 text-end">
+																				<button type="button" class="btn btn-danger btn-sm" onclick="removeEntry(this)">−</button>
+																			</div>
 																		</div>
 																	<?php endif; ?>
 																</div>
+
 																<div class="text-end mt-2">
-																	<button type="button" class="btn btn-success btn-sm" onclick="addEntry('section3')">+</button>
-																	<button type="button" class="btn btn-danger btn-sm" onclick="removeEntry('section3')">−</button>
+																	<button type="button" class="btn btn-success btn-sm" onclick="addEntry('section1')">+</button>
 																</div>
 															</div>
 														</div>
+
 													</div>
 
 													<!-- Section 2 -->
-													<div class="card mt-2">
-														<div class="card-header p-2">
-															<button class="btn btn-link p-0" type="button" data-toggle="collapse" data-target="#sectionTwo">
-																Section 2 - Carousel Images and Links
-															</button>
-														</div>
-														<div id="sectionTwo" class="collapse" data-parent="#themeAccordion">
-															<div class="card-body p-2" id="section2">
-																<div id="section2-entries">
-																	<?php if (!empty($banner['theme_Section2'])): ?>
-																		<?php foreach ($banner['theme_Section2'] as $entry): ?>
+												<div class="card mt-2">
+															<div class="card-header p-2">
+																<button class="btn btn-link p-0" type="button" data-toggle="collapse" data-target="#sectionTwo">
+																	Section 2 - Carousel Images and Links
+																</button>
+															</div>
+															<div id="sectionTwo" class="collapse" data-parent="#themeAccordion">
+																<div class="card-body p-2" id="section2">
+																	<div id="section2-entries">
+																		<?php if (!empty($banner['theme_Section2'])): ?>
+																			<?php foreach ($banner['theme_Section2'] as $entry): ?>
+																				<div class="entry form-row align-items-end mb-2">
+																					<div class="col-6">
+																						<input type="text" class="form-control" name="section2_link[]" value="<?= esc($entry['link'] ?? '') ?>" placeholder="Link">
+																					</div>
+																					<div class="col-6">
+																						<input type="text" class="form-control" name="section2_name[]" value="<?= esc($entry['name'] ?? '') ?>" placeholder="Name">
+																					</div>
+																					<div class="col-12 mt-2">
+																						<input type="file" class="form-control" name="section2_image[]" accept="image/*" onchange="previewImage(this)">
+																						<input type="hidden" name="section2_image_old[]" value="<?= esc($entry['image'] ?? '') ?>">
+																					</div>
+																					<div class="col-12 mt-2">
+																						<?php if (!empty($entry['image'])): ?>
+																							<img src="<?= base_url('/public/uploads/themes/' . $entry['image']) ?>" class="preview img-thumbnail" style="width: 100px; height: 100px;">
+																						<?php else: ?>
+																							<img class="preview img-thumbnail" style="width: 100px; height: 100px; display: none;">
+																						<?php endif; ?>
+																					</div>
+																					<div class="col-12 mt-2 text-end">
+																						<button type="button" class="btn btn-danger btn-sm" onclick="removeEntry(this)">−</button>
+																					</div>
+																				</div>
+																			<?php endforeach; ?>
+																		<?php else: ?>
 																			<div class="entry form-row align-items-end mb-2">
 																				<div class="col-6">
-																					<input type="text" class="form-control" name="section2_link[]" value="<?= esc($entry['link'] ?? '') ?>" placeholder="Link">
+																					<input type="text" class="form-control" name="section2_name[]" placeholder="Name">
 																				</div>
 																				<div class="col-6">
-																					<input type="text" class="form-control" name="section2_name[]" value="<?= esc($entry['name'] ?? '') ?>" placeholder="Name">
+																					<input type="text" class="form-control" name="section2_link[]" placeholder="Link">
 																				</div>
 																				<div class="col-12 mt-2">
 																					<input type="file" class="form-control" name="section2_image[]" accept="image/*" onchange="previewImage(this)">
-																					<input type="hidden" name="section2_image_old[]" value="<?= esc($entry['image'] ?? '') ?>">
+																					<input type="hidden" name="section2_image_old[]" value="">
 																				</div>
-																				<div class="col-12">
-																					<?php if (!empty($entry['image'])): ?>
-																						<img src="<?= base_url('/public/uploads/themes/' . $entry['image']) ?>" class="preview img-thumbnail" style="width: 100px; height: 100px;">
-																					<?php endif; ?>
+																				<div class="col-12 mt-2">
+																					<img class="preview img-thumbnail" style="width: 100px; height: 100px; display: none;">
+																				</div>
+																				<div class="col-12 mt-2 text-end">
+																					<button type="button" class="btn btn-danger btn-sm" onclick="removeEntry(this)">−</button>
 																				</div>
 																			</div>
-																		<?php endforeach; ?>
-																	<?php else: ?>
-																		<div class="entry form-row align-items-end mb-2">
-																			<div class="col-6">
-																				<input type="text" class="form-control" name="section2_name[]" placeholder="Name">
-																			</div>
-																			<div class="col-6">
-																				<input type="text" class="form-control" name="section2_link[]" placeholder="Link">
-																			</div>
-																			<div class="col-12 mt-2">
-																				<input type="file" class="form-control" name="section2_image[]" accept="image/*" onchange="previewImage(this)">
-																			</div>
-																			<div class="col-12">
-																				<img class="preview img-thumbnail" style="width: 100px; height: 100px; display: none;">
-																			</div>
-																		</div>
-																	<?php endif; ?>
-																</div>
-																<div class="text-end mt-2">
-																	<button type="button" class="btn btn-success btn-sm" onclick="addEntry('section2')">+</button>
-																	<button type="button" class="btn btn-danger btn-sm" onclick="removeEntry('section2')">−</button>
+																		<?php endif; ?>
+																	</div>
+
+																	<div class="text-end mt-2">
+																		<button type="button" class="btn btn-success btn-sm" onclick="addEntry('section2')">+</button>
+																	</div>
 																</div>
 															</div>
 														</div>
-													</div>
 
 													<!-- Section 3 -->
-													<div class="card mt-2">
+												<div class="card mt-2">
 														<div class="card-header p-2">
 															<button class="btn btn-link p-0" type="button" data-toggle="collapse" data-target="#sectionThree">
 																Section 3 - Bottom Image and Link
@@ -191,10 +212,15 @@
 																					<input type="file" class="form-control" name="section3_image[]" accept="image/*" onchange="previewImage(this)">
 																					<input type="hidden" name="section3_image_old[]" value="<?= esc($entry['image'] ?? '') ?>">
 																				</div>
-																				<div class="col-12">
+																				<div class="col-12 mt-2">
 																					<?php if (!empty($entry['image'])): ?>
 																						<img src="<?= base_url('/public/uploads/themes/' . $entry['image']) ?>" class="preview img-thumbnail" style="width: 100px; height: 100px;">
+																					<?php else: ?>
+																						<img class="preview img-thumbnail" style="width: 100px; height: 100px; display: none;">
 																					<?php endif; ?>
+																				</div>
+																				<div class="col-12 mt-2 text-end">
+																					<button type="button" class="btn btn-danger btn-sm" onclick="removeEntry(this)">−</button>
 																				</div>
 																			</div>
 																		<?php endforeach; ?>
@@ -205,20 +231,25 @@
 																			</div>
 																			<div class="col-6">
 																				<input type="file" class="form-control" name="section3_image[]" accept="image/*" onchange="previewImage(this)">
+																				<input type="hidden" name="section3_image_old[]" value="">
 																			</div>
 																			<div class="col-12 mt-2">
 																				<img class="preview img-thumbnail" style="width: 100px; height: 100px; display: none;">
 																			</div>
+																			<div class="col-12 mt-2 text-end">
+																				<button type="button" class="btn btn-danger btn-sm" onclick="removeEntry(this)">−</button>
+																			</div>
 																		</div>
 																	<?php endif; ?>
 																</div>
+
 																<div class="text-end mt-2">
 																	<button type="button" class="btn btn-success btn-sm" onclick="addEntry('section3')">+</button>
-																	<button type="button" class="btn btn-danger btn-sm" onclick="removeEntry('section3')">−</button>
 																</div>
 															</div>
 														</div>
 													</div>
+
 												</div>
 											
 											</div>

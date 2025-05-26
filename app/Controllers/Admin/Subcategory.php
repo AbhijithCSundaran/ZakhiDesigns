@@ -31,7 +31,7 @@ class Subcategory extends BaseController
 }
 //Listing Datatable
 
-public function ajaxList()
+	public function ajaxList()
 	{
 	$model = new \App\Models\Admin\SubcategoryModel();
 	$data = $model->getDatatables();
@@ -109,7 +109,7 @@ public function saveSubcategory() {
     $discount_value = $this->input->getPost('discount_value');
     $discount_type = $this->input->getPost('discount_type');
 
-    if ($cat_id && $subcategory_name && $discount_value && $discount_type) {
+    if ($cat_id && $subcategory_name) {
 
         // Check if subcategory name already exists
         $exists = $this->subcategoryModel->issubCategoryExists($subcategory_name, $sub_id);

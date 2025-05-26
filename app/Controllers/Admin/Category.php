@@ -72,7 +72,7 @@ class Category extends BaseController
     $discount_value = $this->input->getPost('discount_value');
     $discount_type = $this->input->getPost('discount_type');
 
-    if ($category_name && $discount_value && $discount_type) {
+    if ($category_name) {
         // 🔍 Check if category name already exists
         $exists = $this->categoryModel->isCategoryExists($category_name, $cat_id);
         if ($exists) {

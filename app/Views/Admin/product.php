@@ -63,12 +63,13 @@
                                                     <thead>
                                                         <tr>
                                                             <th>Slno</th>
-                                                            <th>Product Name</th>
+                                                            <th>Name</th>
                                                             <th>MRP</th>
                                                             <th>Selling Price</th>
                                                             <!-- <th>Discount Type</th> -->
                                                             <th>Discount</th>
                                                             <th>Stock</th>
+                                                            <th>Image</th>
                                                             <th>Status</th>
                                                             <th>Action</th>
                                                         </tr>
@@ -94,4 +95,14 @@
             <div id="styleSelector"> </div>
         </div>
     </div>
+</div>
+<!-- Image Modal -->
+<div class="modal fade" id="imageModal" tabindex="-1" aria-labelledby="imageModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-md">
+    <div class="modal-content">
+      <div class="modal-body text-center">
+        <img id="largeImage" src="" class="img-fluid" alt="Large Preview">
+      </div>
+    </div>
+  </div>
 </div>

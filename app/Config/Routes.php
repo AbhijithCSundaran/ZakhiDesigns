@@ -12,6 +12,11 @@ $routes->get('product/details','ProductDetails::index');
 
 
 
+//category
+$routes->get('/delivery', 'Delivery::index');
+$routes->get('/Privacypolicy', 'Privacypolicy::index');
+$routes->get('/Termsandconditions', 'Termsandconditions::index');
+$routes->get('/Returnpolicy', 'Returnpolicy::index');
 
 
 

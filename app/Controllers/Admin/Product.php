@@ -67,7 +67,7 @@ class Product extends BaseController
 		   onclick="confirmDelete(' . $row['pr_Id'] . ')"></i>&nbsp;
        
 		<img class="img-size open-image-modal"
-			 src="' . base_url(ASSET_PATH . 'admin/assets/images/image_add.ico') . '"
+			 src="' . base_url(ASSET_PATH . 'Admin/assets/images/image_add.ico') . '"
 			 alt="Image-add"
 			 data-toggle="modal"
 			 data-target="#exampleModal"
@@ -77,7 +77,7 @@ class Product extends BaseController
 			 style="cursor: pointer;">&nbsp;
 			 
 		<img class="img-size open-video-modal"
-			 src="' . base_url(ASSET_PATH . 'admin/assets/images/video_add.ico') . '"
+			 src="' . base_url(ASSET_PATH . 'Admin/assets/images/video_add.ico') . '"
 			 alt="Video-add"
 			 data-toggle="modal"
 			 data-target="#videoModal"

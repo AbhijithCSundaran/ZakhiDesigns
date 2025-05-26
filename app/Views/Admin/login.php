@@ -19,21 +19,21 @@
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
       <!-- Favicon icon -->
 
-      <link rel="icon" href="<?php echo base_url().ASSET_PATH; ?>admin/assets/images/favicon.ico" type="image/x-icon">
+      <link rel="icon" href="<?php echo base_url().ASSET_PATH; ?>Admin/assets/images/favicon.ico" type="image/x-icon">
       <!-- Google font-->     
       <link href="https://fonts.googleapis.com/css?family=Roboto:400,500" rel="stylesheet">
       <!-- Required Fremwork -->
-      <link rel="stylesheet" type="text/css" href="<?php echo base_url().ASSET_PATH; ?>admin/assets/css/bootstrap/css/bootstrap.min.css">
+      <link rel="stylesheet" type="text/css" href="<?php echo base_url().ASSET_PATH; ?>Admin/assets/css/bootstrap/css/bootstrap.min.css">
       <!-- waves.css -->
-      <link rel="stylesheet" href="<?php echo base_url().ASSET_PATH; ?>admin/assets/pages/waves/css/waves.min.css" type="text/css" media="all">
+      <link rel="stylesheet" href="<?php echo base_url().ASSET_PATH; ?>Admin/assets/pages/waves/css/waves.min.css" type="text/css" media="all">
       <!-- themify-icons line icon -->
-      <link rel="stylesheet" type="text/css" href="<?php echo base_url().ASSET_PATH; ?>admin/assets/icon/themify-icons/themify-icons.css">
+      <link rel="stylesheet" type="text/css" href="<?php echo base_url().ASSET_PATH; ?>Admin/assets/icon/themify-icons/themify-icons.css">
       <!-- ico font -->
-      <link rel="stylesheet" type="text/css" href="<?php echo base_url().ASSET_PATH; ?>admin/assets/icon/icofont/css/icofont.css">
+      <link rel="stylesheet" type="text/css" href="<?php echo base_url().ASSET_PATH; ?>Admin/assets/icon/icofont/css/icofont.css">
       <!-- Font Awesome -->
-      <link rel="stylesheet" type="text/css" href="<?php echo base_url().ASSET_PATH; ?>admin/assets/icon/font-awesome/css/font-awesome.min.css">
+      <link rel="stylesheet" type="text/css" href="<?php echo base_url().ASSET_PATH; ?>Admin/assets/icon/font-awesome/css/font-awesome.min.css">
       <!-- Style.css -->
-      <link rel="stylesheet" type="text/css" href="<?php echo base_url().ASSET_PATH; ?>admin/assets/css/style.css">
+      <link rel="stylesheet" type="text/css" href="<?php echo base_url().ASSET_PATH; ?>Admin/assets/css/style.css">
   </head>
 
   <body themebg-pattern="theme1">
@@ -99,7 +99,7 @@
                     <form class="md-float-material form-material" id="form-id" name="form-id" autocomplete="off">
 					
                         <div class="text-center">
-                            <img src="<?php echo base_url().ASSET_PATH; ?>admin/assets/images/logo.png" alt="logo.png">
+                            <img src="<?php echo base_url().ASSET_PATH; ?>Admin/assets/images/logo.png" alt="logo.png">
                         </div>
                         <div class="auth-box card">
                             <div class="card-block">
@@ -153,23 +153,23 @@
     <!-- Older IE warning message -->
 	<!-- Warning Section Ends -->
 	<!-- Required Jquery -->
-    <script type="text/javascript" src="<?php echo base_url().ASSET_PATH; ?>admin/assets/js/jquery/jquery.min.js"></script>     
-	<script type="text/javascript" src="<?php echo base_url().ASSET_PATH; ?>admin/assets/js/jquery-ui/jquery-ui.min.js "></script>    
-	<script type="text/javascript" src="<?php echo base_url().ASSET_PATH; ?>admin/assets/js/popper.js/popper.min.js"></script>     
-	<script type="text/javascript" src="<?php echo base_url().ASSET_PATH; ?>admin/assets/js/bootstrap/js/bootstrap.min.js "></script>
+    <script type="text/javascript" src="<?php echo base_url().ASSET_PATH; ?>Admin/assets/js/jquery/jquery.min.js"></script>     
+	<script type="text/javascript" src="<?php echo base_url().ASSET_PATH; ?>Admin/assets/js/jquery-ui/jquery-ui.min.js "></script>    
+	<script type="text/javascript" src="<?php echo base_url().ASSET_PATH; ?>Admin/assets/js/popper.js/popper.min.js"></script>     
+	<script type="text/javascript" src="<?php echo base_url().ASSET_PATH; ?>Admin/assets/js/bootstrap/js/bootstrap.min.js "></script>
 	<!-- waves js -->
-	<script src="<?php echo base_url().ASSET_PATH; ?>admin/assets/pages/waves/js/waves.min.js"></script>
+	<script src="<?php echo base_url().ASSET_PATH; ?>Admin/assets/pages/waves/js/waves.min.js"></script>
 	<!-- jquery slimscroll js -->
-	<script type="text/javascript" src="<?php echo base_url().ASSET_PATH; ?>admin/assets/js/jquery-slimscroll/jquery.slimscroll.js "></script>
+	<script type="text/javascript" src="<?php echo base_url().ASSET_PATH; ?>Admin/assets/js/jquery-slimscroll/jquery.slimscroll.js "></script>
 	<!-- modernizr js -->
 		<!-- <script type="text/javascript" src="<?php echo base_url().ASSET_PATH; ?>assets/js/SmoothScroll.js"></script>      -->
-		<script src="<?php echo base_url().ASSET_PATH; ?>admin/assets/js/jquery.mCustomScrollbar.concat.min.js "></script>
+		<script src="<?php echo base_url().ASSET_PATH; ?>Admin/assets/js/jquery.mCustomScrollbar.concat.min.js "></script>
 	<!-- i18next.min.js 
 	<script type="text/javascript" src="bower_components/i18next/js/i18next.min.js"></script>
 	<script type="text/javascript" src="bower_components/i18next-xhr-backend/js/i18nextXHRBackend.min.js"></script>
 	<script type="text/javascript" src="bower_components/i18next-browser-languagedetector/js/i18nextBrowserLanguageDetector.min.js"></script>
 	<script type="text/javascript" src="bower_components/jquery-i18next/js/jquery-i18next.min.js"></script>-->
-	<script type="text/javascript" src="<?php echo base_url().ASSET_PATH; ?>admin/assets/js/common-pages.js"></script>
+	<script type="text/javascript" src="<?php echo base_url().ASSET_PATH; ?>Admin/assets/js/common-pages.js"></script>
 </body>
 <script>
 function authenticate() {

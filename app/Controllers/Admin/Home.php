@@ -8,7 +8,7 @@ class Home extends BaseController
 {
     public function index(): string
     {
-        return view('admin/login');
+        return view('Admin/login');
        
     }
 

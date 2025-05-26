@@ -13,7 +13,7 @@
                 <form class="fileUpload" method="post" enctype="multipart/form-data">
 
                     <div class="row justify-content-center">
-                        <div id="drop-area" class="drop-area text-center p-4 border rounded"
+                        <div id="drop-area" class="drop-area text-center p-2 border rounded"
                             ondragover="event.preventDefault();" ondrop="handleDrop(event)"
                             style="width: 100%; max-width: 400px;">
                             <div class="drop-content">

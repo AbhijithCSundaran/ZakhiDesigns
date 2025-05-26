@@ -36,10 +36,10 @@
 		            <div class="col-md-3">
 		                <h4>Our Company<h4>
 		                        <ul>
-		                            <li><i class="bi bi-arrow-right"></i>Delivery</li>
-		                            <li><i class="bi bi-arrow-right"></i>Privacy Policy</li>
-		                            <li><i class="bi bi-arrow-right"></i>Terms & Conditions</li>
-		                            <li><i class="bi bi-arrow-right"></i>Return Policy</li>
+		                            <li><i class="bi bi-arrow-right"></i> <a href="delivery.php">Delivery</a></li>
+									<li><i class="bi bi-arrow-right"></i> <a href="privacy-policy.php">Privacy Policy</a></li>
+									<li><i class="bi bi-arrow-right"></i> <a href="terms-conditions.php">Terms & Conditions</a></li>
+									<li><i class="bi bi-arrow-right"></i> <a href="return-policy.php">Return Policy</a></li>
 		                        </ul>
 		            </div>
 		            <div class="col-md-3">

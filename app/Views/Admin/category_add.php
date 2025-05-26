@@ -59,8 +59,7 @@
                                            
                                         </div>
                                         <div class="form-group row">
-                                            <label class="col-sm-2 col-form-label">Discount Type <span
-                                                    style="color: red;">*</span></label>
+                                            <label class="col-sm-2 col-form-label">Discount Type </label>
                                             <div class="col-sm-6">
                                                 <select class="form-control fs-13" name="discount_type"
                                                     id="discountType" required>
@@ -76,8 +75,7 @@
                                         </div>
 
                                         <div class="form-group row">
-                                            <label class="col-sm-2 col-form-label">Discount Value <span
-                                                    style="color: red;">*</span></label>
+                                            <label class="col-sm-2 col-form-label">Discount Value </label>
                                             <div class="col-sm-6">
                                                 <input type="text" class="form-control" name="discount_value"
                                                     id="discountValue"

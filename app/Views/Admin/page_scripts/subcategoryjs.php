@@ -120,57 +120,46 @@ function confirmDelete(subId) {
 
 }
 //Active Inactive status Change
-$(document).ready(function() {
-    $('.checkactive').on('change', function() {
-        let subId = $(this).val();
-        let status = $(this).prop('checked') ? 1 : 2;
-        $.ajax({
-            url: '<?= base_url('admin/subcategory/status'); ?>',
-            type: 'POST',
-            data: {
-                sub_Id: subId,
-                sub_Status: status
-            },
-            headers: {
-                'X-CSRF-TOKEN': '<?= csrf_hash(); ?>'
-            },
-            success: function(response) {
-                const messageBox = $('#messageBox');
+var baseUrl = "<?= base_url() ?>";
 
-                if (response.message === 'Status Updated Successfully!') {
-                    messageBox
-                        .removeClass('alert-danger')
-                        .addClass('alert alert-success')
-                        .text(response.message)
-                        .fadeIn();
+$(document).on('change', '.checkactive', function () {
+    let subId = $(this).attr('id').split('-')[1]; // e.g., id="subcheck-5"
+    let status = $(this).is(':checked') ? 1 : 2;
 
-                } else {
-                    messageBox
-                        .removeClass('alert-success')
-                        .addClass('alert alert-danger')
-                        .text(response.message)
-                        .fadeIn();
-                }
-
-                setTimeout(() => {
-                    messageBox.fadeOut();
-                }, 1000);
-            },
-
-            error: function(xhr) {
+    $.ajax({
+        url: baseUrl + 'admin/subcategory/status',
+        type: 'POST',
+        dataType: 'json',
+        data: {
+            sub_Id: subId,
+            sub_Status: status
+        },
+        success: function (response) {
+            if (response.success) {
+                $('#messageBox')
+                    .removeClass('alert-danger')
+                    .addClass('alert-success')
+                    .text(response.message)
+                    .show();
+            } else {
                 $('#messageBox')
                     .removeClass('alert-success')
-                    .addClass('alert alert-danger')
-                    .text('Error updating status. Please try again later.')
-                    .fadeIn();
-
-                setTimeout(() => {
-                    $('#messageBox').fadeOut();
-                }, 1000);
-
-                console.error(xhr.responseText);
+                    .addClass('alert-danger')
+                    .text(response.message)
+                    .show();
             }
-        });
+
+            setTimeout(() => {
+                $('#messageBox').fadeOut();
+            }, 2000);
+        },
+        error: function (xhr, status, error) {
+            $('#messageBox')
+                .removeClass('alert-success')
+                .addClass('alert-danger')
+                .text('AJAX error: ' + error)
+                .show();
+        }
     });
 });
 </script>

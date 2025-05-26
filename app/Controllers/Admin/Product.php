@@ -42,10 +42,26 @@ class Product extends BaseController
 	foreach ($data as &$row) {
 		// Default fallbacks
 		$row['pr_Name'] = $row['pr_Name'] ?? 'N/A';
-		$row['mrp'] = $row['mrp'] ?? 'N/A';
-		$row['pr_Selling_Price'] = $row['pr_Selling_Price'] ?? 'N/A';
+		$row['mrp'] = isset($row['mrp']) ? number_format($row['mrp'], 2) : 'N/A';
+$row['pr_Selling_Price'] = isset($row['pr_Selling_Price']) ? number_format($row['pr_Selling_Price'], 2) : 'N/A';
+
 		$row['pr_Discount_Value'] = $row['pr_Discount_Value'] ?? 'N/A';
 		$row['pr_Stock'] = $row['pr_Stock'] ?? 'N/A';
+
+   
+    $imageArray = json_decode($row['product_images'], true);
+    $firstImage = (!empty($imageArray[0]['name'][0])) ? $imageArray[0]['name'][0] : null;
+
+
+if ($firstImage) {
+    $imagePath = base_url('uploads/productmedia/' . $firstImage);
+    $row['image'] = '
+        <a href="#" class="view-large-image" data-image="' . $imagePath . '" data-bs-toggle="modal" data-bs-target="#imageModal">
+            <img src="' . $imagePath . '" alt="Product Image" class="img-thumbnail" width="60">
+        </a>';
+} else {
+    $row['image'] = '<span class="text-muted">No image</span>';
+}
 	
 		
 		// Status toggle switch
@@ -65,6 +81,13 @@ class Product extends BaseController
 		</a>&nbsp;
 		<i class="bi bi-trash text-danger icon-clickable"
 		   onclick="confirmDelete(' . $row['pr_Id'] . ')"></i>&nbsp;
+
+           	<a href="' . base_url('admin/product/view/' . $row['pr_Id']) . '">
+			<i class="bi bi-card-list text-info icon-clickable"></i>
+		</a>&nbsp;
+
+   
+          
        
 		<img class="img-size open-image-modal"
 			 src="' . base_url(ASSET_PATH . 'Admin/assets/images/image_add.ico') . '"
@@ -239,7 +262,7 @@ public function uploadMedia()
             }
         }
 
-       $productModel = new ProductModel();
+       $productModel = new \App\Models\Admin\ProductModel();
       
 	   $existingMediaJson = $productModel->getProductImages($productId);
 
@@ -269,7 +292,7 @@ public function uploadMedia()
 //get product images
 public function getProductImages($productId)
 {
-    $productModel = new ProductModel();
+    $productModel = new \App\Models\Admin\ProductModel();
     $imagesJson = $productModel->getProductImages($productId);
     $images = json_decode($imagesJson, true);
     
@@ -474,6 +497,24 @@ public function changeStatus()
 			'message' => 'Failed to update status'
 		]);
 	}
+}
+
+//View Product
+
+public function viewProduct($id){
+
+    $product = $this->productModel->getProductByid($id);
+    $data['product'] =   $product;
+    // print_r($data['product']);
+    // exit;
+
+    $template = view('Admin/common/header');
+    $template .= view('Admin/common/leftmenu');
+    $template .= view('Admin/product_view',$data);
+    $template .= view('Admin/common/footer');
+    
+    return $template;
+    
 }
 
 }

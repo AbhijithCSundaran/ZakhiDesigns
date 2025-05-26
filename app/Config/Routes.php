@@ -10,6 +10,11 @@ $routes->get('/', 'Home::index');
 
 
 
+//category
+$routes->get('/delivery', 'Delivery::index');
+$routes->get('/Privacypolicy', 'Privacypolicy::index');
+$routes->get('/Termsandconditions', 'Termsandconditions::index');
+$routes->get('/Returnpolicy', 'Returnpolicy::index');
 
 
 
@@ -55,6 +60,7 @@ $routes->post('admin/product/video', 'Admin\Product::ProductuploadVideo');
 $routes->post('admin/product/getVideo', 'Admin\Product::getVideo');
 $routes->post('admin/product/deletevideo','Admin\Product::deleteVideo');
 $routes->post('admin/product/status', 'Admin\Product::changeStatus');
+$routes->get('admin/product/view/(:any)','Admin\Product::viewProduct/$1');
 
 
 

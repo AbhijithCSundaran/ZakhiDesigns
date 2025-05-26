@@ -46,7 +46,7 @@
                                                     style="color: red;">*</span></label>
                                             <div class="col-sm-7">
                                                 <input type="text" name="product_name" id="productName"
-                                                    class="form-control"  maxlength="50" 
+                                                    class="form-control"  maxlength="30" 
                                                     value="<?= isset($product) ? ($product['pr_Name']) : '' ?>"
                                                     placeholder="Enter the Product Name">
                                             </div>
@@ -207,8 +207,7 @@
 
 
                                         <div class="form-group row">
-                                            <label class="col-sm-3 col-form-label">Sleeve Style<span
-                                                    style="color: red;">*</span></label>
+                                            <label class="col-sm-3 col-form-label">Sleeve Style</label>
                                             <div class="col-sm-7">
                                                 <input type="text" class="form-control"
                                                     value="<?= isset($product) ? ($product['pr_Sleeve_Style']) : '' ?>"
@@ -218,8 +217,7 @@
                                         </div>
 
                                         <div class="form-group row">
-                                            <label class="col-sm-3 col-form-label">Fabric<span
-                                                    style="color: red;">*</span></label>
+                                            <label class="col-sm-3 col-form-label">Fabric</label>
                                             <div class="col-sm-7">
                                                 <input type="text" class="form-control"
                                                     value="<?= isset($product) ? ($product['pr_Fabric']) : '' ?>"
@@ -228,8 +226,7 @@
                                         </div>
 
                                         <div class="form-group row">
-                                            <label class="col-sm-3 col-form-label">Stitching Type<span
-                                                    style="color: red;">*</span></label>
+                                            <label class="col-sm-3 col-form-label">Stitching Type</label>
                                             <div class="col-sm-7">
                                                 <input type="text" class="form-control"
                                                     value="<?= isset($product) ? ($product['pr_Stitch_Type']) : '' ?>"

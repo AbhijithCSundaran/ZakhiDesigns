@@ -27,12 +27,13 @@
 			{ data: 'pr_Selling_Price' },
 			{ data: 'pr_Discount_Value' },
 			{ data: 'pr_Stock' },
+            { data: 'image' }, 
 			{ data: 'status_switch' },
 			{ data: 'actions' }
 		],
 		columnDefs: [
 			{
-				targets: [6, 7], 
+				targets: [6, 7,8], 
 				orderable: false,
 				searchable: false
 			},
@@ -178,6 +179,7 @@ function handleFiles(files) {
             if (data.success === true) {
                 alert(data.msg || 'Images uploaded successfully!');
                 loadProductImages(productId);
+                 $('#productList').DataTable().ajax.reload(null, false);
             } else {
                 alert(data.msg || 'Upload failed.');
             }
@@ -243,7 +245,7 @@ function loadProductImages(productId) {
                     img.src = `<?= base_url('uploads/productmedia/') ?>/${imgName}`;
                     img.alt = "Product Image";
                     img.style.width = '100px';
-                    img.style.height = '100px';
+                    img.style.height = '150px';
                     img.classList.add('rounded', 'border');
 
                     // Create delete icon
@@ -277,6 +279,7 @@ function loadProductImages(productId) {
                                 .then(result => {
                                     if (result.success) {
                                         wrapper.remove(); // Remove image from DOM
+                                        $('#productList').DataTable().ajax.reload(null, false);
                                     } else {
                                         alert('Failed to delete image.');
                                     }
@@ -347,8 +350,10 @@ $('#videoModal').on('hidden.bs.modal', function() {
 });
 
 
-// vide AJAX Upload
-$('#filevideo').on('change', function() {
+// video AJAX Upload 
+
+
+$('#filevideo').on('change', function () {
     var file = this.files[0];
 
     if (file) {
@@ -368,8 +373,11 @@ $('#filevideo').on('change', function() {
         }
     }
 
-    // Proceed to upload via AJAX
     var formData = new FormData($('#videoUploadForm')[0]);
+
+    // Show progress bar
+    $('#uploadProgressContainer').show();
+    $('#uploadProgressBar').css('width', '0%').text('0%');
 
     $.ajax({
         url: '<?= base_url('admin/product/video') ?>',
@@ -377,7 +385,22 @@ $('#filevideo').on('change', function() {
         data: formData,
         contentType: false,
         processData: false,
-        success: function(response) {
+        xhr: function () {
+            var xhr = new window.XMLHttpRequest();
+
+            xhr.upload.addEventListener("progress", function (evt) {
+                if (evt.lengthComputable) {
+                    var percentComplete = Math.round((evt.loaded / evt.total) * 100);
+                    $('#uploadProgressBar').css('width', percentComplete + '%').text(percentComplete + '%');
+                }
+            }, false);
+
+            return xhr;
+        },
+        success: function (response) {
+            // Hide progress bar
+            $('#uploadProgressContainer').hide();
+
             if (response.status === 'success') {
                 alert(response.message);
                 const productId = $('#productVideoId').val();
@@ -387,11 +410,13 @@ $('#filevideo').on('change', function() {
                 alert(response.message);
             }
         },
-        error: function(xhr) {
+        error: function (xhr) {
+            $('#uploadProgressContainer').hide();
             alert('Upload failed: ' + (xhr.responseJSON?.message || 'Unknown error'));
         }
     });
 });
+
 
 //Load video on modal
 function openvideoModal(productId, productName) {
@@ -482,63 +507,63 @@ $(document).on('click', '.delete-video-btn', function(e) {
 
 
 //Active Inactive status Change
-$(document).ready(function() {
-    $('.checkactive').on('change', function() {
-        let prId = $(this).val();
-        let status = $(this).prop('checked') ? 1 : 2;
-        $.ajax({
-            url: '<?= base_url('admin/product/status'); ?>',
-            type: 'POST',
-            data: {
-                pr_Id: prId,
-                pr_Status: status
-            },
-            headers: {
-                'X-CSRF-TOKEN': '<?= csrf_hash(); ?>'
-            },
-            success: function(response) {
-                const messageBox = $('#messageBox');
-                $('html, body').animate({
-                    scrollTop: 0
-                }, 'fast');
 
-                if (response.message === 'Product Status Updated Successfully!') {
-                    messageBox
-                        .removeClass('alert-danger')
-                        .addClass('alert alert-success')
-                        .text(response.message)
-                        .fadeIn();
+var baseUrl = "<?= base_url() ?>";
 
-                } else {
-                    messageBox
-                        .removeClass('alert-success')
-                        .addClass('alert alert-danger')
-                        .text(response.message)
-                        .fadeIn();
-                }
+$(document).on('change', '.checkactive', function () {
+    let prId = $(this).attr('id').split('-')[1]; // e.g., id="check-3" → prId=3
+    let status = $(this).is(':checked') ? 1 : 2;
 
-                setTimeout(() => {
-                    messageBox.fadeOut();
-                }, 1000);
-            },
-
-            error: function(xhr) {
+    $.ajax({
+        url: baseUrl + 'admin/product/status', // Make sure route maps to controller
+        type: 'POST',
+        dataType: 'json',
+        data: {
+            pr_Id: prId,
+            pr_Status: status
+        },
+        success: function (response) {
+            if (response.success) {
+                $('#messageBox')
+                    .removeClass('alert-danger')
+                    .addClass('alert-success')
+                    .text(response.message)
+                    .show();
+            } else {
                 $('#messageBox')
                     .removeClass('alert-success')
-                    .addClass('alert alert-danger')
-                    .text('Error updating status. Please try again later.')
-                    .fadeIn();
-
-                setTimeout(() => {
-                    $('#messageBox').fadeOut();
-                }, 1000);
-
-                console.error(xhr.responseText);
+                    .addClass('alert-danger')
+                    .text(response.message)
+                    .show();
             }
-        });
+
+            setTimeout(() => {
+                $('#messageBox').fadeOut();
+            }, 2000);
+        },
+        error: function (xhr, status, error) {
+            $('#messageBox')
+                .removeClass('alert-success')
+                .addClass('alert-danger')
+                .text('AJAX error: ' + error)
+                .show();
+        }
     });
 });
+//Product view
 
+
+
+//Product popup
+ document.addEventListener('DOMContentLoaded', function () {
+    document.body.addEventListener('click', function (e) {
+      if (e.target.closest('.view-large-image')) {
+        e.preventDefault();
+        const imageUrl = e.target.closest('.view-large-image').getAttribute('data-image');
+        document.getElementById('largeImage').setAttribute('src', imageUrl);
+      }
+    });
+  });
 //Calculate the selling price depends on the discount value
 function calculateSellingPrice() {
     const mrp = parseFloat(document.getElementById('mRp').value) || 0;

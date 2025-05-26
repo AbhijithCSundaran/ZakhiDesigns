@@ -55,6 +55,7 @@ $routes->post('admin/product/video', 'Admin\Product::ProductuploadVideo');
 $routes->post('admin/product/getVideo', 'Admin\Product::getVideo');
 $routes->post('admin/product/deletevideo','Admin\Product::deleteVideo');
 $routes->post('admin/product/status', 'Admin\Product::changeStatus');
+$routes->get('admin/product/view/(:any)','Admin\Product::viewProduct/$1');
 
 
 

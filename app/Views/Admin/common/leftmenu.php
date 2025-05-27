@@ -1,4 +1,4 @@
-
+<!-- 
 <div class="pcoded-main-container">
               <div class="pcoded-wrapper">
                   <nav class="pcoded-navbar">
@@ -48,6 +48,13 @@
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                 </li>
+                                <li class="<?= ($segment == 'profile') ? 'active' : '' ?>">
+                                    <a href="<?php echo base_url('admin/profile') ?>" class="waves-effect waves-dark">
+                                        <span class="pcoded-micon"><i class="bi bi-person-circle"></i></span>
+                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main">Profile</span>
+                                        <span class="pcoded-mcaret"></span>
+                                    </a>
+                                </li>
                           </ul>
                           <ul class="pcoded-item pcoded-left-item">
                           <li class="<?= ($segment == 'category') ? 'active' : '' ?>">
@@ -73,20 +80,6 @@
                                 </a>
                             </li>
                            
-                            <!-- <li class="<?= ($segment == 'banner') ? 'active' : '' ?>">
-                                <a href="<?php echo base_url('admin/banner') ?>" class="waves-effect waves-dark">
-                                    <span class="pcoded-micon"><i class="bi bi-bounding-box-circles"></i><b>D</b></span>
-                                    <span class="pcoded-mtext" data-i18n="nav.dash.main">Banners</span>
-                                    <span class="pcoded-mcaret"></span>
-                                </a>
-                            </li>
-							  <li class="<?= ($segment == 'offer_banner') ? 'active' : '' ?>">
-                                <a href="<?php echo base_url('offer_banner') ?>" class="waves-effect waves-dark">
-                                    <span class="pcoded-micon"><i class="bi bi-bounding-box"></i><b>D</b></span>
-                                    <span class="pcoded-mtext" data-i18n="nav.dash.main">Offer Banners</span>
-                                    <span class="pcoded-mcaret"></span>
-                                </a>
-                            </li> -->
 							<li class="<?= ($segment == 'themes') ? 'active' : '' ?>">
                                 <a href="<?php echo base_url('admin/themes') ?>" class="waves-effect waves-dark">
                                     <span class="pcoded-micon"><i class="ti-home"></i><b>D</b></span>
@@ -97,4 +90,4 @@
                           </ul>
                      
                           
-                  </nav>
+                  </nav> -->

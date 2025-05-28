@@ -1,4 +1,5 @@
  <footer>
+
 		    <div class="container-lg">
 		        <div class="row">
 		            <div class="col-md-3">
@@ -22,10 +23,10 @@
 		            <div class="col-md-3">
 		                <h4>Our Company<h4>
 		                        <ul>
-		                            <li><i class="bi bi-arrow-right"></i>Delivery</li>
-		                            <li><i class="bi bi-arrow-right"></i>Privacy Policy</li>
-		                            <li><i class="bi bi-arrow-right"></i>Terms & Conditions</li>
-		                            <li><i class="bi bi-arrow-right"></i>Return Policy</li>
+		                            <li><i class="bi bi-arrow-right"></i> <a href="delivery.php">Delivery</a></li>
+                                <li><i class="bi bi-arrow-right"></i> <a href="privacy-policy.php">Privacy Policy</a></li>
+                                <li><i class="bi bi-arrow-right"></i> <a href="terms-conditions.php">Terms & Conditions</a></li>
+                                <li><i class="bi bi-arrow-right"></i> <a href="return-policy.php">Return Policy</a></li>
 		                        </ul>
 		            </div>
 		            <div class="col-md-3">
@@ -56,7 +57,7 @@
 		<script src="<?php echo base_url().ASSET_PATH; ?>assets/js/bootstrap.min.js"></script>
 
 		<script src="<?php echo base_url().ASSET_PATH; ?>assets/vendors/owlcarousel/owl.carousel.js"></script>
-		<script>
+<script>
 function openRespMenu() {
     var x = document.getElementById("respTopnav");
     if (x.className === "topnav") {
@@ -90,12 +91,121 @@ $(document).ready(function() {
             }
         }
     });
-})
-		</script>
-    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-	<!--POP UP FORM -->
+});
+//Login form open
 
-</body>
+$(document).ready(function() {
 
-		</html>
+    // Load login form into modal
+    $('#loginBtn').on('click', function(e) {
+        e.preventDefault();
+        $('#modalBody').load("<?= base_url('weblogin'); ?>", function() {
+            $('#mainModal').modal('show');
+        });
+    });
+
+    // Load register form into modal
+    $('#registerBtn').on('click', function(e) {
+        e.preventDefault();
+        $('#modalBody').load("<?= base_url('webreg'); ?>", function() {
+            $('#mainModal').modal('show');
+        });
+    });
+
+    // Login form submission (delegated because it's loaded dynamically)
+    $(document).on('submit', '#loginForm', function(e) {
+        e.preventDefault();
+
+        let email = $('#email').val();
+        let password = $('#password').val();
+
+        $.ajax({
+            url: '<?= base_url('customerauth'); ?>',
+            type: 'POST',
+            data: {
+                cust_Email: email,
+                cust_Password: password
+            },
+            success: function(res) {
+                let data = JSON.parse(res);
+                if (data.status == 1) {
+                    window.location.reload();
+                } else {
+                    $('#loginError').text(data.msg);
+                }
+            },
+            error: function() {
+                $('#loginError').text('Something went wrong. Please try again.');
+            }
+        });
+    });
+
+    // Register form submission (delegated)
+    $(document).on('submit', '#registerForm', function(e) {
+        e.preventDefault();
+
+        $('#regError').html(''); // clear previous messages
+
+        const password = $('#password').val();
+        const cpassword = $('#cpassword').val();
+        const email = $('#email').val();
+        const phone = $('#number').val();
+        const name = $('#name').val();
+
+        // Validate password match
+        if (password !== cpassword) {
+            $('#regError').html('Passwords do not match.');
+            return;
+        }
+
+        // Validate email format
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(email)) {
+            $('#regError').html('Please enter a valid email address.');
+            return;
+        }
+
+        // Validate phone number (10 digits only)
+        if (!/^\d{10}$/.test(phone)) {
+            $('#regError').html('Phone number must be exactly 10 digits.');
+            return;
+        }
+
+        // Validate name (only letters and space)
+        const nameRegex = /^[a-zA-Z ]+$/;
+        if (!nameRegex.test(name)) {
+            $('#regError').html('Name must contain only letters and spaces.');
+            return;
+        }
+
+        // Submit via AJAX
+        $.ajax({
+            url: '<?= base_url('admin/customer/save') ?>',
+            type: 'POST',
+            data: $(this).serialize(),
+            dataType: 'json',
+            success: function(response) {
+                if (response.status === 1) {
+                    $('#regError').removeClass('text-danger').addClass('text-success').html(response.msg);
+                    $('#registerForm')[0].reset(); // reset form
+                } else {
+                    $('#regError').removeClass('text-success').addClass('text-danger').html(response.msg);
+                }
+            },
+            error: function(xhr) {
+                $('#regError').removeClass('text-success').addClass('text-danger').html('An error occurred. Please try again.');
+            }
+        });
+    });
+
+}); // End of document.ready
+
+ </script>
+ <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+ <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+ <!--POP UP FORM -->
+
+ </body>
+
+ </html>

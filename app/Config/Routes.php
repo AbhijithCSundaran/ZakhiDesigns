@@ -9,6 +9,13 @@ use CodeIgniter\Router\RouteCollection;
 $routes->get('/', 'Home::index');
 $routes->get('ordernow','OrderNow::index');
 $routes->get('product/details','ProductDetails::index');
+$routes->get('weblogin','Weblogin::index');
+$routes->get('webreg','Weblogin::webReg');  
+
+
+
+$routes->post('customerauth', 'Weblogin::customerAuthen');
+$routes->get('logout', 'Weblogin::logout'); 
 
 
 

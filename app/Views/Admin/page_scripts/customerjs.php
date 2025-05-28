@@ -1,7 +1,7 @@
 
 <script>
 
-$(document).ready(function() {
+/*$(document).ready(function() {
     $('#customerList').DataTable({
         "processing": true,
         "serverSide": false,
@@ -11,7 +11,56 @@ $(document).ready(function() {
         "info": true,
 
     });
+}); */
+
+$(document).ready(function () {
+    var baseUrl = "<?= base_url() ?>";
+    var csrfToken = "<?= csrf_token() ?>";
+    var csrfHash = "<?= csrf_hash() ?>";
+
+    $('#customerList').DataTable({
+        processing: true,
+        serverSide: true,
+        ajax: {
+            url: baseUrl + "admin/customer/List",
+            type: "POST",
+            data: function (d) {
+                d[csrfToken] = csrfHash;
+            }
+        },
+        columns: [
+            {
+                data: null,
+                render: function (data, type, row, meta) {
+                    return meta.row + meta.settings._iDisplayStart + 1;
+                },
+                orderable: false,
+                searchable: false
+            },
+            { data: 'cust_Name' },
+            { data: 'cust_Email' },
+            { data: 'cust_Phone' },
+            { data: 'status_switch' },
+            { data: 'actions' }
+        ],
+        columnDefs: [
+            {
+                targets: [4, 5], 
+                orderable: false,
+                searchable: false
+            },
+            {
+                targets: 4, 
+                render: function (data, type, row) {
+                    return data;
+                }
+            }
+        ]
+    });
 });
+
+
+
 $(document).ready(function () {
 	const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     const phonePattern = /^\d{10}$/;
@@ -131,58 +180,57 @@ function confirmDelete(addId) {
 }
 /*************************************/
 //Active and Inactive status
-$(document).ready(function() {
-    $('.checkactive').on('change', function() {
-        let custId = $(this).val();
-        let status = $(this).prop('checked') ? 1 : 2;
-        $.ajax({
-            url: '<?= base_url('admin/customer/status'); ?>',
-            type: 'POST',
-            data: {
-                cust_Id: custId,
-                cust_Status: status
-            },
-            headers: {
-                'X-CSRF-TOKEN': '<?= csrf_hash(); ?>'
-            },
-            success: function(response) {
-    const messageBox = $('#messageBox');
-    
-    if (response.status === 'success') {
-        messageBox
-            .removeClass('alert-danger')
-            .addClass('alert alert-success')
-            .text(response.message)
-            .fadeIn();
 
-    } else {
-        messageBox
-            .removeClass('alert-success')
-            .addClass('alert alert-danger')
-            .text(response.message)
-            .fadeIn();
-    }
+$(document).on('change', '.checkactive', function () { 
+    let custId = $(this).attr('id').split('-')[1]; // e.g., id="staffcheck-3"
+    let status = $(this).prop('checked') ? 1 : 2;
 
-    // Auto-hide the message after 1 seconds
-    setTimeout(() => {
-        messageBox.fadeOut();
-    }, 1000);
-},
+    $.ajax({
+        url: '<?= base_url('admin/customer/status'); ?>',
+        type: 'POST',
+        data: {
+            cust_Id: custId,
+            cust_Status: status
+        },
+        headers: {
+            'X-CSRF-TOKEN': '<?= csrf_hash(); ?>'
+        },
+        success: function(response) {
+            const messageBox = $('#messageBox');
+            
+            if (response.status === 'success') {
+                messageBox
+                    .removeClass('alert-danger')
+                    .addClass('alert alert-success')
+                    .text(response.message)
+                    .fadeIn();
+            } else {
+                messageBox
+                    .removeClass('alert-success')
+                    .addClass('alert alert-danger')
+                    .text(response.message)
+                    .fadeIn();
+            }
 
-error: function(xhr) {
-    $('#messageBox')
-        .removeClass('alert-success')
-        .addClass('alert alert-danger')
-        .text('Error updating status. Please try again later.')
-        .fadeIn();
+            setTimeout(() => {
+                messageBox.fadeOut();
+            }, 1000);
+        },
 
-    setTimeout(() => {
-        $('#messageBox').fadeOut();
-    }, 1000);
+        error: function(xhr) {
+            $('#messageBox')
+                .removeClass('alert-success')
+                .addClass('alert alert-danger')
+                .text('Error updating status. Please try again later.')
+                .fadeIn();
 
-    console.error(xhr.responseText);
-}
-        });
+            setTimeout(() => {
+                $('#messageBox').fadeOut();
+            }, 1000);
+
+            console.error(xhr.responseText);
+        }
     });
 });
+
 </script>

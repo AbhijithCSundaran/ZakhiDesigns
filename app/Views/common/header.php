@@ -31,7 +31,7 @@
 				<div class="row">
 					<div class="col-md-12">
 						<div class="topnav" id="respTopnav">
-						  <a href="#home" class="active">Home</a>
+						  <a href="<?= base_url();?>" class="active">Home</a>
 						  <a href="#news">About Us</a>
 						  <a href="#contact">Fashion</a>
 						  <a href="#about">Contact</a>
@@ -43,7 +43,7 @@
 							  </button>
 							</form>--->
 							<a href="javascript:void(0);" class="searchbox">
-								  <input type="text" name="keyword" id="search" placeholder="Search products" value="<?= esc($search ?? '') ?>" />
+								  <input type="text" name="keyword" id="search" placeholder="Search products" autocomplete="off" value="<?= esc($search ?? '') ?>" />
 								</a>
 								<a href="javascript:void(0);" onclick="searchProduct()">
 								  <i class="bi bi-search"></i>

@@ -88,7 +88,7 @@ $firstImage = isset($images[0]['name'][0]) ? $images[0]['name'][0] : 'default.pn
 									<?php if ($product['pr_Stock'] > 1): ?>
 										<span class="badge badge-success">In stock</span>
 									<?php elseif ($product['pr_Stock'] == 1): ?>
-										<span class="badge badge-warning">Only 1 left in stock</span>
+										<span class="badge badge-warning" style="padding:10px;">Only 1 left in stock</span>
 									<?php else: ?>
 										<span class="badge badge-danger">Out of stock</span>
 									<?php endif; ?>

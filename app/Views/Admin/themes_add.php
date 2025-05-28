@@ -84,9 +84,9 @@
 																					<input type="text" class="form-control" name="section1_link[]" value="<?= esc($entry['link'] ?? '') ?>" placeholder="Link">
 																				</div>
 																				<div class="col-6">
-																				<input type="file" class="form-control" name="section1_image[]" accept="image/*" onchange="previewImage(this)">
+																				<input type="file" class="form-control" name="section1_image[]" accept="image/*" >
+																				<!-- onchange="previewImage(this)" -->
 
-																					
 																					<input type="hidden" name="section1_image_old[]" value="<?= esc($entry['image'] ?? '') ?>">
 																				</div>
 																				<div class="col-12 mt-2">

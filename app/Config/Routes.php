@@ -9,6 +9,10 @@ use CodeIgniter\Router\RouteCollection;
 $routes->get('/', 'Home::index');
 $routes->get('ordernow','OrderNow::index');
 $routes->get('product/details','ProductDetails::index');
+$routes->get('product', 'Product::index');
+$routes->get('product/product_details/(:num)', 'Product::product_details/$1');
+$routes->get('product/search', 'Product::ajaxSearch');
+$routes->get('product/products_lists', 'Product::products_lists');
 
 
 

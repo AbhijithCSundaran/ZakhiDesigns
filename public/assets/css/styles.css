@@ -223,7 +223,8 @@ footer ul {
 }
 .thumbs {
 	float: left;
-	width: 122px;
+	/*width: 122px;*/
+	width: auto; 
 	padding-right: 10px;
 }
 .preview {
@@ -393,7 +394,7 @@ a.fancybox-item.fancybox-close {
 	}
 	.thumbs {
 		float: left;
-		width: 60px;
+		width: auto; 
 		padding-right: 10px;
 	}
 	.full {

@@ -79,10 +79,13 @@ $routes->post('admin/staff/delete/(:any)', 'Admin\Staff::deleteStaff/$1');
 
 //Customers
 $routes->get('admin/customer', 'Admin\Customer::index');
+$routes->post('admin/customer/List', 'Admin\customer::ajaxList');
 $routes->get('admin/customer/view', 'Admin\Customer::view_cust'); // Create
+$routes->get('admin/customer/customer_address', 'Admin\Customer::customer_address'); // Create
 $routes->get('admin/customer/view/(:num)', 'Admin\Customer::view_cust/$1'); // Edit Page
 $routes->post('admin/customer/save', 'Admin\Customer::createnew');
 $routes->post('admin/customer/delete/(:any)', 'Admin\Customer::deleteCust/$1');
+
 //$routes->post('customer/updateStatus', 'Customer::updateStatus');
 $routes->post('admin/customer/status', 'Admin\Customer::updateStatus');
 $routes->get('admin/customer/location/(:num)', 'Admin\Customer_address::location/$1');//customer address edit

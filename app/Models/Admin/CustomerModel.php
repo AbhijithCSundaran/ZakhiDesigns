@@ -58,6 +58,74 @@ class CustomerModel extends Model {
 		$query = $builder->get();
 		return $query->getNumRows() > 0;
 	}
-}
+	
+	
+	//**************************Data table */
+	protected $table = 'customer';
+    protected $primaryKey = 'cust_Id';
+    protected $allowedFields = ['cust_Name', 'cust_Email','cust_Phone', 'cust_Status']; // Adjust to your table
+
+    // For DataTables
+    public function getDatatables()
+	{
+		$builder = $this->db->table('customer c');
+		
+		// Select required fields including category and subcategory names
+		$builder->select('c.*');
+		
+		// Only fetch rows of active staffs
+		$builder->where('c.cust_Status !=', 3);
+
+		// Add search logic if required
+		$postData = service('request')->getPost();
+		if (!empty($postData['search']['value'])) {
+			$builder->groupStart()
+					->like('c.cust_Name', $postData['search']['value'])
+					->groupEnd();
+		}
+
+		// Add pagination (limit and offset)
+		if (!empty($postData['length']) && $postData['length'] != -1) {
+			$builder->limit($postData['length'], $postData['start']);
+		}
+
+		// Apply ordering if provided
+		if (!empty($postData['order'])) {
+			$columns = ['c.cust_Name ', 'c.cust_Email','c.cust_Phone','c.cust_Status'];
+			$orderCol = $columns[$postData['order'][0]['column']];
+			$orderDir = $postData['order'][0]['dir'];
+			$builder->orderBy($orderCol, $orderDir);
+		}
+
+		// Execute the query and return the result
+		return $builder->get()->getResultArray();
+	}
+
+
+	public function countAll()
+	{
+		return $this->db->table('customer')
+			->where('cust_Status !=', 3)
+			->countAllResults();
+	}
+
+	public function countFiltered()
+	{
+		$builder = $this->db->table('customer c');
+
+		// Only fetch rows where either staffs exists
+		$builder->where('c.cust_Status !=', 3);
+	 
+		$postData = service('request')->getPost();
+		if (!empty($postData['search']['value'])) {
+			$builder->groupStart()
+					->like('c.cust_Name', $postData['search']['value'])
+					->groupEnd();
+		}
+		return $builder->countAllResults();
+	}
+    }
 
 ?>
+
+

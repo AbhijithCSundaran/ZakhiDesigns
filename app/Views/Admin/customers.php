@@ -69,40 +69,7 @@
 																<th>Action</th>
                                                             </tr>
                                                         </thead>
-														 <tbody>
-                                                       <?php
-															$slno = 1;
-															foreach ($user as $row) { ?>
-																<tr>
-																	<td><?= $slno++; ?></td>
-																	<td><?= wordwrap(esc($row['cust_Name']), 20, '<br>'); ?></td>
-																	<td><?= wordwrap(esc($row['cust_Email']), 20, '<br>') ;?> </td>
-																	<td><?= wordwrap(esc($row['cust_Phone']), 20, '<br>') ;?> </td> 
-																	<td>
-																	 <div class="form-check form-switch">
-                                                                    <input class="form-check-input checkactive"
-                                                                        type="checkbox"
-                                                                        id="statusSwitch-<?= $row['cust_Id']; ?>"
-                                                                        value="<?= $row['cust_Id']; ?>"
-                                                                        <?= ($row['cust_Status'] == 1) ? 'checked' : ''; ?>>
-                                                                    <label class="form-check-label pl-0 label-check"
-                                                                        for="statusSwitch-<?= $row['cust_Id']; ?>">
-                                                                        
-                                                                    </label>
-                                                                </div>
-																</td>
-																	<td>
-																	  <a href="<?= base_url('admin/customer/location/' . $row['cust_Id']); ?>">
-																		<i class="bi bi-geo-alt text-primary ms-2"></i>
-																	  </a>&nbsp;
-																		<a href="<?= base_url('admin/customer/view/'. $row['cust_Id']); ?>">
-																			<i class="bi bi-pencil-square"></i>
-																		</a>   &nbsp;                                                  
-																			<i class="bi bi-trash text-danger icon-clickable" onclick="confirmDelete(<?= $row['cust_Id']; ?>)"></i>
-																	</td>                                                  
-																</tr>
-															<?php } ?>
-                                                        </tbody>
+														 
                                                        
                                                     </table>
                                                 </div>

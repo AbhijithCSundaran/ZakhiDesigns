@@ -62,8 +62,8 @@
         $sizes = explode(',', $product->pr_Size);
         foreach ($sizes as $size):
     ?>
-                                    <span
-                                        class="d-inline-flex justify-content-center align-items-center text-dark me-2">
+                                    <span class="d-inline-flex justify-content-center align-items-center rounded-circle border bg-light text-dark me-2"
+                                                                                style="width: 40px; height: 40px;">
                                         <?= esc(trim($size)); ?>
                                     </span>
                                     <?php endforeach; ?>

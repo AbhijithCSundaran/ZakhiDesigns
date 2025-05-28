@@ -28,11 +28,9 @@
                     </div>
 
                     <div id="uploadProgressContainer" class="mt-3 w-100" style="display: none;">
-                        <div class="progress">
-                            <div id="uploadProgressBar"
-                                class="progress-bar progress-bar-striped progress-bar-animated bg-info"
-                                role="progressbar" style="width: 0%">0%</div>
-                        </div>
+                 <div class="progress">
+                        <div id="uploadProgressBar" class="progress-bar progress-bar-striped progress-bar-animated bg-info" 
+                             role="progressbar" style="width: 0%">0%</div>
                     </div>
 
                     <input type="hidden" id="productVideoName" name="product_name" value="">

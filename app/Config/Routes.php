@@ -19,6 +19,11 @@ $routes->get('logout', 'Weblogin::logout');
 
 
 
+//category
+$routes->get('/delivery', 'Delivery::index');
+$routes->get('/Privacypolicy', 'Privacypolicy::index');
+$routes->get('/Termsandconditions', 'Termsandconditions::index');
+$routes->get('/Returnpolicy', 'Returnpolicy::index');
 
 
 
@@ -104,6 +109,15 @@ $routes->get('admin/themes/add/(:num)', 'Admin\Themes::addbanner/$1'); // Edit
 //$routes->post('themes/save', 'Themes::save_file');
 $routes->post('admin/themes/delete/(:any)', 'Admin\Themes::deleteBanner/$1');
 $routes->post('admin/themes/save_file', 'Admin\Themes::save_file');
+
+//profile
+$routes->get('admin/profile', 'Admin\Profile::index');
+$routes->post('admin/profile/update', 'Admin\Profile::update');
+$routes->post('admin/profile/change_password', 'Admin\Profile::change_password');
+$routes->post('admin/profile/list', 'Admin\Profile::ajaxList');
+
+
+
 
 //logout
 $routes->post('admin/logout', 'Admin\Auth::logout'); 

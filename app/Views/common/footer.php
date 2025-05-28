@@ -1,60 +1,60 @@
  <footer>
-     <div class="container-lg">
-         <div class="row">
-             <div class="col-md-3">
-                 <h4>Your Account<h4>
-                         <ul>
-                             <li><i class="bi bi-arrow-right"></i>My Profile</li>
-                             <li><i class="bi bi-arrow-right"></i>My Orders</li>
-                             <li><i class="bi bi-arrow-right"></i>Address</li>
-                             <li><i class="bi bi-arrow-right"></i>Track Orders</li>
-                         </ul>
-             </div>
-             <div class="col-md-3">
-                 <h4>Products<h4>
-                         <ul>
-                             <li><i class="bi bi-arrow-right"></i>Price Drop</li>
-                             <li><i class="bi bi-arrow-right"></i>Products</li>
-                             <li><i class="bi bi-arrow-right"></i>Best Sellers</li>
-                             <li><i class="bi bi-arrow-right"></i>Sitemap</li>
-                         </ul>
-             </div>
-             <div class="col-md-3">
-                 <h4>Our Company<h4>
-                         <ul>
-                             <li><i class="bi bi-arrow-right"></i>Delivery</li>
-                             <li><i class="bi bi-arrow-right"></i>Privacy Policy</li>
-                             <li><i class="bi bi-arrow-right"></i>Terms & Conditions</li>
-                             <li><i class="bi bi-arrow-right"></i>Return Policy</li>
-                         </ul>
-             </div>
-             <div class="col-md-3">
-                 <h4>Store Information<h4>
-                         <ul>
-                             <li><i class="bi bi-geo-alt-fill"></i>Zakhi Designs Store<br />16/541P Muppathadam, Near
-                                 Govt: GHS School Aluva, Ernakulam</li>
-                             <li><i class="bi bi-telephone-fill"></i>+91 70348 53219</li>
-                             <li><i class="bi bi-envelope-fill"></i>zakhidesigns@gmail.com</li>
-                         </ul>
-             </div>
-         </div>
-         <div class="row">
-             <div class="col-md-12 text-center social-ico">
-                 <i class="bi bi-facebook"></i>
-                 <i class="bi bi-twitter"></i>
-                 <i class="bi bi-instagram"></i>
-                 <i class="bi bi-youtube"></i>
-             </div>
-         </div>
-     </div>
- </footer>
- </body>
 
- <script src="<?php echo base_url().ASSET_PATH; ?>assets/js/jquery-3.7.1.min.js"></script>
- <script src="<?php echo base_url().ASSET_PATH; ?>assets/js/bootstrap.min.js"></script>
+		    <div class="container-lg">
+		        <div class="row">
+		            <div class="col-md-3">
+		                <h4>Your Account<h4>
+		                        <ul>
+		                            <li><i class="bi bi-arrow-right"></i>My Profile</li>
+		                            <li><i class="bi bi-arrow-right"></i>My Orders</li>
+		                            <li><i class="bi bi-arrow-right"></i>Address</li>
+		                            <li><i class="bi bi-arrow-right"></i>Track Orders</li>
+		                        </ul>
+		            </div>
+		            <div class="col-md-3">
+		                <h4>Products<h4>
+		                        <ul>
+		                            <li><i class="bi bi-arrow-right"></i>Price Drop</li>
+		                            <li><i class="bi bi-arrow-right"></i>Products</li>
+		                            <li><i class="bi bi-arrow-right"></i>Best Sellers</li>
+		                            <li><i class="bi bi-arrow-right"></i>Sitemap</li>
+		                        </ul>
+		            </div>
+		            <div class="col-md-3">
+		                <h4>Our Company<h4>
+		                        <ul>
+		                            <li><i class="bi bi-arrow-right"></i> <a href="delivery.php">Delivery</a></li>
+                                <li><i class="bi bi-arrow-right"></i> <a href="privacy-policy.php">Privacy Policy</a></li>
+                                <li><i class="bi bi-arrow-right"></i> <a href="terms-conditions.php">Terms & Conditions</a></li>
+                                <li><i class="bi bi-arrow-right"></i> <a href="return-policy.php">Return Policy</a></li>
+		                        </ul>
+		            </div>
+		            <div class="col-md-3">
+		                <h4>Store Information<h4>
+		                        <ul>
+		                            <li><i class="bi bi-geo-alt-fill"></i>Zakhi Designs Store<br />16/541P Muppathadam, Near
+		                                Govt: GHS School Aluva, Ernakulam</li>
+		                            <li><i class="bi bi-telephone-fill"></i>+91 70348 53219</li>
+		                            <li><i class="bi bi-envelope-fill"></i>zakhidesigns@gmail.com</li>
+		                        </ul>
+		            </div>
+		        </div>
+		        <div class="row">
+		            <div class="col-md-12 text-center social-ico">
+		                <i class="bi bi-facebook"></i>
+		                <i class="bi bi-twitter"></i>
+		                <i class="bi bi-instagram"></i>
+		                <i class="bi bi-youtube"></i>
+		            </div>
+		        </div>
+		    </div>
+		</footer>
+		</body>
+		<script src="<?php echo base_url().ASSET_PATH; ?>assets/js/jquery-3.7.1.min.js"></script>
+		<script src="<?php echo base_url().ASSET_PATH; ?>assets/js/bootstrap.min.js"></script>
 
- <script src="<?php echo base_url().ASSET_PATH; ?>assets/vendors/owlcarousel/owl.carousel.js"></script>
- <script>
+		<script src="<?php echo base_url().ASSET_PATH; ?>assets/vendors/owlcarousel/owl.carousel.js"></script>
+<script>
 function openRespMenu() {
     var x = document.getElementById("respTopnav");
     if (x.className === "topnav") {

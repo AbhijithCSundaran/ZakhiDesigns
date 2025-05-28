@@ -40,15 +40,9 @@
                                         <div class="col-md-3">
                                             <div class="row">
                                                 <div class="col-lg-12 d-flex justify-content-end p-2">
-<<<<<<< HEAD:app/Views/Admin/staff.php
                                                     <a href="<?= base_url('admin/staff/add'); ?>"
                                                         class="btn btn-primary">
                                                         Add Staff
-=======
-                                                    <a href="<?= base_url('themes/add'); ?>"
-                                                        class="btn btn-primary">
-                                                        Add Themes
->>>>>>> 3cd0e43d71784d73b42432460e10069bc82f63e6:app/Views/themes.php
                                                     </a>
                                                 </div>
                                             </div>

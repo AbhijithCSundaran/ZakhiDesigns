@@ -2,31 +2,48 @@
 
 //////////////////////////////////////////data tables//////////////////////
 var baseUrl = "<?= base_url() ?>";
+
 $('#productsLists').DataTable({
     processing: true,
     serverSide: true,
     ajax: {
-        url: "<?= base_url('admin/themes/List') ?>",
+        url: baseUrl + "admin/themes/List", // Use baseUrl for clarity
         type: "POST",
         data: function (d) {
-            d['<?= csrf_token() ?>'] = "<?= csrf_hash() ?>";
+            // Dynamically add CSRF token to each request
+            d['<?= csrf_token() ?>'] = $('meta[name="csrf-token"]').attr('content');
+        },
+        dataSrc: function (json) {
+            // Optionally update CSRF token on response
+            if (json.csrfHash) {
+                $('meta[name="csrf-token"]').attr('content', json.csrfHash);
+            }
+            return json.data;
+        },
+        error: function (xhr, error, thrown) {
+            console.error("DataTables AJAX Error:", xhr.responseText);
         }
     },
-		columns: [
-		{ data: 'DT_RowIndex', orderable: false, searchable: false },
-		{ data: 'theme_Name' },
-		{ data: 'theme_Description' },
-		{ data: 'status_switch' },
-		{ data: 'actions' }
-	],
-
+    columns: [
+        { data: 'DT_RowIndex', orderable: false, searchable: false },
+        { data: 'theme_Name' },
+        { data: 'theme_Description' },
+        { data: 'status_switch' },
+        { data: 'actions' }
+    ],
     columnDefs: [
-        { targets: [3,4], orderable: false, searchable: false },
-        { targets: 2, render: function (data, type, row) {
-            return data; // Render raw HTML for image thumbnail
-        }}
+        { targets: [3, 4], orderable: false, searchable: false },
+        {
+            targets: 2,
+            render: function (data, type, row) {
+                return data; // Optional: adjust this if you're embedding HTML
+            }
+        }
     ]
 });
+
+
+
 ///////////////////////////////////////////////////////////////////////////
 
 /*********************************/
@@ -98,8 +115,9 @@ $(document).on('change', '.checkactive', function () {
             }
 
             setTimeout(() => {
+				 $('#productsLists').DataTable().ajax.reload(null, false);
                 messageBox.fadeOut();
-            }, 1000);
+            }, 3000);
         },
         error: function (xhr) {
             $('#messageBox')
@@ -110,7 +128,7 @@ $(document).on('change', '.checkactive', function () {
 
             setTimeout(() => {
                 $('#messageBox').fadeOut();
-            }, 1000);
+            }, 3000);
 
             console.error(xhr.responseText);
         }
@@ -138,6 +156,50 @@ $(document).on('click', '.add-row', function () {
 $(document).on('change', 'input[type="file"]', function () {
     previewImage(this);
 });
+// Image size
+function previewImage(input) {
+    const file = input.files[0];
+
+    if (!file) return;
+
+    const img = new Image();
+    const objectUrl = URL.createObjectURL(file);
+
+    img.onload = function () {
+        const width = img.width;
+        const height = img.height;
+
+        // Check dimensions
+        if (
+            width < 1000 || width > 1200 ||
+            height < 300 || height > 400
+        ) {
+            alert("Please upload images with dimensions between 1100×350 and 1200×400.");
+            input.value = ""; // Clear the invalid file
+            URL.revokeObjectURL(objectUrl);
+            return;
+        }
+
+        // If valid, show preview if needed
+        const preview = input.closest('.entry').querySelector('img.preview');
+        if (preview) {
+            preview.src = objectUrl;
+            preview.style.display = 'block';
+        }
+
+        URL.revokeObjectURL(objectUrl);
+    };
+
+    img.onerror = function () {
+        alert("Invalid image file.");
+        input.value = "";
+        URL.revokeObjectURL(objectUrl);
+    };
+
+    img.src = objectUrl;
+}
+
+
 
 // Add new entry
 function addEntry(sectionId) {
@@ -170,17 +232,18 @@ function addEntry(sectionId) {
     }
 }
 
-// Remove entry
-function removeEntry(sectionId) {
-    const container = document.querySelector(`#${sectionId}-entries`);
+function removeEntry(button) {
+    const entry = button.closest('.entry');
+    const container = entry.parentElement;
     const entries = container.querySelectorAll('.entry');
 
     if (entries.length > 1) {
-        container.removeChild(entries[entries.length - 1]);
+        container.removeChild(entry);
     } else {
         alert('At least one entry must remain.');
     }
 }
+
 
 // Collect JSON data from all sections
 function collectSectionData() {
@@ -216,6 +279,7 @@ function collectSectionData() {
 $('#main_home_submit').on('click', function (e) {
     e.preventDefault();
     $('#main_home_submit').prop('disabled', true);
+	 window.scrollTo({ top: 0, behavior: 'smooth' });
 
     let form = $('#theme_add')[0];
     let formData = new FormData(form);
@@ -244,7 +308,7 @@ $('#main_home_submit').on('click', function (e) {
                 setTimeout(function () {
                     $('#main_home_submit').prop('disabled', false);
                     window.location.href = baseUrl + "admin/themes";
-                }, 3000);
+                }, 5000);
             } else {
                 $('#messageBox')
                     .removeClass('alert-success')
@@ -256,7 +320,7 @@ $('#main_home_submit').on('click', function (e) {
 
             setTimeout(function () {
                 $('#messageBox').hide();
-            }, 3000);
+            }, 5000);
         },
 		
 		error: function (xhr, status, error) {

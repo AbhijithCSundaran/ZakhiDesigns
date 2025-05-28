@@ -13,6 +13,13 @@ $routes->get('product', 'Product::index');
 $routes->get('product/product_details/(:num)', 'Product::product_details/$1');
 $routes->get('product/search', 'Product::ajaxSearch');
 $routes->get('product/products_lists', 'Product::products_lists');
+$routes->get('weblogin','Weblogin::index');
+$routes->get('webreg','Weblogin::webReg'); 
+
+
+
+$routes->post('customerauth', 'Weblogin::customerAuthen');
+$routes->get('logout', 'Weblogin::logout'); 
 
 
 

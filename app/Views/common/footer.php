@@ -1,59 +1,60 @@
  <footer>
-		    <div class="container-lg">
-		        <div class="row">
-		            <div class="col-md-3">
-		                <h4>Your Account<h4>
-		                        <ul>
-		                            <li><i class="bi bi-arrow-right"></i>My Profile</li>
-		                            <li><i class="bi bi-arrow-right"></i>My Orders</li>
-		                            <li><i class="bi bi-arrow-right"></i>Address</li>
-		                            <li><i class="bi bi-arrow-right"></i>Track Orders</li>
-		                        </ul>
-		            </div>
-		            <div class="col-md-3">
-		                <h4>Products<h4>
-		                        <ul>
-		                            <li><i class="bi bi-arrow-right"></i>Price Drop</li>
-		                            <li><i class="bi bi-arrow-right"></i>Products</li>
-		                            <li><i class="bi bi-arrow-right"></i>Best Sellers</li>
-		                            <li><i class="bi bi-arrow-right"></i>Sitemap</li>
-		                        </ul>
-		            </div>
-		            <div class="col-md-3">
-		                <h4>Our Company<h4>
-		                        <ul>
-		                            <li><i class="bi bi-arrow-right"></i>Delivery</li>
-		                            <li><i class="bi bi-arrow-right"></i>Privacy Policy</li>
-		                            <li><i class="bi bi-arrow-right"></i>Terms & Conditions</li>
-		                            <li><i class="bi bi-arrow-right"></i>Return Policy</li>
-		                        </ul>
-		            </div>
-		            <div class="col-md-3">
-		                <h4>Store Information<h4>
-		                        <ul>
-		                            <li><i class="bi bi-geo-alt-fill"></i>Zakhi Designs Store<br />16/541P Muppathadam, Near
-		                                Govt: GHS School Aluva, Ernakulam</li>
-		                            <li><i class="bi bi-telephone-fill"></i>+91 70348 53219</li>
-		                            <li><i class="bi bi-envelope-fill"></i>zakhidesigns@gmail.com</li>
-		                        </ul>
-		            </div>
-		        </div>
-		        <div class="row">
-		            <div class="col-md-12 text-center social-ico">
-		                <i class="bi bi-facebook"></i>
-		                <i class="bi bi-twitter"></i>
-		                <i class="bi bi-instagram"></i>
-		                <i class="bi bi-youtube"></i>
-		            </div>
-		        </div>
-		    </div>
-		</footer>
-		</body>
-		<script src="<?php echo base_url().ASSET_PATH; ?>assets/js/jquery-3.7.1.min.js"></script>
-		<script src="<?php echo base_url().ASSET_PATH; ?>assets/js/bootstrap.min.js"></script>
+     <div class="container-lg">
+         <div class="row">
+             <div class="col-md-3">
+                 <h4>Your Account<h4>
+                         <ul>
+                             <li><i class="bi bi-arrow-right"></i>My Profile</li>
+                             <li><i class="bi bi-arrow-right"></i>My Orders</li>
+                             <li><i class="bi bi-arrow-right"></i>Address</li>
+                             <li><i class="bi bi-arrow-right"></i>Track Orders</li>
+                         </ul>
+             </div>
+             <div class="col-md-3">
+                 <h4>Products<h4>
+                         <ul>
+                             <li><i class="bi bi-arrow-right"></i>Price Drop</li>
+                             <li><i class="bi bi-arrow-right"></i>Products</li>
+                             <li><i class="bi bi-arrow-right"></i>Best Sellers</li>
+                             <li><i class="bi bi-arrow-right"></i>Sitemap</li>
+                         </ul>
+             </div>
+             <div class="col-md-3">
+                 <h4>Our Company<h4>
+                         <ul>
+                             <li><i class="bi bi-arrow-right"></i>Delivery</li>
+                             <li><i class="bi bi-arrow-right"></i>Privacy Policy</li>
+                             <li><i class="bi bi-arrow-right"></i>Terms & Conditions</li>
+                             <li><i class="bi bi-arrow-right"></i>Return Policy</li>
+                         </ul>
+             </div>
+             <div class="col-md-3">
+                 <h4>Store Information<h4>
+                         <ul>
+                             <li><i class="bi bi-geo-alt-fill"></i>Zakhi Designs Store<br />16/541P Muppathadam, Near
+                                 Govt: GHS School Aluva, Ernakulam</li>
+                             <li><i class="bi bi-telephone-fill"></i>+91 70348 53219</li>
+                             <li><i class="bi bi-envelope-fill"></i>zakhidesigns@gmail.com</li>
+                         </ul>
+             </div>
+         </div>
+         <div class="row">
+             <div class="col-md-12 text-center social-ico">
+                 <i class="bi bi-facebook"></i>
+                 <i class="bi bi-twitter"></i>
+                 <i class="bi bi-instagram"></i>
+                 <i class="bi bi-youtube"></i>
+             </div>
+         </div>
+     </div>
+ </footer>
+ </body>
 
-		<script src="<?php echo base_url().ASSET_PATH; ?>assets/vendors/owlcarousel/owl.carousel.js"></script>
-		<script>
+ <script src="<?php echo base_url().ASSET_PATH; ?>assets/js/jquery-3.7.1.min.js"></script>
+ <script src="<?php echo base_url().ASSET_PATH; ?>assets/js/bootstrap.min.js"></script>
+
+ <script src="<?php echo base_url().ASSET_PATH; ?>assets/vendors/owlcarousel/owl.carousel.js"></script>
+ <script>
 function openRespMenu() {
     var x = document.getElementById("respTopnav");
     if (x.className === "topnav") {
@@ -87,13 +88,121 @@ $(document).ready(function() {
             }
         }
     });
-})
-		</script>
-    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-	
-	<!--POP UP FORM -->
+});
+//Login form open
 
-</body>
+$(document).ready(function() {
 
-		</html>
+    // Load login form into modal
+    $('#loginBtn').on('click', function(e) {
+        e.preventDefault();
+        $('#modalBody').load("<?= base_url('weblogin'); ?>", function() {
+            $('#mainModal').modal('show');
+        });
+    });
+
+    // Load register form into modal
+    $('#registerBtn').on('click', function(e) {
+        e.preventDefault();
+        $('#modalBody').load("<?= base_url('webreg'); ?>", function() {
+            $('#mainModal').modal('show');
+        });
+    });
+
+    // Login form submission (delegated because it's loaded dynamically)
+    $(document).on('submit', '#loginForm', function(e) {
+        e.preventDefault();
+
+        let email = $('#email').val();
+        let password = $('#password').val();
+
+        $.ajax({
+            url: '<?= base_url('customerauth'); ?>',
+            type: 'POST',
+            data: {
+                cust_Email: email,
+                cust_Password: password
+            },
+            success: function(res) {
+                let data = JSON.parse(res);
+                if (data.status == 1) {
+                    window.location.reload();
+                } else {
+                    $('#loginError').text(data.msg);
+                }
+            },
+            error: function() {
+                $('#loginError').text('Something went wrong. Please try again.');
+            }
+        });
+    });
+
+    // Register form submission (delegated)
+    $(document).on('submit', '#registerForm', function(e) {
+        e.preventDefault();
+
+        $('#regError').html(''); // clear previous messages
+
+        const password = $('#password').val();
+        const cpassword = $('#cpassword').val();
+        const email = $('#email').val();
+        const phone = $('#number').val();
+        const name = $('#name').val();
+
+        // Validate password match
+        if (password !== cpassword) {
+            $('#regError').html('Passwords do not match.');
+            return;
+        }
+
+        // Validate email format
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(email)) {
+            $('#regError').html('Please enter a valid email address.');
+            return;
+        }
+
+        // Validate phone number (10 digits only)
+        if (!/^\d{10}$/.test(phone)) {
+            $('#regError').html('Phone number must be exactly 10 digits.');
+            return;
+        }
+
+        // Validate name (only letters and space)
+        const nameRegex = /^[a-zA-Z ]+$/;
+        if (!nameRegex.test(name)) {
+            $('#regError').html('Name must contain only letters and spaces.');
+            return;
+        }
+
+        // Submit via AJAX
+        $.ajax({
+            url: '<?= base_url('admin/customer/save') ?>',
+            type: 'POST',
+            data: $(this).serialize(),
+            dataType: 'json',
+            success: function(response) {
+                if (response.status === 1) {
+                    $('#regError').removeClass('text-danger').addClass('text-success').html(response.msg);
+                    $('#registerForm')[0].reset(); // reset form
+                } else {
+                    $('#regError').removeClass('text-success').addClass('text-danger').html(response.msg);
+                }
+            },
+            error: function(xhr) {
+                $('#regError').removeClass('text-success').addClass('text-danger').html('An error occurred. Please try again.');
+            }
+        });
+    });
+
+}); // End of document.ready
+
+ </script>
+ <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+ <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+ <!--POP UP FORM -->
+
+ </body>
+
+ </html>

@@ -64,7 +64,7 @@
                         <?php endif; ?>
 
                         <a href="javascript:void(0);" class="searchbox">
-                                <input type="text" name="keyword" id="search" placeholder="Search products" value="<?= esc($search ?? '') ?>" />
+                                <input type="text" name="keyword" id="search" placeholder="Search products" autocomplete="off" value="<?= esc($search ?? '') ?>" />
                             </a>
                             <a href="javascript:void(0);" onclick="searchProduct()">
                                 <i class="bi bi-search"></i>

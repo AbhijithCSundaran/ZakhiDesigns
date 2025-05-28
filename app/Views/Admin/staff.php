@@ -39,7 +39,7 @@
                                         </div>
 										<div class="col-md-3">
                                             <div class="row">
-                                                <div class="col-lg-12 d-flex justify-content-end p-2">
+											 <div class="col-lg-12 d-flex justify-content-end p-2">
                                                     <a href="<?= base_url('admin/staff/add'); ?>"
                                                         class="btn btn-primary">
                                                         Add Staff

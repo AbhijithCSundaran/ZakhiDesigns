@@ -1,3 +1,7 @@
+	<?php
+$images = json_decode($product['product_images'], true);
+$firstImage = isset($images[0]['name'][0]) ? $images[0]['name'][0] : 'default.png';
+?>
 	<section class="hero-banner">
 			<div class="container-lg">
 				<div class="row">
@@ -5,15 +9,21 @@
 						<div class="clearfix">
 							<div class="pics clearfix">
 								<div class="thumbs">
-								<div class="preview"> <a href="#" class="selected" data-full="<?php echo base_url().ASSET_PATH; ?>images/luna1.jpg" data-title="Spring 2013 | Luna + Hill"> <img src="<?php echo base_url().ASSET_PATH; ?>images/luna1.jpg"/> </a> </div>
-								<div class="preview"> <a href="#" data-full="<?php echo base_url().ASSET_PATH; ?>images/luna2.jpg" data-title="Spring 2013 | Luna + Hill"> <img src="<?php echo base_url().ASSET_PATH; ?>images/luna2.jpg"/> </a> </div>
-								<div class="preview"> <a href="#" data-full="<?php echo base_url().ASSET_PATH; ?>images/luna3.jpg" data-title="Spring 2013 | Luna + Hill"> <img src="<?php echo base_url().ASSET_PATH; ?>images/luna3.jpg"/> </a> </div>
-								<div class="preview"> <a href="#" data-full="<?php echo base_url().ASSET_PATH; ?>images/luna4.jpg" data-title="Spring 2013 | Luna + Hill"> <img src="<?php echo base_url().ASSET_PATH; ?>images/luna4.jpg"/> </a> </div>
-								<div class="preview"> <a href="#" data-full="<?php echo base_url().ASSET_PATH; ?>images/luna5.jpg" data-title="Spring 2013 | Luna + Hill"> <img src="<?php echo base_url().ASSET_PATH; ?>images/luna5.jpg"/> </a> </div>
+									<?php foreach ($images as $img): ?>
+										<div class="preview">
+											<a href="#"
+											   data-full="<?= base_url('uploads/productmedia/' . $img['name'][0]); ?>"
+											   data-title="<?= esc($product['pr_Name']); ?>">
+												<img src="<?= base_url('uploads/productmedia/' . $img['name'][0]); ?>" />
+											</a>
+										</div>
+									<?php endforeach; ?>
 								</div>
-								<a href="<?php echo base_url().ASSET_PATH; ?>images/luna1.jpg" class="full" title="Spring 2013 | Luna + Hill"> 
-									<img src="<?php echo base_url().ASSET_PATH; ?>images/luna1.jpg"> 
-								</a> 
+
+								<!-- Main image display -->
+								<a href="#" class="full" id="main-image-link" title="<?= esc($product['pr_Name']); ?>">
+									<img id="main-image" src="<?= base_url('uploads/productmedia/' . $images[0]['name'][0]); ?>" alt="">
+								</a>
 							</div>
 						</div>
 					</div>
@@ -21,7 +31,7 @@
 						<div class="row">
 							<div class="clearfix">&nbsp;</div>
 							<div class="col-md-12">
-								<div class="prod-name">Multi colour Kurthi</div>
+								<div class="prod-name"><?= esc($product['pr_Name']); ?></div>
 								<div class="star-rate text-left">
 									<i class="bi bi-star-fill gold"></i>
 									<i class="bi bi-star-fill gold"></i>
@@ -31,44 +41,59 @@
 									0 Reviews
 								</div>
 								<div class="col-md-12">
-									<p>Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, 
-									when an unknown printer took a galley of type and scrambled it to make a type 
-									specimen book. It has survived not only five centuries, but also the leap into 
-									electronic typesetting, remaining essentially unchanged.</p>
+									<p><?= esc($product['pr_Description']); ?></p>
 								</div>
 								<div class="col-md-12">
 									<b>Size</b>
 								</div>
+								<?php
+									$sizes = explode(',', $product['pr_Size']); // Assuming pr_Size holds "S,M,L,XL,XXL"
+								?>
+
 								<div class="col-md-12 size">
 									<select>
-										<option>S</option>
-										<option>M</option>
-										<option>L</option>
+										<?php foreach ($sizes as $size): ?>
+											<option><?= esc(trim($size)); ?></option>
+										<?php endforeach; ?>
 									</select>
 								</div>
 								<div class="col-md-12 colorblock">
 									<b>Color</b>
 								</div>
+								<?php
+									$colors = explode(',', $product['pr_Aval_Colors']); // Assuming pr_Color is the DB field
+								?>
+
 								<div class="col-md-12 color-box">
-									<div class="col-md-1 cpicker" style="background-color:red">&nbsp;</div>
-									<div class="col-md-1 cpicker" style="background-color:blue">&nbsp;</div>
-									<div class="col-md-1 cpicker" style="background-color:green">&nbsp;</div>
+									<?php foreach ($colors as $color): ?>
+										<div class="col-md-1 cpicker" style="background-color:<?= esc(trim($color)); ?>">&nbsp;</div>
+									<?php endforeach; ?>
 								</div>
-								<div class="col-md-12 price-block">
-									<span class="actualprice"><i class="bi bi-currency-rupee"></i>18000</span>
-									<span class="offerprice"><i class="bi bi-currency-rupee"></i>1000</span>
+								 <div class="col-md-12 price-block">
+									<span class="actualprice"><i class="bi bi-currency-rupee"></i><?= esc($product['mrp']); ?></span>
+									<span class="offerprice"><i class="bi bi-currency-rupee"></i><?= esc($product['pr_Selling_Price']); ?></span>
 								</div>
+								
 								<div class="col-md-12 stock-block">
 									<select>
 										<option value="">Quantity</option>
-										<option value="">1</option>
-										<option value="">2</option>
+										<?php for ($i = 1; $i <= 5; $i++): ?>
+											<option value="<?= $i; ?>"><?= $i; ?></option>
+										<?php endfor; ?>
 									</select>
-									<button class="btn btn-dark">Order Now</button>
+									<input type="hidden" name="pr_Id" value="<?= $product['pr_Id'] ;?>">
+									<button class="btn btn-dark" onclick="window.location.href='<?= base_url('ordernow?pr_Id=' . $product['pr_Id']); ?>'">Order Now</button>
 								</div>
 								<div class="col-md-12">
-									<span class="badge badge-success">In stock</span>
+									<?php if ($product['pr_Stock'] > 1): ?>
+										<span class="badge badge-success">In stock</span>
+									<?php elseif ($product['pr_Stock'] == 1): ?>
+										<span class="badge badge-warning">Only 1 left in stock</span>
+									<?php else: ?>
+										<span class="badge badge-danger">Out of stock</span>
+									<?php endif; ?>
 								</div>
+
 								<div class="col-md-12">
 									<div class="clearfix">&nbsp;</div>
 									<div class="col-md-12 imp-text">
@@ -85,5 +110,6 @@
 						</div>
 					</div>
 				</div>
+				
 			</div>
 		</section>

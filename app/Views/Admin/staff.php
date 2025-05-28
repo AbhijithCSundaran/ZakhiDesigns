@@ -37,7 +37,7 @@
                                         </div>
                                         <div class="col-md-7">
                                         </div>
-                                        <div class="col-md-3">
+										<div class="col-md-3">
                                             <div class="row">
                                                 <div class="col-lg-12 d-flex justify-content-end p-2">
                                                     <a href="<?= base_url('admin/staff/add'); ?>"
@@ -50,29 +50,28 @@
                                     </div>
                                 </div>
                                 <div class="card-block">
-                                    <div class="card">
-                                        <div class="card-block table-border-style">
-                                            <div id="message" style="display:none;"></div>
-                                            <div id="messageBox" class="alert" style="display: none;"></div>
-                                            <div class="table-responsive">
-                                                <table class="table table-hover" id="staffList">
-                                                    <thead>
+                                <div class="card">
+                                            <div class="card-block table-border-style">
+											<div id="message" style="display:none;"></div>
+											<div id="messageBox" class="alert" style="display: none;"></div>
+                                                <div class="table-responsive">
+                                                    <table class="table table-hover" id="staffList">
+                                                        <thead>
                                                         <tr>
                                                             <th>Sl.No.</th>
                                                             <th>Name</th>
                                                             <th>Email</th>
-                                                            <th>Alternate Email</th>
+                                                            <th>Confirmation Mail</th>
                                                             <th>Contact Number</th>
                                                             <th>Status</th>
                                                             <th>Action</th>
                                                         </tr>
                                                     </thead>
                                                     <tbody></tbody>
-
-                                                </table>
+                                                    </table>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -114,7 +113,8 @@
             </div>
             <div class="modal-footer d-flex justify-content-center">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                <button type="button" class="btn btn-danger" id="deleteStaff" onclick="deleteStaff()">Delete</button>
+                <button type="button" class="btn btn-danger" id="deleteStaff"
+                    onclick="deleteStaff()">Delete</button>
             </div>
         </div>
     </div>

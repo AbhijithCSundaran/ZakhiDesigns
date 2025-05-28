@@ -20,7 +20,7 @@
 
                     <div class="item">
                         <div class="col-md-12">
-                            <a href="<?= base_url('product/details'); ?>">
+                            <a href="<?= base_url('product/product_details/'.$item->pr_Id); ?>">
                                 <img class="product-img" src="<?= base_url('uploads/productmedia/') . $firstImage; ?>"
                                     alt="<?= $item->pr_Name; ?>" />
                             </a>

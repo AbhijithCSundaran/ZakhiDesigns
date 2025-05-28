@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html>
-
 <head>
     <title>Zakhi Designs</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -12,6 +11,7 @@
         href="<?php echo base_url().ASSET_PATH;?>assets/vendors/owlcarousel/assets/owl.carousel.min.css">
     <link rel="stylesheet"
         href="<?php echo base_url().ASSET_PATH; ?>assets/vendors/owlcarousel/assets/owl.theme.default.min.css">
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 
 <body>
@@ -64,9 +64,11 @@
                         <?php endif; ?>
 
                         <a href="javascript:void(0);" class="searchbox">
-                            <input type="text" name="search" id="search" placeholder="Search products" />
-                        </a>
-                        <a href="javascript:void(0);"><i class="bi bi-search"></i></a>
+                                <input type="text" name="keyword" id="search" placeholder="Search products" value="<?= esc($search ?? '') ?>" />
+                            </a>
+                            <a href="javascript:void(0);" onclick="searchProduct()">
+                                <i class="bi bi-search"></i>
+                            </a>
                         <a href="javascript:void(0);" class="icon" onclick="openRespMenu()">
                             <i class="bi bi-list"></i>
                         </a>
@@ -90,3 +92,13 @@
             </div>
         </div>
     </div>
+<script>
+  function searchProduct() {
+    const keyword = document.getElementById('search').value.trim();
+    if (keyword !== '') {
+      window.location.href = "<?= base_url('product/products_lists') ?>?keyword=" + encodeURIComponent(keyword);
+    }
+  }
+</script>
+
+

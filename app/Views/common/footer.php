@@ -50,6 +50,9 @@
 		    </div>
 		</footer>
 		</body>
+		
+
+
 		<script src="<?php echo base_url().ASSET_PATH; ?>assets/js/jquery-3.7.1.min.js"></script>
 		<script src="<?php echo base_url().ASSET_PATH; ?>assets/js/bootstrap.min.js"></script>
 

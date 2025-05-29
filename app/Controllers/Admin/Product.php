@@ -183,7 +183,7 @@ public function saveProduct() {
     $stitching = $this->input->getPost('stitching');
 
    
-    if (empty($cat_id) || empty($product_name) || empty($product_code) || empty($mrp)) {
+    if (empty($cat_id) || empty($product_name) || empty($product_code) || empty($mrp) || empty($available_color) || empty( $size) ) {
         return $this->response->setJSON([
             'status' => 'error',
             'message' => 'All required fields must be filled.'

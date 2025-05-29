@@ -26,4 +26,5 @@ class ProductDetails extends BaseController
             
 	
     }
+	
 }

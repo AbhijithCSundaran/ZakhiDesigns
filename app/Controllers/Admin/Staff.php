@@ -15,6 +15,9 @@ class Staff extends BaseController
 
     public function index()
     {
+		 if (!$this->session->get('zd_uid')) {
+        return redirect()->to(base_url('/admin/'));
+    }
         //$getall['users'] = $this->staffModel->getAllStaff();
         $staff = $this->staffModel->getAllStaff();
         $data['user'] = $staff;
@@ -31,7 +34,7 @@ class Staff extends BaseController
 	{
 		if (!$this->session->get('zd_uid')) 
 		{
-			return redirect()->to(base_url('admin/staff'));
+			return redirect()->to(base_url('/admin/'));
 		}
 
 		$data = [];

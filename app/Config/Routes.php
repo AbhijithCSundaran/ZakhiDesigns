@@ -7,6 +7,19 @@ use CodeIgniter\Router\RouteCollection;
  */
 /* GET METHODS */
 $routes->get('/', 'Home::index');
+$routes->get('ordernow','OrderNow::index');
+$routes->get('ordernow/product/(:any)', 'OrderNow::orderproduct/$1');
+$routes->post('ordernow/submit', 'OrderNow::submit');
+
+//$routes->get('ordernow/product/(:any)&(:any)','OrderNow::orderproduct/$1/$2');
+$routes->get('product/details','ProductDetails::index');
+$routes->get('product', 'Product::index');
+$routes->get('product/product_details/(:num)', 'Product::product_details/$1');
+$routes->get('product/search', 'Product::ajaxSearch');
+$routes->get('product/product_list', 'Product::products_lists');
+$routes->get('weblogin','Weblogin::index');
+$routes->get('webreg','Weblogin::webReg'); 
+$routes->get('Contact','Contact::index'); 
 $routes->get('ordernow', 'OrderNow::index');
 $routes->get('product/details', 'ProductDetails::index');
 $routes->get('product', 'Product::index');

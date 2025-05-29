@@ -15,6 +15,9 @@ class Product extends BaseController
 
     public function index()
     {
+		 if (!$this->session->get('zd_uid')) {
+        return redirect()->to(base_url('/admin/'));
+    }
 
         $allproducts = $this->productModel->getAllProducts();
 		$data['product'] =  $allproducts;
@@ -124,7 +127,7 @@ if ($firstImage) {
 public function addProduct($pr_id = null)
 {
     if (!$this->session->get('zd_uid')) {
-        return redirect()->to(base_url());
+        return redirect()->to(base_url('/admin/'));
     }
 
     $data = [];

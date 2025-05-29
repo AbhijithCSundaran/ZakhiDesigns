@@ -33,13 +33,12 @@
                             <i class="bi bi-star-fill"></i>
                             <i class="bi bi-star-fill"></i>
                         </div>
-                        <div class="item-name p-1"><a
-                                href="<?= base_url('product/details'); ?>"><?php echo $item->pr_Description; ?></a>
+                        <div class="item-name p-1"><a href="<?= base_url('product/product_details/'. $item->pr_Id); ?>"><?php echo $item->pr_Name; ?></a>
                         </div>
                         <div class="item-price"><i
                                 class="bi bi-currency-rupee"></i>&nbsp;<?php echo $item->pr_Selling_Price; ?></div>
                         <div class="col-md-12 text-center"><button class="order-btn"
-                                onclick="window.location.href='<?= base_url('ordernow'); ?>'"></button></div>
+                                onclick="window.location.href='<?= base_url('ordernow?pr_Id=' . $item->pr_Id); ?>'"></button></div>
                     </div>
                     <?php endforeach; ?>
 

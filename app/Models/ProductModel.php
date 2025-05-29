@@ -1,14 +1,15 @@
-<?php namespace App\Models;
+<?php 
+namespace App\Models;
 use CodeIgniter\Model;
 
 class ProductModel extends Model
 {
 	 public function getAllProducts() {
-			return $this->db->table('product')
-			->where('pr_Status !=', 3)
-			->get()
-			->getResultArray();
-        }
+		return $this->db->table('product')
+		->where('pr_Status !=', 3)
+		->get()
+		->getResultArray();
+       }
     protected $table = 'product';
     protected $primaryKey = 'pr_Id';
     protected $allowedFields = ['pr_Name', 'pr_Description', 'pr_Selling_Price', 'product_images'];

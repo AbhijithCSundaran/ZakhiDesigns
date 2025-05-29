@@ -14,7 +14,9 @@
                             <label for="fname" class="form-label">Fullname</label>
                         </div>
                         <div class="col-md-9">
-                            <input type="text" class="form-control" id="fname">
+                           
+							 <input type="text" class="form-control" id="fname" name="fname" 
+               value="<?= esc($details['add_Name'] ?? '') ?>">
                         </div>
                     </div>
                     <div class="row">
@@ -22,7 +24,7 @@
                             <label for="Place" class="form-label">Place</label>
                         </div>
                         <div class="col-md-9">
-                            <input type="text" class="form-control" id="Place" placeholder="eg. your place, state">
+                            <input type="text" class="form-control" id="Place"  value="<?= esc($details['add_City'] ?? '') ?>" placeholder="eg. your place, state">
                         </div>
                     </div>
                     <div class="row">
@@ -30,7 +32,7 @@
                             <label for="emailid" class="form-label">Email Id</label>
                         </div>
                         <div class="col-md-9">
-                            <input type="text" class="form-control" id="emailid" placeholder="eg. ra****@mail.com">
+                            <input type="text" class="form-control" id="emailid" value="<?= esc($details['add_Email'] ?? '') ?>"  placeholder="eg. ra****@mail.com">
                             <small>The order details will be sent to the provided email address.</small>
                         </div>
                     </div>
@@ -39,7 +41,7 @@
                             <label for="contactno" class="form-label">Contact No.</label>
                         </div>
                         <div class="col-md-9">
-                            <input type="text" class="form-control" id="contactno" placeholder="eg. +91 98********" />
+                            <input type="text" class="form-control" id="contactno" value="<?= esc($details['add_Phone'] ?? '') ?>"  placeholder="eg. +91 98********" />
                             <small>Our executive will reach out to you at this number.</small>
                         </div>
                     </div>
@@ -48,7 +50,17 @@
                             <label for="contactno" class="form-label">Delivery Address</label>
                         </div>
                         <div class="col-md-9">
-                            <textarea class="form-control"></textarea>
+							
+							<textarea class="form-control" rows="5"><?=
+								esc(
+									($details['add_BuldingNo'] ?? '') . ', ' .
+									($details['add_Street'] ?? '') . "\n" .
+									($details['add_Landmark'] ?? '') . "\n" .
+									($details['add_City'] ?? '') . ', ' . ($details['add_State'] ?? '') . "\n" .
+									($details['add_Pincode'] ?? '') . "\n" .
+									($details['add_Phone'] ?? '')
+								);
+							?></textarea>
                             <small>Your order will be delivered to the specified address.</small>
                         </div>
                     </div>
@@ -70,17 +82,17 @@
                 </div>
                 <div class="row">
                     <div class="col-md-5">
-                        <img src="<?php echo base_url().ASSET_PATH; ?>assets/images/slides/s2.png" />
+					<img src="<?= base_url('uploads/productmedia/' . $details['product_images']); ?>" style="width: 100px;" />
                     </div>
                     <div class="col-md-7">
-                        <div class="item-name text-left"><b>Lorem Ipsum</b></div>
+                        <div class="item-name text-left"><b><?= esc($details['pr_Name'] ?? '');?></b></div>
                         <div class="item-desc text-left">
-                            <p>Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an
-                                unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
+                            <p><?= esc($details['pr_Code'] ?? '');?>
+							</p>
                         </div>
-                        <div class="item-price text-left">Price: <i class="bi bi-currency-rupee"></i>1000</div>
-                        <div class="item-price text-left">Quantity: 2</div>
-                        <div class="item-price text-left">Grand total : <i class="bi bi-currency-rupee"></i>2000</div>
+                        <div class="item-price text-left">Price: <i class="bi bi-currency-rupee"></i><?= esc($details['pr_Selling_Price'] ?? '');?></div>
+                        <div class="item-price text-left">Quantity: <?= esc($details['od_Quantity'] ?? '');?></div>
+                        <div class="item-price text-left">Grand total : <i class="bi bi-currency-rupee"></i><?= esc($details['or_Total_Price'] ?? '');?></div>
                     </div>
                 </div>
                 <div class="row">

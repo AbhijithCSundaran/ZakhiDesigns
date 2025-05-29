@@ -1,28 +1,23 @@
-<?php
-namespace App\Models;
+<?php namespace App\Models;
+
 use CodeIgniter\Model;
 
 class OrderNowModel extends Model
 {
-    protected $table = 'product';
+    protected $table = 'product'; // Primary table
     protected $primaryKey = 'pr_Id';
 
-    // Optional: if you plan to insert/update orders
-    protected $allowedFields = [
-        'pr_Id', 'pr_Name', 'pr_Description', 'mrp', 'pr_Selling_Price', 'pr_Size', 'pr_Aval_Colors', 'pr_Stock'
-    ];
-
-    /**
-     * Get full order page data including customer, address, and product info
-     */
-    public function getOrderData($custId, $productId)
+    public function getProductWithAddress($zd_uid, $pr_Id)
     {
-        return $this->db->table('products p')
-            ->select('p.*, c.cust_Name, c.cust_Email, c.cust_Phone, a.address_line1, a.address_line2, a.city, a.state, a.zip')
-            ->join('customers c', 'c.cust_id = ' . $this->db->escape($custId))
-            ->join('addresses a', 'a.cust_id = c.cust_id', 'left')
-            ->where('p.pr_Id', $productId)
-            ->get()
-            ->getRowArray(); // or getRow() for object
+        // Join address table with condition add_Default = 1 and matching user ID
+        return $this->select('product.*, address.*')
+                    ->join('address', 'address.add_Id = ' . $this->db->escape($zd_uid) . ' AND address.add_Default = 1', 'left')
+                    ->where('product.pr_Id', $pr_Id)
+                    ->first();
+    }
+	public function insertOrder(array $data)
+    {
+        $this->insert($data);
+		return $this->getInsertID(); 
     }
 }

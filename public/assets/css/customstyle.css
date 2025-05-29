@@ -29,17 +29,17 @@ button, input, optgroup, select, textarea {
 *, ::after, ::before {
     box-sizing: border-box;
 }
-.thumbs img {
-    width: auto !important;    /* Let the image keep its original width */
-    height: auto !important;   /* Let the image keep its original height */
-    max-width: none !important; /* Remove any max-width constraints */
+/* .thumbs img {
+    width: auto !important;   
+    height: auto !important;   
+    max-width: none !important; 
     max-height: none !important;
-    display: block;            /* Remove inline spacing */
+    display: block;           
 }
 .thumbs img {
     max-width: 100%;
     height: auto;
-}
+} */
 .preview img {
     width: auto !important;
     height: auto !important;
@@ -47,8 +47,26 @@ button, input, optgroup, select, textarea {
     max-height: none !important;
     display: block;
 }
-
-
+.prod-preview img {
+    width: auto;
+    height: auto;
+    max-width: 105px;
+    max-height: 105px;
+    display: block;
+    margin: auto;
+}
+.prod-preview a {
+    width: 115px;
+    height: 115px;
+    display: flex;
+    overflow: hidden;
+    border: 1px solid rgba(119, 119, 119, 0.25);
+    padding: 4px;
+    transition: all 0.2s ease;
+}
+.prod-preview a:hover {
+   box-shadow: 0px 0px 2px 1px rgba(65, 65, 65, 0.2);
+}
 
 
 .preview a.selected img {
@@ -69,15 +87,18 @@ button, input, optgroup, select, textarea {
 .product-carousel .product-item {
     max-width: 300px; /* increased from 250px */
     text-align: center;
+    display: flex;
+    flex-direction: column;
 }
 
 .product-carousel .product-img {
-    width: 100%;
+    max-width: 100%;
+    width: auto;
+    margin: 0 auto 10px;
     height: 350px; /* increased from 280px */
     object-fit: cover;
     border-radius: 10px;
     box-shadow: 0 0 6px rgba(0,0,0,0.1);
-    margin-bottom: 10px;
     display: block;
 }
 
@@ -129,6 +150,16 @@ button, input, optgroup, select, textarea {
     height: auto;
     display: block;
 }
+.prod-preview video::after {
+    content: '▶';
+    position: absolute;
+    color: white;
+    font-size: 20px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
 
 
 
@@ -152,3 +183,11 @@ button, input, optgroup, select, textarea {
     border-radius: 0.25rem;
     display: inline-block;
 }
+
+
+
+
+
+
+
+

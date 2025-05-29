@@ -42,11 +42,13 @@
     font-size: 12px;
     color: #007bff;
 }
- 
+.drop {
+	display:none !important;
+}
 .dropdown {
     display: inline-block;
 }
 .drop-menu{
-    border:none;    
+    border:none;   
 }
 

@@ -35,6 +35,8 @@ $routes->get('webreg', 'Weblogin::webReg');
 $routes->post('customerauth', 'Weblogin::customerAuthen');
 $routes->get('logout', 'Weblogin::logout');
 
+//About Us
+$routes->get('aboutus', 'AboutUs::index');
 
 
 //category

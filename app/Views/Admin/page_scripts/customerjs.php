@@ -182,7 +182,7 @@ function confirmDelete(addId) {
 //Active and Inactive status
 
 $(document).on('change', '.checkactive', function () { 
-    let custId = $(this).attr('id').split('-')[1]; // e.g., id="staffcheck-3"
+    let custId = $(this).attr('id').split('-')[1]; 
     let status = $(this).prop('checked') ? 1 : 2;
 
     $.ajax({

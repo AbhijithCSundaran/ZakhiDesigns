@@ -2,96 +2,95 @@
 namespace App\Controllers\Admin;
 
 use App\Controllers\BaseController;
-use App\Models\ProfileModel;
+use App\Models\Admin\ProfileModel;
 
 class Profile extends BaseController
 {
+	protected $ProfileModel;
 	
 	public function __construct()
 	{
 		$this->session = \Config\Services::session();
 		$this->input = \Config\Services::request();
-		// $this->ProfileModel = new ProfileModel();
+		$this->ProfileModel = new \App\Models\Admin\ProfileModel();
+
+		
 	}
 
 	public function index()
-	{
-		
-		
+{
+    if (!session()->get('zd_uid')) {
+        return redirect()->to(base_url('/admin'));
+    }
+	
+    $template = view('Admin/common/header');
+    $template .= view('Admin/common/leftmenu');
+    $template .= view('Admin/admin_update');
+    $template .= view('Admin/common/footer');
+    $template .= view('Admin/page_scripts/profilejs');
+  
+  return $template;
+}
 
-		$template = view('Admin/common/header');
-		$template .= view('Admin/common/leftmenu');
-		$template .= view('Admin/profile');
-		$template .= view('Admin/page_scripts/profilejs');
-		$template .= view('Admin/common/footer');
-		
+   public function edit_admin()
+   {
+	   $us_Id = $this->session->zd_uid;
+     $admin = $this->ProfileModel->getProfileById($us_Id); 
+	
 
-		return $template;
-	}
+    $data['user'] = (array) $admin; 
 
-	public function update()
-	{
-		$adminId = $this->session->get('us_Id');
-		$name = $this->input->getPost('name');
-		$email = $this->input->getPost('us_Email');
+    $template = view('Admin/common/header');
+    $template .= view('Admin/common/leftmenu');
+    $template .= view('Admin/profile', $data);
+    $template .= view('Admin/common/footer');
+    $template .= view('Admin/page_scripts/profilejs');
 
-		if (!preg_match('/^[a-zA-Z ]+$/', $name)) {
-			$this->session->setFlashdata('error', 'Please enter name correctly.');
-			return redirect()->to('admin/profile');
-		}
+    return $template;
+}
+public function update()
+{
+    $us_Id = $this->session->zd_uid;
+    $data = [
+        'us_Name' => $this->request->getPost('us_Name'),
+        'us_Email' => $this->request->getPost('us_Email'),
+    ];
 
-		if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-			$this->session->setFlashdata('error', 'Please enter a valid email address.');
-			return redirect()->to('admin/profile');
-		}
+    $model = new \App\Models\Admin\ProfileModel();
 
-		$data = [
-			'us_Name'  => $name,
-			'us_Email' => $email,
-		];
+    if ($model->updateProfile($us_Id, $data)) {
+        session()->setFlashdata('success', 'Profile updated successfully.');
+    } else {
+        session()->setFlashdata('error', 'Failed to update profile.');
+    }
 
-		$this->ProfileModel->update($adminId, $data);
-		$this->session->setFlashdata('success', 'Profile updated successfully.');
-		return redirect()->to('admin/profile');
-	}
+    return redirect()->to('admin/profile');
+}
+public function change_password()
+{
+    $us_Id = $this->session->zd_uid;
+    $current = $this->request->getPost('current_password');
+    $new = $this->request->getPost('new_password');
+    $confirm = $this->request->getPost('confirm_password');
 
-	public function change_password()
-	{
-		$adminId = $this->session->get('us_Id');
-		$currentPassword = $this->input->getPost('current_password');
-		$newPassword = $this->input->getPost('new_password');
-		$confirmPassword = $this->input->getPost('confirm_password');
+    $model = new \App\Models\Admin\ProfileModel();
 
-		$admin = $this->ProfileModel->find($adminId);
+    if (!$model->checkCurrentPassword($us_Id, $current)) {
+        session()->setFlashdata('error', 'Current password is incorrect.');
+    } elseif ($new !== $confirm) {
+        session()->setFlashdata('error', 'New passwords do not match.');
+    } else {
+        $hashed = password_hash($new, PASSWORD_DEFAULT);
+        if ($model->changePassword($us_Id, $hashed)) {
+            session()->setFlashdata('success', 'Password changed successfully.');
+        } else {
+            session()->setFlashdata('error', 'Failed to change password.');
+        }
+    }
 
-		if (!$admin || !password_verify($currentPassword, $admin['us_Password'])) {
-			$this->session->setFlashdata('error', 'Current password is incorrect.');
-			return redirect()->to('admin/profile');
-		}
+    return redirect()->to('admin/profile');
+}
 
-		if (strlen($newPassword) < 4 || strlen($newPassword) > 10) {
-			$this->session->setFlashdata('error', 'Password must be between 4 to 10 characters.');
-			return redirect()->to('admin/profile');
-		}
 
-		if ($newPassword !== $confirmPassword) {
-			$this->session->setFlashdata('error', 'New password and confirm password do not match.');
-			return redirect()->to('admin/profile');
-		}
 
-		$this->ProfileModel->update($adminId, [
-			'us_Password' => password_hash($newPassword, PASSWORD_DEFAULT)
-		]);
-
-		$this->session->setFlashdata('success', 'Password changed successfully.');
-		return redirect()->to('admin/profile');
-	}
-
-	public function ajaxList()
-	{
-		return $this->response->setJSON([
-			'status' => 'success',
-			'message' => 'AJAX list loaded'
-		]);
-	}
 }

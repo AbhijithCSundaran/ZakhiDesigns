@@ -13,6 +13,10 @@ class Customer extends BaseController
 
     public function index()
     {
+		 if (!$this->session->get('zd_uid')) {
+        return redirect()->to(base_url('/admin/'));
+    }
+
         //$getall['users'] = $this->staffModel->getAllStaff();
         $customer = $this->customerModel->getAllCustomer();
         $data['user'] = $customer;
@@ -109,6 +113,12 @@ class Customer extends BaseController
 			];
 				$CreateCust = $this->customerModel->createcust($data);
 				//echo json_encode(array("status" => 1, "msg" => "Customer Created successfully."));
+
+				$this->session->set([
+    'zd_uid' => $CreateCust, // or the actual ID if your model returns it
+    'zd_uname' => $custname,
+    'zd_email' => $custemail,
+]);
 				echo json_encode(array(
 					"status" => 1,
 					"msg" => "Customer Created successfully.",
@@ -246,6 +256,3 @@ public function ajaxList()
     ]);
 }
 }
-
-
-

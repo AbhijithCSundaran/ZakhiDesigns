@@ -1,17 +1,20 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>Zakhi Designs</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="<?php echo base_url().ASSET_PATH;?>assets/css/bootstrap.min.css">
+	<link rel="stylesheet" href="<?php echo base_url().ASSET_PATH; ?>assets/css/customstyle.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
     <link rel="stylesheet" href="<?php echo base_url().ASSET_PATH; ?>assets/css/styles.css">
     <link rel="stylesheet" href="<?php echo base_url().ASSET_PATH; ?>assets/css/custom.css">
+	
     <link rel="stylesheet"
         href="<?php echo base_url().ASSET_PATH;?>assets/vendors/owlcarousel/assets/owl.carousel.min.css">
     <link rel="stylesheet"
         href="<?php echo base_url().ASSET_PATH; ?>assets/vendors/owlcarousel/assets/owl.theme.default.min.css">
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 
 <body>
@@ -34,13 +37,13 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="topnav" id="respTopnav">
-                        <a href="#home" class="active">Home</a>
-                        <a href="<?= base_url('aboutus');  ?>">About Us</a>
+                      <a href="<?= base_url();?>" class="active">Home</a>
+                      <a href="<?= base_url('aboutus');  ?>">About Us</a>
                         <a href="#contact">Fashion</a>
-                        <a href="#about">Contact</a>
+                        <a href="<?= base_url('/Contact');?>">Contact</a>
 
                         <?php if (session()->get('zd_uname')): ?>
-                        <div class="drop">
+                        <a class="drop">
                             <a class="btn dropdown-toggle drop-menu" href="#" role="button" id="customerDropdown"
                                 data-bs-toggle="dropdown" aria-expanded="false">
                                 <?= session()->get('zd_uname'); ?>
@@ -57,18 +60,22 @@
                                     </a>
                                 </li>
                             </ul>
-                        </div>
+                        </a>
                         <?php else: ?>
+                        <!-- Show login/register links if not logged in -->
                         <a href="" id="loginBtn">Login</a>
                         <a href="" id="registerBtn">Register</a>
                         <?php endif; ?>
 
+
+
                         <a href="javascript:void(0);" class="searchbox">
-                                <input type="text" name="keyword" id="search" placeholder="Search products" autocomplete="off" value="<?= esc($search ?? '') ?>" />
-                            </a>
-                            <a href="javascript:void(0);" onclick="searchProduct()">
-                                <i class="bi bi-search"></i>
-                            </a>
+                            <input type="text" name="keyword" id="search" placeholder="Search products"
+                                autocomplete="off" value="<?= esc($search ?? '') ?>" />
+                        </a>
+                        <a href="javascript:void(0);" onclick="searchProduct()">
+                            <i class="bi bi-search"></i>
+                        </a>
                         <a href="javascript:void(0);" class="icon" onclick="openRespMenu()">
                             <i class="bi bi-list"></i>
                         </a>
@@ -96,9 +103,6 @@
   function searchProduct() {
     const keyword = document.getElementById('search').value.trim();
     if (keyword !== '') {
-      window.location.href = "<?= base_url('product/products_lists') ?>?keyword=" + encodeURIComponent(keyword);
+      window.location.href = "<?= base_url('product/search') ?>?keyword=" + encodeURIComponent(keyword);
     }
-  }
-</script>
-
-
+    </script>

@@ -1,32 +1,71 @@
-	<?php
-$images = json_decode($product['product_images'], true);
-$firstImage = isset($images[0]['name'][0]) ? $images[0]['name'][0] : 'default.png';
+<?php
+$decoded = json_decode($product['product_images'], true); // decode image JSON
+$imageList = [];
+
+if (is_array($decoded) && isset($decoded[0]['name']) && is_array($decoded[0]['name'])) {
+    $imageList = $decoded[0]['name']; // array of image names
+}
 ?>
+<form action="<?= base_url('ordernow/product') ?>" method="post" id="orderNowForm">
+<?php $zd_uid = session()->get('zd_uid'); ?>
 	<section class="hero-banner">
 			<div class="container-lg">
 				<div class="row">
 					<div class="col-md-6">
-						<div class="clearfix">
-							<div class="pics clearfix">
-								<div class="thumbs">
-									<?php foreach ($images as $img): ?>
-										<div class="preview">
-											<a href="#"
-											   data-full="<?= base_url('uploads/productmedia/' . $img['name'][0]); ?>"
-											   data-title="<?= esc($product['pr_Name']); ?>">
-												<img src="<?= base_url('uploads/productmedia/' . $img['name'][0]); ?>" />
-											</a>
-										</div>
-									<?php endforeach; ?>
-								</div>
-
-								<!-- Main image display -->
-								<a href="#" class="full" id="main-image-link" title="<?= esc($product['pr_Name']); ?>">
-									<img id="main-image" src="<?= base_url('uploads/productmedia/' . $images[0]['name'][0]); ?>" alt="">
-								</a>
-							</div>
+    <div class="clearfix">
+        <div class="pics clearfix">
+            <!-- Thumbnails -->
+            <div class="thumbs d-flex flex-column flex-wrap gap-2 mb-3">
+                <?php foreach ($imageList as $imgName): ?>
+                    <div class="prod-preview" >
+                        <a href="#"
+                           class="thumb-link"
+                           data-full="<?= base_url('uploads/productmedia/' . $imgName); ?>"
+                           data-title="<?= esc($product['pr_Name']); ?>">
+                            <img src="<?= base_url('uploads/productmedia/' . $imgName); ?>"
+                                 alt="" />
+                        </a>
+                    </div>
+                <?php endforeach; ?>
+				   <!-- Video Thumbnails -->
+          
+					<!-- Single Video Thumbnail -->
+					<?php if (!empty($videoName)): ?>
+						<div class="prod-preview" >
+							<a href="#"
+							   class="thumb-link"
+							   data-type="video"
+							   data-src="<?= base_url('uploads/productmedia/' . $videoName); ?>">
+								<video
+									src="<?= base_url('uploads/productmedia/' . $videoName); ?>"
+									muted preload="metadata">
+								</video>
+							</a>
 						</div>
-					</div>
+					<?php endif; ?>
+            </div>
+			
+			 <div id="main-preview">
+            <!-- Main image display -->
+            <?php if (!empty($imageList)): ?>
+                <a href="<?= base_url('ordernow/product/'. $product['pr_Id']); ?>" class="full" id="main-image-link" title="<?= esc($product['pr_Name']); ?>">
+                    <img id="main-image"
+                         src="<?= base_url('uploads/productmedia/' . $imageList[0]); ?>"
+                         alt="<?= esc($product['pr_Name']); ?>" />
+                </a>
+				<?php elseif (!empty($videoName)): ?>
+					<img id="main-image"
+						 src="<?= base_url('assets/img/video-placeholder.jpg'); ?>" 
+						 alt="Video Placeholder"
+						 style="width: 100%; max-height: 600px; object-fit: contain;" />
+				<?php endif; ?>
+				</div>
+
+        </div>
+    </div>
+	
+</div>
+
 					<div class="col-md-6 prod-detail-block">
 						<div class="row">
 							<div class="clearfix">&nbsp;</div>
@@ -43,30 +82,30 @@ $firstImage = isset($images[0]['name'][0]) ? $images[0]['name'][0] : 'default.pn
 								<div class="col-md-12">
 									<p><?= esc($product['pr_Description']); ?></p>
 								</div>
-								<div class="col-md-12">
-									<b>Size</b>
-								</div>
-								<?php
-									$sizes = explode(',', $product['pr_Size']); // Assuming pr_Size holds "S,M,L,XL,XXL"
-								?>
-
+								<div class="col-md-12"><b>Size</b></div>
+								<?php $sizes = explode(',', $product['pr_Size']); ?>
 								<div class="col-md-12 size">
-									<select>
+									<select name="size" class="form-control">
 										<?php foreach ($sizes as $size): ?>
-											<option><?= esc(trim($size)); ?></option>
+											<option value="<?= esc(trim($size)) ?>" 
+												<?= trim($size) == ($selectedSize ?? '') ? 'selected' : '' ?>>
+												<?= esc(trim($size)) ?>
+											</option>
 										<?php endforeach; ?>
 									</select>
 								</div>
 								<div class="col-md-12 colorblock">
 									<b>Color</b>
 								</div>
+								<input type="hidden" name="selected_color" id="selected_color">
+
 								<?php
 									$colors = explode(',', $product['pr_Aval_Colors']); // Assuming pr_Color is the DB field
 								?>
 
 								<div class="col-md-12 color-box">
 									<?php foreach ($colors as $color): ?>
-										<div class="col-md-1 cpicker" style="background-color:<?= esc(trim($color)); ?>">&nbsp;</div>
+										<div class="col-md-1 cpicker" style="background-color:<?= esc(trim($color)); ?> " onclick="selectColor('<?= trim($color); ?>', this)">&nbsp;</div>
 									<?php endforeach; ?>
 								</div>
 								 <div class="col-md-12 price-block">
@@ -81,8 +120,12 @@ $firstImage = isset($images[0]['name'][0]) ? $images[0]['name'][0] : 'default.pn
 											<option value="<?= $i; ?>"><?= $i; ?></option>
 										<?php endfor; ?>
 									</select>
+									
 									<input type="hidden" name="pr_Id" value="<?= $product['pr_Id'] ;?>">
-									<button class="btn btn-dark" onclick="window.location.href='<?= base_url('ordernow?pr_Id=' . $product['pr_Id']); ?>'">Order Now</button>
+									<input type="hidden" name="cust_Id" value="<?= $zd_uid; ?>">
+									<button class="btn btn-dark" name="orderNowBtn" id="orderNowBtn" >
+											Order Now
+										</button>
 								</div>
 								<div class="col-md-12">
 									<?php if ($product['pr_Stock'] > 1): ?>
@@ -113,3 +156,15 @@ $firstImage = isset($images[0]['name'][0]) ? $images[0]['name'][0] : 'default.pn
 				
 			</div>
 		</section>
+	</form>
+<script>
+function selectColor(color, element) {
+    document.getElementById('selected_color').value = color;
+
+    // Remove highlight from all
+    document.querySelectorAll('.cpicker').forEach(el => el.style.border = 'none');
+
+    // Highlight selected
+    element.style.border = '3px solid #000';
+}
+</script>

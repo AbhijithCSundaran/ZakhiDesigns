@@ -169,7 +169,8 @@
                                         </div>
 
                                         <div class="form-group row">
-                                            <label class="col-sm-3 col-form-label">Available Colors</label>
+                                            <label class="col-sm-3 col-form-label">Available Colors <span
+                                                    style="color: red;">*</span></label>
                                             <div class="col-sm-7">
                                                 <input type="text" class="form-control"
                                                     value="<?= isset($product) ? ($product['pr_Aval_Colors']) : '' ?>"
@@ -187,7 +188,8 @@
 
 
                                         <div class="form-group row">
-                                            <label class="col-sm-3 col-form-label">Available Size</label>
+                                            <label class="col-sm-3 col-form-label">Available Size <span
+                                                    style="color: red;">*</span></label>
                                             <div class="col-sm-7 prod-size">
                                                 <input type="checkbox" name="size[]" value="S"
                                                     <?= in_array('S', $sizes) ? 'checked' : '' ?> />&nbsp;S

@@ -12,7 +12,7 @@ class Weblogin extends BaseController
         $this->session = \Config\Services::session();
         $this->input = \Config\Services::request();
         $this->customerLoginModel = new CustomerLoginModel();
-        }
+    }
 
     public function index(): string
     {

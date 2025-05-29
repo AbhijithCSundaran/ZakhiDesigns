@@ -1,14 +1,14 @@
 
-
 <script>
   function searchProduct() {
     const keyword = document.getElementById('search').value.trim();
     if (keyword !== '') {
-      window.location.href = "<?= base_url('product/products_lists') ?>?keyword=" + encodeURIComponent(keyword);
+      window.location.href = "<?= base_url('product/search') ?>?keyword=" + encodeURIComponent(keyword);
     }
   }
-</script>
-<script>
+
+
+
     $(document).ready(function() {
         $('.thumbs .preview a').on('click', function(e) {
             e.preventDefault();
@@ -22,8 +22,7 @@
             $(this).addClass('selected');
         });
     });
-</script>
-<script>
+
     document.querySelectorAll('.thumbs a').forEach(thumb => {
         thumb.addEventListener('click', function (e) {
             e.preventDefault();
@@ -38,5 +37,96 @@
             this.classList.add('selected');
         });
     });
-</script>
 
+//for saving pick details
+
+/* document.getElementById('orderNowBtn').addEventListener('click', function () {
+    const formData = {
+        size: document.getElementById('size').value,
+        selected_color: document.getElementById('selected_color').value,
+        quantity: document.getElementById('quantity').value,
+        pr_Id: document.getElementById('pr_Id').value
+    };
+
+    fetch("<?= base_url('ordernow/submit') ?>", {
+        method: "POST",
+        headers: {
+            'Content-Type': 'application/json',
+            'X-Requested-With': 'XMLHttpRequest' // Important for CodeIgniter request->isAJAX()
+        },
+        body: JSON.stringify(formData)
+    })
+    .then(response => response.json())
+    .then(result => {
+        if (result.success) {
+            window.location.href = "<?= base_url('order_now') ?>"; // Redirect on success
+        } else {
+            alert('Order submission failed. Please try again.');
+        }
+    })
+    .catch(err => {
+        console.error('AJAX error:', err);
+    });
+}); */
+
+
+/*********************************************/
+
+var baseUrl = "<?= base_url() ?>";
+
+$('#orderNowBtn').click(function(e) {
+$('#orderNowBtn').prop('disabled', true);
+    e.preventDefault(); // Important to prevent normal form submit
+    var url = baseUrl + "ordernow/submit"; // Correct route
+    $.post(url, $('#orderNowForm').serialize(), function(response) {
+		    $('html, body').animate({
+            scrollTop: 0
+        }, 'fast');
+ 
+       // $('#createstaff')[0].reset();
+        if (response.status == 1) { 
+		$('#messageBox')
+				 // Extract cust_id from the redirect URL
+				let redirectUrl = response.redirect;
+				let parts = redirectUrl.split('/');
+				let cust_id = parts[parts.length - 1]; // "1"
+            // Wait, then redirect
+            setTimeout(function() {
+				$('#orderNowBtn').prop('disabled', false);
+				window.location.href = baseUrl + "ordernow/product/" + od_Id;
+            }, 1000);
+        } 
+		else {
+            $('#messageBox')
+                .removeClass('alert-success')
+                .addClass('alert-danger')
+                .text(response.msg || 'Oops... Something went wrong')
+                .show();
+				$('#orderNowBtn').prop('disabled', false);
+        }
+		setTimeout(function() {
+                $('#messageBox').empty().hide();
+            }, 3000);
+    }, 'json');
+});
+/**********************************************************************/
+
+
+    document.addEventListener('DOMContentLoaded', function () {
+        const preview = document.getElementById('main-preview');
+
+        document.querySelectorAll('.thumb-link').forEach(link => {
+            link.addEventListener('click', function (e) {
+                e.preventDefault();
+                const type = this.dataset.type;
+                const src = this.dataset.src;
+
+                if (type === 'image') {
+                    preview.innerHTML = `<img src="${src}" style="width: 100%; max-height: 400px; object-fit: contain;" />`;
+                } else if (type === 'video') {
+                    preview.innerHTML = `<video src="${src}" controls autoplay style="width: 100%; max-height: 400px; object-fit: contain;"></video>`;
+                }
+            });
+        });
+    });
+</script>

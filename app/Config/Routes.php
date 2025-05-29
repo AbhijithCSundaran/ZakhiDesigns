@@ -25,10 +25,10 @@ $routes->get('logout', 'Weblogin::logout');
 
 
 //category
-$routes->get('/delivery', 'Delivery::index');
-$routes->get('/Privacypolicy', 'Privacypolicy::index');
-$routes->get('/Termsandconditions', 'Termsandconditions::index');
-$routes->get('/Returnpolicy', 'Returnpolicy::index');
+$routes->get('delivery', 'Delivery::index');
+$routes->get('Privacypolicy', 'Privacypolicy::index');
+$routes->get('Termsandconditions', 'Termsandconditions::index');
+$routes->get('Returnpolicy', 'Returnpolicy::index');
 
 
 
@@ -126,7 +126,8 @@ $routes->get('admin/orders/view/(:num)', 'Admin\Orders::orderView/$1');
 $routes->post('admin/orders/loadStatus/(:num)', 'Admin\Orders::orderStatusUpdation/$1');
 
 //profile
-$routes->get('admin/profile', 'Admin\Profile::index');
+$routes->get('admin/', 'Admin\Profile::index');
+$routes->get('admin/profile', 'Admin\Profile::edit_admin');
 $routes->post('admin/profile/update', 'Admin\Profile::update');
 $routes->post('admin/profile/change_password', 'Admin\Profile::change_password');
 $routes->post('admin/profile/list', 'Admin\Profile::ajaxList');

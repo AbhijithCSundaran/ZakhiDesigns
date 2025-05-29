@@ -1,5 +1,6 @@
 <?php
-namespace App\Models\Admin;
+
+namespace App\Models\Admin;  
 
 use CodeIgniter\Model;
 
@@ -7,27 +8,21 @@ class ProfileModel extends Model
 {
     protected $table = 'user';
     protected $primaryKey = 'us_Id';
-    protected $allowedFields = ['us_Name', 'us_Email', 'us_Password'];
-    protected $returnType = 'array';
 
-    protected $db;
+    protected $allowedFields = ['us_Name', 'us_Email'];
 
-    public function __construct()
-    {
-        parent::__construct();
-        $this->db = \Config\Database::connect();
-    }
-
+    
     public function getProfileById($us_Id)
     {
-        return $this->db->table('user')->where('us_Id', $us_Id)->get()->getRowArray();
+        return $this->asArray()->where('us_Id', $us_Id)->first();
     }
 
     public function updateProfile($us_Id, $data)
     {
-        return $this->db->table('user')->where('us_Id', $us_Id)->update($data);
+        return $this->where('us_Id', $us_Id)->set($data)->update();
     }
 
+   
     public function checkCurrentPassword($us_Id, $plainPassword)
     {
         $user = $this->getProfileById($us_Id);
@@ -37,17 +32,21 @@ class ProfileModel extends Model
         return false;
     }
 
+    
     public function changePassword($us_Id, $hashedPassword)
     {
         return $this->updateProfile($us_Id, ['us_Password' => $hashedPassword]);
     }
 
-    public function emailExistsExcept($email, $excludeId)
+   
+    public function emailExistsExcept($Name, $email, $Password, $excludeId)
     {
-        return $this->db->table('user')
-            ->where('us_Email', $email)
-            ->where('us_Id !=', $excludeId)
-            ->where('us_Status !=', 3)
-            ->countAllResults() > 0;
+        $builder = $this->builder();
+        $builder->where('us_Name', $Name);
+        $builder->where('us_Email', $email);
+        
+        $builder->where('us_Id !=', $excludeId);
+        $query = $builder->get();
+        return $query->getNumRows() > 0;
     }
 }

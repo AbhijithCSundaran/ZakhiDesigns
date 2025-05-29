@@ -37,8 +37,8 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="topnav" id="respTopnav">
-                        <a href="<?= base_url();?>" class="active">Home</a>
-                        <a href="#news">About Us</a>
+                      <a href="<?= base_url();?>" class="active">Home</a>
+                      <a href="<?= base_url('aboutus');  ?>">About Us</a>
                         <a href="#contact">Fashion</a>
                         <a href="<?= base_url('/Contact');?>">Contact</a>
 

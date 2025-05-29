@@ -18,6 +18,7 @@ $routes->get('webreg', 'Weblogin::webReg');
 
 
 
+
 $routes->post('customerauth', 'Weblogin::customerAuthen');
 $routes->get('logout', 'Weblogin::logout');
 
@@ -116,6 +117,7 @@ $routes->get('admin/themes/add/(:num)', 'Admin\Themes::addbanner/$1'); // Edit
 //$routes->post('themes/save', 'Themes::save_file');
 $routes->post('admin/themes/delete/(:any)', 'Admin\Themes::deleteBanner/$1');
 $routes->post('admin/themes/save_file', 'Admin\Themes::save_file');
+$routes->get('admin/get/themes', 'Admin\Themes::fetch_theme');
 
 //orders
 $routes->get('admin/orders', 'Admin\Orders::index');

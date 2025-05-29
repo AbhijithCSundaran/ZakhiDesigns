@@ -53,7 +53,7 @@
                         <div class="star-rate">
                             <i class="bi bi-star-fill gold"></i>
                             <i class="bi bi-star-fill gold"></i>
-                            <i class="bi bi-star-fill gold"></i>
+                            <i class="bi bi-star-fill gold"></i>    
                             <i class="bi bi-star-fill"></i>
                             <i class="bi bi-star-fill"></i>
                         </div>

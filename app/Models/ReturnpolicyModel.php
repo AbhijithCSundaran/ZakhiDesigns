@@ -9,7 +9,7 @@ class ReturnpolicyModel extends Model {
             $this->db = \Config\Database::connect();
         }
        
-        public function returnpolicy Insert($data) {
+        public function returnpolicyInsert($data) {
             return $this->db->table('returnpolicy')->insert($data);
         }
        

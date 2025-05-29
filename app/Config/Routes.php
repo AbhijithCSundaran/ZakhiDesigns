@@ -107,7 +107,8 @@ $routes->post('admin/themes/delete/(:any)', 'Admin\Themes::deleteBanner/$1');
 $routes->post('admin/themes/save_file', 'Admin\Themes::save_file');
 
 //profile
-$routes->get('admin/profile', 'Admin\Profile::index');
+$routes->get('admin/', 'Admin\Profile::index');
+$routes->get('admin/profile', 'Admin\Profile::edit_admin');
 $routes->post('admin/profile/update', 'Admin\Profile::update');
 $routes->post('admin/profile/change_password', 'Admin\Profile::change_password');
 $routes->post('admin/profile/list', 'Admin\Profile::ajaxList');

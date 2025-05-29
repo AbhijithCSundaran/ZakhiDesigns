@@ -75,7 +75,7 @@
 
                                         </div>
                                         <div class="form-group row">
-                                            <label class="col-sm-2 col-form-label">Alternate Email</label>
+                                            <label class="col-sm-2 col-form-label">Order COnfrimation Email</label>
                                             <div class="col-sm-6">
                                                 <input type="email" class="form-control" name="staffotemail" id="staffotemail" size=30
                                                   value="<?= isset($staff) ? ($staff['us_Email2']) : '' ?>"   placeholder="Enter alternate mail id"><span class="text-danger error-msg"> (Order details will receive to this mail id)</span>
@@ -142,7 +142,7 @@
                                                 value="<?= isset($staff['us_Id']) ? esc($staff['us_Id']) : '' ?>">
                                             <div class="button-group">
                                                 <button type="button" class="btn btn-secondary"
-                                                    onclick="window.location.href='<?= base_url('staff'); ?>'">
+                                                    onclick="window.location.href='<?= base_url('admin/staff/'); ?>'">
                                                     <i class="bi bi-x-circle"></i> Discard
                                                 </button>
 													<button type="button" class="btn btn-primary" id="staffSubmit" name="staffSubmit" >

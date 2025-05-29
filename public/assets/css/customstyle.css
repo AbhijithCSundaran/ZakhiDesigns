@@ -1,0 +1,154 @@
+element.style {
+    display: inline-block;
+}
+.searchbox button {
+  background: transparent;
+  border: none;
+  padding: 0;
+  color: inherit;
+}
+.searchbox input
+ {
+    border: #CCC 1px solid;
+    width: 300px;
+    display: none;
+    padding: 0px 3px;
+}
+.searchbox input {
+    background: transparent;
+    border: none;
+    color: inherit;
+}
+
+button, input, optgroup, select, textarea {
+    margin: 0;
+    font-family: inherit;
+    font-size: inherit;
+    line-height: inherit;
+}
+*, ::after, ::before {
+    box-sizing: border-box;
+}
+.thumbs img {
+    width: auto !important;    /* Let the image keep its original width */
+    height: auto !important;   /* Let the image keep its original height */
+    max-width: none !important; /* Remove any max-width constraints */
+    max-height: none !important;
+    display: block;            /* Remove inline spacing */
+}
+.thumbs img {
+    max-width: 100%;
+    height: auto;
+}
+.preview img {
+    width: auto !important;
+    height: auto !important;
+    max-width: none !important;
+    max-height: none !important;
+    display: block;
+}
+
+
+
+
+.preview a.selected img {
+    border: 2px solid #000;
+}
+
+
+
+
+
+
+
+.product-carousel .owl-item {
+    padding: 15px;
+    display: flex;
+    justify-content: center;
+}
+.product-carousel .product-item {
+    max-width: 300px; /* increased from 250px */
+    text-align: center;
+}
+
+.product-carousel .product-img {
+    width: 100%;
+    height: 350px; /* increased from 280px */
+    object-fit: cover;
+    border-radius: 10px;
+    box-shadow: 0 0 6px rgba(0,0,0,0.1);
+    margin-bottom: 10px;
+    display: block;
+}
+
+
+.product-carousel .item-name {
+    font-size: 16px;
+    font-weight: 500;
+    color: #333;
+    margin-bottom: 5px;
+}
+
+.product-carousel .item-price {
+    font-size: 15px;
+    color: #222;
+    margin-bottom: 10px;
+}
+
+
+
+
+
+
+
+
+.pics {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+}
+
+.thumbs {
+    width: 100px;
+    margin-right: 15px;
+}
+
+.preview img {
+    width: 100%;
+    height: auto;
+    cursor: pointer;
+    border: 2px solid transparent;
+}
+
+.preview a.selected img {
+    border-color: #333;
+}
+
+.full img {
+    max-width: 400px;
+    height: auto;
+    display: block;
+}
+
+
+
+
+
+
+.badge-warning {
+    background-color: #ffc107; /* Amber */
+    color: #212529;            /* Dark text */
+    padding: 0.5em 0.75em;
+    font-size: 0.9em;
+    border-radius: 0.25rem;
+    display: inline-block;
+}
+
+.badge-danger {
+    background-color: #dc3545; /* Bootstrap danger red */
+    color: #fff;
+    padding: 0.5em 0.75em;
+    font-size: 0.9em;
+    border-radius: 0.25rem;
+    display: inline-block;
+}

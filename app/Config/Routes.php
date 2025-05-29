@@ -7,8 +7,19 @@ use CodeIgniter\Router\RouteCollection;
  */
 /* GET METHODS */
 $routes->get('/', 'Home::index');
-$routes->get('ordernow','OrderNow::index');
-$routes->get('product/details','ProductDetails::index');
+$routes->get('ordernow', 'OrderNow::index');
+$routes->get('product/details', 'ProductDetails::index');
+$routes->get('product', 'Product::index');
+$routes->get('product/product_details/(:num)', 'Product::product_details/$1');
+$routes->get('product/search', 'Product::ajaxSearch');
+$routes->get('product/products_lists', 'Product::products_lists');
+$routes->get('weblogin', 'Weblogin::index');
+$routes->get('webreg', 'Weblogin::webReg');
+
+
+
+$routes->post('customerauth', 'Weblogin::customerAuthen');
+$routes->get('logout', 'Weblogin::logout');
 
 
 
@@ -22,16 +33,16 @@ $routes->get('Returnpolicy', 'Returnpolicy::index');
 
 // $routes->group('admin', ['namespace' => 'App\Controllers\admin'], function($routes) {
 
-$routes->get('admin', 'Admin\Home::index'); 
-$routes->post('admin/Auth', 'Admin\Auth::authenticate'); 
-$routes->get('admin/dashboard', 'Admin\Dashboard::index'); 
+$routes->get('admin', 'Admin\Home::index');
+$routes->post('admin/Auth', 'Admin\Auth::authenticate');
+$routes->get('admin/dashboard', 'Admin\Dashboard::index');
 
 
 
 //category
 $routes->get('admin/category', 'Admin\Category::index');
 $routes->get('admin/category/add', 'Admin\Category::addCategory');
-$routes->get('admin/category/edit/(:num)', 'Admin\Category::addCategory/$1'); 
+$routes->get('admin/category/edit/(:num)', 'Admin\Category::addCategory/$1');
 $routes->post('admin/category/save', 'Admin\Category::saveCategory');
 $routes->post('admin/category/status', 'Admin\Category::changeStatus');
 $routes->post('admin/category/delete/(:any)', 'Admin\Category::deleteCategory/$1');
@@ -41,7 +52,7 @@ $routes->post('admin/category/delete/(:any)', 'Admin\Category::deleteCategory/$1
 $routes->get('admin/subcategory', 'Admin\Subcategory::index');
 $routes->post('admin/subcategory/List', 'Admin\Subcategory::ajaxList');
 $routes->get('admin/subcategory/add', 'Admin\Subcategory::addSubcategory');
-$routes->get('admin/subcategory/edit/(:num)', 'Admin\Subcategory::addSubcategory/$1'); 
+$routes->get('admin/subcategory/edit/(:num)', 'Admin\Subcategory::addSubcategory/$1');
 $routes->post('admin/subcategory/save', 'Admin\Subcategory::saveSubcategory');
 $routes->post('admin/subcategory/delete/(:any)', 'Admin\Subcategory::deleteSubcategory/$1');
 $routes->post('admin/subcategory/status', 'Admin\Subcategory::changeStatus');
@@ -51,7 +62,7 @@ $routes->post('admin/subcategory/status', 'Admin\Subcategory::changeStatus');
 $routes->get('admin/product', 'Admin\Product::index');
 $routes->post('admin/product/List', 'Admin\Product::ajaxList');
 $routes->get('admin/product/add', 'Admin\Product::addProduct');
-$routes->get('admin/product/edit/(:num)', 'Admin\Product::addProduct/$1'); 
+$routes->get('admin/product/edit/(:num)', 'Admin\Product::addProduct/$1');
 $routes->post('admin/product/save', 'Admin\Product::saveProduct');
 $routes->post('admin/product/delete/(:any)', 'Admin\Product::deleteProduct/$1');
 $routes->post('admin/product/get-subcategories', 'Admin\Product::getSubcategories');
@@ -60,9 +71,9 @@ $routes->get('admin/product/get-product-images/(:num)', 'Admin\Product::getProdu
 $routes->post('admin/product/delete-product-image', 'Admin\Product::deleteProductImage');
 $routes->post('admin/product/video', 'Admin\Product::ProductuploadVideo');
 $routes->post('admin/product/getVideo', 'Admin\Product::getVideo');
-$routes->post('admin/product/deletevideo','Admin\Product::deleteVideo');
+$routes->post('admin/product/deletevideo', 'Admin\Product::deleteVideo');
 $routes->post('admin/product/status', 'Admin\Product::changeStatus');
-$routes->get('admin/product/view/(:any)','Admin\Product::viewProduct/$1');
+$routes->get('admin/product/view/(:any)', 'Admin\Product::viewProduct/$1');
 
 
 
@@ -106,6 +117,12 @@ $routes->get('admin/themes/add/(:num)', 'Admin\Themes::addbanner/$1'); // Edit
 $routes->post('admin/themes/delete/(:any)', 'Admin\Themes::deleteBanner/$1');
 $routes->post('admin/themes/save_file', 'Admin\Themes::save_file');
 
+//orders
+$routes->get('admin/orders', 'Admin\Orders::index');
+$routes->post('admin/orders/List', 'Admin\Orders::ajaxList');
+$routes->get('admin/orders/view/(:num)', 'Admin\Orders::orderView/$1');
+$routes->post('admin/orders/loadStatus/(:num)', 'Admin\Orders::orderStatusUpdation/$1');
+
 //profile
 $routes->get('admin/', 'Admin\Profile::index');
 $routes->get('admin/profile', 'Admin\Profile::edit_admin');
@@ -117,7 +134,7 @@ $routes->post('admin/profile/list', 'Admin\Profile::ajaxList');
 
 
 //logout
-$routes->post('admin/logout', 'Admin\Auth::logout'); 
+$routes->post('admin/logout', 'Admin\Auth::logout');
 
 
 

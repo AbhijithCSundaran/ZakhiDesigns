@@ -157,7 +157,7 @@ $(document).on('change', 'input[type="file"]', function () {
     previewImage(this);
 });
 // Image size
-function previewImage(input) {
+/* function previewImage(input) {
     const file = input.files[0];
 
     if (!file) return;
@@ -170,7 +170,7 @@ function previewImage(input) {
         const height = img.height;
 
         // Check dimensions
-        if (
+       /*  if (
             width < 1000 || width > 1200 ||
             height < 300 || height > 400
         ) {
@@ -178,10 +178,10 @@ function previewImage(input) {
             input.value = ""; // Clear the invalid file
             URL.revokeObjectURL(objectUrl);
             return;
-        }
+        } */
 
         // If valid, show preview if needed
-        const preview = input.closest('.entry').querySelector('img.preview');
+        /* const preview = input.closest('.entry').querySelector('img.preview');
         if (preview) {
             preview.src = objectUrl;
             preview.style.display = 'block';
@@ -197,10 +197,7 @@ function previewImage(input) {
     };
 
     img.src = objectUrl;
-}
-
-
-
+} */ 
 // Add new entry
 function addEntry(sectionId) {
     const section = document.getElementById(sectionId);

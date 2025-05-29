@@ -17,13 +17,20 @@ class Theme_Model extends Model {
         /* public function createBanner($data) {
             return $this->db->table('theme')->insert($data);
         } */
-		 public function fetchTheme() 
-		 {
-			return $this->db->table('themes')
-			->where('theme_Status ==', 1)
-			->get()
-			->getResultArray();
-        }
+		//  public function fetchTheme() 
+		//  {
+		// 	return $this->db->table('themes')
+		// 	->where('theme_Status ==', 1)
+		// 	->get()
+		// 	->getResultArray();
+        // }
+		public function fetchTheme() 
+{
+    return $this->db->table('themes')
+        ->where('theme_Status', 1)
+        ->get()
+        ->getResultArray();
+}
 		public function insert_data($data)
 		{
 			return $this->db->table('themes')->insert($data);

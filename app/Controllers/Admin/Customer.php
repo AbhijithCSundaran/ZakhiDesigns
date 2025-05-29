@@ -109,6 +109,12 @@ class Customer extends BaseController
 			];
 				$CreateCust = $this->customerModel->createcust($data);
 				//echo json_encode(array("status" => 1, "msg" => "Customer Created successfully."));
+
+				$this->session->set([
+    'zd_uid' => $CreateCust, // or the actual ID if your model returns it
+    'zd_uname' => $custname,
+    'zd_email' => $custemail,
+]);
 				echo json_encode(array(
 					"status" => 1,
 					"msg" => "Customer Created successfully.",
@@ -246,6 +252,3 @@ public function ajaxList()
     ]);
 }
 }
-
-
-

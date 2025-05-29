@@ -4,7 +4,7 @@
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content rounded">
             <div class="modal-header">
-                <h5 class="modal-title"></h5>
+                 <h5 class="modal-title"></h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -27,12 +27,6 @@
                         </div>
                     </div>
 
-                    <div id="uploadProgressContainer" class="mt-3 w-100" style="display: none;">
-                 <div class="progress">
-                        <div id="uploadProgressBar" class="progress-bar progress-bar-striped progress-bar-animated bg-info" 
-                             role="progressbar" style="width: 0%">0%</div>
-                    </div>
-
                     <input type="hidden" id="productVideoName" name="product_name" value="">
                     <input type="hidden" id="productVideoId" name="product_id" value="">
                 </form>
@@ -41,9 +35,17 @@
                 <div class="mt-3" id="imagePreviewContainer">
                     <div id="videoPreview" class="d-flex flex-wrap justify-content-center gap-2" style="display:none;">
                         <!-- Previewed video will be inserted here via JS -->
-
+                        
                     </div>
                 </div>
+                <div id="uploadProgressContainer" class="mt-3" style="display: none;">
+    <div class="progress">
+        <div id="uploadProgressBar" class="progress-bar" role="progressbar" 
+             style="width: 0%;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
+            0%
+        </div>
+    </div>
+</div>
             </div>
 
             <div class="modal-footer">

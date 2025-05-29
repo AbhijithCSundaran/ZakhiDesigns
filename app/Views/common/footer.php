@@ -193,6 +193,7 @@ $(document).ready(function() {
                     $('#regError').removeClass('text-danger').addClass('text-success').html(
                         response.msg);
                     $('#registerForm')[0].reset(); // reset form
+                    window.location.reload();
                 } else {
                     $('#regError').removeClass('text-success').addClass('text-danger').html(
                         response.msg);

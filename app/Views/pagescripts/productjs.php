@@ -71,44 +71,50 @@
 
 
 /*********************************************/
-
 var baseUrl = "<?= base_url() ?>";
 
 $('#orderNowBtn').click(function(e) {
-$('#orderNowBtn').prop('disabled', true);
-    e.preventDefault(); // Important to prevent normal form submit
-    var url = baseUrl + "ordernow/submit"; // Correct route
+    e.preventDefault();
+    $('#orderNowBtn').prop('disabled', true);
+
+    var url = baseUrl + "product/submit";
+
     $.post(url, $('#orderNowForm').serialize(), function(response) {
-		    $('html, body').animate({
-            scrollTop: 0
-        }, 'fast');
- 
-       // $('#createstaff')[0].reset();
-        if (response.status == 1) { 
-		$('#messageBox')
-				 // Extract cust_id from the redirect URL
-				let redirectUrl = response.redirect;
-				let parts = redirectUrl.split('/');
-				let cust_id = parts[parts.length - 1]; // "1"
-            // Wait, then redirect
+        $('html, body').animate({ scrollTop: 0 }, 'fast');
+console.log(response); 
+        if (response.status == 1) {
+			
+            $('#messageBox')
+                .removeClass('alert-danger')
+                .addClass('alert-success')
+                .text(response.msg || 'Order placed successfully')
+                .show();
+
+            // Assuming od_Id is returned from the backend
+				let od_Id = response.od_Id;
+
             setTimeout(function() {
-				$('#orderNowBtn').prop('disabled', false);
-				window.location.href = baseUrl + "ordernow/product/" + od_Id;
-            }, 1000);
-        } 
-		else {
+                $('#orderNowBtn').prop('disabled', false);
+                if (od_Id) {
+                    window.location.href = baseUrl + "ordernow/product/" + od_Id;
+                }
+            }, 3000);
+        } else {
             $('#messageBox')
                 .removeClass('alert-success')
                 .addClass('alert-danger')
-                .text(response.msg || 'Oops... Something went wrong')
+                .text(response.msg || 'Please select Options.')
                 .show();
-				$('#orderNowBtn').prop('disabled', false);
+            $('#orderNowBtn').prop('disabled', false);
         }
-		setTimeout(function() {
-                $('#messageBox').empty().hide();
-            }, 3000);
+
+        setTimeout(function() {
+			$('#orderNowBtn').prop('disabled', false);
+            $('#messageBox').empty().hide();
+        }, 3000);
     }, 'json');
 });
+
 /**********************************************************************/
 
 

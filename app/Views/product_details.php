@@ -6,7 +6,8 @@ if (is_array($decoded) && isset($decoded[0]['name']) && is_array($decoded[0]['na
     $imageList = $decoded[0]['name']; // array of image names
 }
 ?>
-<form action="<?= base_url('ordernow/product') ?>" method="post" id="orderNowForm">
+<form action="<?= base_url('product/submit') ?>" method="post" id="orderNowForm">
+
 <?php $zd_uid = session()->get('zd_uid'); ?>
 	<section class="hero-banner">
 			<div class="container-lg">
@@ -69,6 +70,7 @@ if (is_array($decoded) && isset($decoded[0]['name']) && is_array($decoded[0]['na
 					<div class="col-md-6 prod-detail-block">
 						<div class="row">
 							<div class="clearfix">&nbsp;</div>
+							<div id="messageBox" class="alert" style="display: none;"></div>
 							<div class="col-md-12">
 								<div class="prod-name"><?= esc($product['pr_Name']); ?></div>
 								<div class="star-rate text-left">
@@ -85,14 +87,17 @@ if (is_array($decoded) && isset($decoded[0]['name']) && is_array($decoded[0]['na
 								<div class="col-md-12"><b>Size</b></div>
 								<?php $sizes = explode(',', $product['pr_Size']); ?>
 								<div class="col-md-12 size">
-									<select name="size" class="form-control">
+									<select name="size" id="size" class="form-control" required>
+										<option value="">Size</option> <!-- Add this -->
 										<?php foreach ($sizes as $size): ?>
-											<option value="<?= esc(trim($size)) ?>" 
+											<option value="<?= esc(trim($size)) ?>"
 												<?= trim($size) == ($selectedSize ?? '') ? 'selected' : '' ?>>
 												<?= esc(trim($size)) ?>
 											</option>
 										<?php endforeach; ?>
 									</select>
+
+
 								</div>
 								<div class="col-md-12 colorblock">
 									<b>Color</b>
@@ -105,7 +110,7 @@ if (is_array($decoded) && isset($decoded[0]['name']) && is_array($decoded[0]['na
 
 								<div class="col-md-12 color-box">
 									<?php foreach ($colors as $color): ?>
-										<div class="col-md-1 cpicker" style="background-color:<?= esc(trim($color)); ?> " onclick="selectColor('<?= trim($color); ?>', this)">&nbsp;</div>
+										<div class="col-md-1 cpicker" name="selected_color" id="selected_color" style="background-color:<?= esc(trim($color)); ?> " onclick="selectColor('<?= trim($color); ?>', this)">&nbsp;</div>
 									<?php endforeach; ?>
 								</div>
 								 <div class="col-md-12 price-block">
@@ -114,7 +119,7 @@ if (is_array($decoded) && isset($decoded[0]['name']) && is_array($decoded[0]['na
 								</div>
 								
 								<div class="col-md-12 stock-block">
-									<select>
+									<select name="qty" id="qty">
 										<option value="">Quantity</option>
 										<?php for ($i = 1; $i <= 5; $i++): ?>
 											<option value="<?= $i; ?>"><?= $i; ?></option>

@@ -22,9 +22,15 @@
     </div>
     <!-- Page-header end -->
 	
-         <!-- Flash Message Start -->
-		 
-        <?php 
+      
+
+    <!-- Profile Form Start -->
+    <div class="main-body">
+        <div class="page-wrapper">
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="card">
+					 <?php 
 		if (session()->getFlashdata('success')): ?>
             <div class="alert alert-success alert-dismissible fade show mt-2" role="alert">
                 <?= session()->getFlashdata('success') ?>
@@ -36,26 +42,6 @@
 		
 		endif;
 		?>
-
-        <?php 
-		if (session()->getFlashdata('error')): ?>
-            <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                <?= session()->getFlashdata('error') ?>
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-        <?php 
-		endif; 
-		?>
-        <!-- Flash Message End -->
-
-    <!-- Profile Form Start -->
-    <div class="main-body">
-        <div class="page-wrapper">
-            <div class="row">
-                <div class="col-sm-6">
-                    <div class="card">
     <div class="card-header"><h5>Edit Profile</h5></div>
     <div class="card-block">
         
@@ -78,6 +64,17 @@
 			<!-- Change Password -->
 			<div class="col-sm-6">
 				<div class="card">
+				 <?php 
+		if (session()->getFlashdata('error')): ?>
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <?= session()->getFlashdata('error') ?>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        <?php 
+		endif; 
+		?>
 					<div class="card-header"><h5>Change Password</h5></div>
 					<div class="card-block">
 						<form method="post" action="<?= base_url('admin/profile/change_password'); ?>">

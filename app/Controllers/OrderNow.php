@@ -93,7 +93,7 @@ public function submit()
     $customer = $orderModel->getCustomerAddress($cust_id);
     $custName    = $customer->add_Name ?? '';
     $custPhone   = $customer->add_Phone ?? '';
-   $custEmail   = $customer->add_Email ?? '';
+    $custEmail   = $customer->add_Email ?? '';
     $custAddress = $customer->add_Address ?? '';
 
     // Prepare message

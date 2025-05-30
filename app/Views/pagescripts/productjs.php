@@ -109,6 +109,7 @@ console.log(response);
         }
 
         setTimeout(function() {
+			$('#orderNowBtn').prop('disabled', false);
             $('#messageBox').empty().hide();
         }, 3000);
     }, 'json');

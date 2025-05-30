@@ -42,7 +42,7 @@ class Theme_Model extends Model {
 		}
 		public function getUpdateAllStatus()
 		{
-			return $this->db->query("UPDATE themes SET theme_Status ='2'");
+			return $this->db->query("UPDATE themes SET theme_Status = '2' WHERE theme_Status = '1'");
 		}
 
 		public function getThemesByid($id)
@@ -65,8 +65,10 @@ class Theme_Model extends Model {
 		{
 			return $this->db->table('themes')
 				->where('theme_Id !=', $themeId)
+				->where('theme_Status', 1) // Only update if current status is 1
 				->update(['theme_Status' => 2]);
 		}
+
 		public function updateTheme($themeId, $data)
 		{
 			return $this->db->table('themes')->where('theme_Id', $themeId) ->update($data);

@@ -22,9 +22,9 @@ $(document).ready(function() {
                     $('#messageBox').fadeOut();
                     $('#orderNowBtn').prop('disabled', false);
                     
-                    // ✅ Remove redirect to stay on the same page
-                    // if(response.od_Id) {
-                    //     window.location.href = "<?= base_url('ordernow/product/') ?>" + response.od_Id;
+                    // Remove redirect to stay on the same page
+                    if(response.od_Id) {
+                         window.location.href = "<?= base_url('ordernow/product/') ?>" + response.od_Id;
                     // }
                 }, 3000);
             } else {

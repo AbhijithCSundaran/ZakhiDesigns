@@ -1,6 +1,6 @@
 <?php
 namespace App\Controllers;
-use App\Models\AdminModel;
+use App\Models\Admin\AdminModel;
 
 class Admin extends BaseController
 {
@@ -14,11 +14,6 @@ class Admin extends BaseController
 
     public function index()
     {
-
-		if (!$this->session->get('zd_uid')) 
-		{
-			return redirect()->to(base_url());
-		}
 
 		$data = [];
 		$val =	$this->session->get('zd_uid');

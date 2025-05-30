@@ -1,50 +1,64 @@
 <script>
-	var baseUrl = "<?= base_url() ?>";
-    var csrfTokenName = "<?= csrf_token() ?>";
-    var csrfHash = "<?= csrf_hash() ?>";
+var baseUrl = "<?= base_url() ?>";
+var csrfTokenName = "<?= csrf_token() ?>";
+var csrfHash = "<?= csrf_hash() ?>";
 
-	$('#productList').DataTable({
-		processing: true,
-		serverSide: true,
-		ajax: {
-			url: baseUrl + "admin/product/List",
-			type: "POST",
-			data: function (d) {
-				d[csrfTokenName] = csrfHash;
-			}
-		},
-		columns: [
-			{
-				data: null,
-				render: function (data, type, row, meta) {
-					return meta.row + meta.settings._iDisplayStart + 1; // Serial number
-				},
-				orderable: false,
-				searchable: false
-			},
-			{ data: 'pr_Name' },
-			{ data: 'mrp' },
-			{ data: 'pr_Selling_Price' },
-			{ data: 'pr_Discount_Value' },
-			{ data: 'pr_Stock' },
-            { data: 'image' }, 
-			{ data: 'status_switch' },
-			{ data: 'actions' }
-		],
-		columnDefs: [
-			{
-				targets: [6, 7,8], 
-				orderable: false,
-				searchable: false
-			},
-			{
-				targets: 6,
-				render: function (data, type, row) {
-					return data; 
-				}
-			}
-		]
-	});
+$('#productList').DataTable({
+    processing: true,
+    serverSide: true,
+    ajax: {
+        url: baseUrl + "admin/product/List",
+        type: "POST",
+        data: function(d) {
+            d[csrfTokenName] = csrfHash;
+        }
+    },
+    columns: [{
+            data: null,
+            render: function(data, type, row, meta) {
+                return meta.row + meta.settings._iDisplayStart + 1; // Serial number
+            },
+            orderable: false,
+            searchable: false
+        },
+        {
+            data: 'pr_Name'
+        },
+        {
+            data: 'mrp'
+        },
+        {
+            data: 'pr_Selling_Price'
+        },
+        {
+            data: 'pr_Discount_Value'
+        },
+        {
+            data: 'pr_Stock'
+        },
+        {
+            data: 'image'
+        },
+        {
+            data: 'status_switch'
+        },
+        {
+            data: 'actions'
+        }
+    ],
+    columnDefs: [{
+            targets: [6, 7, 8],
+            orderable: false,
+            searchable: false
+        },
+        {
+            targets: 6,
+            render: function(data, type, row) {
+                return data;
+            }
+        }
+    ]
+});
 
 //Add product
 
@@ -70,7 +84,7 @@ $('#productSubmit').click(function(e) {
                 window.location.href = baseUrl + "admin/product/";
             }, 3000);
         } else {
-            
+
             let message = response.message || 'Please fill all the required fields.';
             if (response.field === 'product_name') {
                 message = response.message;
@@ -179,7 +193,7 @@ function handleFiles(files) {
             if (data.success === true) {
                 alert(data.msg || 'Images uploaded successfully!');
                 loadProductImages(productId);
-                 $('#productList').DataTable().ajax.reload(null, false);
+                $('#productList').DataTable().ajax.reload(null, false);
             } else {
                 alert(data.msg || 'Upload failed.');
             }
@@ -350,10 +364,10 @@ $('#videoModal').on('hidden.bs.modal', function() {
 });
 
 
-// video AJAX Upload 
 
 
-$('#filevideo').on('change', function () {
+// vide AJAX Upload
+$('#filevideo').on('change', function() {
     var file = this.files[0];
 
     if (file) {
@@ -377,7 +391,7 @@ $('#filevideo').on('change', function () {
 
     // Show progress bar
     $('#uploadProgressContainer').show();
-    $('#uploadProgressBar').css('width', '0%').text('0%');
+    $('#uploadProgressBar').css('width', '0%').attr('aria-valuenow', 0).text('0%');
 
     $.ajax({
         url: '<?= base_url('admin/product/video') ?>',
@@ -385,20 +399,21 @@ $('#filevideo').on('change', function () {
         data: formData,
         contentType: false,
         processData: false,
-        xhr: function () {
-            var xhr = new window.XMLHttpRequest();
 
-            xhr.upload.addEventListener("progress", function (evt) {
-                if (evt.lengthComputable) {
-                    var percentComplete = Math.round((evt.loaded / evt.total) * 100);
-                    $('#uploadProgressBar').css('width', percentComplete + '%').text(percentComplete + '%');
+        xhr: function() {
+            var xhr = new window.XMLHttpRequest();
+            xhr.upload.addEventListener('progress', function(e) {
+                if (e.lengthComputable) {
+                    var percentComplete = Math.round((e.loaded / e.total) * 100);
+                    $('#uploadProgressBar').css('width', percentComplete + '%')
+                        .attr('aria-valuenow', percentComplete)
+                        .text(percentComplete + '%');
                 }
             }, false);
-
             return xhr;
         },
-        success: function (response) {
-            // Hide progress bar
+
+        success: function(response) {
             $('#uploadProgressContainer').hide();
 
             if (response.status === 'success') {
@@ -410,7 +425,8 @@ $('#filevideo').on('change', function () {
                 alert(response.message);
             }
         },
-        error: function (xhr) {
+
+        error: function(xhr) {
             $('#uploadProgressContainer').hide();
             alert('Upload failed: ' + (xhr.responseJSON?.message || 'Unknown error'));
         }
@@ -473,6 +489,7 @@ function openvideoModal(productId, productName) {
 }
 
 
+
 //Delete video single video
 
 $(document).on('click', '.delete-video-btn', function(e) {
@@ -510,7 +527,7 @@ $(document).on('click', '.delete-video-btn', function(e) {
 
 var baseUrl = "<?= base_url() ?>";
 
-$(document).on('change', '.checkactive', function () {
+$(document).on('change', '.checkactive', function() {
     let prId = $(this).attr('id').split('-')[1]; // e.g., id="check-3" → prId=3
     let status = $(this).is(':checked') ? 1 : 2;
 
@@ -522,7 +539,7 @@ $(document).on('change', '.checkactive', function () {
             pr_Id: prId,
             pr_Status: status
         },
-        success: function (response) {
+        success: function(response) {
             if (response.success) {
                 $('#messageBox')
                     .removeClass('alert-danger')
@@ -541,7 +558,7 @@ $(document).on('change', '.checkactive', function () {
                 $('#messageBox').fadeOut();
             }, 2000);
         },
-        error: function (xhr, status, error) {
+        error: function(xhr, status, error) {
             $('#messageBox')
                 .removeClass('alert-success')
                 .addClass('alert-danger')
@@ -555,15 +572,15 @@ $(document).on('change', '.checkactive', function () {
 
 
 //Product popup
- document.addEventListener('DOMContentLoaded', function () {
-    document.body.addEventListener('click', function (e) {
-      if (e.target.closest('.view-large-image')) {
-        e.preventDefault();
-        const imageUrl = e.target.closest('.view-large-image').getAttribute('data-image');
-        document.getElementById('largeImage').setAttribute('src', imageUrl);
-      }
+document.addEventListener('DOMContentLoaded', function() {
+    document.body.addEventListener('click', function(e) {
+        if (e.target.closest('.view-large-image')) {
+            e.preventDefault();
+            const imageUrl = e.target.closest('.view-large-image').getAttribute('data-image');
+            document.getElementById('largeImage').setAttribute('src', imageUrl);
+        }
     });
-  });
+});
 //Calculate the selling price depends on the discount value
 function calculateSellingPrice() {
     const mrp = parseFloat(document.getElementById('mRp').value) || 0;
@@ -587,6 +604,8 @@ function calculateSellingPrice() {
 }
 
 document.getElementById('mRp')?.addEventListener('input', calculateSellingPrice);
-document.getElementById('discountType')?.addEventListener('change', calculateSellingPrice);
-document.getElementById('discountValue')?.addEventListener('input', calculateSellingPrice);
+document.getElementById(
+    'discountType')?.addEventListener('change', calculateSellingPrice);
+document.getElementById('discountValue')
+    ?.addEventListener('input', calculateSellingPrice);
 </script>

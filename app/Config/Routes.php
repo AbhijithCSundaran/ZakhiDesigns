@@ -34,16 +34,17 @@ $routes->get('webreg', 'Weblogin::webReg');
 
 
 
+
 $routes->post('customerauth', 'Weblogin::customerAuthen');
 $routes->get('logout', 'Weblogin::logout');
 
 
 
 //category
-$routes->get('/delivery', 'Delivery::index');
-$routes->get('/Privacypolicy', 'Privacypolicy::index');
-$routes->get('/Termsandconditions', 'Termsandconditions::index');
-$routes->get('/Returnpolicy', 'Returnpolicy::index');
+$routes->get('delivery', 'Delivery::index');
+$routes->get('Privacypolicy', 'Privacypolicy::index');
+$routes->get('Termsandconditions', 'Termsandconditions::index');
+$routes->get('Returnpolicy', 'Returnpolicy::index');
 
 
 
@@ -132,6 +133,7 @@ $routes->get('admin/themes/add/(:num)', 'Admin\Themes::addbanner/$1'); // Edit
 //$routes->post('themes/save', 'Themes::save_file');
 $routes->post('admin/themes/delete/(:any)', 'Admin\Themes::deleteBanner/$1');
 $routes->post('admin/themes/save_file', 'Admin\Themes::save_file');
+$routes->get('admin/get/themes', 'Admin\Themes::fetch_theme');
 
 //orders
 $routes->get('admin/orders', 'Admin\Orders::index');
@@ -140,7 +142,8 @@ $routes->get('admin/orders/view/(:num)', 'Admin\Orders::orderView/$1');
 $routes->post('admin/orders/loadStatus/(:num)', 'Admin\Orders::orderStatusUpdation/$1');
 
 //profile
-$routes->get('admin/profile', 'Admin\Profile::index');
+$routes->get('admin/', 'Admin\Profile::index');
+$routes->get('admin/profile', 'Admin\Profile::edit_admin');
 $routes->post('admin/profile/update', 'Admin\Profile::update');
 $routes->post('admin/profile/change_password', 'Admin\Profile::change_password');
 $routes->post('admin/profile/list', 'Admin\Profile::ajaxList');

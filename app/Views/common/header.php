@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>Zakhi Designs</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -13,7 +14,7 @@
         href="<?php echo base_url().ASSET_PATH;?>assets/vendors/owlcarousel/assets/owl.carousel.min.css">
     <link rel="stylesheet"
         href="<?php echo base_url().ASSET_PATH; ?>assets/vendors/owlcarousel/assets/owl.theme.default.min.css">
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 
 <body>
@@ -61,16 +62,20 @@
                             </ul>
                         </a>
                         <?php else: ?>
+                        <!-- Show login/register links if not logged in -->
                         <a href="" id="loginBtn">Login</a>
                         <a href="" id="registerBtn">Register</a>
                         <?php endif; ?>
 
+
+
                         <a href="javascript:void(0);" class="searchbox">
-                                <input type="text" name="keyword" id="search" placeholder="Search products" autocomplete="off" value="<?= esc($search ?? '') ?>" />
-                            </a>
-                            <a href="javascript:void(0);" onclick="searchProduct()">
-                                <i class="bi bi-search"></i>
-                            </a>
+                            <input type="text" name="keyword" id="search" placeholder="Search products"
+                                autocomplete="off" value="<?= esc($search ?? '') ?>" />
+                        </a>
+                        <a href="javascript:void(0);" onclick="searchProduct()">
+                            <i class="bi bi-search"></i>
+                        </a>
                         <a href="javascript:void(0);" class="icon" onclick="openRespMenu()">
                             <i class="bi bi-list"></i>
                         </a>
@@ -100,7 +105,4 @@
     if (keyword !== '') {
       window.location.href = "<?= base_url('product/search') ?>?keyword=" + encodeURIComponent(keyword);
     }
-  }
-</script>
-
-
+    </script>

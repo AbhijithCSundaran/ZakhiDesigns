@@ -16,9 +16,7 @@
                             <label for="fname" class="form-label">Fullname</label>
                         </div>
                         <div class="col-md-9">
-                           
-							 <input type="text" class="form-control" id="fname" name="fname" 
-               value="<?= esc($details['add_Name'] ?? '') ?>">
+                            <input type="text" class="form-control" id="fname">
                         </div>
                     </div>
                     <div class="row">
@@ -26,7 +24,7 @@
                             <label for="Place" class="form-label">Place</label>
                         </div>
                         <div class="col-md-9">
-                            <input type="text" class="form-control" id="Place"  value="<?= esc($details['add_City'] ?? '') ?>" placeholder="eg. your place, state">
+                            <input type="text" class="form-control" id="Place" placeholder="eg. your place, state">
                         </div>
                     </div>
                     <div class="row">
@@ -34,7 +32,7 @@
                             <label for="emailid" class="form-label">Email Id</label>
                         </div>
                         <div class="col-md-9">
-                            <input type="text" class="form-control" id="emailid" value="<?= esc($details['add_Email'] ?? '') ?>"  placeholder="eg. ra****@mail.com">
+                            <input type="text" class="form-control" id="emailid" placeholder="eg. ra****@mail.com">
                             <small>The order details will be sent to the provided email address.</small>
                         </div>
                     </div>
@@ -43,7 +41,7 @@
                             <label for="contactno" class="form-label">Contact No.</label>
                         </div>
                         <div class="col-md-9">
-                            <input type="text" class="form-control" id="contactno" value="<?= esc($details['add_Phone'] ?? '') ?>"  placeholder="eg. +91 98********" />
+                            <input type="text" class="form-control" id="contactno" placeholder="eg. +91 98********" />
                             <small>Our executive will reach out to you at this number.</small>
                         </div>
                     </div>
@@ -52,17 +50,7 @@
                             <label for="contactno" class="form-label">Delivery Address</label>
                         </div>
                         <div class="col-md-9">
-							
-							<textarea class="form-control" rows="5"><?=
-								esc(
-									($details['add_BuldingNo'] ?? '') . ', ' .
-									($details['add_Street'] ?? '') . "\n" .
-									($details['add_Landmark'] ?? '') . "\n" .
-									($details['add_City'] ?? '') . ', ' . ($details['add_State'] ?? '') . "\n" .
-									($details['add_Pincode'] ?? '') . "\n" .
-									($details['add_Phone'] ?? '')
-								);
-							?></textarea>
+                            <textarea class="form-control"></textarea>
                             <small>Your order will be delivered to the specified address.</small>
                         </div>
                     </div>
@@ -83,8 +71,7 @@
                     </div>
                 </div>
                 <div class="row">
-				
-				<?php
+<?php
 					$decoded = json_decode($details['product_images'], true);
 					$firstImage = '';
 
@@ -98,9 +85,8 @@
 					<div class="col-md-5">
 						<img src="<?= $firstImage ?>" style="width: 100px;" alt="Product Image" />
 					</div>
-
                     <div class="col-md-7">
-                        <div class="item-name text-left"><b><?= esc($details['pr_Name'] ?? '');?></b></div>
+                        <div class="item-name text-left"><b>Lorem Ipsum</b></div>
                         <div class="item-desc text-left">
                             <p>Product Code: <?= esc($details['pr_Code'] ?? '');?>
 							</p>
@@ -116,7 +102,6 @@
 							<div class="item-price text-left">
 								Grand total: <i class="bi bi-currency-rupee"></i> <?= esc($details['od_Grand_Total'] ?? ''); ?>
 							</div>
-					
                     </div>
                 </div>
                 <div class="row">

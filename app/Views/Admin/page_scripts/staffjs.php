@@ -217,7 +217,7 @@ $(document).on('change', '.checkactive', function () {
 
             setTimeout(() => {
                 messageBox.fadeOut();
-            }, 2000);
+            }, 3000);
         },
         error: function (xhr) {
             $('#messageBox')
@@ -228,7 +228,7 @@ $(document).on('change', '.checkactive', function () {
 
             setTimeout(() => {
                 $('#messageBox').fadeOut();
-            }, 2000);
+            }, 3000);
 
             console.error(xhr.responseText);
         }

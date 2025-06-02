@@ -182,7 +182,12 @@ public function saveProduct() {
     $fabric = $this->input->getPost('fabric');
     $stitching = $this->input->getPost('stitching');
 
-   
+    if($discount_type == "%" && $discount_value > 100 ){
+        return $this->response->setJSON([
+            'status' => 'error',
+            'message' => 'Enter a Valid Percentage Value.'
+        ]);
+    }
     if (empty($cat_id) || empty($product_name) || empty($product_code) || empty($mrp) || empty($available_color) || empty( $size) ) {
         return $this->response->setJSON([
             'status' => 'error',

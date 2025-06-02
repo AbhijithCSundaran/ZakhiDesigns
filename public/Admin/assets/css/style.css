@@ -16470,3 +16470,20 @@ body.dark {
         color: red;
         font-weight: bold;
     }
+
+.arrow{
+  appearance: none !important;
+  -webkit-appearance: none !important;
+  -moz-appearance: none !important;
+  padding: 6px 30px 6px 10px;
+      font-size: 12px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      background-color: white;
+      background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%204%205'%3E%3Cpath%20fill='%23000'%20d='M2%205L0%200h4z'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 8px center;
+      background-size: 10px;
+      cursor: pointer;
+      width: 100px !important;
+}

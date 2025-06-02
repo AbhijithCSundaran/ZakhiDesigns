@@ -106,7 +106,7 @@ $routes->post('admin/staff/delete/(:any)', 'Admin\Staff::deleteStaff/$1');
 
 //Customers
 $routes->get('admin/customer', 'Admin\Customer::index');
-$routes->post('admin/customer/List', 'Admin\customer::ajaxList');
+$routes->post('admin/customer/List', 'Admin\Customer::ajaxList');
 $routes->get('admin/customer/view', 'Admin\Customer::view_cust'); // Create
 $routes->get('admin/customer/customer_address', 'Admin\Customer::customer_address'); // Create
 $routes->get('admin/customer/view/(:num)', 'Admin\Customer::view_cust/$1'); // Edit Page

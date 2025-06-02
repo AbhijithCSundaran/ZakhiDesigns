@@ -83,9 +83,13 @@ class Staff extends BaseController
 			return $this->response->setJSON(['status' => 'error', 'msg' => 'Please enter name correctly.']);
 		}
 
-		// Validate emails
+		// Validate emails 1
 		if (!filter_var($staffemail, FILTER_VALIDATE_EMAIL)) {
 			return $this->response->setJSON(['status' => 'error', 'msg' => 'Please enter a valid primary email.']);
+		}
+		// Validate emails 2 
+		if (!filter_var($staffotemail, FILTER_VALIDATE_EMAIL)) {
+			return $this->response->setJSON(['status' => 'error', 'msg' => 'Please enter a valid Secondary email.']);
 		}
 		// Validate mobile
 		if (!empty($mobile) && (!ctype_digit($mobile) || strlen($mobile) !== 10)) {

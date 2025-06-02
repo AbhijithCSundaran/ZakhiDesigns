@@ -12,7 +12,7 @@
                 <div class="col-md-4">
                     <ul class="breadcrumb-title">
                         <li class="breadcrumb-item">
-                            <a href="<?php echo base_url('dashboard') ?>"> <i class="fa fa-home"></i> </a>
+                            <a href="<?= base_url('admin/dashboard'); ?>"> <i class="fa fa-home"></i> </a>
                         </li>
                         <li class="breadcrumb-item"><a href="#!"><?= isset($staff) ? 'Update Staff' : 'Add Staff'; ?></a>
                         </li>
@@ -75,10 +75,11 @@
 
                                         </div>
                                         <div class="form-group row">
-                                            <label class="col-sm-2 col-form-label">Order COnfrimation Email</label>
+                                            <label class="col-sm-2 col-form-label">Order Confirmation Email <span
+                                                    style="color: red;">*</span></label>
                                             <div class="col-sm-6">
                                                 <input type="email" class="form-control" name="staffotemail" id="staffotemail" size=30
-                                                  value="<?= isset($staff) ? ($staff['us_Email2']) : '' ?>"   placeholder="Enter alternate mail id"><span class="text-danger error-msg"> (Order details will receive to this mail id)</span>
+                                                  value="<?= isset($staff) ? ($staff['us_Email2']) : '' ?>"   placeholder="Enter Alternate Mail Id"><span class="text-danger error-msg"> (Order details will receive to this mail id)</span>
                                            <br/> <span class="text-danger error-msg" id="error-staffotemail"></span>
 											
 											</div>

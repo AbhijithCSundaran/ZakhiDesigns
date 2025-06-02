@@ -34,7 +34,11 @@ class ProductModel extends Model
         ->get()
         ->getRowArray();
     }
-
-
+		public function insertOrder($data)
+{
+    $this->db->table('order_detail')->insert($data);
+    return $this->db->insertID(); // return the inserted ID
+}
+	
 }
 ?>

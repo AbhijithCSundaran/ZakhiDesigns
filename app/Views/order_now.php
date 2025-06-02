@@ -3,7 +3,9 @@
         <h4>PLACE YOUR ORDER ENQUIRY</h4>
         <div class="row order-box">
             <div class="col-md-7">
-                <form id="order">
+                <form id="order" method="post" action="<?= base_url('ordernow/submit') ?>">
+				<div id="messageBox" class="alert" style="display: none;"></div>
+				<div id="responseMsg" style="margin-top: 20px; color: green;"></div>
                     <div class="row">
                         <div class="col-md-12">
                             <h6>Submit the order form to place your order.</h6>
@@ -55,10 +57,10 @@
                     <div class="row">
                         <div class="col-md-3">&nbsp;</div>
                         <div class="col-md-9">
-                            <button type="submit" class="btn btn-dark">Order Now</button>
-                        </div>
+							<button type="submit" class="btn btn-dark" id="orderNowBtn">Order Now</button>
+						</div>
                     </div>
-
+					<input type="hidden" name="od_Id" value="<?= $details['od_Id'] ;?>">
                 </form>
             </div>
             <div class="col-md-5">
@@ -69,18 +71,37 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-md-5">
-                        <img src="<?php echo base_url().ASSET_PATH; ?>assets/images/slides/s2.png" />
-                    </div>
+<?php
+					$decoded = json_decode($details['product_images'], true);
+					$firstImage = '';
+
+					if (is_array($decoded) && isset($decoded[0]['name'][0])) {
+						$firstImage = base_url('uploads/productmedia/' . $decoded[0]['name'][0]);
+					} else {
+						$firstImage = base_url('assets/img/no-image.png'); // fallback image
+					}
+					?>
+
+					<div class="col-md-5">
+						<img src="<?= $firstImage ?>" style="width: 100px;" alt="Product Image" />
+					</div>
                     <div class="col-md-7">
                         <div class="item-name text-left"><b>Lorem Ipsum</b></div>
                         <div class="item-desc text-left">
-                            <p>Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an
-                                unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
+                            <p>Product Code: <?= esc($details['pr_Code'] ?? '');?>
+							</p>
                         </div>
-                        <div class="item-price text-left">Price: <i class="bi bi-currency-rupee"></i>1000</div>
-                        <div class="item-price text-left">Quantity: 2</div>
-                        <div class="item-price text-left">Grand total : <i class="bi bi-currency-rupee"></i>2000</div>
+                        <div class="item-price text-left">
+								Price: <i class="bi bi-currency-rupee"></i> <?= esc($details['od_Selling_Price'] ?? ''); ?>
+							</div>
+
+							<div class="item-price text-left">
+								Quantity: <?= esc($details['od_Quantity'] ?? ''); ?>
+							</div>
+
+							<div class="item-price text-left">
+								Grand total: <i class="bi bi-currency-rupee"></i> <?= esc($details['od_Grand_Total'] ?? ''); ?>
+							</div>
                     </div>
                 </div>
                 <div class="row">

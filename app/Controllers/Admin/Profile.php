@@ -13,7 +13,7 @@ class Profile extends BaseController
 		$this->session = \Config\Services::session();
 		$this->input = \Config\Services::request();
 		$this->ProfileModel = new \App\Models\Admin\ProfileModel();
-
+        $us_Id = $this->session->get('zd_uid');
 		
 	}
 
@@ -67,31 +67,41 @@ public function update()
 
     return redirect()->to('admin/profile');
 }
-public function change_password()
-{
-    $session = session();
-    $model = new \App\Models\Admin\ProfileModel();
 
-    $admin_id = $session->get('admin_id');
-    $current_password = $this->request->getPost('current_password');
-    $new_password = $this->request->getPost('new_password');
-    $confirm_password = $this->request->getPost('confirm_password');
+   public function change_password()
+	{
+		$model = new \App\Models\Admin\ProfileModel();
+		$current_password = $this->request->getPost('current_password');
+		$new_password = $this->request->getPost('new_password');
+		$confirm_password = $this->request->getPost('confirm_password');
+		$us_Id = $this->session->get('zd_uid'); 
+		if (!$current_password || !$new_password || !$confirm_password) {
+			return $this->response
+			->setJSON([
+			'status' => 0, 
+			'msg' => 'All fields are required'
+			]);
+		}
+		if ($new_password !== $confirm_password) {
+			return $this->response
+			->setJSON([
+			'status' => 0, 
+			'msg' => 'New password and confirmation do not match'
+			]);
+		}
+		$model = new \App\Models\Admin\ProfileModel();
+		$updateResult = $model->change_passwordNow($new_password,$current_password, $us_Id);
 
-    $admin = $model->where('id', $admin_id)->first();
+		if ($updateResult) {
+			return $this->response->setJSON(['status' => 1, 'msg' => 'Password updated successfully']);
+		} 
+		else 
+		{
+			return $this->response->setJSON(['status' => 0, 'msg' => 'Failed to update password']);
+		}
+		
+	}
 
-    if (!$admin || !password_verify($current_password, $admin['password'])) {
-        return redirect()->back()->with('error', 'Current password is incorrect');
-    }
-
-    if ($new_password !== $confirm_password) {
-        return redirect()->back()->with('error', 'New password and confirmation do not match');
-    }
-
-    $hashed_password = password_hash($new_password, PASSWORD_DEFAULT);
-    $model->update($admin_id, ['password' => $hashed_password]);
-
-    return redirect()->back()->with('success', 'Your password has been changed successfully.');
-}
 
 
 }

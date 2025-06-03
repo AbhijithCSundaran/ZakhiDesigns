@@ -148,7 +148,8 @@ $routes->post('admin/orders/loadStatus/(:num)', 'Admin\Orders::orderStatusUpdati
 $routes->get('admin/', 'Admin\Profile::index');
 $routes->get('admin/profile', 'Admin\Profile::edit_admin');
 $routes->post('admin/profile/update', 'Admin\Profile::update');
-$routes->post('admin/profile/change_password', 'Admin\Profile::change_password');
+//$routes->post('admin/profile/change_password', 'Admin\Profile::change_password');
+$routes->match(['get', 'post'], 'admin/profile/change_password', 'Admin\Profile::change_password');
 $routes->post('admin/profile/list', 'Admin\Profile::ajaxList');
 
 

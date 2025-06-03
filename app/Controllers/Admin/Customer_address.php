@@ -30,7 +30,7 @@ class Customer_address extends BaseController
 	public function view_address($cust_id, $add_id = null)
 	{
 
-		if (!$this->session->get('zd_uid')) {
+		if (!$this->session->get('ad_uid')) {
 			return redirect()->to(base_url('admin/customer_address'));
 		}
 
@@ -126,8 +126,8 @@ class Customer_address extends BaseController
 						'add_CustId'			=> $cust_id,
 						'add_Status'	   		=> 1,
 						'add_createdon'    		=> date("Y-m-d H:i:s"),
-						'add_createdby'    		=> $this->session->get('zd_uid'),
-						'add_modifyby'     		=> $this->session->get('zd_uid'),
+						'add_createdby'    		=> $this->session->get('ad_uid'),
+						'add_modifyby'     		=> $this->session->get('ad_uid'),
 					];
 						$Createaddress = $this->addressModel->createcust($data);
 						//echo json_encode(array("status" => 1, "msg" => "Customer address Created successfully."));
@@ -153,8 +153,8 @@ class Customer_address extends BaseController
 						'add_CustId'			=> $cust_id,
 						'add_Status'	   		=> 1,
 						'add_createdon'    		=> date("Y-m-d H:i:s"),
-						'add_createdby'    		=> $this->session->get('zd_uid'),
-						'add_modifyby'     		=> $this->session->get('zd_uid'),
+						'add_createdby'    		=> $this->session->get('ad_uid'),
+						'add_modifyby'     		=> $this->session->get('ad_uid'),
 					];
 				$modifyaddress = $this->addressModel->modifyaddress($add_id,$data);
 				//echo json_encode(array("status" => 1, "msg" => "Customer address details updated successfully."));	
@@ -178,7 +178,7 @@ class Customer_address extends BaseController
 		/***************************************/
 		 public function deleteAddress($add_id) {
 		if ($add_id) {
-			$modified_by = $this->session->get('zd_uid');
+			$modified_by = $this->session->get('ad_uid');
 			$add_status = $this->addressModel->deleteCustById(3, $add_id, $modified_by);
 
 			if ($add_status) {

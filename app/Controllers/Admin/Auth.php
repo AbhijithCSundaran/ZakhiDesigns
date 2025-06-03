@@ -31,8 +31,9 @@ class Auth extends BaseController
 				$userLog = $this->usModel->getLoginAccount($email, $password);
 				if ($userLog) {
 					$this->session->set([
-						'zd_uid' => $userLog->us_Id,
-						'zd_uname' => $userLog->us_Name,
+						'ad_uid' => $userLog->us_Id,
+						'ad_uname' => $userLog->us_Name,
+						'role' => 'admin',
 					]);
 					//$this->session->get('fav_user_name');
 					echo json_encode(array(
@@ -56,12 +57,14 @@ class Auth extends BaseController
 		}
 
 	public function logout()
-{
-    $session = session();
-    $session->destroy();
-    return redirect()->to(base_url('admin')); 
-	//return view('login');
-}
+	{
+		$session = session();
+		$session->remove(['ad_uid', 'ad_uname']); 
+		return redirect()->to(base_url('admin'));
+	}
+
+
+
 	private function reCaptcha($recaptcha)
     {
         $secretKey = '6LeoL5UpAAAAANCPPYP_gZWrENl5vYFJIZytnUkD';

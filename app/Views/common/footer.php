@@ -23,14 +23,10 @@
              <div class="col-md-3">
                  <h4>Our Company<h4>
                          <ul>
-                             <li><i class="bi bi-arrow-right"></i> <a href="<?= base_url('delivery'); ?>">Delivery</a>
-                             </li>
-                             <li><i class="bi bi-arrow-right"></i> <a href="<?= base_url('Privacypolicy'); ?>">Privacy
-                                     Policy</a></li>
-                             <li><i class="bi bi-arrow-right"></i> <a
-                                     href="<?= base_url('Termsandconditions'); ?>">Terms & Conditions</a></li>
-                             <li><i class="bi bi-arrow-right"></i> <a href="<?= base_url('Returnpolicy'); ?>">Return
-                                     Policy</a></li>
+                            <li><i class="bi bi-arrow-right"></i> <a class="foot-link" href="<?= base_url('delivery'); ?>" >Delivery</a></li>
+                             <li><i class="bi bi-arrow-right"></i> <a class="foot-link" href="<?= base_url('Privacypolicy'); ?>" >Privacy Policy</a></li>
+                             <li><i class="bi bi-arrow-right"></i> <a class="foot-link" href="<?= base_url('Termsandconditions'); ?>" >Terms & Conditions</a></li>
+                             <li><i class="bi bi-arrow-right"></i> <a class="foot-link" href="<?= base_url('Returnpolicy'); ?>">Return Policy</a></li>
                          </ul>
              </div>
              <div class="col-md-3">

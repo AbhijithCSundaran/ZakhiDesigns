@@ -60,6 +60,7 @@ $routes->get('admin/dashboard', 'Admin\Dashboard::index');
 
 //category
 $routes->get('admin/category', 'Admin\Category::index');
+$routes->post('admin/category/List', 'Admin\Category::ajaxList');
 $routes->get('admin/category/add', 'Admin\Category::addCategory');
 $routes->get('admin/category/edit/(:num)', 'Admin\Category::addCategory/$1');
 $routes->post('admin/category/save', 'Admin\Category::saveCategory');

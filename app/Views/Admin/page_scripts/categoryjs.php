@@ -1,6 +1,6 @@
 <script>
 //Data table
-$(document).ready(function() {
+/*$(document).ready(function() {
     $('#categoryList').DataTable({
         "processing": true,
         "serverSide": false,
@@ -10,7 +10,54 @@ $(document).ready(function() {
         "info": true,
 
     });
+});*/
+
+$(document).ready(function () {
+    var baseUrl = "<?= base_url() ?>";
+    var csrfToken = "<?= csrf_token() ?>";
+    var csrfHash = "<?= csrf_hash() ?>";
+
+    $('#categoryList').DataTable({
+        processing: true,
+        serverSide: true,
+        ajax: {
+            url: baseUrl + "admin/category/List",
+            type: "POST",
+            data: function (d) {
+                d[csrfToken] = csrfHash;
+            }
+        },
+        columns: [
+            {
+                data: null,
+                render: function (data, type, row, meta) {
+                    return meta.row + meta.settings._iDisplayStart + 1;
+                },
+                orderable: false,
+                searchable: false
+            },
+            { data: 'cat_Name' },
+            { data: 'cat_Discount_Value' },
+            { data: 'cat_Discount_Type' },
+            { data: 'status_switch' },
+            { data: 'actions' }
+        ],
+        columnDefs: [
+            {
+                targets: [4, 5], 
+                orderable: false,
+                searchable: false
+            },
+            {
+                targets: 4, 
+                render: function (data, type, row) {
+                    return data;
+                }
+            }
+        ]
+    });
 });
+
 
 //Add category
 

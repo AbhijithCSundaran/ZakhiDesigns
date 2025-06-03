@@ -172,6 +172,49 @@ class Category extends BaseController
 			]);
 		}
 	}
+	
+	// Listing table data
+	public function ajaxList()
+	{
+	$model = new \App\Models\Admin\CategoryModel();
+	$data = $model->getDatatables();
+	$total = $model->countAll();
+	$filtered = $model->countFiltered();
+
+	foreach ($data as &$row) {
+		// Default fallbacks
+		$row['cat_Name'] = $row['cat_Name'] ?? 'N/A';
+		$row['cat_Discount_Value'] = $row['cat_Discount_Value'] ?? 'N/A';
+		$row['cat_Discount_Type'] = $row['cat_Discount_Type'] ?? 'N/A';
+		
+	
+		
+		// Status toggle switch
+		$row['status_switch'] = '<div class="form-check form-switch">
+          <input class="form-check-input checkactive"
+           type="checkbox"
+           id="statusSwitch-' . $row['cat_Id'] . '"
+           value="' . $row['cat_Id'] . '" ' . ($row['cat_Status'] == 1 ? 'checked' : '') . '>
+          <label class="form-check-label pl-0 label-check"
+           for="statusSwitch-' . $row['cat_Id'] . '"></label>
+           </div>';
+
+
+		// Action buttons
+		$row['actions'] = '<a href="' . base_url('admin/Category/edit/' . $row['cat_Id']) . '">
+				<i class="bi bi-pencil-square"></i>
+			</a>&nbsp;
+			<i class="bi bi-trash text-danger icon-clickable"
+			   onclick="confirmDelete(' . $row['cat_Id'] . ')"></i>';
+	}
+	
+	return $this->response->setJSON([
+		'draw' => intval($this->request->getPost('draw')),
+		'recordsTotal' => $total,
+		'recordsFiltered' => $filtered,
+		'data' => $data
+	]);
+	}
 
 
 }

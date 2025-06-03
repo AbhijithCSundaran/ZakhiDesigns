@@ -25,6 +25,11 @@
         <div class="main-body">
             <div class="page-wrapper">
                 <div class="page-body">
+                    <div class="row">
+                        <div class="col text-end">
+                            <button class="btn btn-secondary" id="backToOrders">Back to list</button>
+                        </div>
+                    </div><br/>
                    <div class="row">
                         <div class="col-md-6">
                             <div class="card mb-3">
@@ -56,11 +61,9 @@
                             </div>
                         </div>
                     </div>
-
                 </div>
                 <!-- Page-body end -->
             </div>
-            <div id="styleSelector"> </div>
         </div>
     </div>
 </div>

@@ -9,7 +9,7 @@ class TermsandconditionsModel extends Model {
             $this->db = \Config\Database::connect();
         }
        
-        public function termsandconditions Insert($data) {
+        public function termsandconditionsInsert($data) {
             return $this->db->table('termsandconditions')->insert($data);
         }
        

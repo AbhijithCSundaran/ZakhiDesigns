@@ -1,11 +1,17 @@
+<!-- Add a custom search input bar -->
+<div style="margin-bottom: 10px;">
+    <input type="text" id="customSearchBox" placeholder="Search Orders..." class="form-control" style="width: 300px;" />
+</div>
+
 <script>
 var baseUrl = "<?= base_url() ?>";
 var csrfTokenName = "<?= csrf_token() ?>";
 var csrfHash = "<?= csrf_hash() ?>";
 
-$('#orderList').DataTable({
+var table = $('#orderList').DataTable({
     processing: true,
     serverSide: true,
+    scrollX: true,
     ajax: {
         url: baseUrl + "admin/orders/List",  
         type: "POST",
@@ -33,6 +39,8 @@ $('#orderList').DataTable({
     ]
 });
 
+// Bind custom search box
+$('#customSearchBox').on('keyup', function () {
+    table.search(this.value).draw();
+});
 </script>
-
-

@@ -26,7 +26,7 @@ class ProductImage extends BaseController
     }
     public function addProductImage($pri_id = null)
     {
-        if (!$this->session->get('zd_uid')) {
+        if (!$this->session->get('ad_uid')) {
             return redirect()->to(base_url());
         }
     
@@ -77,7 +77,7 @@ class ProductImage extends BaseController
                 'pri_Thumbnail' => json_encode($uploadData),
                 'pri_Status' =>1,
                 'pri_createdon' => date('Y-m-d H:i:s'),
-                'pri_createdby' => $this->session->get('zd_uid')
+                'pri_createdby' => $this->session->get('ad_uid')
             ];
     
             $this->productimageModel->productimageInsert($data);

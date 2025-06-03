@@ -26,7 +26,7 @@ class Themes extends BaseController
     }
 	 public function fetch_theme()
 	 {
-		 if (!$this->session->get('zd_uid')) {
+		 if (!$this->session->get('ad_uid')) {
 				return redirect()->to(base_url('admin'));
 			}
 				$themes = $this->theme_Model->fetchTheme();
@@ -74,7 +74,7 @@ class Themes extends BaseController
 
      public function deleteBanner($theme_id) {
 		if ($theme_id) {
-			$modified_by = $this->session->get('zd_uid');
+			$modified_by = $this->session->get('ad_uid');
 			$theme_Status = $this->theme_Model->deleteBannerById(3, $theme_id, $modified_by);
 			if ($theme_Status) {
 				echo json_encode([
@@ -96,7 +96,7 @@ class Themes extends BaseController
 	}
 	public function addbanner($theme_id = null)
 	{
-		if (!$this->session->get('zd_uid')) {
+		if (!$this->session->get('ad_uid')) {
 			return redirect()->to(base_url('admin'));
 		}
 
@@ -291,14 +291,14 @@ public function save_file()
         'theme_Section2'    => json_encode($section2),
         'theme_Section3'    => json_encode($section3),
         'theme_Status'      => 1,
-        'theme_modifyby'    => $this->session->get('zd_uid'),
+        'theme_modifyby'    => $this->session->get('ad_uid'),
         'theme_modifyon'    => date('Y-m-d H:i:s'),
     ];
 
     //  Insert or Update
     if (empty($theme_id)) {
         $data['theme_createdon'] = date('Y-m-d H:i:s');
-        $data['theme_createdby'] = $this->session->get('zd_uid');
+        $data['theme_createdby'] = $this->session->get('ad_uid');
         $this->theme_Model->insert_data($data);
 
         // Get last inserted ID

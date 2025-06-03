@@ -13,7 +13,7 @@ class Customer extends BaseController
 
     public function index()
     {
-		 if (!$this->session->get('zd_uid')) {
+		 if (!$this->session->get('ad_uid')) {
         return redirect()->to(base_url('/admin/'));
     }
 
@@ -108,16 +108,16 @@ class Customer extends BaseController
 				'cust_Password'      => md5($password),
 				'cust_Status'	   	 => 1,
 				'cust_createdon'     => date("Y-m-d H:i:s"),
-				'cust_createdby'     => $this->session->get('zd_uid'),
-				'cust_modifyby'      => $this->session->get('zd_uid'),
+				'cust_createdby'     => $this->session->get('ad_uid'),
+				'cust_modifyby'      => $this->session->get('ad_uid'),
 			];
 				$CreateCust = $this->customerModel->createcust($data);
 				//echo json_encode(array("status" => 1, "msg" => "Customer Created successfully."));
 
 				$this->session->set([
-    'zd_uid' => $CreateCust, // or the actual ID if your model returns it
-    'zd_uname' => $custname,
-    'zd_email' => $custemail,
+    'ad_uid' => $CreateCust, // or the actual ID if your model returns it
+    'ad_uname' => $custname,
+    'ad_email' => $custemail,
 ]);
 				echo json_encode(array(
 					"status" => 1,
@@ -139,8 +139,8 @@ class Customer extends BaseController
 				'cust_Email'         => $custemail,
 				'cust_Phone'	     => $mobile,
 				'cust_createdon'     => date("Y-m-d H:i:s"),
-				'cust_createdby'     => $this->session->get('zd_uid'),
-				'cust_modifyby'      => $this->session->get('zd_uid'),  
+				'cust_createdby'     => $this->session->get('ad_uid'),
+				'cust_modifyby'      => $this->session->get('ad_uid'),  
 			];	
 					
 				$modifycust = $this->customerModel->modifycust($cust_id,$data);
@@ -162,7 +162,7 @@ class Customer extends BaseController
 	}
 	 public function deleteCust($cust_id) {
 		if ($cust_id) {
-			$modified_by = $this->session->get('zd_uid');
+			$modified_by = $this->session->get('ad_uid');
 			$us_status = $this->customerModel->deleteCustById(3, $cust_id, $modified_by);
 
 			if ($us_status) {

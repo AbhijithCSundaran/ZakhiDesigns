@@ -52,7 +52,7 @@ class Offer_Banner extends BaseController
 	}
      public function deleteBanner($the_id) {
 		if ($the_id) {
-			$modified_by = $this->session->get('zd_uid');
+			$modified_by = $this->session->get('ad_uid');
 			$the_status = $this->offer_bannerModel->deleteBannerById(3, $the_id, $modified_by);
 			if ($the_status) {
 				echo json_encode([
@@ -74,7 +74,7 @@ class Offer_Banner extends BaseController
 	}
 /* 	public function addbanner($the_id = null)
 	{
-		if (!$this->session->get('zd_uid')) {
+		if (!$this->session->get('ad_uid')) {
 			return redirect()->to(base_url());
 		}
 		//$banner = new Offer_BannerModel();
@@ -97,7 +97,7 @@ class Offer_Banner extends BaseController
 	
 	public function addbanner($the_id = null)
 	{
-		if (!$this->session->get('zd_uid')) 
+		if (!$this->session->get('ad_uid')) 
 		{
 			return redirect()->to(base_url());
 		}
@@ -196,8 +196,8 @@ class Offer_Banner extends BaseController
 				'the_Offer_Banner'  => $newName ?? '',
 				'the_Status'        => 1,
 				'the_createdon'     => date("Y-m-d H:i:s"),
-				'the_createdby'     => $this->session->get('zd_uid'),
-				'the_modifyby'      => $this->session->get('zd_uid')
+				'the_createdby'     => $this->session->get('ad_uid'),
+				'the_modifyby'      => $this->session->get('ad_uid')
 			];
 			$offer_bannerModel->createBanner($data);
 			return $this->response->setJSON([
@@ -222,7 +222,7 @@ class Offer_Banner extends BaseController
 				'the_PrId'          => $pr_Id,
 				'the_Description'   => $description,
 				'the_Status'        => 1,
-				'the_modifyby'      => $this->session->get('zd_uid')
+				'the_modifyby'      => $this->session->get('ad_uid')
 			];
 
 			// Only update image if a new one was uploaded

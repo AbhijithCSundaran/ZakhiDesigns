@@ -14,7 +14,7 @@ class Dashboard extends BaseController
 	public function index()
 	{
 	
-	 	if (!$this->session->get('zd_uid')) {
+	 	if (!$this->session->get('ad_uid')) {
 			redirect()->to(base_url());
          }
 

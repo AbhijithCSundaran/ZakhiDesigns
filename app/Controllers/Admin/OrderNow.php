@@ -25,13 +25,13 @@ class OrderNow extends BaseController
     {
         // Get product ID from GET or POST (depending on your link or form)
         $productId = $this->request->getPost('pr_Id');
-		$custId = $this->session->getPost('zd_uid');
+		$custId = $this->session->getPost('ad_uid');
         if (!$productId) {
             return redirect()->to('/'); // Redirect if no product specified
         }
 
         // Check if user logged in (assuming session has 'cust_id')
-		if (!$this->session->get('zd_uid')) {
+		if (!$this->session->get('ad_uid')) {
 			// Not logged in, redirect to login and pass intended page + product id
 			return redirect()->to('/login?redirect=ordernow&pr_Id=' . $productId);
 		}

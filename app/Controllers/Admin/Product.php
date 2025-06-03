@@ -89,7 +89,7 @@ if ($firstImage) {
 			 onclick="openProductModal(' . $row['pr_Id'] . ', \'' . addslashes($row['pr_Name']) . '\')"
 			 style="cursor: pointer;">&nbsp;
 
-        			 
+      			 
 		<img class="img-size open-video-modal"
 			 src="' . base_url(ASSET_PATH . 'Admin/assets/images/video_add.ico') . '"
 			 alt="Video-add"

@@ -1,13 +1,7 @@
  .product-img {
-	height: 500px;
+	height: 350px;
 	width: 100%;
 	object-fit: cover;
- }
-
-  .product-img {
-    height: 500px;
-    width: 100%;
-    object-fit: cover;
  }
  .modal-header{
     border-bottom:none !important;

@@ -71,49 +71,80 @@
 
 
 /*********************************************/
+
 var baseUrl = "<?= base_url() ?>";
 
 $('#orderNowBtn').click(function(e) {
     e.preventDefault();
     $('#orderNowBtn').prop('disabled', true);
 
+    const zd_uid = "<?= session()->get('zd_uid'); ?>";
+
+    if (!zd_uid) {
+        $('#modalBody').load("<?= base_url('weblogin'); ?>", function() {
+            $('#mainModal').modal('show');
+        });
+        $('#orderNowBtn').prop('disabled', false);
+        return;
+    }
+
+    let size = $('#size').val();
+    let color = $('#selected_color').val();
+    let qty = $('#qty').val();
+
+    if (!size || !color || !qty) {
+        $('#messageBox')
+            .removeClass('alert-success')
+            .addClass('alert alert-danger')
+            .text('Please select Size, Color and Quantity.')
+            .fadeIn();
+
+        $('#orderNowBtn').prop('disabled', false);
+
+        setTimeout(() => {
+            $('#messageBox').fadeOut();
+        }, 1000);
+        return;
+    }
+
     var url = baseUrl + "product/submit";
 
     $.post(url, $('#orderNowForm').serialize(), function(response) {
         $('html, body').animate({ scrollTop: 0 }, 'fast');
-console.log(response); 
+        console.log(response);
+
+        $('#messageBox').removeClass('alert-danger alert-success').hide();
+
         if (response.status == 1) {
-			
-            $('#messageBox')
-                .removeClass('alert-danger')
-                .addClass('alert-success')
-                .text(response.msg || 'Order placed successfully')
-                .show();
-
-            // Assuming od_Id is returned from the backend
-				let od_Id = response.od_Id;
-
-            setTimeout(function() {
+            // Directly redirect without showing message
+            let redirectUrl = response.redirect;
+            if (redirectUrl) {
+                window.location.href = redirectUrl;
+            } else {
                 $('#orderNowBtn').prop('disabled', false);
-                if (od_Id) {
-                    window.location.href = baseUrl + "ordernow/product/" + od_Id;
-                }
-            }, 3000);
+            }
         } else {
             $('#messageBox')
-                .removeClass('alert-success')
-                .addClass('alert-danger')
-                .text(response.msg || 'Please select Options.')
-                .show();
-            $('#orderNowBtn').prop('disabled', false);
-        }
+                .addClass('alert alert-danger')
+                .text(response.msg || 'Please select Size, Color and Quantity.')
+                .fadeIn();
 
-        setTimeout(function() {
-			$('#orderNowBtn').prop('disabled', false);
-            $('#messageBox').empty().hide();
-        }, 3000);
-    }, 'json');
+            $('#orderNowBtn').prop('disabled', false);
+
+            setTimeout(function() {
+                $('#messageBox').fadeOut();
+            }, 5000);
+        }
+    }, 'json').fail(function(jqXHR, textStatus, errorThrown) {
+        $('#orderNowBtn').prop('disabled', false);
+        $('#messageBox')
+            .removeClass('alert-success')
+            .addClass('alert alert-danger')
+            .text('A server error occurred: ' + errorThrown)
+            .fadeIn();
+    });
 });
+
 
 /**********************************************************************/
 
@@ -126,7 +157,6 @@ console.log(response);
                 e.preventDefault();
                 const type = this.dataset.type;
                 const src = this.dataset.src;
-
                 if (type === 'image') {
                     preview.innerHTML = `<img src="${src}" style="width: 100%; max-height: 400px; object-fit: contain;" />`;
                 } else if (type === 'video') {

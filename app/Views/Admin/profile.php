@@ -23,8 +23,22 @@
     <!-- Page-header end -->
 	
          <!-- Flash Message Start -->
-		 
-        <?php 
+
+        <!-- Flash Message End -->
+
+    <!-- Profile Form Start -->
+    <div class="main-body">
+        <div class="page-wrapper">
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="card">
+					
+    <div class="card-header"><h5>Edit Profile</h5></div>
+    <div class="card-block">
+        
+
+        <form method="post" action="<?= base_url('admin/profile/update'); ?>">
+		 <?php 
 		if (session()->getFlashdata('success')): ?>
             <div class="alert alert-success alert-dismissible fade show mt-2" role="alert">
                 <?= session()->getFlashdata('success') ?>
@@ -36,31 +50,6 @@
 		
 		endif;
 		?>
-
-        <?php 
-		if (session()->getFlashdata('error')): ?>
-            <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                <?= session()->getFlashdata('error') ?>
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-        <?php 
-		endif; 
-		?>
-        <!-- Flash Message End -->
-
-    <!-- Profile Form Start -->
-    <div class="main-body">
-        <div class="page-wrapper">
-            <div class="row">
-                <div class="col-sm-6">
-                    <div class="card">
-    <div class="card-header"><h5>Edit Profile</h5></div>
-    <div class="card-block">
-        
-
-        <form method="post" action="<?= base_url('admin/profile/update'); ?>">
             <div class="form-group">
                 <label>Name</label>
                 <input type="text" name="us_Name" class="form-control" value="<?= $user['us_Name']; ?>" required>
@@ -78,9 +67,22 @@
 			<!-- Change Password -->
 			<div class="col-sm-6">
 				<div class="card">
+				
+				
 					<div class="card-header"><h5>Change Password</h5></div>
 					<div class="card-block">
 						<form method="post" action="<?= base_url('admin/profile/change_password'); ?>">
+						<?php 
+							if (session()->getFlashdata('error')): ?>
+								<div class="alert alert-danger alert-dismissible fade show" role="alert">
+									<?= session()->getFlashdata('error') ?>
+									<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+										<span aria-hidden="true">&times;</span>
+									</button>
+								</div>
+							<?php 
+							endif; 
+							?>
 							<div class="form-group">
 								<label>Current Password</label>
 								<input type="password" name="current_password" id="current_password" class="form-control" required>
@@ -91,7 +93,7 @@
 							</div>
 							<div class="form-group">
 								<label>Confirm New Password</label>
-								<input type="password" name="confirm_password"  id="new_password" class="form-control" required>
+								<input type="password" name="confirm_password"  id="confirm_password" class="form-control" required>
 							</div>
 							<button type="submit" class="btn btn-warning">Change Password</button>
 						</form>

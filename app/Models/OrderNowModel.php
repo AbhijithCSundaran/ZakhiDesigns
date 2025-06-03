@@ -41,4 +41,13 @@ public function getCustomerAddress($cus_Id)
         ->get()
         ->getRow();
 }
+ public function getDefaultAddress($userId)
+    {
+        return $this->where(['user_id' => $userId, 'add_Default' => 1])->first();
+    }
+
+    public function getAllAddresses($userId)
+    {
+        return $this->where('user_id', $userId)->findAll();
+    }
 }

@@ -12,9 +12,9 @@
 
     });
 }); */
-
+ var baseUrl = "<?= base_url() ?>";
 $(document).ready(function () {
-    var baseUrl = "<?= base_url() ?>";
+   
     var csrfToken = "<?= csrf_token() ?>";
     var csrfHash = "<?= csrf_hash() ?>";
 

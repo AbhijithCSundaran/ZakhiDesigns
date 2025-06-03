@@ -17,7 +17,13 @@ $routes->get('product/details','ProductDetails::index');
 $routes->get('product', 'Product::index');
 $routes->get('product/product_details/(:num)', 'Product::product_details/$1');
 $routes->get('product/search', 'Product::ajaxSearch');
-$routes->get('product/product_list', 'Product::products_lists');
+// $routes->get('product/product_list', 'Product::products_lists');
+$routes->get('product/product_list/category/(:num)', 'Product::product_list_by_category/$1');
+$routes->get('product/product_list/subcategory/(:num)', 'Product::product_list_by_subcategory/$1');
+$routes->get('product/product_list', 'Product::product_list'); // show all products (Fashion)
+$routes->get('product/product_list/category/(:num)', 'Product::product_list_by_category/$1');
+$routes->get('product/product_list/subcategory/(:num)', 'Product::product_list_by_subcategory/$1');
+//$routes->post('product/product_list/search', 'Product::search_products');
 $routes->post('product/submit', 'Product::submit');
 
 $routes->get('weblogin','Weblogin::index');
@@ -29,6 +35,11 @@ $routes->get('product', 'Product::index');
 $routes->get('product/product_details/(:num)', 'Product::product_details/$1');
 $routes->get('product/search', 'Product::ajaxSearch');
 $routes->get('product/products_lists', 'Product::products_lists');
+$routes->get('product/product_list', 'Product::products_lists');
+$routes->post('ordernow/getAddress', 'OrderNow::getAddress');
+$routes->post('ordernow/saveAddress', 'OrderNow::saveAddress');
+
+
 $routes->get('weblogin', 'Weblogin::index');
 $routes->get('webreg', 'Weblogin::webReg');
 
@@ -109,7 +120,7 @@ $routes->post('admin/staff/delete/(:any)', 'Admin\Staff::deleteStaff/$1');
 
 //Customers
 $routes->get('admin/customer', 'Admin\Customer::index');
-$routes->post('admin/customer/List', 'Admin\customer::ajaxList');
+$routes->post('admin/customer/List', 'Admin\Customer::ajaxList');
 $routes->get('admin/customer/view', 'Admin\Customer::view_cust'); // Create
 $routes->get('admin/customer/customer_address', 'Admin\Customer::customer_address'); // Create
 $routes->get('admin/customer/view/(:num)', 'Admin\Customer::view_cust/$1'); // Edit Page

@@ -29,7 +29,6 @@ class AddressModel extends Model
 	
 	public function insertAndSetDefault($zd_uid, $data)
 {
-	echo ("keriiiiii");exit;
     // 1. Unset all previous default addresses
     $this->builder()->where('add_CustId', $zd_uid)->update(['add_Default' => 0]);
 

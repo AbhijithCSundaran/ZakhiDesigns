@@ -23,6 +23,7 @@ class OrderNowModel extends Model
 	{
 		return $this->db->query("select * from order_detail where od_Id = '".$od_Id."'")->getRow();
 	}
+	
 	public function getProductByid($pr_Id)
 	{
 		return $this->db->table('product p')
@@ -41,13 +42,13 @@ public function getCustomerAddress($cus_Id)
         ->get()
         ->getRow();
 }
- public function getDefaultAddress($userId)
+ public function getDefaultAddress($zd_uid)
     {
-        return $this->where(['user_id' => $userId, 'add_Default' => 1])->first();
+        return $this->where(['add_CustId' => $zd_uid, 'add_Default' => 1])->first();
     }
 
-    public function getAllAddresses($userId)
+    public function getAllAddresses($zd_uid)
     {
-        return $this->where('user_id', $userId)->findAll();
+        return $this->where('add_CustId', $zd_uid)->findAll();
     }
 }

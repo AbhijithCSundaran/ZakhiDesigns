@@ -23,44 +23,51 @@
       </button>
     </h2>
     <div id="collapseDefault" class="accordion-collapse collapse show" aria-labelledby="headingDefault" data-bs-parent="#addressAccordion">
-      <div class="accordion-body">
-        <div class="mb-3">
-          <label>Full Name</label>
-          <input type="text" class="form-control" name="fname" value="<?= esc($details['add_Name'] ?? '') ?>">
-        </div>
-        <div class="mb-3">
-          <label>Place</label>
-          <input type="text" class="form-control" name="place" value="<?= esc($details['add_City'] ?? '') ?>">
-        </div>
-        <div class="mb-3">
-          <label>Email</label>
-          <input type="email" class="form-control" name="email" value="<?= esc($details['add_Email'] ?? '') ?>">
-        </div>
-        <div class="mb-3">
-          <label>Contact No.</label>
-          <input type="text" class="form-control" name="phone" value="<?= esc($details['add_Phone'] ?? '') ?>">
-        </div>
-        <div class="mb-3">
-          <label>Delivery Address</label>
-          <textarea class="form-control" rows="5" name="address" readonly><?= esc(
-              ($details['add_BuldingNo'] ?? '') . ', ' .
-              ($details['add_Street'] ?? '') . "\n" .
-              ($details['add_Landmark'] ?? '') . "\n" .
-              ($details['add_City'] ?? '') . ', ' . ($details['add_State'] ?? '') . "\n" .
-              ($details['add_Pincode'] ?? '') . "\n" .
-              ($details['add_Phone'] ?? '')
-          ) ?></textarea>
-        </div>
-      </div>
+     <div class="accordion-body">
+  <div class="mb-3">
+    <label>Full Name</label>
+    <input type="text" id="fname" class="form-control" name="fname" value="<?= esc($details['add_Name'] ?? '') ?>">
+  </div>
+  <div class="mb-3">
+    <label>Place</label>
+    <input type="text" id="Place" class="form-control" name="place" value="<?= esc($details['add_City'] ?? '') ?>">
+  </div>
+  <div class="mb-3">
+    <label>Email</label>
+    <input type="email" id="emailid" class="form-control" name="email" value="<?= esc($details['add_Email'] ?? '') ?>">
+  </div>
+  <div class="mb-3">
+    <label>Contact No.</label>
+    <input type="text" id="contactno" class="form-control" name="phone" value="<?= esc($details['add_Phone'] ?? '') ?>">
+  </div>
+  <div class="mb-3">
+    <label>Delivery Address</label>
+    <textarea id="deliveryAddress" class="form-control" rows="5" name="address" readonly><?= esc(
+        ($details['add_BuldingNo'] ?? '') . ', ' .
+        ($details['add_Street'] ?? '') . "\n" .
+        ($details['add_Landmark'] ?? '') . "\n" .
+        ($details['add_City'] ?? '') . ', ' . ($details['add_State'] ?? '') . "\n" .
+        ($details['add_Pincode'] ?? '') . "\n" .
+        ($details['add_Phone'] ?? '')
+    ) ?></textarea>
+  </div>
+</div>
+
     </div>
   </div>
 
   <!-- Choose Existing Address Section -->
   <div class="accordion-item">
-    <h2 class="accordion-header" id="headingExisting">
-	<button type="button" class="btn btn-link" onclick="openAccordionItem('collapseExisting')">Choose Existing Address</button>
+   <h2 class="accordion-header" id="headingExisting">
+  <div class="d-flex justify-content-between align-items-center w-100">
+ <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExisting" aria-expanded="false" aria-controls="collapseExisting">
+        Choose Existing Address
       </button>
-    </h2>
+  
+   
+  </div>
+</h2>
+
     <div id="collapseExisting" class="accordion-collapse collapse" aria-labelledby="headingExisting" data-bs-parent="#addressAccordion">
       <div class="accordion-body">
         <h6>Select an address</h6>
@@ -71,7 +78,11 @@
           </div>
         <?php endforeach; ?>
       </div>
+	  <button id="useSelectedAddressBtn" onclick="useSelectedAddress()" class="btn btn-primary">
+      Use This Address
+    </button>
     </div>
+	 
   </div>
 
   <!-- Add New Address Section -->
@@ -109,54 +120,7 @@
 				</form>
 				<div id="messageBox" class="alert" style="display: none;"></div>
 				<div id="responseMsg" style="margin-top: 20px; color: green;"></div>
-                    <div class="row">
-                        <div class="col-md-12">
-                            <h6>Submit the order form to place your order.</h6>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-3">
-                            <label for="fname" class="form-label">Fullname</label>
-                        </div>
-                        <div class="col-md-9">
-                            <input type="text" class="form-control" id="fname">
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-3">
-                            <label for="Place" class="form-label">Place</label>
-                        </div>
-                        <div class="col-md-9">
-                            <input type="text" class="form-control" id="Place" placeholder="eg. your place, state">
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-3">
-                            <label for="emailid" class="form-label">Email Id</label>
-                        </div>
-                        <div class="col-md-9">
-                            <input type="text" class="form-control" id="emailid" placeholder="eg. ra****@mail.com">
-                            <small>The order details will be sent to the provided email address.</small>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-3">
-                            <label for="contactno" class="form-label">Contact No.</label>
-                        </div>
-                        <div class="col-md-9">
-                            <input type="text" class="form-control" id="contactno" placeholder="eg. +91 98********" />
-                            <small>Our executive will reach out to you at this number.</small>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-3">
-                            <label for="contactno" class="form-label">Delivery Address</label>
-                        </div>
-                        <div class="col-md-9">
-                            <textarea class="form-control"></textarea>
-                            <small>Your order will be delivered to the specified address.</small>
-                        </div>
-                    </div>
+                    
                     <div class="row">
                         <div class="col-md-3">&nbsp;</div>
                         <div class="col-md-9">
@@ -174,22 +138,7 @@
                 </div>
                 <div class="row">
                     <?php
-                        $decoded = json_decode($details['product_images'], true);
-                        $firstImage = base_url('assets/img/no-image.png');
-                        if (is_array($decoded) && isset($decoded[0]['name'][0])) {
-                            $firstImage = base_url('uploads/productmedia/' . $decoded[0]['name'][0]);
-                        }
-                    ?>
-                    <div class="col-md-5">
-                        <img src="<?= $firstImage ?>" style="width: 100px;" alt="Product Image" />
-                    </div>
-                    <div class="col-md-7">
-                        <div><b><?= esc($details['pr_Name'] ?? ''); ?></b></div>
-                        <p>Product Code: <?= esc($details['pr_Code'] ?? ''); ?></p>
-                        <p>Price: ₹ <?= esc($details['od_Selling_Price'] ?? ''); ?></p>
-                        <p>Quantity: <?= esc($details['od_Quantity'] ?? ''); ?></p>
-                        <p>Grand Total: ₹ <?= esc($details['od_Grand_Total'] ?? ''); ?></p>
-<?php
+                       
 					$decoded = json_decode($details['product_images'], true);
 					$firstImage = '';
 
@@ -204,7 +153,7 @@
 						<img src="<?= $firstImage ?>" style="width: 100px;" alt="Product Image" />
 					</div>
                     <div class="col-md-7">
-                        <div class="item-name text-left"><b>Lorem Ipsum</b></div>
+                        <div class="item-name text-left"><b><?= esc($details['pr_Name'] ?? '');?></b></div>
                         <div class="item-desc text-left">
                             <p>Product Code: <?= esc($details['pr_Code'] ?? '');?>
 							</p>

@@ -6,6 +6,7 @@ use CodeIgniter\Controller;
 class Product extends Controller
 {
     protected $productdisplayModel;
+    protected $categories;
 
     public function __construct()
     {
@@ -17,11 +18,17 @@ class Product extends Controller
     // Homepage - shows all products
     public function index()
     {
+		
+
 		$zd_uid = $this->session->get('zd_uid');
 		$data = [];
         $data['product'] = $this->productdisplayModel->getAllProducts();
+		$this->categories = $this->productdisplayModel->getAllCategoriesAndSub();
+		$data['categories'] = $this->categories;
+        $data['title'] = 'Product';
+		print_r($data);
 
-        return view('common/header')
+        return view('common/header',$data)
             . view('products_list', $data)
             . view('common/footer')
             . view('pagescripts/productjs');

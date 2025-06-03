@@ -49,18 +49,47 @@ $(document).ready(function() {
 
 
 /*******************************************************************************/
-function loadAddress(id) {
-    fetch('<?= base_url('ordernow/getAddress/') ?>' + id)
-        .then(res => res.json())
-        .then(data => {
-            document.getElementById('fname').value = data.add_Name;
-            document.getElementById('Place').value = data.add_City;
-            document.getElementById('emailid').value = data.add_Email;
-            document.getElementById('contactno').value = data.add_Phone;
-            document.getElementById('deliveryAddress').value =
-                `${data.add_BuldingNo}, ${data.add_Street}\n${data.add_Landmark}\n${data.add_City}, ${data.add_State}\n${data.add_Pincode}\n${data.add_Phone}`;
-        });
+// Enable the 'Use This Address' button only when a radio is selected
+document.querySelectorAll('input[name="selectedAddress"]').forEach(radio => {
+  radio.addEventListener('change', () => {
+    document.getElementById('useSelectedAddressBtn').disabled = false;
+  });
+});
+
+// Function to call on button click
+function useSelectedAddress() {
+  const selectedRadio = document.querySelector('input[name="selectedAddress"]:checked');
+  if (!selectedRadio) {
+    alert('Please select an address first.');
+    return;
+  }
+
+  fetch('<?= base_url('ordernow/getAddress/') ?>' + selectedRadio.value)
+    .then(res => res.json())
+    .then(data => {
+      // Update Section 1 input fields
+      document.getElementById('fname').value = data.add_Name;
+      document.getElementById('Place').value = data.add_City;
+      document.getElementById('emailid').value = data.add_Email;
+      document.getElementById('contactno').value = data.add_Phone;
+      document.getElementById('deliveryAddress').value =
+        `${data.add_BuldingNo}, ${data.add_Street}\n` +
+        `${data.add_Landmark}\n` +
+        `${data.add_City}, ${data.add_State}\n` +
+        `${data.add_Pincode}\n` +
+        `${data.add_Phone}`;
+
+      // Optional: Close accordion if needed
+      const collapseExisting = bootstrap.Collapse.getOrCreateInstance(document.getElementById('collapseExisting'));
+      collapseExisting.hide();
+    })
+    .catch(error => {
+      console.error("Error fetching address:", error);
+      alert("Failed to load the selected address.");
+    });
 }
+
+
 
 function saveNewAddress() {
     const data = {
@@ -84,7 +113,7 @@ function saveNewAddress() {
     .then(res => res.json())
     .then(data => {
         alert('Address saved');
-        loadAddress(data.add_ID);
+        loadAddress(data.add_Id);
     });
 }
 
@@ -106,42 +135,30 @@ function saveAndSetAddress() {
     const form = document.getElementById('orderaddress');
     const formData = new FormData(form);
 
-    fetch("<?= base_url('ordernow/save-new-address') ?>", {
+    fetch("<?= base_url('ordernow/saveNewAddress') ?>", {
         method: "POST",
         body: formData
     })
-    .then(response => response.json())
-    .then(response => {
-        if (response.status === 'success') {
-            const address = response.address;
+    .then(res => res.json())
+    .then(data => {
+        if (data.status === 'success') {
+            const addr = data.address;
 
-            // Update the default address section dynamically
-            document.querySelector("input[name='fname']").value = address.add_Name;
-            document.querySelector("input[name='place']").value = address.add_City;
-            document.querySelector("input[name='email']").value = address.add_Email;
-            document.querySelector("input[name='phone']").value = address.add_Phone;
-            document.querySelector("textarea[name='address']").value =
-                `${address.add_BuldingNo}, ${address.add_Street}\n` +
-                `${address.add_Landmark}\n` +
-                `${address.add_City}, ${address.add_State}\n` +
-                `${address.add_Pincode}\n` +
-                `${address.add_Phone}`;
+            // Update default address section
+            document.querySelector("input[name='fname']").value = addr.add_Name;
+            document.querySelector("input[name='email']").value = addr.add_Email;
+            document.querySelector("input[name='phone']").value = addr.add_Phone;
+            document.querySelector("input[name='place']").value = addr.add_City;
+            document.querySelector("textarea[name='address']").value = 
+                `${addr.add_BuldingNo}, ${addr.add_Street}\n${addr.add_Landmark}\n${addr.add_City}, ${addr.add_State}\n${addr.add_Pincode}\n${addr.add_Phone}`;
 
-            // Optionally collapse the new address accordion
-            const newAddressSection = document.getElementById('accordionNew');
-            if (newAddressSection) newAddressSection.classList.remove('show');
-
-            // Show success alert or message
-            alert("Address saved and set as default.");
+            // Optional: Close "Add New Address" accordion and open default
+            document.getElementById('collapseNew').classList.remove('show');
+            document.getElementById('collapseDefault').classList.add('show');
         } else {
-            alert("Failed to save address. Please try again.");
+            alert(data.msg || 'Something went wrong');
         }
-    })
-    .catch(error => {
-        console.error('Error:', error);
-        alert("An error occurred while saving the address.");
     });
 }
-
 </script>
 

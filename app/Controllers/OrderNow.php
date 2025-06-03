@@ -28,10 +28,11 @@ class OrderNow extends Controller
     }
 
     public function getAddress($id)
-    {
-        $model = new AddressModel();
-        return $this->response->setJSON($model->find($id));
-    }
+{
+    $model = new AddressModel();
+    $address = $model->find($id);  // CI built-in method to find row by primary key
+    return $this->response->setJSON($address);
+}
 
 
 public function saveNewAddress()

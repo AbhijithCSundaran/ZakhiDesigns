@@ -16,7 +16,7 @@ class Admin extends BaseController
     {
 
 		$data = [];
-		$val =	$this->session->get('zd_uid');
+		$val =	$this->session->get('ad_uid');
 		$staff_val = $this->adminModel->getdata($val);
 		$data['staff'] = (array) $staff_val;
 		
@@ -100,8 +100,8 @@ class Admin extends BaseController
 				'us_Password'	   => $newPassword,
 				'us_Status'		   => 1,
 				'us_Role'		   => 1,
-				'us_createdby'     => $this->session->get('zd_uid'),
-				'us_modifyby'	   => $this->session->get('zd_uid'),     
+				'us_createdby'     => $this->session->get('ad_uid'),
+				'us_modifyby'	   => $this->session->get('ad_uid'),     
 			];	
 				$modifyStaff = $this->adminModel->modifyAdmin($us_id,$data);
 				//echo json_encode(array("status" => 1, "msg" => "Updated successfully."));	

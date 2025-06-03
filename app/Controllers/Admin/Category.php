@@ -31,7 +31,7 @@ class Category extends BaseController
     }
     public function addCategory($cat_id = null)
 	{
-		if (!$this->session->get('zd_uid')) 
+		if (!$this->session->get('ad_uid')) 
 		{
 			return redirect()->to(base_url('admin/category'));
 		}
@@ -89,8 +89,8 @@ class Category extends BaseController
             'cat_Discount_Type' => $discount_type,
             'cat_Status' => 1,
             'cat_createdon' => date("Y-m-d H:i:s"),
-            'cat_createdby' => $this->session->get('zd_uid'),
-            'cat_modifyby' => $this->session->get('zd_uid'),
+            'cat_createdby' => $this->session->get('ad_uid'),
+            'cat_modifyby' => $this->session->get('ad_uid'),
         ];
 
         if (empty($cat_id)) {
@@ -151,7 +151,7 @@ class Category extends BaseController
 
     public function deleteCategory($cat_id) {
 		if ($cat_id) {
-			$modified_by = $this->session->get('zd_uid');
+			$modified_by = $this->session->get('ad_uid');
 			$cat_status = $this->categoryModel->deleteCategoryById(3, $cat_id, $modified_by);
 	
 			if ($cat_status) {

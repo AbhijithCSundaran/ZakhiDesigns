@@ -28,7 +28,7 @@ $routes->post('product/submit', 'Product::submit');
 
 $routes->get('weblogin','Weblogin::index');
 $routes->get('webreg','Weblogin::webReg'); 
-$routes->get('Contact','Contact::index'); 
+$routes->get('contact','Contact::index'); 
 $routes->get('ordernow', 'OrderNow::index');
 $routes->get('product/details', 'ProductDetails::index');
 $routes->get('product', 'Product::index');

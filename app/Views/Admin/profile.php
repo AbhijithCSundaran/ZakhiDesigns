@@ -82,7 +82,7 @@
 				  <i class="fa fa-eye" id="toggleConfirmPassword" style="position: absolute; top: 70%; right: 10px; transform: translateY(-50%); cursor: pointer;"></i>
 				</div>
 
-					<button type="submit" id="passUpdate" class="btn btn-primary">Change Password</button>
+					<button type="button" id="passUpdate" class="btn btn-primary">Change Password</button>
 				  </form>
 				</div>
 			  </div>

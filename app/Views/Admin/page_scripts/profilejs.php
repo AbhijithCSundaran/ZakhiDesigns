@@ -26,18 +26,21 @@
 
     // Password Change Validation
 	
-   $('#passUpdate').click(function(e) {
+  $('#passUpdate').click(function(e) {
     e.preventDefault();
     var url = "<?= base_url('admin/profile/change_password') ?>";
     $.post(url, $('#changePasswordForm').serialize(), function(data) {
-     if (data.status == 1) {
-		//$('#passAlert').hide();
-		} else if (data.status == 0) {
-			$("#passAlert").html(data.msg);
-			$("#passAlert").show();
-		}
+        if (data.status == 1) {
+            $('#passAlert').hide();
+        } else if (data.status == 0) {
+            $("#passAlert").html(data.msg).show();
+            setTimeout(function() {
+                $("#passAlert").fadeOut();
+            }, 1000); 
+        }
     }, 'json');
-  });
+});
+
 
 
     // Show/Hide Password Toggle

@@ -4,9 +4,9 @@
 
     // Profile Update Validation
     $('form[action$="update"]').submit(function (e) {
-      const name = $('input[name="name"]').val().trim();
+      const name = $('input[name="us_Name"]').val().trim();
       const email = $('input[name="us_Email"]').val().trim();
-      const password = $('input[name="us_Password"]').val().trim();
+     
       let valid = true;
 
       if (!name) {
@@ -19,69 +19,61 @@
         valid = false;
       }
 
-      if (!password) {
-        alert('Password is required.');
-        valid = false;
-      }
+     
 
       if (!valid) e.preventDefault();
     });
 
     // Password Change Validation
-    $('form[action$="change_password"]').submit(function (e) {
-      const current = $('#current_password').val().trim();
-      const newPwd = $('#new_password').val().trim();
-      const confirmPwd = $('#confirm_password').val().trim();
-      let valid = true;
+	
+   $('#passUpdate').click(function(e) {
+    e.preventDefault();
+    var url = "<?= base_url('admin/profile/change_password') ?>";
+    $.post(url, $('#changePasswordForm').serialize(), function(data) {
+     if (data.status == 1) {
+		//$('#passAlert').hide();
+		} else if (data.status == 0) {
+			$("#passAlert").html(data.msg);
+			$("#passAlert").show();
+		}
+    }, 'json');
+  });
 
-      if (!current || !newPwd || !confirmPwd) {
-        alert('All password fields are required.');
-        valid = false;
-      }
-
-      if (newPwd.length < 4 || newPwd.length > 10) {
-        alert('New password must be between 4 to 10 characters.');
-        valid = false;
-      }
-
-      if (newPwd !== confirmPwd) {
-        alert('New password and confirm password do not match.');
-        valid = false;
-      }
-
-      if (!valid) e.preventDefault();
-    });
 
     // Show/Hide Password Toggle
 	
 	
 
-  function togglePassword(inputId, toggleId) {
-    const input = document.getElementById(inputId);
-    const toggle = document.getElementById(toggleId);
+ function togglePassword(inputId, toggleId) {
+  const input = document.getElementById(inputId);
+  const toggle = document.getElementById(toggleId);
 
-    toggle.addEventListener('click', function () {
-      const isPassword = input.type === 'password';
-      input.type = isPassword ? 'text' : 'password';
-      toggle.classList.toggle('fa-eye');
-      toggle.classList.toggle('fa-eye-slash');
-    });
-  }
+  if (!input || !toggle) return;
 
-  togglePassword('currentPassword', 'toggleCurrentPassword');
-  togglePassword('newPassword', 'toggleNewPassword');
-  togglePassword('confirmPassword', 'toggleConfirmPassword');
+  toggle.addEventListener('click', function () {
+    const isPassword = input.type === 'password';
+    input.type = isPassword ? 'text' : 'password';
+    toggle.classList.toggle('fa-eye');
+    toggle.classList.toggle('fa-eye-slash');
+  });
+}
+
+togglePassword('current_password', 'toggleCurrentPassword');
+togglePassword('new_password', 'toggleNewPassword');
+togglePassword('confirm_password', 'toggleConfirmPassword');
+
 
 
 
     // Auto-hide alert messages after 7 seconds
     setTimeout(function () {
-      let alertEl = document.querySelector('.alert');
+      let alertEl = document.querySelector('#tog-alert');
       if (alertEl) {
         alertEl.classList.remove('show');
         alertEl.classList.add('fade');
         setTimeout(() => alertEl.remove(), 500);
       }
-    }, 7000);
+    }, 3000);
   });
+ 
 </script>

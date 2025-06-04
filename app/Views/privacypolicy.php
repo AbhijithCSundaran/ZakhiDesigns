@@ -1,6 +1,6 @@
 <section class="hero-banner">
     <div class="container-lg">
-        <h4>ABOUT US</h4>
+        <h4>Privacy Policy</h4>
         <div class="row order-box">
             <div class="col-md-12">
                 <form >

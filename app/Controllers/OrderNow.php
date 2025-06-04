@@ -20,7 +20,7 @@ class OrderNow extends Controller
         $data['addresses'] = $model->getAllAddresses($zd_uid);
 
         $template = view('common/header');
-        $template .= view('order_now', $data); // FIXED: was `data` instead of `$data`
+        $template .= view('order_now', $data); 
         $template .= view('common/footer'); 
         $template .= view('pagescripts/OrderNowjs');
 
@@ -28,98 +28,74 @@ class OrderNow extends Controller
     }
 
     public function getAddress($id)
-{
-    $model = new AddressModel();
-    $address = $model->find($id);  // CI built-in method to find row by primary key
-    return $this->response->setJSON($address);
-}
-
-
-public function saveNewAddress()
-{
-    $session = session();
-    $zd_uid = $session->get('zd_uid');  // Or however you get user ID
-
-    $data = [
-        'add_Name'       => $this->request->getPost('newName'),
-        'add_Email'      => $this->request->getPost('newEmail'),
-        'add_Phone'      => $this->request->getPost('newPhone'),
-        'add_BuldingNo'  => $this->request->getPost('newBuilding'),
-        'add_Street'     => $this->request->getPost('newStreet'),
-        'add_Landmark'   => $this->request->getPost('newLandmark'),
-        'add_City'       => $this->request->getPost('newCity'),
-        'add_State'      => $this->request->getPost('newState'),
-        'add_Pincode'    => $this->request->getPost('newPincode'),
-    ];
-
-    $addressModel = new \App\Models\AddressModel();
-    $newAddress = $addressModel->insertAndSetDefault($zd_uid, $data);
-
-    if ($newAddress) {
-        return $this->response->setJSON([
-            'status' => 'success',
-            'address' => $newAddress,
-        ]);
-    } else {
-        return $this->response->setJSON([
-            'status' => 'error',
-            'msg' => 'Failed to save new address.',
-        ]);
-    }
-}
-
-
-    public function saveAddress()
     {
-        $model = new AddressModel();
-        $data = $this->request->getPost();
-        $data['user_id'] = session()->get('zd_uid'); // FIXED: match to `zd_uid` not `user_id`
+		$model = new AddressModel();
+		$address = $model->findAddress($id);
+		if (!$address) {
+			return $this->response->setStatusCode(404)->setJSON(['error' => 'Address not found']);
+		}
+		return $this->response->setJSON($address);
+	}
 
-        if (!empty($data['add_Default'])) {
-            // Reset previous default addresses
-            $model->where('user_id', $data['user_id'])->set(['add_Default' => 0])->update();
-        }
+    public function useAddress()
+    {
+        $zd_uid = session()->get('zd_uid');
+        $addressId = $this->request->getPost('addressId');
 
-        $model->save($data);
-        $id = $model->getInsertID();
-        $address = $model->find($id);
+        $addressModel = new AddressModel();
+        $addressModel->setDefault($zd_uid, $addressId);
 
-        return $this->response->setJSON($address);
-    }
-	public function orderproduct($od_Id)
-{
-    $zd_uid = session()->get('zd_uid');
-
-    if (empty($zd_uid)) {
-        return redirect()->to(base_url());
+        return $this->response->setJSON(['success' => true]);
     }
 
-    $orderModel = new OrderNowModel();
-    $addressModel = new AddressModel(); // Load address model
+    public function saveNewAddress()
 
-    $orders = $orderModel->getOrdersById($od_Id);
+	{
+		print_r('Hello');
+		exit;
+		$od_Id = $this->request->getPost('od_Id');
+		$zd_uid = session()->get('zd_uid');
 
-    if (empty($orders)) {
-        return redirect()->to(base_url())->with('error', 'Order not found');
-    }
+		$setAsDefault = $this->request->getPost('setAsDefault');
 
-    $pr_Id = $orders->pr_Id;
-    $cus_Id = $orders->cus_Id;
+		$model = new AddressModel();
 
-    $data['product'] = $orderModel->getProductById($pr_Id);
-    $data['details'] = $orderModel->getProductWithAddress($cus_Id, $pr_Id);
+		if ($setAsDefault) {
+			$model->setDefault($zd_uid, 0);
+		}
+		$data = [
+			'add_Name'       => $this->request->getPost('newName'),
+			'add_Email'      => $this->request->getPost('newEmail'),
+			'add_Phone'      => $this->request->getPost('newPhone'),
+			'add_BuldingNo'  => $this->request->getPost('newBuilding'),
+			'add_Street'     => $this->request->getPost('newStreet'),
+			'add_Landmark'   => $this->request->getPost('newLandmark'),
+			'add_City'       => $this->request->getPost('newCity'),
+			'add_State'      => $this->request->getPost('newState'),
+			'add_Pincode'    => $this->request->getPost('newPincode'),
+			'add_CustId'     => $zd_uid,
+			'add_createdby'  => $zd_uid,
+			'add_createdon'  => date("Y-m-d H:i:s"),
+			'add_Default'    => $setAsDefault ? 1 : 0,
+		];
 
-    // ✅ Add this line to pass all addresses (fix for undefined $addresses)
-    $data['addresses'] = $addressModel->getAllAddresses($zd_uid);
+			$model->insert($data);
+			$insertId = $model->getInsertID();
 
-    return view('common/header')
-        . view('order_now', $data)
-        . view('common/footer')
-        . view('pagescripts/OrderNowjs');
-}
+			if ($setAsDefault) {
 
+				$model->setDefault($zd_uid, $insertId);
+			}
 
-    /* public function orderproduct($od_Id)
+			$defaultAddress = $model->getDefaultAddress($zd_uid);
+			return $this->response->setJSON([
+				'success' => true,
+				'defaultAddress' => $defaultAddress
+			]);
+
+	}
+
+    public function orderproduct($od_Id)
     {
         $zd_uid = session()->get('zd_uid');
 
@@ -128,6 +104,7 @@ public function saveNewAddress()
         }
 
         $orderModel = new OrderNowModel();
+        $addressModel = new AddressModel();
 
         $orders = $orderModel->getOrdersById($od_Id);
 
@@ -138,16 +115,19 @@ public function saveNewAddress()
         $pr_Id = $orders->pr_Id;
         $cus_Id = $orders->cus_Id;
 
-        $data['product'] = $orderModel->getProductById($pr_Id);
-        $data['details'] = $orderModel->getProductWithAddress($cus_Id, $pr_Id);
+        $data = [
+            'product'   => $orderModel->getProductById($pr_Id),
+            'details'   => $orderModel->getProductWithAddress($cus_Id, $pr_Id),
+            'addresses' => $addressModel->getAllAddresses($zd_uid),
+        ];
 
         return view('common/header')
             . view('order_now', $data)
             . view('common/footer')
             . view('pagescripts/OrderNowjs');
     }
- */
-    public function submit()
+
+    public function submitfrm()
     {
         $orderModel = new OrderNowModel();
         $zd_uid = session()->get('zd_uid');
@@ -180,10 +160,18 @@ public function saveNewAddress()
         $product = $orderModel->getProductById($pr_Id);
         $productName   = $product->pr_Name ?? '';
         $pr_code       = $product->pr_Code ?? '';
-        $selling_price = $order->od_Selling_Price ?? 0;
         $grand_total   = $order->od_Grand_Total ?? 0;
+        $custEmail     = '';
 
         $customer = $orderModel->getCustomerAddress($cust_id);
+
+        if (!$customer) {
+            return $this->response->setJSON([
+                'status' => 0,
+                'msg'    => 'Customer details not found.'
+            ]);
+        }
+
         $custName    = $customer->add_Name ?? '';
         $custPhone   = $customer->add_Phone ?? '';
         $custEmail   = $customer->add_Email ?? '';
@@ -199,7 +187,7 @@ public function saveNewAddress()
 
         $email = \Config\Services::email();
         $email->setTo($custEmail);
-        $email->setBCC('sandra@smartlounge.online'); // You can make this configurable
+        $email->setBCC('sandra@smartlounge.online');
         $email->setSubject('New Order Confirmation');
         $email->setMessage(nl2br($message));
         $email->send();

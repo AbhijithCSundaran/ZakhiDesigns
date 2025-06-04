@@ -97,7 +97,7 @@ if (is_array($decoded) && isset($decoded[0]['name']) && is_array($decoded[0]['na
 								
 								<div class="col-md-12"><b>Size</b></div>
 								<?php $sizes = explode(',', $product['pr_Size']); ?>
-									<select name="size" id="size"  required>
+									<select name="size" id="size" style="width: 85px;"  required>
 										<option value="">Size</option> <!-- Add this -->
 										<?php foreach ($sizes as $size): ?>
 											<option value="<?= esc(trim($size)) ?>"

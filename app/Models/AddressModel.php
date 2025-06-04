@@ -4,18 +4,16 @@ use CodeIgniter\Model;
 
 class AddressModel extends Model
 {
-	
-    protected $table = 'address';
+	protected $table = 'address';
     protected $primaryKey = 'add_Id';
     protected $allowedFields = [
-        'add_CustId', 'add_Name', 'add_Email', 'add_Phone',
-        'add_BuldingNo', 'add_Street', 'add_Landmark',
-        'add_City', 'add_State', 'add_Pincode', 'add_Default'
+        'add_Name', 'add_Email', 'add_Phone', 'add_BuldingNo', 'add_Street',
+        'add_Landmark', 'add_City', 'add_State', 'add_Pincode',
+        'add_CustId', 'add_Default'
     ];
-
-    public function getDefaultAddress($zd_uid)
+	 public function getDefaultAddress($custId)
     {
-        return $this->where(['add_CustId' => $zd_uid, 'add_Default' => 1])->first();
+        return $this->where('add_CustId', $custId)->where('add_Default', 1)->first();
     }
 	public function insertOrder($data)
 	{
@@ -24,10 +22,25 @@ class AddressModel extends Model
 	}
     public function getAllAddresses($zd_uid)
     {
-        return $this->where('add_CustId', $zd_uid)->findAll();
+		return $this->db->table('address')
+		->select('address.*')
+		->where('address.add_CustId', $zd_uid)
+		->where('address.add_Status', 1)
+		->get()
+		->getResultArray();
+
+    }
+	 public function findAddress($id)
+    {
+        return $this->where('add_Id', $id)->first();
+    }
+	public function setDefault($custId, $addressId)
+    {
+        $this->where('add_CustId', $custId)->set(['add_Default' => 0])->update();
+        return $this->update($addressId, ['add_Default' => 1]);
     }
 	
-	public function insertAndSetDefault($zd_uid, $data)
+	/* public function insertAndSetDefault($zd_uid, $data)
 {
     // 1. Unset all previous default addresses
     $this->builder()->where('add_CustId', $zd_uid)->update(['add_Default' => 0]);
@@ -43,5 +56,6 @@ class AddressModel extends Model
     // 4. Return newly inserted address
     return $this->find($newId);
 }
-
+ */
 }
+

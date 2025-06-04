@@ -26,7 +26,7 @@ class Themes extends BaseController
     }
 	 public function fetch_theme()
 	 {
-		 if (!$this->session->get('ad_uid')) {
+		 if (!$this->session->get('zd_uid')) {
 				return redirect()->to(base_url('admin'));
 			}
 				$themes = $this->theme_Model->fetchTheme();
@@ -74,7 +74,7 @@ class Themes extends BaseController
 
      public function deleteBanner($theme_id) {
 		if ($theme_id) {
-			$modified_by = $this->session->get('ad_uid');
+			$modified_by = $this->session->get('zd_uid');
 			$theme_Status = $this->theme_Model->deleteBannerById(3, $theme_id, $modified_by);
 			if ($theme_Status) {
 				echo json_encode([
@@ -96,7 +96,7 @@ class Themes extends BaseController
 	}
 	public function addbanner($theme_id = null)
 	{
-		if (!$this->session->get('ad_uid')) {
+		if (!$this->session->get('zd_uid')) {
 			return redirect()->to(base_url('admin'));
 		}
 
@@ -134,122 +134,159 @@ public function save_file()
     $theme_id = $this->request->getPost('theme_id');
     $mainData = $this->request->getPost();
     $files = $this->request->getFiles();
+    $mainData['theme_name'] = trim($mainData['theme_name']);
+    $mainData['description'] = trim($mainData['description']);
 
-    $mainData['theme_name'] = trim($mainData['theme_name'] ?? '');
-    $mainData['description'] = trim($mainData['description'] ?? '');
+    $section1 = json_decode($mainData['theme_Section1'], true) ?? [];
+    $section2 = json_decode($mainData['theme_Section2'], true) ?? [];
+    $section3 = json_decode($mainData['theme_Section3'], true) ?? [];
 
     $errors = [];
 
-    // Validation - Mandatory Fields
-    if (empty($mainData['theme_name']) || empty($mainData['description'])) {
-        return $this->response->setJSON([
-            'status' => 0,
-            'msg' => 'Mandatory Fields are Required.'
-        ]);
-    }
-
-    // Validate theme_name - only letters and spaces
-    if (!preg_match('/^[a-zA-Z\s]+$/', $mainData['theme_name'])) {
+    //  Validate theme_name and description
+    if (!isset($mainData['theme_name']) || !preg_match('/^[a-zA-Z\s]+$/', $mainData['theme_name'])) {
         return $this->response->setJSON([
             'status' => 0,
             'msg' => 'Theme name must contain only letters and spaces.'
         ]);
     }
 
-    // Validate description - alphanumeric and basic punctuation
     if (!preg_match('/^[a-zA-Z0-9\s,\.\'\"\\\\;: ]+$/', $mainData['description'])) {
         return $this->response->setJSON([
             'status' => 0,
             'msg' => 'Please enter Description correctly.'
         ]);
     }
+   $errors = [];
+	$emptySections = [];
+	$hasMissingImage = false;
 
-    // Helper function to validate image dimensions
-    $validateDimensions = function($file, $minWidth, $minHeight, $maxWidth, $maxHeight, &$errors, $section, $index) {
+	foreach (['Section1' => $section1, 'Section2' => $section2, 'Section3' => $section3] as $link => $section) {
+		// Check if entire section is empty
+		if (empty($section)) {
+			$emptySections[] = $link;
+			continue;
+		}
+
+		foreach ($section as $index => $item) {
+			// Only validate the 'image' field
+			if (empty($item['image'])) {
+				$hasMissingImage = true;
+			}
+		}
+	}
+
+	// If any section is completely empty
+	if (!empty($emptySections)) {
+		$errors[] = "All sections must have at least one item.";
+	}
+
+	// If any item is missing its image
+	if ($hasMissingImage) {
+		$errors[] = "Each item must have an image.";
+	}
+
+
+
+   if (!preg_match('/^[a-zA-Z\s ]+$/', $mainData['theme_name'])) {
+		return $this->response->setJSON([
+			'status' => 0,
+			'msg' => 'Please Enter Theme Name Correctly.'
+		]);
+	} 
+
+	if (!preg_match('/^[a-zA-Z0-9\s,\.\'\"\\\\;: ]+$/', $mainData['description'])) {
+		return $this->response->setJSON([
+			'status' => 0,
+			'msg' => 'Please Enter Description Correctly.'
+		]);
+	}
+
+    //  Validate Section 1
+    foreach ($section1 as $i => $item) {
+        if (!empty($item['link']) && !filter_var($item['link'], FILTER_VALIDATE_URL)) {
+            $errors[] = "Section 1, item " . ($i + 1) . ": Link must be a valid URL.";
+        }
+    }
+
+    //  Validate Section 2
+    foreach ($section2 as $i => $item) {
+        if (!empty($item['name']) && !preg_match('/^[a-zA-Z\s ]+$/', $item['name'])) {
+            $errors[] = "Section 2, item " . ($i + 1) . ": Name must contain only letters.";
+        }
+        if (!empty($item['link']) && !filter_var($item['link'], FILTER_VALIDATE_URL)) {
+            $errors[] = "Section 2, item " . ($i + 1) . ": Link must be a valid URL.";
+        }
+    }
+
+    // Validate Section 3
+    foreach ($section3 as $i => $item) {
+        if (!empty($item['link']) && !filter_var($item['link'], FILTER_VALIDATE_URL)) {
+            $errors[] = "Section 3, item " . ($i + 1) . ": Link must be a valid URL.";
+        }
+    }
+
+    //  Validate and Upload Images
+    $validateImage = function($file, $section, $index) use (&$errors) {
         if ($file->isValid() && !$file->hasMoved()) {
-            $tempPath = $file->getTempName();
-            [$width, $height] = getimagesize($tempPath);
-            if ($width < $minWidth || $width > $maxWidth || $height < $minHeight || $height > $maxHeight) {
-                $errors[] = "$section image #" . ($index + 1) . " dimensions must be between {$minWidth}x{$minHeight} and {$maxWidth}x{$maxHeight} pixels. Uploaded image is {$width}x{$height}.";
-                return false;
+            $mime = $file->getMimeType();
+            if (!str_starts_with($mime, 'image/')) {
+                $errors[] = "$section, item " . ($index + 1) . ": Only image files are allowed.";
             }
-            return true;
         }
-        return false;
     };
+    // Section 1 Images
+	if (isset($files['section1_image'])) {
+		foreach ($files['section1_image'] as $i => $file) {
+			if ($file->isValid() && !$file->hasMoved()) {
+				$newName = $file->getRandomName();
+				$file->move(ROOTPATH . 'public/uploads/themes', $newName);
+				$section1[$i]['image'] = $newName;
+			} else {
+				// No new image uploaded, retain old
+				$section1[$i]['image'] = $mainData['section1_image_old'][$i] ?? '';
+			}
+		}
+	}
 
-    // Helper function to move & resize image
-    $uploadAndResize = function($file, $resizeWidth, $resizeHeight, $path) {
-        $newName = $file->getRandomName();
-        $file->move($path, $newName);
-        \Config\Services::image()
-            ->withFile($path . $newName)
-            ->resize($resizeWidth, $resizeHeight, false)
-            ->save($path . $newName);
-        return $newName;
-    };
 
-    $uploadPath = ROOTPATH . 'public/uploads/themes/';
+    // Section 2 Images
+	if (isset($files['section2_image'])) {
+		foreach ($files['section2_image'] as $i => $file) {
+			if ($file->isValid() && !$file->hasMoved()) {
+				$newName = $file->getRandomName();
+				$file->move(ROOTPATH . 'public/uploads/themes', $newName);
+				$section2[$i]['image'] = $newName;
+			} else {
+				// No new image uploaded, retain old
+				$section2[$i]['image'] = $mainData['section2_image_old'][$i] ?? '';
+			}
+		}
+	}
 
-    // SECTION 1 (1200x300 to 1300x400, resize to 1300x400)
-    $section1 = [];
-    if (isset($files['section1_image'])) {
-        foreach ($files['section1_image'] as $i => $file) {
-            if ($file->isValid() && !$file->hasMoved()) {
-                if (!$validateDimensions($file, 1200, 300, 1300, 400, $errors, 'Section 1', $i)) {
-                    continue; // skip invalid image
-                }
-                $section1[$i]['image'] = $uploadAndResize($file, 1300, 400, $uploadPath);
-            } else {
-                $section1[$i]['image'] = $mainData['section1_image_old'][$i] ?? null;
-            }
-            $section1[$i]['link'] = !empty($mainData['section1_link'][$i]) ? $mainData['section1_link'][$i] : null;
-        }
-    }
+    // Section 3 Images
+	if (isset($files['section3_image'])) {
+		foreach ($files['section3_image'] as $i => $file) {
+			if ($file->isValid() && !$file->hasMoved()) {
+				$newName = $file->getRandomName();
+				$file->move(ROOTPATH . 'public/uploads/themes', $newName);
+				$section3[$i]['image'] = $newName;
+			} else {
+				// No new image uploaded, retain old
+				$section3[$i]['image'] = $mainData['section3_image_old'][$i] ?? '';
+			}
+		}
+	}
 
-    // SECTION 2 (300x200 to 400x300, resize to 400x300)
-    $section2 = [];
-    if (isset($files['section2_image'])) {
-        foreach ($files['section2_image'] as $i => $file) {
-            if ($file->isValid() && !$file->hasMoved()) {
-                if (!$validateDimensions($file, 300, 200, 400, 300, $errors, 'Section 2', $i)) {
-                    continue;
-                }
-                $section2[$i]['image'] = $uploadAndResize($file, 400, 300, $uploadPath);
-            } else {
-                $section2[$i]['image'] = $mainData['section2_image_old'][$i] ?? null;
-            }
-            $section2[$i]['name'] = !empty($mainData['section2_name'][$i]) ? $mainData['section2_name'][$i] : null;
-            $section2[$i]['link'] = !empty($mainData['section2_link'][$i]) ? $mainData['section2_link'][$i] : null;
-        }
-    }
-
-    // SECTION 3 (1300x400 to 1400x500, resize to 1350x400)
-    $section3 = [];
-    if (isset($files['section3_image'])) {
-        foreach ($files['section3_image'] as $i => $file) {
-            if ($file->isValid() && !$file->hasMoved()) {
-                if (!$validateDimensions($file, 1200, 400, 1400, 500, $errors, 'Section 3', $i)) {
-                    continue;
-                }
-                $section3[$i]['image'] = $uploadAndResize($file, 1400, 500, $uploadPath);
-            } else {
-                $section3[$i]['image'] = $mainData['section3_image_old'][$i] ?? null;
-            }
-            $section3[$i]['name'] = !empty($mainData['section3_name'][$i]) ? $mainData['section3_name'][$i] : null;
-            $section3[$i]['link'] = !empty($mainData['section3_link'][$i]) ? $mainData['section3_link'][$i] : null;
-        }
-    }
-
-    // Stop if validation errors exist
+    // Stop if errors
     if (!empty($errors)) {
         return $this->response->setJSON([
             'status' => 0,
-            'msg' => implode('<br>', $errors)
+            'msg' => implode('/', $errors)
         ]);
     }
 
-    // Prepare data for saving
+    //  Prepare data to save
     $data = [
         'theme_Name'        => $mainData['theme_name'],
         'theme_Description' => $mainData['description'],
@@ -257,14 +294,14 @@ public function save_file()
         'theme_Section2'    => json_encode($section2),
         'theme_Section3'    => json_encode($section3),
         'theme_Status'      => 1,
-        'theme_modifyby'    => $this->session->get('ad_uid'),
+        'theme_modifyby'    => $this->session->get('zd_uid'),
         'theme_modifyon'    => date('Y-m-d H:i:s'),
     ];
 
+    //  Insert or Update
     if (empty($theme_id)) {
-        // Insert new
         $data['theme_createdon'] = date('Y-m-d H:i:s');
-        $data['theme_createdby'] = $this->session->get('ad_uid');
+        $data['theme_createdby'] = $this->session->get('zd_uid');
         $this->theme_Model->insert_data($data);
 
         // Get last inserted ID
@@ -278,14 +315,13 @@ public function save_file()
             'msg' => 'Theme created successfully.'
         ]);
     } else {
-        // Update existing
-        $existing = $theme_Model->getThemeByid($theme_id);
+        $existing = $this->theme_Model->getThemeByid($theme_id);
         if (!$existing) {
             return $this->response->setJSON(['status' => 0, 'msg' => 'Theme not found.']);
         }
 
-        $theme_Model->modifyThemes($theme_id, $data);
-        $theme_Model->deactivateAllThemesExcept($theme_id);
+        $this->theme_Model->modifyThemes($theme_id, $data);
+        $this->theme_Model->deactivateAllThemesExcept($theme_id);
 
         return $this->response->setJSON([
             'status' => 1,
@@ -294,6 +330,7 @@ public function save_file()
         ]);
     }
 }
+
 
 /***************************************************************************************************/
 

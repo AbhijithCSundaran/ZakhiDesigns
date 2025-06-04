@@ -7,9 +7,7 @@ use CodeIgniter\Router\RouteCollection;
  */
 /* GET METHODS */
 $routes->get('/', 'Home::index');
-$routes->get('ordernow','OrderNow::index');
-$routes->get('ordernow/product/(:any)', 'OrderNow::orderproduct/$1');
-$routes->post('ordernow/submit', 'OrderNow::submit');
+
 
 //$routes->get('ordernow/product/(:any)&(:any)','OrderNow::orderproduct/$1/$2');
 
@@ -17,18 +15,31 @@ $routes->get('product/details','ProductDetails::index');
 $routes->get('product', 'Product::index');
 $routes->get('product/product_details/(:num)', 'Product::product_details/$1');
 $routes->get('product/search', 'Product::ajaxSearch');
-$routes->get('product/product_list', 'Product::products_lists');
+// $routes->get('product/product_list', 'Product::products_lists');
+$routes->get('product/product_list/category/(:num)', 'Product::product_list_by_category/$1');
+$routes->get('product/product_list/subcategory/(:num)', 'Product::product_list_by_subcategory/$1');
+$routes->get('product/product_list', 'Product::product_list'); // show all products (Fashion)
+$routes->get('product/product_list/category/(:num)', 'Product::product_list_by_category/$1');
+$routes->get('product/product_list/subcategory/(:num)', 'Product::product_list_by_subcategory/$1');
+//$routes->post('product/product_list/search', 'Product::search_products');
 $routes->post('product/submit', 'Product::submit');
 
 $routes->get('weblogin','Weblogin::index');
 $routes->get('webreg','Weblogin::webReg'); 
-$routes->get('Contact','Contact::index'); 
-$routes->get('ordernow', 'OrderNow::index');
+$routes->get('contact','Contact::index'); 
+
 $routes->get('product/details', 'ProductDetails::index');
 $routes->get('product', 'Product::index');
 $routes->get('product/product_details/(:num)', 'Product::product_details/$1');
 $routes->get('product/search', 'Product::ajaxSearch');
 $routes->get('product/products_lists', 'Product::products_lists');
+$routes->get('product/product_list', 'Product::products_lists');
+$routes->get('ordernow', 'OrderNow::index');
+$routes->get('ordernow/product/(:any)', 'OrderNow::orderproduct/$1');
+$routes->post('ordernow/submit', 'OrderNow::submit');
+$routes->post('ordernow/saveAddress', 'OrderNow::saveNewAddress');
+$routes->get('ordernow/getAddress/(:num)', 'OrderNow::getAddress/$1');
+
 $routes->get('weblogin', 'Weblogin::index');
 $routes->get('webreg', 'Weblogin::webReg');
 

@@ -16,11 +16,10 @@ class Privacypolicy extends BaseController
     public function index()
     {
         
-        // print_r($data['privacypolicy']);
-        // exit;
+        
         $template = view('common/header');
 		$template.= view('Privacypolicy');
-        // $template.= view('common/footer');
+        $template.= view('common/footer');
         return $template;
 
         

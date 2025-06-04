@@ -20,7 +20,7 @@ class Delivery extends BaseController
 
         $template = view('common/header');
 		$template.= view('delivery');
-     // $template.= view('common/footer');
+        $template.= view('common/footer');
         return $template;
 
         

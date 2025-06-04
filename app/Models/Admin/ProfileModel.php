@@ -9,7 +9,7 @@ class ProfileModel extends Model
     protected $table = 'user';
     protected $primaryKey = 'us_Id';
 
-   protected $allowedFields = ['us_Name', 'us_Email', 'us_Password'];
+    protected $allowedFields = ['us_Name', 'us_Email', 'us_Password'];
 
     
     public function getProfileById($us_Id)
@@ -33,36 +33,16 @@ class ProfileModel extends Model
     }
 
     
-  public function change_password()
-{
-    $session = session();
-    $user_id = $session->get('zd_uid');
-
-    $current_password = $this->request->getPost('current_password');
-    $new_password = $this->request->getPost('new_password');
-    $confirm_password = $this->request->getPost('confirm_password');
-
-    $adminModel = new \App\Models\Admin\ProfileModel();
-    $admin = $adminModel->getProfileById($user_id); 
-
-    if (!$admin || !password_verify($current_password, $admin['us_Password'])) {
-        $session->setFlashdata('error', 'Current password is incorrect.');
-        return redirect()->to('admin/profile');
+    public function change_passwordNow($new_password,$current_password, $us_Id)
+    {
+		$new_pass = md5($new_password);
+        $check = $this->db->query("select us_Password from user where us_Id= '".$us_Id."'")->getRow();
+		$cu_pass = md5($current_password);
+		if($check && $check->us_Password == $cu_pass ){
+			$result = $this->db->query("update user set us_Password = '".$new_pass."'");
+			return $result;
+		}
     }
-
-    if ($new_password !== $confirm_password) {
-        $session->setFlashdata('error', 'New password and confirm password do not match.');
-        return redirect()->to('admin/profile');
-    }
-
-    $hashed = password_hash($new_password, PASSWORD_BCRYPT);
-    $adminModel->changePassword($user_id, $hashed);
-
-    $session->setFlashdata('success', 'Your password has been changed successfully.');
-    return redirect()->to('admin/profile');
-}
-
-
    
     public function emailExistsExcept($Name, $email, $Password, $excludeId)
     {

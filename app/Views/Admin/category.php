@@ -69,43 +69,7 @@
                                                             <th>Action</th>
                                                         </tr>
                                                     </thead>
-                                                    <tbody>
-
-                                                        <?php foreach($category as $index => $cat) : ?>
-
-                                                        <tr>
-                                                            <td><?= $index + 1; ?></td>
-                                                            <td><?= ucwords($cat['cat_Name']); ?></td>
-                                                            <td><?= $cat['cat_Discount_Value']; ?></td>
-                                                            <td><?= $cat['cat_Discount_Type']; ?></td>
-                                                            <td>
-                                                                <div class="form-check form-switch">
-                                                                    <input class="form-check-input checkactive"
-                                                                        type="checkbox"
-                                                                        id="statusSwitch-<?= $cat['cat_Id']; ?>"
-                                                                        value="<?= $cat['cat_Id']; ?>"
-                                                                        <?= ($cat['cat_Status'] == 1) ? 'checked' : ''; ?>>
-                                                                    <label class="form-check-label pl-0 label-check"
-                                                                        for="statusSwitch-<?= $cat['cat_Id']; ?>">
-                                                                        
-                                                                    </label>
-                                                                </div>
-                                                            </td>
-                                                            <td>
-                                                            <a href="<?= base_url('admin/category/edit/'. $cat['cat_Id']); ?>">
-																<i class="bi bi-pencil-square p-2"></i>
-															</a> 
-                                                                <i class="bi bi-trash text-danger icon-clickable" 
-                                                                 onclick="confirmDelete(<?= $cat['cat_Id']; ?>)" 
-                                                                   ></i>
-                                                            </td>
-
-                                                        </tr>
-
-
-                                                        <?php endforeach; ?>
-
-                                                    </tbody>
+                                                 
                                                 </table>
                                             </div>
                                         </div>

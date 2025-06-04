@@ -36,6 +36,7 @@ class Profile extends BaseController
    {
 	   $us_Id = $this->session->ad_uid;
      $admin = $this->ProfileModel->getProfileById($us_Id); 
+	 
 	
 
     $data['user'] = (array) $admin; 
@@ -73,24 +74,29 @@ public function change_password()
     $new = $this->request->getPost('new_password');
     $confirm = $this->request->getPost('confirm_password');
 
+    $session = session();
     $model = new \App\Models\Admin\ProfileModel();
 
-    if (!$model->checkCurrentPassword($us_Id, $current)) {
-        session()->setFlashdata('error', 'Current password is incorrect.');
-    } elseif ($new !== $confirm) {
-        session()->setFlashdata('error', 'New passwords do not match.');
-    } else {
-        $hashed = password_hash($new, PASSWORD_DEFAULT);
-        if ($model->changePassword($us_Id, $hashed)) {
-            session()->setFlashdata('success', 'Password changed successfully.');
-        } else {
-            session()->setFlashdata('error', 'Failed to change password.');
-        }
+    $admin_id = $session->get('admin_id');
+    $current_password = $this->request->getPost('current_password');
+    $new_password = $this->request->getPost('new_password');
+    $confirm_password = $this->request->getPost('confirm_password');
+
+    $admin = $model->where('id', $admin_id)->first();
+
+    if (!$admin || !password_verify($current_password, $admin['password'])) {
+        return redirect()->back()->with('error', 'Current password is incorrect');
     }
 
-    return redirect()->to('admin/profile');
-}
+    if ($new_password !== $confirm_password) {
+        return redirect()->back()->with('error', 'New password and confirmation do not match');
+    }
 
+    $hashed_password = password_hash($new_password, PASSWORD_DEFAULT);
+    $model->update($admin_id, ['password' => $hashed_password]);
+
+    return redirect()->back()->with('success', 'Your password has been changed successfully.');
+}
 
 
 }

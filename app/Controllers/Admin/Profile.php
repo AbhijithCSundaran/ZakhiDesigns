@@ -69,6 +69,8 @@ public function update()
 }
 public function change_password()
 {
+
+    
     $us_Id = $this->session->ad_uid;
     $current = $this->request->getPost('current_password');
     $new = $this->request->getPost('new_password');

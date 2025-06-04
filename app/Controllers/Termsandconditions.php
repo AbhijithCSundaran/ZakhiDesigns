@@ -20,7 +20,7 @@ class Termsandconditions extends BaseController
         // exit;
         $template = view('common/header');
 		$template.= view('termsandconditions');
-        //$template.= view('common/footer');
+        $template.= view('common/footer');
        
         return $template;
 

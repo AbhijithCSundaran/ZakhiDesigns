@@ -20,7 +20,7 @@ class Returnpolicy extends BaseController
         // exit;
         $template = view('common/header');
 		$template.= view('returnpolicy');
-        //$template.= view('common/footer');
+        $template.= view('common/footer');
        
         return $template;
 

@@ -201,7 +201,7 @@ class Category extends BaseController
 
 
 		// Action buttons
-		$row['actions'] = '<a href="' . base_url('admin/Category/edit/' . $row['cat_Id']) . '">
+		$row['actions'] = '<a href="' . base_url('admin/category/edit/' . $row['cat_Id']) . '">
 				<i class="bi bi-pencil-square"></i>
 			</a>&nbsp;
 			<i class="bi bi-trash text-danger icon-clickable"

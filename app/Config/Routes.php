@@ -37,7 +37,7 @@ $routes->get('product/product_list', 'Product::products_lists');
 $routes->get('ordernow', 'OrderNow::index');
 $routes->get('ordernow/product/(:any)', 'OrderNow::orderproduct/$1');
 $routes->post('ordernow/submit', 'OrderNow::submit');
-$routes->get('ordernow/saveAddress', 'OrderNow::saveNewAddress');
+$routes->post('ordernow/saveAddress', 'OrderNow::saveNewAddress');
 $routes->get('ordernow/getAddress/(:num)', 'OrderNow::getAddress/$1');
 
 $routes->get('weblogin', 'Weblogin::index');

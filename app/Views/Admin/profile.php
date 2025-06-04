@@ -54,7 +54,6 @@
           </div>
     </div>
 
-<<<<<<< HEAD
 			<!-- Change Password -->
 			<div class="col-sm-6">
 				<div class="card">
@@ -89,22 +88,6 @@
 							<button type="submit" class="btn btn-warning">Change Password</button>
 						</form>
 					</div>
-=======
-<!-- Change Password -->
-<div class="col-sm-6">
-  <div class="card">
-	<div class="card-header">
-	  <h5>Change Password</h5>
-	</div>
-			<div class="card-block">
-			<div class="alert alert-danger" style="display:none" id="passAlert"></div>
-			  <form id="changePasswordForm" name="changePasswordForm">
-
-				<div class="form-group" style="position: relative;">
-				  <label>Current Password</label>
-				  <input type="password" id="current_password" name="current_password" class="form-control" placeholder="Current Password">
-				  <i class="fa fa-eye" id="toggleCurrentPassword" style="position: absolute; top: 70%; right: 10px; transform: translateY(-50%); cursor: pointer;"></i>
->>>>>>> 04b6a1c52bb02d096f6d2e803f67a5e4aebcdbff
 				</div>
 
 					<div class="form-group" style="position: relative;">

@@ -37,22 +37,8 @@ class OrderNow extends Controller
 		return $this->response->setJSON($address);
 	}
 
-    public function useAddress()
-    {
-        $zd_uid = session()->get('zd_uid');
-        $addressId = $this->request->getPost('addressId');
-
-        $addressModel = new AddressModel();
-        $addressModel->setDefault($zd_uid, $addressId);
-
-        return $this->response->setJSON(['success' => true]);
-    }
-
     public function saveNewAddress()
-
 	{
-		print_r('Hello');
-		exit;
 		$od_Id = $this->request->getPost('od_Id');
 		$zd_uid = session()->get('zd_uid');
 
@@ -87,12 +73,11 @@ class OrderNow extends Controller
 				$model->setDefault($zd_uid, $insertId);
 			}
 
-			$defaultAddress = $model->getDefaultAddress($zd_uid);
+			$details = $model->findAddress($insertId);
 			return $this->response->setJSON([
 				'success' => true,
-				'defaultAddress' => $defaultAddress
+				'details' => $details
 			]);
-
 	}
 
     public function orderproduct($od_Id)

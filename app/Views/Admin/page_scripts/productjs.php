@@ -466,7 +466,7 @@ function openvideoModal(productId, productName) {
                             data-product-id="${productId}" 
                             data-video-name="${response.video}" 
                             title="Delete this video"
-                            style="position: absolute; top: -6px; right: -2px; cursor: pointer; color: red; font-size: 17px;">
+                            style="position: absolute;  right: 4px; cursor: pointer; color: red; font-size: 17px;">
                             <i class="fa fa-trash"></i>
                         </span>
                     </div>

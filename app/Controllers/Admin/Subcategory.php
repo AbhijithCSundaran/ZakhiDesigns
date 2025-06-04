@@ -76,7 +76,7 @@ class Subcategory extends BaseController
 
 public function addSubcategory($sub_id = null)
 {
-    if (!$this->session->get('zd_uid')) {
+    if (!$this->session->get('ad_uid')) {
         return redirect()->to(base_url());
     }
 
@@ -128,8 +128,8 @@ public function saveSubcategory() {
             'sub_Discount_Type' => $discount_type,
             'sub_Status' => 1,
             'sub_createdon' => date("Y-m-d H:i:s"),
-            'sub_createdby' => $this->session->get('zd_uid'),
-            'sub_modifyby' => $this->session->get('zd_uid'),
+            'sub_createdby' => $this->session->get('ad_uid'),
+            'sub_modifyby' => $this->session->get('ad_uid'),
         ];
 
         if (empty($sub_id)) {
@@ -190,7 +190,7 @@ public function changeStatus()
 
 public function deleteSubcategory($sub_id) {
 	if ($sub_id) {
-		$modified_by = $this->session->get('zd_uid');
+		$modified_by = $this->session->get('ad_uid');
 		$sub_status = $this->subcategoryModel->deleteSubcategoryById(3, $sub_id, $modified_by);
 		if ($sub_status) {
 			echo json_encode([

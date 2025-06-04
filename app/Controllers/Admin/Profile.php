@@ -19,7 +19,7 @@ class Profile extends BaseController
 
 	public function index()
 {
-    if (!session()->get('zd_uid')) {
+    if (!session()->get('ad_uid')) {
         return redirect()->to(base_url('/admin'));
     }
 	
@@ -34,7 +34,7 @@ class Profile extends BaseController
 
    public function edit_admin()
    {
-	   $us_Id = $this->session->zd_uid;
+	   $us_Id = $this->session->ad_uid;
      $admin = $this->ProfileModel->getProfileById($us_Id); 
 	 
 	
@@ -51,7 +51,7 @@ class Profile extends BaseController
 }
 public function update()
 {
-    $us_Id = $this->session->zd_uid;
+    $us_Id = $this->session->ad_uid;
     $data = [
         'us_Name' => $this->request->getPost('us_Name'),
         'us_Email' => $this->request->getPost('us_Email'),
@@ -67,6 +67,7 @@ public function update()
 
     return redirect()->to('admin/profile');
 }
+
 
    public function change_password()
 	{

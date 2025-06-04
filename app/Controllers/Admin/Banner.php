@@ -52,7 +52,7 @@ class Banner extends BaseController
 	}
      public function deleteBanner($the_id) {
 		if ($the_id) {
-			$modified_by = $this->session->get('zd_uid');
+			$modified_by = $this->session->get('ad_uid');
 			$the_status = $this->bannerModel->deleteBannerById(3, $the_id, $modified_by);
 			if ($the_status) {
 				echo json_encode([
@@ -74,7 +74,7 @@ class Banner extends BaseController
 	}
 	public function addbanner($the_id = null)
 	{
-		if (!$this->session->get('zd_uid')) 
+		if (!$this->session->get('ad_uid')) 
 		{
 			return redirect()->to(base_url());
 		}
@@ -145,8 +145,8 @@ class Banner extends BaseController
 				'the_Home_Banner'  => $newName ?? '',
 				'the_Status'       => 1,
 				'the_createdon'    => date("Y-m-d H:i:s"),
-				'the_createdby'    => $this->session->get('zd_uid'),
-				'the_modifyby'     => $this->session->get('zd_uid'),
+				'the_createdby'    => $this->session->get('ad_uid'),
+				'the_modifyby'     => $this->session->get('ad_uid'),
 			];
 
 			$bannerModel->createBanner($data);
@@ -182,7 +182,7 @@ class Banner extends BaseController
 			$data = [
 				'the_Name'         => $bannerName,
 				'the_Description'  => $description,
-				'the_modifyby'     => $this->session->get('zd_uid'),
+				'the_modifyby'     => $this->session->get('ad_uid'),
 				//'the_Home_Banner'  => $newName ?? $existing['the_Home_Banner']  // retain old name if no new image
 			   	'the_Home_Banner' => $newName ?? $existing->the_Home_Banner
 

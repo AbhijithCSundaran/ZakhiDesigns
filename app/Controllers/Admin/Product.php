@@ -15,7 +15,7 @@ class Product extends BaseController
 
     public function index()
     {
-		 if (!$this->session->get('zd_uid')) {
+		 if (!$this->session->get('ad_uid')) {
         return redirect()->to(base_url('/admin/'));
     }
 
@@ -79,20 +79,7 @@ if ($firstImage) {
 
 		// Action buttons
 		$row['actions'] = '
-		<a href="' . base_url('admin/product/edit/' . $row['pr_Id']) . '">
-			<i class="bi bi-pencil-square"></i>
-		</a>&nbsp;
-		<i class="bi bi-trash text-danger icon-clickable"
-		   onclick="confirmDelete(' . $row['pr_Id'] . ')"></i>&nbsp;
-
-           	<a href="' . base_url('admin/product/view/' . $row['pr_Id']) . '">
-			<i class="bi bi-card-list text-info icon-clickable"></i>
-		</a>&nbsp;
-
-   
-          
-       
-		<img class="img-size open-image-modal"
+        <img class="img-size open-image-modal"
 			 src="' . base_url(ASSET_PATH . 'Admin/assets/images/image_add.ico') . '"
 			 alt="Image-add"
 			 data-toggle="modal"
@@ -101,7 +88,8 @@ if ($firstImage) {
 			 data-product-name="' . htmlspecialchars($row['pr_Name'], ENT_QUOTES) . '"
 			 onclick="openProductModal(' . $row['pr_Id'] . ', \'' . addslashes($row['pr_Name']) . '\')"
 			 style="cursor: pointer;">&nbsp;
-			 
+
+      			 
 		<img class="img-size open-video-modal"
 			 src="' . base_url(ASSET_PATH . 'Admin/assets/images/video_add.ico') . '"
 			 alt="Video-add"
@@ -110,7 +98,18 @@ if ($firstImage) {
 			 data-product-id="' . $row['pr_Id'] . '"
 			 data-product-name="' . htmlspecialchars($row['pr_Name'], ENT_QUOTES) . '"
 			 onclick="openvideoModal(' . $row['pr_Id'] . ', \'' . addslashes($row['pr_Name']) . '\')"
-			 style="cursor: pointer;">';
+			 style="cursor: pointer;">     
+             
+		<a href="' . base_url('admin/product/edit/' . $row['pr_Id']) . '">
+			<i class="bi bi-pencil-square"></i>
+		</a>&nbsp;
+
+           	<a href="' . base_url('admin/product/view/' . $row['pr_Id']) . '">
+			<i class="bi bi-card-list text-info icon-clickable"></i>
+		</a>&nbsp;
+        
+        <i class="bi bi-trash text-danger icon-clickable" style="cursor: pointer;" 
+		   onclick="confirmDelete(' . $row['pr_Id'] . ')"></i>&nbsp;';
 
 	}
 	
@@ -126,7 +125,7 @@ if ($firstImage) {
 //Product Add
 public function addProduct($pr_id = null)
 {
-    if (!$this->session->get('zd_uid')) {
+    if (!$this->session->get('ad_uid')) {
         return redirect()->to(base_url('/admin/'));
     }
 
@@ -182,7 +181,12 @@ public function saveProduct() {
     $fabric = $this->input->getPost('fabric');
     $stitching = $this->input->getPost('stitching');
 
-   
+    if($discount_type == "%" && $discount_value > 100 ){
+        return $this->response->setJSON([
+            'status' => 'error',
+            'message' => 'Enter a Valid Percentage Value.'
+        ]);
+    }
     if (empty($cat_id) || empty($product_name) || empty($product_code) || empty($mrp) || empty($available_color) || empty( $size) ) {
         return $this->response->setJSON([
             'status' => 'error',
@@ -219,14 +223,14 @@ public function saveProduct() {
         'pr_Fabric' => $fabric,
         'pr_Stitch_Type' => $stitching,
         'pr_Status' => 1,
-        'pr_modifyby' => $this->session->get('zd_uid'),
+        'pr_modifyby' => $this->session->get('ad_uid'),
         'pr_modifyon' => date("Y-m-d H:i:s"),
     ];
 
     if (empty($pr_id)) {
         // Insert new product
         $data['pr_createdon'] = date("Y-m-d H:i:s");
-        $data['pr_createdby'] = $this->session->get('zd_uid');
+        $data['pr_createdby'] = $this->session->get('ad_uid');
 
         $this->productModel->productInsert($data);
 
@@ -308,7 +312,7 @@ public function getProductImages($productId)
 //Delte the whole product
 public function deleteProduct($pr_id) {
 	if ($pr_id) {
-		$modified_by = $this->session->get('zd_uid');
+		$modified_by = $this->session->get('ad_uid');
 		$pr_status = $this->productModel->deleteProductById(3, $pr_id, $modified_by);
 		if ($pr_status) {
 			echo json_encode([

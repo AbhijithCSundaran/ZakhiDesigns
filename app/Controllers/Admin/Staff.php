@@ -15,7 +15,7 @@ class Staff extends BaseController
 
     public function index()
     {
-		 if (!$this->session->get('zd_uid')) {
+		 if (!$this->session->get('ad_uid')) {
         return redirect()->to(base_url('/admin/'));
     }
         //$getall['users'] = $this->staffModel->getAllStaff();
@@ -32,7 +32,7 @@ class Staff extends BaseController
     }
 	public function addStaff($us_id = null)
 	{
-		if (!$this->session->get('zd_uid')) 
+		if (!$this->session->get('ad_uid')) 
 		{
 			return redirect()->to(base_url('/admin/'));
 		}
@@ -83,9 +83,13 @@ class Staff extends BaseController
 			return $this->response->setJSON(['status' => 'error', 'msg' => 'Please enter name correctly.']);
 		}
 
-		// Validate emails
+		// Validate emails 1
 		if (!filter_var($staffemail, FILTER_VALIDATE_EMAIL)) {
 			return $this->response->setJSON(['status' => 'error', 'msg' => 'Please enter a valid primary email.']);
+		}
+		// Validate emails 2 
+		if (!filter_var($staffotemail, FILTER_VALIDATE_EMAIL)) {
+			return $this->response->setJSON(['status' => 'error', 'msg' => 'Please enter a valid Secondary email.']);
 		}
 		// Validate mobile
 		if (!empty($mobile) && (!ctype_digit($mobile) || strlen($mobile) !== 10)) {
@@ -137,8 +141,8 @@ class Staff extends BaseController
 				'us_Role'       => 2,
 				'us_Password'   => md5($password),
 				'us_createdon'  => date("Y-m-d H:i:s"),
-				'us_createdby'  => $this->session->get('zd_uid'),
-				'us_modifyby'   => $this->session->get('zd_uid'),
+				'us_createdby'  => $this->session->get('ad_uid'),
+				'us_modifyby'   => $this->session->get('ad_uid'),
 			];
 
 			$staffModel->createStaff($data);
@@ -189,7 +193,7 @@ class Staff extends BaseController
 			'us_Status'    => 1,
 			'us_Role'      => 2,
 			'us_Password'  => $newPassword,
-			'us_modifyby'  => $this->session->get('zd_uid'),
+			'us_modifyby'  => $this->session->get('ad_uid'),
 		];
 
 		$staffModel->modifyStaff($us_id, $data);
@@ -197,7 +201,7 @@ class Staff extends BaseController
 	}
 	 public function deleteStaff($us_id) {
 		if ($us_id) {
-			$modified_by = $this->session->get('zd_uid');
+			$modified_by = $this->session->get('ad_uid');
 			$us_status = $this->staffModel->deleteStaffById(3, $us_id, $modified_by);
 
 			if ($us_status) {

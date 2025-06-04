@@ -39,7 +39,7 @@ $(document).ready(function () {
                     <div class="form-group row align-items-center card-block">
                         <label class="col-auto col-form-label"><strong>Update Status:</strong></label>
                         <div class="col-auto">
-                            <select class="form-control form-control-sm" style="font-size: 12px;" id="orderStatus" name="orderStatus">
+                            <select class="form-control form-control-sm arrow" style="font-size: 12px;" id="orderStatus" name="orderStatus">
                                 <option value="1" ${order.od_Status === '1' ? 'selected' : ''}>New</option>
                                 <option value="2" ${order.od_Status === '2' ? 'selected' : ''}>Confirmed</option>
                                 <option value="3" ${order.od_Status === '3' ? 'selected' : ''}>Packed</option>
@@ -120,5 +120,8 @@ $(document).ready(function () {
             }
         });
     });
+});
+$(document).on('click', '#backToOrders', function () {
+     window.location.href = "<?= base_url('admin/orders') ?>";
 });
 </script>

@@ -162,7 +162,7 @@
                               <a href="#!" class="waves-effect waves-light">
 									<?php
                                         $session = session();
-                                        $username = $session->get('zd_uname');
+                                        $username = $session->get('ad_uname');
                                     ?>  
                                   <span><?= esc($username); ?></span>
                                   <i class="ti-angle-down"></i>

@@ -35,6 +35,7 @@ public function webReg()
 					$this->session->set([
 						'zd_uid' => $userLog->cust_Id,
 						'zd_uname' => $userLog->cust_Name,
+						'role' => 'user',
 					]);
 					
 					echo json_encode(array(
@@ -59,10 +60,11 @@ public function webReg()
 
         
     	public function logout()
-{
-    $session = session();
-    $session->destroy();
-    return redirect()->to(base_url('/')); 
-	
-}
+		{
+			$session = session();
+			$session->remove(['zd_uid', 'zd_uname']); 
+			return redirect()->to(base_url('/'));
+		}
+
+
 }

@@ -61,6 +61,7 @@ $(document).ready(function () {
 
 
 
+
 $(document).ready(function () {
 	const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     const phonePattern = /^\d{10}$/;

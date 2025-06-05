@@ -7,56 +7,55 @@ use CodeIgniter\Router\RouteCollection;
  */
 /* GET METHODS */
 $routes->get('/', 'Home::index');
-$routes->get('ordernow', 'OrderNow::index');
-$routes->get('ordernow/product/(:any)', 'OrderNow::orderproduct/$1');
-$routes->post('ordernow/submit', 'OrderNow::submit');
 
-//$routes->get('ordernow/product/(:any)&(:any)','OrderNow::orderproduct/$1/$2');
-
-$routes->get('product/details', 'ProductDetails::index');
-$routes->get('product', 'Product::index');
-$routes->get('product/product_details/(:num)', 'Product::product_details/$1');
-$routes->get('product/search', 'Product::ajaxSearch');
-$routes->get('product/product_list', 'Product::products_lists');
-$routes->post('product/submit', 'Product::submit');
-
-// $routes->get('weblogin', 'Weblogin::index');
-// $routes->get('webreg', 'Weblogin::webReg');
-$routes->get('Contact', 'Contact::index');
-$routes->get('ordernow', 'OrderNow::index');
-$routes->get('product/details', 'ProductDetails::index');
-$routes->get('product', 'Product::index');
-$routes->get('product/product_details/(:num)', 'Product::product_details/$1');
-$routes->get('product/search', 'Product::ajaxSearch');
-$routes->get('product/products_lists', 'Product::products_lists');
-
-
+// login register logout
 $routes->get('weblogin', 'Weblogin::index');
 $routes->get('webreg', 'Weblogin::webReg');
-
 $routes->post('customerauth', 'Weblogin::customerAuthen');
 $routes->get('logout', 'Weblogin::logout');
 
+// ordernow user
+$routes->get('ordernow', 'OrderNow::index');
+$routes->get('ordernow/product/(:any)', 'OrderNow::orderproduct/$1');
+$routes->post('ordernow/submit', 'OrderNow::submit');
+$routes->post('ordernow/saveAddress', 'OrderNow::saveNewAddress');
+$routes->get('ordernow/getAddress/(:num)', 'OrderNow::getAddress/$1');
+
+//$routes->get('ordernow/product/(:any)&(:any)','OrderNow::orderproduct/$1/$2');
+
+// products user
+$routes->get('product', 'Product::index');
+$routes->get('product/details', 'ProductDetails::index');
+$routes->get('product/product_details/(:num)', 'Product::product_details/$1');
+$routes->get('product/search', 'Product::ajaxSearch');
+$routes->get('product/product_list', 'Product::products_lists');
+$routes->get('product/product_list/category/(:num)', 'Product::product_list_by_category/$1');
+$routes->get('product/product_list/subcategory/(:num)', 'Product::product_list_by_subcategory/$1');
+//$routes->post('product/product_list/search', 'Product::search_products');
+$routes->post('product/submit', 'Product::submit');
+
+// contact us
+$routes->get('contact', 'Contact::index');
+
 //About Us
 $routes->get('aboutus', 'AboutUs::index');
-
 
 //category
 $routes->get('delivery', 'Delivery::index');
 $routes->get('Privacypolicy', 'Privacypolicy::index');
 $routes->get('Termsandconditions', 'Termsandconditions::index');
 $routes->get('Returnpolicy', 'Returnpolicy::index');
-$routes->get('admin/category/delete/(:num)', 'Admin\Category::delete/$1');
 
 
+
+
+// --------------------------------ADMIN----------------------------------------//
 
 
 // $routes->group('admin', ['namespace' => 'App\Controllers\admin'], function($routes) {
-
 $routes->get('admin', 'Admin\Home::index');
 $routes->post('admin/Auth', 'Admin\Auth::authenticate');
 $routes->get('admin/dashboard', 'Admin\Dashboard::index');
-
 
 
 //category
@@ -67,6 +66,7 @@ $routes->get('admin/category/edit/(:num)', 'Admin\Category::addCategory/$1');
 $routes->post('admin/category/save', 'Admin\Category::saveCategory');
 $routes->post('admin/category/status', 'Admin\Category::changeStatus');
 $routes->post('admin/category/delete/(:any)', 'Admin\Category::deleteCategory/$1');
+$routes->get('admin/category/delete/(:num)', 'Admin\Category::delete/$1');
 
 
 //Subcategory
@@ -79,7 +79,7 @@ $routes->post('admin/subcategory/delete/(:any)', 'Admin\Subcategory::deleteSubca
 $routes->post('admin/subcategory/status', 'Admin\Subcategory::changeStatus');
 
 
-//Products
+//admin Products
 $routes->get('admin/product', 'Admin\Product::index');
 $routes->post('admin/product/List', 'Admin\Product::ajaxList');
 $routes->get('admin/product/add', 'Admin\Product::addProduct');

@@ -64,14 +64,15 @@
 
 										<!-- Accordion Section -->
 										<div class="form-group row">
-											<label class="col-sm-3 col-form-label">Theme Sections<span style="color: red;">*</span></label>
+											<label class="col-sm-3 col-form-label">Theme Sections</label>
 											<div class="col-sm-7">
 												<div class="accordion" id="themeAccordion">
 													<!-- Section 1 -->
 													<div class="card">
 														<div class="card-header p-2">
-															<button class="btn btn-link p-0" type="button" data-toggle="collapse" data-target="#sectionOne">
-																Section 1 - Main Banner and Link
+															<button class="btn btn-link p-0" type="button" style ="text-decoration:none!important;
+														color:#000!important;" data-toggle="collapse" data-target="#sectionOne">
+																Main Banner and Link
 															</button>
 														</div>
 														<div id="sectionOne" class="collapse" data-parent="#themeAccordion">
@@ -84,12 +85,15 @@
 																					<input type="text" class="form-control" name="section1_link[]" value="<?= esc($entry['link'] ?? '') ?>" placeholder="Link">
 																				</div>
 																				<div class="col-6">
+																				
 																				<input type="file" class="form-control" name="section1_image[]" accept="image/*" >
+																				
 																				<!-- onchange="previewImage(this)" -->
 
 																					<input type="hidden" name="section1_image_old[]" value="<?= esc($entry['image'] ?? '') ?>">
 																				</div>
 																				<div class="col-12 mt-2">
+																				
 																					<?php if (!empty($entry['image'])): ?>
 																						<img src="<?= base_url('/public/uploads/themes/' . $entry['image']) ?>" class="preview img-thumbnail" style="width: 100px; height: 100px;">
 																					<?php else: ?>
@@ -107,6 +111,8 @@
 																				<input type="text" class="form-control" name="section1_link[]" placeholder="Link">
 																			</div>
 																			<div class="col-6">
+																			<span>(Image size between 1200*300 and 1300*400)</span>
+																			
 																				<input type="file" class="form-control" name="section1_image[]" accept="image/*" onchange="previewImage(this)">
 																				<input type="hidden" name="section1_image_old[]" value="">
 																			</div>
@@ -119,7 +125,6 @@
 																		</div>
 																	<?php endif; ?>
 																</div>
-
 																<div class="text-end mt-2">
 																	<button type="button" class="btn btn-success btn-sm" onclick="addEntry('section1')">+</button>
 																</div>
@@ -131,8 +136,9 @@
 													<!-- Section 2 -->
 												<div class="card mt-2">
 															<div class="card-header p-2">
-																<button class="btn btn-link p-0" type="button" data-toggle="collapse" data-target="#sectionTwo">
-																	Section 2 - Carousel Images and Links
+																<button class="btn btn-link p-0" style ="text-decoration:none!important;
+														color:#000!important;" type="button" data-toggle="collapse" data-target="#sectionTwo">
+																	Carousel Images and Links
 																</button>
 															</div>
 															<div id="sectionTwo" class="collapse" data-parent="#themeAccordion">
@@ -148,6 +154,7 @@
 																						<input type="text" class="form-control" name="section2_name[]" value="<?= esc($entry['name'] ?? '') ?>" placeholder="Name">
 																					</div>
 																					<div class="col-12 mt-2">
+																					<span>(Image size between 300*200 and 400*300)</span>
 																						<input type="file" class="form-control" name="section2_image[]" accept="image/*" onchange="previewImage(this)">
 																						<input type="hidden" name="section2_image_old[]" value="<?= esc($entry['image'] ?? '') ?>">
 																					</div>
@@ -166,12 +173,13 @@
 																		<?php else: ?>
 																			<div class="entry form-row align-items-end mb-2">
 																				<div class="col-6">
-																					<input type="text" class="form-control" name="section2_name[]" placeholder="Name">
-																				</div>
-																				<div class="col-6">
 																					<input type="text" class="form-control" name="section2_link[]" placeholder="Link">
 																				</div>
+																				<div class="col-6">
+																					<input type="text" class="form-control" name="section2_name[]" placeholder="Name">
+																				</div>
 																				<div class="col-12 mt-2">
+																				<span>(Image size between 300*200 and 400*300)</span>
 																					<input type="file" class="form-control" name="section2_image[]" accept="image/*" onchange="previewImage(this)">
 																					<input type="hidden" name="section2_image_old[]" value="">
 																				</div>
@@ -194,9 +202,11 @@
 
 													<!-- Section 3 -->
 												<div class="card mt-2">
-														<div class="card-header p-2">
-															<button class="btn btn-link p-0" type="button" data-toggle="collapse" data-target="#sectionThree">
-																Section 3 - Bottom Image and Link
+														<div class="card-header p-2" >
+
+															<button class="btn btn-link p-0" style ="text-decoration:none!important;
+														color:#000!important;" type="button" data-toggle="collapse" data-target="#sectionThree">
+																Bottom Image and Link
 															</button>
 														</div>
 														<div id="sectionThree" class="collapse" data-parent="#themeAccordion">
@@ -209,6 +219,10 @@
 																					<input type="text" class="form-control" name="section3_link[]" value="<?= esc($entry['link'] ?? '') ?>" placeholder="Link">
 																				</div>
 																				<div class="col-6">
+																						<input type="text" class="form-control" name="section3_name[]" value="<?= esc($entry['name'] ?? '') ?>" placeholder="Name">
+																				</div>
+																				<div class="col-6">
+																				<span>(Image size between 1200*400 and 1400*500)</span>
 																					<input type="file" class="form-control" name="section3_image[]" accept="image/*" onchange="previewImage(this)">
 																					<input type="hidden" name="section3_image_old[]" value="<?= esc($entry['image'] ?? '') ?>">
 																				</div>
@@ -230,6 +244,10 @@
 																				<input type="text" class="form-control" name="section3_link[]" placeholder="Link">
 																			</div>
 																			<div class="col-6">
+																					<input type="text" class="form-control" name="section3_name[]" value="" placeholder="Name">
+																			</div>
+																			<div class="col-6">
+																			<span>(Image size between 1200*400 and 1400*500)</span>
 																				<input type="file" class="form-control" name="section3_image[]" accept="image/*" onchange="previewImage(this)">
 																				<input type="hidden" name="section3_image_old[]" value="">
 																			</div>

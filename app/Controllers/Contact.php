@@ -13,9 +13,6 @@ class Contact extends BaseController {
 	
 	public function index() {
 	
-		if (!$this->session->get('zd_uid')) {
-			return redirect()->to(base_url());
-		}
 		$template = view('common/header');
 		$template.= view('contact');
 		$template.= view('common/footer');      

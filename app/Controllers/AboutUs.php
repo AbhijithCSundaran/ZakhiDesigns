@@ -2,10 +2,12 @@
 namespace App\Controllers;
 use App\Controllers\BaseController;
 
-
+use App\Models\ProductDisplayModel;
 
 class AboutUs extends BaseController
 {
+	protected $productdisplayModel;
+    protected $categories;
 
     public function __construct()
     {
@@ -15,7 +17,13 @@ class AboutUs extends BaseController
 
     public function index()
     {
-        $template = view('common/header');
+		$this->productdisplayModel = new ProductDisplayModel();
+        $this->categories = $this->productdisplayModel->getAllCategoriesAndSub();
+		 $data['categories'] = $this->categories;
+        $data['title'] = 'AboutUs';
+
+        $data['product'] = $this->productdisplayModel->getAllProducts();
+        $template = view('common/header',$data);
 		$template.= view('aboutus');
         $template.= view('common/footer');
         return $template;

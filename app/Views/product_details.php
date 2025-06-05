@@ -21,7 +21,8 @@ if (is_array($decoded) && isset($decoded[0]['name']) && is_array($decoded[0]['na
                     <div class="prod-preview" >
                         <a href="#"
                            class="thumb-link"
-                           data-full="<?= base_url('uploads/productmedia/' . $imgName); ?>"
+						   data-type="image"
+                           data-src="<?= base_url('uploads/productmedia/' . $imgName); ?>"
                            data-title="<?= esc($product['pr_Name']); ?>">
                             <img src="<?= base_url('uploads/productmedia/' . $imgName); ?>"
                                  alt="" />
@@ -84,10 +85,19 @@ if (is_array($decoded) && isset($decoded[0]['name']) && is_array($decoded[0]['na
 								<div class="col-md-12">
 									<p><?= esc($product['pr_Description']); ?></p>
 								</div>
+								<div class="col-md-12"><b>Fabric</b>
+								<span> : <?= esc($product['pr_Fabric']); ?></span>
+								</div>
+								<div class="col-md-12"><b>Sleeve</b>
+								<span> : <?= esc($product['pr_Sleeve_Style']); ?></span>
+								</div>
+								<div class="col-md-12"><b>Stitch Type</b>
+								<span> : <?= esc($product['pr_Stitch_Type']); ?></span>
+								</div>
+								
 								<div class="col-md-12"><b>Size</b></div>
 								<?php $sizes = explode(',', $product['pr_Size']); ?>
-								<div class="col-md-12 size">
-									<select name="size" id="size" class="form-control" required>
+									<select name="size" id="size" style="width: 85px;"  required>
 										<option value="">Size</option> <!-- Add this -->
 										<?php foreach ($sizes as $size): ?>
 											<option value="<?= esc(trim($size)) ?>"

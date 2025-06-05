@@ -196,7 +196,7 @@ public function delete_image($product_id, $image_name)
 			$orderCol = $columns[$postData['order'][0]['column']];
 			$orderDir = $postData['order'][0]['dir'];
 			$builder->orderBy($orderCol, $orderDir);
-		}
+		}   
 
 		// Execute the query and return the result
 		return $builder->get()->getResultArray();
@@ -225,6 +225,16 @@ public function delete_image($product_id, $image_name)
 		}
 		return $builder->countAllResults();
 	}
+
+    //Check if there exist any discount in sub-category
+    public function isDiscountInSub($sub_id){
+        $discountInSub = "SELECT sub_Discount_Value, sub_Discount_Type FROM subcategory WHERE sub_Id = ?";
+        return $this->db->query($discountInSub, [$sub_id])->getRow(); 
+    }
+    public function isDiscountInCat($cat_id){
+        $discountInCat = "SELECT cat_Discount_Value, cat_Discount_Type FROM category WHERE cat_Id  = ?";
+        return $this->db->query($discountInCat,[$cat_id])->getRow();
+    }
 
 
 }

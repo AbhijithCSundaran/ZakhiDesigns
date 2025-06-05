@@ -66,7 +66,7 @@ $routes->get('admin/category/edit/(:num)', 'Admin\Category::addCategory/$1');
 $routes->post('admin/category/save', 'Admin\Category::saveCategory');
 $routes->post('admin/category/status', 'Admin\Category::changeStatus');
 $routes->post('admin/category/delete/(:any)', 'Admin\Category::deleteCategory/$1');
-$routes->get('admin/category/delete/(:num)', 'Admin\Category::delete/$1');
+
 
 
 //Subcategory

@@ -73,34 +73,22 @@
 							<?php 
 							endif; 
 							?>
-							<div class="form-group">
+							<div class="form-group" style="position: relative;">
 								<label>Current Password</label>
-								<input type="password" name="current_password" id="current_password" class="form-control" required>
+								<input type="password" name="current_password" id="current_password" class="form-control"  placeholder="Current Password"  required>
+								 <i class="fa fa-eye" id="toggleCurrentPassword" style="position: absolute; top: 70%; right: 10px; transform: translateY(-50%); cursor: pointer;"></i>
+								</div>						
+							<div class="form-group" style="position: relative;">
+							  <label>New Password</label>
+							  <input type="password" name="new_password" id="new_password" class="form-control" placeholder="New Password" required>
+							  <i class="fa fa-eye" id="toggleNewPassword" style="position: absolute; top: 70%; right: 10px; transform: translateY(-50%); cursor: pointer;"></i>
 							</div>
-							<div class="form-group">
-								<label>New Password</label>
-								<input type="password" name="new_password"  id="new_password" class="form-control" required>
-							</div>
-							<div class="form-group">
-								<label>Confirm New Password</label>
-								<input type="password" name="confirm_password"  id="confirm_password" class="form-control" required>
-							</div>
-							<button type="submit" class="btn btn-warning">Change Password</button>
-						</form>
-					</div>
-				</div>
 
-					<div class="form-group" style="position: relative;">
-					  <label>New Password</label>
-					  <input type="password" name="new_password" id="new_password" class="form-control" placeholder="New Password" required>
-					  <i class="fa fa-eye" id="toggleNewPassword" style="position: absolute; top: 70%; right: 10px; transform: translateY(-50%); cursor: pointer;"></i>
-					</div>
-
-				<div class="form-group" style="position: relative;">
-				  <label>Confirm New Password</label>
-				  <input type="password" name="confirm_password" id="confirm_password" class="form-control" placeholder="Confirm New Password" required>
-				  <i class="fa fa-eye" id="toggleConfirmPassword" style="position: absolute; top: 70%; right: 10px; transform: translateY(-50%); cursor: pointer;"></i>
-				</div>
+						<div class="form-group" style="position: relative;">
+						  <label>Confirm New Password</label>
+						  <input type="password" name="confirm_password" id="confirm_password" class="form-control" placeholder="Confirm New Password" required>
+						  <i class="fa fa-eye" id="toggleConfirmPassword" style="position: absolute; top: 70%; right: 10px; transform: translateY(-50%); cursor: pointer;"></i>
+						</div>
 
 					<button type="button" id="passUpdate" class="btn btn-primary">Change Password</button>
 				  </form>

@@ -149,31 +149,16 @@ class Category extends BaseController
     
     //Category Delete
 
-    public function deleteCategory($cat_id) {
-		if ($cat_id) {
-			$modified_by = $this->session->get('ad_uid');
-			$cat_status = $this->categoryModel->deleteCategoryById(3, $cat_id, $modified_by);
-	
-			if ($cat_status) {
-				echo json_encode([
-					'success' => true,
-					'msg' => 'category deleted Successfully.'
-				]);
-			} else {
-				echo json_encode([
-					'success' => false,
-					'msg' => 'Failed to delete Category.'
-				]);
-			}
-		} else {
-			echo json_encode([
-				'success' => false,
-				'msg' => 'Invalid request.'
-			]);
-		}
+ 
+   public function deleteCategory($cat_id)
+	{
+		$modified_by = session()->get('us_Id'); 
+
+		$this->categoryModel->deleteCategoryAndSubcategories($cat_id, $modified_by);
 	}
 	
 	// Listing table data
+	
 	public function ajaxList()
 	{
 	$model = new \App\Models\Admin\CategoryModel();
@@ -201,7 +186,7 @@ class Category extends BaseController
 
 
 		// Action buttons
-		$row['actions'] = '<a href="' . base_url('admin/Category/edit/' . $row['cat_Id']) . '">
+		$row['actions'] = '<a href="' . base_url('admin/category/edit/' . $row['cat_Id']) . '">
 				<i class="bi bi-pencil-square"></i>
 			</a>&nbsp;
 			<i class="bi bi-trash text-danger icon-clickable"

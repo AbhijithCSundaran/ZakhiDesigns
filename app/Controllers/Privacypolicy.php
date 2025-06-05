@@ -18,10 +18,11 @@ class Privacypolicy extends BaseController
         
         
         $template = view('common/header');
-		$template.= view('Privacypolicy');
+		$template.= view('privacypolicy');
         $template.= view('common/footer');
         return $template;
 
         
     }
+	
 }

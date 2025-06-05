@@ -8,6 +8,7 @@ use CodeIgniter\HTTP\IncomingRequest;
 use CodeIgniter\HTTP\RequestInterface;
 use CodeIgniter\HTTP\ResponseInterface;
 use Psr\Log\LoggerInterface;
+use App\Models\ProductDisplayModel;
 
 /**
  * Class BaseController
@@ -36,7 +37,9 @@ abstract class BaseController extends Controller
      * @var list<string>
      */
     protected $helpers = [];
-
+	
+	 protected $productdisplayModel;
+     protected $categories;
     /**
      * Be sure to declare properties for any property fetch you initialized.
      * The creation of dynamic property is deprecated in PHP 8.2.
@@ -50,7 +53,10 @@ abstract class BaseController extends Controller
     {
         // Do Not Edit This Line
         parent::initController($request, $response, $logger);
+		 $this->productdisplayModel = new ProductDisplayModel();
+        $this->categories = $this->productdisplayModel->getAllCategoriesAndSub();
 
+        // Share categories with all views automatically
         // Preload any models, libraries, etc, here.
 
         // E.g.: $this->session = service('session');

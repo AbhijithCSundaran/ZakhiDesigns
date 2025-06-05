@@ -54,20 +54,40 @@
           </div>
     </div>
 
-<!-- Change Password -->
-<div class="col-sm-6">
-  <div class="card">
-	<div class="card-header">
-	  <h5>Change Password</h5>
-	</div>
-			<div class="card-block">
-			<div class="alert alert-danger" style="display:none" id="passAlert"></div>
-			  <form id="changePasswordForm" name="changePasswordForm">
-
-				<div class="form-group" style="position: relative;">
-				  <label>Current Password</label>
-				  <input type="password" id="current_password" name="current_password" class="form-control" placeholder="Current Password">
-				  <i class="fa fa-eye" id="toggleCurrentPassword" style="position: absolute; top: 70%; right: 10px; transform: translateY(-50%); cursor: pointer;"></i>
+			<!-- Change Password -->
+			<div class="col-sm-6">
+				<div class="card">
+				
+				
+					<div class="card-header"><h5>Change Password</h5></div>
+					<div class="card-block">
+						<form method="post" action="<?= base_url('admin/profile/change_password'); ?>">
+						<?php 
+							if (session()->getFlashdata('error')): ?>
+								<div class="alert alert-danger alert-dismissible fade show" role="alert">
+									<?= session()->getFlashdata('error') ?>
+									<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+										<span aria-hidden="true">&times;</span>
+									</button>
+								</div>
+							<?php 
+							endif; 
+							?>
+							<div class="form-group">
+								<label>Current Password</label>
+								<input type="password" name="current_password" id="current_password" class="form-control" required>
+							</div>
+							<div class="form-group">
+								<label>New Password</label>
+								<input type="password" name="new_password"  id="new_password" class="form-control" required>
+							</div>
+							<div class="form-group">
+								<label>Confirm New Password</label>
+								<input type="password" name="confirm_password"  id="confirm_password" class="form-control" required>
+							</div>
+							<button type="submit" class="btn btn-warning">Change Password</button>
+						</form>
+					</div>
 				</div>
 
 					<div class="form-group" style="position: relative;">
@@ -82,7 +102,7 @@
 				  <i class="fa fa-eye" id="toggleConfirmPassword" style="position: absolute; top: 70%; right: 10px; transform: translateY(-50%); cursor: pointer;"></i>
 				</div>
 
-					<button type="submit" id="passUpdate" class="btn btn-primary">Change Password</button>
+					<button type="button" id="passUpdate" class="btn btn-primary">Change Password</button>
 				  </form>
 				</div>
 			  </div>

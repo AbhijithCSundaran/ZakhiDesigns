@@ -22,44 +22,53 @@
 <section class="category-promo">
     <div class="container-lg">
         <div class="col-md-12">
-            <div class="row">
+            <div class="row" id="section2-slider">
                 <?php
-                if (!empty($themes['theme_Section2'])) {
+                if (!empty($themes['theme_Section2'])):
                     $section2 = json_decode($themes['theme_Section2'], true);
-                    // Display up to 3 images from section2
-                    for ($i = 0; $i < 3; $i++) {
-                        if (!empty($section2[$i]['image'])) {
-                            $imagePath = base_url('public/uploads/themes/' . $section2[$i]['image']);
-                            $title = !empty($section2[$i]['name']) ? $section2[$i]['name'] : 'Category';
-                            $link = !empty($section2[$i]['link']) ? $section2[$i]['link'] : '#';
-                            echo '<div class="col-md-4">';
-                            echo '<a href="' . esc($link) . '">';
-                            echo '<img src="' . $imagePath . '" class="img-fluid"/>';
-                            echo '<div class="col-md-12 cat-title">' . esc($title) . '</div>';
-                            echo '</a>';
-                            echo '</div>';
-                        } else {
-                            // Fallback for missing images
-                            $fallbackImage = base_url(ASSET_PATH . 'assets/images/c' . ($i + 1) . '.jpg');
-                            $fallbackTitle = ['New Women Style', 'Best Women Shopping', 'Top Women Collection'][$i];
-                            echo '<div class="col-md-4">';
-                            echo '<img src="' . $fallbackImage . '" class="img-fluid"/>';
-                            echo '<div class="col-md-12 cat-title">' . $fallbackTitle . '</div>';
-                            echo '</div>';
-                        }
-                    }
-                } else {
-                    // Full fallback to static if theme_Section2 is empty
-                    $fallbackTitles = ['New Women Style', 'Best Women Shopping', 'Top Women Collection'];
-                    for ($i = 0; $i < 3; $i++) {
-                        echo '<div class="col-md-4">';
-                        echo '<img src="' . base_url(ASSET_PATH . 'assets/images/c' . ($i + 1) . '.jpg') . '" class="img-fluid"/>';
-                        echo '<div class="col-md-12 cat-title">' . $fallbackTitles[$i] . '</div>';
-                        echo '</div>';
-                    }
-                }
+                    foreach ($section2 as $index => $item):
+                        if (!empty($item['image'])):
+                            $imagePath = base_url('public/uploads/themes/' . $item['image']);
+                            $title = !empty($item['name']) ? $item['name'] : 'Category';
+                            $link = !empty($item['link']) ? $item['link'] : '#';
+                ?>
+                <div class="col-md-4 section2-item" data-index="<?= $index ?>" style="<?= $index >= 3 ? 'display:none;' : '' ?>">
+                    <a href="<?= esc($link) ?>">
+                        <img src="<?= esc($imagePath) ?>" class="img-fluid" />
+                    </a>
+                    <div class="col-md-12 cat-title"><?= esc($title) ?></div>
+                </div>
+                <?php
+                        endif;
+                    endforeach;
+                endif;
                 ?>
             </div>
         </div>
     </div>
 </section>
+
+
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    const allItems = document.querySelectorAll(".section2-item");
+    const totalItems = allItems.length;
+    let currentIndex = 0;
+
+    function updateSection2() {
+        allItems.forEach(item => item.style.display = "none");
+
+        for (let i = 0; i < 3; i++) {
+            const index = (currentIndex + i) % totalItems;
+            allItems[index].style.display = "block";
+        }
+
+        currentIndex = (currentIndex + 3) % totalItems;
+    }
+
+    // Refresh every 10 minutes (600000 ms)
+    setInterval(updateSection2, 600000);
+});
+</script>
+

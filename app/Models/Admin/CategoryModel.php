@@ -16,9 +16,7 @@ class CategoryModel extends Model {
         public function getAllCategory() {
             return $this->db->query("SELECT * FROM category WHERE cat_Status <> 3")->getResultArray();
         }
-         public function getCategoryByid($id){
-            return $this->db->table('category')->where('cat_Id', $id)->get()->getRow(); 
-    }
+         
     
 public function isCategoryExists($categoryName, $excludeId = null) {
     $builder = $this->db->table('category');
@@ -31,10 +29,13 @@ public function isCategoryExists($categoryName, $excludeId = null) {
 
     return $builder->get()->getRow();
 }
+	public function getCategoryByid($catId){
 
-    public function updateCategory($id, $data)
+			return $this->db->query("select * from category where cat_Id = '".$catId."'")->getRow();
+    }
+    public function updateCategory($catId, $data)
     {
-        return $this->db->table('category')->where('cat_Id', $id) ->update($data);
+        return $this->db->table('category')->where('cat_Id', $catId) ->update($data);
     }
   // delete category
   

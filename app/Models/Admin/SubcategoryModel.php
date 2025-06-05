@@ -52,6 +52,9 @@ class SubcategoryModel extends Model {
             ->get()
             ->getRow();
     }
+    public function getsubCategory($subId){
+        return $this->db->query("select * from subcategory where sub_Id = '".$subId."' ")->getRow();
+    }
     
     public function updatesubCategory($id, $data)
     {

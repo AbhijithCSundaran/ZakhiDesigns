@@ -120,10 +120,13 @@ class Category extends BaseController
     {
         $catId = $this->request->getPost('cat_Id');
         $newStatus = $this->request->getPost('cat_Status');
-    
-        $categoryModel = new CategoryModel();
+        
+        $categoryModel =  new \App\Models\Admin\CategoryModel();
         $category = $categoryModel->getCategoryByid($catId);
-    
+
+        $productModel = new \App\Models\Admin\ProductModel();
+	    $product = $productModel->getProductByid($catId);
+        
         if (!$category) {
             return $this->response->setJSON([
                 'success' => false,

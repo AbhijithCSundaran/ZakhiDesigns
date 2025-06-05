@@ -150,12 +150,12 @@ class Category extends BaseController
     //Category Delete
 
  
-  public function deleteCategory($cat_id)
-{
-    $modified_by = session()->get('admin_id'); // or whatever you use
+   public function deleteCategory($cat_id)
+	{
+		$modified_by = session()->get('us_Id'); 
 
-    $this->categoryModel->deleteCategoryAndSubcategories($cat_id, $modified_by);
-}
+		$this->categoryModel->deleteCategoryAndSubcategories($cat_id, $modified_by);
+	}
 	
 	// Listing table data
 	

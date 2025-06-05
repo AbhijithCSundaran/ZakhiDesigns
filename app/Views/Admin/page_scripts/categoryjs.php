@@ -163,7 +163,7 @@ function confirmDelete(catId) {
                 success: function(response) {
                     Swal.fire('Deleted!', 'Category has been deleted.', 'success')
                         .then(() => {
-                            location.reload(); // or use AJAX to refresh the table
+                            location.reload(); 
                         });
                 },
                 error: function(xhr, status, error) {

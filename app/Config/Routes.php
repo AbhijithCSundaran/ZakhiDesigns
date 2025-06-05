@@ -60,6 +60,8 @@ $routes->get('delivery', 'Delivery::index');
 $routes->get('Privacypolicy', 'Privacypolicy::index');
 $routes->get('Termsandconditions', 'Termsandconditions::index');
 $routes->get('Returnpolicy', 'Returnpolicy::index');
+$routes->get('admin/category/delete/(:num)', 'Admin\Category::delete/$1');
+
 
 
 

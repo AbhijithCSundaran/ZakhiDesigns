@@ -38,9 +38,37 @@ public function isCategoryExists($categoryName, $excludeId = null) {
     }
 
     public function deleteCategoryById($cat_status, $cat_id, $modified_by)
-		{
-			return $this->db->query("update category set cat_Status = '".$cat_status."', cat_modifyon=NOW(), cat_modifyby='".$modified_by."' where cat_Id = '".$cat_id."'");
-		}
+	{
+		return $this->db->table('category')
+			->where('cat_Id', $cat_id)
+			->update([
+				'cat_Status'   => $cat_status,
+				'cat_modifyon' => date('Y-m-d H:i:s'),
+				'cat_modifyby' => $modified_by
+			]);
+	}
+	public function deleteCategoryAndSubcategories($cat_id, $modified_by)
+{
+    // Step 1: Delete category (soft delete by setting cat_Status = 3)
+    $this->db->table('category')
+        ->where('cat_Id', $cat_id)
+        ->update([
+            'cat_Status'   => 3,
+            'cat_modifyon' => date('Y-m-d H:i:s'),
+            'cat_modifyby' => $modified_by
+        ]);
+
+    // Step 2: Delete all subcategories under this category
+    $this->db->table('subcategory')
+        ->where('cat_Id', $cat_id)
+        ->update([
+            'sub_Status'   => 3,
+            'sub_modifiyon' => date('Y-m-d H:i:s'),
+            'sub_modifyby'  => $modified_by
+        ]);
+
+    return true;
+}
 		
 				//**************************Data table */
 	protected $table = 'category';

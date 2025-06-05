@@ -157,24 +157,21 @@ function confirmDelete(catId) {
         cancelButtonText: 'Cancel',
     }).then((result) => {
         if (result.isConfirmed) {
-            // AJAX call to delete
             $.ajax({
-                url: "<?php echo base_url('admin/category/delete'); ?>/" + catId,
-                method: "POST",
-                dataType: "json",
+                url: "<?php echo base_url('admin/category/delete/'); ?>" + catId,
+                type: "POST",
                 success: function(response) {
-                    if (response.success) {
-                        Swal.fire('Deleted!', response.msg, 'success');
-                        setTimeout(() => location.reload(), 1000);
-                    } else {
-                        Swal.fire('Error', response.msg, 'error');
-                    }
+                    Swal.fire('Deleted!', 'Category has been deleted.', 'success')
+                        .then(() => {
+                            location.reload(); // or use AJAX to refresh the table
+                        });
                 },
-                error: function() {
-                    Swal.fire('Error', 'Something went wrong.', 'error');
+                error: function(xhr, status, error) {
+                    Swal.fire('Error!', 'Something went wrong.', 'error');
                 }
             });
         }
     });
 }
+
 </script>

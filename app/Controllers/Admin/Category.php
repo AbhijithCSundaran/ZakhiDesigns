@@ -149,31 +149,16 @@ class Category extends BaseController
     
     //Category Delete
 
-    public function deleteCategory($cat_id) {
-		if ($cat_id) {
-			$modified_by = $this->session->get('ad_uid');
-			$cat_status = $this->categoryModel->deleteCategoryById(3, $cat_id, $modified_by);
-	
-			if ($cat_status) {
-				echo json_encode([
-					'success' => true,
-					'msg' => 'category deleted Successfully.'
-				]);
-			} else {
-				echo json_encode([
-					'success' => false,
-					'msg' => 'Failed to delete Category.'
-				]);
-			}
-		} else {
-			echo json_encode([
-				'success' => false,
-				'msg' => 'Invalid request.'
-			]);
-		}
-	}
+ 
+  public function deleteCategory($cat_id)
+{
+    $modified_by = session()->get('admin_id'); // or whatever you use
+
+    $this->categoryModel->deleteCategoryAndSubcategories($cat_id, $modified_by);
+}
 	
 	// Listing table data
+	
 	public function ajaxList()
 	{
 	$model = new \App\Models\Admin\CategoryModel();

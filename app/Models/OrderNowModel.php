@@ -4,8 +4,11 @@ use CodeIgniter\Model;
 
 class OrderNowModel extends Model
 {
-    protected $table = 'product'; // Primary table
-    protected $primaryKey = 'pr_Id';
+    protected $table = 'order_Detail'; // Primary table
+    protected $primaryKey = 'od_Id';
+	protected $allowedFields = [
+    'pr_Id','od_Original_Price','od_Selling_Price','od_modifyby','pr_Code','cus_Id','od_Status',
+    'od_Quantity','od_Grand_Total','od_createdby','od_createdon','add_Id'];
 
    public function getProductWithAddress($cus_Id, $pr_Id)
 {
@@ -23,7 +26,11 @@ class OrderNowModel extends Model
 	{
 		return $this->db->query("select * from order_detail where od_Id = '".$od_Id."'")->getRow();
 	}
-	
+	  public function updateOrderStatus($od_Id, $data)
+    {
+        return $this->update($od_Id, $data);
+    }
+
 	public function getProductByid($pr_Id)
 	{
 		return $this->db->table('product p')
@@ -42,13 +49,12 @@ public function getCustomerAddress($cus_Id)
         ->get()
         ->getRow();
 }
- public function getDefaultAddress($zd_uid)
+/*  public function getDefaultAddress($zd_uid)
     {
         return $this->where(['add_CustId' => $zd_uid, 'add_Default' => 1])->first();
     }
-
     public function getAllAddresses($zd_uid)
     {
         return $this->where('add_CustId', $zd_uid)->findAll();
-    }
+    } */
 }

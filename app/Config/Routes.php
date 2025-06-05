@@ -38,6 +38,8 @@ $routes->get('ordernow', 'OrderNow::index');
 $routes->get('ordernow/product/(:any)', 'OrderNow::orderproduct/$1');
 $routes->post('ordernow/submit', 'OrderNow::submit');
 $routes->post('ordernow/saveAddress', 'OrderNow::saveNewAddress');
+$routes->post('ordernow/submitfrm', 'OrderNow::submitfrm');
+//$routes->post('ordernow/submitfrm', 'OrderNow::submitfrm');
 $routes->get('ordernow/getAddress/(:num)', 'OrderNow::getAddress/$1');
 
 $routes->get('weblogin', 'Weblogin::index');

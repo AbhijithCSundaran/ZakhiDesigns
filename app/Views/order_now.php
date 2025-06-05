@@ -9,13 +9,12 @@
                 <div class="mb-3">
                     <h6>Submit the order form to place your order.</h6>
                 </div>
-
-                <form id="orderNowForm" method="post">
+				<form id="orderNowForm" name="orderNowForm" method="post" action="<?= base_url('ordernow/submitfrm') ?>">
                     <div id="messageBox" class="alert" style="display: none;"></div>
 
                     <!-- Accordion Starts -->
                     <div class="accordion mt-4" id="addressAccordion">
-						<form id="orderNowForm" name="orderNowForm" method="post" >
+						
                         <!-- Default Address Section -->
                         <div class="accordion-item">
                             <h2 class="accordion-header" id="headingDefault">
@@ -53,10 +52,16 @@
                                         ) ?></textarea>
                                     </div>
                                 </div>
+								<div class="mt-4 text-end">
+                        <input type="hidden" name="od_Id" value="<?= esc($details['od_Id'] ?? '') ;?>">
+						<input type="hidden" name="add_Id" value="<?= esc($details['add_Id'] ?? '');?>">
+                        <button type="submit" class="btn btn-dark" id="orderNowBtn">Order Now</button>
+                    </div>
                             </div>
+							 
                         </div>
-						</form>
-
+						
+				</form>
                         <!-- Choose Existing Address Section -->
                         <div class="accordion-item">
                             <h2 class="accordion-header" id="headingExisting">
@@ -117,12 +122,7 @@
 
                     </div>
                     <!-- Accordion Ends -->
-
-                    <div class="mt-4 text-end">
-                        <input type="hidden" name="od_Id" value="<?= esc($details['od_Id'] ?? '') ;?>">
-                        <button type="submit" class="btn btn-dark" id="orderNowBtn">Order Now</button>
-                    </div>
-                </form>
+				
             </div>
 
             <!-- Right Panel: Product Summary -->

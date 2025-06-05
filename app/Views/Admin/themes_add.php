@@ -85,7 +85,7 @@
 																					<input type="text" class="form-control" name="section1_link[]" value="<?= esc($entry['link'] ?? '') ?>" placeholder="Link">
 																				</div>
 																				<div class="col-6">
-																				
+																				<span>(Image size between 1200*300 and 1300*400)</span>
 																				<input type="file" class="form-control" name="section1_image[]" accept="image/*" >
 																				
 																				<!-- onchange="previewImage(this)" -->

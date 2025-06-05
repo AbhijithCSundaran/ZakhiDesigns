@@ -18,7 +18,6 @@ class OrderNow extends Controller
 
         $data['details'] = $model->getDefaultAddress($zd_uid);
         $data['addresses'] = $model->getAllAddresses($zd_uid);
-
         $template = view('common/header');
         $template .= view('order_now', $data); 
         $template .= view('common/footer'); 
@@ -113,74 +112,71 @@ class OrderNow extends Controller
     }
 
     public function submitfrm()
-    {
-        $orderModel = new OrderNowModel();
-        $zd_uid = session()->get('zd_uid');
+{
+    $orderModel = new OrderNowModel();
+    $addressModel = new AddressModel();
+    $zd_uid = session()->get('zd_uid');
+    $od_Id = $this->request->getPost('od_Id');
+    $add_Id = $this->request->getPost('add_Id');
 
-        if (empty($zd_uid)) {
-            return redirect()->to(base_url());
-        }
-
-        $od_Id = $this->request->getPost('od_Id');
-
-        if (empty($od_Id)) {
-            return $this->response->setJSON([
-                'status' => 0,
-                'msg'    => 'Missing order ID.'
-            ]);
-        }
-
-        $order = $orderModel->getOrdersById($od_Id);
-        if (!$order) {
-            return $this->response->setJSON([
-                'status' => 0,
-                'msg'    => 'Order not found.'
-            ]);
-        }
-
-        $pr_Id   = $order->pr_Id;
-        $cust_id = $order->cus_Id;
-        $qty     = $order->od_Quantity;
-
-        $product = $orderModel->getProductById($pr_Id);
-        $productName   = $product->pr_Name ?? '';
-        $pr_code       = $product->pr_Code ?? '';
-        $grand_total   = $order->od_Grand_Total ?? 0;
-        $custEmail     = '';
-
-        $customer = $orderModel->getCustomerAddress($cust_id);
-
-        if (!$customer) {
-            return $this->response->setJSON([
-                'status' => 0,
-                'msg'    => 'Customer details not found.'
-            ]);
-        }
-
-        $custName    = $customer->add_Name ?? '';
-        $custPhone   = $customer->add_Phone ?? '';
-        $custEmail   = $customer->add_Email ?? '';
-        $custAddress = $customer->add_Address ?? '';
-
-        $message = "🛒 *New Order Placed*\n"
-            . "*Product:* $productName\n"
-            . "*Code:* $pr_code\n"
-            . "*Amount:* ₹$grand_total\n"
-            . "*Customer:* $custName\n"
-            . "*Address:* $custAddress\n"
-            . "*Phone:* $custPhone\n";
-
-        $email = \Config\Services::email();
-        $email->setTo($custEmail);
-        $email->setBCC('sandra@smartlounge.online');
-        $email->setSubject('New Order Confirmation');
-        $email->setMessage(nl2br($message));
-        $email->send();
-
-        return $this->response->setJSON([
-            'status' => 1,
-            'msg'    => 'Order confirmation sent successfully. Mail sent to your mail ID.',
-            'od_Id'  => $od_Id
-        ]);
+    if (empty($zd_uid) || empty($od_Id)) {
+        return $this->response->setJSON(['status' => 0, 'msg' => 'Unauthorized or missing data.']);
     }
+
+    $order = $orderModel->getOrdersById($od_Id);
+    if (!$order) {
+        return $this->response->setJSON(['status' => 0, 'msg' => 'Order not found.']);
+    }
+
+    $orderModel->updateOrderStatus($od_Id, [
+        'od_Status'     => 1,
+        'od_createdby'  => $zd_uid,
+        'od_createdon'  => date('Y-m-d H:i:s'),
+        'add_Id'        => $add_Id
+    ]);
+    $product = $orderModel->getProductById($order->pr_Id);
+    $customer = $addressModel->findAddress($order->add_Id);
+    if (!$customer) {
+        return $this->response->setJSON(['status' => 0, 'msg' => 'Customer address not found.']);
+    }
+		$addressDetails = implode(', ', array_filter([
+        $customer->add_BuldingNo ?? '',
+        $customer->add_Street ?? '',
+        $customer->add_Landmark ?? '',
+        $customer->add_City ?? '',
+        $customer->add_State ?? '',
+        $customer->add_Pincode ?? ''
+    ]));
+
+    $message = "
+        <h3>🛒 Order Confirmation</h3>
+        <table border='1' cellpadding='10' cellspacing='0' style='border-collapse: collapse;'>
+            <tr><th>Order ID</th><td>{$od_Id}</td></tr>
+            <tr><th>Product</th><td>{$product->pr_Name}</td></tr>
+            <tr><th>Product Code</th><td>{$product->pr_Code}</td></tr>
+            <tr><th>Quantity</th><td>{$order->od_Quantity}</td></tr>
+            <tr><th>Total Amount</th><td>₹{$order->od_Grand_Total}</td></tr>
+            <tr><th>Customer</th><td>{$customer['add_Name']}</td></tr>
+            <tr><th>Email</th><td>{$customer['add_Email']}</td></tr>
+            <tr><th>Phone</th><td>{$customer['add_Phone']}</td></tr>
+            <tr><th>Delivery Address</th><td>{$addressDetails}</td></tr>
+        </table>
+    ";
+    $email = \Config\Services::email();
+    $email->setTo($customer['add_Email']);
+    $email->setBCC('sandra@smartlounge.online');
+    $email->setSubject('New Order Confirmation');
+    $email->setMessage($message);
+    $email->setMailType('html');
+
+    $email->send();
+
+    return $this->response->setJSON([
+        'status' => 1,
+        'msg'    => 'Order confirmed successfully. Email sent.',
+        'od_Id'  => $od_Id
+    ]);
+}
+
+
 }

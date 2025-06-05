@@ -64,7 +64,7 @@ $(document).ready(function() {
         const value = $(this).val().trim();
         $('#error-staffname').text(value ? '' : 'Name is required.');
     });
-    $('#staffemail').on('input', function() {
+    $('#staffemail').on('input', function () {
         const value = $(this).val().trim();
         if (!value) {
             $('#error-staffemail').text('Email is required.');
@@ -74,9 +74,12 @@ $(document).ready(function() {
             $('#error-staffemail').text('');
         }
     });
-    $('#staffotemail').on('input', function() {
+
+    $('#staffotemail').on('input', function () {
         const value = $(this).val().trim();
-        if (!emailPattern.test(value)) {
+        if (!value) {
+            $('#error-staffotemail').text('Email field is required.');
+        } else if (!emailPattern.test(value)) {
             $('#error-staffotemail').text('Invalid email format.');
         } else {
             $('#error-staffotemail').text('');

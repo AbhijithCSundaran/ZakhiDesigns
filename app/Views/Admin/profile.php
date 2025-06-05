@@ -61,7 +61,7 @@
 				
 					<div class="card-header"><h5>Change Password</h5></div>
 					<div class="card-block">
-						<form method="post" action="<?= base_url('admin/profile/change_password'); ?>">
+					    <form method="post" id="changePasswordForm" action="<?= base_url('admin/profile/change_password'); ?>">
 						<?php 
 							if (session()->getFlashdata('error')): ?>
 								<div class="alert alert-danger alert-dismissible fade show" role="alert">

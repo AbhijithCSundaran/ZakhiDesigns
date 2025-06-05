@@ -36,7 +36,8 @@ public function isCategoryExists($categoryName, $excludeId = null) {
     {
         return $this->db->table('category')->where('cat_Id', $id) ->update($data);
     }
-
+  // delete category
+  
     public function deleteCategoryById($cat_status, $cat_id, $modified_by)
 	{
 		return $this->db->table('category')
@@ -48,8 +49,7 @@ public function isCategoryExists($categoryName, $excludeId = null) {
 			]);
 	}
 	public function deleteCategoryAndSubcategories($cat_id, $modified_by)
-{
-    // Step 1: Delete category (soft delete by setting cat_Status = 3)
+  {
     $this->db->table('category')
         ->where('cat_Id', $cat_id)
         ->update([
@@ -58,7 +58,6 @@ public function isCategoryExists($categoryName, $excludeId = null) {
             'cat_modifyby' => $modified_by
         ]);
 
-    // Step 2: Delete all subcategories under this category
     $this->db->table('subcategory')
         ->where('cat_Id', $cat_id)
         ->update([
@@ -68,9 +67,10 @@ public function isCategoryExists($categoryName, $excludeId = null) {
         ]);
 
     return true;
-}
+  }
 		
-				//**************************Data table */
+	//**************************Data table */
+				
 	protected $table = 'category';
     protected $primaryKey = 'cat_Id';
     protected $allowedFields = ['cat_Name', 'cat_Discount_Value','cat_Discount_Type','cat_Status']; // Adjust to your table

@@ -39,7 +39,6 @@
                                         </div>
                                         <div class="col-md-7">
                                         <div id="message" style="display:none;"></div>
-                                        <div id="messageBox" class="alert" style="display: none;"></div>
                                         </div>
                                         <div class="col-md-3">
                                             <div class="row">
@@ -53,10 +52,9 @@
                                     </div>
                                 </div>
                                 <div class="card-block">
-                                    <div class="card">
-                                    
-                                      
+                                    <div class="card">    
                                         <div class="card-block table-border-style">
+                                        <div id="messageBox" class="alert" style="display: none;"></div>
                                             <div class="table-responsive">
                                                 <table class="table table-hover" id="categoryList">
                                                     <thead>

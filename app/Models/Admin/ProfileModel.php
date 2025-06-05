@@ -35,12 +35,13 @@ class ProfileModel extends Model
     
     public function change_passwordNow($new_password,$current_password, $us_Id)
     {
+		
 		$new_pass = md5($new_password);
         $check = $this->db->query("select us_Password from user where us_Id= '".$us_Id."'")->getRow();
 		$cu_pass = md5($current_password);
 		if($check && $check->us_Password == $cu_pass ){
-			$result = $this->db->query("update user set us_Password = '".$new_pass."'");
-			return $result;
+		$result = $this->db->query("UPDATE user SET us_Password = '".$new_pass."' WHERE us_Id = '".$us_Id."'");
+		return $result;
 		}
     }
    

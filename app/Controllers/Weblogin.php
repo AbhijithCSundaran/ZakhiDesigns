@@ -18,11 +18,13 @@ class Weblogin extends BaseController
 	{
 
 		return view('weblogin');
+		
 	}
 
 	public function webReg()
 	{
 		return view('webregister');
+		   
 	}
 	public function customerAuthen()
 	{

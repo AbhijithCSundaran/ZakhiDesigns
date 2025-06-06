@@ -114,11 +114,11 @@ class Customer extends BaseController
 				$CreateCust = $this->customerModel->createcust($data);
 				//echo json_encode(array("status" => 1, "msg" => "Customer Created successfully."));
 
-				$this->session->set([
-    'ad_uid' => $CreateCust, // or the actual ID if your model returns it
-    'ad_uname' => $custname,
-    'ad_email' => $custemail,
-]);
+// 				$this->session->set([
+//     'ad_uid' => $CreateCust, // or the actual ID if your model returns it
+//     'ad_uname' => $custname,
+//     'ad_email' => $custemail,
+// ]);
 				echo json_encode(array(
 					"status" => 1,
 					"msg" => "Account Created successfully. Please login to your account to start shopping.",

@@ -34,8 +34,38 @@ $routes->get('product/product_list/subcategory/(:num)', 'Product::product_list_b
 //$routes->post('product/product_list/search', 'Product::search_products');
 $routes->post('product/submit', 'Product::submit');
 
-// contact us
-$routes->get('contact', 'Contact::index');
+
+
+$routes->get('contact','Contact::index'); 
+$routes->post('contact/submit', 'Contact::submit');
+$routes->get('review', 'Review::index');
+$routes->post('review/submit', 'Review::submit');
+$routes->get('profile', 'Profile::index');
+$routes->post('profile/update', 'Profile::update');
+$routes->post('profile/address/add', 'Profile::addAddress');
+$routes->post('profile/address/edit', 'Profile::editAddress');
+$routes->post('profile/address/delete', 'Profile::deleteAddress');
+$routes->post('/profile/setDefaultAddress', 'Profile::setDefaultAddress');
+$routes->post('profile/update', 'Profile::update');
+$routes->post('profile/getAddress', 'Profile::getAddress');
+
+
+
+
+
+$routes->get('product/details', 'ProductDetails::index');
+$routes->get('product', 'Product::index');
+$routes->get('product/product_details/(:num)', 'Product::product_details/$1');
+$routes->get('product/search', 'Product::ajaxSearch');
+$routes->get('product/products_lists', 'Product::products_lists');
+$routes->get('product/product_list', 'Product::products_lists');
+$routes->get('ordernow', 'OrderNow::index');
+$routes->get('ordernow/product/(:any)', 'OrderNow::orderproduct/$1');
+$routes->post('ordernow/submitfrm', 'OrderNow::submitfrm');
+//$routes->post('ordernow/submitfrm', 'OrderNow::submitfrm');
+
+
+
 
 //About Us
 $routes->get('aboutus', 'AboutUs::index');

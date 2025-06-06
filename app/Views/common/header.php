@@ -75,12 +75,8 @@
                                 <?php endif; ?>
                             </div>
 
-
-                        </div>
-
-
-
-                        <a href="<?= base_url('/contact');?>">Contact</a>
+                       </div>
+                        <a href="<?= base_url('contact');?>">Contact</a>
 
                         <?php if (session()->get('zd_uname')): ?>
                         <div class="dropdown">
@@ -163,21 +159,5 @@
         fashionMenu.addEventListener('mouseleave', () => {
             if (catDropdown) catDropdown.style.display = 'none';
         });
-
-        fashionMenu.querySelectorAll('.cat-item').forEach(catItem => {
-            const subDropdown = catItem.querySelector('.sub-dropdown');
-            if (!subDropdown) return;
-
-            catItem.addEventListener('mouseenter', () => {
-                subDropdown.style.display = 'block';
-            });
-            catItem.addEventListener('mouseleave', () => {
-                subDropdown.style.display = 'none';
-            });
-        });
-    });
     </script>
-   
-</body>
 
-</html>

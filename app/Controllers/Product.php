@@ -167,8 +167,7 @@ public function submit()
 	$discount_value = $product['pr_Discount_Value'] ?? '';
 	$discount_type  = $product['pr_Discount_Type'] ?? '';
 	$pr_code        = $product['pr_Code'] ?? '';
-	$subtotal = $selling_price * $qty;
-	$grand_total = $subtotal - $discount_value;
+	$grand_total    = $selling_price * $qty;
 
 	if (!empty($cust_id) && !empty($pr_Id) && !empty($size) && !empty($color) && !empty($qty)) {
 		$data = [

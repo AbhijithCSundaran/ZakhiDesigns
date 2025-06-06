@@ -34,8 +34,8 @@
                                                     <div class="card-block">
                                                         <div class="row align-items-center">
                                                             <div class="col-8">
-                                                                <h4 class="text-c-purple">150</h4>
-                                                                <h6 class="text-muted m-b-0">Latest Orders</h6>
+                                                                <h4 class="text-c-purple"><?= esc($latestOrderCount); ?></h4>
+                                                                <h6 class="text-muted m-b-0">Latest Orders (Last 7 Days)</h6>
                                                             </div>
                                                             <div class="col-4 text-right">
                                                             <i class="bi bi-box-seam f-28"></i>

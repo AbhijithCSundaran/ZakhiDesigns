@@ -3,13 +3,13 @@
     <div class="container-lg">
         <div class="row">
             <div class="col-md-3">
-                <h4>Your Account<h4>
-                        <ul>
-                            <li><i class="bi bi-arrow-right"></i>My Profile</li>
-                            <li><i class="bi bi-arrow-right"></i>My Orders</li>
-                            <li><i class="bi bi-arrow-right"></i>Address</li>
-                            <li><i class="bi bi-arrow-right"></i>Track Orders</li>
-                        </ul>
+                <h4>Your Account</h4>
+                <ul>
+                    <li><i class="bi bi-arrow-right"></i>My Profile</li>
+                    <li><i class="bi bi-arrow-right"></i>My Orders</li>
+                    <li><i class="bi bi-arrow-right"></i>Address</li>
+                    <li><i class="bi bi-arrow-right"></i>Track Orders</li>
+                </ul>
             </div>
             <div class="col-md-3">
                 <h4>Products<h4>
@@ -58,164 +58,182 @@
 
 
 <script src="<?php echo base_url() . ASSET_PATH; ?>assets/js/jquery-3.7.1.min.js"></script>
-<script src="<?php echo base_url() . ASSET_PATH; ?>assets/js/bootstrap.min.js"></script>
-
 <script src="<?php echo base_url() . ASSET_PATH; ?>assets/vendors/owlcarousel/owl.carousel.js"></script>
-<script>
-    function openRespMenu() {
-        var x = document.getElementById("respTopnav");
-        if (x.className === "topnav") {
-            x.className += " responsive";
-        } else {
-            x.className = "topnav";
-        }
-    }
-    $(document).ready(function () {
-        $('.bi-search').click(function () {
-            $('.searchbox').find('input').toggle({
-                right: '250px'
-            });
-        });
-        var topowl = $('#top-prod-owl,#top-prod-owl-two');
-        topowl.owlCarousel({
-            margin: 10,
-            loop: true,
-            nav: true, // Enables navigation
-            navText: ["<", ">"], // Custom navigation text/icons
+<script src="<?php echo base_url() . ASSET_PATH; ?>assets/js/bootstrap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
 
-            responsive: {
-                0: {
-                    items: 1
-                },
-                600: {
-                    items: 3
-                },
-                1000: {
-                    items: 4
+
+<script>
+function openRespMenu() {
+    var x = document.getElementById("respTopnav");
+    if (x.className === "topnav") {
+        x.className += " responsive";
+    } else {
+        x.className = "topnav";
+    }
+}
+$(document).ready(function() {
+    $('.bi-search').click(function() {
+        $('.searchbox').find('input').toggle({
+            right: '250px'
+        });
+    });
+    var topowl = $('#top-prod-owl,#top-prod-owl-two');
+    topowl.owlCarousel({
+        margin: 10,
+        loop: true,
+        nav: true, // Enables navigation
+        navText: ["<", ">"], // Custom navigation text/icons
+
+        responsive: {
+            0: {
+                items: 1
+            },
+            600: {
+                items: 3
+            },
+            1000: {
+                items: 4
+            }
+        }
+    });
+});
+//Login form open
+
+$(document).ready(function() {
+
+    // Load login form into modal
+    $('#loginBtn').on('click', function(e) {
+        e.preventDefault();
+        $('#modalBody').load("<?= base_url('weblogin'); ?>", function() {
+            $('#mainModal').modal('show');
+        });
+    });
+
+    // Load register form into modal
+    $('#registerBtn').on('click', function(e) {
+        e.preventDefault();
+        $('#modalBody').load("<?= base_url('webreg'); ?>", function() {
+            $('#mainModal').modal('show');
+        });
+    });
+
+    // When "Register" is clicked inside login modal
+    $(document).on('click', '#showRegisterFromLogin', function(e) {
+        e.preventDefault();
+
+        // Load register form in the same modal
+        $('#modalBody').load("<?= base_url('webreg'); ?>", function() {
+            $('#mainModal').modal('show');
+        });
+    });
+    // When "Login" is clicked inside register modal
+    $(document).on('click', '#showLoginFromRegister', function(e) {
+        e.preventDefault();
+
+        $('#modalBody').load("<?= base_url('weblogin'); ?>", function() {
+            $('#mainModal').modal('show');
+        });
+    });
+
+
+    // Login form submission (delegated because it's loaded dynamically)
+    $(document).on('submit', '#loginForm', function(e) {
+        e.preventDefault();
+
+        let email = $('#email').val();
+        let password = $('#password').val();
+
+        $.ajax({
+            url: '<?= base_url('customerauth'); ?>',
+            type: 'POST',
+            data: {
+                cust_Email: email,
+                cust_Password: password
+            },
+            success: function(res) {
+                let data = JSON.parse(res);
+                if (data.status == 1) {
+                    window.location.reload();
+                } else {
+                    $('#loginError').text(data.msg);
                 }
+            },
+            error: function() {
+                $('#loginError').text('Something went wrong. Please try again.');
             }
         });
     });
-    //Login form open
 
-    $(document).ready(function () {
+    // Register form submission (delegated)
+    $(document).on('submit', '#registerForm', function(e) {
+        e.preventDefault();
 
-        // Load login form into modal
-        $('#loginBtn').on('click', function (e) {
-            e.preventDefault();
-            $('#modalBody').load("<?= base_url('weblogin'); ?>", function () {
-                $('#mainModal').modal('show');
-            });
-        });
+        $('#regError').html(''); // clear previous messages
 
-        // Load register form into modal
-        $('#registerBtn').on('click', function (e) {
-            e.preventDefault();
-            $('#modalBody').load("<?= base_url('webreg'); ?>", function () {
-                $('#mainModal').modal('show');
-            });
-        });
+        const password = $('#password').val();
+        const cpassword = $('#cpassword').val();
+        const email = $('#email').val();
+        const phone = $('#number').val();
+        const name = $('#name').val();
 
-        // Login form submission (delegated because it's loaded dynamically)
-        $(document).on('submit', '#loginForm', function (e) {
-            e.preventDefault();
+        // Validate password match
+        if (password !== cpassword) {
+            $('#regError').html('Passwords do not match.');
+            return;
+        }
 
-            let email = $('#email').val();
-            let password = $('#password').val();
+        // Validate email format
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(email)) {
+            $('#regError').html('Please enter a valid email address.');
+            return;
+        }
 
-            $.ajax({
-                url: '<?= base_url('customerauth'); ?>',
-                type: 'POST',
-                data: {
-                    cust_Email: email,
-                    cust_Password: password
-                },
-                success: function (res) {
-                    let data = JSON.parse(res);
-                    if (data.status == 1) {
-                        window.location.reload();
-                    } else {
-                        $('#loginError').text(data.msg);
-                    }
-                },
-                error: function () {
-                    $('#loginError').text('Something went wrong. Please try again.');
-                }
-            });
-        });
+        // Validate phone number (10 digits only)
+        if (!/^\d{10}$/.test(phone)) {
+            $('#regError').html('Phone number must be exactly 10 digits.');
+            return;
+        }
 
-        // Register form submission (delegated)
-        $(document).on('submit', '#registerForm', function (e) {
-            e.preventDefault();
-           // debugger;
-            $('#regError').html(''); // clear previous messages
+        // Validate name (only letters and space)
+        const nameRegex = /^[a-zA-Z ]+$/;
+        if (!nameRegex.test(name)) {
+            $('#regError').html('Name must contain only letters and spaces.');
+            return;
+        }
 
-            const password = $('#password').val();
-            const cpassword = $('#cpassword').val();
-            const email = $('#email').val();
-            const phone = $('#number').val();
-            const name = $('#name').val();
+        // Submit via AJAX
+        $.ajax({
+            url: '<?= base_url('admin/customer/save') ?>',
+            type: 'POST',
+            data: $(this).serialize(),
+            dataType: 'json',
+            success: function(response) {
+                if (response.status === 1) {
+                    $('#regError').removeClass('text-danger').addClass('text-success').html(
+                        response.msg);
+                    $('#registerForm')[0].reset(); // reset form
+                    setTimeout(function() {
+                        $('#registerModal').modal('hide');
+                    }, 1000);
 
-            // Validate password match
-            if (password !== cpassword) {
-                $('#regError').html('Passwords do not match.');
-                return;
-            }
-
-            // Validate email format
-            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            if (!emailRegex.test(email)) {
-                $('#regError').html('Please enter a valid email address.');
-                return;
-            }
-
-            // Validate phone number (10 digits only)
-            if (!/^\d{10}$/.test(phone)) {
-                $('#regError').html('Phone number must be exactly 10 digits.');
-                return;
-            }
-
-            // Validate name (only letters and space)
-            const nameRegex = /^[a-zA-Z ]+$/;
-            if (!nameRegex.test(name)) {
-                $('#regError').html('Name must contain only letters and spaces.');
-                return;
-            }
-
-            // Submit via AJAX
-            $.ajax({
-                url: '<?= base_url(relativePath: 'admin/customer/save') ?>',
-                type: 'POST',
-                data: $(this).serialize(),
-                dataType: 'json',
-                success: function (response) {
-                    if (response.status === 1) {
-                        $('#regError').removeClass('text-danger').addClass('text-success').html(
-                            response.msg);
-                        $('#registerForm')[0].reset(); // reset form
-                        setTimeout(function(){
-                            window.location.reload();
-                        },2000);
-                        
-                    } else {
-                        $('#regError').removeClass('text-success').addClass('text-danger').html(
-                            response.msg);
-                    }
-                },
-                error: function (xhr) {
+                    // window.location.reload();
+                } else {
                     $('#regError').removeClass('text-success').addClass('text-danger').html(
-                        'An error occurred. Please try again.');
+                        response.msg);
                 }
-            });
+            },
+            error: function(xhr) {
+                $('#regError').removeClass('text-success').addClass('text-danger').html(
+                    'An error occurred. Please try again.');
+            }
         });
+    });
 
-    }); // End of document.ready
+});
 </script>
-<script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-
-<!--POP UP FORM -->
-
 </body>
 
 </html>

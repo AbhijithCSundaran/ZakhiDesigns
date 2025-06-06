@@ -173,16 +173,16 @@ $routes->post('admin/banner/save', 'Admin\Banner::createnew');
 $routes->post('admin/banner/delete/(:any)', 'Admin\Banner::deleteBanner/$1');
 
 
-//offer banners
-$routes->get('offer_banner', 'Offer_Banner::index');
-$routes->post('offer_banner/List', 'Offer_Banner::ajaxList');
-$routes->post('offer_banner/changeStatus', 'Offer_Banner::updateStatus');
-$routes->get('offer_banner/add', 'Offer_Banner::addbanner'); // Create
-$routes->get('offer_banner/add/(:num)', 'Offer_Banner::addbanner/$1'); // Edit
-$routes->post('offer_banner/save', 'Offer_Banner::createnew');
-$routes->post('offer_banner/delete/(:any)', 'Offer_Banner::deleteBanner/$1');
-$routes->post('offer_banner/get-subcategories', 'Offer_Banner::getSubcategories');
-$routes->post('offer_banner/get-products', 'Offer_Banner::getProducts');
+// //offer banners
+// $routes->get('offer_banner', 'Offer_Banner::index');
+// $routes->post('offer_banner/List', 'Offer_Banner::ajaxList');
+// $routes->post('offer_banner/changeStatus', 'Offer_Banner::updateStatus');
+// $routes->get('offer_banner/add', 'Offer_Banner::addbanner'); // Create
+// $routes->get('offer_banner/add/(:num)', 'Offer_Banner::addbanner/$1'); // Edit
+// $routes->post('offer_banner/save', 'Offer_Banner::createnew');
+// $routes->post('offer_banner/delete/(:any)', 'Offer_Banner::deleteBanner/$1');
+// $routes->post('offer_banner/get-subcategories', 'Offer_Banner::getSubcategories');
+// $routes->post('offer_banner/get-products', 'Offer_Banner::getProducts');
 //admin_updation
 $routes->get('/admin', 'Admin::index');
 $routes->post('admin/save', 'Admin::createnew');

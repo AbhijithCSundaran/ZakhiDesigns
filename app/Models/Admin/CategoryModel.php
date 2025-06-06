@@ -16,9 +16,7 @@ class CategoryModel extends Model {
         public function getAllCategory() {
             return $this->db->query("SELECT * FROM category WHERE cat_Status <> 3")->getResultArray();
         }
-         public function getCategoryByid($id){
-            return $this->db->table('category')->where('cat_Id', $id)->get()->getRow(); 
-    }
+         
     
 public function isCategoryExists($categoryName, $excludeId = null) {
     $builder = $this->db->table('category');
@@ -31,12 +29,16 @@ public function isCategoryExists($categoryName, $excludeId = null) {
 
     return $builder->get()->getRow();
 }
+	public function getCategoryByid($catId){
 
-    public function updateCategory($id, $data)
-    {
-        return $this->db->table('category')->where('cat_Id', $id) ->update($data);
+			return $this->db->query("select * from category where cat_Id = '".$catId."'")->getRow();
     }
-
+    public function updateCategory($catId, $data)
+    {
+        return $this->db->table('category')->where('cat_Id', $catId) ->update($data);
+    }
+  // delete category
+  
     public function deleteCategoryById($cat_status, $cat_id, $modified_by)
 	{
 		return $this->db->table('category')
@@ -48,8 +50,7 @@ public function isCategoryExists($categoryName, $excludeId = null) {
 			]);
 	}
 	public function deleteCategoryAndSubcategories($cat_id, $modified_by)
-{
-    // Step 1: Delete category (soft delete by setting cat_Status = 3)
+  {
     $this->db->table('category')
         ->where('cat_Id', $cat_id)
         ->update([
@@ -58,7 +59,6 @@ public function isCategoryExists($categoryName, $excludeId = null) {
             'cat_modifyby' => $modified_by
         ]);
 
-    // Step 2: Delete all subcategories under this category
     $this->db->table('subcategory')
         ->where('cat_Id', $cat_id)
         ->update([
@@ -68,9 +68,10 @@ public function isCategoryExists($categoryName, $excludeId = null) {
         ]);
 
     return true;
-}
+  }
 		
-				//**************************Data table */
+	//**************************Data table */
+				
 	protected $table = 'category';
     protected $primaryKey = 'cat_Id';
     protected $allowedFields = ['cat_Name', 'cat_Discount_Value','cat_Discount_Type','cat_Status']; // Adjust to your table

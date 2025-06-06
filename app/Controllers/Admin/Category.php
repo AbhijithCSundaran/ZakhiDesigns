@@ -120,10 +120,13 @@ class Category extends BaseController
     {
         $catId = $this->request->getPost('cat_Id');
         $newStatus = $this->request->getPost('cat_Status');
-    
-        $categoryModel = new CategoryModel();
+        
+        $categoryModel =  new \App\Models\Admin\CategoryModel();
         $category = $categoryModel->getCategoryByid($catId);
-    
+
+        $productModel = new \App\Models\Admin\ProductModel();
+	    $product = $productModel->getProductByid($catId);
+        
         if (!$category) {
             return $this->response->setJSON([
                 'success' => false,
@@ -150,12 +153,12 @@ class Category extends BaseController
     //Category Delete
 
  
-  public function deleteCategory($cat_id)
-{
-    $modified_by = session()->get('admin_id'); // or whatever you use
+   public function deleteCategory($cat_id)
+	{
+		$modified_by = session()->get('us_Id'); 
 
-    $this->categoryModel->deleteCategoryAndSubcategories($cat_id, $modified_by);
-}
+		$this->categoryModel->deleteCategoryAndSubcategories($cat_id, $modified_by);
+	}
 	
 	// Listing table data
 	

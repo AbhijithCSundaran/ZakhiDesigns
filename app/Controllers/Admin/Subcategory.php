@@ -161,7 +161,7 @@ public function changeStatus()
 	$newStatus = $this->request->getPost('sub_Status');
 
 	$subcategoryModel = new \App\Models\Admin\SubcategoryModel();
-	$subcategory = $subcategoryModel->getsubCategoryByid($subId);
+	$subcategory = $subcategoryModel->getsubCategory($subId);
 
 	if (!$subcategory) {
 		return $this->response->setJSON([

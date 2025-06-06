@@ -39,7 +39,7 @@ $routes->get('product/viewcollection', 'Product::view_collection');
 
 $routes->get('contact','Contact::index'); 
 $routes->post('contact/submit', 'Contact::submit');
-$routes->get('review', 'Review::index');
+$routes->get('review/(:num)', 'Review::index/$1');
 $routes->post('review/submit', 'Review::submit');
 $routes->get('profile', 'Profile::index');
 $routes->post('profile/update', 'Profile::update');

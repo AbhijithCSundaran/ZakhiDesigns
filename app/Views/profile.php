@@ -123,7 +123,7 @@
 											Quantity: <?= esc($order['od_Quantity']) ?><br>
 											<b>Track your product:</b> <?= esc($order['tracker_Link']) ?><br>
 											
-											<a href="<?= base_url('review?product=' . urlencode($order['pr_Name'])) ?>" class="btn btn-link p-0 mt-2">Write Review</a>
+											<a href="<?= base_url('review/' . $order['pr_Id']) ?>" class="btn btn-link p-0 mt-2">Write Review</a>
 										</div>
 									</div>
 								</div>

@@ -41,7 +41,7 @@
                         </div>
                         <div class="text-center mt-2">
                              <div class="col-md-12 text-center">
-                                    <button class="order-btn" onclick="window.location.href='<?= base_url('ordernow?pr_Id=' . $item['pr_Id']); ?>'"></button>
+                                    <button class="order-btn" onclick="window.location.href='<?= base_url('product/product_details/' . $item['pr_Id']); ?>'"></button>
                                 </div>
                         </div>
                     </div>

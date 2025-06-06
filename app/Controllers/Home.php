@@ -35,7 +35,7 @@ class Home extends BaseController
         }
 
         $template  = view('common/header', $data);
-        $template .= view('banner', $data);
+        $template .= view('banner');
         $template .= view('category', $data);
         $template .= view('top_products', $data);
         $template .= view('footer_banner', $data);

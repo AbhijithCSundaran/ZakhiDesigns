@@ -39,7 +39,10 @@ $('#productsLists').DataTable({
                 return data; // Optional: adjust this if you're embedding HTML
             }
         }
-    ]
+    ],
+    language: {
+        infoFiltered : ""
+    }
 });
 
 

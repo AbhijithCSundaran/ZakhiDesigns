@@ -1,88 +1,114 @@
 <?php
 namespace App\Controllers;
+
 use App\Models\ReviewModel;
 use App\Models\ProductDisplayModel;
+use App\Models\UserModel;
 
-class Review extends BaseController {
-	protected $productdisplayModel;
-    protected $categories;
-	
-	public function __construct()
+class Review extends BaseController
+{
+    protected $session;
+    protected $request;
+
+    public function __construct()
     {
         $this->session = \Config\Services::session();
-        $this->input = \Config\Services::request();
-    }
-   public function index($prId)
-{
-	if (!$this->session->get('zd_uid')) {
-        return redirect()->to(base_url());
-    }
-	$cust_Id =  $this->session->get('zd_uid');
-    $productModel = new \App\Models\ProductDisplayModel();
-    $reviewModel = new \App\Models\ReviewModel();
-
-    $product = $productModel->find($prId);
-
-    if (!$product) {
-        return redirect()->to('/')->with('error', 'Product not found');
+        $this->request = \Config\Services::request();
     }
 
-    $reviews = $reviewModel->where('pr_Id', $prId)->orderBy('created_at', 'DESC')->findAll();
+    // Load the review form/details view
+	public function index() 
+    {
+        $userId = session()->get('zd_uid');
 
-    return view('common/header')
-        . view('review', [
-            'product' => $product,
-            'reviews' => $reviews
-        ])
-        . view('common/footer')
-		.view('pagescripts/reviewjs');
-}
+        $userModel = new UserModel();
+        $addressModel = new AddressProfileModel();
+        $orderModel = new OrderModel();
 
-public function submit()
-{
-    $session = session();
-    $custId = $session->get('zd_uid'); // Get customer ID from session
+        $user = $userModel->find($userId);
 
-    if (!$custId) {
-        return $this->response->setJSON([
-            'status' => 'error',
-            'message' => 'You must be logged in to submit a review.'
+        $data = [
+            'user' => $user,
+            'addresses' => $addressModel->getUserAddresses($userId),
+            'orders' => $orderModel->getOrdersByUser($userId),
+        ];
+
+		$template  = view('common/header');
+        $template .= view('review', $data); // Ensure this view file exists
+        $template .= view('common/footer');
+        $template .= view('pagescripts/reviewjs');
+		return $template;
+		
+
+    }
+    public function loaddetails($custId, $pr_Id)
+    {
+       $userModel = new UserModel();
+		$productModel = new ProductDisplayModel();
+
+		$customer = $userModel->find($custId);
+		$product  = $productModel->find($pr_Id);  // rename $order to $product for clarity
+
+		$reviewModel = new ReviewModel();
+		$reviews = $reviewModel->where('pr_Id', $pr_Id)->orderBy('created_at', 'DESC')->findAll();
+
+		$data = [
+			'customer' => $customer,
+			'product'  => $product,
+			'reviews'  => $reviews,
+		];
+
+        $template  = view('common/header');
+        $template .= view('review', $data); // Ensure this view file exists
+        $template .= view('common/footer');
+        $template .= view('pagescripts/reviewjs');
+        return $template;
+    }
+
+    // Handle review submission via AJAX
+    public function submit()
+    {
+        $reviewModel = new ReviewModel();
+		$pr_Id = $this->request->getPost('pr_Id');
+        // Get form inputs
+        $data = [
+            'cust_Id'    => $this->request->getPost('cust_Id'),
+            'pr_Id'      => $pr_Id,
+            'name'       => $this->request->getPost('name'),
+            'email'      => $this->request->getPost('email'),
+            'review'     => $this->request->getPost('review'),
+            'rating'     => $this->request->getPost('rating'),
+            'created_at' => date('Y-m-d H:i:s'),
+            'is_approved'=> 0 // Default to not approved; optional
+        ];
+
+        // Validate input
+        $validation = \Config\Services::validation();
+        $validation->setRules([
+            'name'   => 'required',
+            'email'  => 'required|valid_email',
+            'rating' => 'required|in_list[1,2,3,4,5]',
+            'review' => 'required'
         ]);
+
+        if (!$validation->run($this->request->getPost())) {
+            return $this->response->setJSON([
+                'status' => 'error',
+                'message' => $validation->getErrors()
+            ]);
+        }
+
+        // Save to database
+        if ($reviewModel->insert($data)) {
+            return $this->response->setJSON([
+                'status' => 'success',
+                'message' => 'Review submitted successfully!'
+            ]);
+        } else {
+            return $this->response->setJSON([
+                'status' => 'error',
+                'message' => 'Failed to save review.'
+            ]);
+        }
     }
-
-    $request = service('request');
-
-    $data = [
-        'pr_Id'     => $request->getPost('pr_Id'),
-        'cust_Id'   => $custId,
-        'name'      => $request->getPost('name'),
-        'email'     => $request->getPost('email'),
-        'rating'    => $request->getPost('rating'),
-        'review'    => $request->getPost('review'),
-        'created_at' => date('Y-m-d H:i:s')
-    ];
-
-    $validation = \Config\Services::validation();
-    $validation->setRules([
-        'name'   => 'required',
-        'email'  => 'required|valid_email',
-        'rating' => 'required|in_list[1,2,3,4,5]',
-        'review' => 'required'
-    ]);
-
-    if (!$validation->run($data)) {
-        return $this->response->setJSON([
-            'status' => 'error',
-            'message' => $validation->getErrors()
-        ]);
-    }
-
-    $reviewModel = new \App\Models\ReviewModel();
-    $reviewModel->insert($data);
-
-    return $this->response->setJSON([
-        'status' => 'success',
-        'message' => 'Review submitted successfully.'
-    ]);
-}
 }

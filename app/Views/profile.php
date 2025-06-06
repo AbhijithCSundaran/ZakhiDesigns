@@ -122,8 +122,8 @@
 											Size: <?= esc($order['od_Size']) ?><br>
 											Quantity: <?= esc($order['od_Quantity']) ?><br>
 											<b>Track your product:</b> <?= esc($order['tracker_Link']) ?><br>
-											
-											<a href="<?= base_url('review/' . $order['pr_Id']) ?>" class="btn btn-link p-0 mt-2">Write Review</a>
+											<a href="<?= base_url('review/' . $order['cus_Id'] . '/' . $order['pr_Id']) ?>" class="btn btn-link p-0 mt-2">Write Review</a>
+
 										</div>
 									</div>
 								</div>
@@ -146,7 +146,7 @@
   <div class="modal-dialog">
    <form id="editAddressForm" class="modal-content">
   <div class="modal-header">
-    <img src="<?= base_url('assets/logo.png') ?>" alt="Site Logo" height="30" class="me-2">
+ <!------------   <img src="<?= base_url('assets/logo.png') ?>" alt="Site Logo" height="30" class="me-2">------------>
     <h5 class="modal-title" id="editAddressModalLabel">Update Address</h5>
     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
   </div>

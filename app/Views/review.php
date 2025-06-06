@@ -1,15 +1,18 @@
 <div class="container mt-5">
     <h2>Leave a Review</h2>
-    <form id="reviewForm" method="post" action="<?= base_url('review/submit') ?>">
-        <input type="hidden" name="pr_Id" value="<?= esc($product['pr_Id']) ?>" />
-        <div class="form-group col-md-6">
-            <label>Name</label>
-            <input name="name" class="form-control" required />
-        </div>
-        <div class="form-group col-md-6">
-            <label>Email</label>
-            <input name="email" class="form-control" required />
-        </div>
+    <form id="reviewForm" method="post">
+      <input type="hidden" name="pr_Id" value="<?= esc($product['pr_Id'] ?? '') ?>" />
+	<input type="hidden" name="cust_Id" value="<?= esc($customer['cust_Id'] ?? '') ?>" />
+
+	
+			<div class="form-group col-md-6">
+			<label>Name</label>
+			<input name="name" class="form-control" value="<?= esc($customer['cust_Name'] ?? '') ?>" required />
+			</div>
+			<div class="form-group col-md-6">
+				<label>Email</label>
+				<input name="email" class="form-control" value="<?= esc($customer['cust_Email'] ?? '') ?>" required />
+			</div>
         <div class="form-group col-md-6">
             <label>Rating</label>
             <select name="rating" class="form-control" required>
@@ -36,22 +39,23 @@
 
     <hr>
     <h3>What others say</h3>
-    <div class="row">
-        <?php if (!empty($reviews)): ?>
-            <?php foreach ($reviews as $rev): ?>
-                <div class="col-md-6">
-                    <div class="card my-2">
-                        <div class="card-body">
-                            <strong><?= esc($rev['name']) ?></strong>
-                            <div><?= str_repeat('★', $rev['rating']) . str_repeat('☆', 5 - $rev['rating']) ?></div>
-                            <p><?= esc($rev['review']) ?></p>
-                            <small class="text-muted"><?= date('F d, Y', strtotime($rev['created_at'])) ?></small>
-                        </div>
+   <div class="row">
+    <?php if (!empty($reviews)): ?>
+        <?php foreach ($reviews as $rev): ?>
+            <div class="col-md-6">
+                <div class="card my-2">
+                    <div class="card-body">
+                        <strong><?= esc($rev['name']) ?></strong>
+                        <div><?= str_repeat('★', (int) $rev['rating']) . str_repeat('☆', 5 - (int) $rev['rating']) ?></div>
+                        <p><?= esc($rev['review']) ?></p>
+                        <small class="text-muted"><?= date('F d, Y', strtotime($rev['created_at'])) ?></small>
                     </div>
                 </div>
-            <?php endforeach; ?>
-        <?php else: ?>
-            <p class="text-muted">No reviews yet.</p>
-        <?php endif; ?>
-    </div>
+            </div>
+        <?php endforeach; ?>
+    <?php else: ?>
+        <p class="text-muted">No reviews yet.</p>
+    <?php endif; ?>
+</div>
+
 </div>

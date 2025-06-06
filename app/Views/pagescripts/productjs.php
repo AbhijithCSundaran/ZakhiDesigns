@@ -158,9 +158,9 @@ $('#orderNowBtn').click(function(e) {
                 const type = this.dataset.type;
                 const src = this.dataset.src;
                 if (type === 'image') {
-                    preview.innerHTML = `<img src="${src}" style="width: 100%; max-height: 400px; object-fit: contain;" />`;
+                    preview.innerHTML = `<img src="${src}" />`;
                 } else if (type === 'video') {
-                    preview.innerHTML = `<video src="${src}" controls autoplay style="width: 100%; max-height: 400px; object-fit: contain;"></video>`;
+                    preview.innerHTML = `<video src="${src}" controls autoplay></video>`;
                 }
             });
         });

@@ -53,11 +53,16 @@
 
 
 
- <script src="<?php echo base_url().ASSET_PATH; ?>assets/js/jquery-3.7.1.min.js"></script>
- <script src="<?php echo base_url().ASSET_PATH; ?>assets/js/bootstrap.min.js"></script>
+              
+<script src="<?php echo base_url() . ASSET_PATH; ?>assets/js/jquery-3.7.1.min.js"></script>
+<script src="<?php echo base_url() . ASSET_PATH; ?>assets/vendors/owlcarousel/owl.carousel.js"></script>
+<script src="<?php echo base_url() . ASSET_PATH; ?>assets/js/bootstrap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>  
 
- <script src="<?php echo base_url().ASSET_PATH; ?>assets/vendors/owlcarousel/owl.carousel.js"></script>
- <script>
+<script>
+
 function openRespMenu() {
     var x = document.getElementById("respTopnav");
     if (x.className === "topnav") {
@@ -111,6 +116,25 @@ $(document).ready(function() {
             $('#mainModal').modal('show');
         });
     });
+
+    // When "Register" is clicked inside login modal
+    $(document).on('click', '#showRegisterFromLogin', function(e) {
+        e.preventDefault();
+
+        // Load register form in the same modal
+        $('#modalBody').load("<?= base_url('webreg'); ?>", function() {
+            $('#mainModal').modal('show');
+        });
+    });
+    // When "Login" is clicked inside register modal
+    $(document).on('click', '#showLoginFromRegister', function(e) {
+        e.preventDefault();
+
+        $('#modalBody').load("<?= base_url('weblogin'); ?>", function() {
+            $('#mainModal').modal('show');
+        });
+    });
+
 
     // Login form submission (delegated because it's loaded dynamically)
     $(document).on('submit', '#loginForm', function(e) {
@@ -189,7 +213,11 @@ $(document).ready(function() {
                     $('#regError').removeClass('text-danger').addClass('text-success').html(
                         response.msg);
                     $('#registerForm')[0].reset(); // reset form
-                    window.location.reload();
+                    setTimeout(function() {
+                        $('#registerModal').modal('hide');
+                    }, 1000);
+
+                    // window.location.reload();
                 } else {
                     $('#regError').removeClass('text-success').addClass('text-danger').html(
                         response.msg);
@@ -202,15 +230,9 @@ $(document).ready(function() {
         });
     });
 
-}); // End of document.ready
- </script>
- <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<!-- Bootstrap JS bundle includes Popper -->
 
- <!--POP UP FORM -->
 
- </body>
 
- </html>
+</script>
+
+</html>

@@ -80,20 +80,20 @@ class Staff extends BaseController
 
 		// Validate name
 		if (!preg_match('/^[a-zA-Z ]+$/', $staffname)) {
-			return $this->response->setJSON(['status' => 'error', 'msg' => 'Please enter name correctly.']);
+			return $this->response->setJSON(['status' => 'error', 'msg' => 'Please Enter Name Correctly.']);
 		}
 
 		// Validate emails 1
 		if (!filter_var($staffemail, FILTER_VALIDATE_EMAIL)) {
-			return $this->response->setJSON(['status' => 'error', 'msg' => 'Please enter a valid primary email.']);
+			return $this->response->setJSON(['status' => 'error', 'msg' => 'Please Enter A Valid Primary Email.']);
 		}
 		// Validate emails 2 
 		if (!filter_var($staffotemail, FILTER_VALIDATE_EMAIL)) {
-			return $this->response->setJSON(['status' => 'error', 'msg' => 'Please enter a valid Secondary email.']);
+			return $this->response->setJSON(['status' => 'error', 'msg' => 'Please Enter The Order Confirmation Email.']);
 		}
 		// Validate mobile
 		if (!empty($mobile) && (!ctype_digit($mobile) || strlen($mobile) !== 10)) {
-			return $this->response->setJSON(['status' => 'error', 'msg' => 'Phone number must contain exactly 10 digits.']);
+			return $this->response->setJSON(['status' => 'error', 'msg' => 'Phone Number Must Contain Exactly 10 Digits.']);
 		}
 		//validate password length
 		

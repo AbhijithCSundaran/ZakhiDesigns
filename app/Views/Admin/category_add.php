@@ -13,7 +13,7 @@
                 <div class="col-md-4">
                     <ul class="breadcrumb-title">
                         <li class="breadcrumb-item">
-                             <a href="<?= base_url('dashboard'); ?>"> <i class="fa fa-home"></i> </a>
+                             <a href="<?= base_url('admin/dashboard'); ?>"> <i class="fa fa-home"></i> </a>
                         </li>
                         <!-- <li class="breadcrumb-item"><a href="#!">Add Category</a> -->
                         <li class="breadcrumb-item"><a

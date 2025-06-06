@@ -180,13 +180,49 @@ public function saveProduct() {
     $sleeve_style = $this->input->getPost('sleeve_style');
     $fabric = $this->input->getPost('fabric');
     $stitching = $this->input->getPost('stitching');
+    
+  if(empty($discount_value) && empty($discount_type)){
+        if (!empty($sub_id)) {
+            $subcategory = $this->productModel->isDiscountInSub($sub_id);
 
+            if (!empty($subcategory->sub_Discount_Value) && !empty($subcategory->sub_Discount_Type)) {
+                $discount_value = $subcategory->sub_Discount_Value;
+                $discount_type = $subcategory->sub_Discount_Type;
+            }
+        }
+
+        if (empty($discount_value) || empty($discount_type)) {
+            $category = $this->productModel->isDiscountInCat($cat_id);
+
+            if (!empty($category->cat_Discount_Value) && !empty($category->cat_Discount_Type)) {
+                $discount_value = $category->cat_Discount_Value;
+                $discount_type = $category->cat_Discount_Type;
+            }
+        }
+
+        if (!empty($discount_value) && !empty($discount_type)) {
+            $discount_value = (float)$discount_value;
+
+            if ($discount_type === '%') {
+                $selling_price = $mrp - ($mrp * $discount_value / 100);
+            } elseif ($discount_type === 'Rs') {
+                $selling_price = $mrp - $discount_value;
+            }
+
+            if ($selling_price < 0) {
+                $selling_price = 0;
+            }
+        }
+    }
+    
     if($discount_type == "%" && $discount_value > 100 ){
         return $this->response->setJSON([
             'status' => 'error',
             'message' => 'Enter a Valid Percentage Value.'
         ]);
     }
+    
+
     if (empty($cat_id) || empty($product_name) || empty($product_code) || empty($mrp) || empty($available_color) || empty( $size) ) {
         return $this->response->setJSON([
             'status' => 'error',
@@ -246,7 +282,7 @@ public function saveProduct() {
         return $this->response->setJSON([
             'status' => 1,
             'msg' => 'Product updated successfully.',
-            'redirect' => base_url('admin/product')
+            //'redirect' => base_url('admin/product')
         ]);
     }
 }

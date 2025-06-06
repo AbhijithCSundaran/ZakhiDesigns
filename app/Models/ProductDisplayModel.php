@@ -8,7 +8,7 @@ class ProductDisplayModel extends Model
     protected $primaryKey = 'pr_Id';
 	 public function getAllProducts() {
 		return $this->db->table('product')
-		->where('pr_Status !=', 3)
+		->where('pr_Status =', 1)
 		->get()
 		->getResultArray();
        }

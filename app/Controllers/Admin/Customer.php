@@ -99,7 +99,7 @@ class Customer extends BaseController
 				// INSERT
 			// Check if email already exists
 				if ($customerModel->getCustomerByEmail($custemail)) {
-					return $this->response->setJSON(['status' => 'error', 'msg' => 'Email already exists.']);
+					return $this->response->setJSON(['status' => 'error', 'msg' => 'User email already exists. Please login to continue.']);
 				}
 				$data = [
 				'cust_Name'          => $custname,
@@ -114,14 +114,14 @@ class Customer extends BaseController
 				$CreateCust = $this->customerModel->createcust($data);
 				//echo json_encode(array("status" => 1, "msg" => "Customer Created successfully."));
 
-				$this->session->set([
-    'ad_uid' => $CreateCust, // or the actual ID if your model returns it
-    'ad_uname' => $custname,
-    'ad_email' => $custemail,
-]);
+// 				$this->session->set([
+//     'ad_uid' => $CreateCust, // or the actual ID if your model returns it
+//     'ad_uname' => $custname,
+//     'ad_email' => $custemail,
+// ]);
 				echo json_encode(array(
 					"status" => 1,
-					"msg" => "Customer Created successfully.",
+					"msg" => "Account Created successfully. Please login to your account to start shopping.",
 					"redirect" => base_url('customer')
 				));
 				

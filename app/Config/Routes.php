@@ -33,6 +33,7 @@ $routes->get('product/product_list/category/(:num)', 'Product::product_list_by_c
 $routes->get('product/product_list/subcategory/(:num)', 'Product::product_list_by_subcategory/$1');
 //$routes->post('product/product_list/search', 'Product::search_products');
 $routes->post('product/submit', 'Product::submit');
+$routes->get('product/viewcollection', 'Product::view_collection');
 
 // contact us
 $routes->get('contact', 'Contact::index');

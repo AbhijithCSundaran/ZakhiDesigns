@@ -1,4 +1,5 @@
-<?php namespace App\Controllers;
+<?php 
+namespace App\Controllers;
 
 use App\Models\ProductDisplayModel;
 use CodeIgniter\Controller;
@@ -52,13 +53,27 @@ class Product extends Controller
 	public function product_list()
     {
         $productdisplayModel = new ProductDisplayModel();
+		
         $data['product'] = $productdisplayModel->getAllProduct();
         return view('common/header')
         . view('products_list', $data)
         . view('common/footer')
         . view('pagescripts/productjs');
     }
+	
+	///////view collection//////
+	
+    public function view_collection()
+	{
+		$model = new ProductDisplayModel();
+		$data['product'] = $model->getProductsByModifiedDate();
+		return view('common/header')
+			. view('products_list', $data)
+			. view('common/footer')
+			. view('pagescripts/productjs');
+	}
 
+	
     public function product_list_by_category($cat_Id)
     {
         $productdisplayModel = new ProductDisplayModel();

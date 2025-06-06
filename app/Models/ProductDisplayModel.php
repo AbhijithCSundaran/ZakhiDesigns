@@ -13,7 +13,7 @@ class ProductDisplayModel extends Model
 		->getResultArray();
        }
 
-    protected $allowedFields = ['pr_Name', 'pr_Description', 'pr_Selling_Price', 'product_images', 'cat_Id', 'sub_Id','pr_Price'];
+    protected $allowedFields = ['pr_Name', 'pr_Description', 'pr_Selling_Price', 'product_images', 'cat_Id', 'sub_Id','pr_Price','pr_modifyon'];
 /* 	public function searchProducts($keyword)
 	{
 		return $this->distinct()
@@ -21,6 +21,13 @@ class ProductDisplayModel extends Model
 			->like('pr_Name', $keyword)
 			->findAll();
 	} */
+	
+	///// view collection ////
+	public function getProductsByModifiedDate()
+    {
+        return $this->orderBy('pr_modifyon', 'DESC')->findAll();
+    }
+
  public function getAllProduct()
     {
         return $this->findAll();
@@ -54,11 +61,9 @@ class ProductDisplayModel extends Model
 		return $this->db->insertID(); // return the inserted ID
 	}
 
-
     public function getAllCategoriesWithSub()
     {
 
-	
         $builder = $this->db->table('category');
         $builder->select('category.id as cat_id, category.cat_Name, subcategory.id as sub_id, subcategory.sub_Name');
         $builder->join('subcategory', 'subcategory.cat_id = category.id', 'left');

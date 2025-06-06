@@ -82,22 +82,35 @@ if (is_array($decoded) && isset($decoded[0]['name']) && is_array($decoded[0]['na
 									<i class="bi bi-star-fill"></i>
 									0 Reviews
 								</div>
-								<div class="col-md-12">
-									<p><?= esc($product['pr_Description']); ?></p>
-								</div>
-								<div class="col-md-12"><b>Fabric</b>
-								<span> : <?= esc($product['pr_Fabric']); ?></span>
-								</div>
-								<div class="col-md-12"><b>Sleeve</b>
-								<span> : <?= esc($product['pr_Sleeve_Style']); ?></span>
-								</div>
-								<div class="col-md-12"><b>Stitch Type</b>
-								<span> : <?= esc($product['pr_Stitch_Type']); ?></span>
-								</div>
-								
+								<?php if (!empty($product['pr_Description'])): ?>
+									<div class="col-md-12">
+										<p><?= esc($product['pr_Description']); ?></p>
+									</div>
+									<?php endif; ?>
+
+									<?php if (!empty($product['pr_Fabric'])): ?>
+									<div class="col-md-12">
+										<b>Fabric</b>
+										<span>: <?= esc($product['pr_Fabric']); ?></span>
+									</div>
+									<?php endif; ?>
+
+									<?php if (!empty($product['pr_Sleeve_Style'])): ?>
+									<div class="col-md-12">
+										<b>Sleeve</b>
+										<span>: <?= esc($product['pr_Sleeve_Style']); ?></span>
+									</div>
+									<?php endif; ?>
+
+									<?php if (!empty($product['pr_Stitch_Type'])): ?>
+									<div class="col-md-12">
+										<b>Stitch Type</b>
+										<span>: <?= esc($product['pr_Stitch_Type']); ?></span>
+									</div>
+									<?php endif; ?>
 								<div class="col-md-12"><b>Size</b></div>
 								<?php $sizes = explode(',', $product['pr_Size']); ?>
-									<select name="size" id="size" style="width: 85px;"  required>
+									<select name="size" id="size" style="width: 100px;"  required>
 										<option value="">Size</option> <!-- Add this -->
 										<?php foreach ($sizes as $size): ?>
 											<option value="<?= esc(trim($size)) ?>"
@@ -128,29 +141,39 @@ if (is_array($decoded) && isset($decoded[0]['name']) && is_array($decoded[0]['na
 									<span class="offerprice"><i class="bi bi-currency-rupee"></i><?= esc($product['pr_Selling_Price']); ?></span>
 								</div>
 								
-								<div class="col-md-12 stock-block">
-									<select name="qty" id="qty">
-										<option value="">Quantity</option>
-										<?php for ($i = 1; $i <= 5; $i++): ?>
-											<option value="<?= $i; ?>"><?= $i; ?></option>
-										<?php endfor; ?>
-									</select>
-									
-									<input type="hidden" name="pr_Id" value="<?= $product['pr_Id'] ;?>">
-									<input type="hidden" name="cust_Id" value="<?= $zd_uid; ?>">
-									<button class="btn btn-dark" name="orderNowBtn" id="orderNowBtn" >
-											Order Now
-										</button>
-								</div>
-								<div class="col-md-12">
-									<?php if ($product['pr_Stock'] > 1): ?>
-										<span class="badge badge-success">In stock</span>
-									<?php elseif ($product['pr_Stock'] == 1): ?>
-										<span class="badge badge-warning" style="padding:10px;">Only 1 left in stock</span>
-									<?php else: ?>
+								
+									<?php if ($product['pr_Stock'] > 0): ?>
+									<div class="col-md-12 stock-block">
+										<select name="qty" id="qty">
+											<option value="">Quantity</option>
+											<?php
+											// Limit to 5 if more than 5 in stock, otherwise allow up to stock count
+											$maxQty = ($product['pr_Stock'] > 5) ? 5 : $product['pr_Stock'];
+											for ($i = 1; $i <= $maxQty; $i++): ?>
+												<option value="<?= $i; ?>"><?= $i; ?></option>
+											<?php endfor; ?>
+										</select>
+
+										<input type="hidden" name="pr_Id" value="<?= $product['pr_Id']; ?>">
+										<input type="hidden" name="cust_Id" value="<?= $zd_uid; ?>">
+
+										<button class="btn btn-dark" name="orderNowBtn" id="orderNowBtn">Order Now</button>
+									</div>
+								<?php else: ?>
+									<div class="col-md-12">
 										<span class="badge badge-danger">Out of stock</span>
-									<?php endif; ?>
-								</div>
+										<div class="text-danger mt-2">This product is currently out of stock.</div>
+									</div>
+								<?php endif; ?>
+
+								<!-- Stock status badge (always shown) -->
+								<?php if ($product['pr_Stock'] > 1): ?>
+									<div class="col-md-12"><span class="badge badge-success">In stock</span></div>
+								<?php elseif ($product['pr_Stock'] == 1): ?>
+									<div class="col-md-12"><span class="badge badge-warning" style="padding:10px;">Only 1 left in stock</span></div>
+								<?php endif; ?>
+
+
 
 								<div class="col-md-12">
 									<div class="clearfix">&nbsp;</div>

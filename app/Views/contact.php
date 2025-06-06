@@ -7,24 +7,32 @@
 					<div class="col-md-12">
 						<h2>Quick Enquiry</h2>
 						<p>We're happy to hear from you. Share us your query.</p>
-						<form name="contact" id="contact">
+						
+						<div id="formResponse" class="mt-2"></div>
+						<form name="contact" id="contactForm">
 							<div class="form-group">
 								<label>Fullname</label>
-								<input type="text" class="form-control" name="fname" id="" />
+								<input type="text" class="form-control" name="fullname" required>
 							</div>
 							<div class="form-group">
 								<label>Email</label>
-								<input type="text" class="form-control" name="fname" id="" />
+								<input type="email" class="form-control" name="email" required>
 							</div>
 							<div class="form-group">
 								<label>Contact No.</label>
-								<input type="text" class="form-control" name="fname" id="" />
+								<input type="text" class="form-control" name="contact_no" required>
 							</div>
 							<div class="form-group">
 								<label>Message</label>
-								<textarea type="text" class="form-control" name="fname" id=""></textarea>
+								<textarea class="form-control" name="message" required></textarea>
 							</div>
+							<div class="mt-4 text-end">
+                        <button type="submit" class="btn btn-dark">Submit</button>
+                    </div>
+							
 						</form>
+
+
 					</div>
 				</div>
                 <div class="col-md-6">

@@ -71,9 +71,6 @@
 
    
 </div>
-
-
-
                         <a href="<?= base_url('/contact');?>">Contact</a>
 
                         <?php if (session()->get('zd_uname')): ?>
@@ -167,9 +164,5 @@ function checkEnter(event) {
     });
 });
 
-	  
-	 
-
     </script>
-</body>
-</html>
+

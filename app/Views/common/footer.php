@@ -4,12 +4,12 @@
          <div class="row">
              <div class="col-md-3">
                  <h4>Your Account<h4>
-                         <ul>
-                             <li><i class="bi bi-arrow-right"></i>My Profile</li>
-                             <li><i class="bi bi-arrow-right"></i>My Orders</li>
-                             <li><i class="bi bi-arrow-right"></i>Address</li>
-                             <li><i class="bi bi-arrow-right"></i>Track Orders</li>
-                         </ul>
+                        <ul>
+							<li><i class="bi bi-arrow-right"></i> <a class="foot-link" href="<?= base_url('profile#profile'); ?>">Profile</a></li>
+							<li><i class="bi bi-arrow-right"></i> <a class="foot-link" href="<?= base_url('profile#orders'); ?>">My Orders</a></li>
+							<li><i class="bi bi-arrow-right"></i> <a class="foot-link" href="<?= base_url('profile#address'); ?>">Address</a></li>
+							<li><i class="bi bi-arrow-right"></i> <a class="foot-link" href="<?= base_url('profile#orders'); ?>">Track Orders</a></li>
+						</ul>
              </div>
              <div class="col-md-3">
                  <h4>Products<h4>
@@ -17,7 +17,7 @@
                              <li><i class="bi bi-arrow-right"></i>Price Drop</li>
                              <li><i class="bi bi-arrow-right"></i>Products</li>
                              <li><i class="bi bi-arrow-right"></i>Best Sellers</li>
-                             <li><i class="bi bi-arrow-right"></i>Sitemap</li>
+                             <li><i class="bi bi-arrow-right"></i><a class="foot-link" href="<?= base_url('contact'); ?>" >Sitemap</a></li>
                          </ul>
              </div>
              <div class="col-md-3">
@@ -206,6 +206,8 @@ $(document).ready(function() {
  </script>
  <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+ <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<!-- Bootstrap JS bundle includes Popper -->
 
  <!--POP UP FORM -->
 

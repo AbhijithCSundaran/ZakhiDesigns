@@ -27,6 +27,21 @@ $routes->post('product/submit', 'Product::submit');
 $routes->get('weblogin','Weblogin::index');
 $routes->get('webreg','Weblogin::webReg'); 
 $routes->get('contact','Contact::index'); 
+$routes->post('contact/submit', 'Contact::submit');
+$routes->get('review', 'Review::index');
+$routes->post('review/submit', 'Review::submit');
+$routes->get('profile', 'Profile::index');
+$routes->post('profile/update', 'Profile::update');
+$routes->post('profile/address/add', 'Profile::addAddress');
+$routes->post('profile/address/edit', 'Profile::editAddress');
+$routes->post('profile/address/delete', 'Profile::deleteAddress');
+$routes->post('/profile/setDefaultAddress', 'Profile::setDefaultAddress');
+$routes->post('profile/update', 'Profile::update');
+$routes->post('profile/getAddress', 'Profile::getAddress');
+
+
+
+
 
 $routes->get('product/details', 'ProductDetails::index');
 $routes->get('product', 'Product::index');

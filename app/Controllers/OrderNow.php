@@ -132,6 +132,7 @@ class OrderNow extends Controller
         'od_Status'     => 1,
         'od_createdby'  => $zd_uid,
         'od_createdon'  => date('Y-m-d H:i:s'),
+		'od_modifyby'   =>$zd_uid,
         'add_Id'        => $add_Id
     ]);
     $product = $orderModel->getProductById($order->pr_Id);

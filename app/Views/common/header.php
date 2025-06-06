@@ -45,32 +45,28 @@
                         <!-- Fashion dropdown -->
                        <div class="dropdown-wrapper" style="position: relative; display: inline-block;">
          <a href="<?= base_url('product/product_list') ?>" class="dropbtn">Fashion</a>
+						<div class="cat-dropdown">
+							<?php if (!empty($categories)): ?>
+								<?php foreach ($categories as $category): ?>
+									<div class="cat-item">
+										<a href="<?= base_url('product/product_list/category/' . $category['cat_Id']) ?>">
+											<?= esc($category['cat_Name']) ?>
+										</a>
 
-    
-<div class="cat-dropdown">
-    <?php if (!empty($categories)): ?>
-        <?php foreach ($categories as $category): ?>
-            <div class="cat-item">
-                <a href="<?= base_url('product/product_list/category/' . $category['cat_Id']) ?>">
-                    <?= esc($category['cat_Name']) ?>
-                </a>
-
-                <?php if (!empty($category['subcategories'])): ?>
-                    <div class="sub-dropdown">
-                        <?php foreach ($category['subcategories'] as $sub): ?>
-                            <a href="<?= base_url('product/product_list/subcategory/' . $sub['sub_Id']) ?>">
-                                <?= esc($sub['sub_Category_Name']) ?>
-                            </a>
-                        <?php endforeach; ?>
-                    </div>
-                <?php endif; ?>
-            </div>
-        <?php endforeach; ?>
-    <?php endif; ?>
-</div>
-
-   
-</div>
+										<?php if (!empty($category['subcategories'])): ?>
+											<div class="sub-dropdown">
+												<?php foreach ($category['subcategories'] as $sub): ?>
+													<a href="<?= base_url('product/product_list/subcategory/' . $sub['sub_Id']) ?>">
+														<?= esc($sub['sub_Category_Name']) ?>
+													</a>
+												<?php endforeach; ?>
+											</div>
+										<?php endif; ?>
+									</div>
+								<?php endforeach; ?>
+							<?php endif; ?>
+						</div>  
+						</div>
                         <a href="<?= base_url('/contact');?>">Contact</a>
 
                         <?php if (session()->get('zd_uname')): ?>

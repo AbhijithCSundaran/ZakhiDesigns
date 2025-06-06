@@ -29,11 +29,12 @@ class Profile extends BaseController
             'addresses' => $addressModel->getUserAddresses($userId),
             'orders' => $orderModel->getOrdersByUser($userId),
         ];
+		$template = view('common/header');
+		$template.= view('profile', $data);
+		$template.= view('common/footer');
+		$template.= view('pagescripts/profilejs');
+        return $template;   
 
-        return view('common/header')
-             . view('profile', $data)
-             . view('common/footer')
-             . view('pagescripts/profilejs');
     }
 	public function setDefaultAddress()
 	{

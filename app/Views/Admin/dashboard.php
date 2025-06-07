@@ -248,7 +248,10 @@
                                                                     src="<?= base_url('uploads/productmedia/' . esc($product->main_image)); ?>"
                                                                     alt="<?= esc($product->pr_Name); ?>">
                                                             <?php else: ?>
-                                                                <span class="text-muted">No image</span>
+                                                                <!-- <span class="text-muted">No image</span> -->
+                                                                  <img style="height: 80px;"
+                                                                    src="<?= base_url('public/Admin/assets/images/default.jpg') ?>"
+                                                                    >
                                                             <?php endif; ?>
                                                         </td>
 

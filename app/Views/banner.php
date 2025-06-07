@@ -2,45 +2,40 @@
     <div class="container-lg">
         <div class="row">
 
-        <?php
-        $section1Images = [];
+            <?php
+            $section1Images = [];
 
-        if (!empty($themes['theme_Section1'])) {
-            $section1 = json_decode($themes['theme_Section1'], true);
+            if (!empty($themes['theme_Section1'])) {
+                $section1 = json_decode($themes['theme_Section1'], true);
 
-            if (!empty($section1) && is_array($section1)) {
-                foreach ($section1 as $item) {
-                    if (!empty($item['image'])) {
-                        $section1Images[] = [
-                            'image' => base_url('public/uploads/themes/' . $item['image']),
-                            'link' => !empty($item['link']) ? esc($item['link']) : '#'
-                        ];
+                if (!empty($section1) && is_array($section1)) {
+                    foreach ($section1 as $item) {
+                        if (!empty($item['image'])) {
+                            $section1Images[] = [
+                                'image' => base_url('public/uploads/themes/' . $item['image']),
+                                'link' => !empty($item['link']) ? esc($item['link']) : '#'
+                            ];
+                        }
                     }
                 }
             }
-        }
 
-        if (!empty($section1Images)):
-            $firstImage = $section1Images[0];
-        ?>
-            <div class="col-md-12 banner">
-                <a href="<?= esc($firstImage['link']) ?>" id="theme-banner-link">
-                    <img src="<?= esc($firstImage['image']) ?>" alt="Theme Banner" class="img-fluid" id="theme-banner-img">
-                </a>
-            </div>
+            if (!empty($section1Images)):
+                $firstImage = $section1Images[0];
+                ?>
+                <div class="col-md-12 banner">
+                    <a href="<?= esc($firstImage['link']) ?>" id="theme-banner-link">
+                        <img src="<?= esc($firstImage['image']) ?>" alt="Theme Banner" class="img-fluid"
+                            id="theme-banner-img">
+                    </a>
+                </div>
 
-            <script>
-            const section1Images = <?= json_encode($section1Images); ?>;
-            </script>
-        <?php endif; ?>
+                <script>
+                    const section1Images = <?= json_encode($section1Images); ?>;
+                </script>
+            <?php endif; ?>
 
         </div>
-    </div>
-</section>
-
-
-
-
         <div class="row">
             <div class="col-md-12 highlightrow">
                 <div class="row">
@@ -53,19 +48,26 @@
             </div>
         </div>
     </div>
+
+
+
+
+
+
+
 </section>
 <script>
-document.addEventListener("DOMContentLoaded", function () {
-    const bannerImages = <?= json_encode($section1Images); ?>;
-    let currentIndex = 0;
+    document.addEventListener("DOMContentLoaded", function () {
+        const bannerImages = <?= json_encode($section1Images); ?>;
+        let currentIndex = 0;
 
-    if (bannerImages.length > 1) {
-        setInterval(() => {
-            currentIndex = (currentIndex + 1) % bannerImages.length;
-            const newImage = bannerImages[currentIndex];
-            document.getElementById('theme-banner-img').src = newImage.image;
-            document.getElementById('theme-banner-link').href = newImage.link;
-        }, 600000); // 10 min = 10000 milliseconds
-    }
-});
+        if (bannerImages.length > 1) {
+            setInterval(() => {
+                currentIndex = (currentIndex + 1) % bannerImages.length;
+                const newImage = bannerImages[currentIndex];
+                document.getElementById('theme-banner-img').src = newImage.image;
+                document.getElementById('theme-banner-link').href = newImage.link;
+            }, 600000); // 10 min = 10000 milliseconds
+        }
+    });
 </script>

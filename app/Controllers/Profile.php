@@ -10,19 +10,11 @@ class Profile extends BaseController
     {
         $userId = session()->get('zd_uid');
 
-        if (!$userId) {
-            return redirect()->to('login')->with('error', 'Please log in first.');
-        }
-
         $userModel = new UserModel();
         $addressModel = new AddressProfileModel();
         $orderModel = new OrderModel();
 
         $user = $userModel->find($userId);
-
-        if (!$user) {
-            return redirect()->to('login')->with('error', 'User not found.');
-        }
 
         $data = [
             'user' => $user,
@@ -30,10 +22,11 @@ class Profile extends BaseController
             'orders' => $orderModel->getOrdersByUser($userId),
         ];
 
-        return view('common/header')
-             . view('profile', $data)
-             . view('common/footer')
-             . view('pagescripts/profilejs');
+    $template  = view('common/header');
+    $template .= view('profile', $data);
+    $template .= view('common/footer');
+    $template .= view('pagescripts/profilejs');
+    return $template;
     }
 	public function setDefaultAddress()
 	{

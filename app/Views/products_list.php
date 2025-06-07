@@ -28,20 +28,22 @@
                                 src="<?= base_url('uploads/productmedia/') . $firstImage; ?>"
                                 alt="<?= esc($item['pr_Name']); ?>" />
                         </a>
-                        <div class="star-rate p-1">
-                            <i class="bi bi-star-fill gold"></i>
-                            <i class="bi bi-star-fill gold"></i>
-                            <i class="bi bi-star-fill gold"></i>
-                            <i class="bi bi-star-fill"></i>
-                            <i class="bi bi-star-fill"></i>
-                        </div>
+                       <div class="star-rate p-1">
+							<?php 
+							$avg = intval($item['avg_rating'] ?? 0);
+							for ($i = 1; $i <= 5; $i++): 
+							?>
+								<i class="<?= $i <= $avg ? 'bi bi-star-fill gold' : 'bi bi-star' ?>"></i>
+							<?php endfor; ?>
+						</div>
+
                         <div class="item-name p-1"><?= esc($item['pr_Name']); ?></div>
                         <div class="item-price">
                             <i class="bi bi-currency-rupee"></i>&nbsp;<?= esc($item['pr_Selling_Price']); ?>
                         </div>
                         <div class="text-center mt-2">
                              <div class="col-md-12 text-center">
-                                    <button class="order-btn" onclick="window.location.href='<?= base_url('ordernow?pr_Id=' . $item['pr_Id']); ?>'"></button>
+                                    <button class="order-btn" onclick="window.location.href='<?= base_url('product/product_details/' . $item['pr_Id']); ?>'"></button>
                                 </div>
                         </div>
                     </div>

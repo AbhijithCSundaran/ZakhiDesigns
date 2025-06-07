@@ -349,4 +349,10 @@ header, .header-wrapper, .topnav, .navbar, .main-container {
         .sub-dropdown a:hover {
             background-color: #f4f4f4;
         }
+
+
+
+.gold {
+    color: gold;
+}
     

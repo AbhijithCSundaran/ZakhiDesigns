@@ -2,7 +2,7 @@
 
 use App\Models\ProductDisplayModel;
 use CodeIgniter\Controller;
-
+use App\Models\ReviewModel;
 class Product extends Controller
 {
     protected $productdisplayModel;
@@ -16,24 +16,35 @@ class Product extends Controller
     }
 
     // Homepage - shows all products
-    public function index()
+      public function index()
     {
-		
-
-		$zd_uid = $this->session->get('zd_uid');
-		$data = [];
-        $data['product'] = $this->productdisplayModel->getAllProducts();
-		$this->categories = $this->productdisplayModel->getAllCategoriesAndSub();
-		$data['categories'] = $this->categories;
+        $zd_uid = $this->session->get('zd_uid');
+        $data = [];
+        $products = $this->productdisplayModel->getAllProducts();
+        $this->categories = $this->productdisplayModel->getAllCategoriesAndSub();
+        $data['categories'] = $this->categories;
         $data['title'] = 'Product';
-		print_r($data);
+        $reviewModel = new ReviewModel();
+        $productIds = array_column($products, 'pr_Id');
 
-        return view('common/header',$data)
+        if (!empty($productIds)) {
+            $avgRatings = $reviewModel->getAverageRatingForProducts($productIds);
+            $ratingsMap = [];
+            foreach ($avgRatings as $rating) {
+                $ratingsMap[$rating['pr_Id']] = $rating['avg_rating'];
+            }
+            foreach ($products as &$product) {
+                $product['avg_rating'] = $ratingsMap[$product['pr_Id']] ?? 0;
+            }
+        }
+
+        $data['product'] = $products;
+
+        return view('common/header', $data)
             . view('products_list', $data)
             . view('common/footer')
             . view('pagescripts/productjs');
     }
-
     // Handles AJAX search - returns JSON (optional use)
 	public function ajaxSearch()
     {

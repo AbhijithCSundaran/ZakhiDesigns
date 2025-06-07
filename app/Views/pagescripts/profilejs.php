@@ -1,13 +1,17 @@
 <script>
-$('#profileForm').submit(function(e) {
-    e.preventDefault();
-    $.post("<?= base_url('profile/update') ?>", $(this).serialize(), function(res) {
-        if (res.status === 'success') {
-            showMessage('Profile updated successfully!', 'success');
-        } else {
-            showMessage(res.msg || 'Update failed!', 'danger');
+$(document).ready(function () {
+    $('.login-check').click(function (e) {
+        const zd_uid = "<?= session()->get('zd_uid'); ?>";
+
+        if (!zd_uid) {
+            e.preventDefault(); // Stop navigation
+
+            // Load login form into modal and show it
+            $('#modalBody').load("<?= base_url('weblogin'); ?>", function () {
+                $('#mainModal').modal('show');
+            });
         }
-    }, 'json');
+    });
 });
 
 function openAddAddressForm() {

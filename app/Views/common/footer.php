@@ -4,16 +4,21 @@
         <div class="row">
             <div class="col-md-3">
                 <h4>Your Account<h4>
-                        <ul>
-                            <li><i class="bi bi-arrow-right"></i> <a class="foot-link"
-                                    href="<?= base_url('profile#profile'); ?>">Profile</a></li>
-                            <li><i class="bi bi-arrow-right"></i> <a class="foot-link"
-                                    href="<?= base_url('profile#orders'); ?>">My Orders</a></li>
-                            <li><i class="bi bi-arrow-right"></i> <a class="foot-link"
-                                    href="<?= base_url('profile#address'); ?>">Address</a></li>
-                            <li><i class="bi bi-arrow-right"></i> <a class="foot-link"
-                                    href="<?= base_url('profile#orders'); ?>">Track Orders</a></li>
-                        </ul>
+                       <ul>
+    <li><i class="bi bi-arrow-right"></i> 
+        <a href="<?= base_url('profile#profile'); ?>" class="foot-link login-check">Profile</a>
+    </li>
+    <li><i class="bi bi-arrow-right"></i> 
+        <a href="<?= base_url('profile#orders'); ?>" class="foot-link login-check">My Orders</a>
+    </li>
+    <li><i class="bi bi-arrow-right"></i> 
+        <a href="<?= base_url('profile#address'); ?>" class="foot-link login-check">Address</a>
+    </li>
+    <li><i class="bi bi-arrow-right"></i> 
+        <a href="<?= base_url('profile#orders'); ?>" class="foot-link login-check">Track Orders</a>
+    </li>
+</ul>
+
             </div>
             <div class="col-md-3">
                 <h4>Products<h4>
@@ -87,7 +92,7 @@
                 right: '250px'
             });
         });
-        debugger;
+
         var topowl = $('#top-prod-owl,#top-prod-owl-two');
         topowl.owlCarousel({
             margin: 10,

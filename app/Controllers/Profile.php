@@ -8,8 +8,17 @@ class Profile extends BaseController
 {
    public function index() 
     {
-        $userId = session()->get('zd_uid');
+         $userId = session()->get('zd_uid');
 
+    // If not logged in and JS is bypassed
+		if (!$userId) {
+			// Prevent loading profile page directly without login
+			if ($this->request->isAJAX()) {
+				return view('weblogin'); // For modal
+			} else {
+				return redirect()->to(base_url()); // Or show error/redirect
+			}
+		}
         $userModel = new UserModel();
         $addressModel = new AddressProfileModel();
         $orderModel = new OrderModel();

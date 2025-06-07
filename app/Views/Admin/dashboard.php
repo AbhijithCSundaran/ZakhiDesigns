@@ -37,7 +37,7 @@
                                             <h6 class="text-muted m-b-0">Latest Orders (Last 7 Days)</h6>
                                         </div>
                                         <div class="col-4 text-right">
-                                            <i class="bi bi-box-seam f-28"></i>
+                                            <i class="bi bi-bag-heart f-28"></i>
                                         </div>
                                     </div>
                                 </div>
@@ -56,14 +56,14 @@
                         </div>
                         <div class="col-xl-3 col-md-6">
                             <div class="card">
-                                <div class="card-block">
+                                <div class="card-block m-2">
                                     <div class="row align-items-center">
                                         <div class="col-8">
                                             <h4 class="text-c-green"><?= esc($totalOrderCount); ?></h4>
                                             <h6 class="text-muted m-b-0">Total Orders</h6>
                                         </div>
                                         <div class="col-4 text-right">
-                                            <i class="bi bi-box-seam f-28"></i>
+                                            <i class="bi bi-bag-heart f-28"></i>
                                         </div>
                                     </div>
                                 </div>
@@ -81,7 +81,7 @@
                         </div>
                         <div class="col-xl-3 col-md-6">
                             <div class="card">
-                                <div class="card-block">
+                                <div class="card-block m-2">
                                     <div class="row align-items-center">
                                         <div class="col-8">
                                             <h4 class="text-c-red"><?= esc($totalCustomerCount); ?></h4>
@@ -151,6 +151,7 @@
                                                     <th>Total Price</th>
                                                     <th>Selling Price</th>
                                                     <th>Discount</th>
+                                                    <th>Grand Total</th>
                                                     <th>Order Status</th>
                                                 </tr>
                                             </thead>
@@ -171,10 +172,20 @@
                                                                 <?= esc($order->od_DiscountValue); ?>
                                                                 <?= esc($order->od_DiscountType); ?>
                                                             </td>
+                                                            <td><i
+                                                                    class="bi bi-currency-rupee"></i><?= esc(number_format($order->od_Grand_Total, 2)); ?>
+                                                            </td>
                                                             <td>
-                                                                <span class="badge badge-info">
-                                                                    <?= esc($order->od_Status); ?>
-                                                                </span>
+                                                                <?php
+                                                                $statusLabels = [
+                                                                    1 => 'New',
+                                                                    2 => 'Confirmed',
+                                                                    3 => 'Packed',
+                                                                    4 => 'Dispatched'
+                                                                ];
+                                                                $statusText = $statusLabels[$order->od_Status] ?? 'Unknown';
+                                                                ?>
+                                                                <span class="badge badge-info"><?= esc($statusText); ?></span>
                                                             </td>
                                                         </tr>
                                                     <?php endforeach; ?>
@@ -187,7 +198,8 @@
 
                                         </table>
                                         <div class="text-right m-r-20">
-                                            <a href="<?php echo base_url('admin/orders') ?>" class=" b-b-primary text-primary">View all Orders</a>
+                                            <a href="<?php echo base_url('admin/orders') ?>"
+                                                class=" b-b-primary text-primary">View all Orders</a>
                                         </div>
                                     </div>
                                 </div>
@@ -215,7 +227,7 @@
                                         <table class="table table-hover">
                                             <thead>
                                                 <tr>
-
+                                                    <th>Product Code</th>
                                                     <th>Product Name</th>
                                                     <th>Product Image</th>
                                                     <th>MRP</th>
@@ -227,12 +239,19 @@
                                             <tbody>
                                                 <?php foreach ($latestProducts as $product): ?>
                                                     <tr>
+                                                        <td><?= esc($product->pr_Code); ?></td>
                                                         <td><?= esc($product->pr_Name); ?></td>
+
                                                         <td>
-                                                            <img style="height:80px;"
-                                                                src="<?= base_url('uploads/productmedia/' . esc($product->product_images)); ?>"
-                                                                alt="<?= esc($product->pr_Name); ?>">
+                                                            <?php if (!empty($product->main_image)): ?>
+                                                                <img style="height: 80px;"
+                                                                    src="<?= base_url('uploads/productmedia/' . esc($product->main_image)); ?>"
+                                                                    alt="<?= esc($product->pr_Name); ?>">
+                                                            <?php else: ?>
+                                                                <span class="text-muted">No image</span>
+                                                            <?php endif; ?>
                                                         </td>
+
                                                         <td><i class="bi bi-currency-rupee"></i><?= esc($product->mrp); ?>
                                                         </td>
                                                         <td><i
@@ -245,7 +264,8 @@
 
                                         </table>
                                         <div class="text-right m-r-20">
-                                            <a href="<?php echo base_url('admin/product') ?>" class=" b-b-primary text-primary">View all Products</a>
+                                            <a href="<?php echo base_url('admin/product') ?>"
+                                                class=" b-b-primary text-primary">View all Products</a>
                                         </div>
                                     </div>
                                 </div>

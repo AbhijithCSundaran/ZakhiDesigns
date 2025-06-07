@@ -62,3 +62,6 @@
      max-width: 380px;
      object-fit: contain;
  }
+ .owl-carousel{
+	 z-index:0!important;
+ }

@@ -187,7 +187,7 @@
 
                                         </table>
                                         <div class="text-right m-r-20">
-                                            <a href="#!" class=" b-b-primary text-primary">View all Orders</a>
+                                            <a href="<?php echo base_url('admin/orders') ?>" class=" b-b-primary text-primary">View all Orders</a>
                                         </div>
                                     </div>
                                 </div>
@@ -245,7 +245,7 @@
 
                                         </table>
                                         <div class="text-right m-r-20">
-                                            <a href="#!" class=" b-b-primary text-primary">View all Products</a>
+                                            <a href="<?php echo base_url('admin/product') ?>" class=" b-b-primary text-primary">View all Products</a>
                                         </div>
                                     </div>
                                 </div>

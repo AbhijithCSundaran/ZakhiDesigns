@@ -57,7 +57,7 @@ if (!empty($themes['theme_Section3'])) {
             </div>
             <div class="col-md-6 rightbox">
                 <div class="yearblock"><?= date('Y') ?></div>
-				<a href="<?= base_url('product/viewcollection') ?>" class="btn btn-black">View Collection</a>
+				<a href="<?= base_url('product/viewcollection') ?>" class="btn btn-black">View Collection</a>
             </div>
         </div>
     </div>

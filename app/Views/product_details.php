@@ -17,7 +17,9 @@ if (is_array($decoded) && isset($decoded[0]['name']) && is_array($decoded[0]['na
 						<div class="pics clearfix">
 							<!-- Thumbnails -->
 							<div class="thumbs d-flex flex-column flex-wrap gap-2 mb-3">
-								<?php foreach ($imageList as $imgName): ?>
+							
+								<?php 	
+								foreach ($imageList as $imgName): ?>
 									<div class="prod-preview">
 										<a href="#" class="thumb-link" data-type="image"
 											data-src="<?= base_url('uploads/productmedia/' . $imgName); ?>"
@@ -71,12 +73,20 @@ if (is_array($decoded) && isset($decoded[0]['name']) && is_array($decoded[0]['na
 						<div class="col-md-12">
 							<div class="prod-name"><?= esc($product['pr_Name']); ?></div>
 							<div class="star-rate text-left">
-								<i class="bi bi-star-fill gold"></i>
-								<i class="bi bi-star-fill gold"></i>
-								<i class="bi bi-star-fill gold"></i>
-								<i class="bi bi-star-fill"></i>
-								<i class="bi bi-star-fill"></i>
-								0 Reviews
+		
+								<?php 
+								$avg = round($product['avg_rating'] ?? 0, 1);
+								for ($i = 1; $i <= 5; $i++) {
+									if ($avg >= $i) {
+										echo '<i class="bi bi-star-fill gold"></i>';
+									} elseif ($avg >= ($i - 0.5)) {
+										echo '<i class="bi bi-star-half gold"></i>';
+									} else {
+										echo '<i class="bi bi-star"></i>';
+									}
+								}
+								?>
+				
 							</div>
 							<?php if (!empty($product['pr_Description'])): ?>
 								<div class="col-md-12">
@@ -195,6 +205,181 @@ if (is_array($decoded) && isset($decoded[0]['name']) && is_array($decoded[0]['na
 		</div>
 	</section>
 </form>
+<section>
+			<div class="container-lg">
+				<div class="row">
+					<div class="owl-carousel" id="top-prod-owl-one">
+						<div class="item">
+							<div class="col-md-12">
+								<img src="assets/images/slides/s1.png" />
+							</div>
+							<div class="star-rate">
+								<i class="bi bi-star-fill gold"></i>
+								<i class="bi bi-star-fill gold"></i>
+								<i class="bi bi-star-fill gold"></i>
+								<i class="bi bi-star-fill"></i>
+								<i class="bi bi-star-fill"></i>
+							</div>
+							<div class="item-name">Lorem Ipsum</div>
+							<div class="item-price"><i class="bi bi-currency-rupee"></i>&nbsp;1000</div>
+							<div class="col-md-12 text-center"><button class="order-btn"></button></div>
+						</div>
+						<div class="item">
+							<div class="col-md-12">
+								<img src="assets/images/slides/s2.png" />
+							</div>
+							<div class="star-rate">
+								<i class="bi bi-star-fill gold"></i>
+								<i class="bi bi-star-fill gold"></i>
+								<i class="bi bi-star-fill"></i>
+								<i class="bi bi-star-fill"></i>
+								<i class="bi bi-star-fill"></i>
+							</div>
+							<div class="item-name">Lorem Ipsum</div>
+							<div class="item-price"><i class="bi bi-currency-rupee"></i>&nbsp;1000</div>
+							<div class="col-md-12 text-center"><button class="order-btn"></button></div>
+						</div>
+						<div class="item">
+							<div class="col-md-12">
+								<img src="assets/images/slides/s3.png" />
+							</div>
+							<div class="star-rate">
+								<i class="bi bi-star-fill gold"></i>
+								<i class="bi bi-star-fill gold"></i>
+								<i class="bi bi-star-fill gold"></i>
+								<i class="bi bi-star-fill gold"></i>
+								<i class="bi bi-star-fill"></i>
+							</div>
+							<div class="item-name">Lorem Ipsum</div>
+							<div class="item-price"><i class="bi bi-currency-rupee"></i>&nbsp;1000</div>
+							<div class="col-md-12 text-center"><button class="order-btn"></button></div>
+						</div>
+						<div class="item">
+							<div class="col-md-12">
+								<img src="assets/images/slides/s4.png" />
+							</div>
+							<div class="star-rate">
+								<i class="bi bi-star-fill gold"></i>
+								<i class="bi bi-star-fill gold"></i>
+								<i class="bi bi-star-fill gold"></i>
+								<i class="bi bi-star-fill"></i>
+								<i class="bi bi-star-fill"></i>
+							</div>
+							<div class="item-name">Lorem Ipsum</div>
+							<div class="item-price"><i class="bi bi-currency-rupee"></i>&nbsp;1000</div>
+							<div class="col-md-12 text-center"><button class="order-btn"></button></div>
+						</div>
+						<div class="item">
+							<div class="col-md-12">
+								<img src="assets/images/slides/s1.png" />
+							</div>
+							<div class="star-rate">
+								<i class="bi bi-star-fill gold"></i>
+								<i class="bi bi-star-fill gold"></i>
+								<i class="bi bi-star-fill gold"></i>
+								<i class="bi bi-star-fill gold"></i>
+								<i class="bi bi-star-fill gold"></i>
+							</div>
+							<div class="item-name">Lorem Ipsum</div>
+							<div class="item-price"><i class="bi bi-currency-rupee"></i>&nbsp;1000</div>
+							<div class="col-md-12 text-center"><button class="order-btn"></button></div>
+						</div>
+						<div class="item">
+							<div class="col-md-12">
+								<img src="assets/images/slides/s2.png" />
+							</div>
+							<div class="star-rate">
+								<i class="bi bi-star-fill gold"></i>
+								<i class="bi bi-star-fill gold"></i>
+								<i class="bi bi-star-fill gold"></i>
+								<i class="bi bi-star-fill gold"></i>
+								<i class="bi bi-star-fill gold"></i>
+							</div>
+							<div class="item-name">Lorem Ipsum</div>
+							<div class="item-price"><i class="bi bi-currency-rupee"></i>&nbsp;1000</div>
+							<div class="col-md-12 text-center"><button class="order-btn"></button></div>
+						</div>
+						<div class="item">
+							<div class="col-md-12">
+								<img src="assets/images/slides/s3.png" />
+							</div>
+							<div class="star-rate">
+								<i class="bi bi-star-fill gold"></i>
+								<i class="bi bi-star-fill gold"></i>
+								<i class="bi bi-star-fill gold"></i>
+								<i class="bi bi-star-fill"></i>
+								<i class="bi bi-star-fill"></i>
+							</div>
+							<div class="item-name">Lorem Ipsum</div>
+							<div class="item-price"><i class="bi bi-currency-rupee"></i>&nbsp;1000</div>
+							<div class="col-md-12 text-center"><button class="order-btn"></button></div>
+						</div>
+						<div class="item">
+							<div class="col-md-12">
+								<img src="assets/images/slides/s4.png" />
+							</div>
+							<div class="star-rate">
+								<i class="bi bi-star-fill gold"></i>
+								<i class="bi bi-star-fill gold"></i>
+								<i class="bi bi-star-fill gold"></i>
+								<i class="bi bi-star-fill gold"></i>
+								<i class="bi bi-star-fill"></i>
+							</div>
+							<div class="item-name">Lorem Ipsum</div>
+							<div class="item-price"><i class="bi bi-currency-rupee"></i>&nbsp;1000</div>
+							<div class="col-md-12 text-center"><button class="order-btn"></button></div>
+						</div>
+						<div class="item">
+							<div class="col-md-12">
+								<img src="assets/images/slides/s1.png" />
+							</div>
+							<div class="star-rate">
+								<i class="bi bi-star-fill gold"></i>
+								<i class="bi bi-star-fill gold"></i>
+								<i class="bi bi-star-fill gold"></i>
+								<i class="bi bi-star-fill gold"></i>
+								<i class="bi bi-star-fill gold"></i>
+							</div>
+							<div class="item-name">Lorem Ipsum</div>
+							<div class="item-price"><i class="bi bi-currency-rupee"></i>&nbsp;1000</div>
+							<div class="col-md-12 text-center"><button class="order-btn"></button></div>
+						</div>
+						<div class="item">
+							<div class="col-md-12">
+								<img src="assets/images/slides/s2.png" />
+							</div>
+							<div class="star-rate">
+								<i class="bi bi-star-fill gold"></i>
+								<i class="bi bi-star-fill gold"></i>
+								<i class="bi bi-star-fill gold"></i>
+								<i class="bi bi-star-fill gold"></i>
+								<i class="bi bi-star-fill"></i>
+							</div>
+							<div class="item-name">Lorem Ipsum</div>
+							<div class="item-price"><i class="bi bi-currency-rupee"></i>&nbsp;1000</div>
+							<div class="col-md-12 text-center"><button class="order-btn"></button></div>
+						</div>
+						<div class="item">
+							<div class="col-md-12">
+								<img src="assets/images/slides/s3.png" />
+							</div>
+							<div class="star-rate">
+								<i class="bi bi-star-fill gold"></i>
+								<i class="bi bi-star-fill gold"></i>
+								<i class="bi bi-star-fill gold"></i>
+								<i class="bi bi-star-fill gold"></i>
+								<i class="bi bi-star-fill"></i>
+							</div>
+							<div class="item-name">Lorem Ipsum</div>
+							<div class="item-price"><i class="bi bi-currency-rupee"></i>&nbsp;1000</div>
+							<div class="col-md-12 text-center"><button class="order-btn"></button></div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+		
+		
 <script>
 	function selectColor(color, element) {
 		document.getElementById('selected_color').value = color;

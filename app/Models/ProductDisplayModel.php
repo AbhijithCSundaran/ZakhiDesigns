@@ -6,12 +6,20 @@ class ProductDisplayModel extends Model
 {
 	protected $table = 'product';
     protected $primaryKey = 'pr_Id';
-	 public function getAllProducts() {
-		return $this->db->table('product')
+	
+	public function getAllProducts()
+	{
+		/*return $this->db->table('product')
 		->where('pr_Status =', 1)
 		->get()
-		->getResultArray();
-       }
+		->getResultArray();*/
+		
+		return $this->db->query("select pd.*, avg(rating) as ratings 
+							from product as pd 
+							left join reviews as rw on rw.pr_Id = pd.pr_Id 
+							where pd.pr_Status = 1 group by pd.pr_Id")->getResultArray();
+		
+	}
 
     protected $allowedFields = ['pr_Name', 'pr_Description', 'pr_Selling_Price', 'product_images', 'cat_Id', 'sub_Id','pr_Price','pr_modifyon'];
 /* 	public function searchProducts($keyword)
@@ -27,6 +35,7 @@ class ProductDisplayModel extends Model
     {
         return $this->orderBy('pr_modifyon', 'DESC')->findAll();
     }
+
 
  public function getAllProduct()
     {
@@ -50,10 +59,16 @@ class ProductDisplayModel extends Model
 	}
 	 public function getProductById($id)
     {
-		 return $this->db->table('product')
-        ->where('pr_Id', $id)
-        ->get()
-        ->getRowArray();
+	
+		$builder = $this->db->query("
+        SELECT pd.*, AVG(rw.rating) AS avg_rating
+        FROM product AS pd
+        LEFT JOIN reviews AS rw ON rw.pr_Id = pd.pr_Id
+        WHERE pd.pr_Status = 1 AND pd.pr_Id = ?
+        GROUP BY pd.pr_Id
+    ", [$id]);
+
+    return $builder->getRowArray();
     }
 	public function insertOrder($data)
 	{

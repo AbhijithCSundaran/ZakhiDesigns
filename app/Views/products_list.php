@@ -12,6 +12,7 @@
             <div class="row">
                 <?php
                     $uniqueIds = [];
+				
                     foreach ($product as $item):
                         if (in_array($item['pr_Id'], $uniqueIds)) {
                             continue;
@@ -19,7 +20,7 @@
                         $uniqueIds[] = $item['pr_Id'];
 
                         $images = json_decode($item['product_images'], true);
-                        $firstImage = isset($images[0]['name'][0]) ? $images[0]['name'][0] : 'default.png';
+                        $firstImage = isset($images[0]['name'][0]) ? $images[0]['name'][0] : 'default.jpg';
                 ?>
                 <div class="col-md-3 mb-4">
                     <div class="product-item text-center border p-3 h-100">
@@ -28,14 +29,16 @@
                                 src="<?= base_url('uploads/productmedia/') . $firstImage; ?>"
                                 alt="<?= esc($item['pr_Name']); ?>" />
                         </a>
-                       <div class="star-rate p-1">
-							<?php 
-							$avg = intval($item['avg_rating'] ?? 0);
-							for ($i = 1; $i <= 5; $i++): 
-							?>
-								<i class="<?= $i <= $avg ? 'bi bi-star-fill gold' : 'bi bi-star' ?>"></i>
-							<?php endfor; ?>
-						</div>
+							    <div class="star-rate p-1">
+									<?php
+										$avg = isset($item['ratings']) ? round($item['ratings']) : 0;
+										for ($i = 1; $i <= 5; $i++):
+									?>
+										<i class="<?= $i <= $avg ? 'bi bi-star-fill gold' : 'bi bi-star' ?>"></i>
+									<?php endfor; ?>
+									<!-- Show numeric average -->
+									
+								</div>
 
                         <div class="item-name p-1"><?= esc($item['pr_Name']); ?></div>
                         <div class="item-price">

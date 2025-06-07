@@ -4,10 +4,13 @@ namespace App\Controllers;
 use App\Models\ProductDisplayModel;
 use CodeIgniter\Controller;
 use App\Models\ReviewModel;
+
 class Product extends Controller
 {
     protected $productdisplayModel;
     protected $categories;
+    protected $session;
+    protected $request;
 
     public function __construct()
     {
@@ -16,223 +19,289 @@ class Product extends Controller
         $this->productdisplayModel = new ProductDisplayModel();
     }
 
-    // Homepage - shows all products
-      public function index()
+    // Homepage - shows all products with categories and ratings
+   public function index()
+{
+    $zd_uid = $this->session->get('zd_uid');
+    $data = [];
+
+    // Load categories for header
+    $data['categories'] = $this->productdisplayModel->getAllCategoriesAndSub();
+
+    // Load all products
+    $products = $this->productdisplayModel->getAllProducts();
+    $reviewModel = new ReviewModel();
+    $data['product'] = $products;
+	print_r($data);exit;
+
+    return view('common/header', $data)
+        . view('products_list', $data)
+        . view('common/footer')
+        . view('pagescripts/productjs');
+}
+
+    // Handles AJAX search
+    public function ajaxSearch()
     {
-        $zd_uid = $this->session->get('zd_uid');
-        $data = [];
-        $products = $this->productdisplayModel->getAllProducts();
-        $this->categories = $this->productdisplayModel->getAllCategoriesAndSub();
-        $data['categories'] = $this->categories;
-        $data['title'] = 'Product';
-        $reviewModel = new ReviewModel();
-        $productIds = array_column($products, 'pr_Id');
+				$zd_uid = $this->session->get('zd_uid');
+    $data = [];
 
-        if (!empty($productIds)) {
-            $avgRatings = $reviewModel->getAverageRatingForProducts($productIds);
-            $ratingsMap = [];
-            foreach ($avgRatings as $rating) {
-                $ratingsMap[$rating['pr_Id']] = $rating['avg_rating'];
-            }
-            foreach ($products as &$product) {
-                $product['avg_rating'] = $ratingsMap[$product['pr_Id']] ?? 0;
-            }
-        }
+    // Load categories for header
+    $data['categories'] = $this->productdisplayModel->getAllCategoriesAndSub();
 
-        $data['product'] = $products;
+    // Load all products
+    $products = $this->productdisplayModel->getAllProducts();
+    $reviewModel = new ReviewModel();
+    $data['product'] = $products;
+		$data['avg_rating'] = $ratingsMap;
+        $keyword = $this->request->getGet('keyword');
+        $products = $keyword ? $this->productdisplayModel->searchProducts($keyword) : [];
 
-        return view('common/header', $data)
+        $products = array_values(array_unique($products, SORT_REGULAR));
+
+        return view('common/header',$data)
+            . view('products_list', ['product' => $products])
+            . view('common/footer')
+            . view('pagescripts/productjs');
+    }
+
+    public function product_list()
+    {
+       // $data['product'] = $this->productdisplayModel->getAllProducts();
+		
+		$zd_uid = $this->session->get('zd_uid');
+    $data = [];
+
+    // Load categories for header
+    $data['categories'] = $this->productdisplayModel->getAllCategoriesAndSub();
+
+    // Load all products
+    $products = $this->productdisplayModel->getAllProducts();
+    $reviewModel = new ReviewModel();
+    $data['product'] = $products;
+
+        return view('common/header',$data)
             . view('products_list', $data)
             . view('common/footer')
             . view('pagescripts/productjs');
     }
-    // Handles AJAX search - returns JSON (optional use)
-	public function ajaxSearch()
-    {
-        $this->productdisplayModel = new ProductDisplayModel();
-        $keyword = $this->request->getGet('keyword');
-        $products = $keyword ? $this->productdisplayModel->searchProducts($keyword) : [];
- 
-        // Remove duplicates by unique product ID (optional)
-        $products = array_values(array_unique($products, SORT_REGULAR));
 
-		return view('common/header')
-			. view('products_list', ['product' => $products])
-			. view('common/footer')
-			. view('pagescripts/productjs');
-    }
-	public function product_list()
-    {
-        $productdisplayModel = new ProductDisplayModel();
-		
-        $data['product'] = $productdisplayModel->getAllProduct();
-        return view('common/header')
-        . view('products_list', $data)
-        . view('common/footer')
-        . view('pagescripts/productjs');
-    }
-	
-	///////view collection//////
-	
     public function view_collection()
-	{
-		$model = new ProductDisplayModel();
-		$data['product'] = $model->getProductsByModifiedDate();
-		return view('common/header')
-			. view('products_list', $data)
-			. view('common/footer')
-			. view('pagescripts/productjs');
-	}
-
-	
-    public function product_list_by_category($cat_Id)
     {
-        $productdisplayModel = new ProductDisplayModel();
-        $data['product'] = $productdisplayModel->getProductsByCategoryName($cat_Id);
-        return view('common/header')
-        . view('products_list', $data)
-        . view('common/footer')
-        . view('pagescripts/productjs');
+				$zd_uid = $this->session->get('zd_uid');
+    $data = [];
+
+    // Load categories for header
+    $data['categories'] = $this->productdisplayModel->getAllCategoriesAndSub();
+
+    // Load all products
+    $products = $this->productdisplayModel->getAllProducts();
+    $reviewModel = new ReviewModel();
+    $data['product'] = $products;
+		$data['avg_rating'] = $ratingsMap;
+        $data['product'] = $this->productdisplayModel->getProductsByModifiedDate();
+        return view('common/header',$data)
+            . view('products_list', $data)
+            . view('common/footer')
+            . view('pagescripts/productjs');
+    }
+
+    public function product_list_by_category($cat_Id)
+	{
+	$zd_uid = $this->session->get('zd_uid');
+    $data = [];
+
+    // Load categories for header
+    $data['categories'] = $this->productdisplayModel->getAllCategoriesAndSub();
+
+    // Load all products
+    $products = $this->productdisplayModel->getAllProducts();
+    $reviewModel = new ReviewModel();
+		$data['product'] = $products;
+		$data['avg_rating'] = $ratingsMap;
+        $data['product'] = $this->productdisplayModel->getProductsByCategoryName($cat_Id);
+        return view('common/header',$data)
+            . view('products_list', $data)
+            . view('common/footer')
+            . view('pagescripts/productjs');
     }
 
     public function product_list_by_subcategory($sub_Id)
     {
-        $productdisplayModel = new ProductDisplayModel();
-        $data['product'] = $productdisplayModel->getProductsBySubcategoryName($sub_Id);
-        return view('common/header')
-        . view('products_list', $data)
-        . view('common/footer')
-        . view('pagescripts/productjs');
+				$zd_uid = $this->session->get('zd_uid');
+    $data = [];
+
+    // Load categories for header
+    $data['categories'] = $this->productdisplayModel->getAllCategoriesAndSub();
+
+    // Load all products
+    $products = $this->productdisplayModel->getAllProducts();
+    $reviewModel = new ReviewModel();
+    $data['product'] = $products;
+		$data['avg_rating'] = $ratingsMap;
+        $data['product'] = $this->productdisplayModel->getProductsBySubcategoryName($sub_Id);
+        return view('common/header',$data)
+            . view('products_list', $data)
+            . view('common/footer')
+            . view('pagescripts/productjs');
     }
 
     public function search_products()
     {
+		
+		$zd_uid = $this->session->get('zd_uid');
+    $data = [];
+
+    // Load categories for header
+    $data['categories'] = $this->productdisplayModel->getAllCategoriesAndSub();
+
+    // Load all products
+    $products = $this->productdisplayModel->getAllProducts();
+    $reviewModel = new ReviewModel();
+    $data['product'] = $products;
         $keyword = $this->request->getPost('keyword');
-        $productdisplayModel = new ProductDisplayModel();
-        $data['product'] = $productdisplayModel->searchProducts($keyword);
-        return view('common/header')
-        . view('products_list', $data)
-        . view('common/footer')
-        . view('pagescripts/productjs');
-    }
-	public function products_lists()
-{
-    $categoryId    = $this->request->getGet('category');
-    $subCategoryId = $this->request->getGet('subcategory');
-    $keyword       = $this->request->getGet('keyword');
-
-    if ($categoryId) {
-        $data['product'] = $this->productdisplayModel->getProductsByCategory($categoryId);
-        $data['filter_type'] = 'category';
-    } elseif ($subCategoryId) {
-        $data['product'] = $this->productdisplayModel->getProductsBySubCategory($subCategoryId);
-        $data['filter_type'] = 'subcategory';
-    } elseif ($keyword) {
-        $data['product'] = $this->productdisplayModel->searchProducts($keyword);
-        $data['filter_type'] = 'search';
-        $data['search'] = $keyword;
-    } else {
-        $data['product'] = $this->productdisplayModel->getAllProducts();
-        $data['filter_type'] = 'all';
-        $data['search'] = '';
+        //$data['product'] = $this->productdisplayModel->searchProducts($keyword);
+        return view('common/header',$data)
+            . view('products_list', $data)
+            . view('common/footer')
+            . view('pagescripts/productjs');
     }
 
-    return view('common/header')
-        . view('products_list', $data)
-        . view('common/footer')
-        . view('pagescripts/productjs');
-}
-
-
-
-	public function product_details($id)
-{
-    $zd_uid = $this->session->get('zd_uid');
-    $productdisplayModel = new ProductDisplayModel();
-	$product = $productdisplayModel->getProductById($id);
-
-	// Decode images from JSON
-	$imageList = [];
-	if (!empty($product['product_images'])) {
-		$imgJson = json_decode($product['product_images'], true);
-		$imageList = $imgJson[0]['name'] ?? [];
-	}
-
-	// Single video (not array)
-	$videoName = !empty($product['product_video']) ? trim($product['product_video']) : null;
-
-	return view('common/header')
-		. view('product_details', [
-			'product' => $product,
-			'zd_uid' => $this->session->get('zd_uid'),
-			'imageList' => $imageList,
-			'videoName' => $videoName
-		])
-		.view('common/footer')
-		. view('pagescripts/productjs');
-
-	}
-
-public function submit()
-{
-	$this->productdisplayModel = new ProductDisplayModel();
+    public function products_lists()
+    {
 	$zd_uid = $this->session->get('zd_uid');
-	if (empty($zd_uid)) {
-		return redirect()->to(base_url('weblogin'));
-	}
-	
-	$cust_id  = $this->request->getPost('cust_Id');
-	$pr_Id    = $this->request->getPost('pr_Id');
-	$size     = $this->request->getPost('size');
-	$color    = $this->request->getPost('selected_color');
-	$qty      = (int)$this->request->getPost('qty');
-	$product = $this->productdisplayModel->getProductById($pr_Id);
-	$productName    = $product['pr_Name'] ?? '';
-	$original_price = $product['mrp'] ?? '';
-	$selling_price  = (float)$product['pr_Selling_Price'] ?? '';
-	$discount_value = $product['pr_Discount_Value'] ?? '';
-	$discount_type  = $product['pr_Discount_Type'] ?? '';
-	$pr_code        = $product['pr_Code'] ?? '';
-	$grand_total    = $selling_price * $qty;
+    $data = [];
 
-	if (!empty($cust_id) && !empty($pr_Id) && !empty($size) && !empty($color) && !empty($qty)) {
-		$data = [
-			'cus_Id'            => $cust_id,
-			'pr_Id'             => $pr_Id,
-			'od_Size'           => $size,
-			'od_Color'          => $color,
-			'od_Quantity'       => $qty,
-			'od_Original_Price' => $original_price,
-			'od_Selling_Price'  => $selling_price,
-			'od_DiscountValue'  => $discount_value,
-			'od_DiscountType'   => $discount_type,
-			'pr_Code'           => $pr_code,
-			'od_Grand_Total' 	=> $grand_total,
-			'od_createdon'      => date("Y-m-d H:i:s"),
-			'od_createdby'      => $zd_uid,
-			'od_modifyby'       => $zd_uid,
-		];
+    // Load categories for header
+    $data['categories'] = $this->productdisplayModel->getAllCategoriesAndSub();
 
-		$od_Id = $this->productdisplayModel->insertOrder($data);
-		if ($od_Id) {
-			return $this->response->setJSON([
-				'status' => 1,
-				'msg'    => 'Order Placed Successfully.',
-				'od_Id'  => $od_Id,
-				'redirect' => base_url('ordernow/product/' . $od_Id)
-			]);
-		} else {
-			return $this->response->setJSON([
-				'status' => 0,
-				'msg'    => 'Failed to place order.'
-			]);
-		}
-	} else {
-		return $this->response->setJSON([
-			'status' => 0,
-			'msg'    => 'Please select Size,Color and Quantity.',
-		]);
-	}
-}
+    // Load all products
+    $products = $this->productdisplayModel->getAllProducts();
+    $reviewModel = new ReviewModel();
+        $data['product'] = $products;
+		$data['avg_rating'] = 1;
+        $categoryId    = $this->request->getGet('category');
+        $subCategoryId = $this->request->getGet('subcategory');
+        $keyword       = $this->request->getGet('keyword');
 
+        if ($categoryId) {
+            $data['product'] = $this->productdisplayModel->getProductsByCategory($categoryId);
+            $data['filter_type'] = 'category';
+        } elseif ($subCategoryId) {
+            $data['product'] = $this->productdisplayModel->getProductsBySubCategory($subCategoryId);
+            $data['filter_type'] = 'subcategory';
+        } elseif ($keyword) {
+            $data['product'] = $this->productdisplayModel->searchProducts($keyword);
+            $data['filter_type'] = 'search';
+            $data['search'] = $keyword;
+        } else {
+            $data['product'] = $this->productdisplayModel->getAllProducts();
+            $data['filter_type'] = 'all';
+            $data['search'] = '';
+        }
+
+        return view('common/header',$data)
+            . view('products_list', $data)
+            . view('common/footer')
+            . view('pagescripts/productjs');
+    }
+
+    public function product_details($id)
+    {
+		
+       // $zd_uid = $this->session->get('zd_uid');
+				$zd_uid = $this->session->get('zd_uid');
+    $data = [];
+
+    // Load categories for header
+    $data['categories'] = $this->productdisplayModel->getAllCategoriesAndSub();
+
+    // Load all products
+    $products = $this->productdisplayModel->getAllProducts();
+    $reviewModel = new ReviewModel();
+    $data['product'] = $products;
+	$data['avg_rating'] = 1;
+        $product = $this->productdisplayModel->getProductById($id);
+
+        $imageList = [];
+        if (!empty($product['product_images'])) {
+            $imgJson = json_decode($product['product_images'], true);
+            $imageList = $imgJson[0]['name'] ?? [];
+        }
+
+        $videoName = !empty($product['product_video']) ? trim($product['product_video']) : null;
+
+        return view('common/header',$data)
+            . view('product_details', [
+                'product' => $product,
+                'zd_uid' => $zd_uid,
+                'imageList' => $imageList,
+                'videoName' => $videoName
+            ])
+            . view('common/footer')
+            . view('pagescripts/productjs');
+    }
+
+    public function submit()
+    {
+        $zd_uid = $this->session->get('zd_uid');
+        if (empty($zd_uid)) {
+            return redirect()->to(base_url('weblogin'));
+        }
+
+        $cust_id  = $this->request->getPost('cust_Id');
+        $pr_Id    = $this->request->getPost('pr_Id');
+        $size     = $this->request->getPost('size');
+        $color    = $this->request->getPost('selected_color');
+        $qty      = (int)$this->request->getPost('qty');
+        $product  = $this->productdisplayModel->getProductById($pr_Id);
+
+        $productName    = $product['pr_Name'] ?? '';
+        $original_price = $product['mrp'] ?? '';
+        $selling_price  = (float)($product['pr_Selling_Price'] ?? 0);
+        $discount_value = $product['pr_Discount_Value'] ?? '';
+        $discount_type  = $product['pr_Discount_Type'] ?? '';
+        $pr_code        = $product['pr_Code'] ?? '';
+        $grand_total    = $selling_price * $qty;
+
+        if (!empty($cust_id) && !empty($pr_Id) && !empty($size) && !empty($color) && !empty($qty)) {
+            $data = [
+                'cus_Id'            => $cust_id,
+                'pr_Id'             => $pr_Id,
+                'od_Size'           => $size,
+                'od_Color'          => $color,
+                'od_Quantity'       => $qty,
+                'od_Original_Price' => $original_price,
+                'od_Selling_Price'  => $selling_price,
+                'od_DiscountValue'  => $discount_value,
+                'od_DiscountType'   => $discount_type,
+                'pr_Code'           => $pr_code,
+                'od_Grand_Total'    => $grand_total,
+                'od_createdon'      => date("Y-m-d H:i:s"),
+                'od_createdby'      => $zd_uid,
+                'od_modifyby'       => $zd_uid,
+            ];
+
+            $od_Id = $this->productdisplayModel->insertOrder($data);
+
+            if ($od_Id) {
+                return $this->response->setJSON([
+                    'status' => 1,
+                    'msg'    => 'Order Placed Successfully.',
+                    'od_Id'  => $od_Id,
+                    'redirect' => base_url('ordernow/product/' . $od_Id)
+                ]);
+            } else {
+                return $this->response->setJSON([
+                    'status' => 0,
+                    'msg'    => 'Failed to place order.'
+                ]);
+            }
+        } else {
+            return $this->response->setJSON([
+                'status' => 0,
+                'msg'    => 'Please select Size, Color and Quantity.',
+            ]);
+        }
+    }
 }

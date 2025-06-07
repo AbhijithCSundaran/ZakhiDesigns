@@ -63,7 +63,12 @@ if ($firstImage) {
             <img src="' . $imagePath . '" alt="Product Image" class="img-thumbnail" width="60">
         </a>';
 } else {
-    $row['image'] = '<span class="text-muted">No image</span>';
+    //$row['image'] = '<span class="text-muted">No image</span>';
+     $defaultImage = base_url('public/Admin/assets/images/default.jpg');
+    $row['image'] = '
+        <a href="#">
+            <img src="' . $defaultImage . '" alt="No Image" class="img-thumbnail" width="60">
+        </a>';
 }
 	
 		

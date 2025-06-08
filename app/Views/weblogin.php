@@ -11,10 +11,15 @@
         <label for="email">Enter the email address</label>
     </div>
 
-    <div class="floating-label-group mb-1">
-        <input type="password" class="form-control" id="password" name="cust_Password" placeholder=" " required />
-        <label for="password">Enter your password</label>
+   <div class="floating-label-group password-wrapper">
+        <div class="password-input-wrapper">
+             <input type="password" class="form-control" id="password" name="cust_Password" placeholder=" " required />
+         <label for="password">Enter your password</label>
+         <i class="bi bi-eye-slash toggle-password" id="togglePassword"></i>
+        </div>
     </div>
+
+
     <div class="row text-end">
         <a href="">Forgot Password?</a>
     </div>
@@ -27,3 +32,18 @@
         <button type="submit" class="btn btn-primary">Login</button>
     </div>
 </form>
+<script>
+    $(document).ready(function() {
+        $('#togglePassword').on('click', function () {
+            const passwordField = $('#password');
+            const icon = $(this);
+            
+            // Toggle input type
+            const type = passwordField.attr('type') === 'password' ? 'text' : 'password';
+            passwordField.attr('type', type);
+
+            // Toggle icon class
+            icon.toggleClass('bi-eye bi-eye-slash');
+        });
+    });
+</script>

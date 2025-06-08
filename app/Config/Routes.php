@@ -27,6 +27,8 @@ $routes->get('ordernow/getAddress/(:num)', 'OrderNow::getAddress/$1');
 $routes->get('product', 'Product::index');
 $routes->get('product/details', 'ProductDetails::index');
 $routes->get('product/product_details/(:num)', 'Product::product_details/$1');
+//$routes->get('/product-details/(:num)', 'ProductController::productDetails/$1');
+$routes->get('/similar-products/(:num)', 'Product::similarProducts/$1');
 $routes->get('product/search', 'Product::ajaxSearch');
 $routes->get('product/product_list', 'Product::products_lists');
 $routes->get('product/product_list/category/(:num)', 'Product::product_list_by_category/$1');

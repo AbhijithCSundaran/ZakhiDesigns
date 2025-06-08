@@ -32,13 +32,23 @@ class Product extends Controller
     $products = $this->productdisplayModel->getAllProducts();
     $reviewModel = new ReviewModel();
     $data['product'] = $products;
-	print_r($data);exit;
 
     return view('common/header', $data)
         . view('products_list', $data)
         . view('common/footer')
         . view('pagescripts/productjs');
 }
+ /* public function similarProducts($pr_Id)
+    {
+        $model = new ProductModel();
+        $product = $model->find($pr_Id);
+        $similar = $model->getSimilarProducts($product['cat_Id'], $pr_Id);
+		$data['similar']=$similar;
+         return view('common/header', $data)
+        . view('product_details', $data)
+        . view('common/footer')
+        . view('pagescripts/productjs');
+    } */
 
     // Handles AJAX search
     public function ajaxSearch()
@@ -53,7 +63,7 @@ class Product extends Controller
     $products = $this->productdisplayModel->getAllProducts();
     $reviewModel = new ReviewModel();
     $data['product'] = $products;
-		$data['avg_rating'] = $ratingsMap;
+		$data['avg_rating'] = 1;
         $keyword = $this->request->getGet('keyword');
         $products = $keyword ? $this->productdisplayModel->searchProducts($keyword) : [];
 
@@ -79,6 +89,7 @@ class Product extends Controller
     $products = $this->productdisplayModel->getAllProducts();
     $reviewModel = new ReviewModel();
     $data['product'] = $products;
+	$data['avg_rating'] = 1;
 
         return view('common/header',$data)
             . view('products_list', $data)
@@ -88,7 +99,7 @@ class Product extends Controller
 
     public function view_collection()
     {
-				$zd_uid = $this->session->get('zd_uid');
+	$zd_uid = $this->session->get('zd_uid');
     $data = [];
 
     // Load categories for header
@@ -98,7 +109,7 @@ class Product extends Controller
     $products = $this->productdisplayModel->getAllProducts();
     $reviewModel = new ReviewModel();
     $data['product'] = $products;
-		$data['avg_rating'] = $ratingsMap;
+		$data['avg_rating'] = 1;
         $data['product'] = $this->productdisplayModel->getProductsByModifiedDate();
         return view('common/header',$data)
             . view('products_list', $data)
@@ -118,7 +129,7 @@ class Product extends Controller
     $products = $this->productdisplayModel->getAllProducts();
     $reviewModel = new ReviewModel();
 		$data['product'] = $products;
-		$data['avg_rating'] = $ratingsMap;
+		$data['avg_rating'] = 1;
         $data['product'] = $this->productdisplayModel->getProductsByCategoryName($cat_Id);
         return view('common/header',$data)
             . view('products_list', $data)
@@ -138,7 +149,7 @@ class Product extends Controller
     $products = $this->productdisplayModel->getAllProducts();
     $reviewModel = new ReviewModel();
     $data['product'] = $products;
-		$data['avg_rating'] = $ratingsMap;
+		$data['avg_rating'] = 1;
         $data['product'] = $this->productdisplayModel->getProductsBySubcategoryName($sub_Id);
         return view('common/header',$data)
             . view('products_list', $data)
@@ -159,6 +170,7 @@ class Product extends Controller
     $products = $this->productdisplayModel->getAllProducts();
     $reviewModel = new ReviewModel();
     $data['product'] = $products;
+	$data['avg_rating'] = 1;
         $keyword = $this->request->getPost('keyword');
         //$data['product'] = $this->productdisplayModel->searchProducts($keyword);
         return view('common/header',$data)
@@ -206,41 +218,50 @@ class Product extends Controller
             . view('pagescripts/productjs');
     }
 
-    public function product_details($id)
-    {
-		
-       // $zd_uid = $this->session->get('zd_uid');
-				$zd_uid = $this->session->get('zd_uid');
+   public function product_details($id)
+{
+    $zd_uid = $this->session->get('zd_uid');
     $data = [];
 
     // Load categories for header
     $data['categories'] = $this->productdisplayModel->getAllCategoriesAndSub();
 
-    // Load all products
-    $products = $this->productdisplayModel->getAllProducts();
-    $reviewModel = new ReviewModel();
-    $data['product'] = $products;
-	$data['avg_rating'] = 1;
-        $product = $this->productdisplayModel->getProductById($id);
+    // Get single product
+    $product = $this->productdisplayModel->getProductById($id);
 
-        $imageList = [];
-        if (!empty($product['product_images'])) {
-            $imgJson = json_decode($product['product_images'], true);
-            $imageList = $imgJson[0]['name'] ?? [];
-        }
-
-        $videoName = !empty($product['product_video']) ? trim($product['product_video']) : null;
-
-        return view('common/header',$data)
-            . view('product_details', [
-                'product' => $product,
-                'zd_uid' => $zd_uid,
-                'imageList' => $imageList,
-                'videoName' => $videoName
-            ])
-            . view('common/footer')
-            . view('pagescripts/productjs');
+    if (!$product) {
+        throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound('Product not found');
     }
+
+    // Get similar products
+    $data['similar'] = $this->productdisplayModel->getSimilarProducts($product['cat_Id'], $id);
+
+    // Product data for main view
+    $data['product'] = $product;
+
+    // Rating (optional logic here if implemented)
+    $data['avg_rating'] = 1;
+
+    // Product Images
+    $imageList = [];
+    if (!empty($product['product_images'])) {
+        $imgJson = json_decode($product['product_images'], true);
+        $imageList = $imgJson[0]['name'] ?? [];
+    }
+
+    $videoName = !empty($product['product_video']) ? trim($product['product_video']) : null;
+
+    return view('common/header', $data)
+        . view('product_details', [
+            'product' => $product,
+            'zd_uid' => $zd_uid,
+            'imageList' => $imageList,
+            'videoName' => $videoName,
+            'similar' => $data['similar'] // explicitly pass if needed
+        ])
+        . view('common/footer')
+        . view('pagescripts/productjs');
+}
 
     public function submit()
     {

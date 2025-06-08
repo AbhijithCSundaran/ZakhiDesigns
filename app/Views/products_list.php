@@ -12,7 +12,7 @@
             <div class="row">
                 <?php
                     $uniqueIds = [];
-				
+
                     foreach ($product as $item):
                         if (in_array($item['pr_Id'], $uniqueIds)) {
                             continue;

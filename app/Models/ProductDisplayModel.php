@@ -31,31 +31,71 @@ class ProductDisplayModel extends Model
 	} */
 	
 	///// view collection ////
+	 public function getSimilarProducts($cat_Id, $excludeId)
+    {
+        return $this->select('product.*, AVG(reviews.rating) as ratings')
+                    ->join('reviews', 'reviews.pr_Id = product.pr_Id', 'left')
+                    ->where('product.cat_Id', $cat_Id)
+                    ->where('product.pr_Status', 1)
+                    ->where('product.pr_Id !=', $excludeId)
+                    ->groupBy('product.pr_Id')
+                    ->orderBy('product.pr_createdon', 'DESC')
+                    ->findAll(8); // limit to 8
+    }
 	public function getProductsByModifiedDate()
     {
-        return $this->orderBy('pr_modifyon', 'DESC')->findAll();
+       return $this->select('product.*, AVG(reviews.rating) AS ratings')
+            ->join('reviews', 'reviews.pr_Id = product.pr_Id', 'left')
+            ->where('product.pr_Status', 1)
+            ->where('product.pr_createdon IS NOT NULL') // or any condition you want
+            ->groupBy('product.pr_Id')
+            ->orderBy('product.pr_createdon', 'DESC')
+            ->findAll();
+
     }
 
 
  public function getAllProduct()
     {
-        return $this->findAll();
+       return $this->db->query("select pd.*, avg(rating) as ratings 
+				from product as pd 
+				left join reviews as rw on rw.pr_Id = pd.pr_Id 
+				where pd.pr_Status = 1 group by pd.pr_Id")->getResultArray();
     }
     public function getProductsByCategoryName($cat_Id)
     {
-        return $this->where('cat_Id', $cat_Id)->findAll();
+       return $this->select('product.*, AVG(reviews.rating) AS ratings')
+            ->join('reviews', 'reviews.pr_Id = product.pr_Id', 'left')
+            ->where('product.cat_Id', $cat_Id)
+            ->where('product.pr_Status', 1)
+            ->groupBy('product.pr_Id')
+            ->orderBy('product.pr_createdon', 'DESC')
+            ->findAll();
+
+
     }
 
     public function getProductsBySubcategoryName($sub_Id)
     {
-        return $this->where('sub_Id', $sub_Id)->findAll();
+       return $this->select('product.*, AVG(reviews.rating) AS ratings')
+            ->join('reviews', 'reviews.pr_Id = product.pr_Id', 'left')
+            ->where('product.sub_Id', $sub_Id)
+            ->where('product.pr_Status', 1)
+            ->groupBy('product.pr_Id')
+            ->orderBy('product.pr_createdon', 'DESC')
+            ->findAll();
+
     }
     public function searchProducts($keyword)
 	{
-		return $this->where('pr_Status !=', 3)
-			->like('pr_Name', $keyword)
-			->groupBy('pr_Id')
-			->findAll();
+		return $this->select('product.*, AVG(reviews.rating) AS ratings')
+            ->join('reviews', 'reviews.pr_Id = product.pr_Id', 'left')
+            ->where('product.pr_Status !=', 3)
+            ->like('product.pr_Name', $keyword)
+            ->groupBy('product.pr_Id')
+            ->findAll();
+
+			
 	}
 	 public function getProductById($id)
     {

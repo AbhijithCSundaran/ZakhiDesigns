@@ -66,7 +66,7 @@ if ($firstImage) {
     //$row['image'] = '<span class="text-muted">No image</span>';
      $defaultImage = base_url('public/Admin/assets/images/default.jpg');
     $row['image'] = '
-        <a href="#">
+        <a href="#" onclick="alert(\'Please upload the images\'); return false;">
             <img src="' . $defaultImage . '" alt="No Image" class="img-thumbnail" width="60">
         </a>';
 }

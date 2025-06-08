@@ -18,24 +18,24 @@
         <div class="tab-pane fade show active" id="profile" role="tabpanel">
 		<div class="row">
       <div class="col-md-6">
-            <form id="profileForm">
+            <form id="profileForm" method="post">
 			<?php if (!empty($user)): ?>
 			<div>&nbsp;</div>
-			  <input name="name" class="form-control" value="<?= esc($user['cust_Name']) ?>" />
+			  <input type="text" name="name" id="name" class="form-control" value="<?= esc($user['cust_Name']) ?>" />
 			  <div>&nbsp;</div>
-			  <input name="email" class="form-control" value="<?= esc($user['cust_Email']) ?>" />
+			  <input type="email" name="email" id="email" class="form-control" value="<?= esc($user['cust_Email']) ?>" />
 			  <div>&nbsp;</div>
-			  <input name="phone" class="form-control" value="<?= esc($user['cust_Phone']) ?>" />
+			  <input type="phone" name="phone" id="phone" class="form-control" value="<?= esc($user['cust_Phone']) ?>" />
 			  <div>&nbsp;</div>
 			<?php else: ?>
 			  <div class="alert alert-danger">User information not found.</div>
 			<?php endif; ?>
-
 			<div class="text-end">
-                <button class="btn btn-primary mt-2">Update</button>
+                <button class="btn btn-primary mt-2" type="submit">Update</button>
 				</div>
 				<div>&nbsp;</div>
             </form>
+			
 			<div>&nbsp;</div>
 			</div>
 			</div>

@@ -90,7 +90,7 @@ class ProductDisplayModel extends Model
 	{
 		return $this->select('product.*, AVG(reviews.rating) AS ratings')
             ->join('reviews', 'reviews.pr_Id = product.pr_Id', 'left')
-            ->where('product.pr_Status !=', 3)
+            ->where('product.pr_Status', 1)
             ->like('product.pr_Name', $keyword)
             ->groupBy('product.pr_Id')
             ->findAll();
@@ -116,7 +116,7 @@ class ProductDisplayModel extends Model
 		return $this->db->insertID(); // return the inserted ID
 	}
 
-    public function getAllCategoriesWithSub()
+  /*   public function getAllCategoriesWithSub()
     {
 
         $builder = $this->db->table('category');
@@ -144,7 +144,7 @@ class ProductDisplayModel extends Model
 
         return array_values($result);
     }
-
+ */
     public function getAllCategoriesAndSub()
     {
         $db = \Config\Database::connect();
@@ -186,7 +186,7 @@ class ProductDisplayModel extends Model
 {
     return $this->db->table('product')
         ->where('cat_Id', $categoryId)
-        ->where('pr_Status !=', 3)
+        ->where('pr_Status', 1)
         ->get()
         ->getResultArray();
 }
@@ -195,7 +195,7 @@ public function getProductsBySubCategory($subCategoryId)
 {
     return $this->db->table('product')
         ->where('sub_Id', $subCategoryId)
-        ->where('pr_Status !=', 3)
+        ->where('pr_Status',1)
         ->get()
         ->getResultArray();
 }

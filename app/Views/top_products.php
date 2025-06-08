@@ -17,7 +17,7 @@ $next20 = array_slice($latestProducts, 20, 20);
                     <?php foreach ($first20 as $item): ?>
                         <?php
                         $images = json_decode($item['product_images'], true);
-                        $firstImage = isset($images[0]['name'][0]) ? $images[0]['name'][0] : 'default.png';
+                        $firstImage = isset($images[0]['name'][0]) ? $images[0]['name'][0] : 'default.jpg';
                         ?>
                         <div class="item">
                             <div class="col-md-12">

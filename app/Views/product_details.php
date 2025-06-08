@@ -6,7 +6,7 @@ if (is_array($decoded) && isset($decoded[0]['name']) && is_array($decoded[0]['na
 	$imageList = $decoded[0]['name']; // array of image names
 }
 ?>
-<form action="<?= base_url('product/submit') ?>" method="post" id="orderNowForm">
+
 
 	<?php $zd_uid = session()->get('zd_uid'); ?>
 	<section class="hero-banner">
@@ -16,8 +16,7 @@ if (is_array($decoded) && isset($decoded[0]['name']) && is_array($decoded[0]['na
 					<div class="clearfix">
 						<div class="pics clearfix">
 							<!-- Thumbnails -->
-							<div class="thumbs d-flex flex-column flex-wrap gap-2 mb-3">
-							
+							<div class="thumbs d-flex flex-column flex-wrap gap-2 mb-3">	
 								<?php 	
 								foreach ($imageList as $imgName): ?>
 									<div class="prod-preview">
@@ -42,7 +41,6 @@ if (is_array($decoded) && isset($decoded[0]['name']) && is_array($decoded[0]['na
 									</div>
 								<?php endif; ?>
 							</div>
-
 							<div id="main-preview">
 								<!-- Main image display -->
 								<?php if (!empty($imageList)): ?>
@@ -65,9 +63,9 @@ if (is_array($decoded) && isset($decoded[0]['name']) && is_array($decoded[0]['na
 					</div>
 
 				</div>
-
 				<div class="col-md-6 prod-detail-block">
 					<div class="row">
+					<form action="<?= base_url('product/submit') ?>" method="post" id="orderNowForm">
 						<div class="clearfix">&nbsp;</div>
 						<div id="messageBox" class="alert" style="display: none;"></div>
 						<div class="col-md-12">
@@ -124,8 +122,6 @@ if (is_array($decoded) && isset($decoded[0]['name']) && is_array($decoded[0]['na
 									</option>
 								<?php endforeach; ?>
 							</select>
-
-
 						</div>
 						<div class="col-md-12 colorblock">
 							<b>Color</b>
@@ -183,7 +179,7 @@ if (is_array($decoded) && isset($decoded[0]['name']) && is_array($decoded[0]['na
 									stock</span></div>
 						<?php endif; ?>
 
-
+					</form>
 
 						<div class="col-md-12">
 							<div class="clearfix">&nbsp;</div>
@@ -204,182 +200,56 @@ if (is_array($decoded) && isset($decoded[0]['name']) && is_array($decoded[0]['na
 
 		</div>
 	</section>
-</form>
-<section>
+	<section>
 			<div class="container-lg">
 				<div class="row">
-					<div class="owl-carousel" id="top-prod-owl-one">
-						<div class="item">
-							<div class="col-md-12">
-								<img src="assets/images/slides/s1.png" />
-							</div>
-							<div class="star-rate">
-								<i class="bi bi-star-fill gold"></i>
-								<i class="bi bi-star-fill gold"></i>
-								<i class="bi bi-star-fill gold"></i>
-								<i class="bi bi-star-fill"></i>
-								<i class="bi bi-star-fill"></i>
-							</div>
-							<div class="item-name">Lorem Ipsum</div>
-							<div class="item-price"><i class="bi bi-currency-rupee"></i>&nbsp;1000</div>
-							<div class="col-md-12 text-center"><button class="order-btn"></button></div>
-						</div>
-						<div class="item">
-							<div class="col-md-12">
-								<img src="assets/images/slides/s2.png" />
-							</div>
-							<div class="star-rate">
-								<i class="bi bi-star-fill gold"></i>
-								<i class="bi bi-star-fill gold"></i>
-								<i class="bi bi-star-fill"></i>
-								<i class="bi bi-star-fill"></i>
-								<i class="bi bi-star-fill"></i>
-							</div>
-							<div class="item-name">Lorem Ipsum</div>
-							<div class="item-price"><i class="bi bi-currency-rupee"></i>&nbsp;1000</div>
-							<div class="col-md-12 text-center"><button class="order-btn"></button></div>
-						</div>
-						<div class="item">
-							<div class="col-md-12">
-								<img src="assets/images/slides/s3.png" />
-							</div>
-							<div class="star-rate">
-								<i class="bi bi-star-fill gold"></i>
-								<i class="bi bi-star-fill gold"></i>
-								<i class="bi bi-star-fill gold"></i>
-								<i class="bi bi-star-fill gold"></i>
-								<i class="bi bi-star-fill"></i>
-							</div>
-							<div class="item-name">Lorem Ipsum</div>
-							<div class="item-price"><i class="bi bi-currency-rupee"></i>&nbsp;1000</div>
-							<div class="col-md-12 text-center"><button class="order-btn"></button></div>
-						</div>
-						<div class="item">
-							<div class="col-md-12">
-								<img src="assets/images/slides/s4.png" />
-							</div>
-							<div class="star-rate">
-								<i class="bi bi-star-fill gold"></i>
-								<i class="bi bi-star-fill gold"></i>
-								<i class="bi bi-star-fill gold"></i>
-								<i class="bi bi-star-fill"></i>
-								<i class="bi bi-star-fill"></i>
-							</div>
-							<div class="item-name">Lorem Ipsum</div>
-							<div class="item-price"><i class="bi bi-currency-rupee"></i>&nbsp;1000</div>
-							<div class="col-md-12 text-center"><button class="order-btn"></button></div>
-						</div>
-						<div class="item">
-							<div class="col-md-12">
-								<img src="assets/images/slides/s1.png" />
-							</div>
-							<div class="star-rate">
-								<i class="bi bi-star-fill gold"></i>
-								<i class="bi bi-star-fill gold"></i>
-								<i class="bi bi-star-fill gold"></i>
-								<i class="bi bi-star-fill gold"></i>
-								<i class="bi bi-star-fill gold"></i>
-							</div>
-							<div class="item-name">Lorem Ipsum</div>
-							<div class="item-price"><i class="bi bi-currency-rupee"></i>&nbsp;1000</div>
-							<div class="col-md-12 text-center"><button class="order-btn"></button></div>
-						</div>
-						<div class="item">
-							<div class="col-md-12">
-								<img src="assets/images/slides/s2.png" />
-							</div>
-							<div class="star-rate">
-								<i class="bi bi-star-fill gold"></i>
-								<i class="bi bi-star-fill gold"></i>
-								<i class="bi bi-star-fill gold"></i>
-								<i class="bi bi-star-fill gold"></i>
-								<i class="bi bi-star-fill gold"></i>
-							</div>
-							<div class="item-name">Lorem Ipsum</div>
-							<div class="item-price"><i class="bi bi-currency-rupee"></i>&nbsp;1000</div>
-							<div class="col-md-12 text-center"><button class="order-btn"></button></div>
-						</div>
-						<div class="item">
-							<div class="col-md-12">
-								<img src="assets/images/slides/s3.png" />
-							</div>
-							<div class="star-rate">
-								<i class="bi bi-star-fill gold"></i>
-								<i class="bi bi-star-fill gold"></i>
-								<i class="bi bi-star-fill gold"></i>
-								<i class="bi bi-star-fill"></i>
-								<i class="bi bi-star-fill"></i>
-							</div>
-							<div class="item-name">Lorem Ipsum</div>
-							<div class="item-price"><i class="bi bi-currency-rupee"></i>&nbsp;1000</div>
-							<div class="col-md-12 text-center"><button class="order-btn"></button></div>
-						</div>
-						<div class="item">
-							<div class="col-md-12">
-								<img src="assets/images/slides/s4.png" />
-							</div>
-							<div class="star-rate">
-								<i class="bi bi-star-fill gold"></i>
-								<i class="bi bi-star-fill gold"></i>
-								<i class="bi bi-star-fill gold"></i>
-								<i class="bi bi-star-fill gold"></i>
-								<i class="bi bi-star-fill"></i>
-							</div>
-							<div class="item-name">Lorem Ipsum</div>
-							<div class="item-price"><i class="bi bi-currency-rupee"></i>&nbsp;1000</div>
-							<div class="col-md-12 text-center"><button class="order-btn"></button></div>
-						</div>
-						<div class="item">
-							<div class="col-md-12">
-								<img src="assets/images/slides/s1.png" />
-							</div>
-							<div class="star-rate">
-								<i class="bi bi-star-fill gold"></i>
-								<i class="bi bi-star-fill gold"></i>
-								<i class="bi bi-star-fill gold"></i>
-								<i class="bi bi-star-fill gold"></i>
-								<i class="bi bi-star-fill gold"></i>
-							</div>
-							<div class="item-name">Lorem Ipsum</div>
-							<div class="item-price"><i class="bi bi-currency-rupee"></i>&nbsp;1000</div>
-							<div class="col-md-12 text-center"><button class="order-btn"></button></div>
-						</div>
-						<div class="item">
-							<div class="col-md-12">
-								<img src="assets/images/slides/s2.png" />
-							</div>
-							<div class="star-rate">
-								<i class="bi bi-star-fill gold"></i>
-								<i class="bi bi-star-fill gold"></i>
-								<i class="bi bi-star-fill gold"></i>
-								<i class="bi bi-star-fill gold"></i>
-								<i class="bi bi-star-fill"></i>
-							</div>
-							<div class="item-name">Lorem Ipsum</div>
-							<div class="item-price"><i class="bi bi-currency-rupee"></i>&nbsp;1000</div>
-							<div class="col-md-12 text-center"><button class="order-btn"></button></div>
-						</div>
-						<div class="item">
-							<div class="col-md-12">
-								<img src="assets/images/slides/s3.png" />
-							</div>
-							<div class="star-rate">
-								<i class="bi bi-star-fill gold"></i>
-								<i class="bi bi-star-fill gold"></i>
-								<i class="bi bi-star-fill gold"></i>
-								<i class="bi bi-star-fill gold"></i>
-								<i class="bi bi-star-fill"></i>
-							</div>
-							<div class="item-name">Lorem Ipsum</div>
-							<div class="item-price"><i class="bi bi-currency-rupee"></i>&nbsp;1000</div>
-							<div class="col-md-12 text-center"><button class="order-btn"></button></div>
-						</div>
+
+					<h4 class="mb-3">Similar Products</h4>
+					<div class="owl-carousel" id="similar-carousel">
+						<?php 
+						if (!empty($similar)): ?>
+							<?php foreach ($similar as $item): ?>
+							 <?php
+							 if (!empty($item['product_images'])) {
+								
+								$decoded = json_decode($item['product_images'], true);
+								$firstImage = is_array($decoded) && isset($decoded[0]['name'][0])
+									? base_url('uploads/productmedia/' . $decoded[0]['name'][0])
+									: base_url('assets/img/no-image.png');		
+							 }
+                
+							?>
+								<div class="item">
+									<div class="col-md-5">
+											<img src="<?= $firstImage ?>" style="width: 100px;" alt="Product Image" />
+										</div>
+									<div class="star-rate">
+										<?php 
+											$fullStars = round($item['ratings']);
+											for ($i = 1; $i <= 5; $i++): ?>
+												<i class="bi bi-star-fill <?= $i <= $fullStars ? 'gold' : '' ?>"></i>
+										<?php endfor; ?>
+									</div>
+									<div class="item-name"><?= esc($item['pr_Name']) ?></div>
+									<div class="item-price">
+									</div>
+									<div class="col-md-12 text-center">
+										<button onclick="location.href='<?= site_url('product-details/' . $item['pr_Id']) ?>'" class="order-btn">
+											Order Now
+										</button>
+									</div>
+								</div>
+							<?php endforeach; ?>
+						<?php else: ?>
+							<p>No similar products found.</p>
+						<?php endif; ?>
 					</div>
 				</div>
 			</div>
 		</section>
 		
-		
+
+
 <script>
 	function selectColor(color, element) {
 		document.getElementById('selected_color').value = color;

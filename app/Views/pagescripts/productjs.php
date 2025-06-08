@@ -1,5 +1,21 @@
-
 <script>
+$(document).ready(function(){
+    $("#top-prod-owl-one").owlCarousel({
+        items: 4,
+        margin: 10,
+        nav: true,       // Show next/prev buttons
+        dots: false,     // Hide dots
+        loop: true,      // Loop the items
+        autoplay: false, // Disable automatic slide
+        responsive:{
+            0:{ items:1 },
+            600:{ items:2 },
+            1000:{ items:4 }
+        }
+    });
+});
+
+
   function searchProduct() {
     const keyword = document.getElementById('search').value.trim();
     if (keyword !== '') {

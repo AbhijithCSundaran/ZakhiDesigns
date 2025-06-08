@@ -26,7 +26,7 @@
         <div class="password-input-wrapper">
             <input type="password" class="form-control" id="password" name="password" placeholder=" " required />
             <label for="password">Password</label>
-            <i class="bi bi-eye toggle-password" id="toggleCurrentPassword"></i>
+            <i class="bi bi-eye-slash toggle-password" id="toggleCurrentPassword"></i>
         </div>
     </div>
 
@@ -34,7 +34,7 @@
         <div class="password-input-wrapper">
             <input type="password" class="form-control" id="cpassword" name="cust_cpassword" placeholder=" " required />
             <label for="cpassword">Confirm Password</label>
-            <i class="bi bi-eye toggle-password" id="toggleConfirmPassword"></i>
+            <i class="bi bi-eye-slash toggle-password" id="toggleConfirmPassword"></i>
         </div>
     </div>
     <div class="d-flex justify-content-center">

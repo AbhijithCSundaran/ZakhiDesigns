@@ -21,14 +21,23 @@ class Dashboard extends BaseController
 			redirect()->to(base_url());
 		}
 
-		 
+
 
 		$latestOrderCount = $this->dashboardModel->getLatestOrderCount();
 		$totalOrderCount = $this->dashboardModel->getTotalOrderCount();
 		$totalCustomerCount = $this->dashboardModel->getTotalCustomerCount();
 		$lastMonthRevenue = $this->dashboardModel->getLastMonthRevenue();
 		$todaysOrders = $this->dashboardModel->getTodaysOrders();
-		$latestProducts   = $this->dashboardModel->getLatestProducts();
+		$latestProducts = $this->dashboardModel->getLatestProducts();
+		// Decode images for each product
+		foreach ($latestProducts as &$product) {
+			$images = json_decode($product->product_images, true);
+			if (!empty($images[0]['name'][0])) {
+				$product->main_image = $images[0]['name'][0];
+			} else {
+				$product->main_image = null;
+			}
+		}
 
 
 
@@ -38,10 +47,10 @@ class Dashboard extends BaseController
 		$template .= view('Admin/dashboard', [
 			'latestOrderCount' => $latestOrderCount,
 			'totalOrderCount' => $totalOrderCount,
-			'totalCustomerCount'   => $totalCustomerCount,
-			'lastMonthRevenue'     => $lastMonthRevenue,
-			'todaysOrders'         => $todaysOrders,
-			'latestProducts'      => $latestProducts
+			'totalCustomerCount' => $totalCustomerCount,
+			'lastMonthRevenue' => $lastMonthRevenue,
+			'todaysOrders' => $todaysOrders,
+			'latestProducts' => $latestProducts
 		]);
 		$template .= view('Admin/common/footer');
 		return $template;

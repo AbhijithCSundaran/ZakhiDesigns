@@ -3,6 +3,7 @@ namespace App\Controllers;
 use App\Models\UserModel;
 use App\Models\AddressProfileModel;
 use App\Models\OrderModel;
+use App\Models\ProfileModel;
 
 class Profile extends BaseController 
 {
@@ -31,12 +32,37 @@ class Profile extends BaseController
             'orders' => $orderModel->getOrdersByUser($userId),
         ];
 
-    $template  = view('common/header');
+    $template  = view('common/header',$data);
     $template .= view('profile', $data);
     $template .= view('common/footer');
     $template .= view('pagescripts/profilejs');
     return $template;
     }
+	 public function editProfile()
+    {
+        $profileModel = new ProfileModel();
+
+        $id = session()->get('zd_uid');
+        $data = [
+            'cust_Name'  => $this->request->getPost('name'),
+            'cust_Email' => $this->request->getPost('email'),
+            'cust_Phone' => $this->request->getPost('phone'),
+        ];
+        $updatedUser = $profileModel->updateUserProfile($id, $data);
+
+        if ($updatedUser) {
+            return $this->response->setJSON([
+                'status' => 'success',
+                'msg' => 'Profile updated successfully.'
+            ]);
+        } else {
+            return $this->response->setJSON([
+                'status' => 'error',
+                'msg' => 'Failed to update profile.'
+            ]);
+        }
+    }
+
 	public function setDefaultAddress()
 	{
 		$userId = session()->get('zd_uid');

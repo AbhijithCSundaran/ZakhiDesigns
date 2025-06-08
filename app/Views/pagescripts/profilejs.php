@@ -14,6 +14,43 @@ $(document).ready(function () {
     });
 });
 
+$('#profileForm').on('submit', function(e) {
+    e.preventDefault();
+
+    $.ajax({
+        type: 'POST',
+        url: '<?= base_url('profile/editprofile') ?>',
+        data: $(this).serialize(),
+        dataType: 'json',
+        success: function(response) {
+            $('#messageBox')
+                .removeClass('alert-success alert-danger')
+                .addClass('alert-' + (response.status === 'success' ? 'success' : 'danger'))
+                .html(response.msg)
+                .fadeIn();
+
+            // Auto-hide and optionally reload updated data
+            if (response.status === 'success') {
+                setTimeout(function () {
+                    location.reload(); // reloads profile data from server
+                }, 2000);
+            } else {
+                setTimeout(() => $('#messageBox').fadeOut(), 5000);
+            }
+        },
+        error: function () {
+            $('#messageBox')
+                .removeClass('alert-success')
+                .addClass('alert-danger')
+                .html('An error occurred. Please try again.')
+                .fadeIn();
+
+            setTimeout(() => $('#messageBox').fadeOut(), 5000);
+        }
+    });
+});
+
+
 function openAddAddressForm() {
     $('#addressFormContainer').show();
     $('#addressForm')[0].reset();

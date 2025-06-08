@@ -70,4 +70,6 @@ class AddressProfileModel extends Model {
     ");
 }
 
+
+
 }

@@ -356,3 +356,8 @@ header, .header-wrapper, .topnav, .navbar, .main-container {
     color: gold;
 }
     
+
+ .owl-carousel{
+	 z-index:0 !important;
+	 display:block !important;
+ }

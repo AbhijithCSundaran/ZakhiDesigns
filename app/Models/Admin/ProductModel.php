@@ -7,7 +7,7 @@ class ProductModel extends Model {
 
     protected $table = 'product';
     protected $primaryKey = 'pr_Id';
-    protected $allowedFields = ['pr_Name', 'mrp','pr_Selling_Price','pr_Discount_Value','pr_Stock', 'pr_Status']; // Adjust to your table
+    protected $allowedFields = ['pr_Name', 'pr_Code', 'mrp','pr_Selling_Price','pr_Discount_Value','pr_Stock', 'pr_Status']; // Adjust to your table
 	
         public function __construct() {
             $this->db = \Config\Database::connect();
@@ -36,6 +36,19 @@ public function isProductExists($productName, $excludeId = null) {
 
     return $builder->get()->getRow();
 }
+public function isProductCodeExists($productCode, $excludeId = null)
+{
+    $builder = $this->db->table('product');
+    $builder->where('pr_Code', $productCode);
+    $builder->where('pr_Status !=', 3); 
+
+    if (!empty($excludeId)) {
+        $builder->where('pr_Id !=', $excludeId);
+    }
+
+    return $builder->get()->getRow(); 
+}
+
 
 
 

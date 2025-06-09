@@ -107,5 +107,8 @@
     display: block;
     max-width: 100%;
 }
+.banner-btm-spce{
+    margin-bottom: 3px !important;
+}
 
 

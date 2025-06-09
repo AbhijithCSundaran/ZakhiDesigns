@@ -26,7 +26,8 @@ class Dashboard extends BaseController
 		$latestOrderCount = $this->dashboardModel->getLatestOrderCount();
 		$totalOrderCount = $this->dashboardModel->getTotalOrderCount();
 		$totalCustomerCount = $this->dashboardModel->getTotalCustomerCount();
-		$lastMonthRevenue = $this->dashboardModel->getLastMonthRevenue();
+		$annualRevenue = $this->dashboardModel->getAnnualRevenue();
+
 		$todaysOrders = $this->dashboardModel->getTodaysOrders();
 		$latestProducts = $this->dashboardModel->getLatestProducts();
 		// Decode images for each product
@@ -48,7 +49,7 @@ class Dashboard extends BaseController
 			'latestOrderCount' => $latestOrderCount,
 			'totalOrderCount' => $totalOrderCount,
 			'totalCustomerCount' => $totalCustomerCount,
-			'lastMonthRevenue' => $lastMonthRevenue,
+			'annualRevenue' => $annualRevenue,
 			'todaysOrders' => $todaysOrders,
 			'latestProducts' => $latestProducts
 		]);

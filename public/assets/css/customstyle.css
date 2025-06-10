@@ -361,3 +361,9 @@ header, .header-wrapper, .topnav, .navbar, .main-container {
 	 z-index:0 !important;
 	 display:block !important;
  }
+
+
+.owl-carousel .owl-dots.disabled, .owl-carousel .owl-nav.disabled {
+    display: block !important;
+
+

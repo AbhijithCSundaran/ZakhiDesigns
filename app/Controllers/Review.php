@@ -5,6 +5,7 @@ use App\Models\ReviewModel;
 use App\Models\ProductDisplayModel;
 use App\Models\UserModel;
 
+
 class Review extends BaseController
 {
     protected $session;
@@ -33,7 +34,7 @@ class Review extends BaseController
             'orders' => $orderModel->getOrdersByUser($userId),
         ];
 
-		$template  = view('common/header');
+		$template  = view('common/header',$data);
         $template .= view('review', $data); // Ensure this view file exists
         $template .= view('common/footer');
         $template .= view('pagescripts/reviewjs');
@@ -41,29 +42,36 @@ class Review extends BaseController
 		
 
     }
-    public function loaddetails($custId, $pr_Id)
-    {
-       $userModel = new UserModel();
-		$productModel = new ProductDisplayModel();
+   public function loaddetails($custId, $pr_Id)
+	{
+		$userModel     = new UserModel();
+		$reviewModel   = new ReviewModel();
+		$productModel  = new ProductDisplayModel();
 
-		$customer = $userModel->find($custId);
-		$product  = $productModel->find($pr_Id);  // rename $order to $product for clarity
+		// Fetch required data
+		$customer      = $userModel->find($custId);
+		$product       = $productModel->find($pr_Id);
+		$reviews       = $reviewModel->where('pr_Id', $pr_Id)->orderBy('created_at', 'DESC')->findAll();
+		$categories    = $productModel->getAllCategoriesAndSub();
 
-		$reviewModel = new ReviewModel();
-		$reviews = $reviewModel->where('pr_Id', $pr_Id)->orderBy('created_at', 'DESC')->findAll();
-
+		// Pass data to the view
 		$data = [
-			'customer' => $customer,
-			'product'  => $product,
-			'reviews'  => $reviews,
+			'customer'   => $customer,
+			'product'    => $product,
+			'reviews'    => $reviews,
+			'categories' => $categories,
 		];
 
-        $template  = view('common/header');
-        $template .= view('review', $data); // Ensure this view file exists
-        $template .= view('common/footer');
-        $template .= view('pagescripts/reviewjs');
-        return $template;
-    }
+		// Load view
+		$template  = view('common/header', $data);
+		$template .= view('review', $data); // Make sure 'review' view handles looping through $reviews
+		$template .= view('common/footer');
+		$template .= view('pagescripts/reviewjs');
+
+		return $template;
+	}
+
+
 
     // Handle review submission via AJAX
     public function submit()

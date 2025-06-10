@@ -5,6 +5,37 @@ document.querySelector("#contactForm").addEventListener("submit", function(e) {
 	const form = e.target;
 	const formData = new FormData(form);
 
+	const name = formData.get("fullname").trim();
+	const phone = formData.get("contact_no").trim();
+	const email = formData.get("email").trim();
+	const message = formData.get("message").trim();
+	const responseDiv = document.getElementById("formResponse");
+
+	// === VALIDATION ===
+	const nameRegex = /^[a-zA-Z\s]+$/;
+	const phoneRegex = /^\d{10}$/;
+
+	if (!nameRegex.test(name)) {
+		showMessage("Name must contain only letters and spaces.", "danger");
+		return;
+	}
+
+	if (!phoneRegex.test(phone)) {
+		showMessage("Contact number must be exactly 10 digits.", "danger");
+		return;
+	}
+
+	if (email === '' || !email.includes("@")) {
+		showMessage("Enter a valid email address.", "danger");
+		return;
+	}
+
+	if (message === '') {
+		showMessage("Message cannot be empty.", "danger");
+		return;
+	}
+
+	// === SUBMIT ===
 	fetch("<?= base_url('contact/submit') ?>", {
 		method: "POST",
 		body: formData,
@@ -14,17 +45,23 @@ document.querySelector("#contactForm").addEventListener("submit", function(e) {
 	})
 	.then(response => response.json())
 	.then(data => {
-		const responseDiv = document.getElementById("formResponse");
 		if (data.status === 'success') {
 			form.reset();
-			responseDiv.innerHTML = `<div class="alert alert-success">${data.message}</div>`;
+			showMessage(data.message, "success");
 		} else {
-			responseDiv.innerHTML = `<div class="alert alert-danger">${data.message}</div>`;
+			showMessage(data.message, "danger");
 		}
 	})
 	.catch(error => {
-		document.getElementById("formResponse").innerHTML =
-			`<div class="alert alert-danger">Something went wrong.</div>`;
+		showMessage("Something went wrong.", "danger");
 	});
+
+	// === Helper: Show Message and Auto-hide ===
+	function showMessage(msg, type) {
+		responseDiv.innerHTML = `<div class="alert alert-${type}">${msg}</div>`;
+		setTimeout(() => {
+			responseDiv.innerHTML = "";
+		}, 3000); // 3 seconds
+	}
 });
 </script>

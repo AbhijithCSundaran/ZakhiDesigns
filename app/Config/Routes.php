@@ -53,6 +53,7 @@ $routes->post('profile/update', 'Profile::update');
 $routes->post('profile/getAddress', 'Profile::getAddress');
 //$routes->get('profile/editprofile', 'Profile::editProfile');
 $routes->match(['get', 'post'], 'profile/editprofile', 'Profile::editProfile');
+$routes->match(['get', 'post'],'profile/change_password', 'Profile::changePassword');
 
 
 

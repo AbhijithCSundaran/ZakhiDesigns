@@ -9,19 +9,22 @@
 						<p>We're happy to hear from you. Share us your query.</p>
 						
 						<div id="formResponse" class="mt-2"></div>
-						<form name="contact" id="contactForm">
+						<form name="contact" id="contactForm" autocomplete="off" required>
 							<div class="form-group">
 								<label>Fullname</label>
 								<input type="text" class="form-control" name="fullname" required>
 							</div>
+							<div class="clearfix">&nbsp;</div>
 							<div class="form-group">
 								<label>Email</label>
 								<input type="email" class="form-control" name="email" required>
 							</div>
+							<div class="clearfix">&nbsp;</div>
 							<div class="form-group">
 								<label>Contact No.</label>
 								<input type="text" class="form-control" name="contact_no" required>
 							</div>
+							<div class="clearfix">&nbsp;</div>
 							<div class="form-group">
 								<label>Message</label>
 								<textarea class="form-control" name="message" required></textarea>

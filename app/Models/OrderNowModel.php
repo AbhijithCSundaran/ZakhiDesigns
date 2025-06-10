@@ -4,24 +4,25 @@ use CodeIgniter\Model;
 
 class OrderNowModel extends Model
 {
-    protected $table = 'order_Detail'; // Primary table
+    protected $table = 'order_detail'; // Primary table
     protected $primaryKey = 'od_Id';
 	protected $allowedFields = [
     'pr_Id','od_Original_Price','od_Selling_Price','od_modifyby','pr_Code','cus_Id','od_Status',
     'od_Quantity','od_Grand_Total','od_createdby','od_createdon','add_Id'];
 
-   public function getProductWithAddress($cus_Id, $pr_Id)
-{
-    return $this->db->table('order_detail od')
-        ->select('od.*, product.*, address.*')
-        ->join('product', 'product.pr_Id = od.pr_Id', 'left')
-        ->join('address', 'address.add_Id = od.cus_Id AND address.add_Default = 1', 'left')
-        ->where('od.cus_Id', $cus_Id)
-        ->where('od.pr_Id', $pr_Id)
-        ->orderBy('od.od_Id', 'DESC')
-        ->get()
-        ->getRowArray();
-}
+	  public function getProductWithAddress($cus_Id, $pr_Id)
+	{
+		return $this->db->table('order_detail od')
+			->select('od.*, product.*, address.*')
+			->join('product', 'product.pr_Id = od.pr_Id', 'left')
+			->join('address', 'address.add_CustId = od.cus_Id AND address.add_Default = 1', 'left')
+			->where('od.cus_Id', $cus_Id)
+			->where('od.pr_Id', $pr_Id)
+			->orderBy('od.od_Id', 'DESC')
+			->get()
+			->getRowArray(); // returns a single row
+	}
+
 	public function getOrdersById($od_Id)
 	{
 		return $this->db->query("select * from order_detail where od_Id = '".$od_Id."'")->getRow();
@@ -49,12 +50,16 @@ public function getCustomerAddress($cus_Id)
         ->get()
         ->getRow();
 }
-/*  public function getDefaultAddress($zd_uid)
-    {
-        return $this->where(['add_CustId' => $zd_uid, 'add_Default' => 1])->first();
-    }
+public function getDefaultAddress($zd_uid)
+{
+    return $this->where('add_CustId', $zd_uid)
+                ->where('add_Status', 1)
+                ->where('add_Default', 1)
+                ->first();
+}
+
     public function getAllAddresses($zd_uid)
     {
         return $this->where('add_CustId', $zd_uid)->findAll();
-    } */
+    } 
 }

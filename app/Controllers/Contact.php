@@ -32,39 +32,64 @@ class Contact extends BaseController
 
         
     }
-	public function submit() {
-		if ($this->request->isAJAX()) {
-			$data = [
-				'fullname' => $this->request->getPost('fullname'),
-				'email' => $this->request->getPost('email'),
-				'contact_no' => $this->request->getPost('contact_no'),
-				'message' => $this->request->getPost('message'),
-				'submitted_at' => date('Y-m-d H:i:s'),
-			];
+	public function submit()
+{
+    if ($this->request->isAJAX()) {
+        $data = [
+            'fullname'    => $this->request->getPost('fullname'),
+            'email'       => $this->request->getPost('email'),
+            'contact_no'  => $this->request->getPost('contact_no'),
+            'message'     => $this->request->getPost('message'),
+            'submitted_at'=> date('Y-m-d H:i:s'),
+        ];
 
-			$model = new ContactModel();
-			$model->insert($data);
+        $model = new ContactModel();
+        $inserted = $model->insert($data);
 
-			// Send Email
-			$email = \Config\Services::email();
-			$email->setTo('sandra@smartlounge.online');
-			$email->setFrom($data['email'], $data['fullname']);
-			$email->setSubject('New Contact Enquiry');
-			$email->setMessage(
-				"New enquiry received:\n\n".
-				"Name: {$data['fullname']}\n".
-				"Email: {$data['email']}\n".
-				"Phone: {$data['contact_no']}\n".
-				"Message: {$data['message']}"
-			);
+        if (!$inserted) {
+            return $this->response->setJSON([
+                'status' => 'error',
+                'message' => 'Failed to save contact enquiry.'
+            ]);
+        }
 
-			if ($email->send()) {
-				return $this->response->setJSON(['status' => 'success', 'message' => 'Enquiry submitted successfully.']);
-			} else {
-				return $this->response->setJSON(['status' => 'error', 'message' => 'Email sending failed.']);
-			}
-		}
+        $to = 'sandrakbabu23@gmail.com';
+        $subject = 'New Contact Enquiry';
 
-		return $this->response->setStatusCode(400)->setJSON(['status' => 'error', 'message' => 'Invalid request']);
-	}
+        $message =
+            "New enquiry received:\n\n" .
+            "Name: {$data['fullname']}\n" .
+            "Email: {$data['email']}\n" .
+            "Phone: {$data['contact_no']}\n" .
+            "Message: {$data['message']}";
+
+        $headers = "From: {$data['fullname']} <{$data['email']}>\r\n" .
+                   "Reply-To: {$data['email']}\r\n" .
+                   "MIME-Version: 1.0\r\n" .
+                   "Content-Type: text/plain; charset=UTF-8\r\n" .
+                   "X-Mailer: PHP/" . phpversion();
+
+        // Send email and check result
+        $mailSent = mail($to, $subject, $message, $headers);
+
+        if ($mailSent) {
+            return $this->response->setJSON([
+                'status' => 'success',
+                'message' => 'Your enquiry has been sent successfully!'
+            ]);
+        } else {
+            return $this->response->setJSON([
+                'status' => 'error',
+                'message' => 'Failed to send email. Please try again later.'
+            ]);
+        }
+    }
+
+    // Not AJAX or invalid request
+    return $this->response->setJSON([
+        'status' => 'error',
+        'message' => 'Invalid request.'
+    ]);
+}
+
 }

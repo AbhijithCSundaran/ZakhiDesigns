@@ -228,7 +228,7 @@ public function saveProduct() {
     }
     
 
-    if (empty($cat_id) || empty($product_name) || empty($product_code) || empty($product_stock) || empty($reset_stock)  || empty($mrp) || empty($available_color) || empty( $size) ) {
+    if (empty($cat_id) || empty($product_name) || empty($product_stock) || empty($reset_stock)  || empty($mrp) || empty($available_color) || empty( $size) ) {
         return $this->response->setJSON([
             'status' => 'error',
             'message' => 'All required fields must be filled.'
@@ -249,7 +249,7 @@ public function saveProduct() {
     
     $data = [
         'pr_Name' => $product_name,
-        'product_name' => $pr_Code,
+        'pr_Code' => $product_code,
         'pr_Description' => $product_description,
         'mrp' => $mrp,
         'pr_Selling_Price' => $selling_price,

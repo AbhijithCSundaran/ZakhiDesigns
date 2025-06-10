@@ -7,7 +7,7 @@ class ProductModel extends Model {
 
     protected $table = 'product';
     protected $primaryKey = 'pr_Id';
-    protected $allowedFields = ['pr_Name', 'mrp','pr_Selling_Price','pr_Discount_Value','pr_Stock', 'pr_Status']; // Adjust to your table
+    protected $allowedFields = ['pr_Name','mrp','pr_Selling_Price','pr_Discount_Value','pr_Stock', 'pr_Status']; // Adjust to your table
 	
         public function __construct() {
             $this->db = \Config\Database::connect();

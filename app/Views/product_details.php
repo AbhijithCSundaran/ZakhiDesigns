@@ -200,56 +200,65 @@ if (is_array($decoded) && isset($decoded[0]['name']) && is_array($decoded[0]['na
 
 		</div>
 	</section>
-	<section>
-			<div class="container-lg">
-				<div class="row">
+		
+<section class="top-prod">
+    <div class="container-lg">
+        <div class="col-md-12">
+            <div class="row">
+                <h3>Top Products</h3>
+            </div>
 
-					<h4 class="mb-3">Similar Products</h4>
-					<div class="owl-carousel" id="similar-carousel">
-						<?php 
+            <!-- First 20 products -->
+            <div class="row mb-4">
+					<div class="owl-carousel" id="top-prod-owl-one">
+					
+					  <?php 
+					   $firstImage = 'uploads/productmedia/default.jpg';
 						if (!empty($similar)): ?>
-							<?php foreach ($similar as $item): ?>
+							<?php foreach ($similar as $item):
+							 // Reset?>
 							 <?php
 							 if (!empty($item['product_images'])) {
 								
 								$decoded = json_decode($item['product_images'], true);
 								$firstImage = is_array($decoded) && isset($decoded[0]['name'][0])
 									? base_url('uploads/productmedia/' . $decoded[0]['name'][0])
-									: base_url('assets/img/no-image.png');		
+									: base_url('uploads/productmedia/default.jpg');		
 							 }
-                
 							?>
-								<div class="item">
-									<div class="col-md-5">
-											<img src="<?= $firstImage ?>" style="width: 100px;" alt="Product Image" />
-										</div>
-									<div class="star-rate">
-										<?php 
-											$fullStars = round($item['ratings']);
-											for ($i = 1; $i <= 5; $i++): ?>
-												<i class="bi bi-star-fill <?= $i <= $fullStars ? 'gold' : '' ?>"></i>
-										<?php endfor; ?>
-									</div>
-									<div class="item-name"><?= esc($item['pr_Name']) ?></div>
-									<div class="item-price">
-									</div>
-									<div class="col-md-12 text-center">
-										<button onclick="location.href='<?= site_url('product-details/' . $item['pr_Id']) ?>'" class="order-btn">
-											Order Now
-										</button>
-									</div>
-								</div>
-							<?php endforeach; ?>
+                        <div class="item">
+                            <div class="col-md-12">
+                                <a href="<?= base_url('product/product_details/' . $item['pr_Id']); ?>">
+                                    <img src="<?= $firstImage ?> " alt="<?= esc($item['pr_Name']); ?>" />
+                                </a>
+                            </div>
+                           <div class="star-rate p-1">
+								<?php 
+								$avg = intval($item['avg_rating'] ?? 0);
+								for ($i = 1; $i <= 5; $i++): 
+								?>
+									<i class="<?= $i <= $avg ? 'bi bi-star-fill gold' : 'bi bi-star' ?>"></i>
+								<?php endfor; ?>
+							</div>
+
+                            <div class="item-name p-1"><?= esc($item['pr_Name']); ?></div>
+                            <div class="item-price"><i class="bi bi-currency-rupee"></i>&nbsp;<?= esc($item['pr_Selling_Price']); ?></div>
+                            <div class="col-md-12 text-center">
+                                <button class="order-btn" onclick="window.location.href='<?= base_url('product/product_details/' . $item['pr_Id']); ?>'"></button>
+                            </div>
+                        </div>
+                    <?php endforeach; ?>
 						<?php else: ?>
 							<p>No similar products found.</p>
 						<?php endif; ?>
 					</div>
-				</div>
-			</div>
-		</section>
+ </div>
+
+        </div>
+    </div>
+</section>
 		
-
-
+		
 <script>
 	function selectColor(color, element) {
 		document.getElementById('selected_color').value = color;

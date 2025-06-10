@@ -92,6 +92,8 @@ $next20 = array_slice($latestProducts, 20, 20);
     </div>
 </section>
 
+
+
 <script>
     $(document).ready(function () {
         $('#top-prod-owl, #top-prod-owl-two').owlCarousel({

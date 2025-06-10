@@ -126,7 +126,7 @@ $('#orderNowBtn').click(function(e) {
     var url = baseUrl + "product/submit";
 
     $.post(url, $('#orderNowForm').serialize(), function(response) {
-        $('html, body').animate({ scrollTop: 0 }, 'fast');
+     $('html, body').animate({ scrollTop: 0 }, 'fast');
         console.log(response);
 
         $('#messageBox').removeClass('alert-danger alert-success').hide();

@@ -31,13 +31,13 @@ class Profile extends BaseController
             'addresses' => $addressModel->getUserAddresses($userId),
             'orders' => $orderModel->getOrdersByUser($userId),
         ];
-
-    $template  = view('common/header',$data);
-    $template .= view('profile', $data);
-    $template .= view('common/footer');
-    $template .= view('pagescripts/profilejs');
-    return $template;
-    }
+		
+		$template  = view('common/header',$data);
+		$template .= view('profile');
+		$template .= view('common/footer');
+		$template .= view('pagescripts/profilejs');
+		return $template;
+	}
 	 public function editProfile()
     {
         $profileModel = new ProfileModel();
@@ -124,5 +124,37 @@ class Profile extends BaseController
 			return $this->response->setJSON(['status' => 'error', 'msg' => 'Address not found.']);
 		}
 	}
+	
+public function changePassword()
+{
+    $custId = session()->get('zd_uid');
+
+    $oldPassword = $this->request->getPost('oldPassword');
+    $newPassword = $this->request->getPost('newPassword');
+    $confirmPassword = $this->request->getPost('confirmPassword');
+
+    // Validation: check empty fields
+    if (empty($oldPassword)) {
+        return $this->response->setJSON(['status' => 0, 'msg' => 'Please enter the old password.']);
+    }
+    if (empty($newPassword)) {
+        return $this->response->setJSON(['status' => 0, 'msg' => 'Please enter a new password.']);
+    }
+    if (empty($confirmPassword)) {
+        return $this->response->setJSON(['status' => 0, 'msg' => 'Please confirm your new password.']);
+    }
+
+    // Check new password matches confirm password
+    if ($newPassword !== $confirmPassword) {
+        return $this->response->setJSON(['status' => 0, 'msg' => 'New password and confirm password do not match.']);
+    }
+
+    // Call model to change password
+    $profileModel = new ProfileModel();
+    $result = $profileModel->changePassword($custId, $oldPassword, $newPassword);
+
+    return $this->response->setJSON($result);
+}
+
 
 }

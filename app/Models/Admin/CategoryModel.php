@@ -8,10 +8,7 @@ class CategoryModel extends Model {
         public function __construct() {
             $this->db = \Config\Database::connect();
         }
-       
-        public function categoryInsert($data) {
-            return $this->db->table('category')->insert($data);
-        }
+    
        
         public function getAllCategory() {
             return $this->db->query("SELECT * FROM category WHERE cat_Status <> 3")->getResultArray();
@@ -33,42 +30,200 @@ public function isCategoryExists($categoryName, $excludeId = null) {
 
 			return $this->db->query("select * from category where cat_Id = '".$catId."'")->getRow();
     }
-    public function updateCategory($catId, $data)
-    {
-        return $this->db->table('category')->where('cat_Id', $catId) ->update($data);
+	 
+ public function categoryInsert($data) {
+ 	return $this->db->table('category')->insert($data);
+	 }
+	
+	//update the category discount  with product table
+	
+    //  public function updateCategory($catId, $data)
+	// {
+	// 	$this->db->table('category')
+	// 		->where('cat_Id', $catId)
+	// 		->update($data);
+
+	// 	$category = $this->db->table('category')
+	// 		->select('cat_Discount_Value, cat_Discount_Type')
+	// 		->where('cat_Id', $catId)
+	// 		->get()
+	// 		->getRow();
+
+	// 	if (!$category) {
+	// 		return false;
+	// 	}
+
+	// 	$cat_Discount_Value = $category->cat_Discount_Value;
+	// 	$cat_Discount_Type = $category->cat_Discount_Type;
+
+	// 	if ($cat_Discount_Value === null || $cat_Discount_Value === '' || $cat_Discount_Value <= 0 || empty($cat_Discount_Type)) {
+    //     // Fetch all related products
+    //     $products = $this->db->table('product')
+    //         ->where('cat_Id', $catId)
+    //         ->where('pr_Status', 1)
+    //         ->get()
+    //         ->getResult();
+
+    //     foreach ($products as $pr) {
+	// 	$updateData = [
+	// 		'cat_Discount_Value' => null,
+	// 		'cat_Selling_Price' => null,
+	// 		'pr_modifyon' => date('Y-m-d H:i:s')
+	// 	];
+
+	// 	if ($pr->sub_Selling_Price === null || $pr->sub_Selling_Price == 0) {
+	// 		$updateData['pr_Selling_Price'] = $pr->mrp;
+	// 	}
+
+	// 	$this->db->table('product')
+	// 		->where('pr_Id', $pr->pr_Id)
+	// 		->update($updateData);
+	// }
+
+
+    //     return true;
+    // }
+	// 	$products = $this->db->table('product')
+	// 		->where('cat_Id', $catId)
+	// 		->where('pr_Status', 1)
+	// 		->groupStart()
+	// 			->where('pr_Discount_Value', '')
+	// 			->orWhere('pr_Discount_Value', 0)
+	// 			->orWhere('pr_Discount_Value IS NULL', null, false)
+	// 		->groupEnd()
+	// 		->groupStart()
+	// 			->where('pr_Discount_Type', '')
+	// 			->orWhere('pr_Discount_Type IS NULL', null, false)
+	// 		->groupEnd()
+	// 		->get()
+	// 		->getResult();
+
+	// 	foreach ($products as $pr) {
+	// 		$mrp = $pr->mrp;
+
+	// 		if ($cat_Discount_Type === '%') {
+	// 			$cat_selling_price = $mrp - ($mrp * $cat_Discount_Value / 100);
+	// 		} elseif ($cat_Discount_Type === 'Rs') {
+	// 			$cat_selling_price = $mrp - $cat_Discount_Value;
+	// 		} else {
+
+	// 			continue;
+	// 		}
+
+	// 		$this->db->table('product')
+	// 			->where('pr_Id', $pr->pr_Id)
+	// 			->update([
+	// 				'pr_Selling_Price' => $cat_selling_price,
+	// 				'cat_Selling_Price' => $cat_selling_price,
+	// 				'cat_Discount_Value' => $cat_Discount_Value, 
+	// 				'pr_modifyon' => date('Y-m-d H:i:s')
+	// 			]);
+	// 	}
+
+	// 	return true;
+	// }
+
+public function updateCategory($catId, $data)
+{
+    $this->db->table('category')
+        ->where('cat_Id', $catId)
+        ->update($data);
+
+    $category = $this->db->table('category')
+        ->select('cat_Discount_Value, cat_Discount_Type')
+        ->where('cat_Id', $catId)
+		->where('cat_Status', 1)
+        ->get()
+        ->getRow();
+
+    if (!$category) {
+        return false;
     }
-  // delete category
-  
-    public function deleteCategoryById($cat_status, $cat_id, $modified_by)
+
+    $cat_Discount_Value = $category->cat_Discount_Value;
+    $cat_Discount_Type = $category->cat_Discount_Type;
+
+	 $products = $this->db->table('product')
+							->where('cat_Id', $catId)
+							->where('pr_Status', 1)
+							->groupStart()
+								->where('discount_from !=',1 )
+								->where('discount_from !=',2 )
+								->orwhere('pr_Discount_Value', '')
+								->orWhere('pr_Discount_Value', 0)
+								->orWhere('pr_Discount_Value IS NULL', null, false)
+							->groupEnd()
+							->get()
+							->getResult();
+
+    if ($cat_Discount_Value != null && $cat_Discount_Value != '' && $cat_Discount_Value != '0' && !empty($cat_Discount_Type) && $cat_Discount_Value !='0') {
+       
+			foreach ($products as $pr) {
+			$mrp = $pr->mrp;
+
+			if ($cat_Discount_Type === '%') {
+				$cat_selling_price = $mrp - ($mrp * $cat_Discount_Value / 100);
+			} elseif ($cat_Discount_Type === 'Rs') {
+				$cat_selling_price = $mrp - $cat_Discount_Value;
+			} 
+
+			$this->db->table('product')
+				->where('pr_Id', $pr->pr_Id)
+				->update([
+					'pr_Selling_Price' => $cat_selling_price,
+					'pr_Discount_Value' => $cat_Discount_Value,
+					'discount_from' => "3",
+					'pr_modifyon' => date('Y-m-d H:i:s')
+				]);
+		}
+    }else{
+		foreach ($products as $pr) {
+		$mrp = $pr->mrp;
+		$this->db->table('product')
+				->where('pr_Id', $pr->pr_Id)
+				->update([
+					'pr_Discount_Value' => "0",
+					'pr_Selling_Price' => $mrp,
+					'discount_from' => "0",
+					'pr_modifyon' => date('Y-m-d H:i:s')
+				]);
+			}
+	}
+    return true;
+}
+
+	// delete category
+	
+		public function deleteCategoryById($cat_status, $cat_id, $modified_by)
+		{
+			return $this->db->table('category')
+				->where('cat_Id', $cat_id)
+				->update([
+					'cat_Status'   => $cat_status,
+					'cat_modifyon' => date('Y-m-d H:i:s'),
+					'cat_modifyby' => $modified_by
+				]);
+		}
+		public function deleteCategoryAndSubcategories($cat_id, $modified_by)
 	{
-		return $this->db->table('category')
+		$this->db->table('category')
 			->where('cat_Id', $cat_id)
 			->update([
-				'cat_Status'   => $cat_status,
+				'cat_Status'   => 3,
 				'cat_modifyon' => date('Y-m-d H:i:s'),
 				'cat_modifyby' => $modified_by
 			]);
+
+		$this->db->table('subcategory')
+			->where('cat_Id', $cat_id)
+			->update([
+				'sub_Status'   => 3,
+				'sub_modifiyon' => date('Y-m-d H:i:s'),
+				'sub_modifyby'  => $modified_by
+			]);
+
+		return true;
 	}
-	public function deleteCategoryAndSubcategories($cat_id, $modified_by)
-  {
-    $this->db->table('category')
-        ->where('cat_Id', $cat_id)
-        ->update([
-            'cat_Status'   => 3,
-            'cat_modifyon' => date('Y-m-d H:i:s'),
-            'cat_modifyby' => $modified_by
-        ]);
-
-    $this->db->table('subcategory')
-        ->where('cat_Id', $cat_id)
-        ->update([
-            'sub_Status'   => 3,
-            'sub_modifiyon' => date('Y-m-d H:i:s'),
-            'sub_modifyby'  => $modified_by
-        ]);
-
-    return true;
-  }
 		
 	//**************************Data table */
 				

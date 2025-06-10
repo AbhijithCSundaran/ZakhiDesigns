@@ -47,23 +47,16 @@
 	
 	
 
- function togglePassword(inputId, toggleId) {
-  const input = document.getElementById(inputId);
-  const toggle = document.getElementById(toggleId);
-
-  if (!input || !toggle) return;
-
-  toggle.addEventListener('click', function () {
-    const isPassword = input.type === 'password';
-    input.type = isPassword ? 'text' : 'password';
-    toggle.classList.toggle('fa-eye');
-    toggle.classList.toggle('fa-eye-slash');
-  });
-}
-
-togglePassword('current_password', 'toggleCurrentPassword');
-togglePassword('new_password', 'toggleNewPassword');
-togglePassword('confirm_password', 'toggleConfirmPassword');
+document.querySelectorAll(".toggle-password").forEach(function(icon) {
+    icon.addEventListener("click", function() {
+        const targetId = this.getAttribute("data-target");
+        const input = document.getElementById(targetId);
+        const isPassword = input.getAttribute("type") === "password";
+        input.setAttribute("type", isPassword ? "text" : "password");
+        this.classList.toggle("fa-eye");
+        this.classList.toggle("fa-eye-slash");
+    });
+});
 
 
 
@@ -78,5 +71,34 @@ togglePassword('confirm_password', 'toggleConfirmPassword');
       }
     }, 3000);
   });
+  
+  
+  $(document).ready(function () {
+    $('#passUpdate').on('click', function () {
+        var formData = $('#changePasswordForm').serialize();
+
+        $.ajax({
+            url: "<?= base_url('admin/profile/change_password'); ?>",
+            method: "POST",
+            data: formData,
+            dataType: "json",
+            success: function (response) {
+                var messageBox = $('#messageBox');
+                messageBox.removeClass('alert-success alert-danger');
+
+                if (response.status == 1) {
+                    messageBox.addClass('alert alert-success').text(response.msg).fadeIn();
+                    $('#changePasswordForm')[0].reset(); 
+                } else {
+                    messageBox.addClass('alert alert-danger').text(response.msg).fadeIn();
+                }
+
+                setTimeout(function () {
+                    messageBox.fadeOut();
+                }, 3000);
+            }
+        }); 
+    }); 
+}); 
  
 </script>

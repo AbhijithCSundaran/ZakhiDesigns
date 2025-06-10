@@ -228,7 +228,7 @@ public function saveProduct() {
     }
     
 
-    if (empty($cat_id) || empty($product_name) || empty($product_stock) || empty($reset_stock)  || empty($mrp) || empty($available_color) || empty( $size) ) {
+    if (empty($cat_id) || empty($product_name) || empty($product_code) || empty($product_stock) || empty($reset_stock)  || empty($mrp) || empty($available_color) || empty( $size) ) {
         return $this->response->setJSON([
             'status' => 'error',
             'message' => 'All required fields must be filled.'
@@ -244,6 +244,20 @@ public function saveProduct() {
             'message' => 'Product name already exists.'
         ]);
     }
+	
+	/////////////////////////////////////
+	
+
+		$exists = $this->productModel->isProductCodeExists($product_code, $pr_id);
+
+		if ($exists) {
+			return $this->response->setJSON([
+				'status' => 'error',
+				'field' => 'pr_Code',
+				'message' => 'Product code already exists.'
+			]);
+		}
+
 	
 
     

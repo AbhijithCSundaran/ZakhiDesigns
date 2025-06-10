@@ -245,24 +245,6 @@ public function saveProduct() {
         ]);
     }
 	
-	$pr_Code = $this->request->getPost('pr_Code');
-	$pr_Id = $this->request->getPost('pr_Id'); // for update
-
-	if (empty($pr_Code)) {
-		return $this->response->setJSON([
-			'status' => 'error',
-			'message' => 'Product Code is required.'
-		]);
-	}
-
-	$productExists = $this->productModel->isProductCodeExists($pr_Code, $pr_Id ?? null);
-
-	if ($productExists) {
-		return $this->response->setJSON([
-			'status' => 'error',
-			'message' => 'Product code already exists.'
-		]);
-	}
 
     
     $data = [

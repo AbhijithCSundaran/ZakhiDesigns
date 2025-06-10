@@ -244,11 +244,30 @@ public function saveProduct() {
             'message' => 'Product name already exists.'
         ]);
     }
+	
+	$pr_Code = $this->request->getPost('pr_Code');
+	$pr_Id = $this->request->getPost('pr_Id'); // for update
+
+	if (empty($pr_Code)) {
+		return $this->response->setJSON([
+			'status' => 'error',
+			'message' => 'Product Code is required.'
+		]);
+	}
+
+	$productExists = $this->productModel->isProductCodeExists($pr_Code, $pr_Id ?? null);
+
+	if ($productExists) {
+		return $this->response->setJSON([
+			'status' => 'error',
+			'message' => 'Product code already exists.'
+		]);
+	}
 
     
     $data = [
         'pr_Name' => $product_name,
-        'pr_Code' => $product_code,
+        'product_name' => $pr_Code,
         'pr_Description' => $product_description,
         'mrp' => $mrp,
         'pr_Selling_Price' => $selling_price,

@@ -168,8 +168,12 @@ $(document).ready(function() {
 
 function handleFiles(files) {
     const allowedTypes = ['image/jpeg', 'image/png'];
+    const requiredWidth = 265;
+    const requiredHeight = 356;
     const formData = new FormData();
     const productId = document.getElementById('productId').value;
+
+    let validatedFiles = 0;
 
     for (let i = 0; i < files.length; i++) {
         const file = files[i];
@@ -179,29 +183,48 @@ function handleFiles(files) {
             return; // Stop processing if one file is invalid
         }
 
-        formData.append('files[]', file);
+        const reader = new FileReader();
+
+        reader.onload = function(e) {
+            const img = new Image();
+            img.onload = function() {
+                if (img.width !== requiredWidth || img.height !== requiredHeight) {
+                    alert(`"${file.name}" has invalid dimensions. Only images of size 265x356 pixels are allowed.`);
+                    return;
+                }
+
+                formData.append('files[]', file);
+                validatedFiles++;
+
+                // Upload only after all files are validated
+                if (validatedFiles === files.length) {
+                    formData.append('product_id', productId);
+
+                    fetch("<?= base_url('admin/product/upload-media') ?>", {
+                            method: 'POST',
+                            body: formData,
+                        })
+                        .then(response => response.json())
+                        .then(data => {
+                            if (data.success === true) {
+                                alert(data.msg || 'Images uploaded successfully!');
+                                loadProductImages(productId);
+                                $('#productList').DataTable().ajax.reload(null, false);
+                            } else {
+                                alert(data.msg || 'Upload failed.');
+                            }
+                        })
+                        .catch(error => {
+                            console.error('Upload error:', error);
+                            alert('Something went wrong. Try again later.');
+                        });
+                }
+            };
+            img.src = e.target.result;
+        };
+
+        reader.readAsDataURL(file);
     }
-
-    formData.append('product_id', productId);
-
-    fetch("<?= base_url('admin/product/upload-media') ?>", {
-            method: 'POST',
-            body: formData,
-        })
-        .then(response => response.json())
-        .then(data => {
-            if (data.success === true) {
-                alert(data.msg || 'Images uploaded successfully!');
-                loadProductImages(productId);
-                $('#productList').DataTable().ajax.reload(null, false);
-            } else {
-                alert(data.msg || 'Upload failed.');
-            }
-        })
-        .catch(error => {
-            console.error('Upload error:', error);
-            alert('Something went wrong. Try again later.');
-        });
 }
 
 

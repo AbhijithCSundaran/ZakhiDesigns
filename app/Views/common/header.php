@@ -85,7 +85,7 @@
                                     <?= session()->get('zd_uname'); ?>
                                 </a>
                                 <ul class="dropdown-menu" aria-labelledby="customerDropdown">
-                                    <li><a class="dropdown-item" href="<?= base_url('customer/profile') ?>"><i
+                                    <li><a class="dropdown-item" href="<?= base_url('profile#profile'); ?>"><i
                                                 class="bi bi-person-circle"></i> My Profile</a></li>
                                     <li><a class="dropdown-item" href="<?= base_url('logout') ?>"><i
                                                 class="bi bi-escape"></i> Logout</a></li>

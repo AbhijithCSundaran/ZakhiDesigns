@@ -31,7 +31,23 @@
                 </div>
 
                 <script>
+                    
                     const section1Images = <?= json_encode($section1Images); ?>;
+                    let currentImageIndex = 0;
+
+                    function rotateBannerImage() {
+                        currentImageIndex = (currentImageIndex + 1) % section1Images.length;
+                        const current = section1Images[currentImageIndex];
+
+                        const bannerImg = document.getElementById('theme-banner-img');
+                        const bannerLink = document.getElementById('theme-banner-link');
+
+                        bannerImg.src = current.image;
+                        bannerLink.href = current.link;
+                    }
+
+                    // Change image every 5 seconds (5000 ms)
+                    setInterval(rotateBannerImage, 5000);
                 </script>
             <?php endif; ?>
 

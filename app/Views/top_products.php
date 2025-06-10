@@ -17,27 +17,37 @@ $next20 = array_slice($latestProducts, 20, 20);
                     <?php foreach ($first20 as $item): ?>
                         <?php
                         $images = json_decode($item['product_images'], true);
-                        $firstImage = isset($images[0]['name'][0]) ? $images[0]['name'][0] : 'default.png';
+                        $firstImage = isset($images[0]['name'][0]) ? $images[0]['name'][0] : 'default.jpg';
                         ?>
                         <div class="item">
                             <div class="col-md-12">
                                 <a href="<?= base_url('product/product_details/' . $item['pr_Id']); ?>">
-                                    <img class="product-img" src="<?= base_url('uploads/productmedia/' . $firstImage); ?>" alt="<?= esc($item['pr_Name']); ?>" />
+                                    <img class="product-img" src="<?= base_url('uploads/productmedia/' . $firstImage); ?>"
+                                        alt="<?= esc($item['pr_Name']); ?>" />
                                 </a>
                             </div>
-                           <div class="star-rate p-1">
-								<?php 
-								$avg = intval($item['avg_rating'] ?? 0);
-								for ($i = 1; $i <= 5; $i++): 
-								?>
-									<i class="<?= $i <= $avg ? 'bi bi-star-fill gold' : 'bi bi-star' ?>"></i>
-								<?php endfor; ?>
-							</div>
+                            <div class="star-rate p-1">
+                                <?php
+                                $avg = intval($item['avg_rating'] ?? 0);
+                                for ($i = 1; $i <= 5; $i++):
+                                    ?>
+                                    <i class="<?= $i <= $avg ? 'bi bi-star-fill gold' : 'bi bi-star' ?>"></i>
+                                <?php endfor; ?>
+                            </div>
 
-                            <div class="item-name p-1"><?= esc($item['pr_Name']); ?></div>
-                            <div class="item-price"><i class="bi bi-currency-rupee"></i>&nbsp;<?= esc($item['pr_Selling_Price']); ?></div>
+                            <div class="item-name p-1" title="<?= esc($item['pr_Name']); ?>"><?= esc($item['pr_Name']); ?></div>
+                            <div class="item-price">
+                                <span style="color: #999;">
+                                    <del>
+                                        <i class="bi bi-currency-rupee"></i><?= esc($item['mrp']); ?>
+                                    </del>
+                                </span>
+                                &nbsp;
+                                <i class="bi bi-currency-rupee"></i><?= esc($item['pr_Selling_Price']); ?>
+                            </div>
                             <div class="col-md-12 text-center">
-                                <button class="order-btn" onclick="window.location.href='<?= base_url('product/product_details/' . $item['pr_Id']); ?>'"></button>
+                                <button class="order-btn"
+                                    onclick="window.location.href='<?= base_url('product/product_details/' . $item['pr_Id']); ?>'"></button>
                             </div>
                         </div>
                     <?php endforeach; ?>
@@ -55,7 +65,8 @@ $next20 = array_slice($latestProducts, 20, 20);
                         <div class="item">
                             <div class="col-md-12">
                                 <a href="<?= base_url('product/product_details/' . $item['pr_Id']); ?>">
-                                    <img class="product-img" src="<?= base_url('uploads/productmedia/' . $firstImage); ?>" alt="<?= esc($item['pr_Name']); ?>" />
+                                    <img class="product-img" src="<?= base_url('uploads/productmedia/' . $firstImage); ?>"
+                                        alt="<?= esc($item['pr_Name']); ?>" />
                                 </a>
                             </div>
                             <div class="star-rate p-1">
@@ -66,10 +77,12 @@ $next20 = array_slice($latestProducts, 20, 20);
                                 <i class="bi bi-star-fill"></i>
                             </div>
                             <div class="item-name p-1"><?= esc($item['pr_Name']); ?></div>
-                            <div class="item-price"><i class="bi bi-currency-rupee"></i>&nbsp;<?= esc($item['pr_Selling_Price']); ?></div>
+                            <div class="item-price"><i
+                                    class="bi bi-currency-rupee"></i>&nbsp;<?= esc($item['pr_Selling_Price']); ?></div>
                             <div class="col-md-12 text-center">
-                                    <button class="order-btn" onclick="window.location.href='<?= base_url('product/product_details/' . $item['pr_Id']); ?>'"></button>
-                                </div>
+                                <button class="order-btn"
+                                    onclick="window.location.href='<?= base_url('product/product_details/' . $item['pr_Id']); ?>'"></button>
+                            </div>
                         </div>
                     <?php endforeach; ?>
                 </div>
@@ -80,19 +93,19 @@ $next20 = array_slice($latestProducts, 20, 20);
 </section>
 
 <script>
-$(document).ready(function(){
-    $('#top-prod-owl, #top-prod-owl-two').owlCarousel({
-        loop: true,
-        margin: 10,
-        nav: true,
-        dots: false,
-        responsive: {
-            0: { items: 1 },
-            576: { items: 2 },
-            768: { items: 3 },
-            992: { items: 4 },
-            1200: { items: 5 }
-        }
+    $(document).ready(function () {
+        $('#top-prod-owl, #top-prod-owl-two').owlCarousel({
+            loop: true,
+            margin: 10,
+            nav: true,
+            dots: false,
+            responsive: {
+                0: { items: 1 },
+                576: { items: 2 },
+                768: { items: 3 },
+                992: { items: 4 },
+                1200: { items: 5 }
+            }
+        });
     });
-});
 </script>

@@ -100,5 +100,15 @@
     color: #007bff;
 }
 
+.item-name {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: block;
+    max-width: 100%;
+}
+.banner-btm-spce{
+    margin-bottom: 3px !important;
+}
 
 

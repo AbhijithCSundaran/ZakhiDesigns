@@ -162,7 +162,7 @@ class OrderNow extends Controller
         return $this->response->setJSON(['status' => 0, 'msg' => 'Customer address not found.']);
     }
 
-$addressDetails = implode(', ', array_filter([
+$addressDetails = implode('<br>', array_filter([
     $customer['add_BuldingNo'] ?? '',
     $customer['add_Street'] ?? '',
     $customer['add_Landmark'] ?? '',

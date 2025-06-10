@@ -23,9 +23,12 @@
             <div class="col-md-3">
                 <h4>Products<h4>
                         <ul>
-                            <li><i class="bi bi-arrow-right"></i>Price Drop</li>
-                            <li><i class="bi bi-arrow-right"></i>Products</li>
-                            <li><i class="bi bi-arrow-right"></i>Best Sellers</li>
+                            <li><i class="bi bi-arrow-right"></i><a class="foot-link"
+                                    href="<?= base_url('product/product_list'); ?>">Price Drop</li>
+                            <li><i class="bi bi-arrow-right"></i><a class="foot-link"
+                                    href="<?= base_url('product/product_list'); ?>">Products</a></li>
+                            <li><i class="bi bi-arrow-right"></i><a class="foot-link"
+                                    href="<?= base_url('product/product_list'); ?>">Best Sellers</li>
                             <li><i class="bi bi-arrow-right"></i><a class="foot-link"
                                     href="<?= base_url('contact'); ?>">Sitemap</a></li>
                         </ul>

@@ -4,12 +4,13 @@
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content rounded">
             <div class="modal-header">
-                <h5 class="modal-title" id="productName"></h5>
+                <h5 class="modal-title"></h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
+                <h5 class="mb-3">Image upload for: <span id="productName" class="text-primary"></span></h5>
                 <form class="fileUpload" method="post" enctype="multipart/form-data">
 
                     <div class="row justify-content-center">
@@ -23,10 +24,11 @@
                                 <label class="btn btn-outline-primary btn-sm" for="fileElem">
                                     <i class="bi bi-upload me-1"></i> Select Images
                                 </label>
-                                <input type="file" id="fileElem" multiple accept="image/*" class="fileElem d-none"
+                               <input type="file" id="fileElem" multiple accept="image/*" class="fileElem d-none"
                                     onchange="handleFiles(this.files)">
-
+                                    
                             </div>
+                             <span class="text-warning" style="font-size:14px;">Only 265×356 pixel images are accepted</span>
                         </div>
                     </div>
 
@@ -34,7 +36,7 @@
                 </form>
 
                 <div class="mt-3" id="imagePreviewContainer">
-                    <h6 class="text-center">Uploaded Images</h6>
+                    <!-- <h6 class="text-center">Uploaded Images</h6> -->
                     <div id="imagePreview" class="d-flex flex-wrap justify-content-center gap-2">
                         <!-- Images will be inserted here -->
                     </div>

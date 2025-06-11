@@ -171,5 +171,69 @@ $(document).ready(function() {
         history.replaceState(null, null, e.target.hash);
     });
 });
+
+document.querySelectorAll(".toggle-password").forEach(function(icon) {
+    icon.addEventListener("click", function() {
+        const targetId = this.getAttribute("data-target");
+        const input = document.getElementById(targetId);
+        const isPassword = input.getAttribute("type") === "password";
+        input.setAttribute("type", isPassword ? "text" : "password");
+        this.classList.toggle("fa-eye");
+        this.classList.toggle("fa-eye-slash");
+    });
+});
+
+  
+$('#changePasswordForm').on('submit', function(e) {
+    e.preventDefault();
+
+    const oldPassword = $('#oldPassword').val().trim();
+    const newPassword = $('#newPassword').val().trim();
+    const confirmPassword = $('#confirmPassword').val().trim();
+    const messageBox = $('#messageBox');
+
+    // Basic validations
+    if (!oldPassword || !newPassword || !confirmPassword) {
+        messageBox
+            .removeClass('alert-success alert-danger')
+            .addClass('alert alert-danger')
+            .html('All fields are required!')
+            .fadeIn();
+
+        setTimeout(() => messageBox.fadeOut(), 4000);
+        return;
+    }
+
+    if (newPassword !== confirmPassword) {
+        messageBox
+            .removeClass('alert-success alert-danger')
+            .addClass('alert alert-danger')
+            .html('New Password and Confirm Password do not match!')
+            .fadeIn();
+
+        setTimeout(() => messageBox.fadeOut(), 4000);
+        return;
+    }
+
+    // All good — proceed to submit
+    $.post("<?= base_url('profile/change_password') ?>", $(this).serialize(), function(response) {
+        messageBox
+            .removeClass('alert-success alert-danger')
+            .addClass('alert ' + (response.status ? 'alert-success' : 'alert-danger'))
+            .html(response.msg)
+            .fadeIn();
+
+        $('html, body').animate({ scrollTop: messageBox.offset().top - 20 }, 'fast');
+
+        setTimeout(() => messageBox.fadeOut(), 5000);
+
+        if (response.status) {
+            $('#changePasswordForm')[0].reset();
+        }
+    }, 'json');
+});
+
+
 </script>
+
 

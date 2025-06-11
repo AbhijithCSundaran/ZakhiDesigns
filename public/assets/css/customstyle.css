@@ -1,19 +1,21 @@
 element.style {
     display: flex;
 }
+
 .searchbox button {
-  background: transparent;
-  border: none;
-  padding: 0;
-  color: inherit;
+    background: transparent;
+    border: none;
+    padding: 0;
+    color: inherit;
 }
-.searchbox input
- {
+
+.searchbox input {
     border: #CCC 1px solid;
     width: 300px;
     display: none;
     padding: 5px 10px;
 }
+
 .searchbox input {
     background: transparent;
     border: none;
@@ -21,15 +23,23 @@ element.style {
 }
 
 
-button, input, optgroup, select, textarea {
+button,
+input,
+optgroup,
+select,
+textarea {
     margin: 0;
     font-family: inherit;
     font-size: inherit;
     line-height: inherit;
 }
-*, ::after, ::before {
+
+*,
+::after,
+::before {
     box-sizing: border-box;
 }
+
 /* .thumbs img {
     width: auto !important;   
     height: auto !important;   
@@ -48,6 +58,7 @@ button, input, optgroup, select, textarea {
     max-height: none !important;
     display: block;
 }
+
 .prod-preview img {
     width: auto;
     height: auto;
@@ -56,6 +67,7 @@ button, input, optgroup, select, textarea {
     display: block;
     margin: auto;
 }
+
 .prod-preview a {
     width: 115px;
     height: 115px;
@@ -65,8 +77,9 @@ button, input, optgroup, select, textarea {
     padding: 4px;
     transition: all 0.2s ease;
 }
+
 .prod-preview a:hover {
-   box-shadow: 0px 0px 2px 1px rgba(65, 65, 65, 0.2);
+    box-shadow: 0px 0px 2px 1px rgba(65, 65, 65, 0.2);
 }
 
 
@@ -85,8 +98,10 @@ button, input, optgroup, select, textarea {
     display: flex;
     justify-content: center;
 }
+
 .product-carousel .product-item {
-    max-width: 300px; /* increased from 250px */
+    max-width: 300px;
+    /* increased from 250px */
     text-align: center;
     display: flex;
     flex-direction: column;
@@ -96,10 +111,11 @@ button, input, optgroup, select, textarea {
     max-width: 100%;
     width: auto;
     margin: 0 auto 10px;
-    height: 350px; /* increased from 280px */
+    height: 350px;
+    /* increased from 280px */
     object-fit: cover;
     border-radius: 10px;
-    box-shadow: 0 0 6px rgba(0,0,0,0.1);
+    box-shadow: 0 0 6px rgba(0, 0, 0, 0.1);
     display: block;
 }
 
@@ -151,6 +167,7 @@ button, input, optgroup, select, textarea {
     height: auto;
     display: block;
 }
+
 .prod-preview video::after {
     content: '▶';
     position: absolute;
@@ -168,8 +185,10 @@ button, input, optgroup, select, textarea {
 
 
 .badge-warning {
-    background-color: #ffc107; /* Amber */
-    color: #212529;            /* Dark text */
+    background-color: #ffc107;
+    /* Amber */
+    color: #212529;
+    /* Dark text */
     padding: 0.5em 0.75em;
     font-size: 0.9em;
     border-radius: 0.25rem;
@@ -177,14 +196,16 @@ button, input, optgroup, select, textarea {
 }
 
 .badge-danger {
-    background-color: #dc3545; /* Bootstrap danger red */
+    background-color: #dc3545;
+    /* Bootstrap danger red */
     color: #fff;
     padding: 0.5em 0.75em;
     font-size: 0.9em;
     border-radius: 0.25rem;
     display: inline-block;
 }
-.foot-link{
+
+.foot-link {
     color: white;
     text-decoration: none;
 }
@@ -198,15 +219,22 @@ button, input, optgroup, select, textarea {
 
 
 
-header, .header-wrapper, .topnav, .navbar, .main-container {
+header,
+.header-wrapper,
+.topnav,
+.navbar,
+.main-container {
     overflow: visible !important;
     position: relative;
     z-index: 1;
 }
-        /* Inline CSS for dropdown */
-    .fashion-menu {
-    position: relative; /* necessary for absolute dropdown positioning */
+
+/* Inline CSS for dropdown */
+.fashion-menu {
+    position: relative;
+    /* necessary for absolute dropdown positioning */
 }
+
 .cat-dropdown,
 .sub-dropdown {
     display: none;
@@ -217,18 +245,21 @@ header, .header-wrapper, .topnav, .navbar, .main-container {
     display: block;
     position: absolute;
     top: 100%;
-    left: 0;
+    left: 15px;
     background: #fff;
     border: 1px solid #ccc;
     z-index: 1000;
-    min-width: 200px;
+    min-width: 170px;
+    padding: 5px 0;
 }
 
-.cat-item {
+/* .cat-item {
     position: relative;
     padding: 8px 15px;
     white-space: nowrap;
-}
+} */
+
+
 
 .cat-item:hover .sub-dropdown {
     display: block;
@@ -265,99 +296,130 @@ header, .header-wrapper, .topnav, .navbar, .main-container {
 
 
 
-        /* Inline CSS for dropdown */
-		.topnav a {
+/* Inline CSS for dropdown */
+/* .topnav a {
        color: #000 !important;
     text-align: left !important;
     padding: 14px 16px !important;
     text-decoration: none !important;
     font-size: 17px !important;
     text-transform: uppercase !important;
-		}
-        .topnav {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-		
-        .topnav a, .topnav .fashion-menu {
-            color: #000;
-            text-decoration: none;
-            padding: 10px 15px;
-            position: relative;
-            cursor: pointer;
-			float:none !important;
-			text-align:left !important;
-        }
-        .topnav a:hover, .topnav .fashion-menu:hover {
+		} */
+.topnav {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.topnav a,
+.topnav .fashion-menu {
+    color: #000;
+    text-decoration: none;
+    /* padding: 10px 15px; */
+    position: relative;
+    cursor: pointer;
+    float: none !important;
+    text-align: left !important;
+}
+
+/* .topnav a:hover, .topnav .fashion-menu:hover {
             background-color: #f4f4f4;
-        }
-        .fashion-menu {
-            display: inline-block;
-        }
-        .cat-dropdown-wrapper {
-            position: relative;
-            display: inline-block;
-        }
-        .cat-dropdown {
-            display: none;
-            position: absolute;
-            top: 100%;
-            left: 0;
-            background: #fff;
-            min-width: 180px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-            border: 1px solid #ccc;
-            z-index: 1000;
-        }
-        .cat-dropdown-wrapper:hover .cat-dropdown {
-            display: block;
-        }
-        .cat-item {
-            position: relative;
-            white-space: nowrap;
-			font-size:14px !important;
-        }
-        .cat-item > a {
-            display: block;
-            padding: 10px;
-            color: #000;
-            text-decoration: none;
-        }
-        .cat-item > a:hover {
-            background-color: #f4f4f4;
-        }
-        .sub-dropdown {
-            display: none;
-            position: absolute;
-            top: 0;
-            left: 100%;
-            background: #fff;
-            border: 1px solid #ccc;
-            min-width: 180px;
-            z-index: 1001;
-        }
-        .cat-item:hover > .sub-dropdown {
-            display: block;
-        }
-        .sub-dropdown a {
-            display: block;
-            padding: 10px;
-            color: #000;
-            text-decoration: none;
-        }
-        .sub-dropdown a:hover {
-            background-color: #f4f4f4;
-        }
+        } */
+.fashion-menu {
+    display: inline-block;
+}
+
+.cat-dropdown-wrapper {
+    position: relative;
+    display: inline-block;
+}
+
+.cat-dropdown {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: #fff;
+    min-width: 180px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border: 1px solid #ccc;
+    z-index: 1000;
+}
+
+.cat-dropdown-wrapper:hover .cat-dropdown {
+    display: block;
+}
+
+.cat-item a {
+    position: relative;
+    white-space: nowrap;
+    font-size: 14px !important;
+    display: block;
+    padding: 5px 10px !important;
+    color: #000;
+    text-decoration: none;
+}
+
+.cat-item>a:hover {
+    background-color: #f4f4f4;
+}
+
+.sub-dropdown {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 100%;
+    background: #fff;
+    border: 1px solid #ccc;
+    min-width: 180px;
+    z-index: 1001;
+}
+
+.cat-item:hover>.sub-dropdown {
+    display: block;
+}
+
+.sub-dropdown a {
+    display: block;
+    padding: 10px;
+    color: #000;
+    text-decoration: none;
+}
+
+.sub-dropdown a:hover {
+    background-color: #f4f4f4;
+}
 
 
 
 .gold {
     color: gold;
 }
-    
 
- .owl-carousel{
-	 z-index:0 !important;
-	 display:block !important;
- }
+
+.owl-carousel {
+    z-index: 0 !important;
+    display: block !important;
+}
+
+
+.owl-carousel .owl-dots.disabled,
+.owl-carousel .owl-nav.disabled {
+    display: block !important;
+}
+
+#top-prod-owl-one .owl-item a {
+    display: flex;
+}
+
+#top-prod-owl-one .owl-item img {
+    margin: auto;
+    height: 240px;
+    width: auto !important;
+    max-width: 100%;
+}
+
+
+html {
+  scroll-behavior: smooth;
+}

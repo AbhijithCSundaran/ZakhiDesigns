@@ -26,62 +26,44 @@
             <div class="page-wrapper">
                 <!-- Page-body start -->
                 <div class="page-body">
-                    <div class="row">
+                    <div class="row align-items-stretch">
                         <!-- task, page, download counter  start -->
                         <div class="col-xl-3 col-md-6">
-                            <div class="card">
+                            <div class="card  h-75">
                                 <div class="card-block">
                                     <div class="row align-items-center">
                                         <div class="col-8">
                                             <h4 class="text-c-purple"><?= esc($latestOrderCount); ?></h4>
-                                            <h6 class="text-muted m-b-0">Latest Orders (Last 7 Days)</h6>
+                                            <h6 class="text-muted m-b-0">Latest Orders (7 days)</h6>
                                         </div>
                                         <div class="col-4 text-right">
                                             <i class="bi bi-bag-heart f-28"></i>
                                         </div>
                                     </div>
                                 </div>
-                                <!-- <div class="card-footer bg-c-purple">
-                                                        <div class="row align-items-center">
-                                                            <div class="col-9">
-                                                                <p class="text-white m-b-0">% change</p>
-                                                            </div>
-                                                            <div class="col-3 text-right">
-                                                                <i class="fa fa-line-chart text-white f-16"></i>
-                                                            </div>
-                                                        </div>
-            
-                                                    </div> -->
+
                             </div>
                         </div>
                         <div class="col-xl-3 col-md-6">
-                            <div class="card">
-                                <div class="card-block m-2">
+                            <div class="card  h-75">
+                                <div class="card-block">
                                     <div class="row align-items-center">
                                         <div class="col-8">
                                             <h4 class="text-c-green"><?= esc($totalOrderCount); ?></h4>
                                             <h6 class="text-muted m-b-0">Total Orders</h6>
+
                                         </div>
                                         <div class="col-4 text-right">
                                             <i class="bi bi-bag-heart f-28"></i>
                                         </div>
                                     </div>
                                 </div>
-                                <!-- <div class="card-footer bg-c-green">
-                                                        <div class="row align-items-center">
-                                                            <div class="col-9">
-                                                                <p class="text-white m-b-0">% change</p>
-                                                            </div>
-                                                            <div class="col-3 text-right">
-                                                                <i class="fa fa-line-chart text-white f-16"></i>
-                                                            </div>
-                                                        </div>
-                                                    </div> -->
+
                             </div>
                         </div>
                         <div class="col-xl-3 col-md-6">
-                            <div class="card">
-                                <div class="card-block m-2">
+                            <div class="card  h-75">
+                                <div class="card-block">
                                     <div class="row align-items-center">
                                         <div class="col-8">
                                             <h4 class="text-c-red"><?= esc($totalCustomerCount); ?></h4>
@@ -92,47 +74,33 @@
                                         </div>
                                     </div>
                                 </div>
-                                <!-- <div class="card-footer bg-c-red">
-                                                        <div class="row align-items-center">
-                                                            <div class="col-9">
-                                                                <p class="text-white m-b-0">% change</p>
-                                                            </div>
-                                                            <div class="col-3 text-right">
-                                                                <i class="fa fa-line-chart text-white f-16"></i>
-                                                            </div>
-                                                        </div>
-                                                    </div> -->
+
                             </div>
                         </div>
                         <div class="col-xl-3 col-md-6">
-                            <div class="card">
+                            <div class="card  h-75">
                                 <div class="card-block">
                                     <div class="row align-items-center">
                                         <div class="col-8">
-                                            <h4 class="text-c-blue"><i class="bi bi-currency-rupee"></i>
-                                                <?= number_format($lastMonthRevenue, 2); ?></h4>
-                                            <h6 class="text-muted m-b-0">Last Month Revenue</h6>
+                                            <h4 class="text-c-blue">
+                                                <i class="bi bi-currency-rupee"></i>
+                                                <?= number_format($annualRevenue, 2); ?>
+                                            </h4>
+                                            <h6 class="text-muted m-b-0">Annual Revenue
+                                                (<?= date('Y', strtotime('-3 months')) ?>-<?= date('Y', strtotime('+9 months')) ?>)
+                                            </h6>
                                         </div>
                                         <div class="col-4 text-right">
-                                            <i class="bi bi-wallet f-28"></i>
-
+                                            <i class="bi bi-wallet2 f-28"></i>
                                         </div>
                                     </div>
                                 </div>
-                                <!-- <div class="card-footer bg-c-blue">
-                                                        <div class="row align-items-center">
-                                                            <div class="col-9">
-                                                                <p class="text-white m-b-0">% change</p>
-                                                            </div>
-                                                            <div class="col-3 text-right">
-                                                                <i class="fa fa-line-chart text-white f-16"></i>
-                                                            </div>
-                                                        </div>
-                                                    </div> -->
                             </div>
 
-                        </div>
 
+                        </div>
+                    </div>
+                    <div class="row">
                         <div class="col-xl-12 col-md-12">
                             <div class="card table-card">
                                 <div class="card-header">
@@ -212,15 +180,6 @@
                             <div class="card table-card">
                                 <div class="card-header">
                                     <h5>Latest Products</h5>
-                                    <!-- <div class="card-header-right">
-                                                            <ul class="list-unstyled card-option">
-                                                                <li><i class="fa fa fa-wrench open-card-option"></i></li>
-                                                                <li><i class="fa fa-window-maximize full-card"></i></li>
-                                                                <li><i class="fa fa-minus minimize-card"></i></li>
-                                                                <li><i class="fa fa-refresh reload-card"></i></li>
-                                                                <li><i class="fa fa-trash close-card"></i></li>
-                                                            </ul>
-                                                        </div> -->
                                 </div>
                                 <div class="card-block">
                                     <div class="table-responsive">
@@ -249,9 +208,8 @@
                                                                     alt="<?= esc($product->pr_Name); ?>">
                                                             <?php else: ?>
                                                                 <!-- <span class="text-muted">No image</span> -->
-                                                                  <img style="height: 80px;"
-                                                                    src="<?= base_url('public/Admin/assets/images/default.jpg') ?>"
-                                                                    >
+                                                                <img style="height: 80px;"
+                                                                    src="<?= base_url('public/Admin/assets/images/default.jpg') ?>">
                                                             <?php endif; ?>
                                                         </td>
 

@@ -250,6 +250,11 @@
                                                     <i class="bi bi-check-circle"></i>
                                                     <?= isset($product) ? 'Update' : 'Save'; ?>
                                                 </button>
+												<?php if (isset($product)) : ?>
+													<a href="<?= base_url('admin/update_stock/' . $product['pr_Id']); ?>" class="btn btn-warning">
+														<i class="bi bi-box-seam"></i> Update Stock
+													</a>
+												<?php endif; ?>
                                             </div>
                                         </div>
                                     </form>

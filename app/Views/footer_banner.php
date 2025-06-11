@@ -49,7 +49,7 @@ if (!empty($themes['theme_Section3'])) {
 ?>
 
 <?php if ($showFooter): ?>
-    <section class="footerbanner" id="footerBanner" style="background-image:url('<?= $footerImage; ?>')">
+    <section class="footerbanner  banner-btm-spce" id="footerBanner" style="background-image:url('<?= $footerImage; ?>')">
         <div class="container-lg">
             <div class="row">
                 <div class="col-md-6 leftbox" id="footerTitle">

@@ -166,43 +166,66 @@
 
     //File Upload
 
-    function handleFiles(files) {
-        const allowedTypes = ['image/jpeg', 'image/png'];
-        const formData = new FormData();
-        const productId = document.getElementById('productId').value;
+function handleFiles(files) {
+    const allowedTypes = ['image/jpeg', 'image/png'];
+    const requiredWidth = 265;
+    const requiredHeight = 356;
+    const formData = new FormData();
+    const productId = document.getElementById('productId').value;
 
-        for (let i = 0; i < files.length; i++) {
-            const file = files[i];
+    let validatedFiles = 0;
+
+    for (let i = 0; i < files.length; i++) {
+        const file = files[i];
 
             if (!allowedTypes.includes(file.type)) {
                 alert(`File "${file.name}" is not allowed. Only JPEG and PNG formats are accepted.`);
                 return; // Stop processing if one file is invalid
             }
 
-            formData.append('files[]', file);
-        }
+ const reader = new FileReader();
 
-        formData.append('product_id', productId);
-
-        fetch("<?= base_url('admin/product/upload-media') ?>", {
-            method: 'POST',
-            body: formData,
-        })
-            .then(response => response.json())
-            .then(data => {
-                if (data.success === true) {
-                    alert(data.msg || 'Images uploaded successfully!');
-                    loadProductImages(productId);
-                    $('#productList').DataTable().ajax.reload(null, false);
-                } else {
-                    alert(data.msg || 'Upload failed.');
+        reader.onload = function(e) {
+            const img = new Image();
+            img.onload = function() {
+                if (img.width !== requiredWidth || img.height !== requiredHeight) {
+                    alert(`"${file.name}" has invalid dimensions. Only images of size 265x356 pixels are allowed.`);
+                    return;
                 }
-            })
-            .catch(error => {
-                console.error('Upload error:', error);
-                alert('Something went wrong. Try again later.');
-            });
+
+                formData.append('files[]', file);
+                validatedFiles++;
+
+                // Upload only after all files are validated
+                if (validatedFiles === files.length) {
+                    formData.append('product_id', productId);
+
+                    fetch("<?= base_url('admin/product/upload-media') ?>", {
+                            method: 'POST',
+                            body: formData,
+                        })
+                        .then(response => response.json())
+                        .then(data => {
+                            if (data.success === true) {
+                                alert(data.msg || 'Images uploaded successfully!');
+                                loadProductImages(productId);
+                                $('#productList').DataTable().ajax.reload(null, false);
+                            } else {
+                                alert(data.msg || 'Upload failed.');
+                            }
+                        })
+                        .catch(error => {
+                            console.error('Upload error:', error);
+                            alert('Something went wrong. Try again later.');
+                        });
+                }
+            };
+            img.src = e.target.result;
+        };
+
+        reader.readAsDataURL(file);
     }
+}
 
 
     function handleDrop(event) {
@@ -432,7 +455,39 @@
             }
         });
     });
+});
+/**********************************STOCK UPDATION*******************************************/
+$('#updateSubmit').click(function(e) {
+    e.preventDefault();
 
+    var pr_Id = $('#pr_Id').val(); // Get product ID from hidden field
+    var url = baseUrl + "admin/update_stock_value/" + pr_Id;
+
+    $.post(url, $('#updateStockForm').serialize(), function(response) {
+        if (response.status == 1) {
+            $('#messageBox')
+                .removeClass('alert-danger')
+                .addClass('alert-success')
+                .text(response.msg || 'Stock Updated Successfully!')
+                .show();
+
+            setTimeout(function () {
+                window.location.href = baseUrl + "admin/product/edit/" + response.pr_Id;
+            }, 3000);
+        } else {
+            $('#messageBox')
+                .removeClass('alert-success')
+                .addClass('alert-danger')
+                .text(response.msg || 'Please fill all the data')
+                .show();
+        }
+
+        setTimeout(function () {
+            $('#messageBox').empty().hide();
+        }, 3000);
+    }, 'json');
+});
+/*****************************************************************************/
 
     //Load video on modal
     function openvideoModal(productId, productName) {

@@ -4,7 +4,7 @@ $first20 = array_slice($latestProducts, 0, 20);
 $next20 = array_slice($latestProducts, 20, 20);
 ?>
 
-<section class="top-prod">
+<section class="top-prod" id="top-products">
     <div class="container-lg">
         <div class="col-md-12">
             <div class="row">
@@ -70,12 +70,13 @@ $next20 = array_slice($latestProducts, 20, 20);
                                 </a>
                             </div>
                             <div class="star-rate p-1">
-                                <i class="bi bi-star-fill gold"></i>
-                                <i class="bi bi-star-fill gold"></i>
-                                <i class="bi bi-star-fill gold"></i>
-                                <i class="bi bi-star-fill"></i>
-                                <i class="bi bi-star-fill"></i>
-                            </div>
+                                    <?php
+                                    $avg = intval($item['avg_rating'] ?? 0);
+                                    for ($i = 1; $i <= 5; $i++):
+                                        echo '<i class="' . ($i <= $avg ? 'bi bi-star-fill gold' : 'bi bi-star') . '"></i>';
+                                    endfor;
+                                    ?>
+                                </div>
                             <div class="item-name p-1"><?= esc($item['pr_Name']); ?></div>
                             <div class="item-price"><i
                                     class="bi bi-currency-rupee"></i>&nbsp;<?= esc($item['pr_Selling_Price']); ?></div>
@@ -91,6 +92,8 @@ $next20 = array_slice($latestProducts, 20, 20);
         </div>
     </div>
 </section>
+
+
 
 <script>
     $(document).ready(function () {

@@ -20,9 +20,9 @@
     </div>
 
 
-    <div class="row text-end">
+    <!-- <div class="row text-end">
         <a href="">Forgot Password?</a>
-    </div>
+    </div> -->
     <div class="d-flex">
         <p> If you are a New Customer? </p>
         <a href="" class="ms-2"  id="showRegisterFromLogin">Register</a>

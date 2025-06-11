@@ -9,7 +9,8 @@ class AddressModel extends Model
     protected $allowedFields = [
         'add_Name', 'add_Email', 'add_Phone', 'add_BuldingNo', 'add_Street',
         'add_Landmark', 'add_City', 'add_State', 'add_Pincode',
-        'add_CustId', 'add_Default'
+        'add_CustId', 'add_Default','add_Status','add_createdon','add_createdby',
+		'add_modifyon','add_modifyby'
     ];
 	 public function getDefaultAddress($custId)
     {

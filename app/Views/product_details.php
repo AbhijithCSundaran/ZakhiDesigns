@@ -57,9 +57,10 @@ $zd_uid = session()->get('zd_uid');
 
             <div class="col-md-6 prod-detail-block">
                 <div class="row">
+				 <div id="messageBox" class="alert" style="display: none;"></div>
                     <form action="<?= base_url('product/submit') ?>" method="post" id="orderNowForm">
                         <div class="clearfix">&nbsp;</div>
-                        <div id="messageBox" class="alert" style="display: none;"></div>
+                       
                         <div class="col-md-12">
                             <div class="prod-name"><?= esc($product['pr_Name']); ?></div>
                             <div class="star-rate text-left">
@@ -75,6 +76,10 @@ $zd_uid = session()->get('zd_uid');
                                     }
                                 }
                                 ?>
+								<a href="#reviewsSection">
+									<i class="bi bi-star-fill text-warning"></i>
+									<?= $total_reviews_count ?> Review<?= $total_reviews_count != 1 ? 's' : '' ?>
+								</a>
                             </div>
 
                             <?php if (!empty($product['pr_Description'])): ?>
@@ -125,15 +130,21 @@ $zd_uid = session()->get('zd_uid');
                             <span class="offerprice"><i class="bi bi-currency-rupee"></i><?= esc($product['pr_Selling_Price']); ?></span>
                         </div>
 
-                        <?php if ($product['pr_Stock'] > 0): ?>
+                        <?php
+							$resetStock = $product['pr_Reset_Stock'];
+							$currentStock = $product['pr_Stock'];
+							$isOutOfStock = ($resetStock == $currentStock) || ($resetStock > $currentStock);
+							?>
+
+							<?php if (!$isOutOfStock && $currentStock > 0): ?>
                             <div class="col-md-12 stock-block">
                                 <select name="qty" id="qty">
                                     <option value="">Quantity</option>
                                     <?php
-                                    $maxQty = ($product['pr_Stock'] > 5) ? 5 : $product['pr_Stock'];
-                                    for ($i = 1; $i <= $maxQty; $i++): ?>
-                                        <option value="<?= $i; ?>"><?= $i; ?></option>
-                                    <?php endfor; ?>
+										$maxQty = ($currentStock > 5) ? 5 : $currentStock;
+										for ($i = 1; $i <= $maxQty; $i++): ?>
+											<option value="<?= $i; ?>"><?= $i; ?></option>
+										<?php endfor; ?>
                                 </select>
 
                                 <input type="hidden" name="pr_Id" value="<?= $product['pr_Id']; ?>">
@@ -141,18 +152,21 @@ $zd_uid = session()->get('zd_uid');
 
                                 <button class="btn btn-dark" name="orderNowBtn" id="orderNowBtn">Order Now</button>
                             </div>
-                        <?php else: ?>
-                            <div class="col-md-12">
-                                <span class="badge badge-danger">Out of stock</span>
-                                <div class="text-danger mt-2">This product is currently out of stock.</div>
-                            </div>
-                        <?php endif; ?>
+                       <?php else: ?>
+							<div class="col-md-12">
+								<button class="btn btn-secondary" disabled>Out of Stock</button>
+								<div class="text-danger mt-2">This product is currently out of stock.</div>
+							</div>
+						<?php endif; ?>
 
-                        <?php if ($product['pr_Stock'] > 1): ?>
-                            <div class="col-md-12"><span class="badge badge-success">In stock</span></div>
-                        <?php elseif ($product['pr_Stock'] == 1): ?>
-                            <div class="col-md-12"><span class="badge badge-warning" style="padding:10px;">Only 1 left in stock</span></div>
-                        <?php endif; ?>
+
+                      <?php if (!$isOutOfStock): ?>
+						<?php if ($currentStock > 1): ?>
+							<div class="col-md-12"><span class="badge bg-success">In stock</span></div>
+						<?php elseif ($currentStock == 1): ?>
+							<div class="col-md-12"><span class="badge bg-warning text-dark" style="padding:10px;">Only 1 left in stock</span></div>
+						<?php endif; ?>
+					<?php endif; ?>
                     </form>
 
                     <div class="col-md-12">
@@ -161,11 +175,39 @@ $zd_uid = session()->get('zd_uid');
                         <div class="col-md-12 imp-text"><i class="bi bi-truck"></i> Free Delivery</div>
                         <div class="col-md-12 imp-text"><i class="bi bi-arrow-return-left"></i> 7 Days Replacement</div>
                     </div>
+					<div id="reviewsSection" class="mt-5">
+					 <h4 class="mt-4" style="font-weight:bold;">Customer Ratings and Reviews</h4>
+
+<div class="row">
+    <?php if (!empty($reviews)): ?>
+        <?php foreach ($reviews as $rev): ?>
+            <div class="col-md-6">
+ 
+                        <h6 class="card-title mb-1"><?= esc($rev['name']) ?></h6>
+                        <div class="mb-2 text-warning" style="font-size: 1.2em;">
+                            <?= str_repeat('★', (int) $rev['rating']) . str_repeat('☆', 5 - (int) $rev['rating']) ?>
+                        </div>
+                        <p class="card-text"><?= esc($rev['review']) ?></p>
+            
+            </div>
+			
+        <?php endforeach; ?>
+    <?php else: ?>
+        <div class="col-12">
+            <p class="text-muted">No reviews yet.</p>
+        </div>
+    <?php endif; ?>
+</div>
+
+</div>
                 </div>
             </div>
         </div>
     </div>
 </section>
+
+
+
 
 <section class="top-prod">
     <div class="container-lg">

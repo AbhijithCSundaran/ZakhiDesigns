@@ -76,7 +76,7 @@ $('#categorySubmit').click(function(e) {
 
             setTimeout(function() {
                 window.location.href = baseUrl + "admin/category/"; 
-            }, 1500);
+            }, 3000);
         } else {
             $('#messageBox')
                 .removeClass('alert-success')
@@ -87,7 +87,7 @@ $('#categorySubmit').click(function(e) {
 
         setTimeout(function() {
             $('#messageBox').empty().hide();
-        }, 2000);
+        }, 3000);
     }, 'json');
 });
 

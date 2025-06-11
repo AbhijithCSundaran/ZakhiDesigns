@@ -15,6 +15,18 @@ $(document).ready(function(){
     });
 });
 
+document.addEventListener('DOMContentLoaded', function () {
+    const stock = <?= isset($product['pr_Stock']) ? (int) $product['pr_Stock'] : 0 ?>;
+    const orderBtn = document.getElementById('orderNowBtn');
+
+    if (stock < 1 && orderBtn) {
+        orderBtn.disabled = true;
+        orderBtn.classList.add('btn-secondary');
+        orderBtn.classList.remove('btn-dark');
+        orderBtn.innerText = 'Out of Stock';
+    }
+});
+
 
   function searchProduct() {
     const keyword = document.getElementById('search').value.trim();
@@ -90,14 +102,14 @@ $(document).ready(function(){
 
 var baseUrl = "<?= base_url() ?>";
 
-$('#orderNowBtn').click(function(e) {
+$('#orderNowBtn').click(function (e) {
     e.preventDefault();
     $('#orderNowBtn').prop('disabled', true);
 
     const zd_uid = "<?= session()->get('zd_uid'); ?>";
 
     if (!zd_uid) {
-        $('#modalBody').load("<?= base_url('weblogin'); ?>", function() {
+        $('#modalBody').load("<?= base_url('weblogin'); ?>", function () {
             $('#mainModal').modal('show');
         });
         $('#orderNowBtn').prop('disabled', false);
@@ -115,31 +127,34 @@ $('#orderNowBtn').click(function(e) {
             .text('Please select Size, Color and Quantity.')
             .fadeIn();
 
+        $('html, body').animate({ scrollTop: 0 }, 'fast'); // Scroll to top on error
+
         $('#orderNowBtn').prop('disabled', false);
 
         setTimeout(() => {
             $('#messageBox').fadeOut();
-        }, 1000);
+        }, 3000);
         return;
     }
 
     var url = baseUrl + "product/submit";
 
-    $.post(url, $('#orderNowForm').serialize(), function(response) {
-     $('html, body').animate({ scrollTop: 0 }, 'fast');
-        console.log(response);
-
+    $.post(url, $('#orderNowForm').serialize(), function (response) {
         $('#messageBox').removeClass('alert-danger alert-success').hide();
 
         if (response.status == 1) {
-            // Directly redirect without showing message
-            let redirectUrl = response.redirect;
-            if (redirectUrl) {
-                window.location.href = redirectUrl;
-            } else {
-                $('#orderNowBtn').prop('disabled', false);
-            }
+            // Scroll to top, then redirect
+            $('html, body').animate({ scrollTop: 0 }, 'fast', function () {
+                let redirectUrl = response.redirect;
+                if (redirectUrl) {
+                    window.location.href = redirectUrl;
+                } else {
+                    $('#orderNowBtn').prop('disabled', false);
+                }
+            });
         } else {
+            $('html, body').animate({ scrollTop: 0 }, 'fast');
+
             $('#messageBox')
                 .addClass('alert alert-danger')
                 .text(response.msg || 'Please select Size, Color and Quantity.')
@@ -147,11 +162,12 @@ $('#orderNowBtn').click(function(e) {
 
             $('#orderNowBtn').prop('disabled', false);
 
-            setTimeout(function() {
+            setTimeout(function () {
                 $('#messageBox').fadeOut();
             }, 5000);
         }
-    }, 'json').fail(function(jqXHR, textStatus, errorThrown) {
+    }, 'json').fail(function (jqXHR, textStatus, errorThrown) {
+        $('html, body').animate({ scrollTop: 0 }, 'fast'); // scroll on failure
         $('#orderNowBtn').prop('disabled', false);
         $('#messageBox')
             .removeClass('alert-success')
@@ -160,6 +176,7 @@ $('#orderNowBtn').click(function(e) {
             .fadeIn();
     });
 });
+
 
 
 /**********************************************************************/

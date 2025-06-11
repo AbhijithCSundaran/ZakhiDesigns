@@ -93,11 +93,9 @@ function useSelectedAddress() {
 
 // Save new address and populate fields
 document.addEventListener('DOMContentLoaded', function () {
-    // Form elements
     const form = document.getElementById('orderAddressForm');
     const messageBox = document.getElementById('messageBox');
 
-    // Helper to show message in messageBox for 3 seconds and scroll top
     function showMessage(message, type = 'success') {
         messageBox.textContent = message;
         messageBox.className = 'alert alert-' + (type === 'success' ? 'success' : 'danger');
@@ -109,13 +107,11 @@ document.addEventListener('DOMContentLoaded', function () {
         }, 3000);
     }
 
-    // Validation functions
     function validateName(name) {
         return /^[A-Za-z\s]+$/.test(name.trim());
     }
 
     function validateEmail(email) {
-        // simple email regex
         return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim());
     }
 
@@ -124,7 +120,6 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     function validateAddressField(addr) {
-        // letters, digits, underscore, hyphen, comma, slash, full stop, space allowed
         return /^[A-Za-z0-9_\-,./\s]+$/.test(addr.trim());
     }
 
@@ -132,68 +127,107 @@ document.addEventListener('DOMContentLoaded', function () {
         return /^\d{6}$/.test(pincode.trim());
     }
 
-    // Populate delivery fields from saved address details
     function populateDeliveryFields(details) {
         document.getElementById('fname').value = details.add_Name || '';
         document.getElementById('Place').value = details.add_City || '';
         document.getElementById('emailid').value = details.add_Email || '';
         document.getElementById('contactno').value = details.add_Phone || '';
 
-        // Compose delivery address text (adjust fields as needed)
         const addr = [
-            details.add_BuldingNo || '',
-            details.add_Street || '',
-            details.add_Landmark || '',
-            details.add_City || '',
-            details.add_State || '',
-            details.add_Pincode || '',
-            details.add_Phone || ''
+            details.add_BuldingNo,
+            details.add_Street,
+            details.add_Landmark,
+            details.add_City,
+            details.add_State,
+            details.add_Pincode,
+            details.add_Phone
         ].filter(Boolean).join(', ');
 
         document.getElementById('deliveryAddress').value = addr;
     }
 
-    // Main form submit handler for saving new address
     form.addEventListener('submit', function (event) {
         event.preventDefault();
 
-        // Gather form data
-        const name = form.newName.value;
-        const email = form.newEmail.value;
-        const phone = form.newPhone.value;
-        const building = form.newBuilding.value;
-        const street = form.newStreet.value;
-        const landmark = form.newLandmark.value;
-        const city = form.newCity.value;
-        const state = form.newState.value;
-        const pincode = form.newPincode.value;
+        const name = form.newName.value.trim();
+        const email = form.newEmail.value.trim();
+        const phone = form.newPhone.value.trim();
+        const building = form.newBuilding.value.trim();
+        const street = form.newStreet.value.trim();
+        const landmark = form.newLandmark.value.trim();
+        const city = form.newCity.value.trim();
+        const state = form.newState.value.trim();
+        const pincode = form.newPincode.value.trim();
 
-        // Validate inputs
+        // Inline validation with focus on the first error
+        if (!name) {
+            showMessage('Full Name is required.', 'error');
+            form.newName.focus();
+            return;
+        }
         if (!validateName(name)) {
             showMessage('Name must contain only alphabets and spaces.', 'error');
+            form.newName.focus();
+            return;
+        }
+
+        if (!email) {
+            showMessage('Email is required.', 'error');
+            form.newEmail.focus();
             return;
         }
         if (!validateEmail(email)) {
             showMessage('Please enter a valid email address.', 'error');
+            form.newEmail.focus();
+            return;
+        }
+
+        if (!phone) {
+            showMessage('Phone number is required.', 'error');
+            form.newPhone.focus();
             return;
         }
         if (!validatePhone(phone)) {
             showMessage('Phone number must be exactly 10 digits.', 'error');
+            form.newPhone.focus();
             return;
         }
-        if (!validateAddressField(building) || !validateAddressField(street) || !validateAddressField(landmark) || !validateAddressField(city) || !validateAddressField(state)) {
-            showMessage('Address fields contain invalid characters.', 'error');
+
+        const addressFields = [
+            { value: building, field: form.newBuilding, label: 'Building No.' },
+            { value: street, field: form.newStreet, label: 'Street' },
+            { value: landmark, field: form.newLandmark, label: 'Landmark' },
+            { value: city, field: form.newCity, label: 'City' },
+            { value: state, field: form.newState, label: 'State' }
+        ];
+
+        for (const item of addressFields) {
+            if (!item.value) {
+                showMessage(`${item.label} is required.`, 'error');
+                item.field.focus();
+                return;
+            }
+            if (!validateAddressField(item.value)) {
+                showMessage(`${item.label} contains invalid characters.`, 'error');
+                item.field.focus();
+                return;
+            }
+        }
+
+        if (!pincode) {
+            showMessage('Pincode is required.', 'error');
+            form.newPincode.focus();
             return;
         }
         if (!validatePincode(pincode)) {
             showMessage('Pincode must be exactly 6 digits.', 'error');
+            form.newPincode.focus();
             return;
         }
 
-        // If all validations pass, submit via fetch
         const formData = new FormData(form);
 
-        fetch('<?= base_url('ordernow/saveAddress') ?>', {
+        fetch("<?= base_url('ordernow/saveAddress') ?>", {
             method: 'POST',
             body: formData
         })
@@ -206,7 +240,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
                 showMessage('Address saved and set as default!', 'success');
 
-                // Collapse all accordion items first
+                // Collapse all accordions
                 const accordion = document.getElementById('addressAccordion');
                 accordion.querySelectorAll('.accordion-collapse').forEach(collapseEl => {
                     const bsCollapse = bootstrap.Collapse.getInstance(collapseEl);
@@ -217,7 +251,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     }
                 });
 
-                // Open the Delivery to This Address accordion
+                // Expand delivery address section
                 const deliveryCollapse = document.getElementById('collapseDefault');
                 const deliveryCollapseInstance = bootstrap.Collapse.getInstance(deliveryCollapse);
                 if (deliveryCollapseInstance) {
@@ -226,7 +260,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     new bootstrap.Collapse(deliveryCollapse, { toggle: true });
                 }
             } else {
-                showMessage('Failed to save address or fetch default.', 'error');
+                showMessage(data.msg || 'Failed to save address or fetch default.', 'error');
             }
         })
         .catch(err => {
@@ -236,42 +270,104 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 });
 
-
 // Submit the order form
-function submitOrderForm(e) {
-    e.preventDefault();
+    var baseUrl = "<?= base_url() ?>";
 
-    const form = e.target;
-    const fname = form.querySelector('#fname').value.trim();
-    const email = form.querySelector('#emailid').value.trim();
-    const contact = form.querySelector('#contactno').value.trim();
-    const address = form.querySelector('#deliveryAddress').value.trim();
+    $('#orderNowBtn').click(function (e) {
+        e.preventDefault();
+        $('#orderNowBtn').prop('disabled', true);
 
-    if (!fname || !email || !contact || !address) {
-        alert('Please fill in all delivery details.');
-        return;
-    }
+        const zd_uid = "<?= session()->get('zd_uid'); ?>";
 
-    const formData = new FormData(form);
-
-    fetch('<?= base_url('ordernow/submitfrm') ?>', {
-        method: 'POST',
-        body: formData
-    })
-    .then(res => res.json())
-    .then(data => {
-        if (data.status === 1) {
-            alert(data.msg);
-            // Optionally redirect or reload
-        } else {
-            alert('Failed: ' + data.msg);
+        // Check login
+        if (!zd_uid) {
+            $('#modalBody').load(baseUrl + "weblogin", function () {
+                $('#mainModal').modal('show');
+            });
+            $('#orderNowBtn').prop('disabled', false);
+            return;
         }
-    })
-    .catch(err => {
-        console.error('Error:', err);
-        alert('An error occurred while placing the order.');
+
+        // Validate fields
+        let fname = $('#fname').val().trim();
+        let email = $('#emailid').val().trim();
+        let contact = $('#contactno').val().trim();
+        let address = $('#deliveryAddress').val().trim();
+
+        let size = $('#size').val();
+        let color = $('#selected_color').val();
+        let qty = $('#qty').val();
+
+        if (!fname || !email || !contact || !address || !size || !color || !qty) {
+            $('#messageBox')
+                .removeClass('alert-success')
+                .addClass('alert alert-danger')
+                .text('Please fill in all required fields: Name, Email, Contact, Address, Size, Color, and Quantity.')
+                .fadeIn();
+
+            $('#orderNowBtn').prop('disabled', false);
+
+            setTimeout(() => {
+                $('#messageBox').fadeOut();
+            }, 4000);
+            return;
+        }
+
+        // AJAX submit
+        const form = $('#orderNowForm')[0];
+        const formData = new FormData(form);
+
+        $.ajax({
+            url: baseUrl + "ordernow/submitfrm",
+            type: 'POST',
+            data: formData,
+            processData: false,
+            contentType: false,
+            dataType: 'json',
+            success: function (response) {
+                $('html, body').animate({ scrollTop: 0 }, 'fast');
+                $('#messageBox').removeClass('alert-danger alert-success').hide();
+
+                if (response.status == 1) {
+                    $('#messageBox')
+                        .addClass('alert alert-success')
+                        .html(response.msg)
+                        .fadeIn();
+
+                    setTimeout(() => {
+                        $('#messageBox').fadeOut();
+                        if (response.redirect) {
+                            window.location.href = response.redirect;
+                        }
+                    }, 3000);
+                } else {
+                    $('#messageBox')
+                        .addClass('alert alert-danger')
+                        .html('Failed: ' + response.msg)
+                        .fadeIn();
+
+                    setTimeout(() => {
+                        $('#messageBox').fadeOut();
+                    }, 4000);
+                }
+                $('#orderNowBtn').prop('disabled', false);
+            },
+            error: function (xhr, status, error) {
+                console.error('AJAX Error:', error);
+                $('#messageBox')
+                    .removeClass('alert-success')
+                    .addClass('alert alert-danger')
+                    .text('A server error occurred: ' + error)
+                    .fadeIn();
+
+                $('#orderNowBtn').prop('disabled', false);
+
+                setTimeout(() => {
+                    $('#messageBox').fadeOut();
+                }, 5000);
+            }
+        });
     });
-}
 
 // Utility: Open accordion item by ID
 function openAccordionItem(targetId) {

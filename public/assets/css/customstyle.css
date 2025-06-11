@@ -418,3 +418,8 @@ header,
     width: auto !important;
     max-width: 100%;
 }
+
+
+html {
+  scroll-behavior: smooth;
+}

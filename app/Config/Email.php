@@ -33,12 +33,12 @@ class Email extends BaseConfig
     /**
      * SMTP Username
      */
-    public string $SMTPUser = 'sandra@smartlounge.online';
+    public string $SMTPUser = 'sandrakbabu23@gmail.com';
 
     /**
      * SMTP Password
      */
-    public string $SMTPPass = 'SL1012';
+    public string $SMTPPass = 'uthram123';
 
     /**
      * SMTP Port
@@ -48,7 +48,7 @@ class Email extends BaseConfig
     /**
      * SMTP Timeout (in seconds)
      */
-    public int $SMTPTimeout = 60;
+    public int $SMTPTimeout = 5;
 
     /**
      * Enable persistent SMTP connections

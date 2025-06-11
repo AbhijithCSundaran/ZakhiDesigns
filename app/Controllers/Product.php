@@ -17,6 +17,7 @@ class Product extends Controller
         $this->session = \Config\Services::session();
         $this->request = \Config\Services::request();
         $this->productdisplayModel = new ProductDisplayModel();
+		$this->reviewModel = new ReviewModel();
     }
 
     // Homepage - shows all products with categories and ratings
@@ -220,6 +221,7 @@ class Product extends Controller
 
    public function product_details($id)
 {
+	$reviewModel = new ReviewModel();
     $zd_uid = $this->session->get('zd_uid');
     $data = [];
 
@@ -238,6 +240,15 @@ class Product extends Controller
 
     // Product data for main view
     $data['product'] = $product;
+	
+   // Fetch limited reviews (e.g., 5 reviews)
+	//$data['reviews'] = $this->reviewModel->getLimitedReviewsByProductId($id, 5);
+	// Get the total count of reviews for the product
+	//$data['total_reviews_count'] = $this->reviewModel->getReviewCountByProductId($id);
+		$data['reviews'] = $this->reviewModel->getLimitedReviewsByProductId($id, 5);
+		$data['total_reviews_count'] = $this->reviewModel->getReviewCountByProductId($id);
+
+
 
     // Rating (optional logic here if implemented)
     $data['avg_rating'] = 1;
@@ -257,7 +268,8 @@ class Product extends Controller
             'zd_uid' => $zd_uid,
             'imageList' => $imageList,
             'videoName' => $videoName,
-            'similar' => $data['similar'] // explicitly pass if needed
+            'similar' => $data['similar'],
+			'total_reviews_count' => $data['total_reviews_count']			// explicitly pass if needed
         ])
         . view('common/footer')
         . view('pagescripts/productjs');

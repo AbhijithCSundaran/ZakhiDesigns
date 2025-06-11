@@ -20,4 +20,20 @@ class ReviewModel extends Model
             ->groupBy('pr_Id')
             ->findAll();
     }
+
+	  public function getLimitedReviewsByProductId($productId, $limit = 5)
+    {
+        return $this->select('reviews.*, customer.*')
+                    ->join('customer', 'customer.cust_Id = reviews.cust_Id')
+                    ->where('reviews.pr_Id', $productId)
+                    ->orderBy('reviews.created_at', 'DESC')
+                    ->limit($limit)
+                    ->findAll();
+    }
+    // Get total count of reviews for a product
+    public function getReviewCountByProductId($productId)
+    {
+        return $this->where('pr_Id', $productId)
+                    ->countAllResults();
+    }
 }

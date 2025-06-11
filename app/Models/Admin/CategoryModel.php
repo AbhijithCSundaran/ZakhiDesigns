@@ -139,8 +139,7 @@ public function updateCategory($catId, $data)
     if (!$category) {
         return false;
     }
-
-    $cat_Discount_Value = $category->cat_Discount_Value;
+$cat_Discount_Value = $category->cat_Discount_Value;
     $cat_Discount_Type = $category->cat_Discount_Type;
 
 	 $products = $this->db->table('product')
@@ -213,8 +212,7 @@ public function updateCategory($catId, $data)
 				'cat_modifyon' => date('Y-m-d H:i:s'),
 				'cat_modifyby' => $modified_by
 			]);
-
-		$this->db->table('subcategory')
+$this->db->table('subcategory')
 			->where('cat_Id', $cat_id)
 			->update([
 				'sub_Status'   => 3,

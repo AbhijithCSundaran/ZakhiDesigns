@@ -187,29 +187,30 @@ public function changeStatus()
 }
 //Category Delete
 
+	public function deleteSubcategory($sub_id)
+	{
+		if ($sub_id) {
+			$modified_by = $this->session->get('ad_uid');
+			$sub_delete = $this->subcategoryModel->deleteSubcategoryById($sub_id, $modified_by);
 
-public function deleteSubcategory($sub_id) {
-	if ($sub_id) {
-		$modified_by = $this->session->get('ad_uid');
-		$sub_status = $this->subcategoryModel->deleteSubcategoryById(3, $sub_id, $modified_by);
-		if ($sub_status) {
-			echo json_encode([
-				'success' => true,
-				'msg' => 'Subcategory Deleted Successfully.'
-			]);
+			if ($sub_delete) {
+				echo json_encode([
+					'success' => true,
+					'msg' => 'Subcategory Deleted Successfully.'
+				]);
+			} else {
+				echo json_encode([
+					'success' => false,
+					'msg' => 'There Exists A Product Under This Subcategory.'
+				]);
+			}
 		} else {
 			echo json_encode([
 				'success' => false,
-				'msg' => 'Failed to Delete Subcategory.'
+				'msg' => 'Invalid request.'
 			]);
 		}
-	} else {
-		echo json_encode([
-			'success' => false,
-			'msg' => 'Invalid request.'
-		]);
 	}
-}
 
 }
 ?>

@@ -156,11 +156,12 @@ class SubcategoryModel extends Model
         return true;
     }
 
-
-    public function deleteSubcategoryById($sub_status, $sub_id, $modified_by)
+ public function deleteSubcategoryById($sub_status, $sub_id, $modified_by)
     {
         return $this->db->query("update subcategory set sub_Status = '" . $sub_status . "', sub_modifiyon=NOW(), sub_modifyby='" . $modified_by . "' where sub_Id = '" . $sub_id . "'");
     }
+
+		
 
     // DataTables: Get filtered subcategories
     public function getDatatables()

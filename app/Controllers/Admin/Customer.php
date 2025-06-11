@@ -168,12 +168,12 @@ class Customer extends BaseController
 			if ($us_status) {
 				echo json_encode([
 					'success' => true,
-					'msg' => 'Staff deleted successfully.'
+					'msg' => 'Customer deleted successfully.'
 				]);
 			} else {
 				echo json_encode([
 					'success' => false,
-					'msg' => 'Failed to delete staff.'
+					'msg' => 'Failed to delete Customer.'
 				]);
 			}
 		} else {

@@ -39,36 +39,73 @@ public function isCategoryExists($categoryName, $excludeId = null) {
     }
   // delete category
   
-    public function deleteCategoryById($cat_status, $cat_id, $modified_by)
-	{
+   // public function deleteCategoryById($cat_id, $modified_by)
+	// {
+		// $subcategory = $this->db->table('subcategory')
+								// ->select('sub_Id')
+								// ->where('cat_Id', $cat_id)
+								// ->get()
+								// ->getResult();
+		// $sub = array_map(function($row) {
+			// return $row->sub_Id;
+		// }, $subcategory);
+
+		// $product = $this->db->table('product')
+							// ->select('pr_Id')
+							// ->groupStart()
+								// ->where('cat_Id', $cat_id)
+								// ->orWhereIn('sub_Id', $sub)
+							// ->groupEnd()
+							// ->where('pr_Status', 1)
+							// ->get()
+							// ->getResult();
+
+		// if (!empty($product) || !empty($sub))) {
+			// return false;
+		// } else {
+			// return $this->db->table('category')
+				// ->where('cat_Id', $cat_id)
+				// ->update([
+					// 'cat_Status'   => 3,
+					// 'cat_modifyon' => date('Y-m-d H:i:s'),
+					// 'cat_modifyby' => $modified_by
+				// ]);
+		// }
+	// }
+	
+	public function deleteCategoryById($cat_id, $modified_by)
+{
+	$subcategory = $this->db->table('subcategory')
+							->select('sub_Id')
+							->where('cat_Id', $cat_id)
+							->get()
+							->getResult();
+							
+	
+	$product = $this->db->table('product')
+						->select('pr_Id')
+						->groupStart()
+							->where('cat_Id', $cat_id)
+						->groupEnd()
+						->where('pr_Status', 1)
+						->get()
+						->getResult();
+
+	if (!empty($product) || !empty($subcategory)) {
+		return false;
+	} else {
 		return $this->db->table('category')
 			->where('cat_Id', $cat_id)
 			->update([
-				'cat_Status'   => $cat_status,
+				'cat_Status'   => 3,
 				'cat_modifyon' => date('Y-m-d H:i:s'),
 				'cat_modifyby' => $modified_by
 			]);
 	}
-	public function deleteCategoryAndSubcategories($cat_id, $modified_by)
-  {
-    $this->db->table('category')
-        ->where('cat_Id', $cat_id)
-        ->update([
-            'cat_Status'   => 3,
-            'cat_modifyon' => date('Y-m-d H:i:s'),
-            'cat_modifyby' => $modified_by
-        ]);
+}
 
-    $this->db->table('subcategory')
-        ->where('cat_Id', $cat_id)
-        ->update([
-            'sub_Status'   => 3,
-            'sub_modifiyon' => date('Y-m-d H:i:s'),
-            'sub_modifyby'  => $modified_by
-        ]);
 
-    return true;
-  }
+
 		
 	//**************************Data table */
 				

@@ -189,6 +189,7 @@ $(document).on('change', '.checkactive', function () {
     $.ajax({
         url: '<?= base_url('admin/customer/status'); ?>',
         type: 'POST',
+        dataType: 'json',
         data: {
             cust_Id: custId,
             cust_Status: status
@@ -199,7 +200,7 @@ $(document).on('change', '.checkactive', function () {
         success: function(response) {
             const messageBox = $('#messageBox');
             
-            if (response.status === 'success') {
+            if (response.status === 1) { 
                 messageBox
                     .removeClass('alert-danger')
                     .addClass('alert alert-success')
@@ -233,5 +234,6 @@ $(document).on('change', '.checkactive', function () {
         }
     });
 });
+
 
 </script>

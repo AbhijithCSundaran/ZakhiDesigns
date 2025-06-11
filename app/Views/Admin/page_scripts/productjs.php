@@ -30,8 +30,11 @@
         {
             data: 'pr_Selling_Price'
         },
-        {
-            data: 'pr_Discount_Value', //pr_Discount_Type show 
+       {
+            data: null, 
+            render: function(data, type, row) {
+                return row.pr_Discount_Value + ' ' + row.pr_Discount_Type;
+            }
         },
         {
             data: 'pr_Stock'
@@ -553,6 +556,10 @@
                         .text(response.message)
                         .show();
                 }
+                 $('html, body').animate({
+                    scrollTop: 0
+                }, 'fast');
+
 
                 setTimeout(() => {
                     $('#messageBox').fadeOut();

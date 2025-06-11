@@ -132,7 +132,7 @@ public function updateCategory($catId, $data)
     $category = $this->db->table('category')
         ->select('cat_Discount_Value, cat_Discount_Type')
         ->where('cat_Id', $catId)
-		->where('cat_Status', 1)
+		//->where('cat_Status', 1)
         ->get()
         ->getRow();
 

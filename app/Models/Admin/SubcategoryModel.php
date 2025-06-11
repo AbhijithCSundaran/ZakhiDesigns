@@ -73,7 +73,7 @@ class SubcategoryModel extends Model
         $subcategory = $this->db->table('subcategory')
             ->select('sub_Discount_Value, sub_Discount_Type')
             ->where('sub_Id', $subId)
-            ->where('sub_Status', 1)
+            //->where('sub_Status', 1)
             ->get()
             ->getRow();
 

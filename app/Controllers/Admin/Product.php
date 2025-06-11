@@ -245,8 +245,6 @@ public function saveProduct() {
         ]);
     }
 	
-	/////////////////////////////////////
-	
 
 		$exists = $this->productModel->isProductCodeExists($product_code, $pr_id);
 
@@ -257,10 +255,7 @@ public function saveProduct() {
 				'message' => 'Product code already exists.'
 			]);
 		}
-
-	
-
-    
+		
     $data = [
         'pr_Name' => $product_name,
         'pr_Code' => $product_code,

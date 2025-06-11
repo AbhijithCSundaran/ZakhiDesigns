@@ -51,57 +51,47 @@ class Profile extends BaseController
 }
 public function update()
 {
-    $us_Id = $this->session->ad_uid;
+    $us_Id = $this->session->get('ad_uid'); // use get()
     $data = [
-        'us_Name' => $this->request->getPost('us_Name'),
+        'us_Name'  => $this->request->getPost('us_Name'),
         'us_Email' => $this->request->getPost('us_Email'),
     ];
 
     $model = new \App\Models\Admin\ProfileModel();
 
     if ($model->updateProfile($us_Id, $data)) {
-        session()->setFlashdata('success', 'Profile updated successfully.');
+        return $this->response->setJSON([
+            'status' => 1,
+            'msg' => 'Profile updated successfully.'
+        ]);
     } else {
-        session()->setFlashdata('error', 'Failed to update profile.');
+        return $this->response->setJSON([
+            'status' => 0,
+            'msg' => 'Failed to update profile.'
+        ]);
     }
-
-    return redirect()->to('admin/profile');
 }
 
 
-   public function change_password()
-	{
-		$model = new \App\Models\Admin\ProfileModel();
-		$current_password = $this->request->getPost('current_password');
-		$new_password = $this->request->getPost('new_password');
-		$confirm_password = $this->request->getPost('confirm_password');
-		$us_Id = $this->session->get('ad_uid'); 
-		if (!$current_password || !$new_password || !$confirm_password) {
-			return $this->response
-			->setJSON([
-			'status' => 0, 
-			'msg' => 'All fields are required'
-			]);
-		}
-		if ($new_password !== $confirm_password) {
-			return $this->response
-			->setJSON([
-			'status' => 0, 
-			'msg' => 'New password and confirmation do not match'
-			]);
-		}
-		$model = new \App\Models\Admin\ProfileModel();
-		$updateResult = $model->change_passwordNow($us_Id, $current_password, $new_password);
+public function change_password()
+{
+    $model = new \App\Models\Admin\ProfileModel();
+    $current_password = $this->request->getPost('current_password');
+    $new_password = $this->request->getPost('new_password');
+    $confirm_password = $this->request->getPost('confirm_password');
+    $us_Id = $this->session->get('ad_uid'); 
 
-		if ($updateResult) {
-			return $this->response->setJSON(['status' => 1, 'msg' => 'Password updated successfully']);
-		} 
-		else 
-		{
-			return $this->response->setJSON(['status' => 0, 'msg' => 'Failed to update password']);
-		}
-		
-	}
+    if (!$current_password || !$new_password || !$confirm_password) {
+        return $this->response->setJSON(['status' => 0, 'msg' => 'All fields are required']);
+    }
+
+    if ($new_password !== $confirm_password) {
+        return $this->response->setJSON(['status' => 0, 'msg' => 'New password and confirmation do not match']);
+    }
+
+    $result = $model->change_passwordNow($us_Id, $current_password, $new_password);
+    return $this->response->setJSON($result);
+}
 
 
 

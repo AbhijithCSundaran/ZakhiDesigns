@@ -219,11 +219,7 @@ class OrderNow extends Controller
 		$headers .= "Reply-To: {$fromEmail}\r\n";
 		$headers .= "Bcc: sandra@smartlounge.online\r\n";
 		$headers .= "X-Mailer: PHP/" . phpversion();
-
-
 		$mailSent = mail($to, $subject, $message, $headers);
-
-
 				if ($mailSent) {
 			return $this->response->setJSON([
 				'status'  => 1,

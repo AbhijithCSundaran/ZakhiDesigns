@@ -52,8 +52,6 @@ function useSelectedAddress() {
                 alert("Invalid address returned.");
                 return;
             }
-
-            // ✅ Populate delivery section
             document.getElementById('fname').value = data.add_Name || '';
             document.getElementById('Place').value = data.add_City || '';
             document.getElementById('emailid').value = data.add_Email || '';
@@ -271,103 +269,99 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 // Submit the order form
-    var baseUrl = "<?= base_url() ?>";
+   var baseUrl = "<?= base_url() ?>";
 
-    $('#orderNowBtn').click(function (e) {
-        e.preventDefault();
-        $('#orderNowBtn').prop('disabled', true);
+$('#orderNowBtn').click(function (e) {
+    e.preventDefault();
+    $('#orderNowBtn').prop('disabled', true);
 
-        const zd_uid = "<?= session()->get('zd_uid'); ?>";
+    const zd_uid = "<?= session()->get('zd_uid'); ?>";
 
-        // Check login
-        if (!zd_uid) {
-            $('#modalBody').load(baseUrl + "weblogin", function () {
-                $('#mainModal').modal('show');
-            });
-            $('#orderNowBtn').prop('disabled', false);
-            return;
-        }
+    // Scroll to top and clear previous message
+    $('html, body').animate({ scrollTop: 0 }, 'fast');
+    $('#messageBox').removeClass('alert-success alert-danger').hide();
 
-        // Validate fields
-        let fname = $('#fname').val().trim();
-        let email = $('#emailid').val().trim();
-        let contact = $('#contactno').val().trim();
-        let address = $('#deliveryAddress').val().trim();
+    // Check login
+    if (!zd_uid) {
+        $('#modalBody').load(baseUrl + "weblogin", function () {
+            $('#mainModal').modal('show');
+        });
+        $('#orderNowBtn').prop('disabled', false);
+        return;
+    }
 
-        let size = $('#size').val();
-        let color = $('#selected_color').val();
-        let qty = $('#qty').val();
+    // Validate fields
+    let fname = $('#fname').val().trim();
+    let email = $('#emailid').val().trim();
+    let contact = $('#contactno').val().trim();
+    let address = $('#deliveryAddress').val().trim();
+    let size = $('#size').val();
+    let color = $('#selected_color').val();
+    let qty = $('#qty').val();
 
-        if (!fname || !email || !contact || !address || !size || !color || !qty) {
-            $('#messageBox')
-                .removeClass('alert-success')
-                .addClass('alert alert-danger')
-                .text('Please fill in all required fields: Name, Email, Contact, Address, Size, Color, and Quantity.')
-                .fadeIn();
+    if (!fname || !email || !contact || !address || !size || !color || !qty) {
+        $('#messageBox')
+            .addClass('alert alert-danger')
+            .text('Please fill in all required fields: Name, Email, Contact, Address, Size, Color, and Quantity.')
+            .fadeIn();
 
-            $('#orderNowBtn').prop('disabled', false);
+        $('#orderNowBtn').prop('disabled', false);
 
-            setTimeout(() => {
-                $('#messageBox').fadeOut();
-            }, 4000);
-            return;
-        }
+        setTimeout(() => $('#messageBox').fadeOut(), 4000);
+        return;
+    }
 
-        // AJAX submit
-        const form = $('#orderNowForm')[0];
-        const formData = new FormData(form);
+    // AJAX submit
+    const form = $('#orderNowForm')[0];
+    const formData = new FormData(form);
 
-        $.ajax({
-            url: baseUrl + "ordernow/submitfrm",
-            type: 'POST',
-            data: formData,
-            processData: false,
-            contentType: false,
-            dataType: 'json',
-            success: function (response) {
-                $('html, body').animate({ scrollTop: 0 }, 'fast');
-                $('#messageBox').removeClass('alert-danger alert-success').hide();
+    $.ajax({
+        url: baseUrl + "ordernow/submitfrm",
+        type: 'POST',
+        data: formData,
+        processData: false,
+        contentType: false,
+        dataType: 'json',
+        success: function (response) {
+            $('html, body').animate({ scrollTop: 0 }, 'fast');
+            $('#messageBox').removeClass('alert-danger alert-success').hide();
 
-                if (response.status == 1) {
-                    $('#messageBox')
-                        .addClass('alert alert-success')
-                        .html(response.msg)
-                        .fadeIn();
-
-                    setTimeout(() => {
-                        $('#messageBox').fadeOut();
-                        if (response.redirect) {
-                            window.location.href = response.redirect;
-                        }
-                    }, 3000);
-                } else {
-                    $('#messageBox')
-                        .addClass('alert alert-danger')
-                        .html('Failed: ' + response.msg)
-                        .fadeIn();
-
-                    setTimeout(() => {
-                        $('#messageBox').fadeOut();
-                    }, 4000);
-                }
-                $('#orderNowBtn').prop('disabled', false);
-            },
-            error: function (xhr, status, error) {
-                console.error('AJAX Error:', error);
+            if (response.status == 1) {
                 $('#messageBox')
-                    .removeClass('alert-success')
-                    .addClass('alert alert-danger')
-                    .text('A server error occurred: ' + error)
+                    .addClass('alert alert-success')
+                    .html(response.msg)
                     .fadeIn();
-
-                $('#orderNowBtn').prop('disabled', false);
 
                 setTimeout(() => {
                     $('#messageBox').fadeOut();
-                }, 5000);
+                    if (response.redirect) {
+                        window.location.href = response.redirect;
+                    }
+                }, 3000);
+            } else {
+                $('#messageBox')
+                    .addClass('alert alert-danger')
+                    .html('Failed: ' + response.msg)
+                    .fadeIn();
+
+                setTimeout(() => $('#messageBox').fadeOut(), 4000);
             }
-        });
+
+            $('#orderNowBtn').prop('disabled', false);
+        },
+        error: function (xhr, status, error) {
+            console.error('AJAX Error:', error);
+
+            $('#messageBox')
+                .addClass('alert alert-danger')
+                .text('A server error occurred: ' + error)
+                .fadeIn();
+
+            setTimeout(() => $('#messageBox').fadeOut(), 5000);
+            $('#orderNowBtn').prop('disabled', false);
+        }
     });
+});
 
 // Utility: Open accordion item by ID
 function openAccordionItem(targetId) {

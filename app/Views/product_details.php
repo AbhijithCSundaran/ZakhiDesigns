@@ -77,7 +77,7 @@ $zd_uid = session()->get('zd_uid');
                                 }
                                 ?>
 								<a href="#reviewsSection">
-									<i class="bi bi-star-fill text-warning"></i>
+									<i class="bi bi text-warning"></i>
 									<?= $total_reviews_count ?> Review<?= $total_reviews_count != 1 ? 's' : '' ?>
 								</a>
                             </div>

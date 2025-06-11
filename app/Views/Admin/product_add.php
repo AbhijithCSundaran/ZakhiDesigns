@@ -149,10 +149,10 @@
                                             <label class="col-sm-3 col-form-label">Product Stock<span
                                                     style="color: red;">*</span></label>
                                             <div class="col-sm-7">
-                                                <input type="text" class="form-control"
+                                                <input type="text" class="form-control" placeholder="Must be five numbers" required
                                                     value="<?= isset($product) ? ($product['pr_Stock']) : '' ?>"
                                                     name="product_stock" id="productStock"
-                                                    placeholder="Enter the Product Stock"
+                                                    placeholder="Enter the Product Stock"  maxlength="5"
                                                     oninput="this.value = this.value.replace(/[^0-9.]/g, '')">
                                             </div>
                                         </div>
@@ -160,11 +160,11 @@
                                             <label class="col-sm-3 col-form-label">Product Reset Stock<span
                                                     style="color: red;">*</span></label>
                                             <div class="col-sm-7">
-                                                <input type="text" class="form-control"
+                                                <input type="text" class="form-control" placeholder="Must be five numbers"
                                                     value="<?= isset($product) ? ($product['pr_Reset_Stock']) : '' ?>"
-                                                    name="reset_stock" id="resetStock"
+                                                    name="reset_stock" id="resetStock" maxlength="5"
                                                     placeholder="Enter the Product Reset Stock"
-                                                    oninput="this.value = this.value.replace(/[^0-9.]/g, '')">
+                                                  >
                                             </div>
                                         </div>
 

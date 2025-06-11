@@ -149,10 +149,15 @@ function confirmDelete(catId) {
                 url: "<?php echo base_url('admin/category/delete/'); ?>" + catId,
                 type: "POST",
                 success: function(response) {
-                    Swal.fire('Deleted!', 'Category has been deleted.', 'success')
+                    if(response.status == 1){
+						Swal.fire('Deleted!', response.message, 'success')
                         .then(() => {
                             location.reload(); 
                         });
+					}
+					if(response.status == 0){
+						Swal.fire('Error!', response.message, 'error')
+					}
                 },
                 error: function(xhr, status, error) {
                     Swal.fire('Error!', 'Something went wrong.', 'error');

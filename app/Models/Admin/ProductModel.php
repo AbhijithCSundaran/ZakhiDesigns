@@ -51,6 +51,8 @@ public function isProductExists($productName, $excludeId = null) {
     return $builder->get()->getRow();
 }
 
+
+
 public function getProductByid($id)
 {
     return $this->db->table('product p')

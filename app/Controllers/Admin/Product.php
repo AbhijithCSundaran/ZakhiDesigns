@@ -527,7 +527,7 @@ class Product extends BaseController
 
         return $this->response->setJSON(['success' => false]);
     }
-
+	}
     //get product images
     public function getProductImages($productId)
     {

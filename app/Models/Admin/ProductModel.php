@@ -10,7 +10,7 @@ class ProductModel extends Model {
   
   // Adjust to your table
 
-  protected $allowedFields = ['pr_Name', 'pr_Code', 'mrp','pr_Selling_Price','pr_Discount_Value','pr_Stock', 'pr_Status','pr_Reset_Stock'];// Adjust to your table
+  protected $allowedFields = ['pr_Name', 'pr_Code', 'mrp','pr_Selling_Price','pr_Discount_Value','pr_Discount_Type','pr_Stock','pr_Aval_Colors','pr_Size', 'pr_Status','pr_Reset_Stock'];// Adjust to your table
 
     
 

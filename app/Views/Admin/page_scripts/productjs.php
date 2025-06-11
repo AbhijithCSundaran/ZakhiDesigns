@@ -455,7 +455,7 @@ function handleFiles(files) {
             }
         });
     });
-});
+
 /**********************************STOCK UPDATION*******************************************/
 $('#updateSubmit').click(function(e) {
     e.preventDefault();

@@ -30,8 +30,11 @@
         {
             data: 'pr_Selling_Price'
         },
-        {
-            data: 'pr_Discount_Value', //pr_Discount_Type show 
+       {
+            data: null, 
+            render: function(data, type, row) {
+                return row.pr_Discount_Value + ' ' + row.pr_Discount_Type;
+            }
         },
         {
             data: 'pr_Stock'
@@ -455,7 +458,7 @@ function handleFiles(files) {
             }
         });
     });
-});
+
 /**********************************STOCK UPDATION*******************************************/
 $('#updateSubmit').click(function(e) {
     e.preventDefault();
@@ -608,6 +611,10 @@ $('#updateSubmit').click(function(e) {
                         .text(response.message)
                         .show();
                 }
+                 $('html, body').animate({
+                    scrollTop: 0
+                }, 'fast');
+
 
                 setTimeout(() => {
                     $('#messageBox').fadeOut();

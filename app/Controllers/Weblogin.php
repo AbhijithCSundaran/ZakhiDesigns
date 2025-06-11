@@ -46,7 +46,7 @@ class Weblogin extends BaseController
 			} else {
 				echo json_encode([
 					"status" => 0,
-					"msg" => "Invalid user. Please sign up."
+					"msg" => "Invalid username or password. Please try again!"
 				]);
 			}
 		} else {

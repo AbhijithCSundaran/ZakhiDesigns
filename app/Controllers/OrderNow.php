@@ -86,38 +86,39 @@ class OrderNow extends Controller
 	}
 
    public function orderproduct($od_Id)
-{
-    $zd_uid = session()->get('zd_uid');
+	{
+		$zd_uid = session()->get('zd_uid');
 
-    if (empty($zd_uid)) {
-        return redirect()->to(base_url());
-    }
+		if (empty($zd_uid)) {
+			return redirect()->to(base_url());
+		}
 
-    $orderModel = new OrderNowModel();
-    $addressModel = new AddressModel();
+		$orderModel = new OrderNowModel();
+		$addressModel = new AddressModel();
 
-    $orders = $orderModel->getOrdersById($od_Id);
+		$orders = $orderModel->getOrdersById($od_Id);
+		$data['details'] = $addressModel->getDefaultAddress($zd_uid);
 
-    if (empty($orders)) {
-        return redirect()->to(base_url())->with('error', 'Order not found');
-    }
+		if (empty($orders)) {
+			return redirect()->to(base_url())->with('error', 'Order not found');
+		}
 
-    $pr_Id = $orders->pr_Id;
-    $cus_Id = $orders->cus_Id;
-    $addresses = $addressModel->getAllAddresses($zd_uid);
+		$pr_Id = $orders->pr_Id;
+		$cus_Id = $orders->cus_Id;
+		$addresses = $addressModel->getAllAddresses($zd_uid);
 
-    $data = [
-        'product'      => $orderModel->getProductById($pr_Id),
-        'details'      => $orderModel->getProductWithAddress($zd_uid, $pr_Id),
-        'addresses'    => $addresses,
-        'is_new_user'  => empty($addresses),
-    ];
+		$data = [
+			'product'      => $orderModel->getProductById($pr_Id),
+			'details'      => $orderModel->getProductWithAddress($zd_uid, $pr_Id),
+			'addresses'    => $addresses,
+			'is_new_user'  => empty($addresses),
+		];
 
-    return view('common/header', $data)
-        . view('order_now', $data)
-        . view('common/footer')
-        . view('pagescripts/OrderNowjs');
-}
+		return view('common/header', $data)
+			. view('order_now', $data)
+			. view('common/footer')
+			. view('pagescripts/OrderNowjs');
+	}
 
    public function submitfrm()
 {

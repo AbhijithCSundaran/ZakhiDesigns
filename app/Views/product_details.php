@@ -127,7 +127,12 @@ $zd_uid = session()->get('zd_uid');
 
                         <div class="col-md-12 price-block">
                             <span class="actualprice"><i class="bi bi-currency-rupee"></i><?= esc($product['mrp']); ?></span>
-                            <span class="offerprice"><i class="bi bi-currency-rupee"></i><?= esc($product['pr_Selling_Price']); ?></span>
+							
+							
+                            <span class="offerprice"><i class="bi bi-currency-rupee"></i><?= esc($product['pr_Selling_Price']); ?>
+							&nbsp;</span>
+							 <span class="offer"><i class="bi bi"></i><?= esc($product['pr_Discount_Value']); ?>
+							 <?= esc($product['pr_Discount_Type']); ?> off</span>
                         </div>
 
                         <?php
@@ -178,19 +183,16 @@ $zd_uid = session()->get('zd_uid');
 					<div id="reviewsSection" class="mt-5">
 					 <h4 class="mt-4" style="font-weight:bold;">Customer Ratings and Reviews</h4>
 
-<div class="row">
-    <?php if (!empty($reviews)): ?>
-        <?php foreach ($reviews as $rev): ?>
-            <div class="col-md-6">
- 
-                        <h6 class="card-title mb-1"><?= esc($rev['name']) ?></h6>
-                        <div class="mb-2 text-warning" style="font-size: 1.2em;">
-                            <?= str_repeat('★', (int) $rev['rating']) . str_repeat('☆', 5 - (int) $rev['rating']) ?>
-                        </div>
-                        <p class="card-text"><?= esc($rev['review']) ?></p>
-            
-            </div>
-			
+						<div class="row">
+							<?php if (!empty($reviews)): ?>
+								<?php foreach ($reviews as $rev): ?>
+									<div class="col-md-6">
+										<h6 class="card-title mb-1"><?= esc($rev['name']) ?></h6>
+										<div class="mb-2 text-warning" style="font-size: 1.2em;">
+											<?= str_repeat('★', (int) $rev['rating']) . str_repeat('☆', 5 - (int) $rev['rating']) ?>
+										</div>
+										<p class="card-text"><?= esc($rev['review']) ?></p>
+									</div>
         <?php endforeach; ?>
     <?php else: ?>
         <div class="col-12">

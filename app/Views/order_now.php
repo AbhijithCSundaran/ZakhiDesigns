@@ -1,5 +1,3 @@
-<?php $hasDefaultAddress = !empty($details['address']); 
-?>
 
 <section class="hero-banner">
     <div class="container-lg">
@@ -17,7 +15,7 @@
 
                 <!-- Accordion Starts -->
                 <div class="accordion mt-4" id="addressAccordion">
-
+					
                     <!-- Add New Address Section -->
                     <div class="accordion-item">
                         <h2 class="accordion-header" id="headingNew">
@@ -73,6 +71,7 @@
                             </div>
                         </div>
                     </div>
+					
 
                     <!-- Choose Existing Address Section -->
                     <div class="accordion-item">
@@ -102,6 +101,7 @@
 
                     <!-- Delivery to This Address Section -->
                     <form id="orderNowForm" name="orderNowForm" method="post" action="<?= base_url('ordernow/submitfrm') ?>">
+				
                         <div class="accordion-item">
                             <h2 class="accordion-header" id="headingDefault">
                                 <button class="accordion-button <?= $hasDefaultAddress ? '' : 'collapsed' ?>" type="button"
@@ -156,6 +156,7 @@
                                 </div>
                             </div>
                         </div>
+					
                     </form>
 
                 </div>

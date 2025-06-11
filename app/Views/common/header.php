@@ -47,22 +47,17 @@
                     <nav class="topnav" id="respTopnav">
                         <a href="<?= base_url(); ?>" class="active">Home</a>
                         <a href="<?= base_url('aboutus'); ?>">About Us</a>
-
-
-
                         <!-- Fashion dropdown -->
                         <div class="dropdown-wrapper" style="position: relative; display: inline-block;">
-                            <a href="<?= base_url('product/product_list') ?>" class="dropbtn">Fashion</a>
-
-
+                            <a  class="dropbtn">Fashion</a>
                             <div class="cat-dropdown">
+								<a href="<?= base_url('product/product_list') ?>">All Products</a>
                                 <?php if (!empty($categories)): ?>
                                     <?php foreach ($categories as $category): ?>
                                         <div class="cat-item">
                                             <a href="<?= base_url('product/product_list/category/' . $category['cat_Id']) ?>">
                                                 <?= esc($category['cat_Name']) ?>
                                             </a>
-
                                             <?php if (!empty($category['subcategories'])): ?>
                                                 <div class="sub-dropdown">
                                                     <?php foreach ($category['subcategories'] as $sub): ?>
@@ -76,7 +71,6 @@
                                     <?php endforeach; ?>
                                 <?php endif; ?>
                             </div>
-
                         </div>
                         <a href="<?= base_url('contact'); ?>">Contact</a>
 

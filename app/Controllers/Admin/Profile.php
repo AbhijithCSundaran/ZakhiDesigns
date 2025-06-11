@@ -75,7 +75,7 @@ public function update()
 		$current_password = $this->request->getPost('current_password');
 		$new_password = $this->request->getPost('new_password');
 		$confirm_password = $this->request->getPost('confirm_password');
-		$us_Id = $this->session->get('zd_uid'); 
+		$us_Id = $this->session->get('ad_uid'); 
 		if (!$current_password || !$new_password || !$confirm_password) {
 			return $this->response
 			->setJSON([
@@ -91,7 +91,7 @@ public function update()
 			]);
 		}
 		$model = new \App\Models\Admin\ProfileModel();
-		$updateResult = $model->change_passwordNow($new_password,$current_password, $us_Id);
+		$updateResult = $model->change_passwordNow($us_Id, $current_password, $new_password);
 
 		if ($updateResult) {
 			return $this->response->setJSON(['status' => 1, 'msg' => 'Password updated successfully']);

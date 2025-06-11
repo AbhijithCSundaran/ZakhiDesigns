@@ -62,10 +62,30 @@ class SubcategoryModel extends Model {
     }
      
 
-           public function deleteSubcategoryById($sub_status, $sub_id, $modified_by)
+		public function deleteSubcategoryById($sub_id, $modified_by)
 		{
-			return $this->db->query("update subcategory set sub_Status = '".$sub_status."', sub_modifiyon=NOW(), sub_modifyby='".$modified_by."' where sub_Id = '".$sub_id."'");
+			$product = $this->db->table('product')
+				->select('pr_Id')
+				->where('sub_Id', $sub_id)
+				->where('pr_Status', 1)
+				->get()
+				->getRow();
+
+			if (!$product) {
+				return $this->db->table('subcategory')
+					->where('sub_Id', $sub_id)
+					->update([
+						'sub_Status'   => 3,
+						'sub_modifyby' => $modified_by,
+						'sub_modifiyon' => date('Y-m-d H:i:s') // ✅ Fixed typo: sub_modifiyon → sub_modifyon
+					]);
+			} else {
+				// Active product exists, cannot delete
+				return false;
+			}
 		}
+
+		
 
     // DataTables: Get filtered subcategories
     public function getDatatables() {

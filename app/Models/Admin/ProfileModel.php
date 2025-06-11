@@ -26,18 +26,43 @@ class ProfileModel extends Model
         }
         return false;
     }
-	 public function change_passwordNow($us_Id, $current_password, $new_password)
-	{
-	$user = $this->find($us_Id);
+	 // public function change_passwordNow($us_Id, $current_password, $new_password)
+	// {
+	// $user = $this->find($us_Id);
 
+		// if (!$user || md5($current_password) !== $user['us_Password']) {
+			// return ['status' => 0, 'msg' => 'Old password does not match.'];
+		// }
+
+		// if (md5($new_password) === $user['us_Password']) {
+			// return ['status' => 0, 'msg' => 'Please enter a new password different from the old one.'];
+		// }
+
+		// $data = ['us_Password' => md5($new_password)];
+
+		// if ($this->update($us_Id, $data)) {
+			// return ['status' => 1, 'msg' => 'Password updated successfully.'];
+		// } else {
+			// return ['status' => 0, 'msg' => 'Something went wrong. Could not update password.'];
+		// }
+
+	// }
+	public function change_passwordNow($us_Id, $current_password, $new_password)
+	{
+		// Fetch user details by ID
+		$user = $this->where('us_Id', $us_Id)->first();
+
+		// Ensure user exists and current password matches the one in the database
 		if (!$user || md5($current_password) !== $user['us_Password']) {
 			return ['status' => 0, 'msg' => 'Old password does not match.'];
 		}
 
+		// Check if new password is different from current one
 		if (md5($new_password) === $user['us_Password']) {
 			return ['status' => 0, 'msg' => 'Please enter a new password different from the old one.'];
 		}
 
+		// Update password
 		$data = ['us_Password' => md5($new_password)];
 
 		if ($this->update($us_Id, $data)) {
@@ -45,8 +70,8 @@ class ProfileModel extends Model
 		} else {
 			return ['status' => 0, 'msg' => 'Something went wrong. Could not update password.'];
 		}
-
 	}
+
 
 
     public function emailExistsExcept($Name, $email, $Password, $excludeId)

@@ -130,6 +130,12 @@ $routes->post('admin/product/getVideo', 'Admin\Product::getVideo');
 $routes->post('admin/product/deletevideo', 'Admin\Product::deleteVideo');
 $routes->post('admin/product/status', 'Admin\Product::changeStatus');
 $routes->get('admin/product/view/(:any)', 'Admin\Product::viewProduct/$1');
+//$routes->get('admin/update_stock/(:any)', 'Admin\Product::updateStock/$1');
+$routes->get('admin/update_stock/(:num)', 'Admin\Stock::updateStockForm/$1');
+$routes->post('admin/update_stock_value/(:num)', 'Admin\Stock::updateStock/$1');
+$routes->get('product/reviews_view/(:num)', 'Product::reviewsView/$1');
+
+
 
 
 

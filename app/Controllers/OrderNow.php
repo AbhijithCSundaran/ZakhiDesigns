@@ -162,61 +162,78 @@ class OrderNow extends Controller
         return $this->response->setJSON(['status' => 0, 'msg' => 'Customer address not found.']);
     }
 
-$addressDetails = implode('<br>', array_filter([
-    $customer['add_BuldingNo'] ?? '',
-    $customer['add_Street'] ?? '',
-    $customer['add_Landmark'] ?? '',
-    $customer['add_City'] ?? '',
-    $customer['add_State'] ?? '',
-    $customer['add_Pincode'] ?? ''
-]));
+		$addressDetails = implode('<br>', array_filter([
+			$customer['add_BuldingNo'] ?? '',
+			$customer['add_Street'] ?? '',
+			$customer['add_Landmark'] ?? '',
+			$customer['add_City'] ?? '',
+			$customer['add_State'] ?? '',
+			$customer['add_Pincode'] ?? ''
+		]));
 
+		$to      = $customer['add_Email']; 
+		$subject = 'Order Confirmation From Zakhi Designs';
+		$fromEmail = 'sandra@smartlounge.online'; // or your domain email
+		$fromName  = 'Sandra'; // or use customer name if preferred
 
-$to      = $customer['add_Email']; 
-$subject = 'New Order Confirmation';
-$fromEmail = 'sandra@smartlounge.online'; // or your domain email
-$fromName  = 'Sandra'; // or use customer name if preferred
-
-$message = "
+		$message = "
     <h3>🛒 Order Confirmation</h3>
-    <table border='1' cellpadding='10' cellspacing='0' style='border-collapse: collapse;'>
+    <table border='1' cellpadding='10' cellspacing='0' style='border-collapse: collapse; width: 100%; font-family: Arial, sans-serif;'>
+        <tr style='background-color: #f5f5f5;'>
+            <td colspan='2' align='center'>
+                <img src='http://localhost/ZakhiDesigns/public/assets/images/logo.jpg' 
+                alt='Zakhi Designs Logo' style='height: 60px;'><br>
+                <strong style='font-size: 18px;'>Zakhi Designs</strong>
+            </td>
+        </tr>
         <tr><th>Order ID</th><td>{$od_Id}</td></tr>
         <tr><th>Product</th><td>{$product->pr_Name}</td></tr>
         <tr><th>Product Code</th><td>{$product->pr_Code}</td></tr>
         <tr><th>Quantity</th><td>{$order->od_Quantity}</td></tr>
         <tr><th>Total Amount</th><td>₹{$order->od_Grand_Total}</td></tr>
-        <tr><th>Customer</th><td>{$customer['add_Name']}</td></tr>
+        <tr><th>Customer Name</th><td>{$customer['add_Name']}</td></tr>
         <tr><th>Email</th><td>{$customer['add_Email']}</td></tr>
         <tr><th>Phone</th><td>{$customer['add_Phone']}</td></tr>
         <tr><th>Delivery Address</th><td>{$addressDetails}</td></tr>
     </table>
+
+    <p style='text-align: center; font-size: 16px; margin-top: 20px;'>
+        <strong>Thank you for purchasing with Zakhi Designs!</strong><br>
+        We’re excited to prepare your order. Your item will be delivered in the next 5–7 business days.
+    </p>
+
+    <p style='text-align: center; margin-top: 20px;'>
+        <a href='https://zakhidesigns.com' style='padding: 10px 20px; background-color: #d81b60; color: white; text-decoration: none; border-radius: 5px;'>Visit Our Website</a>
+    </p>
+
+    <p style='text-align: center; font-size: 14px; color: #555; margin-top: 30px;'>
+        For any queries, reach us at <a href='mailto:support@zakhidesigns.com'>support@zakhidesigns.com</a>
+    </p>
 ";
 
-$headers  = "MIME-Version: 1.0\r\n";
-$headers .= "Content-type: text/html; charset=UTF-8\r\n";
-$headers .= "From: {$fromName} <{$fromEmail}>\r\n";
-$headers .= "Reply-To: {$fromEmail}\r\n";
-$headers .= "X-Mailer: PHP/" . phpversion();
 
 
-$mailSent = mail($to, $subject, $message, $headers);
+		$headers  = "MIME-Version: 1.0\r\n";
+		$headers .= "Content-type: text/html; charset=UTF-8\r\n";
+		$headers .= "From: {$fromName} <{$fromEmail}>\r\n";
+		$headers .= "Reply-To: {$fromEmail}\r\n";
+		$headers .= "Bcc: sandra@smartlounge.online\r\n";
+		$headers .= "X-Mailer: PHP/" . phpversion();
 
 
-if ($mailSent) {
-    return $this->response->setJSON([
-        'status'  => 'success',
-        'message' => 'Order confirmation email sent successfully!'
-    ]);
-} else {
-    return $this->response->setJSON([
-        'status'  => 'error',
-        'message' => 'Failed to send order email. Please try again later.'
-    ]);
-}
-
-     
-
-}
+		$mailSent = mail($to, $subject, $message, $headers);
 
 
+				if ($mailSent) {
+			return $this->response->setJSON([
+				'status'  => 1,
+				'msg' => 'Order confirmation email sent successfully!'
+			]);
+		} else {
+			return $this->response->setJSON([
+				'status'  => 0,
+				'msg' => 'Failed to send order email. Please try again later.'
+			]);
+		}
+	}
 }

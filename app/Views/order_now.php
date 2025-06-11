@@ -1,3 +1,6 @@
+<?php $hasDefaultAddress = !empty($details['address']); 
+?>
+
 <section class="hero-banner">
     <div class="container-lg">
         <h4>PLACE YOUR ORDER ENQUIRY</h4>
@@ -9,78 +12,72 @@
                 <div class="mb-3">
                     <h6>Submit the order form to place your order.</h6>
                 </div>
-                
+
                 <div id="messageBox" class="alert" style="display: none;"></div>
 
                 <!-- Accordion Starts -->
                 <div class="accordion mt-4" id="addressAccordion">
-                    
+
                     <!-- Add New Address Section -->
                     <div class="accordion-item">
                         <h2 class="accordion-header" id="headingNew">
-                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" 
-                                data-bs-target="#collapseNew" aria-expanded="false" aria-controls="collapseNew">
+                            <button class="accordion-button <?= $hasDefaultAddress ? 'collapsed' : '' ?>" type="button"
+                                data-bs-toggle="collapse" data-bs-target="#collapseNew"
+                                aria-expanded="<?= $hasDefaultAddress ? 'false' : 'true' ?>"
+                                aria-controls="collapseNew">
                                 Add New Address
                             </button>
                         </h2>
-                        <div id="collapseNew" class="accordion-collapse collapse" aria-labelledby="headingNew" data-bs-parent="#addressAccordion">
+                        <div id="collapseNew" class="accordion-collapse collapse <?= $hasDefaultAddress ? '' : 'show' ?>"
+                            aria-labelledby="headingNew" data-bs-parent="#addressAccordion">
                             <div class="accordion-body">
-								<form id="orderAddressForm">
-									<div class="mb-2">
-										<label for="newName">Full Name</label>
-										<input type="text" class="form-control" id="newName" name="newName" placeholder="Full Name" required>
-									</div>
-									<div class="mb-2">
-										<label for="newEmail">Email</label>
-										<input type="text" class="form-control" id="newEmail" name="newEmail" placeholder="Email" required>
-									</div>
-									<div class="mb-2">
-										<label for="newPhone">Phone</label>
-										<input type="phone" class="form-control" id="newPhone" name="newPhone" placeholder="Phone" required>
-									</div>
-									<div class="mb-2">
-										<label for="newBuilding">Building No.</label>
-										<input type="text" class="form-control" id="newBuilding" name="newBuilding" placeholder="Building No." required>
-									</div>
-									<div class="mb-2">
-										<label for="newStreet">Street</label>
-										<input type="text" class="form-control" id="newStreet" name="newStreet" placeholder="Street" required>
-									</div>
-									<div class="mb-2">
-										<label for="newLandmark">Landmark</label>
-										<input type="text" class="form-control" id="newLandmark" name="newLandmark" placeholder="Landmark" required>
-									</div>
-									<div class="mb-2">
-										<label for="newCity">City</label>
-										<input type="text" class="form-control" id="newCity" name="newCity" placeholder="City" required>
-									</div>
-									<div class="mb-2">
-										<label for="newState">State</label>
-										<input type="text" class="form-control" id="newState" name="newState" placeholder="State" required>
-									</div>
-									<div class="mb-2">
-										<label for="newPincode">Pincode</label>
-										<input type="text" class="form-control" id="newPincode" name="newPincode" placeholder="Pincode" required>
-									</div>
-									<div class="mb-2">
-										<label>
-											<input type="checkbox" id="newDefault" name="setAsDefault" value="1"> Set as default
-										</label>
-									</div>
-									<input type="hidden" name="od_Id" value="<?= esc($details['od_Id'] ?? '') ;?>">
-									<div class="text-end">
-										<button type="submit" onclick="saveAndSetAddress(event);" class="btn btn-primary">Add New Address</button>
-									</div>
-								</form>
-
+                                <form id="orderAddressForm">
+                                    <!-- Form Fields -->
+                                    <div class="mb-2"><label for="newName">Full Name</label>
+                                        <input type="text" class="form-control" id="newName" name="newName" required>
+                                    </div>
+                                    <div class="mb-2"><label for="newEmail">Email</label>
+                                        <input type="text" class="form-control" id="newEmail" name="newEmail" required>
+                                    </div>
+                                    <div class="mb-2"><label for="newPhone">Phone</label>
+                                        <input type="phone" class="form-control" id="newPhone" name="newPhone" required>
+                                    </div>
+                                    <div class="mb-2"><label for="newBuilding">Building No.</label>
+                                        <input type="text" class="form-control" id="newBuilding" name="newBuilding" required>
+                                    </div>
+                                    <div class="mb-2"><label for="newStreet">Street</label>
+                                        <input type="text" class="form-control" id="newStreet" name="newStreet" required>
+                                    </div>
+                                    <div class="mb-2"><label for="newLandmark">Landmark</label>
+                                        <input type="text" class="form-control" id="newLandmark" name="newLandmark" required>
+                                    </div>
+                                    <div class="mb-2"><label for="newCity">City</label>
+                                        <input type="text" class="form-control" id="newCity" name="newCity" required>
+                                    </div>
+                                    <div class="mb-2"><label for="newState">State</label>
+                                        <input type="text" class="form-control" id="newState" name="newState" required>
+                                    </div>
+                                    <div class="mb-2"><label for="newPincode">Pincode</label>
+                                        <input type="text" class="form-control" id="newPincode" name="newPincode" required>
+                                    </div>
+                                    <div class="mb-2">
+                                        <label>
+                                            <input type="checkbox" id="newDefault" name="setAsDefault" value="1"> Set as default
+                                        </label>
+                                    </div>
+                                    <input type="hidden" name="od_Id" value="<?= esc($details['od_Id'] ?? '') ;?>">
+                                    <div class="text-end">
+                                        <button type="submit" onclick="saveAndSetAddress(event);" class="btn btn-primary">Add New Address</button>
+                                    </div>
+                                </form>
                             </div>
                         </div>
                     </div>
-                    
+
                     <!-- Choose Existing Address Section -->
                     <div class="accordion-item">
                         <h2 class="accordion-header" id="headingExisting">
-                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" 
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                                 data-bs-target="#collapseExisting" aria-expanded="false" aria-controls="collapseExisting">
                                 Choose Existing Address
                             </button>
@@ -103,32 +100,40 @@
                         </div>
                     </div>
 
-                    <!-- Delivery to This Address Section (OPEN by default) -->
+                    <!-- Delivery to This Address Section -->
                     <form id="orderNowForm" name="orderNowForm" method="post" action="<?= base_url('ordernow/submitfrm') ?>">
                         <div class="accordion-item">
                             <h2 class="accordion-header" id="headingDefault">
-                                <button class="accordion-button" type="button" data-bs-toggle="collapse" 
-                                    data-bs-target="#collapseDefault" aria-expanded="true" aria-controls="collapseDefault">
+                                <button class="accordion-button <?= $hasDefaultAddress ? '' : 'collapsed' ?>" type="button"
+                                    data-bs-toggle="collapse" data-bs-target="#collapseDefault"
+                                    aria-expanded="<?= $hasDefaultAddress ? 'true' : 'false' ?>"
+                                    aria-controls="collapseDefault">
                                     Delivery to This Address
                                 </button>
                             </h2>
-                            <div id="collapseDefault" class="accordion-collapse collapse show" aria-labelledby="headingDefault" data-bs-parent="#addressAccordion">
+                            <div id="collapseDefault" class="accordion-collapse collapse <?= $hasDefaultAddress ? 'show' : '' ?>"
+                                aria-labelledby="headingDefault" data-bs-parent="#addressAccordion">
                                 <div class="accordion-body">
+
                                     <div class="mb-3">
                                         <label>Full Name</label>
-                                        <input type="text" id="fname" class="form-control" name="fname" value="<?= esc($details['add_Name'] ?? '') ?>" required>
+                                        <input type="text" id="fname" class="form-control" name="fname"
+                                            value="<?= esc($details['add_Name'] ?? '') ?>" readonly>
                                     </div>
                                     <div class="mb-3">
                                         <label>Place</label>
-                                        <input type="text" id="Place" class="form-control" name="place" value="<?= esc($details['add_City'] ?? '') ?>" required>
+                                        <input type="text" id="Place" class="form-control" name="place"
+                                            value="<?= esc($details['add_City'] ?? '') ?>" readonly>
                                     </div>
                                     <div class="mb-3">
                                         <label>Email</label>
-                                        <input type="email" id="emailid" class="form-control" name="email" value="<?= esc($details['add_Email'] ?? '') ?>" required>
+                                        <input type="email" id="emailid" class="form-control" name="email"
+                                            value="<?= esc($details['add_Email'] ?? '') ?>" readonly>
                                     </div>
                                     <div class="mb-3">
                                         <label>Contact No.</label>
-                                        <input type="text" id="contactno" class="form-control" name="phone" value="<?= esc($details['add_Phone'] ?? '') ?>" required>
+                                        <input type="text" id="contactno" class="form-control" name="phone"
+                                            value="<?= esc($details['add_Phone'] ?? '') ?>" readonly>
                                     </div>
                                     <div class="mb-3">
                                         <label>Delivery Address</label>
@@ -136,16 +141,18 @@
                                             ($details['add_BuldingNo'] ?? '') . ', ' .
                                             ($details['add_Street'] ?? '') . "\n" .
                                             ($details['add_Landmark'] ?? '') . "\n" .
-                                            ($details['add_City'] ?? '') . ', ' . ($details['add_State'] ?? '') . "\n" .
+                                            ($details['add_City'] ?? '') . ', ' .
+                                            ($details['add_State'] ?? '') . "\n" .
                                             ($details['add_Pincode'] ?? '') . "\n" .
                                             ($details['add_Phone'] ?? '')
                                         ) ?></textarea>
                                     </div>
                                     <div class="mt-4 text-end">
-                                        <input type="hidden" name="od_Id" value="<?= esc($details['od_Id'] ?? '') ;?>">
-                                        <input type="hidden" name="add_Id" id="addressIdHidden" value="<?= esc($details['add_Id'] ?? '') ;?>">
+                                        <input type="hidden" name="od_Id" value="<?= esc($details['od_Id'] ?? '') ?>">
+                                        <input type="hidden" name="add_Id" id="addressIdHidden" value="<?= esc($details['add_Id'] ?? '') ?>">
                                         <button type="submit" class="btn btn-dark" id="orderNowBtn">Order Now</button>
                                     </div>
+
                                 </div>
                             </div>
                         </div>
@@ -163,7 +170,7 @@
                 </div>
                 <div class="row">
                     <?php
-                        $decoded = json_decode($details['product_images'], true);
+                        $decoded = json_decode($details['product_images'] ?? '', true);
                         $firstImage = is_array($decoded) && isset($decoded[0]['name'][0])
                             ? base_url('uploads/productmedia/' . $decoded[0]['name'][0])
                             : base_url('assets/img/no-image.png');

@@ -6,14 +6,11 @@ class ProductDisplayModel extends Model
 {
 	protected $table = 'product';
     protected $primaryKey = 'pr_Id';
-	
+	protected $allowedFields = ['pr_Name', 'pr_Description', 'pr_Selling_Price', 'product_images',
+	'cat_Id', 'sub_Id','pr_Price','pr_modifyon','pr_Stock','pr_Status','pr_Reset_Stock'];
 	public function getAllProducts()
 	{
-		/*return $this->db->table('product')
-		->where('pr_Status =', 1)
-		->get()
-		->getResultArray();*/
-		
+
 		return $this->db->query("select pd.*, avg(rating) as ratings 
 							from product as pd 
 							left join reviews as rw on rw.pr_Id = pd.pr_Id 
@@ -21,7 +18,7 @@ class ProductDisplayModel extends Model
 		
 	}
 
-    protected $allowedFields = ['pr_Name', 'pr_Description', 'pr_Selling_Price', 'product_images', 'cat_Id', 'sub_Id','pr_Price','pr_modifyon'];
+   
 /* 	public function searchProducts($keyword)
 	{
 		return $this->distinct()
@@ -31,17 +28,17 @@ class ProductDisplayModel extends Model
 	} */
 	
 	///// view collection ////
-	 public function getSimilarProducts($cat_Id, $excludeId)
-    {
-        return $this->select('product.*, AVG(reviews.rating) as ratings')
-                    ->join('reviews', 'reviews.pr_Id = product.pr_Id', 'left')
-                    ->where('product.cat_Id', $cat_Id)
-                    ->where('product.pr_Status', 1)
-                    ->where('product.pr_Id !=', $excludeId)
-                    ->groupBy('product.pr_Id')
-                    ->orderBy('product.pr_createdon', 'DESC')
-                    ->findAll(8); // limit to 8
-    }
+	public function getSimilarProducts($cat_Id, $excludeId)
+{
+    return $this->select('product.pr_Id, product.pr_Name, product.product_images, product.pr_Selling_Price, AVG(reviews.rating) as ratings')               ->join('reviews', 'reviews.pr_Id = product.pr_Id', 'left')
+                ->where('product.cat_Id', $cat_Id)
+                ->where('product.pr_Status', 1)
+                ->where('product.pr_Id !=', $excludeId)
+                ->groupBy('product.pr_Id, product.pr_Name, product.product_images, product.pr_Selling_Price')
+                ->orderBy('product.pr_createdon', 'DESC')
+                ->findAll(8);
+}
+
 	public function getProductsByModifiedDate()
     {
        return $this->select('product.*, AVG(reviews.rating) AS ratings')
@@ -199,6 +196,14 @@ public function getProductsBySubCategory($subCategoryId)
         ->get()
         ->getResultArray();
 }
+public function updateStockAfterOrder($pr_Id, $quantity)
+    {
+        $product = $this->find($pr_Id);
+        if ($product && isset($product['pr_Stock'])) {
+            $newStock = max(0, $product['pr_Stock'] - $quantity); // avoid negative stock
+            $this->update($pr_Id, ['pr_Stock' => $newStock]);
+        }
+    }
 
 }
 ?>

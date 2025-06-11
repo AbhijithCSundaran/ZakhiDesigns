@@ -104,6 +104,7 @@ function confirmDelete(subId) {
                 method: "POST",
                 dataType: "json",
                 success: function(response) {
+					//alert("ok");
                     if (response.success) {
                         Swal.fire('Deleted!', response.msg, 'success');
                         setTimeout(() => location.reload(), 1000);

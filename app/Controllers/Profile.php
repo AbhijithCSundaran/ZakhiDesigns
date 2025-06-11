@@ -4,40 +4,61 @@ use App\Models\UserModel;
 use App\Models\AddressProfileModel;
 use App\Models\OrderModel;
 use App\Models\ProfileModel;
+use App\Models\ProductDisplayModel;
 
 class Profile extends BaseController 
 {
-   public function index() 
+	protected $productdisplayModel;
+    protected $categories;
+
+    public function __construct()
     {
-         $userId = session()->get('zd_uid');
+        $this->session = \Config\Services::session();
+        $this->input = \Config\Services::request();
+    }
+
+  public function index() 
+{
+    $userId = session()->get('zd_uid');
 
     // If not logged in and JS is bypassed
-		if (!$userId) {
-			// Prevent loading profile page directly without login
-			if ($this->request->isAJAX()) {
-				return view('weblogin'); // For modal
-			} else {
-				return redirect()->to(base_url()); // Or show error/redirect
-			}
-		}
-        $userModel = new UserModel();
-        $addressModel = new AddressProfileModel();
-        $orderModel = new OrderModel();
+    if (!$userId) {
+        if ($this->request->isAJAX()) {
+            return view('weblogin'); // For modal
+        } else {
+            return redirect()->to(base_url());
+        }
+    }
 
-        $user = $userModel->find($userId);
+    $this->productdisplayModel = new ProductDisplayModel();
+    $this->categories = $this->productdisplayModel->getAllCategoriesAndSub();
 
-        $data = [
-            'user' => $user,
-            'addresses' => $addressModel->getUserAddresses($userId),
-            'orders' => $orderModel->getOrdersByUser($userId),
-        ];
+    $data['categories'] = $this->categories;
+    $data['title'] = 'Profile';
 
-    $template  = view('common/header',$data);
-    $template .= view('profile', $data);
+    $data['product'] = $this->productdisplayModel->getAllProducts();
+
+    $userModel = new UserModel();
+    $addressModel = new AddressProfileModel();
+    $orderModel = new OrderModel();
+
+    $user = $userModel->find($userId);
+
+    // MERGE instead of overwrite
+    $data = array_merge($data, [
+        'user' => $user,
+        'addresses' => $addressModel->getUserAddresses($userId),
+        'orders' => $orderModel->getOrdersByUser($userId),
+    ]);
+
+    $template  = view('common/header', $data);
+    $template .= view('profile');
     $template .= view('common/footer');
     $template .= view('pagescripts/profilejs');
+
     return $template;
-    }
+}
+
 	 public function editProfile()
     {
         $profileModel = new ProfileModel();
@@ -124,5 +145,37 @@ class Profile extends BaseController
 			return $this->response->setJSON(['status' => 'error', 'msg' => 'Address not found.']);
 		}
 	}
+	
+public function changePassword()
+{
+    $custId = session()->get('zd_uid');
+
+    $oldPassword = $this->request->getPost('oldPassword');
+    $newPassword = $this->request->getPost('newPassword');
+    $confirmPassword = $this->request->getPost('confirmPassword');
+
+    // Validation: check empty fields
+    if (empty($oldPassword)) {
+        return $this->response->setJSON(['status' => 0, 'msg' => 'Please enter the old password.']);
+    }
+    if (empty($newPassword)) {
+        return $this->response->setJSON(['status' => 0, 'msg' => 'Please enter a new password.']);
+    }
+    if (empty($confirmPassword)) {
+        return $this->response->setJSON(['status' => 0, 'msg' => 'Please confirm your new password.']);
+    }
+
+    // Check new password matches confirm password
+    if ($newPassword !== $confirmPassword) {
+        return $this->response->setJSON(['status' => 0, 'msg' => 'New password and confirm password do not match.']);
+    }
+
+    // Call model to change password
+    $profileModel = new ProfileModel();
+    $result = $profileModel->changePassword($custId, $oldPassword, $newPassword);
+
+    return $this->response->setJSON($result);
+}
+
 
 }

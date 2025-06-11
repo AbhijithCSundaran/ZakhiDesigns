@@ -13,7 +13,21 @@ document.getElementById("reviewForm").addEventListener("submit", function(e) {
     .then(data => {
         const div = document.getElementById("reviewResponse");
         div.innerHTML = `<div class="alert alert-${data.status === 'success' ? 'success' : 'danger'}">${data.message}</div>`;
+
         if (data.status === 'success') form.reset();
+
+        // Hide the message after 3 seconds
+        setTimeout(() => {
+            div.innerHTML = '';
+        }, 3000);
+    })
+    .catch(error => {
+        console.error("Error submitting review:", error);
+        document.getElementById("reviewResponse").innerHTML = `<div class="alert alert-danger">An unexpected error occurred.</div>`;
+
+        setTimeout(() => {
+            document.getElementById("reviewResponse").innerHTML = '';
+        }, 3000);
     });
 });
 </script>

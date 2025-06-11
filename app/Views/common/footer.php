@@ -27,10 +27,12 @@
                                     href="<?= base_url('product/product_list'); ?>">Price Drop</li>
                             <li><i class="bi bi-arrow-right"></i><a class="foot-link"
                                     href="<?= base_url('product/product_list'); ?>">Products</a></li>
+                            <li>
+							<i class="bi bi-arrow-right"></i>
+							<a class="foot-link" href="<?= base_url('/#top-products'); ?>">Best Sellers</a>
+						</li>
                             <li><i class="bi bi-arrow-right"></i><a class="foot-link"
-                                    href="<?= base_url('product/product_list'); ?>">Best Sellers</li>
-                            <li><i class="bi bi-arrow-right"></i><a class="foot-link"
-                                    href="<?= base_url('contact'); ?>">Sitemap</a></li>
+                                    href="<?= base_url(); ?>">Sitemap</a></li>
                         </ul>
             </div>
             <div class="col-md-3">
@@ -249,6 +251,17 @@
             });
         });
 
+    });
+	
+	
+	document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) {
+                target.scrollIntoView({ behavior: 'smooth' });
+            }
+        });
     });
 
 </script>

@@ -7,7 +7,7 @@ class ProductDisplayModel extends Model
 	protected $table = 'product';
     protected $primaryKey = 'pr_Id';
 	protected $allowedFields = ['pr_Name', 'pr_Description', 'pr_Selling_Price', 'product_images',
-	'cat_Id', 'sub_Id','pr_Price','pr_modifyon','pr_Stock','pr_Status'];
+	'cat_Id', 'sub_Id','pr_Price','pr_modifyon','pr_Stock','pr_Status','pr_Reset_Stock'];
 	public function getAllProducts()
 	{
 

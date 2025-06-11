@@ -120,6 +120,9 @@ $(document).on('change', '.checkactive', function() {
                     .text(response.message)
                     .show();
             }
+            $('html, body').animate({
+                    scrollTop: 0
+                }, 'fast');
 
             setTimeout(() => {
                 $('#messageBox').fadeOut();

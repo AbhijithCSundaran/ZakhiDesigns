@@ -19,14 +19,14 @@
                     <!-- Add New Address Section -->
                     <div class="accordion-item">
                         <h2 class="accordion-header" id="headingNew">
-                            <button class="accordion-button <?= $hasDefaultAddress ? 'collapsed' : '' ?>" type="button"
+                            <button class="accordion-button" type="button"
                                 data-bs-toggle="collapse" data-bs-target="#collapseNew"
-                                aria-expanded="<?= $hasDefaultAddress ? 'false' : 'true' ?>"
+                                aria-expanded=""
                                 aria-controls="collapseNew">
                                 Add New Address
                             </button>
                         </h2>
-                        <div id="collapseNew" class="accordion-collapse collapse <?= $hasDefaultAddress ? '' : 'show' ?>"
+                        <div id="collapseNew" class="accordion-collapse collapse"
                             aria-labelledby="headingNew" data-bs-parent="#addressAccordion">
                             <div class="accordion-body">
                                 <form id="orderAddressForm">
@@ -86,8 +86,10 @@
                                 <h6>Select an address</h6>
                                 <?php foreach ($addresses as $addr): ?>
                                     <div class="card mb-2 p-2">
-                                        <input type="radio" name="selectedAddress" value="<?= $addr['add_Id'] ?>">
-                                        <?= esc($addr['add_Name']) ?>, <?= esc($addr['add_City']) ?>, <?= esc($addr['add_Phone']) ?>
+                                        <div class="d-flex align-items-center gap-2 ">
+                                            <input type="radio" name="selectedAddress" value="<?= $addr['add_Id'] ?>">
+                                            <?= esc($addr['add_Name']) ?>, <?= esc($addr['add_City']) ?>, <?= esc($addr['add_Phone']) ?>
+                                        </div>
                                     </div>
                                 <?php endforeach; ?>
                             </div>
@@ -104,49 +106,46 @@
 				
                         <div class="accordion-item">
                             <h2 class="accordion-header" id="headingDefault">
-                                <button class="accordion-button <?= $hasDefaultAddress ? '' : 'collapsed' ?>" type="button"
+                                <button class="accordion-button" type="button"
                                     data-bs-toggle="collapse" data-bs-target="#collapseDefault"
-                                    aria-expanded="<?= $hasDefaultAddress ? 'true' : 'false' ?>"
+                                    aria-expanded=""
                                     aria-controls="collapseDefault">
                                     Delivery to This Address
                                 </button>
                             </h2>
-                            <div id="collapseDefault" class="accordion-collapse collapse <?= $hasDefaultAddress ? 'show' : '' ?>"
+                            <div id="collapseDefault" class="accordion-collapse collapse"
                                 aria-labelledby="headingDefault" data-bs-parent="#addressAccordion">
                                 <div class="accordion-body">
-
-                                    <div class="mb-3">
-                                        <label>Full Name</label>
-                                        <input type="text" id="fname" class="form-control" name="fname"
-                                            value="<?= esc($details['add_Name'] ?? '') ?>" readonly>
-                                    </div>
-                                    <div class="mb-3">
-                                        <label>Place</label>
-                                        <input type="text" id="Place" class="form-control" name="place"
-                                            value="<?= esc($details['add_City'] ?? '') ?>" readonly>
-                                    </div>
-                                    <div class="mb-3">
-                                        <label>Email</label>
-                                        <input type="email" id="emailid" class="form-control" name="email"
-                                            value="<?= esc($details['add_Email'] ?? '') ?>" readonly>
-                                    </div>
-                                    <div class="mb-3">
-                                        <label>Contact No.</label>
-                                        <input type="text" id="contactno" class="form-control" name="phone"
-                                            value="<?= esc($details['add_Phone'] ?? '') ?>" readonly>
-                                    </div>
-                                    <div class="mb-3">
-                                        <label>Delivery Address</label>
-                                        <textarea id="deliveryAddress" class="form-control" rows="5" name="address" readonly><?= esc(
-                                            ($details['add_BuldingNo'] ?? '') . ', ' .
-                                            ($details['add_Street'] ?? '') . "\n" .
-                                            ($details['add_Landmark'] ?? '') . "\n" .
-                                            ($details['add_City'] ?? '') . ', ' .
-                                            ($details['add_State'] ?? '') . "\n" .
-                                            ($details['add_Pincode'] ?? '') . "\n" .
-                                            ($details['add_Phone'] ?? '')
-                                        ) ?></textarea>
-                                    </div>
+										<div class="mb-3 row">
+											<label class="col-sm-5 col-form-label fw-bold">Full Name</label>
+											<div class="col-sm-7 pt-1"><?= esc($details['add_Name'] ?? '') ?></div>
+										</div>
+										<div class="mb-3 row">
+											<label class="col-sm-5 col-form-label fw-bold">Place</label>
+											<div class="col-sm-7 pt-1"><?= esc($details['add_City'] ?? '') ?></div>
+										</div>
+										<div class="mb-3 row">
+											<label class="col-sm-5 col-form-label fw-bold">Email</label>
+											<div class="col-sm-7 pt-1"><?= esc($details['add_Email'] ?? '') ?></div>
+										</div>
+										<div class="mb-3 row">
+											<label class="col-sm-5 col-form-label fw-bold">Contact No.</label>
+											<div class="col-sm-7 pt-1"><?= esc($details['add_Phone'] ?? '') ?></div>
+										</div>
+										<div class="mb-3 row">
+											<label class="col-sm-5 col-form-label fw-bold">Delivery Address</label>
+											<div class="col-sm-3 pt-1">
+												<?= esc(
+													($details['add_BuldingNo'] ?? '') . ', ' .
+													($details['add_Street'] ?? '') . "\n" .
+													($details['add_Landmark'] ?? '') . "\n" .
+													($details['add_City'] ?? '') . ', ' .
+													($details['add_State'] ?? '') . "\n" .
+													($details['add_Pincode'] ?? '') . "\n" .
+													($details['add_Phone'] ?? '')
+												) ?>
+											</div>
+										</div>
                                     <div class="mt-4 text-end">
                                         <input type="hidden" name="od_Id" value="<?= esc($details['od_Id'] ?? '') ?>">
                                         <input type="hidden" name="add_Id" id="addressIdHidden" value="<?= esc($details['add_Id'] ?? '') ?>">
@@ -195,6 +194,7 @@
         </div>
     </div>
 </section>
+<div> &nbsp; </div>
 
 <style>
 .accordion-button {

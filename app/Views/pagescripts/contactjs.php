@@ -45,7 +45,7 @@ document.querySelector("#contactForm").addEventListener("submit", function(e) {
 	})
 	.then(response => response.json())
 	.then(data => {
-		if (data.status === 'success') {
+		if (data.status === '1') {
 			form.reset();
 			showMessage(data.message, "success");
 		} else {
@@ -53,15 +53,16 @@ document.querySelector("#contactForm").addEventListener("submit", function(e) {
 		}
 	})
 	.catch(error => {
-		showMessage("Something went wrong.", "danger");
+		showMessage("Something went wrong. Please try again later.", "danger");
 	});
 
-	// === Helper: Show Message and Auto-hide ===
+	// === Helper: Show Message, Scroll to Top, and Auto-hide ===
 	function showMessage(msg, type) {
 		responseDiv.innerHTML = `<div class="alert alert-${type}">${msg}</div>`;
+		window.scrollTo({ top: 0, behavior: "smooth" });
 		setTimeout(() => {
 			responseDiv.innerHTML = "";
-		}, 3000); // 3 seconds
+		}, 5000); // 5 seconds
 	}
 });
 </script>

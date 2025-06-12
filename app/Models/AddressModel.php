@@ -35,12 +35,16 @@ class AddressModel extends Model
     {
         return $this->where('add_Id', $id)->first();
     }
-	public function setDefault($custId, $addressId)
+	public function setDefault($userId, $addressId = 0)
     {
-        $this->where('add_CustId', $custId)->set(['add_Default' => 0])->update();
-        return $this->update($addressId, ['add_Default' => 1]);
+        // Unset all current default addresses
+        $this->where('add_CustId', $userId)->set(['add_Default' => 0])->update();
+
+        // Set specific address as default (if ID given)
+        if ($addressId > 0) {
+            $this->update($addressId, ['add_Default' => 1]);
+        }
     }
-	
 	/* public function insertAndSetDefault($zd_uid, $data)
 {
     // 1. Unset all previous default addresses

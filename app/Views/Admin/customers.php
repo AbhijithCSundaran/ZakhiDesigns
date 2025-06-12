@@ -55,7 +55,7 @@
                                 <div class="card-block">
                                 <div class="card">
                                             <div class="card-block table-border-style">
-											<div id="message" style="display:none;"></div>
+											<div id="message" class="alert" style="display:none;"></div>
 											<div id="messageBox" class="alert" style="display: none;"></div>
                                                 <div class="table-responsive">
                                                     <table class="table table-hover" id="customerList">

@@ -22,7 +22,9 @@
 							<div class="clearfix">&nbsp;</div>
 							<div class="form-group">
 								<label>Contact No.</label>
-								<input type="text" class="form-control" name="contact_no" required>
+								<input type="text" class="form-control" name="contact_no" 
+								id="contact_no" required maxlength="10" inputmode="numeric">
+
 							</div>
 							<div class="clearfix">&nbsp;</div>
 							<div class="form-group">

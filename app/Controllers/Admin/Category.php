@@ -124,8 +124,8 @@ class Category extends BaseController
         $categoryModel =  new \App\Models\Admin\CategoryModel();
         $category = $categoryModel->getCategoryByid($catId);
 
-        $productModel = new \App\Models\Admin\ProductModel();
-	    $product = $productModel->getProductByid($catId);
+        //$productModel = new \App\Models\Admin\ProductModel();
+	    //$product = $productModel->getProductByid($catId);
         
         if (!$category) {
             return $this->response->setJSON([

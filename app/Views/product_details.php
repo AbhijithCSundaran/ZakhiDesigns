@@ -77,7 +77,7 @@ $zd_uid = session()->get('zd_uid');
                                 }
                                 ?>
 								<a href="#reviewsSection">
-									<i class="bi bi-star-fill text-warning"></i>
+									<i class="bi bi text-warning"></i>
 									<?= $total_reviews_count ?> Review<?= $total_reviews_count != 1 ? 's' : '' ?>
 								</a>
                             </div>
@@ -126,9 +126,29 @@ $zd_uid = session()->get('zd_uid');
                         </div>
 
                         <div class="col-md-12 price-block">
-                            <span class="actualprice"><i class="bi bi-currency-rupee"></i><?= esc($product['mrp']); ?></span>
-                            <span class="offerprice"><i class="bi bi-currency-rupee"></i><?= esc($product['pr_Selling_Price']); ?></span>
-                        </div>
+							<?php if (!empty($product['pr_Discount_Value']) && $product['pr_Discount_Value'] > 0): ?>
+								<!-- MRP with strikethrough -->
+								<span class="actualprice text-muted" style="text-decoration: line-through;">
+									<i class="bi bi-currency-rupee"></i><?= esc($product['mrp']); ?>
+								</span>
+
+								<!-- Selling Price -->
+								<span class="offerprice">
+									<i class="bi bi-currency-rupee"></i><?= esc($product['pr_Selling_Price']); ?>
+								</span>
+
+								<!-- Discount Value -->
+								<span class="offer text-success ms-2">
+									<?= esc($product['pr_Discount_Value']); ?><?= esc($product['pr_Discount_Type']); ?> off
+								</span>
+							<?php else: ?>
+								<!-- Only Selling Price if no discount -->
+								<span class="offerprice fw-bold text-danger">
+									<i class="bi bi-currency-rupee"></i><?= esc($product['pr_Selling_Price']); ?>
+								</span>
+							<?php endif; ?>
+						</div>
+
 
                         <?php
 							$resetStock = $product['pr_Reset_Stock'];
@@ -175,37 +195,55 @@ $zd_uid = session()->get('zd_uid');
                         <div class="col-md-12 imp-text"><i class="bi bi-truck"></i> Free Delivery</div>
                         <div class="col-md-12 imp-text"><i class="bi bi-arrow-return-left"></i> 7 Days Replacement</div>
                     </div>
-					<div id="reviewsSection" class="mt-5">
-					 <h4 class="mt-4" style="font-weight:bold;">Customer Ratings and Reviews</h4>
+					
 
-<div class="row">
-    <?php if (!empty($reviews)): ?>
-        <?php foreach ($reviews as $rev): ?>
-            <div class="col-md-6">
- 
-                        <h6 class="card-title mb-1"><?= esc($rev['name']) ?></h6>
-                        <div class="mb-2 text-warning" style="font-size: 1.2em;">
-                            <?= str_repeat('★', (int) $rev['rating']) . str_repeat('☆', 5 - (int) $rev['rating']) ?>
-                        </div>
-                        <p class="card-text"><?= esc($rev['review']) ?></p>
-            
+</div>
+                </div>
+				
+				
+				
             </div>
-			
-        <?php endforeach; ?>
-    <?php else: ?>
-        <div class="col-12">
-            <p class="text-muted">No reviews yet.</p>
         </div>
-    <?php endif; ?>
-</div>
+    </div>
+</section>
 
-</div>
+<section class="hero-banner">
+    <div id="reviewsSection" class="mt-5">
+        <div class="container-lg">
+            <h5>Customer Ratings and Reviews</h5>
+            <div class="row order-box">
+                <div class="col-md-12">
+				<div>&nbsp; </div>
+                    <?php if (!empty($reviews)): ?>
+                        <?php foreach (array_chunk($reviews, 2) as $reviewPair): ?>
+                            <div class="row mb-4">
+                                <?php foreach ($reviewPair as $rev): ?>
+                                    <div class="col-md-6">
+                                     
+                                            <h6 class="card-title mb-1"><?= esc($rev['name']) ?></h6>
+                                            <div class="mb-2 text-warning" style="font-size: 1.2em;">
+                                                <?= str_repeat('★', (int) $rev['rating']) . str_repeat('☆', 5 - (int) $rev['rating']) ?>
+												<span style="font-size:12px; color:#000;">Posted on <?= date('d M Y', strtotime($rev['created_at'])) ?></span>
+
+                                            </div>
+                                            <p class="card-text"><?= esc($rev['review']) ?></p>
+                                       
+                                    </div>
+                                <?php endforeach; ?>
+                            </div>
+                        <?php endforeach; ?>
+                    <?php else: ?>
+                        <div class="col-12">
+                            <p class="text-muted">No reviews yet.</p>
+                        </div>
+                    <?php endif; ?>
                 </div>
             </div>
         </div>
     </div>
 </section>
 
+<div>&nbsp; </div>
 
 
 
@@ -213,45 +251,80 @@ $zd_uid = session()->get('zd_uid');
     <div class="container-lg">
         <div class="col-md-12">
             <div class="row">
-                <h3>Top Products</h3>
+                <h3>Similar Products</h3>
             </div>
             <div class="row mb-4">
-                <div class="owl-carousel" id="top-prod-owl-one">
-                    <?php if (!empty($similar)): ?>
-                        <?php foreach ($similar as $item):
-                            $firstImage = base_url('uploads/productmedia/default.jpg');
-                            if (!empty($item['product_images'])) {
-                                $decoded = json_decode($item['product_images'], true);
-                                if (is_array($decoded) && isset($decoded[0]['name'][0])) {
-                                    $firstImage = base_url('uploads/productmedia/' . $decoded[0]['name'][0]);
+                <?php if (!empty($similar)): ?>
+                    <?php if (count($similar) > 4): ?>
+                        <!-- Use carousel only if more than 4 products -->
+                        <div class="owl-carousel" id="top-prod-owl-one">
+                            <?php foreach ($similar as $item):
+                                $firstImage = base_url('uploads/productmedia/default.jpg');
+                                if (!empty($item['product_images'])) {
+                                    $decoded = json_decode($item['product_images'], true);
+                                    if (is_array($decoded) && isset($decoded[0]['name'][0])) {
+                                        $firstImage = base_url('uploads/productmedia/' . $decoded[0]['name'][0]);
+                                    }
                                 }
-                            }
-                        ?>
-                            <div class="item">
-                                <div class="col-md-12">
-                                    <a href="<?= base_url('product/product_details/' . $item['pr_Id']); ?>">
-                                        <img src="<?= $firstImage ?>" alt="<?= esc($item['pr_Name']); ?>" />
-                                    </a>
+                            ?>
+                                <div class="item">
+                                    <div class="col-md-12">
+                                        <a href="<?= base_url('product/product_details/' . $item['pr_Id']); ?>">
+                                            <img src="<?= $firstImage ?>" alt="<?= esc($item['pr_Name']); ?>" />
+                                        </a>
+                                    </div>
+                                    <div class="star-rate p-1">
+                                        <?php
+                                        $avg = intval($item['avg_rating'] ?? 0);
+                                        for ($i = 1; $i <= 5; $i++):
+                                            echo '<i class="' . ($i <= $avg ? 'bi bi-star-fill gold' : 'bi bi-star') . '"></i>';
+                                        endfor;
+                                        ?>
+                                    </div>
+                                    <div class="item-name p-1"><?= esc($item['pr_Name']); ?></div>
+                                    <div class="item-price"><i class="bi bi-currency-rupee"></i>&nbsp;<?= esc($item['pr_Selling_Price']); ?></div>
+                                    <div class="col-md-12 text-center">
+                                        <button class="order-btn" onclick="window.location.href='<?= base_url('product/product_details/' . $item['pr_Id']); ?>'"></button>
+                                    </div>
                                 </div>
-                                <div class="star-rate p-1">
-                                    <?php
-                                    $avg = intval($item['avg_rating'] ?? 0);
-                                    for ($i = 1; $i <= 5; $i++):
-                                        echo '<i class="' . ($i <= $avg ? 'bi bi-star-fill gold' : 'bi bi-star') . '"></i>';
-                                    endfor;
-                                    ?>
-                                </div>
-                                <div class="item-name p-1"><?= esc($item['pr_Name']); ?></div>
-                                <div class="item-price"><i class="bi bi-currency-rupee"></i>&nbsp;<?= esc($item['pr_Selling_Price']); ?></div>
-                                <div class="col-md-12 text-center">
-                                    <button class="order-btn" onclick="window.location.href='<?= base_url('product/product_details/' . $item['pr_Id']); ?>'"></button>
-                                </div>
-                            </div>
-                        <?php endforeach; ?>
+                            <?php endforeach; ?>
+                        </div>
                     <?php else: ?>
-                        <p>No similar products found.</p>
+                        <!-- Just show items in grid if 4 or fewer -->
+                        <div class="row">
+                            <?php foreach ($similar as $item):
+                                $firstImage = base_url('uploads/productmedia/default.jpg');
+                                if (!empty($item['product_images'])) {
+                                    $decoded = json_decode($item['product_images'], true);
+                                    if (is_array($decoded) && isset($decoded[0]['name'][0])) {
+                                        $firstImage = base_url('uploads/productmedia/' . $decoded[0]['name'][0]);
+                                    }
+                                }
+                            ?>
+                                <div class="col-md-3 mb-3">
+                                    <div class="item text-center">
+                                        <a href="<?= base_url('product/product_details/' . $item['pr_Id']); ?>">
+                                            <img src="<?= $firstImage ?>" alt="<?= esc($item['pr_Name']); ?>" class="img-fluid" />
+                                        </a>
+                                        <div class="star-rate p-1">
+                                            <?php
+                                            $avg = intval($item['avg_rating'] ?? 0);
+                                            for ($i = 1; $i <= 5; $i++):
+                                                echo '<i class="' . ($i <= $avg ? 'bi bi-star-fill gold' : 'bi bi-star') . '"></i>';
+                                            endfor;
+                                            ?>
+                                        </div>
+                                        <div class="item-name p-1"><?= esc($item['pr_Name']); ?></div>
+                                        <div class="item-price"><i class="bi bi-currency-rupee"></i>&nbsp;<?= esc($item['pr_Selling_Price']); ?></div>
+                                        <button class="order-btn" onclick="window.location.href='<?= base_url('product/product_details/' . $item['pr_Id']); ?>'"></button>
+                                    </div>
+                                </div>
+                            <?php endforeach; ?>
+                        </div>
                     <?php endif; ?>
-                </div>
+                <?php else: ?>
+                    <p>No similar products found.</p>
+                <?php endif; ?>
             </div>
         </div>
     </div>

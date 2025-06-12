@@ -170,8 +170,6 @@ class Product extends BaseController
     // Product save
     public function saveProduct()
     {
-        // print_r('hai');
-        //exit; 
         $pr_id = $this->input->getPost('pr_id');
         $sub_id = $this->input->getPost('sub_id');
         $cat_id = $this->input->getPost('cat_id');
@@ -208,7 +206,6 @@ class Product extends BaseController
                     $DisCountFrom = 2;
                 }
             }
-
             if (!$sub_DiscountExist) {
                 $category = $this->productModel->isDiscountInCat($cat_id);
 
@@ -241,7 +238,6 @@ class Product extends BaseController
                 'message' => 'All required fields must be filled.'
             ]);
         }
-
 
         $exists = $this->productModel->isProductExists($product_name, $pr_id);
         if ($exists) {
@@ -308,7 +304,6 @@ class Product extends BaseController
             }
         }
     }
-
     //Media upload
     public function uploadMedia()
     {
@@ -326,55 +321,9 @@ class Product extends BaseController
                 }
             }
 
-   
-    $exists = $this->productModel->isProductExists($product_name, $pr_id);
-    if ($exists) {
-        return $this->response->setJSON([
-            'status' => 'error',
-            'field' => 'product_name',
-            'message' => 'Product name already exists.'
-        ]);
-    }
-	
+            $productModel = new \App\Models\Admin\ProductModel();
 
-		$exists = $this->productModel->isProductCodeExists($product_code, $pr_id);
-
-		if ($exists) {
-			return $this->response->setJSON([
-				'status' => 'error',
-				'field' => 'pr_Code',
-				'message' => 'Product code already exists.'
-			]);
-		}
-		
-    $data = [
-        'pr_Name' => $product_name,
-        'pr_Code' => $product_code,
-        'pr_Description' => $product_description,
-        'mrp' => $mrp,
-        'pr_Selling_Price' => $selling_price,
-        'pr_Discount_Value' => $discount_value,
-        'pr_Discount_Type' => $discount_type,
-        'cat_Id' => $cat_id,
-        'sub_Id' => $sub_id,
-        'pr_Stock' => $product_stock,
-        'pr_Reset_Stock' => $reset_stock,
-        'pr_Aval_Colors' => $available_color,
-        'pr_Size' => is_array($size) ? implode(',', $size) : '',
-        'pr_Sleeve_Style' => $sleeve_style,
-        'pr_Fabric' => $fabric,
-        'pr_Stitch_Type' => $stitching,
-        'pr_Status' => 1,
-        'pr_modifyby' => $this->session->get('ad_uid'),
-        'pr_modifyon' => date("Y-m-d H:i:s"),
-    ];
-
-    if (empty($pr_id)) {
-        // Insert new product
-        $data['pr_createdon'] = date("Y-m-d H:i:s");
-        $data['pr_createdby'] = $this->session->get('ad_uid');
-
-        $this->productModel->productInsert($data);
+            $existingMediaJson = $productModel->getProductImages($productId);
 
 
             $existingMedia = json_decode($existingMediaJson, true);

@@ -250,6 +250,7 @@
                                                     <i class="bi bi-check-circle"></i>
                                                     <?= isset($product) ? 'Update' : 'Save'; ?>
                                                 </button>
+
                                             </div>
                                         </div>
                                     </form>

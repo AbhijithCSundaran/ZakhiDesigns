@@ -169,11 +169,11 @@
                               </a>
                               <ul class="show-notification profile-notification">
                                 
-                                  <li class="waves-effect waves-light">
+                                  <!-- <li class="waves-effect waves-light">
                                       <a href="<?php echo base_url('admin') ?>">
                                           <i class="ti-user"></i> Profile
                                       </a>
-                                  </li>
+                                  </li> -->
                                   <li class="waves-effect waves-light">
                                       <a href="#" data-toggle="modal" data-target="#logoutModal">
                                           <i class="ti-layout-sidebar-left"></i> Logout

@@ -99,7 +99,8 @@
                     <form class="md-float-material form-material" id="form-id" name="form-id" autocomplete="off">
 					
                         <div class="text-center">
-                            <img src="<?php echo base_url().ASSET_PATH; ?>Admin/assets/images/logo.png" alt="logo.png">
+                            <!-- <img src="<?php echo base_url().ASSET_PATH; ?>Admin/assets/images/logo.png" alt="logo.png"> -->
+                           <h5 class="text-white">Zakhi Designs</h5>
                         </div>
                         <div class="auth-box card">
                             <div class="card-block">
@@ -122,7 +123,7 @@
 											<label class="float-label">Password</label>
 											
 											<!-- Eye icon positioned inside input -->
-											<i class="fa-solid fa-eye toggle-password" id="togglePassword" 
+											<i class="fa-solid fa-eye-slash toggle-password" id="togglePassword" 
 											   style="position: absolute; top: 50%; right: 15px; transform: translateY(-50%); cursor: pointer;"></i>
 										</div>
 									</div>
@@ -206,12 +207,12 @@ document.getElementById('togglePassword').addEventListener('click', function () 
 
     if (passwordInput.type === 'password') {
         passwordInput.type = 'text';
-        icon.classList.remove('fa-eye');
-        icon.classList.add('fa-eye-slash');
-    } else {
-        passwordInput.type = 'password';
         icon.classList.remove('fa-eye-slash');
         icon.classList.add('fa-eye');
+    } else {
+        passwordInput.type = 'password';
+        icon.classList.remove('fa-eye');
+        icon.classList.add('fa-eye-slash');
     }
 });
 </script>

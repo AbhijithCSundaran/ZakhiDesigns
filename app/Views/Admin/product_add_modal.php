@@ -28,7 +28,7 @@
                                     onchange="handleFiles(this.files)">
                                     
                             </div>
-                             <span class="text-warning" style="font-size:14px;">Only 265×356 pixel images are accepted</span>
+                             <span class="text-warning" style="font-size:14px;">Only images with width between 300–500 px and height between 400–600 px are allowed.</span>
                         </div>
                     </div>
 

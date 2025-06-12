@@ -64,7 +64,7 @@ class SubcategoryModel extends Model
         return $this->db->query("select * from subcategory where sub_Id = '" . $subId . "' ")->getRow();
     }
 
-    public function updateSubCategory($subId, $data)
+   public function updateSubCategory($subId, $data)
     {
         $this->db->table('subcategory')
             ->where('sub_Id', $subId)
@@ -73,7 +73,7 @@ class SubcategoryModel extends Model
         $subcategory = $this->db->table('subcategory')
             ->select('sub_Discount_Value, sub_Discount_Type')
             ->where('sub_Id', $subId)
-            //->where('sub_Status', 1)
+            ->where('sub_Status', 1)
             ->get()
             ->getRow();
 
@@ -110,6 +110,7 @@ class SubcategoryModel extends Model
                     ->update([
                         'pr_Selling_Price' => $sub_selling_price,
                         'pr_Discount_Value' => $sub_Discount_Value,
+					    'pr_Discount_Type' => $sub_Discount_Type,
                         'discount_from' => "2",
                         'pr_modifyon' => date('Y-m-d H:i:s')
                     ]);
@@ -135,6 +136,7 @@ class SubcategoryModel extends Model
                         ->update([
                             'pr_Selling_Price' => $cat_selling_price,
                             'pr_Discount_Value' => $cat_Discount_Value,
+					        'pr_Discount_Type' => $cat_Discount_Type,
                             'discount_from' => "3",
                             'pr_modifyon' => date('Y-m-d H:i:s')
                         ]);
@@ -155,6 +157,7 @@ class SubcategoryModel extends Model
         }
         return true;
     }
+
 
  public function deleteSubcategoryById($sub_id, $modified_by)
     {

@@ -46,14 +46,15 @@ public function updateCategory($catId, $data)
     $category = $this->db->table('category')
         ->select('cat_Discount_Value, cat_Discount_Type')
         ->where('cat_Id', $catId)
-		//->where('cat_Status', 1)
+		->where('cat_Status', 1)
         ->get()
         ->getRow();
 
     if (!$category) {
         return false;
     }
-$cat_Discount_Value = $category->cat_Discount_Value;
+
+    $cat_Discount_Value = $category->cat_Discount_Value;
     $cat_Discount_Type = $category->cat_Discount_Type;
 
 	 $products = $this->db->table('product')
@@ -85,6 +86,7 @@ $cat_Discount_Value = $category->cat_Discount_Value;
 				->update([
 					'pr_Selling_Price' => $cat_selling_price,
 					'pr_Discount_Value' => $cat_Discount_Value,
+					'pr_Discount_Type' => $cat_Discount_Type,
 					'discount_from' => "3",
 					'pr_modifyon' => date('Y-m-d H:i:s')
 				]);

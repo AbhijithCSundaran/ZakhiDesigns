@@ -4,7 +4,7 @@
     </div>
     <h5 class="text-center">Login</h5>
 </div>
-<div id="loginError" class="text-danger text-center"></div>
+<div id="loginError" class="text-danger text-center" style="padding:6px;"></div>
 <form id="loginForm" method="post">
     <div class="floating-label-group">
         <input type="email" class="form-control" id="email" name="cust_Email" placeholder=" " required />

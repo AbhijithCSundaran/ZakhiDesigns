@@ -64,7 +64,7 @@
 
 										<!-- Accordion Section -->
 										<div class="form-group row">
-											<label class="col-sm-3 col-form-label">Theme Sections</label>
+											<label class="col-sm-3 col-form-label">Theme Sections<span style="color: red;">*</span></label>
 											<div class="col-sm-7">
 												<div class="accordion" id="themeAccordion">
 													<!-- Section 1 -->
@@ -138,7 +138,7 @@
 															<div class="card-header p-2">
 																<button class="btn btn-link p-0" style ="text-decoration:none!important;
 														color:#000!important;" type="button" data-toggle="collapse" data-target="#sectionTwo">
-																	Carousel Images and Links
+																	Banner Images and Links
 																</button>
 															</div>
 															<div id="sectionTwo" class="collapse" data-parent="#themeAccordion">

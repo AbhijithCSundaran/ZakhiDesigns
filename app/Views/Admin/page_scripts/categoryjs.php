@@ -1,17 +1,4 @@
 <script>
-//Data table
-/*$(document).ready(function() {
-    $('#categoryList').DataTable({
-        "processing": true,
-        "serverSide": false,
-        "searching": true,
-        "paging": true,
-        "ordering": true,
-        "info": true,
-
-    });
-});*/
-
 $(document).ready(function () {
     var baseUrl = "<?= base_url() ?>";
     var csrfToken = "<?= csrf_token() ?>";

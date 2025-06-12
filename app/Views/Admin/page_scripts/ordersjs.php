@@ -1,7 +1,7 @@
 <!-- Add a custom search input bar -->
-<div style="margin-bottom: 10px;">
+<!-- <div style="margin-bottom: 10px;">
     <input type="text" id="customSearchBox" placeholder="Search Orders..." class="form-control" style="width: 300px;" />
-</div>
+</div> -->
 
 <script>
 var baseUrl = "<?= base_url() ?>";
@@ -12,6 +12,9 @@ var table = $('#orderList').DataTable({
     processing: true,
     serverSide: true,
     scrollX: true,
+   // paging: true,
+   // pageLength: 10, 
+   // lengthMenu: [10, 25, 50, 100], 
     ajax: {
         url: baseUrl + "admin/orders/List",  
         type: "POST",
@@ -38,9 +41,11 @@ var table = $('#orderList').DataTable({
         { data: 'actions' }
     ]
 });
-
+// table.on('draw', function () {
+//     console.log('Table redrawn');
+// });
 // Bind custom search box
-$('#customSearchBox').on('keyup', function () {
-    table.search(this.value).draw();
-});
+// $('#customSearchBox').on('keyup', function () {
+//     table.search(this.value).draw();
+// });
 </script>

@@ -146,7 +146,7 @@ public function save_file()
             'status' => 0,
             'msg' => 'Mandatory Fields are Required.'
         ]);
-    }
+    }   
 
     // Validate theme_name - only letters and spaces
     if (!preg_match('/^[a-zA-Z\s]+$/', $mainData['theme_name'])) {
@@ -260,41 +260,66 @@ public function save_file()
         'theme_modifyby'    => $this->session->get('ad_uid'),
         'theme_modifyon'    => date('Y-m-d H:i:s'),
     ];
+$themeSection1 = json_decode($mainData['theme_Section1'], true);
+$themeSection2 = json_decode($mainData['theme_Section2'], true);
+$themeSection3 = json_decode($mainData['theme_Section3'], true);
 
-    if (empty($theme_id)) {
-        // Insert new
-        $data['theme_createdon'] = date('Y-m-d H:i:s');
-        $data['theme_createdby'] = $this->session->get('ad_uid');
-        $this->theme_Model->insert_data($data);
 
-        // Get last inserted ID
-        $themeId = $this->theme_Model->insertID();
-
-        // Deactivate others
-        $this->theme_Model->deactivateAllThemesExcept($themeId);
-
+if (empty($theme_id)) {
+    
+    if (empty($themeSection1[0]['image']) || empty($themeSection2[0]['image']) || empty($themeSection3[0]['image'])) {
         return $this->response->setJSON([
-            'status' => 1,
-            'msg' => 'Theme created successfully.'
-        ]);
-    } else {
-        // Update existing
-        $existing = $theme_Model->getThemeByid($theme_id);
-        if (!$existing) {
-            return $this->response->setJSON(['status' => 0, 'msg' => 'Theme not found.']);
-        }
-
-        $theme_Model->modifyThemes($theme_id, $data);
-        $theme_Model->deactivateAllThemesExcept($theme_id);
-
-        return $this->response->setJSON([
-            'status' => 1,
-            'msg'   => 'Theme updated successfully.',
-            'redirect' => base_url('admin/themes')
+            'status' => 0,
+            'msg' => 'Mandatory Fields are Required.'
         ]);
     }
-}
+    $section2ImageCount = 0;
+    if(!empty($themeSection2[0]['image'])){
+        foreach ($themeSection2 as $item) {
+        if (!empty($item['image'])) {
+            $section2ImageCount++;
+        }
+    }
+    }
 
+    if ($section2ImageCount < 3) {
+        return $this->response->setJSON([
+            'status' => 0,
+            'msg' => 'Atleast Three Banner Images Required .'
+        ]);
+    }
+
+    $data['theme_createdon'] = date('Y-m-d H:i:s');
+    $data['theme_createdby'] = $this->session->get('ad_uid');
+    $this->theme_Model->insert_data($data);
+
+    $themeId = $this->theme_Model->insertID();
+    $this->theme_Model->deactivateAllThemesExcept($themeId);
+
+    return $this->response->setJSON([
+        'status' => 1,
+        'msg' => 'Theme created successfully.'
+    ]);
+} else {
+    // Update existing
+    $existing = $this->theme_Model->getThemeByid($theme_id);
+    if (!$existing) {
+        return $this->response->setJSON([
+            'status' => 0,
+            'msg' => 'Theme not found.'
+        ]);
+    }
+
+    $this->theme_Model->modifyThemes($theme_id, $data);
+    $this->theme_Model->deactivateAllThemesExcept($theme_id);
+
+    return $this->response->setJSON([
+        'status' => 1,
+        'msg' => 'Theme updated successfully.',
+        'redirect' => base_url('admin/themes')
+    ]);
+}
+}
 /***************************************************************************************************/
 
 	public function ajaxList()

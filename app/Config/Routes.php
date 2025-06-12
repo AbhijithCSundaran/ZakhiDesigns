@@ -14,11 +14,24 @@ $routes->get('webreg', 'Weblogin::webReg');
 $routes->post('customerauth', 'Weblogin::customerAuthen');
 $routes->get('logout', 'Weblogin::logout');
 
+
+
+
+
+
+// testing
+
+
+$routes->get('OrderNow', 'OrderNow::index');
+$routes->get('OrderNow/index', 'OrderNow::index');
+$routes->post('OrderNow/saveNewAddress', 'OrderNow::saveNewAddress');
+$routes->post('OrderNow/submitfrm', 'OrderNow::submitfrm');
+
 // ordernow user
-$routes->get('ordernow', 'OrderNow::index');
+//$routes->get('ordernow', 'OrderNow::index');
 $routes->get('ordernow/product/(:any)', 'OrderNow::orderproduct/$1');
-$routes->post('ordernow/submit', 'OrderNow::submit');
-$routes->post('ordernow/saveAddress', 'OrderNow::saveNewAddress');
+//$routes->post('ordernow/submit', 'OrderNow::submit');
+//$routes->post('ordernow/saveAddress', 'OrderNow::saveNewAddress');
 $routes->get('ordernow/getAddress/(:num)', 'OrderNow::getAddress/$1');
 
 //$routes->get('ordernow/product/(:any)&(:any)','OrderNow::orderproduct/$1/$2');

@@ -459,38 +459,6 @@ function handleFiles(files) {
         });
     });
 
-/**********************************STOCK UPDATION*******************************************/
-$('#updateSubmit').click(function(e) {
-    e.preventDefault();
-
-    var pr_Id = $('#pr_Id').val(); // Get product ID from hidden field
-    var url = baseUrl + "admin/update_stock_value/" + pr_Id;
-
-    $.post(url, $('#updateStockForm').serialize(), function(response) {
-        if (response.status == 1) {
-            $('#messageBox')
-                .removeClass('alert-danger')
-                .addClass('alert-success')
-                .text(response.msg || 'Stock Updated Successfully!')
-                .show();
-
-            setTimeout(function () {
-                window.location.href = baseUrl + "admin/product/edit/" + response.pr_Id;
-            }, 3000);
-        } else {
-            $('#messageBox')
-                .removeClass('alert-success')
-                .addClass('alert-danger')
-                .text(response.msg || 'Please fill all the data')
-                .show();
-        }
-
-        setTimeout(function () {
-            $('#messageBox').empty().hide();
-        }, 3000);
-    }, 'json');
-});
-/*****************************************************************************/
 
     //Load video on modal
     function openvideoModal(productId, productName) {

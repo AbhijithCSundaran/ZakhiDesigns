@@ -204,6 +204,18 @@ $('#changePasswordForm').on('submit', function(e) {
         return;
     }
 
+    // Minimum password length check
+    if (newPassword.length < 5) {
+        messageBox
+            .removeClass('alert-success alert-danger')
+            .addClass('alert alert-danger')
+            .html('New Password must be at least 5 characters long!')
+            .fadeIn();
+
+        setTimeout(() => messageBox.fadeOut(), 4000);
+        return;
+    }
+
     if (newPassword !== confirmPassword) {
         messageBox
             .removeClass('alert-success alert-danger')
@@ -232,6 +244,7 @@ $('#changePasswordForm').on('submit', function(e) {
         }
     }, 'json');
 });
+
 
 
 </script>

@@ -27,7 +27,7 @@ $(document).ready(function () {
                     <p><strong>Product Name:</strong> ${order.pr_Name}</p>
                     <p><strong>Description:</strong> ${order.pr_Description}</p>
                     <p><strong>Quantity:</strong> ${order.od_Quantity}</p>
-                    <p><strong>Order Updated On:</strong> ${new Date(order.od_modifyon).toLocaleString()}</p>
+                   
                     <p><strong>Ordered On:</strong> ${new Date(order.od_createdon).toLocaleString()}</p>
                     <p><strong>Original Price:</strong> ${order.od_Original_Price}</p>
                     <p><strong>Selling Price:</strong> ${order.od_Selling_Price}</p>

@@ -1,13 +1,13 @@
 <!-- pagescripts/OrderNowjs.php -->
 <script>
 $(function() {
-    // Save new address and then confirm order
     $('#newAddressForm').on('submit', function(e) {
         e.preventDefault();
         $.ajax({
             url: "<?= base_url('OrderNow/saveNewAddress') ?>",
             type: "POST",
             data: $(this).serialize(),
+            dataType: "json",
             success: function(res) {
                 if (res.success) {
                     $('input[name="address_id"]').prop('checked', false);
@@ -17,16 +17,32 @@ $(function() {
                         value: res.insertId,
                         checked: true
                     }).appendTo('body').hide();
-                    alert(res.message);
+
+                    // ✅ Show success message
+                    $('#messageBox').html('<div class="alert alert-success">' + res.message + '</div>').fadeIn().delay(5000).fadeOut();
+
                 } else {
-                    alert(res.message);
+                    // ❌ Show error message
+                    $('#messageBox').html('<div class="alert alert-danger">' + res.message + '</div>').fadeIn().delay(5000).fadeOut();
                 }
+
+                // ⬆️ Scroll to messageBox
+                $('html, body').animate({
+                    scrollTop: $('#messageBox').offset().top - 100
+                }, 'slow');
             },
             error: function() {
-                alert('Failed to save address.');
+                $('#messageBox').html('<div class="alert alert-danger">Failed to save address.</div>').fadeIn().delay(5000).fadeOut();
+
+                // ⬆️ Scroll to messageBox on error
+                $('html, body').animate({
+                    scrollTop: $('#messageBox').offset().top - 100
+                }, 'slow');
             }
         });
     });
+});
+
 
     // Final Order Submit
     $('#confirmOrderBtn').on('click', function() {
@@ -35,6 +51,8 @@ $(function() {
 
        if (!add_Id) {
         $('#messageBox').html('<div class="alert alert-warning">Please select or add an address.</div>').fadeIn().delay(5000).fadeOut();
+        
+         $('html, body').animate({ scrollTop: $('#messageBox').offset().top - 100 }, 'fast');
         return;
     }
 

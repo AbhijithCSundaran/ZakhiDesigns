@@ -29,9 +29,13 @@
                         <?php foreach ($addresses as $address): ?>
                             <div class="form-check mb-2">
                                 <input class="form-check-input" type="radio" name="address_id" value="<?= $address['add_Id'] ?>" <?= $address['add_Default'] ? 'checked' : '' ?>>
-                                <label class="form-check-label">
+                               <label class="form-check-label">
                                     <?= esc($address['add_Name']) ?> - <?= esc($address['add_Phone']) ?><br>
-                                    <?= esc($address['add_BuldingNo'] . ', ' . $address['add_Street'] . ', ' . $address['add_City']) ?>
+                                    <?= esc($address['add_BuldingNo']) ?>,
+                                    <?= esc($address['add_Street']) ?>,
+                                    <?= esc($address['add_Landmark']) ?>,<br>
+                                    <?= esc($address['add_City']) ?> - <?= esc($address['add_Pincode']) ?><br>
+                                    <?= esc($address['add_State']) ?>
                                 </label>
                             </div>
                         <?php endforeach; ?>

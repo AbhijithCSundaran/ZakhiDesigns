@@ -197,15 +197,25 @@ class Product extends BaseController
                 'message' => 'All required fields must be filled.'
             ]);
         }
+// Check if product name already exists (excluding current ID)
+if ($this->productModel->isProductExists($product_name, $pr_id)) {
+    return $this->response->setJSON([
+        'status' => 'error',
+        'field'  => 'product_name',
+        'message' => 'Product name already exists.'
+    ]);
+}
 
-        $exists = $this->productModel->isProductExists($product_name, $pr_id);
-        if ($exists) {
-            return $this->response->setJSON([
-                'status' => 'error',
-                'field' => 'product_name',
-                'message' => 'Product name already exists.'
-            ]);
-        }
+// Check if product code already exists (excluding current ID)
+if ($this->productModel->isProductCodeExists($product_code, $pr_id)) {
+    return $this->response->setJSON([
+        'status' => 'error',
+        'field'  => 'pr_Code',
+        'message' => 'Product code already exists.'
+    ]);
+}
+
+        
         if (($discount_type == "%" && $discount_value > 100) || ($discount_type == "Rs" && $discount_value >= $mrp) || ($discount_value >= $mrp) ) {
             return $this->response->setJSON([
                 'status' => 'error',

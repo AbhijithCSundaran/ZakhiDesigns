@@ -53,7 +53,7 @@
                             <div class="cat-dropdown">
                                 <?php if (!empty($categories)): ?>
                                 <?php foreach ($categories as $category): ?>
-                                <div class="cat-item">
+                                <div class="cat-item position-relative">
                                     <a href="<?= base_url('product/product_list/category/' . $category['cat_Id']) ?>">
                                         <?= esc($category['cat_Name']) ?>
                                     </a>

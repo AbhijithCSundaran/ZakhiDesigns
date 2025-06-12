@@ -65,7 +65,8 @@ class StaffModel extends Model {
 		$builder->select('u.*');
 		
 		// Only fetch rows of active staffs
-		$builder->where('u.us_Status !=', 3);
+		$builder->where('u.us_Status !=', 3)
+        ->where('u.us_Role !=', 1);
 
 		// Add search logic if required
 		$postData = service('request')->getPost();

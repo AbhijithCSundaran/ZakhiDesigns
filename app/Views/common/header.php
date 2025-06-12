@@ -17,7 +17,7 @@
         href="<?= base_url() . ASSET_PATH; ?>assets/vendors/owlcarousel/assets/owl.theme.default.min.css">
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
 
 
@@ -48,61 +48,64 @@
                         <a href="<?= base_url(); ?>" class="active">Home</a>
                         <a href="<?= base_url('aboutus'); ?>">About Us</a>
                         <!-- Fashion dropdown -->
-                        <div class="dropdown-wrapper" style="position: relative; display: inline-block;">
-                            <a  class="dropbtn">Fashion</a>
+                        <div class="dropdown-wrapper a position-relative" >
+                            <span class="dropbtn">Fashion</span>
                             <div class="cat-dropdown">
-								<a href="<?= base_url('product/product_list') ?>">All Products</a>
                                 <?php if (!empty($categories)): ?>
-                                    <?php foreach ($categories as $category): ?>
-                                        <div class="cat-item">
-                                            <a href="<?= base_url('product/product_list/category/' . $category['cat_Id']) ?>">
-                                                <?= esc($category['cat_Name']) ?>
-                                            </a>
-                                            <?php if (!empty($category['subcategories'])): ?>
-                                                <div class="sub-dropdown">
-                                                    <?php foreach ($category['subcategories'] as $sub): ?>
-                                                        <a href="<?= base_url('product/product_list/subcategory/' . $sub['sub_Id']) ?>">
-                                                            <?= esc($sub['sub_Category_Name']) ?>
-                                                        </a>
-                                                    <?php endforeach; ?>
-                                                </div>
-                                            <?php endif; ?>
-                                        </div>
-                                    <?php endforeach; ?>
+                                <?php foreach ($categories as $category): ?>
+                                <div class="cat-item">
+                                    <a href="<?= base_url('product/product_list/category/' . $category['cat_Id']) ?>">
+                                        <?= esc($category['cat_Name']) ?>
+                                    </a>
+
+                                    <?php if (!empty($category['subcategories'])): ?>
+                                    <div class="sub-dropdown">
+                                        <?php foreach ($category['subcategories'] as $sub): ?>
+                                        <a href="<?= base_url('product/product_list/subcategory/' . $sub['sub_Id']) ?>">
+                                            <?= esc($sub['sub_Category_Name']) ?>
+                                        </a>
+                                        <?php endforeach; ?>
+                                    </div>
+                                    <?php endif; ?>
+                                </div>
+
+                                <?php endforeach; ?>
                                 <?php endif; ?>
+                                <div class="cat-item">
+                                    <a href="<?= base_url('product/product_list') ?>">All Products</a>
+                                </div>
                             </div>
                         </div>
                         <a href="<?= base_url('contact'); ?>">Contact</a>
 
                         <?php if (session()->get('zd_uname')): ?>
-                            <div class="dropdown">
-                                <a class="btn dropdown-toggle drop-menu" href="#" role="button" id="customerDropdown"
-                                    data-bs-toggle="dropdown" aria-expanded="false">
-                                    <?= session()->get('zd_uname'); ?>
-                                </a>
-                                <ul class="dropdown-menu" aria-labelledby="customerDropdown">
-                                    <li><a class="dropdown-item" href="<?= base_url('profile#profile'); ?>"><i
-                                                class="bi bi-person-circle"></i> My Profile</a></li>
-                                    <li><a class="dropdown-item" href="<?= base_url('logout') ?>"><i
-                                                class="bi bi-escape"></i> Logout</a></li>
-                                </ul>
+                        <div class="dropdown a">
+                            <div class="dropdown-toggle drop-menu p-0" href="#" role="button" id="customerDropdown"
+                                data-bs-toggle="dropdown" aria-expanded="false">
+                                <?= session()->get('zd_uname'); ?>
                             </div>
+                            <ul class="dropdown-menu" aria-labelledby="customerDropdown">
+                                <li><a class="dropdown-item" href="<?= base_url('profile#profile'); ?>"><i
+                                            class="bi bi-person-circle"></i> My Profile</a></li>
+                                <li><a class="dropdown-item" href="<?= base_url('logout') ?>"><i
+                                            class="bi bi-escape"></i> Logout</a></li>
+                            </ul>
+                        </div>
 
 
                         <?php else: ?>
-                            <!-- Show login/register links if not logged in -->
-                            <a href="#" id="loginBtn">Login</a>
-                            <a href="#" id="registerBtn">Register</a>
+                        <a href="#" id="loginBtn">Login</a>
+                        <a href="#" id="registerBtn">Register</a>
                         <?php endif; ?>
 
-                        <div class="searchbox">
+                        <a href="javascript:void(0);" class="searchbox">
                             <input type="text" name="keyword" id="search" placeholder="Search products"
                                 autocomplete="off" value="<?= esc($search ?? '') ?>" style="padding:5px;"
                                 onkeydown="checkEnter(event)" />
                             <a href="javascript:void(0);" onclick="searchProduct()">
                                 <i class="bi bi-search"></i>
                             </a>
-                        </div>
+                        </a>
                         <a href="javascript:void(0);" class="icon" onclick="openRespMenu()">
                             <i class="bi bi-list"></i>
                         </a>
@@ -127,33 +130,33 @@
     </div>
 
     <script>
-        function searchProduct() {
-            const keyword = document.getElementById('search').value.trim();
-            if (keyword !== '') {
-                window.location.href = "<?= base_url('product/search') ?>?keyword=" + encodeURIComponent(keyword);
-            }
+    function searchProduct() {
+        const keyword = document.getElementById('search').value.trim();
+        if (keyword !== '') {
+            window.location.href = "<?= base_url('product/search') ?>?keyword=" + encodeURIComponent(keyword);
         }
+    }
 
-        function checkEnter(event) {
-            if (event.key === 'Enter') {
-                event.preventDefault(); // Optional
-                searchProduct();
-            }
+    function checkEnter(event) {
+        if (event.key === 'Enter') {
+            event.preventDefault(); // Optional
+            searchProduct();
         }
+    }
 
 
 
-        document.addEventListener('DOMContentLoaded', function () {
-            const fashionMenu = document.querySelector('.fashion-menu');
-            if (!fashionMenu) return;
+    document.addEventListener('DOMContentLoaded', function() {
+        const fashionMenu = document.querySelector('.fashion-menu');
+        if (!fashionMenu) return;
 
-            const catDropdown = fashionMenu.querySelector('.cat-dropdown');
+        const catDropdown = fashionMenu.querySelector('.cat-dropdown');
 
-            fashionMenu.addEventListener('mouseenter', () => {
-                if (catDropdown) catDropdown.style.display = 'block';
-            });
-            fashionMenu.addEventListener('mouseleave', () => {
-                if (catDropdown) catDropdown.style.display = 'none';
-            });
+        fashionMenu.addEventListener('mouseenter', () => {
+            if (catDropdown) catDropdown.style.display = 'block';
         });
+        fashionMenu.addEventListener('mouseleave', () => {
+            if (catDropdown) catDropdown.style.display = 'none';
+        });
+    });
     </script>

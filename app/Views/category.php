@@ -29,7 +29,7 @@
                     foreach ($section2 as $index => $item):
                         if (!empty($item['image'])):
                             $imagePath = base_url('public/uploads/themes/' . $item['image']);
-                            $title = !empty($item['name']) ? $item['name'] : 'Category';
+                            $title = !empty($item['name']) ? $item['name'] : '';
                             $link = !empty($item['link']) ? $item['link'] : '#';
                 ?>
                 <div class="col-md-4 section2-item" data-index="<?= $index ?>" style="<?= $index >= 3 ? 'display:none;' : '' ?>">

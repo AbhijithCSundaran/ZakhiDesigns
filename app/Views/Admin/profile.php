@@ -9,10 +9,10 @@
                         <p class="m-b-0">Welcome to Zakhi Designs</p>
                     </div>
                 </div>
-                <div class="col-md-4" style="display: none;">
+                <div class="col-md-4" >
                     <ul class="breadcrumb-title">
                         <li class="breadcrumb-item">
-                            <a href="<?= base_url('admin/profile'); ?>"> <i class="fa fa-home"></i> </a>
+                            <a href="<?= base_url('admin/dashboard'); ?>"> <i class="fa fa-home"></i> </a>
                         </li>
                         <li class="breadcrumb-item"><a href="#">Profile</a></li>
                     </ul>

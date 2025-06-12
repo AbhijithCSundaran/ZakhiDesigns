@@ -113,6 +113,7 @@ public function updateCategory($catId, $data)
 		{
 			$subcategory = $this->db->table('subcategory')
 									->where('cat_Id ' , $cat_id)
+									->where('sub_Status !=', 3)
 									->select('sub_Id ')
 									->get()
 									->getResult();

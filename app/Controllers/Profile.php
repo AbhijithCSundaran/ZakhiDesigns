@@ -108,7 +108,7 @@ class Profile extends BaseController
     public function addAddress() {
         $addressModel = new AddressProfileModel();
         $addressModel->addAddress(session()->get('zd_uid'), $this->request->getPost());
-        return $this->response->setJSON(['status' => 'added']);
+        return $this->response->setJSON(['status' => 'success']);
     }
 	public function editAddress() {
 		$addressModel = new AddressProfileModel();

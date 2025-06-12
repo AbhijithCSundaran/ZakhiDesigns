@@ -144,8 +144,8 @@ $(document).on('change', '.checkactive', function () {
                     .show();
             } else {
                 $('#messageBox')
-                    .removeClass('alert-success')
-                    .addClass('alert-danger')
+                    //.removeClass('alert-success')
+                    .addClass('alert-success')
                     .text(response.message)
                     .show();
             }

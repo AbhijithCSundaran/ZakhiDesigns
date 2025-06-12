@@ -267,8 +267,8 @@ $zd_uid = session()->get('zd_uid');
                                     }
                                 }
                             ?>
-                                <div class="item">
-                                    <div class="col-md-12">
+                                <div class="item d-flex flex-column align-center h-100">
+                                    <div class="col-md-12 m-auto">
                                         <a href="<?= base_url('product/product_details/' . $item['pr_Id']); ?>">
                                             <img src="<?= $firstImage ?>" alt="<?= esc($item['pr_Name']); ?>" />
                                         </a>
@@ -302,8 +302,8 @@ $zd_uid = session()->get('zd_uid');
                                 }
                             ?>
                                 <div class="col-md-3 mb-3">
-                                    <div class="item text-center">
-                                        <a href="<?= base_url('product/product_details/' . $item['pr_Id']); ?>">
+                                    <div class="item d-flex flex-column align-center h-100">
+                                        <a class="m-auto" href="<?= base_url('product/product_details/' . $item['pr_Id']); ?>">
                                             <img src="<?= $firstImage ?>" alt="<?= esc($item['pr_Name']); ?>" class="img-fluid" />
                                         </a>
                                         <div class="star-rate p-1">
@@ -316,7 +316,7 @@ $zd_uid = session()->get('zd_uid');
                                         </div>
                                         <div class="item-name p-1"><?= esc($item['pr_Name']); ?></div>
                                         <div class="item-price"><i class="bi bi-currency-rupee"></i>&nbsp;<?= esc($item['pr_Selling_Price']); ?></div>
-                                        <button class="order-btn" onclick="window.location.href='<?= base_url('product/product_details/' . $item['pr_Id']); ?>'"></button>
+                                        <button class="order-btn mx-auto" onclick="window.location.href='<?= base_url('product/product_details/' . $item['pr_Id']); ?>'"></button>
                                     </div>
                                 </div>
                             <?php endforeach; ?>

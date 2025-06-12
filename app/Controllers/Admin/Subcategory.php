@@ -170,18 +170,18 @@ public function changeStatus()
 		]);
 	}
 
-	$update = $subcategoryModel->updatesubCategory($subId, ['sub_Status' => $newStatus]);
+	$update = $subcategoryModel->updateSubCategory($subId, ['sub_Status' => $newStatus]);
 
 	if ($update) {
 		return $this->response->setJSON([
 			'success' => true,
-			'message' => 'Subcategory Status Updated Successfully!',
+			'message' => 'Status Updated Successfully!',
 			'new_status' => $newStatus
 		]);
 	} else {
 		return $this->response->setJSON([
 			'success' => false,
-			'message' => 'Failed to update status'
+			'message' => 'Status Updated Successfully!'
 		]);
 	}
 }

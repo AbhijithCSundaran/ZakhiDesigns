@@ -5,7 +5,7 @@ use CodeIgniter\Model;
 class AddressProfileModel extends Model {
     protected $table = 'address';
     protected $primaryKey = 'add_Id';
-    protected $allowedFields = ['add_Id', 'add_Name','add_BuildingNo','add_Landmark','add_Street', 'add_City',
+    protected $allowedFields = ['add_Id', 'add_Name','add_BuldingNo','add_Landmark','add_Street', 'add_City',
 	'add_State', 'add_Pincode', 'add_Default','add_Status','add_createdon','add_createdby','add_modifyon',
 	'add_modifyby','add_Phone','add_Email','add_CustId' ];
 
@@ -18,6 +18,8 @@ class AddressProfileModel extends Model {
         $saveData = [
             'add_CustId'     => $userId,
             'add_Name'       => $data['newName'],
+            'add_Phone'       =>$data['newPhone'],
+            'add_Email'       =>$data['newEmail'],
             'add_BuldingNo'  => $data['newBuilding'],
             'add_Landmark'   => $data['newLandmark'],
             'add_Street'     => $data['newStreet'],

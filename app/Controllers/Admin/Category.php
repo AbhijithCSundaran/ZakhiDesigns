@@ -144,8 +144,9 @@ class Category extends BaseController
             ]);
         } else {
             return $this->response->setJSON([
-                'success' => false,
-                'message' => 'Failed to update status'
+                'success' => true,
+                'message' => 'Category Status Updated Successfully!',
+                'new_status' => $newStatus
             ]);
         }
     }

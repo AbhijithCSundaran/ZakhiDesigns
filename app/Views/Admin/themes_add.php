@@ -138,7 +138,7 @@
 															<div class="card-header p-2">
 																<button class="btn btn-link p-0" style ="text-decoration:none!important;
 														color:#000!important;" type="button" data-toggle="collapse" data-target="#sectionTwo">
-																	Banner Images and Links
+																	Offer Images and Links
 																</button>
 															</div>
 															<div id="sectionTwo" class="collapse" data-parent="#themeAccordion">

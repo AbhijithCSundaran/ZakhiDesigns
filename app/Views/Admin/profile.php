@@ -39,7 +39,8 @@
 							<div class="alert alert-danger"><?= session()->getFlashdata('error') ?></div>
 						<?php endif; ?>
 
-					  <form method="post" action="<?= base_url('admin/profile/update'); ?>">
+					 <form method="post" id="updateProfileForm" action="<?= base_url('admin/profile/update'); ?>">
+
 						<div class="form-group">
 							<label>Name</label>
 							 <input type="text" name="us_Name" class="form-control" value="<?= $user['us_Name']; ?>" required>

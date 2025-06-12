@@ -194,25 +194,25 @@ class Customer extends BaseController
     
         if (!$customer) {
             return $this->response->setJSON([
-                'success' => false,
+                'success' => 0,
                 'message' => 'Customer not found'
             ]);
         }
         $update = $customerModel->updateCustomer($custId, ['cust_Status' => $newStatus]);
         if ($update) {
-            return $this->response->setJSON([
-                'success' => true,
-                'message' => 'Status Updated Successfully!',
-                'new_status' => $newStatus
-            ]);
+           return $this->response->setJSON([
+			'status' => 1,
+			'message' => 'Customer status updated successfully.'
+		]);
+
         } else {
             return $this->response->setJSON([
-                'success' => false,
+                'success' => 0,
                 'message' => 'Failed to update status'
             ]);
         }
 	}
-	// Listing table data
+	
 	// Listing table data
 	
 public function ajaxList()

@@ -42,6 +42,12 @@
 
                         <div class="item-name p-1"><?= esc($item['pr_Name']); ?></div>
                         <div class="item-price">
+						<span style="color: #999;">
+                                    <del>
+                                        <i class="bi bi-currency-rupee"></i><?= esc($item['mrp']); ?>
+                                    </del>
+                                </span>
+                                &nbsp;
                             <i class="bi bi-currency-rupee"></i>&nbsp;<?= esc($item['pr_Selling_Price']); ?>
                         </div>
                         <div class="text-center mt-2">

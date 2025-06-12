@@ -32,7 +32,7 @@ class Contact extends BaseController
 
         
     }
-	public function submit()
+public function submit()
 {
     if ($this->request->isAJAX()) {
         $data = [
@@ -43,6 +43,7 @@ class Contact extends BaseController
             'submitted_at' => date('Y-m-d H:i:s'),
         ];
 
+        // Save to DB
         $model = new \App\Models\ContactModel();
         if (!$model->insert($data)) {
             return $this->response->setJSON([
@@ -51,71 +52,53 @@ class Contact extends BaseController
             ]);
         }
 
-        // Load email service
-        $emailService = \Config\Services::email();
+        // === Admin Email (raw PHP mail) ===
+        $to      = 'sandrakbabu23@gmail.com';
+        $subject = 'New Contact Enquiry Received';
 
-        // SMTP Configuration
-        $emailService->initialize([
-            'protocol'    => 'smtp',
-            'SMTPHost'    => 'smtp.gmail.com',
-            'SMTPUser'    => 'sandra@smartlounge.online',         // Your Gmail
-            'SMTPPass'    => 'SL1012',           // Use Gmail App Password!
-            'SMTPPort'    => 587,
-            'SMTPCrypto'  => 'tls',
-            'mailType'    => 'html',
-            'charset'     => 'utf-8',
-            'newline'     => "\r\n",
-        ]);
-
-        // === 1. Email to Admin ===
-        $emailService->setFrom('yourgmail@gmail.com', 'Zakhi Designs Website');
-        $emailService->setTo('sandrakbabu23@gmail.com');
-        $emailService->setReplyTo($data['email'], $data['fullname']);
-        $emailService->setSubject('New Contact Enquiry');
         $adminMessage = "
-            <h3>New Enquiry Received</h3>
+            <html><body>
             <p><strong>Name:</strong> {$data['fullname']}</p>
             <p><strong>Email:</strong> {$data['email']}</p>
             <p><strong>Phone:</strong> {$data['contact_no']}</p>
-            <p><strong>Message:</strong><br>{$data['message']}</p>
+            <p><strong>Message:</strong><br>" . nl2br(htmlspecialchars($data['message'])) . "</p>
+            </body></html>
         ";
-        $emailService->setMessage($adminMessage);
-        $adminSent = $emailService->send();
 
-        // === 2. Auto-reply to user ===
-        $emailService->clear(); // Reset
-        $emailService->setFrom('noreply@zakhidesigns.com', 'Zakhi Designs');
-        $emailService->setTo($data['email']);
-        $emailService->setSubject('Thank you for contacting Zakhi Designs');
+        $headers = "MIME-Version: 1.0\r\n";
+        $headers .= "Content-type: text/html; charset=UTF-8\r\n";
+        $headers .= "From: Zakhi Designs <no-reply@zakhidesigns.com>\r\n";
+        $headers .= "Reply-To: {$data['fullname']} <{$data['email']}>\r\n";
 
+        $adminSent = mail($to, $subject, $adminMessage, $headers);
+
+        // === Auto-reply to User ===
+        $userSubject = 'Thank you for contacting Zakhi Designs';
         $userMessage = "
+            <html><body>
             <p>Dear <strong>{$data['fullname']}</strong>,</p>
-            <p>Thank you for reaching out to Zakhi Designs. We’ve received your message and will get back to you as soon as possible.</p>
-
-
-            <p style='text-align: center; margin-top: 20px;'>
-                <a href='https://zakhidesigns.com' style='padding: 10px 20px; background-color: #d81b60; color: white; text-decoration: none; border-radius: 5px;'>Visit Our Website</a>
-            </p>
-
-            <p style='text-align: center; font-size: 14px; color: #555; margin-top: 30px;'>
-                For any queries, reach us at <a href='mailto:support@zakhidesigns.com'>support@zakhidesigns.com</a>
-            </p>
-
-            <br><br>
+            <p>Thank you for contacting Zakhi Designs. We have received your message and will get back to you shortly.</p>
+            <p>For any queries, contact us at <a href='mailto:support@zakhidesigns.com'>support@zakhidesigns.com</a></p>
+            <br>
             <p>Warm regards,<br>Zakhi Designs Team</p>
+            </body></html>
         ";
-        $emailService->setMessage($userMessage);
-        $userSent = $emailService->send();
 
-        if ($userSent) {
+        $userHeaders = "MIME-Version: 1.0\r\n";
+        $userHeaders .= "Content-type: text/html; charset=UTF-8\r\n";
+        $userHeaders .= "From: Zakhi Designs <no-reply@zakhidesigns.com>\r\n";
+
+        $userSent = mail($data['email'], $userSubject, $userMessage, $userHeaders);
+
+        if ($adminSent && $userSent) {
             return $this->response->setJSON([
                 'status' => '1',
-                'message' => 'Your enquiry has been sent successfully!'
+                'message' => 'Thank you! Your enquiry has been submitted. We will get back to you shortly.'
             ]);
         } else {
             return $this->response->setJSON([
                 'status' => '0',
-                'message' => 'Saved successfully but email sending failed.'
+                'message' => 'Saved successfully, but email sending failed.'
             ]);
         }
     }
@@ -125,6 +108,5 @@ class Contact extends BaseController
         'message' => 'Invalid request.'
     ]);
 }
-
 
 }

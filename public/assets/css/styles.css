@@ -17,15 +17,16 @@ body {
 	padding:0px !important;
 }
 .topnav {
-	overflow: hidden;
+	/* overflow: hidden; */
 	background-color: #FFF;
 	float: right;
 }
-.topnav a {
+.topnav a,
+.topnav .a {
 	float: left;
 	/*display: block;*/
 	color: #000;
-	text-align: center;
+	text-align: left;
 	padding: 14px 16px;
 	text-decoration: none;
 	font-size: 17px;
@@ -359,8 +360,9 @@ a.fancybox-item.fancybox-close {
 		float: right;
 		display: block;
 	}
-}
-@media screen and (max-width: 600px) {
+	.searchbox {
+		padding: 0px 14px !important;
+	}
 	.topnav.responsive {
 		position: relative;
 		width: 100%;

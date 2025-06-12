@@ -62,4 +62,28 @@ public function getDefaultAddress($zd_uid)
     {
         return $this->where('add_CustId', $zd_uid)->findAll();
     } 
+	public function getOrdersByUser($userId)
+	{
+		return $this->select('order_detail.*, product.*')
+					->join('product', 'product.pr_Id = order_detail.pr_Id')
+					->where('order_detail.cus_Id', $userId)
+					->orderBy('order_detail.od_createdon', 'DESC')
+					->findAll();
+	}
+
+
+    /**
+     * Get orders with product details (JOIN)
+     *
+     * @param int $userId
+     * @return array
+     */
+    public function getOrdersWithProducts($userId)
+    {
+        return $this->select('order_detail.*, product.pr_Name, product.product_image')
+                    ->join('product', 'product.pr_Id = order_detail.pr_Id')
+                    ->where('order_detail.cus_Id', $userId)
+                    ->orderBy('order_detail.od_createdon', 'DESC')
+                    ->findAll();
+    }
 }

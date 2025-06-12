@@ -107,35 +107,33 @@ $cat_Discount_Value = $category->cat_Discount_Value;
 
 	// delete category
 	
-		public function deleteCategoryById($cat_status, $cat_id, $modified_by)
+		public function deleteCategoryById($cat_id, $modified_by)
 		{
-			return $this->db->table('category')
-				->where('cat_Id', $cat_id)
-				->update([
-					'cat_Status'   => $cat_status,
-					'cat_modifyon' => date('Y-m-d H:i:s'),
-					'cat_modifyby' => $modified_by
-				]);
+			$subcategory = $this->db->table('subcategory')
+									->where('cat_Id ' , $cat_id)
+									->select('sub_Id ')
+									->get()
+									->getResult();
+			$product = $this->db->table('product')
+								->where('cat_Id' , $cat_id)
+								->where('pr_Status' , 1)
+								->select('pr_Id')
+								->get()
+								->getResult();
+									
+			if(empty($subcategory) && empty($product)){
+				return $this->db->table('category')
+					->where('cat_Id', $cat_id)
+					->update([
+						'cat_Status'   => 3,
+						'cat_modifyon' => date('Y-m-d H:i:s'),
+						'cat_modifyby' => $modified_by
+					]);
+			}else{
+				return false;
+			}			
 		}
-		public function deleteCategoryAndSubcategories($cat_id, $modified_by)
-	{
-		$this->db->table('category')
-			->where('cat_Id', $cat_id)
-			->update([
-				'cat_Status'   => 3,
-				'cat_modifyon' => date('Y-m-d H:i:s'),
-				'cat_modifyby' => $modified_by
-			]);
-$this->db->table('subcategory')
-			->where('cat_Id', $cat_id)
-			->update([
-				'sub_Status'   => 3,
-				'sub_modifiyon' => date('Y-m-d H:i:s'),
-				'sub_modifyby'  => $modified_by
-			]);
-
-		return true;
-	}
+	
 		
 	//**************************Data table */
 				
@@ -169,7 +167,7 @@ $this->db->table('subcategory')
 
 		// Apply ordering if provided
 		if (!empty($postData['order'])) {
-			$columns = ['c.cat_Id ', 'c.cat_Name', 'cat.cat_Discount_Value','cat.cat_Discount_Type','c.cat_Status'];
+			$columns = ['c.cat_Id ', 'c.cat_Name', 'c.cat_Discount_Value','c.cat_Discount_Type','c.cat_Status'];
 			$orderCol = $columns[$postData['order'][0]['column']];
 			$orderDir = $postData['order'][0]['dir'];
 			$builder->orderBy($orderCol, $orderDir);

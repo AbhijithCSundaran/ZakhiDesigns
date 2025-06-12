@@ -459,8 +459,7 @@ function handleFiles(files) {
         });
     });
 
-
-    //Load video on modal
+//Load video on modal
     function openvideoModal(productId, productName) {
         $('#productVideoId').val(productId);
         $('#productVideoName').val(productName);

@@ -156,9 +156,24 @@ class SubcategoryModel extends Model
         return true;
     }
 
- public function deleteSubcategoryById($sub_status, $sub_id, $modified_by)
+ public function deleteSubcategoryById($sub_id, $modified_by)
     {
-        return $this->db->query("update subcategory set sub_Status = '" . $sub_status . "', sub_modifiyon=NOW(), sub_modifyby='" . $modified_by . "' where sub_Id = '" . $sub_id . "'");
+		$product = $this->db->table('product')
+							->where('sub_Id', $sub_id)	
+							->select('pr_Id')
+							->get()
+							->getRow();
+		if(empty($product)){
+			return $this->db->table('subcategory')
+					->where('sub_Id', $sub_id)
+					->update([
+						'sub_Status'   => 3,
+						'sub_modifiyon' => date('Y-m-d H:i:s'),
+						'sub_modifyby' => $modified_by
+					]);
+		}else{
+			return false;
+		}					
     }
 
 		

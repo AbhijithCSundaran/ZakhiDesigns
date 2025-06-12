@@ -304,9 +304,6 @@ class Product extends BaseController
             }
         }
     }
-
-   
-
     //Media upload
     public function uploadMedia()
     {
@@ -350,7 +347,7 @@ class Product extends BaseController
 
         return $this->response->setJSON(['success' => false]);
     }
-
+	}
     //get product images
     public function getProductImages($productId)
     {

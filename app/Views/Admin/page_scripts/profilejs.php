@@ -3,43 +3,67 @@
     const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
     // Profile Update Validation
-    $('form[action$="update"]').submit(function (e) {
-      const name = $('input[name="us_Name"]').val().trim();
-      const email = $('input[name="us_Email"]').val().trim();
-     
-      let valid = true;
+	
+$(document).ready(function () {
+    $('#updateProfileForm').on('submit', function (e) {
+        e.preventDefault();
 
-      if (!name) {
-        alert('Name is required.');
-        valid = false;
-      }
+        $.ajax({
+            url: $(this).attr('action'),
+            type: 'POST',
+            data: $(this).serialize(),
+            dataType: 'json',
+            success: function (response) {
+                let alertBox = $('#tog-alert');
 
-      if (!email || !emailPattern.test(email)) {
-        alert('Valid email is required.');
-        valid = false;
-      }
+                if (!alertBox.length) {
+                    $('#updateProfileForm').before('<div class="alert" id="tog-alert"></div>');
+                    alertBox = $('#tog-alert');
+                }
 
-     
+                if (response.status === 1) {
+                    alertBox
+                        .removeClass('alert-danger')
+                        .addClass('alert-success')
+                        .text(response.msg)
+                        .fadeIn();
 
-      if (!valid) e.preventDefault();
+                    setTimeout(function () {
+                        alertBox.fadeOut();
+                    }, 3000);
+                } else {
+                    alertBox
+                        .removeClass('alert-success')
+                        .addClass('alert-danger')
+                        .text(response.msg)
+                        .fadeIn();
+                }
+            },
+            error: function () {
+                alert('An error occurred while updating the profile.');
+            }
+        });
     });
+});
+
+
 
     // Password Change Validation
 	
-  $('#passUpdate').click(function(e) {
-    e.preventDefault();
-    var url = "<?= base_url('admin/profile/change_password') ?>";
-    $.post(url, $('#changePasswordForm').serialize(), function(data) {
-        if (data.status == 1) {
-            $('#passAlert').hide();
-        } else if (data.status == 0) {
-            $("#passAlert").html(data.msg).show();
-            setTimeout(function() {
-                $("#passAlert").fadeOut();
-            }, 1000); 
-        }
-    }, 'json');
-});
+  // $('#passUpdate').click(function(e) {
+    // e.preventDefault();
+    // var url = "<?= base_url('admin/profile/change_password') ?>";
+    // $.post(url, $('#changePasswordForm').serialize(), function(data) {
+        // if (data.status == 1) {
+            // $('#passAlert').hide();
+        // } else if (data.status == 0) {
+            // $("#passAlert").html(data.msg).show();
+            // setTimeout(function() {
+                // $("#passAlert").fadeOut();
+            // }, 1000); 
+        // }
+    // }, 'json');
+// });
 
 
 

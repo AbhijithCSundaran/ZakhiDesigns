@@ -152,24 +152,6 @@ class Category extends BaseController
     
     //Category Delete
 
- 
-  // public function deleteCategory($cat_id)
-// {
-    // $modified_by = $this->session->get('ad_uid'); 
-    // $cat_delete = $this->categoryModel->deleteCategoryById($cat_id, $modified_by);
-
-    // if ($cat_delete) {
-        // return $this->response->setJSON([
-            // 'status' => 1,
-            // 'message' => 'Category deleted successfully.'
-        // ]);
-    // } else {
-        // return $this->response->setJSON([
-            // 'status' => 0,
-            // 'message' => 'Failed to delete category.'
-        // ]);
-    // }
-// }
 	public function deleteCategory($cat_id)
 	{
 		if ($cat_id) {
@@ -183,7 +165,7 @@ class Category extends BaseController
 			} else {
 				return $this->response->setJSON([
 					'status' => 0,
-					'message' => 'Unable to delete the Products exist under this category or its subcategories.'
+					'message' => '<b>Unable To Delete!</b> <br> There exist a product or subcategory under the Category.'
 				]);
 			}
 		} else {
@@ -193,8 +175,10 @@ class Category extends BaseController
 			]);
 		}
 	}
-
+     
 	
+
+		
 	// Listing table data
 	
 	public function ajaxList()

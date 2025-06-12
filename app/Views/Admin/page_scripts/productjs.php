@@ -171,8 +171,7 @@
 
 function handleFiles(files) {
     const allowedTypes = ['image/jpeg', 'image/png'];
-    const requiredWidth = 265;
-    const requiredHeight = 356;
+   
     const formData = new FormData();
     const productId = document.getElementById('productId').value;
 
@@ -191,8 +190,11 @@ function handleFiles(files) {
         reader.onload = function(e) {
             const img = new Image();
             img.onload = function() {
-                if (img.width !== requiredWidth || img.height !== requiredHeight) {
-                    alert(`"${file.name}" has invalid dimensions. Only images of size 265x356 pixels are allowed.`);
+              if (
+                    img.width < 300 || img.width > 500 ||
+                    img.height < 400 || img.height > 600
+                ) {
+                    alert("Only images with width between 300–500 px and height between 400–600 px are allowed.");
                     return;
                 }
 

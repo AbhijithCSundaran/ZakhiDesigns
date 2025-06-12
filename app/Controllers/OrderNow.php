@@ -24,7 +24,7 @@ class OrderNow extends Controller
 		
 		$this->productdisplayModel = new ProductDisplayModel();
         $this->categories = $this->productdisplayModel->getAllCategoriesAndSub();
-		 $data['categories'] = $this->categories;
+	    $data['categories'] = $this->categories;
 
         $data['product'] = $this->productdisplayModel->getAllProducts();
 
@@ -110,8 +110,11 @@ class OrderNow extends Controller
             return redirect()->to(base_url());
         }
 		$this->productdisplayModel = new ProductDisplayModel();
-        $this->categories = $this->productdisplayModel->getAllCategoriesAndSub();
-		 $data['categories'] = $this->categories;
+        $categories = $this->productdisplayModel->getAllCategoriesAndSub();
+        
+		//  $data['categories'] = $this->categories;
+         
+        
         $orderModel   = new OrderNowModel();
         $addressModel = new AddressModel();
 
@@ -128,10 +131,13 @@ class OrderNow extends Controller
             'product'      => $orderModel->getProductById($pr_Id),
             'details'      => $addressModel->getDefaultAddress($zd_uid),
             'addresses'    => $addresses,
+            'categories'  => $categories,
             'is_new_user'  => empty($addresses),
 			'od_Id'        => $od_Id,
 			'order'			=> $orders,
         ];
+      
+      
 
         return view('common/header',$data)
              . view('order_now', $data)

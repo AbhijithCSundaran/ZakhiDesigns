@@ -15,6 +15,7 @@ document.getElementById("reviewForm").addEventListener("submit", function(e) {
         div.innerHTML = `<div class="alert alert-${data.status === 'success' ? 'success' : 'danger'}">${data.message}</div>`;
 
         if (data.status === 'success') form.reset();
+        window.location.reload();
 
         // Hide the message after 3 seconds
         setTimeout(() => {

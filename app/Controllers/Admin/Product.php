@@ -187,7 +187,33 @@ class Product extends BaseController
         $sleeve_style = $this->input->getPost('sleeve_style');
         $fabric = $this->input->getPost('fabric');
         $stitching = $this->input->getPost('stitching');
-        $DisCountFrom = 0;        
+        $DisCountFrom = 0;
+
+
+        if (empty($cat_id) || empty($product_name) || empty($product_code) || empty($product_stock) || empty($reset_stock) || empty($mrp) || empty($available_color) || empty($size)) {
+            return $this->response->setJSON([
+                'status' => 'error',
+                'message' => 'All required fields must be filled.'
+            ]);
+        }
+
+
+        $exists = $this->productModel->isProductExists($product_name, $pr_id);
+        if ($exists) {
+            return $this->response->setJSON([
+                'status' => 'error',
+                'field' => 'product_name',
+                'message' => 'Product name already exists.'
+            ]);
+        }
+
+        if (($discount_type == "%" && $discount_value > 100) || ($discount_type == "Rs" && $discount_value >= $mrp) || $discount_value < 0) {
+            return $this->response->setJSON([
+                'status' => 'error',
+                'message' => 'Enter a Valid Discount.'
+            ]);
+        }
+
 
         if (empty($discount_value) || empty($discount_type) || $discount_value == '0') {
             $sub_DiscountExist = false;
@@ -220,33 +246,10 @@ class Product extends BaseController
                     $DisCountFrom = 3;
                 }
             }
-        }
-        else{
-            $DisCountFrom =1;
-        }
-
-        if (($discount_type == "%" && $discount_value > 100) || $discount_value < 0) {
-            return $this->response->setJSON([
-                'status' => 'error',
-                'message' => 'Enter a Valid Percentage Value.'
-            ]);
+        } else {
+            $DisCountFrom = 1;
         }
 
-        if (empty($cat_id) || empty($product_name) || empty($product_code) || empty($product_stock) || empty($reset_stock) || empty($mrp) || empty($available_color) || empty($size)) {
-            return $this->response->setJSON([
-                'status' => 'error',
-                'message' => 'All required fields must be filled.'
-            ]);
-        }
-
-        $exists = $this->productModel->isProductExists($product_name, $pr_id);
-        if ($exists) {
-            return $this->response->setJSON([
-                'status' => 'error',
-                'field' => 'product_name',
-                'message' => 'Product name already exists.'
-            ]);
-        }
 
         $data = [
             'pr_Name' => $product_name,

@@ -81,8 +81,8 @@ class Orders extends BaseController
    public function orderView($od_id)
     {
         $model = new \App\Models\Admin\OrdersModel();
-
-            if ($this->request->isAJAX()) {
+        if($this->session->get('ad_uid')){
+             if ($this->request->isAJAX()) {
             $order = $model->getOrder($od_id);
             if (!$order) {
                 return $this->response->setJSON([
@@ -112,6 +112,8 @@ class Orders extends BaseController
             . view('Admin/common/footer')
            // . view('Admin/page_scripts/ordersjs');
             . view('Admin/page_scripts/orders_viewjs');
+        }
+
     }
 
     public function orderStatusUpdation($od_id)

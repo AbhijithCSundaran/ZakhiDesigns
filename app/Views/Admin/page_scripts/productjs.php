@@ -596,11 +596,18 @@ function handleFiles(files) {
             }
         });
     });
-    //Product view
-
-
-
+    
     //Product popup
+    document.addEventListener('DOMContentLoaded', function() {
+        document.body.addEventListener('click', function(e) {
+            if (e.target.closest('.view-large-image')) {
+                e.preventDefault();
+                const imageUrl = e.target.closest('.view-large-image').getAttribute('data-image');
+                document.getElementById('largeImage').setAttribute('src', imageUrl);
+            }
+        });
+    });
+ 
     function calculateSellingPrice() {
     const mrp = parseFloat(document.getElementById('mRp').value) || 0;
     const discountType = document.getElementById('discountType').value;

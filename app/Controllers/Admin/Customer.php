@@ -13,10 +13,9 @@ class Customer extends BaseController
 
     public function index()
     {
-		 if (!$this->session->get('ad_uid')) {
-        return redirect()->to(base_url('/admin/'));
-    }
-
+		  if (!$this->session->get('ad_uid')) {
+				return redirect()->to(base_url('admin'));
+			}
         //$getall['users'] = $this->staffModel->getAllStaff();
         $customer = $this->customerModel->getAllCustomer();
         $data['user'] = $customer;

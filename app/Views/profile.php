@@ -204,10 +204,6 @@
 			</div>
 			</div>
 			</div>
-
-
-
-
 			<!-- Edit Address Modal -->
 			<div class="modal fade" id="editAddressModal" tabindex="-1" aria-labelledby="editAddressModalLabel"
 			    aria-hidden="true">
@@ -219,29 +215,26 @@
 			                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 			            </div>
 			            <div class="modal-body">
-			                <input type="hidden" name="add_Id" id="add_Id" />
-							
-			                <input type="hidden" name="add_CustId" id="add_CustId" />
-			             
-							<input name="add_Name" id="add_Name" class="form-control" placeholder="Full Name" required>
-			                
+			                <input type="hidden" name="add_Id" id="add_Id" />							
+			                <input type="hidden" name="add_CustId" id="add_CustId" />			             
+							<input type="text" name="add_Name" id="add_Name" class="form-control" placeholder="Full Name" required>
 							<div>&nbsp</div>
-							<input name="add_Phone" id="add_Phone" class="form-control" placeholder="Phone" required>
+							<input type="tel" maxlength="10" pattern="[0-9]{10}" name="add_Phone" id="add_Phone" class="form-control" placeholder="Phone" required>
 			                <div>&nbsp</div>
-							<input name="add_Email" id="add_Email" class="form-control" placeholder="Email" required>
+							<input type="email" name="add_Email" id="add_Email" class="form-control" placeholder="Email" required>
 			               <div>&nbsp</div>
-							<input name="add_BuldingNo" id="add_BuldingNo" class="form-control" placeholder="Building No"
+							<input type="text" name="add_BuldingNo" id="add_BuldingNo" class="form-control" placeholder="Building No"
 			                    required>
 			                <div>&nbsp</div>
-								<input name="add_Street" id="add_Street" class="form-control" placeholder="Street" required>
+								<input type="text" name="add_Street" id="add_Street" class="form-control" placeholder="Street" required>
 			               <div>&nbsp</div>
-								<input name="add_Landmark" id="add_Landmark" class="form-control" placeholder="Landmark">
+								<input type="text" name="add_Landmark" id="add_Landmark" class="form-control" placeholder="Landmark">
 			               <div>&nbsp</div>
-								<input name="add_City" id="add_City" class="form-control" placeholder="City" required>
+								<input type="text" name="add_City" id="add_City" class="form-control" placeholder="City" required>
 			                <div>&nbsp</div>
-								<input name="add_State" id="add_State" class="form-control" placeholder="State" required>
+								<input type="text" name="add_State" id="add_State" class="form-control" placeholder="State" required>
 			                <div>&nbsp</div>
-								<input name="add_Pincode" id="add_Pincode" class="form-control" placeholder="Pincode" required>
+								<input name="add_Pincode" id="add_Pincode" class="form-control" placeholder="Pincode" maxlength="6" pattern="[1-9][0-9]{5}"  required>
 			                <div>&nbsp</div>
 								<input type="checkbox" class="form-check-input" id="is_default" name="add_Default">
 			                <div class="modal-footer">

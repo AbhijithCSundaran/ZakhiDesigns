@@ -17,7 +17,10 @@ class Address extends BaseController
     // Show all addresses for the logged-in user
     public function index()
     {
-        $userId = session()->get('user_id');
+        $userId = session()->get('ad_uid');
+         if (!$this->session->get('ad_uid')) {
+				return redirect()->to(base_url('admin'));
+			}
 
         $addresses = $this->addressModel
             ->where('user_id', $userId)
@@ -30,6 +33,10 @@ class Address extends BaseController
     // Add new address (GET + POST)
     public function add()
     {
+         $userId = session()->get('ad_uid');
+         if (!$this->session->get('ad_uid')) {
+				return redirect()->to(base_url('admin'));
+			}
         if ($this->request->getMethod() === 'post') {
             $data = [
                 'user_id'       => session()->get('user_id'),
@@ -52,6 +59,10 @@ class Address extends BaseController
     // Edit address
     public function edit($id)
     {
+         $userId = session()->get('ad_uid');
+         if (!$this->session->get('ad_uid')) {
+				return redirect()->to(base_url('admin'));
+			}
         $address = $this->addressModel->find($id);
 
         if (!$address || $address['user_id'] != session()->get('user_id')) {

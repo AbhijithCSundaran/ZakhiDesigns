@@ -14,6 +14,9 @@ class Banner extends BaseController
 
     public function index()
     {
+		 if (!$this->session->get('ad_uid')) {
+				return redirect()->to(base_url('admin'));
+			}
 		$banner = $this->bannerModel->getAllBanners();
         $data['user'] = $banner;
         $template = view('common/header');

@@ -78,7 +78,7 @@ class Orders extends BaseController
                     case '4':
                         return 'Dispatched';
                     default:
-                        return 'Pending';
+                        return '';
                 }
             }
 

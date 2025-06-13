@@ -15,6 +15,9 @@ class Category extends BaseController
 
     public function index()
     {
+         if (!$this->session->get('ad_uid')) {
+				return redirect()->to(base_url('admin'));
+			}
 
         $allcategory = $this->categoryModel->getAllCategory();
         $data['category'] =  $allcategory;

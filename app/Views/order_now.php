@@ -59,15 +59,15 @@
                         <input type="hidden" name="od_Id" value="<?= esc($od_Id) ?>">
 						
                         <div class="row">
-                            <div class="col-md-6 mb-2"><input name="newName" class="form-control" placeholder="Full Name" required></div>
-                            <div class="col-md-6 mb-2"><input name="newEmail" class="form-control" placeholder="Email" required></div>
-                            <div class="col-md-6 mb-2"><input name="newPhone" class="form-control" placeholder="Phone" required></div>
-                            <div class="col-md-6 mb-2"><input name="newBuilding" class="form-control" placeholder="Building No" required></div>
-                            <div class="col-md-6 mb-2"><input name="newStreet" class="form-control" placeholder="Street" required></div>
-                            <div class="col-md-6 mb-2"><input name="newLandmark" class="form-control" placeholder="Landmark"></div>
-                            <div class="col-md-6 mb-2"><input name="newCity" class="form-control" placeholder="City" required></div>
-                            <div class="col-md-6 mb-2"><input name="newState" class="form-control" placeholder="State" required></div>
-                            <div class="col-md-6 mb-2"><input name="newPincode" class="form-control" placeholder="Pincode" required></div>
+                            <div class="col-md-6 mb-2"><input type="text" name="newName" class="form-control" placeholder="Full Name" required></div>
+                            <div class="col-md-6 mb-2"><input type="email" name="newEmail" class="form-control" placeholder="Email" required></div>
+                            <div class="col-md-6 mb-2"><input type="tel" maxlength="10" pattern="[0-9]{10}" name="newPhone" class="form-control" placeholder="Phone" required></div>
+                            <div class="col-md-6 mb-2"><input type="text" name="newBuilding" class="form-control" placeholder="Building No" required></div>
+                            <div class="col-md-6 mb-2"><input type="text" name="newStreet" class="form-control" placeholder="Street" required></div>
+                            <div class="col-md-6 mb-2"><input type="text" name="newLandmark" class="form-control" placeholder="Landmark"></div>
+                            <div class="col-md-6 mb-2"><input type="text" name="newCity" class="form-control" placeholder="City" required></div>
+                            <div class="col-md-6 mb-2"><input type="text" name="newState" class="form-control" placeholder="State" required></div>
+                            <div class="col-md-6 mb-2"><input type="text" name="newPincode" class="form-control" placeholder="Pincode" maxlength="6" pattern="[1-9][0-9]{5}" required></div>
                         </div>
                         <button type="submit" class="btn btn-primary mt-2">Save & Use This Address</button>
                     </form>

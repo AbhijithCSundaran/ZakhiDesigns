@@ -15,6 +15,9 @@ class Themes extends BaseController
 
     public function index()
     {
+         if (!$this->session->get('ad_uid')) {
+				return redirect()->to(base_url('admin'));
+			}
 		$banner = $this->theme_Model->getAllBanners();
         $data['user'] = $banner;
         $template = view('Admin/common/header');
@@ -285,7 +288,7 @@ if (empty($theme_id)) {
     if ($section2ImageCount < 3) {
         return $this->response->setJSON([
             'status' => 0,
-            'msg' => 'Atleast Three Banner Images Required .'
+            'msg' => 'Atleast Three Offer Images Required .'
         ]);
     }
 

@@ -36,7 +36,7 @@ class Banner extends BaseController
         if (!$theme) {
             return $this->response->setJSON([
                 'success' => false,
-                'message' => 'Theme not found'
+                'message' => 'Theme Not Found'
             ]);
         }
         $update = $bannerModel->updateTheme($theId, ['the_Status' => $newStatus]);
@@ -49,7 +49,7 @@ class Banner extends BaseController
         } else {
             return $this->response->setJSON([
                 'success' => false,
-                'message' => 'Failed to update status'
+                'message' => 'Failed To Update Status'
             ]);
         }
 	}
@@ -60,18 +60,18 @@ class Banner extends BaseController
 			if ($the_status) {
 				echo json_encode([
 					'success' => true,
-					'msg' => 'Banner deleted successfully.'
+					'msg' => 'Banner Deleted Successfully.'
 				]);
 			} else {
 				echo json_encode([
 					'success' => false,
-					'msg' => 'Failed to delete banner.'
+					'msg' => 'Failed To Delete Banner.'
 				]);
 			}
 		} else {
 			echo json_encode([
 				'success' => false,
-				'msg' => 'Invalid request.'
+				'msg' => 'Invalid Request.'
 			]);
 		}
 	}
@@ -122,14 +122,14 @@ class Banner extends BaseController
 		$newName     = null;
 		// Validate name format
 		if (!preg_match('/^[a-zA-Z ]+$/', $bannerName)) {
-			return $this->response->setJSON(['status' => 'error', 'msg' => 'Please enter name correctly.']);
+			return $this->response->setJSON(['status' => 'error', 'msg' => 'Please Enter Name Correctly.']);
 		}
 		
 		// If creating new banner (no ID), image is required
 		if (empty($the_id) && (!$image || $image->getError() !== UPLOAD_ERR_OK)) {
 			return $this->response->setJSON([
 				'status' => 'error',
-				'msg'    => 'Please upload the image.'
+				'msg'    => 'Please Upload The Image.'
 			]);
 		}
 
@@ -156,7 +156,7 @@ class Banner extends BaseController
 
 			return $this->response->setJSON([
 				'status' => 1,
-				'msg'    => 'Banner uploaded successfully.'
+				'msg'    => 'Banner Uploaded Successfully.'
 			]);
 		} 
 		
@@ -167,7 +167,7 @@ class Banner extends BaseController
 				if (!$existing) {
 				return $this->response->setJSON([
 					'status' => 0,
-					'msg'    => 'Banner not found for update.'
+					'msg'    => 'Banner Not Found For Update.'
 				]);
 			}
 			
@@ -195,7 +195,7 @@ class Banner extends BaseController
 
 			return $this->response->setJSON([
 				'status'   => 1,
-				'msg'      => 'Banner updated successfully.',
+				'msg'      => 'Banner Updated Successfully.',
 				'redirect' => base_url('banner')
 			]);
 		}
@@ -204,7 +204,7 @@ class Banner extends BaseController
 		else {
 			return $this->response->setJSON([
 				'status' => 'error',
-				'msg' => 'All mandatory fields are required.'
+				'msg' => 'All Mandatory Fields Are Required.'
 			]);
 		}
 	}

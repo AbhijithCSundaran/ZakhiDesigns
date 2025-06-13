@@ -38,19 +38,19 @@ class Admin extends BaseController
 		$newPass = $this->input->getPost('new_password');
 		    // Validate name
 		if (!preg_match('/^[a-zA-Z0-9\s ]+$/', $staffname)) {
-			return $this->response->setJSON(['status' => 'error', 'msg' => 'Please enter name correctly.']);
+			return $this->response->setJSON(['status' => 'error', 'msg' => 'Please Enter Name Correctly.']);
 		}
 		// Validate email formats
 			if (!filter_var($staffemail, FILTER_VALIDATE_EMAIL)) {
 				return $this->response->setJSON([
 					'status' => 'error',
-					'msg' => 'Invalid email format.'
+					'msg' => 'Invalid Email Format.'
 				]);
 			}
 			if (!ctype_digit($mobile) || strlen($mobile) !== 10) {
 				return $this->response->setJSON([
 					'status' => 'error',
-					'msg' => 'Phone number must contain only 10 digits.'
+					'msg' => 'Phone Number Must Contain Only 10 Digits.'
 				]);
 			}
 			
@@ -72,7 +72,7 @@ class Admin extends BaseController
 			if (!empty($oldpass) && $existing->us_Password !== md5($oldpass)) {
 				return $this->response->setJSON([
 					'status' => 'error',
-					'msg' => 'Password not matching with old password.'
+					'msg' => 'Password Not Matching With Old Password.'
 				]);
 			}
 			else{
@@ -80,7 +80,7 @@ class Admin extends BaseController
 				if (empty($newPass) && md5($newPass) !== md5($oldpass)|| md5($newPass) === md5($oldpass)) {
 				return $this->response->setJSON([
 					'status' => 'error',
-					'msg' => 'Please check your new password.'
+					'msg' => 'Please Check Your New Password.'
 				]);
 				}
 				else{
@@ -107,13 +107,13 @@ class Admin extends BaseController
 				//echo json_encode(array("status" => 1, "msg" => "Updated successfully."));	
 				echo json_encode(array(
 					"status" => 1,
-					"msg" => "Updated successfully.",
+					"msg" => "Updated Successfully.",
 				));
 			}
 		else {
 			return $this->response->setJSON([
 				'status' => 'error',
-				'message' => 'All fields are required.'
+				'message' => 'All Fields Are Required.'
 			]);
 		}
 		

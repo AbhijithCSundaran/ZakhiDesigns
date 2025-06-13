@@ -50,7 +50,7 @@ class Auth extends BaseController
 		else {
 				echo json_encode(array(
 					"status" => 0,
-					"msg" => "Login credentials are mandatory"
+					"msg" => "Login Credentials Are Mandatory"
 				));
 			}
 			

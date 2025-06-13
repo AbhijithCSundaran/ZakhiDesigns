@@ -16,8 +16,8 @@ class Product extends BaseController
     public function index()
     {
         if (!$this->session->get('ad_uid')) {
-            return redirect()->to(base_url('/admin/'));
-        }
+           return redirect()->to(base_url('admin'));
+    }
 
         $allproducts = $this->productModel->getAllProducts();
         $data['product'] = $allproducts;
@@ -580,6 +580,9 @@ if ($this->productModel->isProductCodeExists($product_code, $pr_id)) {
 
     public function viewProduct($id)
     {
+         if (!$this->session->get('ad_uid')) {
+           return redirect()->to(base_url('admin'));
+    }
 
         $product = $this->productModel->getProductByid($id);
         $data['product'] = $product;

@@ -13,7 +13,10 @@ class Customer_address extends BaseController
     }
 
     public function location($cust_id)
-    {
+    { 
+		 if (!$this->session->get('ad_uid')) {
+				return redirect()->to(base_url('admin'));
+			}  
 			
         $customer = $this->addressModel->getAllCustomer($cust_id);
         $data['user'] = $customer;

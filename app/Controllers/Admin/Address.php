@@ -50,7 +50,7 @@ class Address extends BaseController
             ];
 
             $this->addressModel->insert($data);
-            return redirect()->to(base_url('address'))->with('success', 'Address added successfully.');
+            return redirect()->to(base_url('address'))->with('success', 'Address Added Successfully.');
         }
 
         return view('address/add');
@@ -66,7 +66,7 @@ class Address extends BaseController
         $address = $this->addressModel->find($id);
 
         if (!$address || $address['user_id'] != session()->get('user_id')) {
-            return redirect()->to(base_url('address'))->with('error', 'Address not found.');
+            return redirect()->to(base_url('address'))->with('error', 'Address Not Found.');
         }
 
         if ($this->request->getMethod() === 'post') {
@@ -80,7 +80,7 @@ class Address extends BaseController
             ];
 
             $this->addressModel->update($id, $data);
-            return redirect()->to(base_url('address'))->with('success', 'Address updated successfully.');
+            return redirect()->to(base_url('address'))->with('success', 'Address Updated Successfully.');
         }
 
         return view('address/edit', ['address' => $address]);
@@ -92,11 +92,11 @@ class Address extends BaseController
         $address = $this->addressModel->find($id);
 
         if (!$address || $address['user_id'] != session()->get('user_id')) {
-            return redirect()->to(base_url('address'))->with('error', 'Address not found.');
+            return redirect()->to(base_url('address'))->with('error', 'Address Not Found.');
         }
 
         $this->addressModel->delete($id);
-        return redirect()->to(base_url('address'))->with('success', 'Address deleted successfully.');
+        return redirect()->to(base_url('address'))->with('success', 'Address Deleted Successfully.');
     }
 
     // Set as default address
@@ -106,7 +106,7 @@ class Address extends BaseController
         $address = $this->addressModel->find($id);
 
         if (!$address || $address['user_id'] != $userId) {
-            return redirect()->to(base_url('address'))->with('error', 'Address not found.');
+            return redirect()->to(base_url('address'))->with('error', 'Address Not Found.');
         }
 
         // Unset existing default
@@ -115,6 +115,6 @@ class Address extends BaseController
         // Set selected as default
         $this->addressModel->update($id, ['is_default' => 1]);
 
-        return redirect()->to(base_url('address'))->with('success', 'Default address set successfully.');
+        return redirect()->to(base_url('address'))->with('success', 'Default Address Set Successfully.');
     }
 }

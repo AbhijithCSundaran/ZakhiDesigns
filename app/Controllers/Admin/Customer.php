@@ -27,12 +27,16 @@ class Customer extends BaseController
         return $template;   
     }
 		public function view_cust($cust_Id = null) {
+			
+		if (!$this->session->get('ad_uid')) {
+			return redirect()->to(base_url('admin'));
+		}
 		$data = [];
 		 if ($cust_Id) {
 			$cust_val = $this->customerModel->findCustomerById($cust_Id);
 		
 			if (!$cust_val) {
-				return redirect()->to('admin/customer')->with('error', 'Staff member not found');
+				return redirect()->to('admin/customer')->with('error', 'Staff Member Not Found');
 			}
 		// $data['cust'] = $cust_val;
 		$data['cust'] = (array) $cust_val;
@@ -65,26 +69,26 @@ class Customer extends BaseController
 		$mobile = $this->input->getPost('mobile');
 	    $password =$this->input->getPost('password');
 		 if (!preg_match('/^[a-zA-Z ]+$/', $custname)) {
-			return $this->response->setJSON(['status' => 'error', 'msg' => 'Please enter name correctly.']);
+			return $this->response->setJSON(['status' => 'error', 'msg' => 'Please Enter Name Correctly.']);
 		}
 
 		// Validate email formats
 			if (!filter_var($custemail, FILTER_VALIDATE_EMAIL)) {
 				return $this->response->setJSON([
 					'status' => 'error',
-					'msg' => 'Invalid email format.'
+					'msg' => 'Invalid Email Format.'
 				]);
 			}
 			// Validate mobile
 			if (!ctype_digit($mobile) || strlen($mobile) !== 10) {
-				return $this->response->setJSON(['status' => 'error', 'msg' => 'Phone number must contain exactly 10 digits.']);
+				return $this->response->setJSON(['status' => 'error', 'msg' => 'Phone Number Must Contain Exactly 10 Digits.']);
 			}
 			//validate password length
 			
 			if (!empty($password) && (strlen($password) < 6 || strlen($password) > 15)) {
 				return $this->response->setJSON([
 					'status' => 'error',
-					'msg' => 'Password must be between 6 to 15 characters.'
+					'msg' => 'Password Must Be Between 6 to 15 Characters.'
 				]);
 			}
 /* 				   // Allow only letters, numbers, @ and _
@@ -100,7 +104,7 @@ class Customer extends BaseController
 				// INSERT
 			// Check if email already exists
 				if ($customerModel->getCustomerByEmail($custemail)) {
-					return $this->response->setJSON(['status' => 'error', 'msg' => 'User email already exists. Please login to continue.']);
+					return $this->response->setJSON(['status' => 'error', 'msg' => 'User Email Already Exists. Please Login To Continue.']);
 				}
 				$data = [
 				'cust_Name'          => $custname,
@@ -122,7 +126,7 @@ class Customer extends BaseController
 // ]);
 				echo json_encode(array(
 					"status" => 1,
-					"msg" => "Account Created successfully. Please login to your account to start shopping.",
+					"msg" => "Account Created Successfully. Please Login To Your Account To Start Shopping.",
 					"redirect" => base_url('customer')
 				));
 				
@@ -132,7 +136,7 @@ class Customer extends BaseController
 				$existing = $customerModel->getCustomerById($cust_id);
 					// Check if email changed and already exists for another user
 				if ($custemail !== $existing->cust_Email && $customerModel->emailExistsExcept($custemail, $cust_id)) {
-					return $this->response->setJSON(['status' => 'error', 'msg' => 'Email already exists.']);
+					return $this->response->setJSON(['status' => 'error', 'msg' => 'Email Already Exists.']);
 				}
 				// Compare hashed passwords (check if the passwords match)
 				$data = [
@@ -148,7 +152,7 @@ class Customer extends BaseController
 				//echo json_encode(array("status" => 1, "msg" => "Customer details updated successfully."));	
 				echo json_encode(array(
 					"status" => 1,
-					"msg" => "Customer details updated successfully.",
+					"msg" => "Customer Details Updated Successfully.",
 					"redirect" => base_url('customer')
 				));
 			}
@@ -156,7 +160,7 @@ class Customer extends BaseController
 		else {
 			return $this->response->setJSON([
 				'status' => 'error',
-				'msg' => 'All mandatory fields are required.'
+				'msg' => 'All Mandatory Fields Are Required.'
 			]);
 		}
 		
@@ -169,18 +173,18 @@ class Customer extends BaseController
 			if ($us_status) {
 				echo json_encode([
 					'success' => true,
-					'msg' => 'Customer deleted successfully.'
+					'msg' => 'Customer Deleted Successfully.'
 				]);
 			} else {
 				echo json_encode([
 					'success' => false,
-					'msg' => 'Failed to delete Customer.'
+					'msg' => 'Failed To Delete Customer.'
 				]);
 			}
 		} else {
 			echo json_encode([
 				'success' => false,
-				'msg' => 'Invalid request.'
+				'msg' => 'Invalid Request.'
 			]);
 		}
 	}
@@ -196,20 +200,20 @@ class Customer extends BaseController
         if (!$customer) {
             return $this->response->setJSON([
                 'success' => 0,
-                'message' => 'Customer not found'
+                'message' => 'Customer Not Found'
             ]);
         }
         $update = $customerModel->updateCustomer($custId, ['cust_Status' => $newStatus]);
         if ($update) {
            return $this->response->setJSON([
 			'status' => 1,
-			'message' => 'Customer status updated successfully.'
+			'message' => 'Customer Status Updated Successfully.'
 		]);
 
         } else {
             return $this->response->setJSON([
                 'success' => 0,
-                'message' => 'Failed to update status'
+                'message' => 'Failed To Update Status'
             ]);
         }
 	}
@@ -221,6 +225,7 @@ public function ajaxList()
     $request = \Config\Services::request();
     $model = new \App\Models\Admin\CustomerModel();
 
+	  
     $data = $model->getDatatables();
     $total = $model->countAll();
     $filtered = $model->countFiltered();

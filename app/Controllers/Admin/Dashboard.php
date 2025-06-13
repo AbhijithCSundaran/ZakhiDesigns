@@ -16,6 +16,9 @@ class Dashboard extends BaseController
 	}
 	public function index()
 	{
+		if (!$this->session->get('ad_uid')) {
+				return redirect()->to(base_url('admin'));
+			}
 
 		if (!$this->session->get('ad_uid')) {
 			redirect()->to(base_url());

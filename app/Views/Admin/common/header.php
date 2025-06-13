@@ -164,7 +164,9 @@
                                         $session = session();
                                         $username = $session->get('ad_uname');
                                     ?>  
-                                  <span><?= esc($username); ?></span>
+                                  
+                                  <span id="headerName"><?= session()->get('ad_name'); ?></span>
+
                                   <i class="ti-angle-down"></i>
                               </a>
                               <ul class="show-notification profile-notification">

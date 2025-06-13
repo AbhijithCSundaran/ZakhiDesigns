@@ -44,7 +44,7 @@ class Category extends BaseController
 			$cate = $this->categoryModel->getCategoryByid($cat_id);
 		
 			if (!$cate) {
-				return redirect()->to('admin/category')->with('error', 'Category not found');
+				return redirect()->to('admin/category')->with('error', 'Category Not Found');
 			}
 			
 			 $data['category'] = (array) $cate;
@@ -83,7 +83,7 @@ class Category extends BaseController
             return $this->response->setJSON([
                 'status' => 'error',
                 'field' => 'category_name',
-                'message' => 'Category name already exists.'
+                'message' => 'Category Name Already Exists.'
             ]);
         }
 
@@ -115,7 +115,7 @@ class Category extends BaseController
     } else {
         return $this->response->setJSON([
             'status' => 'error',
-            'message' => 'All fields are required.'
+            'message' => 'All Fields Are Required.'
         ]);
     }
 }
@@ -134,7 +134,7 @@ class Category extends BaseController
         if (!$category) {
             return $this->response->setJSON([
                 'success' => false,
-                'message' => 'Category not found'
+                'message' => 'Category Not Found'
             ]);
         }
     
@@ -165,18 +165,18 @@ class Category extends BaseController
 			if ($cat_delete) {
 				return $this->response->setJSON([
 					'status' => 1,
-					'message' => 'Category deleted successfully.'
+					'message' => 'Category Deleted Successfully.'
 				]);
 			} else {
 				return $this->response->setJSON([
 					'status' => 0,
-					'message' => '<b>Unable To Delete!</b> <br> There exist a product or subcategory under the Category.'
+					'message' => '<b>Unable To Delete!</b> <br> There Exist a Product or Subcategory Under The Category.'
 				]);
 			}
 		} else {
 			return $this->response->setJSON([
 				'status' => 0,
-				'message' => 'Invalid category ID.'
+				'message' => 'Invalid Category ID.'
 			]);
 		}
 	}

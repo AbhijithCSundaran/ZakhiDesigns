@@ -19,9 +19,9 @@ class Profile extends BaseController
 
 	public function index()
 {
-    if (!session()->get('ad_uid')) {
-        return redirect()->to(base_url('/admin'));
-    }
+   if (!$this->session->get('ad_uid')) {
+				return redirect()->to(base_url('admin'));
+			}
 	
     $template = view('Admin/common/header');
     $template .= view('Admin/common/leftmenu');
@@ -34,6 +34,9 @@ class Profile extends BaseController
 
    public function edit_admin()
    {
+    if (!$this->session->get('ad_uid')) {
+				return redirect()->to(base_url('admin'));
+			}
 	   $us_Id = $this->session->ad_uid;
      $admin = $this->ProfileModel->getProfileById($us_Id); 
 	 
@@ -51,7 +54,8 @@ class Profile extends BaseController
 }
 public function update()
 {
-    $us_Id = $this->session->get('ad_uid'); // use get()
+    $us_Id = $this->session->get('ad_uid'); 
+
     $data = [
         'us_Name'  => $this->request->getPost('us_Name'),
         'us_Email' => $this->request->getPost('us_Email'),
@@ -60,17 +64,22 @@ public function update()
     $model = new \App\Models\Admin\ProfileModel();
 
     if ($model->updateProfile($us_Id, $data)) {
+        // ✅ Update session value
+        $this->session->set('ad_name', $data['us_Name']);
+
         return $this->response->setJSON([
-            'status' => 1,
-            'msg' => 'Profile updated successfully.'
+            'status'   => 1,
+            'msg'      => 'Profile updated successfully.',
+            'ad_name'  => $data['us_Name'] // ✅ Send back updated name
         ]);
     } else {
         return $this->response->setJSON([
             'status' => 0,
-            'msg' => 'Failed to update profile.'
+            'msg'    => 'Failed to update profile.'
         ]);
     }
 }
+
 
 
 public function change_password()

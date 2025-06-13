@@ -15,9 +15,11 @@ class Subcategory extends BaseController
 
     public function index()
     {
+		if (!$this->session->get('ad_uid')) {
+				return redirect()->to(base_url('admin'));
+			}
+			
 		$allsubcategory = $this->subcategoryModel->getAllSubcategories();
-		
-
         $data['subcategory'] =  $allsubcategory;
 		
 
@@ -77,8 +79,9 @@ class Subcategory extends BaseController
 public function addSubcategory($sub_id = null)
 {
     if (!$this->session->get('ad_uid')) {
-        return redirect()->to(base_url());
-    }
+		return redirect()->to(base_url('admin'));
+	}
+
 
     $data = [];
     $data['category'] = $this->subcategoryModel->getAllCategory();

@@ -22,6 +22,7 @@ $(document).ready(function () {
                 }
 
                 if (response.status === 1) {
+                     $('#headerName').text(response.ad_name);
                     alertBox
                         .removeClass('alert-danger')
                         .addClass('alert-success')

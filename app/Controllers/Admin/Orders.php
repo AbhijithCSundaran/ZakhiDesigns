@@ -5,30 +5,32 @@ use App\Models\Admin\OrdersModel;
 
 class Orders extends BaseController
 {
-
     public function __construct()
     {
         $this->session = \Config\Services::session();
         $this->input = \Config\Services::request();
         $this->OrdersModel = new \App\Models\Admin\OrdersModel();
-    }
-
-    
+    } 
 	public function index()
-	{
-		$data = []; 
-		$orders = $this->OrdersModel->getDatatables();
-		// print_r($orders);
-		// exit;
-		$template  = view('Admin/common/header');
-		$template .= view('Admin/common/leftmenu');
-		$template .= view('Admin/orders', $data); 
-		$template .= view('Admin/common/footer');
-		$template .= view('Admin/page_scripts/ordersjs');
-
-		return $template;
+	{   
+        if($this->session->get('ad_uid')){
+            $data = []; 
+            $orders = $this->OrdersModel->getDatatables();
+            // print_r($orders);
+            // exit;
+            $template  = view('Admin/common/header');
+            $template .= view('Admin/common/leftmenu');
+            $template .= view('Admin/orders', $data); 
+            $template .= view('Admin/common/footer');
+            $template .= view('Admin/page_scripts/ordersjs');
+            return $template;
+    }else{
+        if (!$this->session->get('ad_uid')) {
+            return redirect()->to(base_url('admin'));
+        }
+    }
+		
 	}
-	  
 	// Listing table data
        public function ajaxList()
 {
@@ -85,8 +87,10 @@ class Orders extends BaseController
    public function orderView($od_id)
     {
         $model = new \App\Models\Admin\OrdersModel();
-        if($this->session->get('ad_uid')){
-             if ($this->request->isAJAX()) {
+        if (!$this->session->get('ad_uid')) {
+            return redirect()->to(base_url('admin'));
+        }
+           if ($this->request->isAJAX()) {
             $order = $model->getOrder($od_id);
             if (!$order) {
                 return $this->response->setJSON([
@@ -114,9 +118,7 @@ class Orders extends BaseController
             . view('Admin/common/leftmenu')
             . view('Admin/order_view', $data)
             . view('Admin/common/footer')
-           // . view('Admin/page_scripts/ordersjs');
             . view('Admin/page_scripts/orders_viewjs');
-        }
 
     }
 

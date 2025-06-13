@@ -176,6 +176,7 @@ class Product extends BaseController
         $sub_id = $this->input->getPost('sub_id');
         $cat_id = $this->input->getPost('cat_id');
         $product_name = trim($this->input->getPost('product_name'));
+        $product_name = ucwords(strtolower(trim($product_name)));
         $product_code = trim($this->input->getPost('product_code'));
         $product_description = $this->input->getPost('product_description');
         $mrp = $this->input->getPost('mrp');

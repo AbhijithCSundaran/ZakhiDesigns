@@ -138,8 +138,11 @@ public function save_file()
     $mainData = $this->request->getPost();
     $files = $this->request->getFiles();
 
-    $mainData['theme_name'] = trim($mainData['theme_name'] ?? '');
-    $mainData['description'] = trim($mainData['description'] ?? '');
+    //$mainData['theme_name'] = trim($mainData['theme_name'] ?? '');
+    //$mainData['description'] = trim($mainData['description'] ?? '');
+
+    $mainData['theme_name'] = ucwords(strtolower(trim($mainData['theme_name'] ?? '')));
+    $mainData['description'] = ucfirst(strtolower(trim($mainData['description'] ?? '')));
 
     $errors = [];
 
@@ -173,7 +176,7 @@ public function save_file()
             $tempPath = $file->getTempName();
             [$width, $height] = getimagesize($tempPath);
             if ($width < $minWidth || $width > $maxWidth || $height < $minHeight || $height > $maxHeight) {
-                $errors[] = "$section image #" . ($index + 1) . " dimensions must be between {$minWidth}x{$minHeight} and {$maxWidth}x{$maxHeight} pixels. Uploaded image is {$width}x{$height}.";
+                $errors[] = "$section image " . ($index + 1) . " dimensions must be between {$minWidth}x{$minHeight} and {$maxWidth}x{$maxHeight} pixels. Uploaded image is {$width}x{$height}.";
                 return false;
             }
             return true;
@@ -199,7 +202,7 @@ public function save_file()
     if (isset($files['section1_image'])) {
         foreach ($files['section1_image'] as $i => $file) {
             if ($file->isValid() && !$file->hasMoved()) {
-                if (!$validateDimensions($file, 1200, 300, 1300, 400, $errors, 'Section 1', $i)) {
+                if (!$validateDimensions($file, 1200, 300, 1300, 400, $errors, 'Banner', $i)) {
                     continue; // skip invalid image
                 }
                 $section1[$i]['image'] = $uploadAndResize($file, 1300, 400, $uploadPath);
@@ -215,7 +218,7 @@ public function save_file()
     if (isset($files['section2_image'])) {
         foreach ($files['section2_image'] as $i => $file) {
             if ($file->isValid() && !$file->hasMoved()) {
-                if (!$validateDimensions($file, 300, 200, 400, 300, $errors, 'Section 2', $i)) {
+                if (!$validateDimensions($file, 300, 200, 400, 300, $errors, 'Offer', $i)) {
                     continue;
                 }
                 $section2[$i]['image'] = $uploadAndResize($file, 400, 300, $uploadPath);
@@ -232,7 +235,7 @@ public function save_file()
     if (isset($files['section3_image'])) {
         foreach ($files['section3_image'] as $i => $file) {
             if ($file->isValid() && !$file->hasMoved()) {
-                if (!$validateDimensions($file, 1200, 400, 1400, 500, $errors, 'Section 3', $i)) {
+                if (!$validateDimensions($file, 1200, 400, 1400, 500, $errors, 'Banner', $i)) {
                     continue;
                 }
                 $section3[$i]['image'] = $uploadAndResize($file, 1400, 500, $uploadPath);

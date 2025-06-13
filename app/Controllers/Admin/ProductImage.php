@@ -14,6 +14,9 @@ class ProductImage extends BaseController
 
     public function index()
     {
+		 if (!$this->session->get('ad_uid')) {
+           return redirect()->to(base_url('admin'));
+    }
 
         $allproductimages = $this->productimageModel->getAllProductImages();
         $data['productimages'] =  $allproductimages;

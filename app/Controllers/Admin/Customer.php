@@ -27,6 +27,10 @@ class Customer extends BaseController
         return $template;   
     }
 		public function view_cust($cust_Id = null) {
+			
+		if (!$this->session->get('ad_uid')) {
+			return redirect()->to(base_url('admin'));
+		}
 		$data = [];
 		 if ($cust_Id) {
 			$cust_val = $this->customerModel->findCustomerById($cust_Id);
@@ -219,6 +223,7 @@ public function ajaxList()
     $request = \Config\Services::request();
     $model = new \App\Models\Admin\CustomerModel();
 
+	  
     $data = $model->getDatatables();
     $total = $model->countAll();
     $filtered = $model->countFiltered();

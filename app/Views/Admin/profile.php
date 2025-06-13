@@ -48,7 +48,8 @@
                                 <div class="form-group">
                                     <label>Name</label>
                                     <input type="text" name="us_Name" class="form-control"
-                                        value="<?= $user['us_Name']; ?>" required>
+                                         value="<?= esc($user['us_Name'] ?? '') ?>" required>
+
                                 </div>
                                 <div class="form-group">
                                     <label>Email</label>

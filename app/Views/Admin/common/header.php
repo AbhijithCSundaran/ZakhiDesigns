@@ -18,7 +18,7 @@
       <meta name="author" content="codedthemes" />
 	  <meta name="csrf-token" content="<?= csrf_hash() ?>">
       <!-- Favicon icon -->
-      <link rel="icon" href="<?php echo base_url().ASSET_PATH; ?>Admin/assets/images/favicon.ico" type="image/x-icon">
+      <link rel="icon" href="<?php echo base_url().ASSET_PATH; ?>Admin/assets/images/favicon.jpg" type="image/x-icon">
     <!-- Google font-->
     <link href="https://fonts.googleapis.com/css?family=Roboto:400,500" rel="stylesheet">
     <!-- waves.css -->

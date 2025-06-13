@@ -34,3 +34,9 @@ td {
 .img-size{
   width:20px;
 }
+td a {
+  text-decoration: none !important;
+}
+.login-logo{
+width:100px;
+}

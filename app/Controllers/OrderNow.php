@@ -197,18 +197,18 @@ class OrderNow extends Controller
         $subject   = 'Order Confirmation From Zakhi Designs';
         $fromEmail = 'sandra@smartlounge.online';
         $fromName  = 'Sandra';
-        $logoUrl = base_url(ASSET_PATH . 'assets/images/logo.jpg');
+      //  $logoUrl = base_url(ASSET_PATH . 'assets/images/logo.jpg');
 
-        $logoUrl = base_url(ASSET_PATH . 'assets/images/logo.jpg');
+      $logoUrl = base_url(ASSET_PATH . 'assets/images/logo.jpg');
 
 $message = "
     <h3>🛒 Order Confirmation</h3>
     <table border='1' cellpadding='10' cellspacing='0' style='border-collapse: collapse; width: 100%; font-family: Arial, sans-serif;'>
         <tr style='background-color: #f5f5f5;'>
-            <td colspan='2' align='center'>
-                <img src='{$logoUrl}' alt='Zakhi Designs Logo' style='height: 60px;'><br>
-                <strong style='font-size: 18px;'>Zakhi Designs</strong>
-            </td>
+        <td colspan='2' align='center'>
+             <img src='{$logoUrl}' alt='Zakhi Designs Logo' style='height: 60px;'><br>
+         <strong style='font-size: 18px;'>Zakhi Designs</strong>
+         </td>
         </tr>
         <tr><th>Order ID</th><td>{$od_Id}</td></tr>
         <tr><th>Product</th><td>{$product->pr_Name}</td></tr>
@@ -246,3 +246,8 @@ $message = "
         ]);
     }
 }
+
+    // <td colspan='2' align='center'>
+    //             <img src='{$logoUrl}' alt='Zakhi Designs Logo' style='height: 60px;'><br>
+    //             <strong style='font-size: 18px;'>Zakhi Designs</strong>
+    //         </td>

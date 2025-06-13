@@ -1,3 +1,4 @@
+
 <div class="pcoded-content">
     <!-- Page-header start -->
     <div class="page-header">
@@ -29,53 +30,60 @@
                     <div class="row align-items-stretch">
                         <!-- task, page, download counter  start -->
                         <div class="col-xl-3 col-md-6">
-                            <div class="card  h-75">
-                                <div class="card-block">
-                                    <div class="row align-items-center">
-                                        <div class="col-8">
-                                            <h4 class="text-c-purple"><?= esc($latestOrderCount); ?></h4>
-                                            <h6 class="text-muted m-b-0">Latest Orders (7 days)</h6>
-                                        </div>
-                                        <div class="col-4 text-right">
-                                            <i class="bi bi-bag-heart f-28"></i>
+                            <a href="<?= base_url('admin/orders') ?>" style="text-decoration: none; color: inherit;">
+                                <div class="card  h-75">
+                                    <div class="card-block">
+                                        <div class="row align-items-center">
+                                            <div class="col-8">
+                                                <h4 class="text-c-purple"><?= esc($latestOrderCount); ?></h4>
+                                                <h6 class="text-muted m-b-0">Latest Orders (7 days)</h6>
+                                            </div>
+                                            <div class="col-4 text-right">
+                                                <i class="bi bi-bag-heart f-28"></i>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
 
-                            </div>
+                                </div>
+                            </a>
                         </div>
                         <div class="col-xl-3 col-md-6">
-                            <div class="card  h-75">
-                                <div class="card-block">
-                                    <div class="row align-items-center">
-                                        <div class="col-8">
-                                            <h4 class="text-c-green"><?= esc($totalOrderCount); ?></h4>
-                                            <h6 class="text-muted m-b-0">Total Orders</h6>
+                            <a href="<?= base_url('admin/orders') ?>" style="text-decoration: none; color: inherit;">
+                                <div class="card  h-75">
 
-                                        </div>
-                                        <div class="col-4 text-right">
-                                            <i class="bi bi-bag-heart f-28"></i>
+                                    <div class="card-block">
+                                        <div class="row align-items-center">
+                                            <div class="col-8">
+                                                <h4 class="text-c-green"><?= esc($totalOrderCount); ?></h4>
+                                                <h6 class="text-muted m-b-0">Total Orders</h6>
+
+                                            </div>
+                                            <div class="col-4 text-right">
+                                                <i class="bi bi-bag-heart f-28"></i>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
 
-                            </div>
+                                </div>
+                            </a>
                         </div>
                         <div class="col-xl-3 col-md-6">
-                            <div class="card  h-75">
-                                <div class="card-block">
-                                    <div class="row align-items-center">
-                                        <div class="col-8">
-                                            <h4 class="text-c-red"><?= esc($totalCustomerCount); ?></h4>
-                                            <h6 class="text-muted m-b-0">Total Customers</h6>
-                                        </div>
-                                        <div class="col-4 text-right">
-                                            <i class="bi bi-eyeglasses f-28"></i>
+                            <a href="<?= base_url('admin/customer') ?>" style="text-decoration: none; color: inherit;">
+                                <div class="card h-75" style="cursor: pointer;">
+                                    <div class="card-block">
+                                        <div class="row align-items-center">
+                                            <div class="col-8">
+                                                <h4 class="text-c-red"><?= esc($totalCustomerCount); ?></h4>
+                                                <h6 class="text-muted m-b-0">Total Customers</h6>
+                                            </div>
+                                            <div class="col-4 text-right">
+                                                <i class="bi bi-eyeglasses f-28"></i>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
+                            </a>
 
-                            </div>
                         </div>
                         <div class="col-xl-3 col-md-6">
                             <div class="card  h-75">
@@ -125,26 +133,26 @@
                                             </thead>
                                             <tbody>
                                                 <?php if (!empty($todaysOrders)): ?>
-                                                    <?php foreach ($todaysOrders as $order): ?>
-                                                        <tr>
-                                                            <td>#<?= esc($order->od_Id); ?></td>
-                                                            <td><?= esc($order->customer_name); ?></td>
-                                                            <td><?= esc($order->product_name); ?></td>
-                                                            <td><i
-                                                                    class="bi bi-currency-rupee"></i><?= esc(number_format($order->od_Grand_Total, 2)); ?>
-                                                            </td>
-                                                            <td><i
-                                                                    class="bi bi-currency-rupee"></i><?= esc(number_format($order->od_Selling_Price, 2)); ?>
-                                                            </td>
-                                                            <td>
-                                                                <?= esc($order->od_DiscountValue); ?>
-                                                                <?= esc($order->od_DiscountType); ?>
-                                                            </td>
-                                                            <td><i
-                                                                    class="bi bi-currency-rupee"></i><?= esc(number_format($order->od_Grand_Total, 2)); ?>
-                                                            </td>
-                                                            <td>
-                                                                <?php
+                                                <?php foreach ($todaysOrders as $order): ?>
+                                                <tr>
+                                                    <td>#<?= esc($order->od_Id); ?></td>
+                                                    <td><?= esc($order->customer_name); ?></td>
+                                                    <td><?= esc($order->product_name); ?></td>
+                                                    <td><i
+                                                            class="bi bi-currency-rupee"></i><?= esc(number_format($order->od_Grand_Total, 2)); ?>
+                                                    </td>
+                                                    <td><i
+                                                            class="bi bi-currency-rupee"></i><?= esc(number_format($order->od_Selling_Price, 2)); ?>
+                                                    </td>
+                                                    <td>
+                                                        <?= esc($order->od_DiscountValue); ?>
+                                                        <?= esc($order->od_DiscountType); ?>
+                                                    </td>
+                                                    <td><i
+                                                            class="bi bi-currency-rupee"></i><?= esc(number_format($order->od_Grand_Total, 2)); ?>
+                                                    </td>
+                                                    <td>
+                                                        <?php
                                                                 $statusLabels = [
                                                                     1 => 'New',
                                                                     2 => 'Confirmed',
@@ -153,14 +161,14 @@
                                                                 ];
                                                                 $statusText = $statusLabels[$order->od_Status] ?? 'Unknown';
                                                                 ?>
-                                                                <span class="badge badge-info"><?= esc($statusText); ?></span>
-                                                            </td>
-                                                        </tr>
-                                                    <?php endforeach; ?>
+                                                        <span class="badge badge-info"><?= esc($statusText); ?></span>
+                                                    </td>
+                                                </tr>
+                                                <?php endforeach; ?>
                                                 <?php else: ?>
-                                                    <tr>
-                                                        <td colspan="7" class="text-center">No orders today.</td>
-                                                    </tr>
+                                                <tr>
+                                                    <td colspan="7" class="text-center">No orders today.</td>
+                                                </tr>
                                                 <?php endif; ?>
                                             </tbody>
 
@@ -186,49 +194,56 @@
                                         <table class="table table-hover">
                                             <thead>
                                                 <tr>
+                                                    <th>Slno</th>
                                                     <th>Product Code</th>
                                                     <th>Product Name</th>
                                                     <th>Product Image</th>
                                                     <th>MRP</th>
                                                     <th>Selling Price</th>
                                                     <th>Product Stock</th>
-
+                                                    <th>Details</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <?php foreach ($latestProducts as $product): ?>
-                                                    <tr>
-                                                        <td><?= esc($product->pr_Code); ?></td>
-                                                        <td><?= esc($product->pr_Name); ?></td>
+                                                <?php $i = 1; foreach ($latestProducts as $product): ?>
+                                                <tr>
+                                                    <td><?= $i++; ?></td>
+                                                    <td><?= esc($product->pr_Code); ?></td>
+                                                    <td><?= esc($product->pr_Name); ?></td>
 
-                                                        <td>
-                                                            <?php if (!empty($product->main_image)): ?>
-                                                                <img style="height: 80px;"
-                                                                    src="<?= base_url('uploads/productmedia/' . esc($product->main_image)); ?>"
-                                                                    alt="<?= esc($product->pr_Name); ?>">
-                                                            <?php else: ?>
-                                                                <!-- <span class="text-muted">No image</span> -->
-                                                                <img style="height: 80px;"
-                                                                    src="<?= base_url('public/Admin/assets/images/default.jpg') ?>">
-                                                            <?php endif; ?>
-                                                        </td>
+                                                    <td>
+                                                        <?php
+                                                            $imageSrc = !empty($product->main_image)
+                                                                ? base_url('uploads/productmedia/' . esc($product->main_image))
+                                                                : base_url('public/Admin/assets/images/default.jpg');
+                                                            ?>
 
-                                                        <td><i class="bi bi-currency-rupee"></i><?= esc($product->mrp); ?>
-                                                        </td>
-                                                        <td><i
-                                                                class="bi bi-currency-rupee"></i><?= esc($product->pr_Selling_Price); ?>
-                                                        </td>
-                                                        <td><?= esc($product->pr_Stock); ?></td>
-                                                    </tr>
+                                                        <img src="<?= $imageSrc ?>" alt="<?= esc($product->pr_Name); ?>"
+                                                            class="img-thumbnail view-image" data-img="<?= $imageSrc ?>"
+                                                            style="height: 80px; cursor: pointer;">
+                                                    </td>
+
+
+                                                    <td><i class="bi bi-currency-rupee"></i><?= esc($product->mrp); ?>
+                                                    </td>
+                                                    <td><i
+                                                            class="bi bi-currency-rupee"></i><?= esc($product->pr_Selling_Price); ?>
+                                                    </td>
+                                                    <td><?= esc($product->pr_Stock); ?></td>
+                                                    <td><a
+                                                            href="<?= base_url('admin/product/view/' . $product->pr_Id); ?>">View
+                                                            Details</a>
+                                                </tr>
                                                 <?php endforeach; ?>
                                             </tbody>
-
                                         </table>
+
                                         <div class="text-right m-r-20">
-                                            <a href="<?php echo base_url('admin/product') ?>"
-                                                class=" b-b-primary text-primary">View all Products</a>
+                                            <a href="<?= base_url('admin/product') ?>"
+                                                class="b-b-primary text-primary">View all Products</a>
                                         </div>
                                     </div>
+
                                 </div>
                             </div>
                         </div>
@@ -240,3 +255,26 @@
         </div>
     </div>
 </div>
+<!-- Image Modal -->
+<!-- Image Modal -->
+<div class="modal fade" id="imageModal" tabindex="-1" aria-labelledby="imageModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-body text-center">
+                <img id="modalImage" src="" alt="Product Image" class="img-fluid">
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        $(document).on('click', '.view-image', function () {
+            let imgSrc = $(this).data('img');
+            $('#modalImage').attr('src', imgSrc);
+            let imageModal = new bootstrap.Modal(document.getElementById('imageModal'));
+            imageModal.show();
+        });
+    });
+</script>

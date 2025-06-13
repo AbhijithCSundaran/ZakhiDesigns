@@ -65,7 +65,10 @@ class Product extends Controller
     $reviewModel = new ReviewModel();
     $data['product'] = $products;
 		$data['avg_rating'] = 1;
-        $keyword = $this->request->getGet('keyword');
+      //  $keyword = $this->request->getGet('keyword');
+        
+    $keyword = trim($this->request->getGet('keyword'));
+
         $products = $keyword ? $this->productdisplayModel->searchProducts($keyword) : [];
 
         $products = array_values(array_unique($products, SORT_REGULAR));

@@ -11,8 +11,8 @@ class OrdersModel extends Model {
         
 		
 	protected $table = 'order_detail';
-    protected $primaryKey = 'or_Id';
-    protected $allowedFields = ['or_Status','tracker_Link','od_Status','cu_Id']; // Adjust to your table
+    protected $primaryKey = 'od_Id';
+    protected $allowedFields = ['tracker_Link','od_Status','cus_Id']; // Adjust to your table
 
     // For DataTables
 //    public function getDatatables($searchValue = null)
@@ -90,12 +90,29 @@ public function getDatatables($searchValue = null, $start = 0, $length = 10)
    
 public function getOrder($od_id)
 {
+    // return $this->db->table('order_detail')
+    //     ->select('order_detail.*, product.pr_Code, product.pr_Description, product.pr_Name')
+    //     ->join('product', 'product.pr_Id = order_detail.pr_Id')
+    //     ->where('order_detail.od_Id', $od_id)
+    //     ->get()
+    //     ->getRow();
+
+    // return $this->db->table('order_detail')
+    // ->select('order_detail.*, product.pr_Code, product.pr_Description, product.pr_Name')
+    // ->join('product', 'product.pr_Id = order_detail.pr_Id')
+    // ->where('order_detail.od_Id', $od_id)
+    // ->where('order_detail.od_Status IS NOT NULL') // exclude NULL status
+    // ->get()
+    // ->getRow();
     return $this->db->table('order_detail')
-        ->select('order_detail.*, product.pr_Code, product.pr_Description, product.pr_Name')
-        ->join('product', 'product.pr_Id = order_detail.pr_Id')
-        ->where('order_detail.od_Id', $od_id)
-        ->get()
-        ->getRow();
+    ->select('order_detail.*, product.pr_Code, product.pr_Description, product.pr_Name')
+    ->join('product', 'product.pr_Id = order_detail.pr_Id')
+    ->where('order_detail.od_Id', $od_id)
+    ->whereIn('order_detail.od_Status', [1, 2, 3, 4]) // include only specific statuses
+    ->get()
+    ->getRow();
+
+
 }
 
 

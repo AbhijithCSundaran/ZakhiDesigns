@@ -26,11 +26,18 @@ class OrderModel extends Model
      */
     public function getOrdersByUser($userId)
 	{
-		return $this->select('order_detail.*, product.*')
-					->join('product', 'product.pr_Id = order_detail.pr_Id')
-					->where('order_detail.cus_Id', $userId)
-					->orderBy('order_detail.od_createdon', 'DESC')
-					->findAll();
+	// 	return $this->select('order_detail.*, product.*')
+	// 				->join('product', 'product.pr_Id = order_detail.pr_Id')
+	// 				->where('order_detail.cus_Id', $userId)
+	// 				->orderBy('order_detail.od_createdon', 'DESC')
+	// 				->findAll();
+    return $this->select('order_detail.*, product.*')
+            ->join('product', 'product.pr_Id = order_detail.pr_Id')
+            ->where('order_detail.cus_Id', $userId)
+            ->where('order_detail.od_Status', 1) // added condition
+            ->orderBy('order_detail.od_createdon', 'DESC')
+            ->findAll();
+
 	}
 
 

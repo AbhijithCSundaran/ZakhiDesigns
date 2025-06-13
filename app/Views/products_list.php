@@ -42,14 +42,26 @@
 
                         <div class="item-name p-1"><?= esc($item['pr_Name']); ?></div>
                         <div class="item-price">
-						<span style="color: #999;">
-                                    <del>
-                                        <i class="bi bi-currency-rupee"></i><?= esc($item['mrp']); ?>
-                                    </del>
-                                </span>
-                                &nbsp;
-                            <i class="bi bi-currency-rupee"></i>&nbsp;<?= esc($item['pr_Selling_Price']); ?>
-                        </div>
+    <?php if (!empty($item['pr_Discount_Value']) && $item['pr_Discount_Value'] > 0): ?>
+        <!-- MRP with strikethrough -->
+        <span style="color: #999;">
+            <del>
+                <i class="bi bi-currency-rupee"></i><?= esc($item['mrp']); ?>
+            </del>
+        </span>
+        &nbsp;
+        <!-- Selling Price -->
+        <span>
+            <i class="bi bi-currency-rupee"></i><?= esc($item['pr_Selling_Price']); ?>
+        </span>
+    <?php else: ?>
+        <!-- Only Selling Price -->
+        <span>
+            <i class="bi bi-currency-rupee"></i><?= esc($item['pr_Selling_Price']); ?>
+        </span>
+    <?php endif; ?>
+</div>
+
                         <div class="text-center mt-2">
                              <div class="col-md-12 text-center">
                                     <button class="order-btn" onclick="window.location.href='<?= base_url('product/product_details/' . $item['pr_Id']); ?>'"></button>

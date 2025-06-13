@@ -14,6 +14,9 @@ $routes->get('webreg', 'Weblogin::webReg');
 $routes->post('customerauth', 'Weblogin::customerAuthen');
 $routes->get('logout', 'Weblogin::logout');
 
+$routes->set404Override('\App\Controllers\ErrorWeb::show404');
+
+
 
 
 
@@ -93,6 +96,7 @@ $routes->get('delivery', 'Delivery::index');
 $routes->get('Privacypolicy', 'Privacypolicy::index');
 $routes->get('Termsandconditions', 'Termsandconditions::index');
 $routes->get('Returnpolicy', 'Returnpolicy::index');
+
 
 
 
@@ -212,6 +216,8 @@ $routes->post('admin/profile/list', 'Admin\Profile::ajaxList');
 
 //logout
 $routes->post('admin/logout', 'Admin\Auth::logout');
+
+
 
 
 

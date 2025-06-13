@@ -83,17 +83,37 @@ class ProductDisplayModel extends Model
             ->findAll();
 
     }
-    public function searchProducts($keyword)
-	{
-		return $this->select('product.*, AVG(reviews.rating) AS ratings')
-            ->join('reviews', 'reviews.pr_Id = product.pr_Id', 'left')
-            ->where('product.pr_Status', 1)
-            ->like('product.pr_Name', $keyword)
-            ->groupBy('product.pr_Id')
-            ->findAll();
+//    public function searchProducts($keyword)
+// {
+//     return $this->select('product.*, AVG(reviews.rating) AS ratings')
+//         ->join('reviews', 'reviews.pr_Id = product.pr_Id', 'left')
+//         ->where('product.pr_Status', 1)
+//         ->groupStart()
+//             ->like('product.pr_Name', $keyword)
+//             ->orLike('product.pr_Description', $keyword)
+//             ->orLike('product.pr_Code', $keyword)
+//         ->groupEnd()
+//         ->groupBy('product.pr_Id')
+//         ->findAll();
+// }
+public function searchProducts($keyword)
+{
+    // Normalize keyword
+    $keyword = trim($keyword);
+    $keywordNoSpace = str_replace(' ', '', $keyword);
 
-			
-	}
+    return $this->select('product.*, AVG(reviews.rating) AS ratings')
+        ->join('reviews', 'reviews.pr_Id = product.pr_Id', 'left')
+        ->where('product.pr_Status', 1)
+        ->groupStart()
+            ->like('REPLACE(product.pr_Name, " ", "")', $keywordNoSpace) // Match without spaces
+            ->orLike('product.pr_Name', $keyword)                       // Match with spaces
+        ->groupEnd()
+        ->groupBy('product.pr_Id')
+        ->findAll();
+}
+
+
 	 public function getProductById($id)
     {
 	

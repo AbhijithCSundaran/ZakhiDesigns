@@ -110,5 +110,12 @@
 .banner-btm-spce{
     margin-bottom: 3px !important;
 }
-
+@media (max-width: 768px) {
+    .category-promo .section2-item {
+        margin-bottom: 10px;
+    }
+     body, html {
+        overflow-x: hidden;
+    }
+}
 

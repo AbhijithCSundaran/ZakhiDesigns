@@ -400,11 +400,11 @@ $('#filevideo').on('change', function() {
     var file = this.files[0];
 
     if (file) {
-        var maxSizeMB = 8; 
+        var maxSizeMB = 10;
         var allowedTypes = ['video/mp4', 'video/avi', 'video/mpeg', 'video/quicktime', 'video/x-matroska'];
 
         if (file.size > maxSizeMB * 1024 * 1024) {
-            alert('Your video size is too large. Please upload a video within 8MB.');
+            alert('Your video size is too large. Please upload a video within 10MB.');
             this.value = '';
             return;
         }
@@ -415,7 +415,6 @@ $('#filevideo').on('change', function() {
             return;
         }
     }
-
 
     var formData = new FormData($('#videoUploadForm')[0]);
 
@@ -495,7 +494,7 @@ function openvideoModal(productId, productName) {
                             data-product-id="${productId}" 
                             data-video-name="${response.video}" 
                             title="Delete this video"
-                            style="position: absolute;  right: 4px; cursor: pointer; color: red; font-size: 17px;">
+                            style="position: absolute;  right: -3px; top: -4px; cursor: pointer; color: red; font-size: 17px;">
                             <i class="fa fa-trash"></i>
                         </span>
                     </div>

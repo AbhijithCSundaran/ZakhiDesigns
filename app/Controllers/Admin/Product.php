@@ -195,7 +195,7 @@ class Product extends BaseController
         if (empty($cat_id) || empty($product_name) || empty($product_code) || empty($product_stock) || empty($reset_stock) || empty($mrp) || empty($available_color) || empty($size)) {
             return $this->response->setJSON([
                 'status' => 'error',
-                'message' => 'All required fields must be filled.'
+                'message' => 'All Required Fields Must Be Filled.'
             ]);
         }
 // Check if product name already exists (excluding current ID)
@@ -203,7 +203,7 @@ if ($this->productModel->isProductExists($product_name, $pr_id)) {
     return $this->response->setJSON([
         'status' => 'error',
         'field'  => 'product_name',
-        'message' => 'Product name already exists.'
+        'message' => 'Product Name Already Exists.'
     ]);
 }
 
@@ -212,7 +212,7 @@ if ($this->productModel->isProductCodeExists($product_code, $pr_id)) {
     return $this->response->setJSON([
         'status' => 'error',
         'field'  => 'pr_Code',
-        'message' => 'Product code already exists.'
+        'message' => 'Product Code Already Exists.'
     ]);
 }
 
@@ -220,7 +220,7 @@ if ($this->productModel->isProductCodeExists($product_code, $pr_id)) {
         if (($discount_type == "%" && $discount_value > 100) || ($discount_type == "Rs" && $discount_value >= $mrp) || ($discount_value >= $mrp) ) {
             return $this->response->setJSON([
                 'status' => 'error',
-                'message' => 'Enter a Valid Discount'
+                'message' => 'Enter A Valid Discount'
             ]);
         }
 
@@ -294,7 +294,7 @@ if ($this->productModel->isProductCodeExists($product_code, $pr_id)) {
 
                 return $this->response->setJSON([
                     'status' => 1,
-                    'msg' => 'Product created successfully.',
+                    'msg' => 'Product Created Successfully.',
                     'redirect' => base_url('admin/product')
                 ]);
             } else {
@@ -308,12 +308,12 @@ if ($this->productModel->isProductCodeExists($product_code, $pr_id)) {
 
                 return $this->response->setJSON([
                     'status' => 1,
-                    'msg' => 'Product updated successfully.',
+                    'msg' => 'Product Updated Successfully.',
                 ]);
             } else {
                 return $this->response->setJSON([
                     'status' => 0,
-                    'msg' => 'Product not updated successfully.',
+                    'msg' => 'Product Not Updated Successfully.',
                 ]);
             }
         }
@@ -392,13 +392,13 @@ if ($this->productModel->isProductCodeExists($product_code, $pr_id)) {
             } else {
                 echo json_encode([
                     'success' => false,
-                    'msg' => 'Failed to Delete Product.'
+                    'msg' => 'Failed To Delete Product.'
                 ]);
             }
         } else {
             echo json_encode([
                 'success' => false,
-                'msg' => 'Invalid request.'
+                'msg' => 'Invalid Request.'
             ]);
         }
     }
@@ -414,7 +414,7 @@ if ($this->productModel->isProductCodeExists($product_code, $pr_id)) {
         $image = $request['image'] ?? null;
 
         if (!$productId || !$image) {
-            return $this->response->setJSON(['success' => false, 'message' => 'Missing product_id or image.']);
+            return $this->response->setJSON(['success' => false, 'message' => 'Missing Product id Or Image.']);
         }
 
         // Delete from folder
@@ -430,7 +430,7 @@ if ($this->productModel->isProductCodeExists($product_code, $pr_id)) {
 
         return $this->response->setJSON([
             'success' => $deleted,
-            'message' => $deleted ? 'Image deleted successfully.' : 'Image not deleted from DB.'
+            'message' => $deleted ? 'Image deleted successfully.' : 'Image Not Deleted From DB.'
         ]);
     }
 
@@ -469,13 +469,13 @@ if ($this->productModel->isProductCodeExists($product_code, $pr_id)) {
 
             return $this->response->setJSON([
                 'status' => 'success',
-                'message' => 'Video uploaded successfully.',
+                'message' => 'Video Uploaded Successfully.',
                 'video' => $newName
             ]);
         } else {
             return $this->response->setStatusCode(400)->setJSON([
                 'status' => 'error',
-                'message' => 'Invalid video file.'
+                'message' => 'Invalid Video File.'
             ]);
         }
     }
@@ -500,13 +500,13 @@ if ($this->productModel->isProductCodeExists($product_code, $pr_id)) {
             if (!unlink($filePath)) {
                 return $this->response->setJSON([
                     'status' => 'error',
-                    'message' => 'Failed to delete file. Check permissions.'
+                    'message' => 'Failed To Delete File. Check Permissions.'
                 ]);
             }
         } else {
             return $this->response->setJSON([
                 'status' => 'error',
-                'message' => 'File not found on server.'
+                'message' => 'File Not Found On Server.'
             ]);
         }
 
@@ -519,7 +519,7 @@ if ($this->productModel->isProductCodeExists($product_code, $pr_id)) {
         } else {
             return $this->response->setJSON([
                 'status' => 'error',
-                'message' => 'Failed to update database.'
+                'message' => 'Failed To Update Database.'
             ]);
         }
     }
@@ -540,7 +540,7 @@ if ($this->productModel->isProductCodeExists($product_code, $pr_id)) {
             ]);
         }
 
-        return $this->response->setJSON(['status' => 'error', 'message' => 'No video found']);
+        return $this->response->setJSON(['status' => 'error', 'message' => 'No Video Found']);
     }
 
     //ChangeStatus
@@ -556,7 +556,7 @@ if ($this->productModel->isProductCodeExists($product_code, $pr_id)) {
         if (!$product) {
             return $this->response->setJSON([
                 'success' => false,
-                'message' => 'Product not found'
+                'message' => 'Product Not Found'
             ]);
         }
 
@@ -571,7 +571,7 @@ if ($this->productModel->isProductCodeExists($product_code, $pr_id)) {
         } else {
             return $this->response->setJSON([
                 'success' => false,
-                'message' => 'Failed to update status'
+                'message' => 'Failed To Update Status'
             ]);
         }
     }

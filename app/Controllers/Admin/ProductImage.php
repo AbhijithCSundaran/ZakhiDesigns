@@ -50,7 +50,7 @@ class ProductImage extends BaseController
         $files = $this->request->getFiles();
     
         if (!$pr_id || empty($files['media_files'])) {
-            return $this->response->setJSON(['status' => 0, 'msg' => 'Product and files are required.']);
+            return $this->response->setJSON(['status' => 0, 'msg' => 'Product And Files Are Required.']);
         }
     
         $mediaFiles = $files['media_files'];
@@ -82,9 +82,9 @@ class ProductImage extends BaseController
     
             $this->productimageModel->productimageInsert($data);
     
-            return $this->response->setJSON(['status' => 1, 'msg' => 'Media uploaded successfully.']);
+            return $this->response->setJSON(['status' => 1, 'msg' => 'Media Uploaded Successfully.']);
         } else {
-            return $this->response->setJSON(['status' => 0, 'msg' => 'No valid files uploaded.']);
+            return $this->response->setJSON(['status' => 0, 'msg' => 'No Valid Files Uploaded.']);
         }
     }
     

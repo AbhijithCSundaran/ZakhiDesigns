@@ -106,6 +106,7 @@ public function saveSubcategory() {
     $sub_id = $this->input->getPost('sub_id');
     $cat_id = $this->input->getPost('cat_id');
     $subcategory_name = $this->input->getPost('subcategory_name');
+	$subcategory_name = ucwords(strtolower(trim($subcategory_name)));
     $discount_value = $this->input->getPost('discount_value');
     $discount_type = $this->input->getPost('discount_type');
 

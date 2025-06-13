@@ -12,34 +12,7 @@ class OrdersModel extends Model {
 		
 	protected $table = 'order_detail';
     protected $primaryKey = 'od_Id';
-    protected $allowedFields = ['tracker_Link','od_Status','cus_Id']; // Adjust to your table
-
-    // For DataTables
-//    public function getDatatables($searchValue = null)
-//     {
-//         $builder = $this->db->table('order_detail')
-//             ->select([
-//                 'order_detail.od_Id',
-//                 'order_detail.od_Quantity',
-//                 'order_detail.od_Status',
-//                 'order_detail.od_createdon',
-//                 'product.pr_Name',
-//                 'product.pr_Code',
-//                 'customer.cust_Name',
-//                 'customer.cust_Email',
-//                 'customer.cust_Phone'
-//             ])
-//             ->join('product', 'product.pr_Id = order_detail.pr_Id', 'left')
-//             ->join('customer', 'customer.cust_Id = order_detail.cus_Id', 'left');
-
-//             if (!empty($searchValue)) {
-//                 $builder->groupStart()
-//                         ->like('customer.cust_Name', $searchValue)
-//                         ->groupEnd();
-//             }
-
-//         return $builder->get()->getResult();
-//     }
+    protected $allowedFields = ['tracker_Link','od_Status','cus_Id']; 
 public function getDatatables($searchValue = null, $start = 0, $length = 10)
 {
     $builder = $this->db->table('order_detail')
@@ -54,6 +27,7 @@ public function getDatatables($searchValue = null, $start = 0, $length = 10)
             'customer.cust_Email',
             'customer.cust_Phone'
         ])
+        ->where('od_Status!=', '')
         ->join('product', 'product.pr_Id = order_detail.pr_Id', 'left')
         ->join('customer', 'customer.cust_Id = order_detail.cus_Id', 'left');
 
@@ -90,20 +64,6 @@ public function getDatatables($searchValue = null, $start = 0, $length = 10)
    
 public function getOrder($od_id)
 {
-    // return $this->db->table('order_detail')
-    //     ->select('order_detail.*, product.pr_Code, product.pr_Description, product.pr_Name')
-    //     ->join('product', 'product.pr_Id = order_detail.pr_Id')
-    //     ->where('order_detail.od_Id', $od_id)
-    //     ->get()
-    //     ->getRow();
-
-    // return $this->db->table('order_detail')
-    // ->select('order_detail.*, product.pr_Code, product.pr_Description, product.pr_Name')
-    // ->join('product', 'product.pr_Id = order_detail.pr_Id')
-    // ->where('order_detail.od_Id', $od_id)
-    // ->where('order_detail.od_Status IS NOT NULL') // exclude NULL status
-    // ->get()
-    // ->getRow();
     return $this->db->table('order_detail')
     ->select('order_detail.*, product.pr_Code, product.pr_Description, product.pr_Name')
     ->join('product', 'product.pr_Id = order_detail.pr_Id')
@@ -111,7 +71,6 @@ public function getOrder($od_id)
     ->whereIn('order_detail.od_Status', [1, 2, 3, 4]) // include only specific statuses
     ->get()
     ->getRow();
-
 
 }
 

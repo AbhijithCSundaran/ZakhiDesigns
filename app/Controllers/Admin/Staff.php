@@ -71,6 +71,7 @@ class Staff extends BaseController
 	{
 		$us_id         = $this->input->getPost('us_id');
 		$staffname     = $this->input->getPost('staffname');
+		$staffname = ucwords(strtolower(trim($staffname)));
 		$staffemail    = $this->input->getPost('staffemail');
 		$staffotemail  = $this->input->getPost('staffotemail');
 		$mobile        = $this->input->getPost('mobile');

@@ -53,7 +53,7 @@ $(document).ready(function () {
 
                     <div id="tracking-link" class="form-group card-block mt-2" style="display: none;">
                         <label for="trackingUrl"><strong>Tracking Link:</strong></label>
-                        <textarea class="form-control form-control-sm" id="trackingUrl" rows="2" placeholder="Enter tracking link here...">${order.tracker_Link}</textarea>
+                        <textarea class="form-control form-control-sm" id="trackingUrl" rows="2" placeholder="Enter tracking link here...">${order.tracker_Link ? order.tracker_Link : ''}</textarea>
                     </div>
                 `);
 

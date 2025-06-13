@@ -72,6 +72,7 @@ class Category extends BaseController
     public function saveCategory() {
     $cat_id = $this->input->getPost('cat_id');
     $category_name = $this->input->getPost('category_name');
+    $category_name = ucwords(strtolower(trim($category_name)));
     $discount_value = $this->input->getPost('discount_value');
     $discount_type = $this->input->getPost('discount_type');
 

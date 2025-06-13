@@ -330,13 +330,13 @@ class Product extends Controller
             } else {
                 return $this->response->setJSON([
                     'status' => 0,
-                    'msg'    => 'Failed to place order.'
+                    'msg'    => 'Failed To Place Order.'
                 ]);
             }
         } else {
             return $this->response->setJSON([
                 'status' => 0,
-                'msg'    => 'Please select Size, Color and Quantity.',
+                'msg'    => 'Please Select Size, Color And Quantity.',
             ]);
         }
     }

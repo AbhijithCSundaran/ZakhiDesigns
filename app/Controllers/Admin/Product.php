@@ -199,22 +199,10 @@ class Product extends BaseController
             ]);
         }
 // Check if product name already exists (excluding current ID)
-if ($this->productModel->isProductExists($product_name, $pr_id)) {
-    return $this->response->setJSON([
-        'status' => 'error',
-        'field'  => 'product_name',
-        'message' => 'Product Name Already Exists.'
-    ]);
-}
+
 
 // Check if product code already exists (excluding current ID)
-if ($this->productModel->isProductCodeExists($product_code, $pr_id)) {
-    return $this->response->setJSON([
-        'status' => 'error',
-        'field'  => 'pr_Code',
-        'message' => 'Product Code Already Exists.'
-    ]);
-}
+
 
         
         if (($discount_type == "%" && $discount_value > 100) || ($discount_type == "Rs" && $discount_value >= $mrp) || ($discount_value >= $mrp) ) {
@@ -286,6 +274,20 @@ if ($this->productModel->isProductCodeExists($product_code, $pr_id)) {
         ];
 
         if (empty($pr_id)) {
+            if ($this->productModel->isProductExists($product_name, $pr_id)) {
+                    return $this->response->setJSON([
+                        'status' => 'error',
+                        'field'  => 'product_name',
+                        'message' => 'Product Name Already Exists.'
+                    ]);
+                }
+                if ($this->productModel->isProductCodeExists($product_code, $pr_id)) {
+    return $this->response->setJSON([
+        'status' => 'error',
+        'field'  => 'pr_Code',
+        'message' => 'Product Code Already Exists.'
+    ]);
+}
             // Insert new product
             $data['pr_createdon'] = date("Y-m-d H:i:s");
             $data['pr_createdby'] = $this->session->get('ad_uid');
@@ -444,12 +446,13 @@ if ($this->productModel->isProductCodeExists($product_code, $pr_id)) {
         if ($videoFile && $videoFile->isValid() && !$videoFile->hasMoved()) {
 
             // Check file size (max 4MB = 4 * 1024 * 1024 = 4194304 bytes)
-            if ($videoFile->getSize() > 4194304) {
-                return $this->response->setStatusCode(400)->setJSON([
-                    'status' => 'error',
-                    'message' => 'Your video size is too large. Please upload a video within 4MB.'
-                ]);
-            }
+   if ($videoFile->getSize() > 10485760) { // 10 * 1024 * 1024
+    return $this->response->setStatusCode(400)->setJSON([
+        'status' => 'error',
+        'message' => 'Your video size is too large. Please upload a video within 10MB.'
+    ]);
+}
+
 
             // Check MIME type (allow only video formats)
             $allowedMimeTypes = ['video/mp4', 'video/avi', 'video/mpeg', 'video/quicktime', 'video/x-matroska'];

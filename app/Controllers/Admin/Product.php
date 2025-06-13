@@ -444,12 +444,12 @@ if ($this->productModel->isProductCodeExists($product_code, $pr_id)) {
         if ($videoFile && $videoFile->isValid() && !$videoFile->hasMoved()) {
 
             // Check file size (max 4MB = 4 * 1024 * 1024 = 4194304 bytes)
-            if ($videoFile->getSize() > 4194304) {
-                return $this->response->setStatusCode(400)->setJSON([
-                    'status' => 'error',
-                    'message' => 'Your video size is too large. Please upload a video within 4MB.'
-                ]);
-            }
+            if ($videoFile->getSize() > 10485760) { // 10 * 1024 * 1024
+    return $this->response->setStatusCode(400)->setJSON([
+        'status' => 'error',
+        'message' => 'Your video size is too large. Please upload a video within 10MB.'
+    ]);
+}
 
             // Check MIME type (allow only video formats)
             $allowedMimeTypes = ['video/mp4', 'video/avi', 'video/mpeg', 'video/quicktime', 'video/x-matroska'];

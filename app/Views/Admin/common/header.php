@@ -165,7 +165,7 @@
                                         $username = $session->get('ad_uname');
                                     ?>  
                                   
-                                  <span id="headerName"><?= session()->get('ad_name'); ?></span>
+                                  <span id="headerName"><?= session()->get('ad_uname'); ?></span>
 
                                   <i class="ti-angle-down"></i>
                               </a>

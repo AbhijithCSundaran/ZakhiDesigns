@@ -1,6 +1,6 @@
 <section class="hero-banner py-5" style="background-color: #f8f9fa;">
     <div class="container-lg">
-        <h4 class="text-center mb-5"><u>DELIVERY POLICY</u></h4>
+        <h4 class="text-center mb-5"><strong><u>DELIVERY POLICY</u></strong></h4>
         <div class="row justify-content-center">
             <div class="col-md-8 ms-4">
                 <div class="policy-section mb-4">

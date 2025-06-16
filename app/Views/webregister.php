@@ -2,7 +2,7 @@
     <div class="text-center logo ">
         <img class="img-align" src="<?php echo base_url() . ASSET_PATH; ?>assets/images/logo.jpg" />
     </div>
-    <h5 class="text-center">Register</h5>
+    <h5 class="text-center">Create New Account</h5>
 </div>
 <div id="regError" class="text-danger text-center"></div>
 <form id="registerForm" method="post">
@@ -38,7 +38,7 @@
         </div>
     </div>
     <div class="d-flex justify-content-center">
-        <button type="submit" class="btn btn-primary">Register</button>
+        <button type="submit" class="btn btn-primary">Create Now</button>
     </div>
     <div class="d-flex mt-2">
         <p> Already have an account with us ? </p>

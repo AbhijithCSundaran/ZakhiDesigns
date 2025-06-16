@@ -104,7 +104,7 @@ class Customer extends BaseController
 				// INSERT
 			// Check if email already exists
 				if ($customerModel->getCustomerByEmail($custemail)) {
-					return $this->response->setJSON(['status' => 'error', 'msg' => 'User Email Already Exists. Please Login To Continue.']);
+					return $this->response->setJSON(['status' => 'error', 'msg' => 'User Email Already Exists. Try Signing Up With Another One.']);
 				}
 				$data = [
 				'cust_Name'          => $custname,

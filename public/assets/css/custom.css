@@ -117,5 +117,8 @@
      body, html {
         overflow-x: hidden;
     }
+    .product-img{
+        height:auto;
+    }
 }
 

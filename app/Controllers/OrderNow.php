@@ -30,6 +30,9 @@ class OrderNow extends Controller
 
         $zd_uid = session()->get('zd_uid');
         $model = new AddressModel();
+       $orderModel = new OrderNowModel();
+    
+       $od_Id = $this->request->getPost('od_Id');
 
         $addresses = $model->getAllAddresses($zd_uid);
 		$orders = $orderModel->getOrdersById($od_Id);

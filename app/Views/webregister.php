@@ -4,7 +4,7 @@
     </div>
     <h5 class="text-center">Create New Account</h5>
 </div>
-<div id="regError" class="text-danger text-center"></div>
+<div id="regError" class="text-danger text-center p-2"></div>
 <form id="registerForm" method="post">
     <div class="floating-label-group">
         <input type="text" class="form-control" id="name" name="custname" placeholder=" " required />

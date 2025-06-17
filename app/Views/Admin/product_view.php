@@ -25,18 +25,18 @@
 
     <div class="container mt-5">
         <div class="row justify-content-center">
-            <div class="col-lg-10">
+            <div class="col-lg-100  width: 119%; max-width: 105%;" >
                 <div class="card shadow-lg border-0">
-                    <div class="card-header bg-primary text-white">
+                    <div class="card-header bg-white text-dark border-bottom">
                         <h4 class="mb-0"><i class="bi bi-box-seam"></i> <?= esc($product->pr_Name); ?></h4>
                     </div>
-                    <div class="card-body">
+                    <div class="card-body p-3">
                         <div id="messageBox" class="alert alert-success d-none"></div>
 
                         <div class="row">
-                            <div class="col-md-6 mb-3">
+                          <div class="col-md-6 mb-4" style="font-size: 18px;">
 
-                                <p><strong>Code:</strong> <?= esc($product->pr_Code); ?></p>
+                                <p ><strong>Code:</strong> <?= esc($product->pr_Code); ?></p>
                                 <p><strong>Description:</strong> <?= esc($product->pr_Description); ?></p>
                                 <p><strong>Category:</strong> <?= esc($product->cat_Name); ?></p>
                                 <p><strong>Subcategory:</strong> <?= esc($product->sub_Category_Name); ?></p>
@@ -44,7 +44,7 @@
                                 <p><strong>MRP:</strong> ₹<?= esc($product->mrp); ?></p>
                             </div>
 
-                            <div class="col-md-6 mb-3">
+                            <div class="col-md-6 mb-3" style="font-size: 18px;">
 
                                 <p><strong>Stock:</strong> <?= esc($product->pr_Stock); ?></p>
                                 <p><strong>Discount:</strong> <?= esc($product->pr_Discount_Value); ?>
@@ -62,8 +62,8 @@
         $sizes = explode(',', $product->pr_Size);
         foreach ($sizes as $size):
     ?>
-                                    <span class="d-inline-flex justify-content-center align-items-center rounded-circle border bg-light text-dark me-2"
-                                                                                style="width: 40px; height: 40px;">
+                                    <span class="d-inline-flex justify-content-center align-items-center rounded-circle border bg-light text-dark me-2
+                                                                               text-center" style="width: 40px; height: 40px; font-size: 9px; line-height:1px; white-space: normal ">
                                         <?= esc(trim($size)); ?>
                                     </span>
                                     <?php endforeach; ?>

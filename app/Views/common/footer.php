@@ -147,6 +147,17 @@
                 $('#mainModal').modal('show');
             });
         });
+
+        //when forgot password Clicked inside login modal
+         $(document).on('click', '#showForgotForm', function (e) {
+            e.preventDefault();
+
+            // Load Forgot form in the same modal
+            $('#modalBody').load("<?= base_url('webforgot'); ?>", function () {
+                $('#mainModal').modal('show');
+            });
+        });
+
         // When "Login" is clicked inside register modal
         $(document).on('click', '#showLoginFromRegister', function (e) {
             e.preventDefault();
@@ -155,6 +166,7 @@
                 $('#mainModal').modal('show');
             });
         });
+        
 
 
         // Login form submission (delegated because it's loaded dynamically)
@@ -253,16 +265,24 @@
 
     });
 	
-	
 	document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function (e) {
-            e.preventDefault();
-            const target = document.querySelector(this.getAttribute('href'));
-            if (target) {
-                target.scrollIntoView({ behavior: 'smooth' });
-            }
-        });
+    anchor.addEventListener('click', function (e) {
+        const href = this.getAttribute('href');
+
+        // Skip if href is exactly '#' or empty
+        if (href === '#' || href.length < 2) {
+            return;
+        }
+
+        e.preventDefault();
+
+        const target = document.querySelector(href);
+        if (target) {
+            target.scrollIntoView({ behavior: 'smooth' });
+        }
     });
+});
+
 
 </script>
 

@@ -11,10 +11,11 @@ class CustomerLoginModel extends Model {
         }
 
         public function getLoginAccount($email, $password) {
-		
 		return $this->db->query("select * from customer where cust_Email = '".$email."' and cust_Password = '".$password."'")->getRow();
-
-	}
+	    }
+        public function getEmailExist($forgotCustEmail) {
+            return $this->db->query("select cust_Id,cust_Email from customer where cust_Email = '".$forgotCustEmail."'")->getRow();
+        }
 
     }
 

@@ -2,7 +2,7 @@
     <div class="text-center logo">
         <img class="img-align" src="<?php echo base_url().ASSET_PATH; ?>assets/images/logo.jpg" />
     </div>
-    <h5 class="text-center">Login</h5>
+    <!-- <h5 class="text-center">Login</h5> -->
 </div>
 <div id="loginError" class="text-danger text-center" style="padding:6px;"></div>
 <form id="loginForm" method="post">
@@ -20,17 +20,21 @@
     </div>
 
 
-    <!-- <div class="row text-end">
-        <a href="">Forgot Password?</a>
-    </div> -->
-    <div class="d-flex">
-        <p> If you are a New Customer? </p>
-        <a href="" class="ms-2"  id="showRegisterFromLogin">Register</a>
-    </div>
-
-    <div class="d-flex justify-content-center">
+     <div class="d-flex justify-content-center">
         <button type="submit" class="btn btn-primary">Login</button>
     </div>
+
+    
+    <div class="or-divider"><hr/><span>OR</span><hr/></div>
+    <div class="d-flex" style="padding-bottom:8px;">
+        <a id="showForgotForm" class="forgot-style">Forgot Your Password?</a> 
+        <div class="d-flex ms-auto" >
+            <p class="mb-0"> Don't have an acount? </p>
+            <a href="" class="ms-2"  id="showRegisterFromLogin">Register</a>
+        </div>
+    </div>
+
+   
 </form>
 <script>
     $(document).ready(function() {

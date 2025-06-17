@@ -53,7 +53,7 @@ $(document).ready(function () {
 
                     <div id="tracking-link" class="form-group card-block mt-2" style="display: none;">
                         <label for="trackingUrl"><strong>Tracking Link:</strong></label>
-                        <textarea class="form-control form-control-sm" id="trackingUrl" rows="2" placeholder="Enter tracking link here...">${order.tracker_Link ? order.tracker_Link : ''}</textarea>
+                        <textarea class="form-control form-control-sm" id="trackingUrl" name ="trackingUrl" rows="2" placeholder="Enter tracking link here...">${order.tracker_Link ? order.tracker_Link : ''}</textarea>
                     </div>
                 `);
 
@@ -105,23 +105,58 @@ $(document).ready(function () {
                 tracker: tracker,
                 status: currentStatus
             },
-            success: function () {
-                $('#alertBox')
-                    .removeClass()
-                    .addClass('alert alert-success p-2')
-                    .text("Status Updated")
-                    .fadeIn()
-                    .delay(2000)
-                    .fadeOut();
-                originalStatus = currentStatus;
+            // success: function () {
+            //     $('#alertBox')
+            //         .removeClass()
+            //         .addClass('alert alert-success p-2')
+            //         .text("Status Updated")
+            //         .fadeIn()
+            //         .delay(2000)
+            //         .fadeOut();
+            //     originalStatus = currentStatus;
+            // },
+            // error: function (xhr, status, error) {
+            //     alert('Failed to Update Status: ' + error);
+            // }
+            success: function (response) {
+                if (response.status === true) {
+                    $('#alertBox')
+                        .removeClass()
+                        .addClass('alert alert-success p-2')
+                        .text(response.message)
+                        .fadeIn()
+                        .delay(2000)
+                        .fadeOut();
+
+                    originalStatus = currentStatus; // Save the new valid status
+                } else {
+                    // This will show message like: 'Enter the tracking link here.'
+                    $('#alertBox')
+                        .removeClass()
+                        .addClass('alert alert-danger p-2')
+                        .text(response.message)
+                        .fadeIn()
+                        .delay(3000)
+                        .fadeOut();
+                }
             },
             error: function (xhr, status, error) {
-                alert('Failed to Update Status: ' + error);
+                $('#alertBox')
+                    .removeClass()
+                    .addClass('alert alert-danger p-2')
+                    .text('Failed to Update Status: ' + xhr.responseText)
+                    .fadeIn()
+                    .delay(3000)
+                    .fadeOut();
             }
+
         });
     });
 });
 $(document).on('click', '#backToOrders', function () {
      window.location.href = "<?= base_url('admin/orders') ?>";
 });
+
+
+
 </script>

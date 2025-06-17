@@ -80,9 +80,13 @@ class Customer extends BaseController
 				]);
 			}
 			// Validate mobile
-			if (!ctype_digit($mobile) || strlen($mobile) !== 10) {
-				return $this->response->setJSON(['status' => 'error', 'msg' => 'Phone Number Must Contain Exactly 10 Digits.']);
+			if (!ctype_digit($mobile) || strlen($mobile) < 7 || strlen($mobile) > 15) {
+				return $this->response->setJSON([
+					'status' => 'error',
+					'msg'    => 'Phone number must contain between 7 to 15 digits.'
+				]);
 			}
+
 			//validate password length
 			
 			if (!empty($password) && (strlen($password) < 6 || strlen($password) > 15)) {
@@ -225,7 +229,6 @@ public function ajaxList()
     $request = \Config\Services::request();
     $model = new \App\Models\Admin\CustomerModel();
 
-	  
     $data = $model->getDatatables();
     $total = $model->countAll();
     $filtered = $model->countFiltered();

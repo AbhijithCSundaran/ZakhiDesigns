@@ -17,7 +17,7 @@
     </div>
 
     <div class="floating-label-group">
-        <input type="text" class="form-control" id="number" name="mobile" placeholder=" " required />
+        <input type="text" class="form-control" id="number" name="mobile" maxlength="15"  minlength="7" placeholder=" " required />
         <label for="number">Phone Number</label>
     </div>
 

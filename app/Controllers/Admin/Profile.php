@@ -56,29 +56,33 @@ public function update()
 {
     $us_Id = $this->session->get('ad_uid'); 
 
+    $name  = ucwords(strtolower($this->request->getPost('us_Name')));
+    $email = $this->request->getPost('us_Email');
+
     $data = [
-        'us_Name'  => $this->request->getPost('us_Name'),
-        'us_Email' => $this->request->getPost('us_Email'),
+        'us_Name'  => $name,
+        'us_Email' => $email,
     ];
 
     $model = new \App\Models\Admin\ProfileModel();
 
     if ($model->updateProfile($us_Id, $data)) {
-        // ✅ Update session value
-        $this->session->set('ad_name', $data['us_Name']);
+        // Update session value
+        $this->session->set('ad_name', $name);
 
         return $this->response->setJSON([
             'status'   => 1,
-            'msg'      => 'Profile updated successfully.',
-            'ad_name'  => $data['us_Name'] // ✅ Send back updated name
+            'msg'      => 'Profile Updated Successfully.',
+            'ad_name'  => $name
         ]);
     } else {
         return $this->response->setJSON([
             'status' => 0,
-            'msg'    => 'Failed to update profile.'
+            'msg'    => 'Failed To Update Profile.'
         ]);
     }
 }
+
 
 
 
@@ -91,11 +95,11 @@ public function change_password()
     $us_Id = $this->session->get('ad_uid'); 
 
     if (!$current_password || !$new_password || !$confirm_password) {
-        return $this->response->setJSON(['status' => 0, 'msg' => 'All fields are required']);
+        return $this->response->setJSON(['status' => 0, 'msg' => 'All Fields Are Required']);
     }
 
     if ($new_password !== $confirm_password) {
-        return $this->response->setJSON(['status' => 0, 'msg' => 'New password and confirmation do not match']);
+        return $this->response->setJSON(['status' => 0, 'msg' => 'New Password and Confirmation Do Not Match']);
     }
 
     $result = $model->change_passwordNow($us_Id, $current_password, $new_password);

@@ -45,7 +45,7 @@
                             <li><i class="bi bi-arrow-right"></i> <a class="foot-link"
                                     href="<?= base_url('Termsandconditions'); ?>">Terms & Conditions</a></li>
                             <li><i class="bi bi-arrow-right"></i> <a class="foot-link"
-                                    href="<?= base_url('Returnpolicy'); ?>">Return and Refund Policy</a></li>
+                                    href="<?= base_url('Return_refundpolicy'); ?>">Return and Refund Policy</a></li>
                         </ul>
             </div>
             <div class="col-md-3">

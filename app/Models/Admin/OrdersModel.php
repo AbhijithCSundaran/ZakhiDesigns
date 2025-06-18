@@ -13,6 +13,7 @@ class OrdersModel extends Model {
 	protected $table = 'order_detail';
     protected $primaryKey = 'od_Id';
     protected $allowedFields = ['tracker_Link','od_Status','cus_Id']; 
+
 public function getDatatables($searchValue = null, $start = 0, $length = 10)
 {
     $builder = $this->db->table('order_detail')
@@ -31,21 +32,22 @@ public function getDatatables($searchValue = null, $start = 0, $length = 10)
         ->join('product', 'product.pr_Id = order_detail.pr_Id', 'left')
         ->join('customer', 'customer.cust_Id = order_detail.cus_Id', 'left');
 
-    // Clone builder before applying filters for total count
+    // Total records before filter
     $totalBuilder = clone $builder;
-    $total = $totalBuilder->countAllResults(false); // total records (no filter)
+    $total = $totalBuilder->countAllResults(false);
 
     // Apply search filter
     if (!empty($searchValue)) {
+        $search = str_replace(' ', '', $searchValue);
         $builder->groupStart()
-                ->like('customer.cust_Name', $searchValue)
-                ->orLike('customer.cust_Email', $searchValue)
-                ->orLike('customer.cust_Phone', $searchValue)
-                ->orLike('product.pr_Code', $searchValue)
-                ->groupEnd();
+            ->like("REPLACE(customer.cust_Name, ' ', '')", $search)
+            ->orLike("REPLACE(customer.cust_Email, ' ', '')", $search)
+            ->orLike("REPLACE(customer.cust_Phone, ' ', '')", $search)
+            ->orLike("REPLACE(product.pr_Code, ' ', '')", $search)
+            ->groupEnd();
     }
 
-    // Clone builder after search filter for filtered count
+    // Filtered count after search
     $filteredBuilder = clone $builder;
     $filtered = $filteredBuilder->countAllResults(false);
 
@@ -60,6 +62,7 @@ public function getDatatables($searchValue = null, $start = 0, $length = 10)
         'filtered' => $filtered
     ];
 }
+
 
    
 public function getOrder($od_id)

@@ -87,22 +87,3 @@
         </div>
     </div>
 </div>
-<script>
-$(document).ready(function () {
-    $('#customerList').DataTable({
-        "processing": true,
-        "serverSide": true,
-        "ajax": {
-            "url": "<?= base_url('admin/customer/ajaxList') ?>",
-            "type": "POST"
-        },
-        "columns": [
-            { "data": "cust_Name" },
-            { "data": "cust_Email" },
-            { "data": "cust_Phone" },
-            { "data": "status_switch", "orderable": false, "searchable": false },
-            { "data": "actions", "orderable": false, "searchable": false }
-        ]
-    });
-});
-</script>

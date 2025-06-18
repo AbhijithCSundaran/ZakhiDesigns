@@ -145,40 +145,40 @@ public function updateCategory($catId, $data)
     protected $allowedFields = ['cat_Name', 'cat_Discount_Value','cat_Discount_Type','cat_Status']; // Adjust to your table
 
     // For DataTables
-    public function getDatatables()
-	{
-		$builder = $this->db->table('category c');
-		
-		// Select required fields including category and subcategory names
-		$builder->select('c.*');
-		
-		// Only fetch rows of active staffs
-		$builder->where('c.cat_Status !=', 3);
 
-		// Add search logic if required
-		$postData = service('request')->getPost();
-		if (!empty($postData['search']['value'])) {
-			$builder->groupStart()
-					->like('c.cat_Name', $postData['search']['value'])
-					->groupEnd();
-		}
-
-		// Add pagination (limit and offset)
-		if (!empty($postData['length']) && $postData['length'] != -1) {
-			$builder->limit($postData['length'], $postData['start']);
-		}
-
-		// Apply ordering if provided
-		if (!empty($postData['order'])) {
-			$columns = ['c.cat_Id ', 'c.cat_Name', 'c.cat_Discount_Value','c.cat_Discount_Type','c.cat_Status'];
-			$orderCol = $columns[$postData['order'][0]['column']];
-			$orderDir = $postData['order'][0]['dir'];
-			$builder->orderBy($orderCol, $orderDir);
-		}
-
-		// Execute the query and return the result
-		return $builder->get()->getResultArray();
+     public function getDatatables()
+{
+	$postData = service('request')->getPost();
+	$searchValue = '';
+	if (!empty($postData['search']['value'])) {
+		$searchValue = str_replace(' ', '', $postData['search']['value']);
 	}
+
+	$builder = $this->db->table('category c');
+	$builder->select('c.*');
+	$builder->where('c.cat_Status !=', 3);
+
+	if (!empty($searchValue)) {
+		$builder->groupStart();
+		$builder->where("REPLACE(c.cat_Name, ' ', '') LIKE '%" . $this->db->escapeLikeString($searchValue) . "%'", null, false);
+		$builder->groupEnd();
+	}
+
+	if (!empty($postData['length']) && $postData['length'] != -1) {
+		$builder->limit($postData['length'], $postData['start']);
+	}
+
+	if (!empty($postData['order'])) {
+		$columns = ['c.cat_Id', 'c.cat_Name', 'c.cat_Discount_Value', 'c.cat_Discount_Type', 'c.cat_Status'];
+		$orderCol = $columns[$postData['order'][0]['column']];
+		$orderDir = $postData['order'][0]['dir'];
+		$builder->orderBy($orderCol, $orderDir);
+	} else {
+		$builder->orderBy('c.cat_Id', 'DESC');
+	}
+
+	return $builder->get()->getResultArray();
+}
 
 
 	public function countAll()
@@ -189,20 +189,25 @@ public function updateCategory($catId, $data)
 	}
 
 	public function countFiltered()
-	{
-		$builder = $this->db->table('category c');
-
-		// Only fetch rows where either staffs exists
-		$builder->where('c.cat_Status !=', 3);
-	 
-		$postData = service('request')->getPost();
-		if (!empty($postData['search']['value'])) {
-			$builder->groupStart()
-					->like('c.cat_Name', $postData['search']['value'])
-					->groupEnd();
-		}
-		return $builder->countAllResults();
+{
+	$postData = service('request')->getPost();
+	$searchValue = '';
+	if (!empty($postData['search']['value'])) {
+		$searchValue = str_replace(' ', '', $postData['search']['value']);
 	}
+
+	$sql = "SELECT COUNT(*) as total 
+			FROM category c 
+			WHERE c.cat_Status != 3";
+
+	if (!empty($searchValue)) {
+		$sql .= " AND REPLACE(c.cat_Name, ' ', '') LIKE '%" . $this->db->escapeLikeString($searchValue) . "%'";
+	}
+
+	$query = $this->db->query($sql);
+	return $query->getRow()->total;
+}
+
     }
 
     

@@ -186,40 +186,35 @@ public function delete_image($product_id, $image_name)
      }
 
     // For DataTables
+
     public function getDatatables()
-	{
-		$builder = $this->db->table('product p');
-		
-		// Select required fields including category and subcategory names
-		$builder->select('p.*');
-		
-		// Only fetch rows of active staffs
-		$builder->where('p.pr_Status !=', 3);
+    {
+        $builder = $this->db->table('product p');
+        $builder->select('p.*');
+        $builder->where('p.pr_Status !=', 3);
 
-		// Add search logic if required
-		$postData = service('request')->getPost();
-		if (!empty($postData['search']['value'])) {
-			$builder->groupStart()
-					->like('p.pr_Name', $postData['search']['value'])
-					->groupEnd();
-		}
+        $postData = service('request')->getPost();
+        if (!empty($postData['search']['value'])) {
+            $search = str_replace(' ', '', $postData['search']['value']);
+            $builder->groupStart()
+                ->like("REPLACE(p.pr_Name, ' ', '')", $search)
+                ->groupEnd();
+        }
 
-		// Add pagination (limit and offset)
-		if (!empty($postData['length']) && $postData['length'] != -1) {
-			$builder->limit($postData['length'], $postData['start']);
-		}
+        if (!empty($postData['length']) && $postData['length'] != -1) {
+            $builder->limit($postData['length'], $postData['start']);
+        }
 
-		// Apply ordering if provided
-		if (!empty($postData['order'])) {
-			$columns = ['pr_Name', 'mrp','pr_Selling_Price','pr_Discount_Value','pr_Stock', 'pr_Status'];
-			$orderCol = $columns[$postData['order'][0]['column']];
-			$orderDir = $postData['order'][0]['dir'];
-			$builder->orderBy($orderCol, $orderDir);
-		}   
+        if (!empty($postData['order'])) {
+            $columns = ['pr_Name', 'mrp', 'pr_Selling_Price', 'pr_Discount_Value', 'pr_Stock', 'pr_Status'];
+            $orderCol = $columns[$postData['order'][0]['column']];
+            $orderDir = $postData['order'][0]['dir'];
+            $builder->orderBy($orderCol, $orderDir);
+        }
 
-		// Execute the query and return the result
-		return $builder->get()->getResultArray();
-	}
+        return $builder->get()->getResultArray();
+    }
+
 
 
 	public function countAll()
@@ -229,21 +224,23 @@ public function delete_image($product_id, $image_name)
 			->countAllResults();
 	}
 
-	public function countFiltered()
-	{
-		$builder = $this->db->table('product p');
+	
+    public function countFiltered()
+    {
+        $builder = $this->db->table('product p');
+        $builder->where('p.pr_Status !=', 3);
 
-		// Only fetch rows where either staffs exists
-		$builder->where('p.pr_Status !=', 3);
-	 
-		$postData = service('request')->getPost();
-		if (!empty($postData['search']['value'])) {
-			$builder->groupStart()
-					->like('p.pr_Name', $postData['search']['value'])
-					->groupEnd();
-		}
-		return $builder->countAllResults();
-	}
+        $postData = service('request')->getPost();
+        if (!empty($postData['search']['value'])) {
+            $search = str_replace(' ', '', $postData['search']['value']);
+            $builder->groupStart()
+                ->like("REPLACE(p.pr_Name, ' ', '')", $search)
+                ->groupEnd();
+        }
+
+        return $builder->countAllResults();
+    }
+
 
     //Check if there exist any discount in sub-category
     public function isDiscountInSub($sub_id){

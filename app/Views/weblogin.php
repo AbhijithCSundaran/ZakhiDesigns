@@ -27,7 +27,7 @@
     
     <div class="or-divider"><hr/><span>OR</span><hr/></div>
     <div class="d-flex" style="padding-bottom:8px;">
-        <a id="showForgotForm" class="forgot-style">Forgot Your Password?</a> 
+        <a id="showForgotForm" class="forgot-style">Forgot Password?</a> 
         <div class="d-flex ms-auto" >
             <p class="mb-0"> Don't have an acount? </p>
             <a href="" class="ms-2"  id="showRegisterFromLogin">Register</a>

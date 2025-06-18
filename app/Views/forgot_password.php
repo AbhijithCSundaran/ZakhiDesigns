@@ -85,6 +85,21 @@
         .submit-btn:hover {
             background-color: black;
         }
+        @media (max-width: 600px) {
+            .container {
+                width: 100% !important;
+                max-width: none !important;
+                border-radius: 0;
+                height: 100vh;
+                padding: 40px 20px;
+                box-shadow: none;
+            }
+            body {
+                margin-top: 0;
+                padding: 0;
+            }
+        }
+
     </style>
 </head>
 <body>

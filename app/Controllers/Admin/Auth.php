@@ -35,11 +35,20 @@ class Auth extends BaseController
 						'ad_uname' => $userLog->us_Name,
 						'role' => 'admin',
 					]);
-					//$this->session->get('fav_user_name');
-					echo json_encode(array(
-						"status" => 1,
-						"msg" => null
-					));
+					if($userLog->us_Status == '1'){
+						echo json_encode(array(
+							"status" => 1,
+							"msg" => null
+						));
+					}	
+					if($userLog->us_Status == '2'){
+						echo json_encode(array(
+							"status" => 0,
+							"msg" => "Staff Access Restricted. Please Contact Admin."
+						));
+					
+					}
+					
 				} else {
 					echo json_encode(array(
 						"status" => 0,

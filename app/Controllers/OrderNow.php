@@ -219,7 +219,7 @@ $message = "
         <tr><th>Quantity</th><td>{$order->od_Quantity}</td></tr>
         <tr><th>Actual Price</th><td>₹{$order->od_Original_Price}</td></tr>
         <tr><th>Discount</th><td>{$order->od_DiscountValue} {$order->od_DiscountType}</td></tr>
-        <tr><th>Total Amount</th><td>₹{$order->od_Grand_Total}</td></tr>
+        <tr><th>Total Price</th><td>₹{$order->od_Grand_Total}</td></tr>
         <tr><th>Customer Name</th><td>{$customer['add_Name']}</td></tr>
         <tr><th>Email</th><td>{$customer['add_Email']}</td></tr>
         <tr><th>Phone</th><td>{$customer['add_Phone']}</td></tr>

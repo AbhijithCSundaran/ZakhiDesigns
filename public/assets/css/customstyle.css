@@ -422,3 +422,33 @@ header,
 html {
   scroll-behavior: smooth;
 }
+
+.forgot-style{
+    
+}
+.forgot-style:hover{
+    cursor:pointer !important;
+    pointer-events: display;
+}
+.or-divider{
+    display: flex;
+    align-items: center;
+    text-align: center;
+    margin: 20px 0;
+    padding-top: -3;
+}
+.or-divider hr {
+    flex: 1;
+    border: none;
+    border-top: 1px solid #000;
+  }
+
+  .or-divider span {
+    padding: 0 10px;
+    color: rgba(0, 0, 0, 0.5);
+    font-weight: bold;
+    line-height: 0.5;
+    margin-left: 10px;
+    margin-right: 10px;
+
+  }

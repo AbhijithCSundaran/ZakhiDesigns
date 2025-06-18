@@ -58,7 +58,7 @@ $('#staffList').DataTable({
 
 $(document).ready(function() {
     const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    const phonePattern = /^\d{10}$/;
+     const phonePattern = /^\+?\d{7,15}$/;
 
     $('#staffname').on('input', function() {
         const value = $(this).val().trim();
@@ -85,21 +85,29 @@ $(document).ready(function() {
             $('#error-staffotemail').text('');
         }
     });
+   $('#mobile').on('input', function () {
+        let rawValue = $(this).val();
 
+        // Remove all characters except digits and optional starting '+'
+        rawValue = rawValue.replace(/[^\d+]/g, '');
 
-    $('#mobile').on('input', function() {
-        const value = $(this).val().trim();
+        // Ensure '+' appears only at the beginning (if any)
+        if (rawValue.indexOf('+') > 0) {
+            rawValue = rawValue.replace(/\+/g, ''); // remove all '+' if not at start
+        }
+
+        // Set cleaned value back to input
+        $(this).val(rawValue);
+
+        const value = rawValue.replace(/\s+/g, '');
+
         if (!phonePattern.test(value)) {
-            $('#error-mobile').text('Phone number must be 10 digits.');
+            $('#error-mobile').text('Phone Number Must Be Minimum of 7 Digits.');
         } else {
             $('#error-mobile').text('');
         }
     });
 
-    // $('#password').on('input', function () {
-    //   const value = $(this).val().trim();
-    //   $('#error-password').text(value ? '' : 'Password is required.');
-    // });
 });
 
 
@@ -111,7 +119,7 @@ $('#staffSubmit').click(function(e) {
     let pwd = $('#password').val();
     let cpwd = $('#confirm_password').val();
     if (pwd !== cpwd) {
-        $('#error-confirm-password').text('Passwords do not match');
+        $('#error-confirm-password').text('Passwords Do Not Match');
         return false;
     } else {
         $('#error-confirm-password').text('');
@@ -127,7 +135,7 @@ $('#staffSubmit').click(function(e) {
             $('#messageBox')
                 .removeClass('alert-danger')
                 .addClass('alert-success')
-                .text(response.msg || 'Staff created successfully!')
+                .text(response.msg || 'Staff created Successfully!')
                 .show();
 
 
@@ -146,10 +154,14 @@ $('#staffSubmit').click(function(e) {
             $('#staffSubmit').prop('disabled', false);
 
         }
+
         setTimeout(function() {
 
             $('#messageBox').empty().hide();
         }, 3000);
+        $('html, body').animate({ scrollTop: 0 }, 'smooth'); // Scroll to top on error
+
+        
     }, 'json');
 });
 
@@ -179,12 +191,29 @@ function confirmDelete(userId) {
                     }
                 },
                 error: function() {
-                    Swal.fire('Error', 'Something went wrong.', 'error');
+                    Swal.fire('Error', 'Something Went Wrong.', 'error');
                 }
             });
         }
     });
 }
+//  eye icon toggle password 
+
+function togglePassword(inputId, iconElement) {
+    const input = document.getElementById(inputId);
+
+    // Toggle input type
+    if (input.type === "password") {
+        input.type = "text";
+        iconElement.classList.remove("fa-eye-slash");
+        iconElement.classList.add("fa-eye");
+    } else {
+        input.type = "password";
+        iconElement.classList.remove("fa-eye");
+        iconElement.classList.add("fa-eye-slash");
+    }
+}
+
 /*************************************/
 //Active and Inactive status
 var baseUrl = "<?= base_url() ?>";
@@ -230,7 +259,7 @@ $(document).on('change', '.checkactive', function () {
             $('#messageBox')
                 .removeClass('alert-success')
                 .addClass('alert-danger')
-                .text('Error updating status. Please try again later.')
+                .text('Error Updating Status. Please Try Again Later.')
                 .fadeIn();
 
             setTimeout(() => {

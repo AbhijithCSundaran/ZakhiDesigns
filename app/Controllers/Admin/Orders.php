@@ -127,24 +127,33 @@ class Orders extends BaseController
         $model = new \App\Models\Admin\OrdersModel();
         $tracker = $this->input->getPost('tracker');
         $status = $this->input->getPost('status');
-        
+
+        //echo $tracker; exit;
         if ($this->request->isAJAX()) {
             $updation = $model->updateStatus($od_id, $tracker, $status);
-            if (!$status) {
+            if ($updation) {
+                if (!$status) {
+                    return $this->response->setJSON([
+                        'status' => false,
+                        'message' => 'Missing The Status.'
+                    ]);
+                }
+                elseif($status == '4' && empty(trim($tracker))) {
+                    return $this->response->setJSON([
+                        'status' => false,
+                        'message' => 'Please Enter the Tracking Link.'
+                    ]);
+                }
                 return $this->response->setJSON([
-                    'status' => false,
-                    'message' => 'Updation not done'
+                    'status' => true,
+                    'message' => 'Status Updation successful'
                 ]);
             }
             return $this->response->setJSON([
-                'status' => true,
-                'message' => 'Status updation successful'
+                'status' => false,
+                'message' => 'Status Updation Failed'
             ]);
-        }
-        return $this->response->setJSON([
-            'status' => false,
-            'message' => 'Status Updation failed'
-        ]);
+            }
     }    
 	
 }

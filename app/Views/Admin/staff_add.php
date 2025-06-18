@@ -88,8 +88,8 @@
 										<div class="form-group row">
                                             <label class="col-sm-2 col-form-label">Contact Number</label>
                                             <div class="col-sm-6">
-                                                <input type="text" class="form-control" name="mobile" id="mobile" maxlength="10" minlength="10"
-                                                  value="<?= isset($staff) ? ($staff['us_Phone']) : '' ?>"   placeholder="Enter Contact Number (Exclude country code)." required autocomplete="off">
+                                                <input type="text" class="form-control" name="mobile" id="mobile" maxlength="15" minlength="7"
+                                                  value="<?= isset($staff) ? ($staff['us_Phone']) : '' ?>"   placeholder="Enter Contact Number." required autocomplete="off">
                                             <span class="text-danger error-msg" id="error-mobile"></span>
 											</div>
 											
@@ -104,6 +104,11 @@
 												<div class="col-sm-6">
 													<input type="password" class="form-control" name="old_password"
 														id="old_password" placeholder="Enter old password" required >
+
+                                                    <i class="fa fa-eye-slash position-absolute toggle-password"
+                                                        style="top: 50%; right: 20px; transform: translateY(-50%); cursor: pointer;"
+                                                        onclick="togglePassword('old_password', this)"></i>
+
 													<span class="text-danger error-msg" id="error-old-password"></span>
 												</div>
 											</div>
@@ -114,6 +119,11 @@
 												<div class="col-sm-6">
 													<input type="password" class="form-control" name="new_password"
 														id="new_password" placeholder="Enter new password" required autocomplete="off">
+
+                                                        <i class="fa fa-eye-slash position-absolute toggle-password"
+                                                        style="top: 50%; right: 20px; transform: translateY(-50%); cursor: pointer;"
+                                                        onclick="togglePassword('new_password', this)"></i>
+
 													<span class="text-danger error-msg" id="error-new-password"></span>
 												</div>
 											</div>

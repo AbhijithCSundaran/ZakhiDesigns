@@ -11,16 +11,15 @@ $routes->get('/', 'Home::index');
 // login register logout
 $routes->get('weblogin', 'Weblogin::index');
 $routes->get('webreg', 'Weblogin::webReg');
+$routes->get('webforgot', 'Weblogin::webForgot');
+//$routes->post('webForgotEmailSend', 'Weblogin::webForgotEmailSend');
+$routes->post('weblogin/webForgotEmailSend', 'Weblogin::webForgotEmailSend');
 $routes->post('customerauth', 'Weblogin::customerAuthen');
 $routes->get('logout', 'Weblogin::logout');
 
 $routes->set404Override('\App\Controllers\ErrorWeb::show404');
-
-
-
-
-
-
+$routes->get('forgotPassword', 'ForgotPassword::index');
+$routes->post('resetPassword', 'ForgotPassword::resetPassword');
 
 // testing
 

@@ -65,11 +65,20 @@ $(function() {
             dataType: "json",
             success: function(res) {
                 if (res.status == 1) {
-                    $('#messageBox').html('<div class="alert alert-success">' + res.msg + '</div>').fadeIn().delay(5000).fadeOut();
+                    $('#messageBox')
+                        .html('<div class="alert alert-success">' + res.msg + '</div>')
+                        .fadeIn()
+                        .delay(5000)
+                        .fadeOut(function(){
+                            window.location.href = res.redirect;
+                        });
                 } else {
-                    $('#messageBox').html('<div class="alert alert-danger">' + res.msg + '</div>').fadeIn().delay(5000).fadeOut();
+                    $('#messageBox')
+                        .html('<div class="alert alert-danger">' + res.msg + '</div>')
+                        .fadeIn()
+                        .delay(5000)
+                        .fadeOut();
                 }
-
                 $('html, body').animate({
                     scrollTop: $('#messageBox').offset().top - 100
                 }, 'slow');

@@ -217,7 +217,9 @@ $message = "
         <tr><th>Product</th><td>{$product->pr_Name}</td></tr>
         <tr><th>Product Code</th><td>{$product->pr_Code}</td></tr>
         <tr><th>Quantity</th><td>{$order->od_Quantity}</td></tr>
-        <tr><th>Total Amount</th><td>₹{$order->od_Grand_Total}</td></tr>
+        <tr><th>Actual Price</th><td>₹{$order->od_Original_Price}</td></tr>
+        <tr><th>Discount</th><td>{$order->od_DiscountValue} {$order->od_DiscountType}</td></tr>
+        <tr><th>Total Price</th><td>₹{$order->od_Grand_Total}</td></tr>
         <tr><th>Customer Name</th><td>{$customer['add_Name']}</td></tr>
         <tr><th>Email</th><td>{$customer['add_Email']}</td></tr>
         <tr><th>Phone</th><td>{$customer['add_Phone']}</td></tr>
@@ -245,12 +247,8 @@ $message = "
         $mailSent = mail($to, $subject, $message, $headers);
         return $this->response->setJSON([
             'status' => $mailSent ? 1 : 0,
-            'msg'    => $mailSent ? 'Order confirmation email sent successfully!' : 'Failed to send order email. Please try again later.'
+            'msg'    => $mailSent ? 'Thank You! Your Order is Confirmed. Continue Shopping To Explore More Great Products' : 'Failed To Send Order Email. Please Try Again Later.',
+            'redirect' => $mailSent ? base_url('product/viewcollection') : ''
         ]);
     }
 }
-
-    // <td colspan='2' align='center'>
-    //             <img src='{$logoUrl}' alt='Zakhi Designs Logo' style='height: 60px;'><br>
-    //             <strong style='font-size: 18px;'>Zakhi Designs</strong>
-    //         </td>

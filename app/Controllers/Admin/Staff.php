@@ -93,8 +93,8 @@ class Staff extends BaseController
 			return $this->response->setJSON(['status' => 'error', 'msg' => 'Please Enter The Order Confirmation Email.']);
 		}
 		// Validate mobile
-		if (!empty($mobile) && (!ctype_digit($mobile) || strlen($mobile) !== 10)) {
-			return $this->response->setJSON(['status' => 'error', 'msg' => 'Phone Number Must Contain Exactly 10 Digits.']);
+		if (!empty($mobile) && ctype_digit($mobile) && strlen($mobile) < 7) {
+			return $this->response->setJSON(['status' => 'error', 'msg' => 'Phone Number Must Contain Minimum 7 Digits.']);
 		}
 		//validate password length
 		
@@ -147,7 +147,7 @@ class Staff extends BaseController
 			];
 
 			$staffModel->createStaff($data);
-			return $this->response->setJSON(['status' => 1, 'msg' => 'Staff Created successfully.', 'redirect' => base_url('staff')]);
+			return $this->response->setJSON(['status' => 1, 'msg' => 'Staff Created Successfully.', 'redirect' => base_url('staff')]);
 		}
 
 		// UPDATE

@@ -86,58 +86,57 @@ class Theme_Model extends Model {
    protected $table = 'themes';
     protected $primaryKey = 'theme_Id';
     protected $allowedFields = ['theme_Name', 'theme_Description', 'theme_Status']; // Adjust to your table
-  public function getDatatables()
-	{
-		$builder = $this->db->table('themes t');
-		
-		// Select required fields
-		$builder->select('t.*');
+//   public function getDatatables()
 
-		// Exclude deleted records
-		$builder->where('t.theme_Status !=', 3);
+public function getDatatables()
+{
+    $builder = $this->db->table('themes t');
+    $builder->select('t.*');
+    $builder->where('t.theme_Status !=', 3);
 
-		$postData = service('request')->getPost();
+    $postData = service('request')->getPost();
 
-		// Fix search to work on both theme_Name and theme_Description
-		if (!empty($postData['search']['value'])) {
-			$search = $postData['search']['value'];
-			$builder->groupStart()
-					->like('t.theme_Name', $search)
-					->orLike('t.theme_Description', $search)
-					->groupEnd();
-		}
+    if (!empty($postData['search']['value'])) {
+        $search = str_replace(' ', '', $postData['search']['value']);
 
-		// Pagination
-		if (!empty($postData['length']) && $postData['length'] != -1) {
-			$builder->limit($postData['length'], $postData['start']);
-		}
+        $builder->groupStart()
+            ->like("REPLACE(t.theme_Name, ' ', '')", $search)
+            ->orLike("REPLACE(t.theme_Description, ' ', '')", $search)
+            ->groupEnd();
+    }
 
-		// Ordering
-		if (!empty($postData['order'])) {
-			$columns = ['t.theme_Id', 't.theme_Name', 't.theme_Description', 't.theme_Status'];
-			$orderCol = $columns[$postData['order'][0]['column']] ?? 't.theme_Id';
-			$orderDir = $postData['order'][0]['dir'] ?? 'DESC';
-			$builder->orderBy($orderCol, $orderDir);
-		}
+    if (!empty($postData['length']) && $postData['length'] != -1) {
+        $builder->limit($postData['length'], $postData['start']);
+    }
 
-		return $builder->get()->getResultArray();
-	}
+    if (!empty($postData['order'])) {
+        $columns = ['t.theme_Id', 't.theme_Name', 't.theme_Description', 't.theme_Status'];
+        $orderCol = $columns[$postData['order'][0]['column']] ?? 't.theme_Id';
+        $orderDir = $postData['order'][0]['dir'] ?? 'DESC';
+        $builder->orderBy($orderCol, $orderDir);
+    }
+
+    return $builder->get()->getResultArray();
+}
+
 	public function countFiltered()
-	{
-		$builder = $this->db->table('themes t');
-		$builder->where('t.theme_Status !=', 3);
+{
+    $builder = $this->db->table('themes t');
+    $builder->where('t.theme_Status !=', 3);
 
-		$postData = service('request')->getPost();
-		if (!empty($postData['search']['value'])) {
-			$search = $postData['search']['value'];
-			$builder->groupStart()
-					->like('t.theme_Name', $search)
-					->orLike('t.theme_Description', $search)
-					->groupEnd();
-		}
+    $postData = service('request')->getPost();
+    if (!empty($postData['search']['value'])) {
+        $search = str_replace(' ', '', $postData['search']['value']);
 
-		return $builder->countAllResults();
-	}
+        $builder->groupStart()
+            ->like("REPLACE(t.theme_Name, ' ', '')", $search)
+            ->orLike("REPLACE(t.theme_Description, ' ', '')", $search)
+            ->groupEnd();
+    }
+
+    return $builder->countAllResults();
+}
+
 
 
 

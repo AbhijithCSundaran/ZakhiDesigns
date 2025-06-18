@@ -34,25 +34,25 @@ class ProfileModel extends Model
     $user = $this->where('us_Id', $us_Id)->first();
 
     if (!$user) {
-        return ['status' => 0, 'msg' => 'User not found.'];
+        return ['status' => 0, 'msg' => 'User Not Found.'];
     }
 
   
     if (md5($current_password) !== $user['us_Password']) {
-        return ['status' => 0, 'msg' => 'current password does not match.'];
+        return ['status' => 0, 'msg' => 'Current Password Does Not Match.'];
     }
 
    
     if (md5($new_password) === $user['us_Password']) {
-        return ['status' => 0, 'msg' => 'Please enter a different new password.'];
+        return ['status' => 0, 'msg' => 'Please Enter a Different New Password.'];
     }
 
  
     $data = ['us_Password' => md5($new_password)];
     if ($this->update($us_Id, $data)) {
-        return ['status' => 1, 'msg' => 'Password updated successfully then update the profile.'];
+        return ['status' => 1, 'msg' => 'Password Updated Successfully Then Update The Profile.'];
     } else {
-        return ['status' => 0, 'msg' => 'Password update failed.'];
+        return ['status' => 0, 'msg' => 'Password Update Failed.'];
     }
 }
 

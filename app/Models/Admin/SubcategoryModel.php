@@ -183,34 +183,37 @@ class SubcategoryModel extends Model
 
     // DataTables: Get filtered subcategories
     public function getDatatables()
-    {
-        $builder = $this->db->table('subcategory s');
-        $builder->select('s.*, c.cat_Name');
-        $builder->join('category c', 'c.cat_Id = s.cat_Id', 'left');
-        $builder->where('s.sub_Status !=', 3);
+{
+    $builder = $this->db->table('subcategory s');
+    $builder->select('s.*, c.cat_Name');
+    $builder->join('category c', 'c.cat_Id = s.cat_Id', 'left');
+    $builder->where('s.sub_Status !=', 3);
 
-        $postData = service('request')->getPost();
+    $postData = service('request')->getPost();
 
-        if (!empty($postData['search']['value'])) {
-            $builder->groupStart()
-                ->like('s.sub_Category_Name', $postData['search']['value'])
-                ->orLike('c.cat_Name', $postData['search']['value'])
-                ->groupEnd();
-        }
+    if (!empty($postData['search']['value'])) {
+        $search = str_replace(' ', '', $postData['search']['value']); // remove spaces from input
 
-        if (!empty($postData['length']) && $postData['length'] != -1) {
-            $builder->limit($postData['length'], $postData['start']);
-        }
-
-        if (!empty($postData['order'])) {
-            $columns = ['s.sub_Id', 's.sub_Category_Name', 's.sub_Discount_Value', 's.sub_Discount_Type', 's.sub_Status'];
-            $orderCol = $columns[$postData['order'][0]['column']];
-            $orderDir = $postData['order'][0]['dir'];
-            $builder->orderBy($orderCol, $orderDir);
-        }
-
-        return $builder->get()->getResultArray();
+        $builder->groupStart()
+            ->like("REPLACE(s.sub_Category_Name, ' ', '')", $search)
+            ->orLike("REPLACE(c.cat_Name, ' ', '')", $search)
+            ->groupEnd();
     }
+
+    if (!empty($postData['length']) && $postData['length'] != -1) {
+        $builder->limit($postData['length'], $postData['start']);
+    }
+
+    if (!empty($postData['order'])) {
+        $columns = ['s.sub_Id', 's.sub_Category_Name', 's.sub_Discount_Value', 's.sub_Discount_Type', 's.sub_Status'];
+        $orderCol = $columns[$postData['order'][0]['column']] ?? 's.sub_Id';
+        $orderDir = $postData['order'][0]['dir'] ?? 'DESC';
+        $builder->orderBy($orderCol, $orderDir);
+    }
+
+    return $builder->get()->getResultArray();
+}
+
 
     // Count all subcategories (excluding deleted)
     public function countAll()
@@ -222,21 +225,24 @@ class SubcategoryModel extends Model
 
     // Count filtered subcategories (DataTables support)
     public function countFiltered()
-    {
-        $builder = $this->db->table('subcategory s');
-        $builder->join('category c', 'c.cat_Id = s.cat_Id', 'left');
-        $builder->where('s.sub_Status !=', 3);
+{
+    $builder = $this->db->table('subcategory s');
+    $builder->join('category c', 'c.cat_Id = s.cat_Id', 'left');
+    $builder->where('s.sub_Status !=', 3);
 
-        $postData = service('request')->getPost();
-        if (!empty($postData['search']['value'])) {
-            $builder->groupStart()
-                ->like('s.sub_Category_Name', $postData['search']['value'])
-                ->orLike('c.cat_Name', $postData['search']['value'])
-                ->groupEnd();
-        }
+    $postData = service('request')->getPost();
+    if (!empty($postData['search']['value'])) {
+        $search = str_replace(' ', '', $postData['search']['value']);
 
-        return $builder->countAllResults();
+        $builder->groupStart()
+            ->like("REPLACE(s.sub_Category_Name, ' ', '')", $search)
+            ->orLike("REPLACE(c.cat_Name, ' ', '')", $search)
+            ->groupEnd();
     }
+
+    return $builder->countAllResults();
+}
+
 
 
 }

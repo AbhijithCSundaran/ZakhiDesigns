@@ -194,7 +194,7 @@
                                         <table class="table table-hover">
                                             <thead>
                                                 <tr>
-                                                    <th>Slno</th>
+                                                    <th>Sl No</th>
                                                     <th>Product Code</th>
                                                     <th>Product Name</th>
                                                     <th>Product Image</th>

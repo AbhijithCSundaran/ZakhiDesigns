@@ -66,38 +66,39 @@ class CustomerModel extends Model {
     protected $allowedFields = ['cust_Name', 'cust_Email','cust_Phone', 'cust_Status']; // Adjust to your table
 
     // For DataTables
-    public function getDatatables()
+     public function getDatatables()
 	{
-		$builder = $this->db->table('customer c');
-		
-		// Select required fields including category and subcategory names
-		$builder->select('c.*');
-		
-		// Only fetch rows of active staffs
-		$builder->where('c.cust_Status !=', 3);
-
-		// Add search logic if required
 		$postData = service('request')->getPost();
+		$searchValue = '';
 		if (!empty($postData['search']['value'])) {
-			$builder->groupStart()
-					->like('c.cust_Name', $postData['search']['value'])
-					->groupEnd();
+			$searchValue = str_replace(' ', '', $postData['search']['value']);
 		}
 
-		// Add pagination (limit and offset)
+		$builder = $this->db->table('customer c');
+		$builder->select('c.*');
+		$builder->where('c.cust_Status !=', value: 3);
+
+		if (!empty($searchValue)) {
+			$builder->groupStart();
+			$builder->where("REPLACE(c.cust_Name, ' ', '') LIKE '%" . $this->db->escapeLikeString($searchValue) . "%'", null, false);
+			$builder->groupEnd();
+		}
+
+		// Pagination
 		if (!empty($postData['length']) && $postData['length'] != -1) {
 			$builder->limit($postData['length'], $postData['start']);
 		}
 
-		// Apply ordering if provided
+		// Ordering
 		if (!empty($postData['order'])) {
-			$columns = ['c.cust_Name ', 'c.cust_Email','c.cust_Phone','c.cust_Status'];
+			$columns = ['c.cust_Name', 'c.cust_Email', 'c.cust_Phone', 'c.cust_Status'];
 			$orderCol = $columns[$postData['order'][0]['column']];
 			$orderDir = $postData['order'][0]['dir'];
 			$builder->orderBy($orderCol, $orderDir);
+		} else {
+			$builder->orderBy('c.cust_Id', 'DESC');
 		}
 
-		// Execute the query and return the result
 		return $builder->get()->getResultArray();
 	}
 
@@ -108,23 +109,27 @@ class CustomerModel extends Model {
 			->where('cust_Status !=', 3)
 			->countAllResults();
 	}
-
 	public function countFiltered()
 	{
-		$builder = $this->db->table('customer c');
-
-		// Only fetch rows where either staffs exists
-		$builder->where('c.cust_Status !=', 3);
-	 
 		$postData = service('request')->getPost();
+		$searchValue = '';
 		if (!empty($postData['search']['value'])) {
-			$builder->groupStart()
-					->like('c.cust_Name', $postData['search']['value'])
-					->groupEnd();
+			$searchValue = str_replace(' ', '', $postData['search']['value']);
 		}
-		return $builder->countAllResults();
+
+		$sql = "SELECT COUNT(*) as total 
+				FROM customer c 
+				WHERE c.cust_Status != 3";
+
+		if (!empty($searchValue)) {
+			$sql .= " AND REPLACE(c.cust_Name, ' ', '') LIKE '%" . $this->db->escapeLikeString($searchValue) . "%'";
+		}
+
+		$query = $this->db->query($sql);
+		return $query->getRow()->total;
 	}
-    }
+
+}
 
 ?>
 

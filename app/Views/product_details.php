@@ -143,7 +143,7 @@ $zd_uid = session()->get('zd_uid');
 								</span>
 							<?php else: ?>
 								<!-- Only Selling Price if no discount -->
-								<span class="offerprice fw-bold text-danger">
+								<span class="offerprice fw-bold ">
 									<i class="bi bi-currency-rupee"></i><?= esc($product['pr_Selling_Price']); ?>
 								</span>
 							<?php endif; ?>

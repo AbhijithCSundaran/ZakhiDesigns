@@ -25,7 +25,7 @@
 
     <div class="container mt-5">
         <div class="row justify-content-center">
-            <div class="col-lg-100  width: 119%; max-width: 105%;" >
+            <div class="col-lg-100  width: 102%; max-width: 111%;" >
                 <div class="card shadow-lg border-0">
                     <div class="card-header bg-white text-dark border-bottom">
                         <h4 class="mb-0"><i class="bi bi-box-seam"></i> <?= esc($product->pr_Name); ?></h4>
@@ -34,22 +34,22 @@
                         <div id="messageBox" class="alert alert-success d-none"></div>
 
                         <div class="row">
-                          <div class="col-md-6 mb-4" style="font-size: 18px;">
+                          <div class="col-md-6 mb-4">
 
-                                <p ><strong>Code:</strong> <?= esc($product->pr_Code); ?></p>
-                                <p><strong>Description:</strong> <?= esc($product->pr_Description); ?></p>
-                                <p><strong>Category:</strong> <?= esc($product->cat_Name); ?></p>
-                                <p><strong>Subcategory:</strong> <?= esc($product->sub_Category_Name); ?></p>
-                                <p><strong>Selling Price:</strong> ₹<?= esc($product->pr_Selling_Price); ?></p>
-                                <p><strong>MRP:</strong> ₹<?= esc($product->mrp); ?></p>
+                                <p style="font-size: 15px;"><strong>Code:</strong> <?= esc($product->pr_Code); ?></p>
+                                <p style="font-size: 14px;"><strong>Description:</strong> <?= esc($product->pr_Description); ?></p>
+                                <p style="font-size: 14px;"><strong>Category:</strong> <?= esc($product->cat_Name); ?></p>
+                                <p style="font-size: 14px;"><strong>Subcategory:</strong> <?= esc($product->sub_Category_Name); ?></p>
+                                <p style="font-size: 14px;"><strong>Selling Price:</strong> ₹<?= esc($product->pr_Selling_Price); ?></p>
+                                <p style="font-size: 14px;"><strong>MRP:</strong> ₹<?= esc($product->mrp); ?></p>
                             </div>
 
-                            <div class="col-md-6 mb-3" style="font-size: 18px;">
+                            <div class="col-md-6 mb-3">
 
-                                <p><strong>Stock:</strong> <?= esc($product->pr_Stock); ?></p>
-                                <p><strong>Discount:</strong> <?= esc($product->pr_Discount_Value); ?>
+                                <p style="font-size: 14px;"><strong>Stock:</strong> <?= esc($product->pr_Stock); ?></p>
+                                <p style="font-size: 14px;"><strong>Discount:</strong> <?= esc($product->pr_Discount_Value); ?>
                                     <?= esc($product->pr_Discount_Type); ?></p>
-                                <p><strong>Available Colors:</strong>
+                                <p style="font-size: 14px;"><strong>Available Colors:</strong>
                                     <?php
         $colors = explode(',', $product->pr_Aval_Colors);
         foreach ($colors as $color):
@@ -57,20 +57,20 @@
                                     <span class="badge badge-info me-1"><?= esc(trim($color)); ?></span>
                                     <?php endforeach; ?>
                                 </p>
-                                <p><strong>Size:</strong>
+                                <p style="font-size: 14px;"><strong>Size:</strong>
                                     <?php
         $sizes = explode(',', $product->pr_Size);
         foreach ($sizes as $size):
     ?>
                                     <span class="d-inline-flex justify-content-center align-items-center rounded-circle border bg-light text-dark me-2
-                                                                               text-center" style="width: 40px; height: 40px; font-size: 9px; line-height:1px; white-space: normal ">
+                                                                               text-center" style="width: 43px; height: 40px; font-size: 10px; line-height:1px; white-space: normal ">
                                         <?= esc(trim($size)); ?>
                                     </span>
                                     <?php endforeach; ?>
                                 </p>
-                                <p><strong>Sleeve Style:</strong> <?= esc($product->pr_Sleeve_Style); ?></p>
-                                <p><strong>Fabric:</strong> <?= esc($product->pr_Fabric); ?></p>
-                                <p><strong>Stitch Type:</strong> <?= esc($product->pr_Stitch_Type); ?></p>
+                                <p style="font-size: 14px;"><strong>Sleeve Style:</strong> <?= esc($product->pr_Sleeve_Style); ?></p>
+                                <p style="font-size: 14px;"><strong>Fabric:</strong> <?= esc($product->pr_Fabric); ?></p>
+                                <p style="font-size: 14px;"><strong>Stitch Type:</strong> <?= esc($product->pr_Stitch_Type); ?></p>
                             </div>
                         </div>
                     </div>

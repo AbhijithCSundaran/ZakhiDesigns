@@ -16,7 +16,12 @@ class CustomerLoginModel extends Model {
         public function getEmailExist($forgotCustEmail) {
             return $this->db->query("select cust_Id,cust_Email from customer where cust_Email = '".$forgotCustEmail."'")->getRow();
         }
-
+        public function resetPasswordNow($pass, $email)
+        {
+            return $this->db->table('customer')
+                ->where('cust_Email', $email)
+                ->update(['cust_Password' => $pass]);
+        }
     }
 
         ?>

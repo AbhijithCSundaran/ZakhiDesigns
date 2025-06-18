@@ -19,7 +19,7 @@ $routes->get('logout', 'Weblogin::logout');
 
 $routes->set404Override('\App\Controllers\ErrorWeb::show404');
 $routes->get('forgotPassword', 'ForgotPassword::index');
-
+$routes->post('resetPassword', 'ForgotPassword::resetPassword');
 
 // testing
 

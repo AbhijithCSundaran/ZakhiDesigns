@@ -66,6 +66,7 @@ $(function() {
             success: function(res) {
                 if (res.status == 1) {
                     $('#messageBox').html('<div class="alert alert-success">' + res.msg + '</div>').fadeIn().delay(5000).fadeOut();
+                    window.location.href = res.redirect;
                 } else {
                     $('#messageBox').html('<div class="alert alert-danger">' + res.msg + '</div>').fadeIn().delay(5000).fadeOut();
                 }

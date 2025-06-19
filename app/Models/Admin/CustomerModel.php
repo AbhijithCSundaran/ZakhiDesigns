@@ -66,41 +66,43 @@ class CustomerModel extends Model {
     protected $allowedFields = ['cust_Name', 'cust_Email','cust_Phone', 'cust_Status']; // Adjust to your table
 
     // For DataTables
-     public function getDatatables()
-	{
-		$postData = service('request')->getPost();
-		$searchValue = '';
-		if (!empty($postData['search']['value'])) {
-			$searchValue = str_replace(' ', '', $postData['search']['value']);
-		}
+     public function getDatatables(){
+    $postData = service('request')->getPost();
+    $searchValue = '';
+    if (!empty($postData['search']['value'])) {
+        // Remove all types of whitespace (space, tab, newline)
+        $searchValue = preg_replace('/\s+/', '', $postData['search']['value']);
+    }
 
-		$builder = $this->db->table('customer c');
-		$builder->select('c.*');
-		$builder->where('c.cust_Status !=', value: 3);
+    $builder = $this->db->table('customer c');
+    $builder->select('c.*');
+    $builder->where('c.cust_Status !=', 3);
 
-		if (!empty($searchValue)) {
-			$builder->groupStart();
-			$builder->where("REPLACE(c.cust_Name, ' ', '') LIKE '%" . $this->db->escapeLikeString($searchValue) . "%'", null, false);
-			$builder->groupEnd();
-		}
+    if (!empty($searchValue)) {
+        $builder->groupStart();
+        // Remove spaces and tabs in DB column
+        $builder->where("REPLACE(REPLACE(c.cust_Name, ' ', ''), '\t', '') LIKE '%" . $this->db->escapeLikeString($searchValue) . "%'", null, false);
+        $builder->groupEnd();
+    }
 
-		// Pagination
-		if (!empty($postData['length']) && $postData['length'] != -1) {
-			$builder->limit($postData['length'], $postData['start']);
-		}
+    // Pagination
+    if (!empty($postData['length']) && $postData['length'] != -1) {
+        $builder->limit($postData['length'], $postData['start']);
+    }
 
-		// Ordering
-		if (!empty($postData['order'])) {
-			$columns = ['c.cust_Name', 'c.cust_Email', 'c.cust_Phone', 'c.cust_Status'];
-			$orderCol = $columns[$postData['order'][0]['column']];
-			$orderDir = $postData['order'][0]['dir'];
-			$builder->orderBy($orderCol, $orderDir);
-		} else {
-			$builder->orderBy('c.cust_Id', 'DESC');
-		}
+    // Ordering
+    if (!empty($postData['order'])) {
+        $columns = ['c.cust_Name', 'c.cust_Email', 'c.cust_Phone', 'c.cust_Status'];
+        $orderCol = $columns[$postData['order'][0]['column']];
+        $orderDir = $postData['order'][0]['dir'];
+        $builder->orderBy($orderCol, $orderDir);
+    } else {
+        $builder->orderBy('c.cust_Id', 'DESC');
+    }
 
-		return $builder->get()->getResultArray();
-	}
+    return $builder->get()->getResultArray();
+    }
+
 
 
 	public function countAll()
@@ -108,26 +110,29 @@ class CustomerModel extends Model {
 		return $this->db->table('customer')
 			->where('cust_Status !=', 3)
 			->countAllResults();
-	}
-	public function countFiltered()
-	{
-		$postData = service('request')->getPost();
-		$searchValue = '';
-		if (!empty($postData['search']['value'])) {
-			$searchValue = str_replace(' ', '', $postData['search']['value']);
-		}
+	} 
+	public function countFiltered(){
+    $postData = service('request')->getPost();
+    $searchValue = '';
+    if (!empty($postData['search']['value'])) {
+        // Remove all types of whitespace (space, tab, newline)
+        $searchValue = preg_replace('/\s+/', '', $postData['search']['value']);
+    }
 
-		$sql = "SELECT COUNT(*) as total 
-				FROM customer c 
-				WHERE c.cust_Status != 3";
+    $sql = "SELECT COUNT(*) as total 
+            FROM customer c 
+            WHERE c.cust_Status != 3";
 
-		if (!empty($searchValue)) {
-			$sql .= " AND REPLACE(c.cust_Name, ' ', '') LIKE '%" . $this->db->escapeLikeString($searchValue) . "%'";
-		}
+    if (!empty($searchValue)) {
+        // Remove space and tab from DB column
+        $escaped = $this->db->escapeLikeString($searchValue);
+        $sql .= " AND REPLACE(REPLACE(c.cust_Name, ' ', ''), '\t', '') LIKE '%$escaped%'";
+    }
 
-		$query = $this->db->query($sql);
-		return $query->getRow()->total;
-	}
+    $query = $this->db->query($sql);
+    return $query->getRow()->total;
+    }
+
 
 }
 

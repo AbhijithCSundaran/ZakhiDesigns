@@ -187,17 +187,18 @@ public function delete_image($product_id, $image_name)
 
     // For DataTables
 
-    public function getDatatables()
-    {
+    public function getDatatables() {
         $builder = $this->db->table('product p');
         $builder->select('p.*');
         $builder->where('p.pr_Status !=', 3);
 
         $postData = service('request')->getPost();
         if (!empty($postData['search']['value'])) {
-            $search = str_replace(' ', '', $postData['search']['value']);
+            $search = preg_replace('/\s+/', '', $postData['search']['value']);
+            $escaped = $this->db->escapeLikeString($search);
+
             $builder->groupStart()
-                ->like("REPLACE(p.pr_Name, ' ', '')", $search)
+                ->where("REPLACE(REPLACE(p.pr_Name, ' ', ''), CHAR(9), '') LIKE '%$escaped%'", null, false)
                 ->groupEnd();
         }
 
@@ -214,6 +215,7 @@ public function delete_image($product_id, $image_name)
 
         return $builder->get()->getResultArray();
     }
+ 
 
 
 
@@ -225,21 +227,24 @@ public function delete_image($product_id, $image_name)
 	}
 
 	
-    public function countFiltered()
-    {
+    public function countFiltered(){
         $builder = $this->db->table('product p');
         $builder->where('p.pr_Status !=', 3);
 
         $postData = service('request')->getPost();
         if (!empty($postData['search']['value'])) {
-            $search = str_replace(' ', '', $postData['search']['value']);
+            $search = preg_replace('/\s+/', '', $postData['search']['value']);
+            $escaped = $this->db->escapeLikeString($search);
+
             $builder->groupStart()
-                ->like("REPLACE(p.pr_Name, ' ', '')", $search)
+                ->where("REPLACE(REPLACE(p.pr_Name, ' ', ''), CHAR(9), '') LIKE '%$escaped%'", null, false)
                 ->groupEnd();
         }
 
         return $builder->countAllResults();
     }
+
+
 
 
     //Check if there exist any discount in sub-category

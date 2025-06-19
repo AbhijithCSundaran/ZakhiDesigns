@@ -14,8 +14,7 @@ class OrdersModel extends Model {
     protected $primaryKey = 'od_Id';
     protected $allowedFields = ['tracker_Link','od_Status','cus_Id']; 
 
-public function getDatatables($searchValue = null, $start = 0, $length = 10)
-{
+public function getDatatables($searchValue = null, $start = 0, $length = 10){
     $builder = $this->db->table('order_detail')
         ->select([
             'order_detail.od_Id',
@@ -36,14 +35,15 @@ public function getDatatables($searchValue = null, $start = 0, $length = 10)
     $totalBuilder = clone $builder;
     $total = $totalBuilder->countAllResults(false);
 
-    // Apply search filter
+    // Apply search filter with space + tab removal
     if (!empty($searchValue)) {
-        $search = str_replace(' ', '', $searchValue);
+        $search = str_replace([" ", "\t"], '', $searchValue); // remove normal & tab spaces from input
+
         $builder->groupStart()
-            ->like("REPLACE(customer.cust_Name, ' ', '')", $search)
-            ->orLike("REPLACE(customer.cust_Email, ' ', '')", $search)
-            ->orLike("REPLACE(customer.cust_Phone, ' ', '')", $search)
-            ->orLike("REPLACE(product.pr_Code, ' ', '')", $search)
+            ->like("REPLACE(REPLACE(customer.cust_Name, ' ', ''), CHAR(9), '')", $search, false)
+            ->orLike("REPLACE(REPLACE(customer.cust_Email, ' ', ''), CHAR(9), '')", $search, false)
+            ->orLike("REPLACE(REPLACE(customer.cust_Phone, ' ', ''), CHAR(9), '')", $search, false)
+            ->orLike("REPLACE(REPLACE(product.pr_Code, ' ', ''), CHAR(9), '')", $search, false)
             ->groupEnd();
     }
 
@@ -62,6 +62,7 @@ public function getDatatables($searchValue = null, $start = 0, $length = 10)
         'filtered' => $filtered
     ];
 }
+
 
 
    

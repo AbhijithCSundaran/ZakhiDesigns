@@ -83,59 +83,61 @@ class Theme_Model extends Model {
 			return $this->db->getLastQuery();
 		} */
   /****************************************************************************************************************/
-   protected $table = 'themes';
-    protected $primaryKey = 'theme_Id';
-    protected $allowedFields = ['theme_Name', 'theme_Description', 'theme_Status']; // Adjust to your table
-//   public function getDatatables()
+	protected $table = 'themes';
+		protected $primaryKey = 'theme_Id';
+		protected $allowedFields = ['theme_Name', 'theme_Description', 'theme_Status']; // Adjust to your table
+	//   public function getDatatables()
 
-public function getDatatables()
-{
-    $builder = $this->db->table('themes t');
-    $builder->select('t.*');
-    $builder->where('t.theme_Status !=', 3);
+	public function getDatatables() {
+		$builder = $this->db->table('themes t');
+		$builder->select('t.*');
+		$builder->where('t.theme_Status !=', 3);
 
-    $postData = service('request')->getPost();
+		$postData = service('request')->getPost();
 
-    if (!empty($postData['search']['value'])) {
-        $search = str_replace(' ', '', $postData['search']['value']);
+		if (!empty($postData['search']['value'])) {
+			// Remove all whitespace (spaces, tabs, newlines)
+			$search = preg_replace('/\s+/', '', $postData['search']['value']);
+			$escaped = $this->db->escapeLikeString($search);
 
-        $builder->groupStart()
-            ->like("REPLACE(t.theme_Name, ' ', '')", $search)
-            ->orLike("REPLACE(t.theme_Description, ' ', '')", $search)
-            ->groupEnd();
+			$builder->groupStart()
+				->where("REPLACE(REPLACE(t.theme_Name, ' ', ''), CHAR(9), '') LIKE '%$escaped%'", null, false)
+				->orWhere("REPLACE(REPLACE(t.theme_Description, ' ', ''), CHAR(9), '') LIKE '%$escaped%'", null, false)
+				->groupEnd();
+		}
+
+		if (!empty($postData['length']) && $postData['length'] != -1) {
+			$builder->limit($postData['length'], $postData['start']);
+		}
+
+		if (!empty($postData['order'])) {
+			$columns = ['t.theme_Id', 't.theme_Name', 't.theme_Description', 't.theme_Status'];
+			$orderCol = $columns[$postData['order'][0]['column']] ?? 't.theme_Id';
+			$orderDir = $postData['order'][0]['dir'] ?? 'DESC';
+			$builder->orderBy($orderCol, $orderDir);
+		}
+
+		return $builder->get()->getResultArray();
+	}
+
+
+	public function countFiltered() {
+		$builder = $this->db->table('themes t');
+		$builder->where('t.theme_Status !=', 3);
+
+		$postData = service('request')->getPost();
+		if (!empty($postData['search']['value'])) {
+			$search = preg_replace('/\s+/', '', $postData['search']['value']);
+			$escaped = $this->db->escapeLikeString($search);
+
+			$builder->groupStart()
+				->where("REPLACE(REPLACE(t.theme_Name, ' ', ''), CHAR(9), '') LIKE '%$escaped%'", null, false)
+				->orWhere("REPLACE(REPLACE(t.theme_Description, ' ', ''), CHAR(9), '') LIKE '%$escaped%'", null, false)
+				->groupEnd();
+		}
+
+		return $builder->countAllResults();
     }
-
-    if (!empty($postData['length']) && $postData['length'] != -1) {
-        $builder->limit($postData['length'], $postData['start']);
-    }
-
-    if (!empty($postData['order'])) {
-        $columns = ['t.theme_Id', 't.theme_Name', 't.theme_Description', 't.theme_Status'];
-        $orderCol = $columns[$postData['order'][0]['column']] ?? 't.theme_Id';
-        $orderDir = $postData['order'][0]['dir'] ?? 'DESC';
-        $builder->orderBy($orderCol, $orderDir);
-    }
-
-    return $builder->get()->getResultArray();
-}
-
-	public function countFiltered()
-{
-    $builder = $this->db->table('themes t');
-    $builder->where('t.theme_Status !=', 3);
-
-    $postData = service('request')->getPost();
-    if (!empty($postData['search']['value'])) {
-        $search = str_replace(' ', '', $postData['search']['value']);
-
-        $builder->groupStart()
-            ->like("REPLACE(t.theme_Name, ' ', '')", $search)
-            ->orLike("REPLACE(t.theme_Description, ' ', '')", $search)
-            ->groupEnd();
-    }
-
-    return $builder->countAllResults();
-}
 
 
 

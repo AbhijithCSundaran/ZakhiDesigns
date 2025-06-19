@@ -182,8 +182,7 @@ class SubcategoryModel extends Model
 		
 
     // DataTables: Get filtered subcategories
-    public function getDatatables()
-{
+    public function getDatatables() {
     $builder = $this->db->table('subcategory s');
     $builder->select('s.*, c.cat_Name');
     $builder->join('category c', 'c.cat_Id = s.cat_Id', 'left');
@@ -192,11 +191,13 @@ class SubcategoryModel extends Model
     $postData = service('request')->getPost();
 
     if (!empty($postData['search']['value'])) {
-        $search = str_replace(' ', '', $postData['search']['value']); // remove spaces from input
+        // Remove all whitespace (space, tab, newline, etc.)
+        $search = preg_replace('/\s+/', '', $postData['search']['value']);
+        $escaped = $this->db->escapeLikeString($search);
 
         $builder->groupStart()
-            ->like("REPLACE(s.sub_Category_Name, ' ', '')", $search)
-            ->orLike("REPLACE(c.cat_Name, ' ', '')", $search)
+            ->where("REPLACE(REPLACE(s.sub_Category_Name, ' ', ''), CHAR(9), '') LIKE '%$escaped%'", null, false)
+            ->orWhere("REPLACE(REPLACE(c.cat_Name, ' ', ''), CHAR(9), '') LIKE '%$escaped%'", null, false)
             ->groupEnd();
     }
 
@@ -212,7 +213,8 @@ class SubcategoryModel extends Model
     }
 
     return $builder->get()->getResultArray();
-}
+    }
+
 
 
     // Count all subcategories (excluding deleted)
@@ -224,24 +226,25 @@ class SubcategoryModel extends Model
     }
 
     // Count filtered subcategories (DataTables support)
-    public function countFiltered()
-{
+   public function countFiltered(){
     $builder = $this->db->table('subcategory s');
     $builder->join('category c', 'c.cat_Id = s.cat_Id', 'left');
     $builder->where('s.sub_Status !=', 3);
 
     $postData = service('request')->getPost();
+
     if (!empty($postData['search']['value'])) {
-        $search = str_replace(' ', '', $postData['search']['value']);
+        $search = preg_replace('/\s+/', '', $postData['search']['value']);
+        $escaped = $this->db->escapeLikeString($search);
 
         $builder->groupStart()
-            ->like("REPLACE(s.sub_Category_Name, ' ', '')", $search)
-            ->orLike("REPLACE(c.cat_Name, ' ', '')", $search)
+            ->where("REPLACE(REPLACE(s.sub_Category_Name, ' ', ''), CHAR(9), '') LIKE '%$escaped%'", null, false)
+            ->orWhere("REPLACE(REPLACE(c.cat_Name, ' ', ''), CHAR(9), '') LIKE '%$escaped%'", null, false)
             ->groupEnd();
     }
 
     return $builder->countAllResults();
-}
+   }
 
 
 

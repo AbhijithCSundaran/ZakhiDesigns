@@ -73,29 +73,39 @@
                                             <label class="col-sm-2 col-form-label">Contact Number <span style="color: red;">*</span></label>
                                             <div class="col-sm-6">
                                                 <input type="text" class="form-control" name="mobile" id="mobile" maxlength="15" minlength="7"
-                                                  value="<?= isset($cust) ? ($cust['cust_Phone']) : '' ?>"   placeholder="Enter Contact Number (Exclude country code)"  required>
+                                                  value="<?= isset($cust) ? ($cust['cust_Phone']) : '' ?>"   placeholder="Enter Contact Number"  required>
 											</div>
 											
                                         </div>
 										<?php if (empty($cust)) : ?>
 										 <!-- Default Add Password Fields -->
-										<div class="form-group row">
-											<label class="col-sm-2 col-form-label">Password <span style="color: red;">*</span></label>
-											<div class="col-sm-6">
-												<input type="password" class="form-control" name="password"
-													id="password" placeholder="Enter password" required autocomplete="off">
-												<span class="text-danger error-msg" id="error-password"></span>
-											</div>
-										</div>
+                                        <!-- Password Field -->
+                                        <!-- Password Field -->
+                                <!-- Password Field -->
+                                    <div class="form-group row">
+                                        <label class="col-sm-2 col-form-label">Password <span style="color: red;">*</span></label>
+                                        <div class="col-sm-6 position-relative">
+                                            <input type="password" class="form-control" name="password" id="password"
+                                                placeholder="Enter password" required autocomplete="off">
+                                            <span class="text-danger error-msg" id="error-password"></span>
+                                            <i class="fa fa-eye-slash position-absolute toggle-password"
+                                            style="top: 50%; right: 20px; transform: translateY(-50%); cursor: pointer;"
+                                            onclick="togglePassword('password', this)"></i>
+                                        </div>
+                                    </div>
 
-										<div class="form-group row">
-											<label class="col-sm-2 col-form-label">Confirm Password <span style="color: red;">*</span></label>
-											<div class="col-sm-6">
-												<input type="password" class="form-control" name="confirm_password"
-													id="confirm_password" placeholder="Confirm password" required autocomplete="off">
-												<span class="text-danger error-msg" id="error-confirm-password"></span>
-											</div>
-										</div>
+                                    <!-- Confirm Password Field -->
+                                    <div class="form-group row">
+                                        <label class="col-sm-2 col-form-label">Confirm Password <span style="color: red;">*</span></label>
+                                        <div class="col-sm-6 position-relative">
+                                            <input type="password" class="form-control" name="confirm_password" id="confirm_password"
+                                                placeholder="Confirm password" required autocomplete="off">
+                                            <span class="text-danger error-msg" id="error-confirm-password"></span>
+                                            <i class="fa fa-eye-slash position-absolute toggle-password"
+                                            style="top: 50%; right: 20px; transform: translateY(-50%); cursor: pointer;"
+                                            onclick="togglePassword('confirm_password', this)"></i>
+                                        </div>
+                                    </div>
 										<?php endif ?>
 										 <div class="row justify-content-center">
 										<input type="hidden" name="cust_id" value="<?= isset($cust['cust_Id']) ? esc($cust['cust_Id']) : '' ?>">

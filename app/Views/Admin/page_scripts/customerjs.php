@@ -146,28 +146,51 @@ $('#custSubmit').click(function(e) {
     }, 'json');
 });
 
-/*********************************/
+/***************************************************** */
 
+function togglePassword(inputId, iconElement) {
+    const input = document.getElementById(inputId);
+    if (!input) return;
+
+    if (input.type === "password") {
+        input.type = "text";
+        iconElement.classList.remove("fa-eye-slash");
+        iconElement.classList.add("fa-eye");
+    } else {
+        input.type = "password";
+        iconElement.classList.remove("fa-eye");
+        iconElement.classList.add("fa-eye-slash");
+    }
+}
+
+
+/*********************************/
 function confirmDelete(addId) {
-	console.log("Deleting ID:", addId);
     Swal.fire({
         title: 'Are you sure?',
-        text: 'You want to delete this customer ?',
+        text: 'You want to delete this customer?',
         icon: 'warning',
         showCancelButton: true,
         confirmButtonText: 'Delete',
         cancelButtonText: 'Cancel',
     }).then((result) => {
         if (result.isConfirmed) {
-            // AJAX call to delete
             $.ajax({
-                url: "<?php echo base_url('admin/customer/delete'); ?>/" + addId,
+                url: "<?= base_url('admin/customer/delete'); ?>/" + addId,
                 method: "POST",
                 dataType: "json",
                 success: function (response) {
                     if (response.success) {
                         Swal.fire('Deleted!', response.msg, 'success');
-                        setTimeout(() => location.reload(), 1000);
+
+                        let table = $('#customerList').DataTable();
+                        let currentPage = table.page();
+
+                        table.ajax.reload(function () {
+                            if (table.data().count() === 0 && currentPage > 0) {
+                                table.page(currentPage - 1).draw(false);
+                            }
+                        }, false);
                     } else {
                         Swal.fire('Error', response.msg, 'error');
                     }
@@ -179,6 +202,10 @@ function confirmDelete(addId) {
         }
     });
 }
+
+
+
+
 /*************************************/
 //Active and Inactive status
 

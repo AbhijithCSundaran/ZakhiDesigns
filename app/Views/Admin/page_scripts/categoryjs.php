@@ -125,7 +125,7 @@ $(document).on('change', '.checkactive', function() {
     });
 });
 //Delete
-function confirmDelete(catId) {
+ function confirmDelete(catId) {
     Swal.fire({
         title: 'Are you sure?',
         text: 'You want to delete this Category?',
@@ -138,16 +138,20 @@ function confirmDelete(catId) {
             $.ajax({
                 url: "<?php echo base_url('admin/category/delete/'); ?>" + catId,
                 type: "POST",
+                dataType: "json",
                 success: function(response) {
-                    if(response.status == 1){
-						Swal.fire('Deleted!', response.message, 'success')
-                        .then(() => {
-                            location.reload(); 
-                        });
-					}
-					if(response.status == 0){
-						Swal.fire('Error!', response.message, 'error')
-					}
+                    if (response.status == 1) {
+                        Swal.fire('Deleted!', response.message, 'success');
+                        let table = $('#categoryList').DataTable();
+                        let currentPage = table.page();
+                        table.ajax.reload(() => {
+                            if (table.data().count() === 0 && currentPage !== 0) {
+                                table.page(currentPage - 1).draw(false);
+                            }
+                        }, false);
+                    } else {
+                        Swal.fire('Error!', response.message, 'error');
+                    }
                 },
                 error: function(xhr, status, error) {
                     Swal.fire('Error!', 'Something went wrong.', 'error');

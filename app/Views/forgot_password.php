@@ -6,12 +6,12 @@
     <title>Reset Password</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-
+    <link rel="icon" href="<?php echo base_url().ASSET_PATH; ?>Admin/assets/images/favicon.jpg" type="image/x-icon">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <style>
         body {
-            font-family: 'Poppins', sans-serif;
+            font-family: 'webfonds', sans-serif;
             background: white;
             display: flex;
             justify-content: center;
@@ -32,7 +32,7 @@
             width: 100%;
             max-width: 400px;
             text-align: center;
-            padding: 48px 58px;
+            padding: 48px 48px;
 
         }
         #resetPasswordContent{
@@ -92,15 +92,13 @@
             padding: 14px;
             border-radius: 8px;
             font-size: 18px;
-            font-weight: bold;
+            font-weight: 13px;
             cursor: pointer;
             margin-left: 7px;
             transition: background 0.3s ease;
         }
 
-        .submit-btn:hover {
-            background-color: black;
-        }
+        
 
         @media (max-width: 600px) {
             body {
@@ -125,7 +123,7 @@
         <img src="<?= $logoUrl ?>" class="logo">
 
         <h2>Reset Password</h2>
-        <p id="resetPasswordContent" style="font-weight: normal; font-size: 15px;  color:	#868686;">Please enter your
+        <p id="resetPasswordContent" style="font-weight: normal; font-size: 14px;  color:	#868686;">Please enter your
             new password below. Make sure it’s strong and easy for you to remember.</p>
         <form class="form-class" id="forgotResetForm">
             <input type="hidden" name="email" id="email" value="<?= esc($email) ?>">
@@ -143,7 +141,7 @@
                 <i class="fa-solid fa-eye-slash toggle-password" toggle="#confirm_reset_password"></i>
             </div>
 
-            <button type="button" id="forgotSaveButton" class="submit-btn">Save</button>
+            <button type="button" id="forgotSaveButton" class="submit-btn">Reset Password</button>
         </form>
     </div>
 
@@ -175,6 +173,12 @@
 
             if (response.status == 1) {
                 $('#resetPasswordContent').text(response.msg).css('color', 'green');
+                // redirection to back 
+                  setTimeout(function () {
+                    window.location.href = response.redirect;
+                    
+                }, 3000);
+
             } else if (response.status == 0) {
                 $('#resetPasswordContent').text(response.msg).css('color', 'red');
             }

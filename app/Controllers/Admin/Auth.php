@@ -45,10 +45,14 @@ class Auth extends BaseController
 						echo json_encode(array(
 							"status" => 0,
 							"msg" => "Staff Access Restricted. Please Contact Admin."
-						));
-					
+						));	
 					}
-					
+					if($userLog->us_Status == '3'){
+						echo json_encode(array(
+							"status" => 0,
+							"msg" => "No Such Staff Member Exists."
+						));	
+					}
 				} else {
 					echo json_encode(array(
 						"status" => 0,

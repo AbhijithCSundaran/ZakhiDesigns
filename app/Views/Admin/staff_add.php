@@ -132,8 +132,12 @@
 											<div class="form-group row">
 												<label class="col-sm-2 col-form-label">Password <span style="color: red;">*</span></label>
 												<div class="col-sm-6">
-													<input type="password" class="form-control" name="password"
+													<input type="password" class="form-control" name="password" 
 														id="password" placeholder="Enter password" required autocomplete="off">
+                                                        <i class="fa fa-eye-slash position-absolute toggle-password"
+                                                        style="top: 50%; right: 20px; transform: translateY(-50%); cursor: pointer;"
+                                                        onclick="togglePassword('password', this)"></i>
+
 													<span class="text-danger error-msg" id="error-password"></span>
 												</div>
 											</div>
@@ -143,6 +147,10 @@
 												<div class="col-sm-6">
 													<input type="password" class="form-control" name="confirm_password"
 														id="confirm_password" placeholder="Confirm password" required autocomplete="off">
+                                                        <i class="fa fa-eye-slash position-absolute toggle-password"
+                                                        style="top: 50%; right: 20px; transform: translateY(-50%); cursor: pointer;"
+                                                        onclick="togglePassword('confirm_password', this)"></i>
+
 													<span class="text-danger error-msg" id="error-confirm-password"></span>
 												</div>
 											</div>

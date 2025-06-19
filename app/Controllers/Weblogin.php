@@ -3,7 +3,11 @@
 namespace App\Controllers;
 use App\Models\CustomerLoginModel;
 
-
+ 
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+ 
+ 
 class Weblogin extends BaseController
 {
 
@@ -13,6 +17,7 @@ class Weblogin extends BaseController
 		$this->input = \Config\Services::request();
 		$this->customerLoginModel = new CustomerLoginModel();
 	}
+
 
 	public function index()
 	{
@@ -60,73 +65,90 @@ class Weblogin extends BaseController
 			));
 		}
 	}
-	public function webForgotEmailSend()
-	{
+
+
+
+	public function webForgotEmailSend(){
 		$forgotCustEmail = $this->request->getPost("forgotCustEmail");
-		if ($forgotCustEmail) {
-			if (!filter_var($forgotCustEmail, FILTER_VALIDATE_EMAIL)) {
-				return $this->response->setJSON([
-					'status' => 0,
-					'msg' => 'Invalid Email Format.'
-				]);
-			}
-
-			// Check if email exists
-			$emailExist = $this->customerLoginModel->getEmailExist($forgotCustEmail);
-			if ($emailExist) {
-				$to        = $forgotCustEmail;
-				$subject   = 'Link to reset your password';
-				$fromEmail = 'sandra@smartlounge.online';
-				$fromName  = 'Sandra';
-				
-				$logoUrl = base_url(ASSET_PATH . 'assets/images/logo.jpg');
-			// $frgtpswd = base_url('forgotPassword');
-			$frgtpswd = base_url('forgotPassword?email=' . urlencode($forgotCustEmail));
-
-				$message = "
-					<center>
-					<img src='{$logoUrl}' alt='Zakhi Designs Logo' style='height: 60px;'>
-					<h2>Forgot Password</h2>
-					</center><br>
-					<p style='text-align: center; font-size: 16px; margin-top: 20px;'>
-						<a href='$frgtpswd'>Click Here To Reset The Password.</a>
-					</p>
-					<p style='text-align: center; margin-top: 20px;'>
-						<a href='https://zakhidesigns.com' style='padding: 10px 20px; background-color: #d81b60; color: white; text-decoration: none; border-radius: 5px;'>Visit Our Website</a>
-					</p>
-					<p style='text-align: center; font-size: 14px; color: #555; margin-top: 30px;'>
-						For any queries, reach us at <a href='mailto:support@zakhidesigns.com'>support@zakhidesigns.com</a>
-					</p>
-				";
-
-				$headers  = "MIME-Version: 1.0\r\n";
-				$headers .= "Content-type: text/html; charset=UTF-8\r\n";
-				$headers .= "From: {$fromName} <{$fromEmail}>\r\n";
-				$headers .= "Reply-To: {$fromEmail}\r\n";
-				$headers .= "Bcc: sandra@smartlounge.online\r\n";
-				$headers .= "X-Mailer: PHP/" . phpversion();
-
-				$mailSent = mail($to, $subject, $message, $headers);
-				
-				return $this->response->setJSON([
-					'status' => $mailSent ? 1 : 0,
-					'msg' => $mailSent ? 'A Reset Link Has Been Sent To Your Email Address.' : 'Failed To Send The Link. Please Try Again.'
-				]);
-			} else {
-				return $this->response->setJSON([
-					"status" => 0,
-					"msg" => "Email Doesn't Exist."
-				]);
-			}
-		} else {
+		if (!$forgotCustEmail) {
 			return $this->response->setJSON([
 				"status" => 0,
 				"msg" => "Enter Your Email Address."
 			]);
 		}
+		if (!filter_var($forgotCustEmail, FILTER_VALIDATE_EMAIL)) {
+			return $this->response->setJSON([
+				'status' => 0,
+				'msg' => 'Invalid Email Format.'
+			]);
+		}
+		$emailExist = $this->customerLoginModel->getEmailExist($forgotCustEmail);
+		if (!$emailExist) {
+			return $this->response->setJSON([
+				"status" => 0,
+				"msg" => "Email Doesn't Exist."
+			]);
+		}
+
+		$name = $emailExist->cust_Name;
+		$logoUrl = base_url(ASSET_PATH . 'assets/images/logo.jpg');
+		$frgtpswd = base_url('forgotPassword?email=' . urlencode($forgotCustEmail));
+
+		// Load PHPMailer files
+		require 'vendors/src/Exception.php';
+		require 'vendors/src/PHPMailer.php';
+		require 'vendors/src/SMTP.php';
+
+		$mail = new \PHPMailer\PHPMailer\PHPMailer(true);
+
+		try {
+			$mail->isSMTP();
+			$mail->Host       = 'smtp.gmail.com';
+			$mail->SMTPAuth   = true;
+			$mail->Username   = 'smartloungework@gmail.com'; // Your Gmail
+			$mail->Password   = 'peetkiqeqbgxaxqs'; // App Password
+			$mail->SMTPSecure = 'tls';
+			$mail->Port       = 587;
+
+			$mail->setFrom('smartloungework@gmail.com', 'Smart Lounge');
+			$mail->addAddress($forgotCustEmail, $name);
+			$mail->addReplyTo('smartloungework@gmail.com', 'Smart Lounge');
+
+			$mail->isHTML(true);
+			$mail->Subject = 'Password Reset Link - Zakhi Designs';
+
+			$mail->Body = "
+				<center>
+					<img src='{$logoUrl}' alt='Zakhi Designs Logo' style='height: 60px;'>
+					<h2>Forgot Password</h2>
+				</center><br>
+				<p style='text-align: center; font-size: 16px; margin-top: 20px;'>
+					<a href='$frgtpswd'>Click Here To Reset The Password.</a>
+				</p>
+				<p style='text-align: center; margin-top: 20px;'>
+					<a href='https://zakhidesigns.com' style='padding: 10px 20px; background-color: #d81b60; color: white; text-decoration: none; border-radius: 5px;'>Visit Our Website</a>
+				</p>
+				<p style='text-align: center; font-size: 14px; color: #555; margin-top: 30px;'>
+					For any queries, reach us at <a href='mailto:support@zakhidesigns.com'>support@zakhidesigns.com</a>
+				</p>
+			";
+
+			$mail->AltBody = "Dear $name,\n\nPlease follow the link to reset your password: $frgtpswd\n\n";
+
+			$mail->send();
+
+			return $this->response->setJSON([
+				'status' => 1,
+				'msg' => 'A Reset Link Has Been Sent To Your Email Address.'
+			]);
+
+		} catch (Exception $e) {
+			return $this->response->setJSON([
+				'status' => 0,
+				'msg' => 'Mail could not be sent. Mailer Error: ' . $mail->ErrorInfo
+			]);
+		}
 	}
-
-
 
 
 	public function logout()

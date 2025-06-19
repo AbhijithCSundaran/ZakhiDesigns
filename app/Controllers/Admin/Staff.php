@@ -34,7 +34,7 @@ class Staff extends BaseController
 	{
 		if (!$this->session->get('ad_uid')) 
 		{
-			return redirect()->to(base_url('/admin/'));
+			return redirect()->to(base_url('admin'));
 		}
 
 		$data = [];
@@ -252,8 +252,7 @@ class Staff extends BaseController
         }
 	}
 	// Listing table data
-	public function ajaxList()
-	{
+	public function ajaxList(){
 	$model = new \App\Models\Admin\StaffModel();
 	$data = $model->getDatatables();
 	$total = $model->countAll();

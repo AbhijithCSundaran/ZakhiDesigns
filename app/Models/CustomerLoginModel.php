@@ -14,7 +14,7 @@ class CustomerLoginModel extends Model {
 		return $this->db->query("select * from customer where cust_Email = '".$email."' and cust_Password = '".$password."'")->getRow();
 	    }
         public function getEmailExist($forgotCustEmail) {
-            return $this->db->query("select cust_Id,cust_Email from customer where cust_Email = '".$forgotCustEmail."'")->getRow();
+            return $this->db->query("select cust_Id,cust_Email,cust_Name from customer where cust_Email = '".$forgotCustEmail."'")->getRow();
         }
         public function resetPasswordNow($pass, $email)
         {

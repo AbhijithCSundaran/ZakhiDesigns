@@ -108,7 +108,7 @@ class CustomerModel extends Model {
 		return $this->db->table('customer')
 			->where('cust_Status !=', 3)
 			->countAllResults();
-	}
+	} 
 	public function countFiltered()
 	{
 		$postData = service('request')->getPost();

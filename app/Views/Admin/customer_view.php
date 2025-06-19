@@ -73,7 +73,7 @@
                                             <label class="col-sm-2 col-form-label">Contact Number <span style="color: red;">*</span></label>
                                             <div class="col-sm-6">
                                                 <input type="text" class="form-control" name="mobile" id="mobile" maxlength="15" minlength="7"
-                                                  value="<?= isset($cust) ? ($cust['cust_Phone']) : '' ?>"   placeholder="Enter Contact Number (Exclude country code)"  required>
+                                                  value="<?= isset($cust) ? ($cust['cust_Phone']) : '' ?>"   placeholder="Enter Contact Number"  required>
 											</div>
 											
                                         </div>

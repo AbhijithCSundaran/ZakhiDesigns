@@ -62,21 +62,21 @@ class OrderNow extends Controller
 
         return $this->response->setJSON($address);
     }
-
+//$custname = ucwords(strtolower(trim($custname)));
     public function saveNewAddress()
     {
         $zd_uid = session()->get('zd_uid');
         $model = new AddressModel();
 
         $data = [
-            'add_Name'       => $this->request->getPost('newName'),
+            'add_Name'       => ucwords(strtolower(trim($this->request->getPost('newName')))),
             'add_Email'      => $this->request->getPost('newEmail'),
             'add_Phone'      => $this->request->getPost('newPhone'),
             'add_BuldingNo'  => $this->request->getPost('newBuilding'),
-            'add_Street'     => $this->request->getPost('newStreet'),
-            'add_Landmark'   => $this->request->getPost('newLandmark'),
-            'add_City'       => $this->request->getPost('newCity'),
-            'add_State'      => $this->request->getPost('newState'),
+            'add_Street'     => ucwords(strtolower(trim($this->request->getPost('newStreet')))),
+            'add_Landmark'   => ucwords(strtolower(trim($this->request->getPost('newLandmark')))),
+            'add_City'       => ucwords(strtolower(trim($this->request->getPost('newCity')))),
+            'add_State'      => ucwords(strtolower(trim($this->request->getPost('newState')))),
             'add_Pincode'    => $this->request->getPost('newPincode'),
             'add_CustId'     => $zd_uid,
             'add_createdby'  => $zd_uid,

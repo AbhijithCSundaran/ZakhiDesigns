@@ -1,8 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>Reset Password</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <style>
@@ -12,42 +16,51 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            min-height: 100dvh;
-            padding: 20px; 
-            flex-direction: column;
-             margin-top:-50px;
+            min-height: 100vh;
         }
+
         .logo {
             width: 70px;
             height: 67px;
             margin-bottom: -1px;
         }
-        .container {
+
+        .login_container {
             background: #fff;
             border-radius: 15px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
             width: 100%;
             max-width: 400px;
             text-align: center;
-            padding:48px 58px;
-            
+            padding: 48px 58px;
+
         }
-        .form-class{
+        #resetPasswordContent{
+            padding:0px;
+            padding-left:0px;
+            padding-right:0px;
+        }
+
+        .form-class {
             padding: 2px;
             margin-left: -20px;
         }
+
         .form-group {
+            position:relative;
             margin-bottom: 20px;
             text-align: left;
-            margin-left:8px ;
-            margin-right: 8px;
+            margin-left: 5px;
+            margin-right: -12px;
         }
+
         .form-group label {
             display: block;
             color: #333;
             font-weight: 550;
             margin-bottom: 8px;
         }
+
         .form-group input {
             width: 100%;
             padding: 12px;
@@ -57,17 +70,19 @@
             transition: all 0.3s ease;
             font-size: 16px;
         }
+
         .form-group input:focus {
             border-color: rgb(89, 50, 244);
             box-shadow: 0 0 8px rgba(22, 19, 21, 0.3);
         }
-        .toggle-password{
+
+        .toggle-password {
             position: absolute;
-            margin-left: 396px;
-            margin-top: -30px; 
+            right: 17px;
+            top: 46px;
             cursor: pointer;
-        } 
-        
+        }
+
 
         .submit-btn {
             width: 102%;
@@ -79,49 +94,52 @@
             font-size: 18px;
             font-weight: bold;
             cursor: pointer;
-            margin-left:7px;
+            margin-left: 7px;
             transition: background 0.3s ease;
         }
+
         .submit-btn:hover {
             background-color: black;
         }
+
         @media (max-width: 600px) {
-            .container {
-                width: 100% !important;
-                max-width: none !important;
-                border-radius: 0;
-                height: 100vh;
-                padding: 40px 20px;
-                box-shadow: none;
-            }
             body {
                 margin-top: 0;
                 padding: 0;
             }
-        }
 
+            .login_container {
+                width: 90%;
+                max-width: none;
+                box-shadow: 0 0px 25px rgba(0, 0, 0, 0.1);
+            }
+        }
     </style>
 </head>
+
 <body>
 
     <?php $logoUrl = base_url(ASSET_PATH . 'assets/images/logo.jpg'); ?>
-    
-    <div class="container">
-    <img src="<?= $logoUrl ?>" class="logo">
+
+    <div class="login_container">
+        <img src="<?= $logoUrl ?>" class="logo">
 
         <h2>Reset Password</h2>
-        <p id="resetPasswordContent" style="font-weight: normal; font-size: 15px;  color:	#868686;">Please enter your new password below. Make sure it’s strong and easy for you to remember.</p>
-        <form  class="form-class" id="forgotResetForm">
-           <input type="hidden" name="email" id = "email" value="<?= esc($email) ?>">
+        <p id="resetPasswordContent" style="font-weight: normal; font-size: 15px;  color:	#868686;">Please enter your
+            new password below. Make sure it’s strong and easy for you to remember.</p>
+        <form class="form-class" id="forgotResetForm">
+            <input type="hidden" name="email" id="email" value="<?= esc($email) ?>">
             <div class="form-group">
                 <label for="new_password">New Password</label>
-                <input type="password" name="new_reset_password" id="new_reset_password" maxlength="15" minlength="7"required>
-                 <i class="fa-solid fa-eye-slash toggle-password" toggle="#new_reset_password"></i>
+                <input type="password" name="new_reset_password" id="new_reset_password" maxlength="15" minlength="7"
+                    required>
+                <i class="fa-solid fa-eye-slash toggle-password" toggle="#new_reset_password"></i>
             </div>
 
             <div class="form-group">
                 <label for="confirm_password">Confirm Password</label>
-                <input type="password" name="confirm_reset_password" id="confirm_reset_password" maxlength="15" minlength="7" required>
+                <input type="password" name="confirm_reset_password" id="confirm_reset_password" maxlength="15"
+                    minlength="7" required>
                 <i class="fa-solid fa-eye-slash toggle-password" toggle="#confirm_reset_password"></i>
             </div>
 
@@ -130,6 +148,7 @@
     </div>
 
 </body>
+
 </html>
 <script>
     var baseUrl = "<?= base_url() ?>";
@@ -147,32 +166,32 @@
             }
         });
     });
-   function resetPassword(){
-     var url = baseUrl + 'resetPassword';
-        $.post(url,$('#forgotResetForm').serialize(), function(response){
+    function resetPassword() {
+        var url = baseUrl + 'resetPassword';
+        $.post(url, $('#forgotResetForm').serialize(), function (response) {
 
-         $('#resetPasswordContent').text('');
+            $('#resetPasswordContent').text('');
             var originalContent = "Please enter your new password below. Make sure it’s strong and easy for you to remember.";
 
-        if(response.status == 1){
-            $('#resetPasswordContent').text(response.msg).css('color', 'green');
-        }else if(response.status == 0){
-             $('#resetPasswordContent').text(response.msg).css('color', 'red');
-        }
-        else{
-             $('#resetPasswordContent').text('Something went wrong. Please try again.').css('color', 'red');
-        }
-        setTimeout(function() {
-            $('#resetPasswordContent').text(originalContent).css('color', '#868686');
-        }, 3000);
-     },'json');
-   }
+            if (response.status == 1) {
+                $('#resetPasswordContent').text(response.msg).css('color', 'green');
+            } else if (response.status == 0) {
+                $('#resetPasswordContent').text(response.msg).css('color', 'red');
+            }
+            else {
+                $('#resetPasswordContent').text('Something went wrong. Please try again.').css('color', 'red');
+            }
+            setTimeout(function () {
+                $('#resetPasswordContent').text(originalContent).css('color', '#868686');
+            }, 3000);
+        }, 'json');
+    }
 
-    $(document).ready(function() {
-        $('#forgotSaveButton').click(function(){
+    $(document).ready(function () {
+        $('#forgotSaveButton').click(function () {
             resetPassword();
         });
-    
+
     });
 
 </script>

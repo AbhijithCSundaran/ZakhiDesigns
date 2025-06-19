@@ -66,7 +66,7 @@
                             <div class="col-md-6 mb-2"><input type="text" name="newStreet" class="form-control" placeholder="Street" required></div>
                             <div class="col-md-6 mb-2"><input type="text" name="newLandmark" class="form-control" placeholder="Landmark"></div>
                             <div class="col-md-6 mb-2"><input type="text" name="newCity" class="form-control" placeholder="City" required></div>
-                            <div class="col-md-6 mb-2"><input type="text" name="newState" class="form-control" placeholder="State" required></div>
+                            <div class="col-md-6 mb-2"><input type="text" name="newState" class="form-control" placeholder="State" required pattern="[A-Za-z\s]+" title="No Numeric Or Special Characters Allowed"></div>
                             <div class="col-md-6 mb-2"><input type="text" name="newPincode" class="form-control" placeholder="Pincode" maxlength="6" pattern="[1-9][0-9]{5}" required></div>
                         </div>
                         <button type="submit" class="btn btn-primary mt-2">Save & Use This Address</button>

@@ -89,6 +89,7 @@ $('#subcategorySubmit').click(function(e) {
 
 
 //Delete Sub category
+
 function confirmDelete(subId) {
     Swal.fire({
         title: 'Are you sure?',
@@ -100,14 +101,20 @@ function confirmDelete(subId) {
     }).then((result) => {
         if (result.isConfirmed) {
             $.ajax({
-                url: "<?php echo base_url('admin/subcategory/delete'); ?>/" + subId,
+                url: "<?php echo base_url('admin/subcategory/delete/'); ?>" + subId,
                 method: "POST",
                 dataType: "json",
                 success: function(response) {
-					//alert("ok");
                     if (response.success) {
                         Swal.fire('Deleted!', response.msg, 'success');
-                        setTimeout(() => location.reload(), 1000);
+
+                        let table = $('#subcategoryList').DataTable();
+                        let currentPage = table.page();
+                        table.ajax.reload(function() {
+                            if (table.data().count() === 0 && currentPage > 0) {
+                                table.page(currentPage - 1).draw(false);
+                            }
+                        }, false);
                     } else {
                         Swal.fire('Error', response.msg, 'error');
                     }
@@ -118,8 +125,8 @@ function confirmDelete(subId) {
             });
         }
     });
-
 }
+
 //Active Inactive status Change
 var baseUrl = "<?= base_url() ?>";
 

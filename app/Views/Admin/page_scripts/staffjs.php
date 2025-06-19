@@ -170,33 +170,40 @@ $('#staffSubmit').click(function(e) {
 function confirmDelete(userId) {
     Swal.fire({
         title: 'Are you sure?',
-        text: 'You want to delete this staff ?',
+        text: 'You want to delete this staff?',
         icon: 'warning',
         showCancelButton: true,
         confirmButtonText: 'Delete',
         cancelButtonText: 'Cancel',
     }).then((result) => {
         if (result.isConfirmed) {
-            // AJAX call to delete
             $.ajax({
-                url: "<?php echo base_url('admin/staff/delete'); ?>/" + userId,
+                url: "<?= base_url('admin/staff/delete'); ?>/" + userId,
                 method: "POST",
                 dataType: "json",
                 success: function(response) {
                     if (response.success) {
                         Swal.fire('Deleted!', response.msg, 'success');
-                        setTimeout(() => location.reload(), 1000);
+                        let table = $('#staffList').DataTable();
+                        let currentPage = table.page();
+                        table.ajax.reload(() => {
+                            if (table.data().count() === 0 && currentPage > 0) {
+                                table.page(currentPage - 1).draw(false);
+                            }
+                        }, false);
+
                     } else {
                         Swal.fire('Error', response.msg, 'error');
                     }
                 },
                 error: function() {
-                    Swal.fire('Error', 'Something Went Wrong.', 'error');
+                    Swal.fire('Error', 'Something went wrong.', 'error');
                 }
             });
         }
     });
 }
+
 //  eye icon toggle password 
 
 function togglePassword(inputId, iconElement) {

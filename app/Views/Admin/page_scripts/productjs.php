@@ -361,13 +361,21 @@ function confirmDelete(prId) {
     }).then((result) => {
         if (result.isConfirmed) {
             $.ajax({
-                url: "<?php echo base_url('admin/product/delete'); ?>/" + prId,
+                url: "<?php echo base_url('admin/product/delete/'); ?>" + prId,
                 method: "POST",
                 dataType: "json",
                 success: function(response) {
                     if (response.success) {
                         Swal.fire('Deleted!', response.msg, 'success');
-                        setTimeout(() => location.reload(), 1000);
+
+                        let table = $('#productList').DataTable();
+                        let currentPage = table.page();
+
+                        table.ajax.reload(function() {
+                            if (table.data().count() === 0 && currentPage > 0) {
+                                table.page(currentPage - 1).draw(false);
+                            }
+                        }, false);
                     } else {
                         Swal.fire('Error', response.msg, 'error');
                     }
@@ -378,8 +386,8 @@ function confirmDelete(prId) {
             });
         }
     });
-
 }
+
 
 // function openvideoModal(productVideoId, productsName) {
 //     document.getElementById('productVideoId').value = productVideoId;

@@ -58,39 +58,39 @@ class StaffModel extends Model {
 
     // For DataTables
 
-       public function getDatatables() {
-    $postData = service('request')->getPost();
-    $searchValue = '';
-    if (!empty($postData['search']['value'])) {
-        $searchValue = str_replace(' ', '', $postData['search']['value']);
+    public function getDatatables() {
+        $postData = service('request')->getPost();
+        $searchValue = '';
+        if (!empty($postData['search']['value'])) {
+            $searchValue = str_replace([" ", "\t"], '', $postData['search']['value']); // Remove space and tab
+        }
+
+        $builder = $this->db->table('user u');
+        $builder->select('u.*');
+        $builder->where('u.us_Status !=', 3)
+                ->where('u.us_Role !=', 1);
+
+        if (!empty($searchValue)) {
+            $builder->groupStart();
+            $builder->where("REPLACE(REPLACE(u.us_Name, ' ', ''), CHAR(9), '') LIKE '%" . $this->db->escapeLikeString($searchValue) . "%'", null, false);
+            $builder->groupEnd();
+        }
+
+        if (!empty($postData['length']) && $postData['length'] != -1) {
+            $builder->limit($postData['length'], $postData['start']);
+        }
+
+        if (!empty($postData['order'])) {
+            $columns = ['u.us_Id', 'u.us_Name', 'u.us_Email', 'u.us_Email2', 'u.us_Phone', 'u.us_Status'];
+            $orderCol = $columns[$postData['order'][0]['column']];
+            $orderDir = $postData['order'][0]['dir'];
+            $builder->orderBy($orderCol, $orderDir);
+        } else {
+            $builder->orderBy('u.us_Id', 'DESC');
+        }
+
+        return $builder->get()->getResultArray();
     }
-
-    $builder = $this->db->table('user u');
-    $builder->select('u.*');
-    $builder->where('u.us_Status !=', 3)
-            ->where('u.us_Role !=', 1);
-
-    if (!empty($searchValue)) {
-        $builder->groupStart();
-        $builder->where("REPLACE(u.us_Name, ' ', '') LIKE '%" . $this->db->escapeLikeString($searchValue) . "%'", null, false);
-        $builder->groupEnd();
-    }
-
-    if (!empty($postData['length']) && $postData['length'] != -1) {
-        $builder->limit($postData['length'], $postData['start']);
-    }
-
-    if (!empty($postData['order'])) {
-        $columns = ['u.us_Id', 'u.us_Name', 'u.us_Email', 'u.us_Email2', 'u.us_Phone', 'u.us_Status'];
-        $orderCol = $columns[$postData['order'][0]['column']];
-        $orderDir = $postData['order'][0]['dir'];
-        $builder->orderBy($orderCol, $orderDir);
-    } else {
-        $builder->orderBy('u.us_Id', 'DESC');
-    }
-
-    return $builder->get()->getResultArray();
-}
 
 
 	public function countAll()
@@ -101,23 +101,23 @@ class StaffModel extends Model {
 	}
 
     public function countFiltered() {
-    $postData = service('request')->getPost();
-    $searchValue = '';
-    if (!empty($postData['search']['value'])) {
-        $searchValue = str_replace(' ', '', $postData['search']['value']);
+        $postData = service('request')->getPost();
+        $searchValue = '';
+        if (!empty($postData['search']['value'])) {
+            $searchValue = str_replace([" ", "\t"], '', $postData['search']['value']); // Remove space and tab
+        }
+
+        $sql = "SELECT COUNT(*) as total 
+                FROM user u 
+                WHERE u.us_Status != 3 AND u.us_Role != 1";
+
+        if (!empty($searchValue)) {
+            $sql .= " AND REPLACE(REPLACE(u.us_Name, ' ', ''), CHAR(9), '') LIKE '%" . $this->db->escapeLikeString($searchValue) . "%'";
+        }
+
+        $query = $this->db->query($sql);
+        return $query->getRow()->total;
     }
-
-    $sql = "SELECT COUNT(*) as total 
-            FROM user u 
-            WHERE u.us_Status != 3 AND u.us_Role != 1";
-
-    if (!empty($searchValue)) {
-        $sql .= " AND REPLACE(u.us_Name, ' ', '') LIKE '%" . $this->db->escapeLikeString($searchValue) . "%'";
-    }
-
-    $query = $this->db->query($sql);
-    return $query->getRow()->total;
-}
     
 }
 

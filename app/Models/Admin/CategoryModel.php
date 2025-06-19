@@ -146,12 +146,12 @@ public function updateCategory($catId, $data)
 
     // For DataTables
 
-     public function getDatatables()
-{
+     public function getDatatables(){
 	$postData = service('request')->getPost();
 	$searchValue = '';
 	if (!empty($postData['search']['value'])) {
-		$searchValue = str_replace(' ', '', $postData['search']['value']);
+		// Remove all whitespace (space, tab, newline)
+		$searchValue = preg_replace('/\s+/', '', $postData['search']['value']);
 	}
 
 	$builder = $this->db->table('category c');
@@ -160,7 +160,8 @@ public function updateCategory($catId, $data)
 
 	if (!empty($searchValue)) {
 		$builder->groupStart();
-		$builder->where("REPLACE(c.cat_Name, ' ', '') LIKE '%" . $this->db->escapeLikeString($searchValue) . "%'", null, false);
+		$escaped = $this->db->escapeLikeString($searchValue);
+		$builder->where("REPLACE(REPLACE(c.cat_Name, ' ', ''), '\t', '') LIKE '%$escaped%'", null, false);
 		$builder->groupEnd();
 	}
 
@@ -178,7 +179,7 @@ public function updateCategory($catId, $data)
 	}
 
 	return $builder->get()->getResultArray();
-}
+   }
 
 
 	public function countAll()
@@ -188,12 +189,12 @@ public function updateCategory($catId, $data)
 			->countAllResults();
 	}
 
-	public function countFiltered()
-{
+	public function countFiltered(){
 	$postData = service('request')->getPost();
 	$searchValue = '';
 	if (!empty($postData['search']['value'])) {
-		$searchValue = str_replace(' ', '', $postData['search']['value']);
+		// Remove all whitespace (space, tab, newline)
+		$searchValue = preg_replace('/\s+/', '', $postData['search']['value']);
 	}
 
 	$sql = "SELECT COUNT(*) as total 
@@ -201,12 +202,14 @@ public function updateCategory($catId, $data)
 			WHERE c.cat_Status != 3";
 
 	if (!empty($searchValue)) {
-		$sql .= " AND REPLACE(c.cat_Name, ' ', '') LIKE '%" . $this->db->escapeLikeString($searchValue) . "%'";
+		$escaped = $this->db->escapeLikeString($searchValue);
+		$sql .= " AND REPLACE(REPLACE(c.cat_Name, ' ', ''), '\t', '') LIKE '%$escaped%'";
 	}
 
 	$query = $this->db->query($sql);
 	return $query->getRow()->total;
-}
+   }
+
 
     }
 

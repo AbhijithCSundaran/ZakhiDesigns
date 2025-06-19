@@ -29,6 +29,11 @@
                         .addClass('alert-success')
                         .text(response.msg)
                         .show();
+                        setTimeout(()=>{
+                            $('#messageBox').fadeOut();
+                            //$('#mainModal').modal('hide');
+                             $('#modalBody').load("<?= base_url('weblogin'); ?>");   
+                        },3000);
                  }
                  else if(response.status == 0){
                     $('#messageBox')
@@ -36,6 +41,9 @@
                         .addClass('alert-danger')
                         .text(response.msg)
                         .show();
+                     setTimeout(()=>{
+                            $('#messageBox').fadeOut();
+                        },3000);    
                  }
                  else{
                      $('#messageBox')
@@ -43,10 +51,10 @@
                         .addClass('alert-success')
                         .text("Invalid Email Format.")
                         .show();
+                     setTimeout(()=>{
+                            $('#messageBox').fadeOut();
+                        },3000);    
                  }
-                 setTimeout(()=>{
-                    $('#messageBox').fadeOut();
-                 },3000);
              },'json');
         });
     }

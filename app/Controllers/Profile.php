@@ -64,14 +64,16 @@ class Profile extends BaseController
         $profileModel = new ProfileModel();
 
         $id = session()->get('zd_uid');
+        $newName = $this->request->getPost('name');
         $data = [
-            'cust_Name'  => $this->request->getPost('name'),
+            'cust_Name'  => $newName,
             'cust_Email' => $this->request->getPost('email'),
             'cust_Phone' => $this->request->getPost('phone'),
         ];
         $updatedUser = $profileModel->updateUserProfile($id, $data);
 
         if ($updatedUser) {
+            session()->set('zd_uname', $newName);
             return $this->response->setJSON([
                 'status' => 'success',
                 'msg' => 'Profile updated successfully.'

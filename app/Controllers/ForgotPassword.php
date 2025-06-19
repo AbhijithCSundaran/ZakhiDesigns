@@ -43,7 +43,8 @@ class ForgotPassword extends BaseController
 
 				return $this->response->setJSON([
 					'status' => 1,
-					'msg' => 'Password Updated Successfully.'
+					'msg' => 'Password Updated Successfully.',
+					 'redirect' => base_url('/')  
 				]);
 				} else {
 					return $this->response->setJSON([

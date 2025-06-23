@@ -14,64 +14,66 @@ class AddressProfileModel extends Model {
                 ->where('add_Status', 1)
                 ->findAll();
 }
-    public function addAddress($userId, $data) {
+ public function addAddress($userId, $data)
+    {
         $saveData = [
             'add_CustId'     => $userId,
-            'add_Name'       => $data['newName'],
-            'add_Phone'       =>$data['newPhone'],
-            'add_Email'       =>$data['newEmail'],
-            'add_BuldingNo'  => $data['newBuilding'],
-            'add_Landmark'   => $data['newLandmark'],
-            'add_Street'     => $data['newStreet'],
-			'add_City'       => $data['newCity'],
-			'add_State'      => $data['newState'],
-			'add_Pincode'    => $data['newPincode'],
+            'add_Name'       => ucwords(strtolower(trim($data['newName']))),
+            'add_Phone'      => trim($data['newPhone']),
+            'add_Email'      => trim($data['newEmail']),
+            'add_BuldingNo'  => ucwords(strtolower(trim($data['newBuilding']))),
+            'add_Landmark'   => ucwords(strtolower(trim($data['newLandmark']))),
+            'add_Street'     => ucwords(strtolower(trim($data['newStreet']))),
+            'add_City'       => ucwords(strtolower(trim($data['newCity']))),
+            'add_State'      => ucwords(strtolower(trim($data['newState']))),
+            'add_Pincode'    => trim($data['newPincode']),
             'add_Default'    => isset($data['setAsDefault']) ? 1 : 0,
-			'add_Status'     =>1,
-			'add_createdon'  =>date("Y-m-d H:i:s"),
-			'add_createdby'  =>$userId,
+            'add_Status'     => 1,
+            'add_createdon'  => date("Y-m-d H:i:s"),
+            'add_createdby'  => $userId,
         ];
+
         return $this->save($saveData);
     }
 
-	public function setAsDefault($userId, $add_Id)
-	{
-		// Reset all to non-default for the user
-		$this->where('add_CustId', $userId)->set(['add_Default' => 0])->update();
+    public function setAsDefault($userId, $add_Id)
+    {
+        // Reset all to non-default for the user
+        $this->where('add_CustId', $userId)->set(['add_Default' => 0])->update();
 
-		// Set the selected address as default
-		return $this->update($add_Id, ['add_Default' => 1]);
-	}
-
-    public function updateAddress($data) {
-        $updateData = [
-           'add_Name'        => $data['add_Name'],
-            'add_BuldingNo'  => $data['add_BuldingNo'],
-            'add_Landmark'   => $data['add_Landmark'],
-            'add_Street'     => $data['add_Street'],
-			'add_City'       => $data['add_City'],
-			'add_State'      => $data['add_State'],
-			'add_Pincode'    => $data['add_Pincode'],
-            'add_Default'    => isset($data['setAsDefault']) ? 1 : 0,
-			'add_Status'     =>1,
-			//'add_modifyon' =>date("Y-m-d H:i:s"),
-			'add_modifyby'  =>$data['add_CustId'],
-			'add_modifyon'    => date('Y-m-d H:i:s'),
-        ];
-			$this->db->table('address')->where('add_Id',$data['add_Id'])->update($data);
-			return $this->db->getLastQuery();
+        // Set the selected address as default
+        return $this->update($add_Id, ['add_Default' => 1]);
     }
 
-   public function deleteAddress($add_status, $add_Id, $modified_by) {
-    return $this->db->query("
-        UPDATE address 
-        SET add_Status = '$add_status', 
-            add_modifyon = NOW(), 
-            add_modifyby = '$modified_by' 
-        WHERE add_Id = '$add_Id'
-    ");
-}
+    public function updateAddress($data)
+    {
+        $updateData = [
+            'add_Name'       => ucwords(strtolower(trim($data['add_Name']))),
+            'add_BuldingNo'  => trim($data['add_BuldingNo']),
+            'add_Landmark'   => trim($data['add_Landmark']),
+            'add_Street'     => trim($data['add_Street']),
+            'add_City'       => ucwords(strtolower(trim($data['add_City']))),
+            'add_State'      => ucwords(strtolower(trim($data['add_State']))),
+            'add_Pincode'    => trim($data['add_Pincode']),
+            'add_Default'    => isset($data['setAsDefault']) ? 1 : 0,
+            'add_Status'     => 1,
+            'add_modifyby'   => $data['add_CustId'],
+            'add_modifyon'   => date('Y-m-d H:i:s'),
+        ];
 
+        return $this->db->table('address')
+                        ->where('add_Id', $data['add_Id'])
+                        ->update($updateData);
+    }
 
-
+    public function deleteAddress($add_status, $add_Id, $modified_by)
+    {
+        return $this->db->query("
+            UPDATE address 
+            SET add_Status = '$add_status', 
+                add_modifyon = NOW(), 
+                add_modifyby = '$modified_by' 
+            WHERE add_Id = '$add_Id'
+        ");
+    }
 }

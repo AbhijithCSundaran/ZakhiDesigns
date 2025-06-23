@@ -102,80 +102,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
 var baseUrl = "<?= base_url() ?>";
 
-// $('#orderNowBtn').click(function (e) {
-//     e.preventDefault();
-//     $('#orderNowBtn').prop('disabled', true);
-
-//     const zd_uid = "<?= session()->get('zd_uid'); ?>";
-
-//     if (!zd_uid) {
-//         $('#modalBody').load("<?= base_url('weblogin'); ?>", function () {
-//             $('#mainModal').modal('show');
-//         });
-//         $('#orderNowBtn').prop('disabled', false);
-//         return;
-//     }
-
-//     let size = $('#size').val();
-//     let color = $('#selected_color').val();
-//     let qty = $('#qty').val();
-
-//     if (!size || !color || !qty) {
-//         $('#messageBox')
-//             .removeClass('alert-success')
-//             .addClass('alert alert-danger')
-//             .text('Please select Size, Color and Quantity.')
-//             .fadeIn();
-
-//         $('html, body').animate({ scrollTop: 0 }, 'fast'); // Scroll to top on error
-
-//         $('#orderNowBtn').prop('disabled', false);
-
-//         setTimeout(() => {
-//             $('#messageBox').fadeOut();
-//         }, 3000);
-//         return;
-//     }
-
-//     var url = baseUrl + "product/submit";
-
-//     $.post(url, $('#orderNowForm').serialize(), function (response) {
-//         $('#messageBox').removeClass('alert-danger alert-success').hide();
-
-//         if (response.status == 1) {
-//             // Scroll to top, then redirect
-//             $('html, body').animate({ scrollTop: 0 }, 'fast', function () {
-//                 let redirectUrl = response.redirect;
-//                 if (redirectUrl) {
-//                     window.location.href = redirectUrl;
-//                 } else {
-//                     $('#orderNowBtn').prop('disabled', false);
-//                 }
-//             });
-//         } else {
-//             $('html, body').animate({ scrollTop: 0 }, 'fast');
-
-//             $('#messageBox')
-//                 .addClass('alert alert-danger')
-//                 .text(response.msg || 'Please select Size, Color and Quantity.')
-//                 .fadeIn();
-
-//             $('#orderNowBtn').prop('disabled', false);
-
-//             setTimeout(function () {
-//                 $('#messageBox').fadeOut();
-//             }, 5000);
-//         }
-//     }, 'json').fail(function (jqXHR, textStatus, errorThrown) {
-//         $('html, body').animate({ scrollTop: 0 }, 'fast'); // scroll on failure
-//         $('#orderNowBtn').prop('disabled', false);
-//         $('#messageBox')
-//             .removeClass('alert-success')
-//             .addClass('alert alert-danger')
-//             .text('A server error occurred: ' + errorThrown)
-//             .fadeIn();
-//     });
-// });
 
 $('#orderNowBtn').click(function (e) {
     e.preventDefault();
@@ -187,14 +113,14 @@ $('#orderNowBtn').click(function (e) {
     let color = $('#selected_color').val();
     let qty = $('#qty').val();
 
-    // Store selected data to localStorage before checking login
-    sessionStorage.setItem('tempOrder', JSON.stringify({
-        size: size,
-        color: color,
-        qty: qty
-    }));
-
     if (!zd_uid) {
+      
+        sessionStorage.setItem('tempOrder', JSON.stringify({
+            size: size,
+            color: color,
+            qty: qty
+        }));
+
         $('#modalBody').load("<?= base_url('weblogin'); ?>", function () {
             $('#mainModal').modal('show');
         });
@@ -256,7 +182,6 @@ $('#orderNowBtn').click(function (e) {
             .fadeIn();
     });
 });
-
 
 /**********************************************************************/
 

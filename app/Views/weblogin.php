@@ -1,7 +1,8 @@
 <div class="row">
     <div class="text-center logo">
-        <img class="img-align" src="<?php echo base_url().ASSET_PATH; ?>assets/images/logo.jpg" />
+    <img class="img-align" src="<?php echo base_url().ASSET_PATH; ?>assets/images/logo.jpg" />
     </div>
+     <h5 class="text-center">Login </h5>
     <!-- <h5 class="text-center">Login</h5> -->
 </div>
 <div id="loginError" class="text-danger text-center" style="padding:6px;"></div>

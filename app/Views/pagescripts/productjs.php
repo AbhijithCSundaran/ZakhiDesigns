@@ -102,23 +102,31 @@ document.addEventListener('DOMContentLoaded', function () {
 
 var baseUrl = "<?= base_url() ?>";
 
+
 $('#orderNowBtn').click(function (e) {
     e.preventDefault();
     $('#orderNowBtn').prop('disabled', true);
 
     const zd_uid = "<?= session()->get('zd_uid'); ?>";
 
+    let size = $('#size').val();
+    let color = $('#selected_color').val();
+    let qty = $('#qty').val();
+
     if (!zd_uid) {
+      
+        sessionStorage.setItem('tempOrder', JSON.stringify({
+            size: size,
+            color: color,
+            qty: qty
+        }));
+
         $('#modalBody').load("<?= base_url('weblogin'); ?>", function () {
             $('#mainModal').modal('show');
         });
         $('#orderNowBtn').prop('disabled', false);
         return;
     }
-
-    let size = $('#size').val();
-    let color = $('#selected_color').val();
-    let qty = $('#qty').val();
 
     if (!size || !color || !qty) {
         $('#messageBox')
@@ -127,8 +135,7 @@ $('#orderNowBtn').click(function (e) {
             .text('Please select Size, Color and Quantity.')
             .fadeIn();
 
-        $('html, body').animate({ scrollTop: 0 }, 'fast'); // Scroll to top on error
-
+        $('html, body').animate({ scrollTop: 0 }, 'fast');
         $('#orderNowBtn').prop('disabled', false);
 
         setTimeout(() => {
@@ -143,7 +150,6 @@ $('#orderNowBtn').click(function (e) {
         $('#messageBox').removeClass('alert-danger alert-success').hide();
 
         if (response.status == 1) {
-            // Scroll to top, then redirect
             $('html, body').animate({ scrollTop: 0 }, 'fast', function () {
                 let redirectUrl = response.redirect;
                 if (redirectUrl) {
@@ -167,7 +173,7 @@ $('#orderNowBtn').click(function (e) {
             }, 5000);
         }
     }, 'json').fail(function (jqXHR, textStatus, errorThrown) {
-        $('html, body').animate({ scrollTop: 0 }, 'fast'); // scroll on failure
+        $('html, body').animate({ scrollTop: 0 }, 'fast');
         $('#orderNowBtn').prop('disabled', false);
         $('#messageBox')
             .removeClass('alert-success')
@@ -176,8 +182,6 @@ $('#orderNowBtn').click(function (e) {
             .fadeIn();
     });
 });
-
-
 
 /**********************************************************************/
 

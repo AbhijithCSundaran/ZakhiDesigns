@@ -336,4 +336,44 @@ $zd_uid = session()->get('zd_uid');
         document.querySelectorAll('.cpicker').forEach(el => el.style.border = 'none');
         element.style.border = '3px solid #000';
     }
+
+  $(document).ready(function () {
+    let tempOrder = sessionStorage.getItem('tempOrder');
+    if (tempOrder) {
+        tempOrder = JSON.parse(tempOrder);
+        
+        if (tempOrder.size) {
+            $('#size').val(tempOrder.size);
+        }
+
+        if (tempOrder.color) {
+            $('#selected_color').val(tempOrder.color);
+            
+            $('.cpicker').removeClass('selected'); 
+            $('.cpicker').each(function() {
+                if ($(this).css('background-color') === tempOrder.color || 
+                    rgb2hex($(this).css('background-color')) === tempOrder.color.toLowerCase()) {
+                    $(this).addClass('selected');
+                }
+            });
+        }
+
+        if (tempOrder.qty) {
+            $('#qty').val(tempOrder.qty);
+        }
+
+        sessionStorage.removeItem('tempOrder');
+    }
+});
+
+// Helper function to convert rgb() to hex
+function rgb2hex(rgb) {
+    if (!rgb.startsWith("rgb")) return rgb;
+    rgb = rgb.match(/\d+/g);
+    return "#" + rgb.map(x => ('0' + parseInt(x).toString(16)).slice(-2)).join('');
+}
+
+
+
+
 </script>

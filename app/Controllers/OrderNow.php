@@ -273,7 +273,7 @@ class OrderNow extends Controller
             $mail->setFrom('smartloungework@gmail.com', 'Smart Lounge');
             $mail->addAddress($customer['add_Email'], $customer['add_Name']);
             $mail->addReplyTo('smartloungework@gmail.com', 'Smart Lounge');
-            $mail->addBCC('sandra@smartlounge.online');
+            $mail->addBCC('smartloungework@gmail.com');
 
             $mail->isHTML(true);
             $mail->Subject = 'Order Confirmation From Zakhi Designs';

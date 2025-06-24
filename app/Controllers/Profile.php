@@ -21,7 +21,7 @@ class Profile extends BaseController
 {
     $userId = session()->get('zd_uid');
 
-    // If not logged in and JS is bypassed
+    // If not logged in and JS is bypassed    
     if (!$userId) {
         if ($this->request->isAJAX()) {
             return view('weblogin'); // For modal
@@ -170,6 +170,12 @@ public function changePassword()
     // Check new password matches confirm password
     if ($newPassword !== $confirmPassword) {
         return $this->response->setJSON(['status' => 0, 'msg' => 'New password and confirm password do not match.']);
+    }
+    if (!empty($new_password) && (strlen($new_password) < 6 || strlen($new_password) > 15)) {
+        return $this->response->setJSON([
+            'status' => 'error',
+            'msg' => 'Password must be between 6 to 15 characters.'
+        ]);
     }
 
     // Call model to change password

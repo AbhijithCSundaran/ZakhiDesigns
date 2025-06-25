@@ -23,18 +23,22 @@ $('#profileForm').on('submit', function(e) {
         data: $(this).serialize(),
         dataType: 'json',
         success: function(response) {
+            $('html, body').animate({   scrollTop: 0  }, 'fast');
+
             $('#messageBox')
                 .removeClass('alert-success alert-danger')
                 .addClass('alert-' + (response.status === 'success' ? 'success' : 'danger'))
                 .html(response.msg)
                 .fadeIn();
-
             // Auto-hide and optionally reload updated data
             if (response.status === 'success') {
                 setTimeout(function () {
                     location.reload(); // reloads profile data from server
                 }, 2000);
+                
             } else {
+                $('html, body').animate({   scrollTop: 0  }, 'fast');
+
                 setTimeout(() => $('#messageBox').fadeOut(), 5000);
             }
         },
@@ -44,8 +48,9 @@ $('#profileForm').on('submit', function(e) {
                 .addClass('alert-danger')
                 .html('An error occurred. Please try again.')
                 .fadeIn();
-
+            $('html, body').animate({ scrollTop: 0 }, 'fast');
             setTimeout(() => $('#messageBox').fadeOut(), 5000);
+            
         }
     });
 });
@@ -104,11 +109,21 @@ $('#editAddressForm').submit(function(e) {
     }, 'json');
 });
 
-$('#addressForm').submit(function(e){
+$('#addressForm').submit(function(e) {
     e.preventDefault();
+    
     const id = $('#addressId').val();
+    const phone = $('#newPhone').val().trim();
+    const phonePattern = /^\d{7,15}$/;
+
+    if (!phonePattern.test(phone)) {
+        showMessage('Phone number must be between 7 to 15 digits.', 'danger');
+        $('#newPhone').focus();
+        return;
+    }
+
     const url = id ? 'profile/address/edit' : 'profile/address/add';
-    $.post("<?= base_url() ?>" + url, $(this).serialize(), function(res){
+    $.post("<?= base_url() ?>" + url, $(this).serialize(), function(res) {
         if (res.status === 'success') {
             showMessage('Address saved successfully!', 'success');
             setTimeout(() => location.reload(), 3000);
@@ -117,6 +132,7 @@ $('#addressForm').submit(function(e){
         }
     }, 'json');
 });
+
 
 function deleteAddress(id) {
     if (confirm("Are you sure to delete this address?")) {
@@ -204,12 +220,12 @@ $('#changePasswordForm').on('submit', function(e) {
         return;
     }
 
-    // Minimum password length check
-    if (newPassword.length < 5) {
+
+    if (newPassword.length < 6) {
         messageBox
             .removeClass('alert-success alert-danger')
             .addClass('alert alert-danger')
-            .html('New Password must be at least 5 characters long!')
+            .html('New Password must be at least 6 characters long!')
             .fadeIn();
 
         setTimeout(() => messageBox.fadeOut(), 4000);

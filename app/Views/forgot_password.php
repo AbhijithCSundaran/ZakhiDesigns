@@ -129,7 +129,7 @@
             <input type="hidden" name="email" id="email" value="<?= esc($email) ?>">
             <div class="form-group">
                 <label for="new_password">New Password</label>
-                <input type="password" name="new_reset_password" id="new_reset_password" maxlength="15" minlength="7"
+                <input type="password" name="new_reset_password" id="new_reset_password" maxlength="15" minlength="6"
                     required>
                 <i class="fa-solid fa-eye-slash toggle-password" toggle="#new_reset_password"></i>
             </div>
@@ -137,7 +137,7 @@
             <div class="form-group">
                 <label for="confirm_password">Confirm Password</label>
                 <input type="password" name="confirm_reset_password" id="confirm_reset_password" maxlength="15"
-                    minlength="7" required>
+                    minlength="6" required>
                 <i class="fa-solid fa-eye-slash toggle-password" toggle="#confirm_reset_password"></i>
             </div>
 

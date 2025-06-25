@@ -31,10 +31,10 @@ class ForgotPassword extends BaseController
 				'msg' => 'Both Fields Are Required.'
 			]);
 		}
-		if (strlen($new_password) < 7 || strlen($new_password) > 15) {
+		if (strlen($new_password) < 6 || strlen($new_password) > 15) {
 			return $this->response->setJSON([
 				'status' => 0,
-				'msg' => 'Password Must Be 7-15 Characters Long.'
+				'msg' => 'Password Must Be 6-15 Characters Long.'
 			]);
 		}
 		else if ($new_password === $confirm_password ) {

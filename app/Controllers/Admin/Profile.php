@@ -52,16 +52,56 @@ class Profile extends BaseController
 
     return $template;
 }
-public function update()
+// public function update()
+// {
+//     $us_Id = $this->session->get('ad_uid'); 
+
+//     $name  = ucwords(strtolower($this->request->getPost('us_Name')));
+//     $email = $this->request->getPost('us_Email');
+
+//     $data = [
+//         'us_Name'  => $name,
+//         'us_Email' => $email,
+//     ];
+
+//     $model = new \App\Models\Admin\ProfileModel();
+
+//     if ($model->updateProfile($us_Id, $data)) {
+//         // Update session value
+//         $this->session->set('ad_name', $name);
+
+//         return $this->response->setJSON([
+//             'status'   => 1,
+//             'msg'      => 'Profile Updated Successfully.',
+//             'ad_name'  => $name
+//         ]);
+//     } else {
+//         return $this->response->setJSON([
+//             'status' => 0,
+//             'msg'    => 'Failed To Update Profile.'
+//         ]);
+//     }
+// }
+ public function update()
 {
     $us_Id = $this->session->get('ad_uid'); 
 
-    $name  = ucwords(strtolower($this->request->getPost('us_Name')));
-    $email = $this->request->getPost('us_Email');
+    $name   = ucwords(strtolower($this->request->getPost('us_Name')));
+    $email  = $this->request->getPost('us_Email');
+    $phone  = $this->request->getPost('us_Phone');
+
+    // Optional: Validate phone number format (7 to 15 digits)
+    if (!preg_match('/^\d{7,15}$/', $phone)) {
+        return $this->response->setJSON([
+            'status' => 0,
+            'msg'    => 'Invalid phone number format.'
+        ]);
+    }
 
     $data = [
         'us_Name'  => $name,
         'us_Email' => $email,
+        'us_Phone' => $phone
     ];
 
     $model = new \App\Models\Admin\ProfileModel();
@@ -100,6 +140,13 @@ public function change_password()
 
     if ($new_password !== $confirm_password) {
         return $this->response->setJSON(['status' => 0, 'msg' => 'New Password and Confirmation Do Not Match']);
+    }
+
+    if (!empty($new_password) && (strlen($new_password) < 6 || strlen($new_password) > 15)) {
+        return $this->response->setJSON([
+            'status' => 'error',
+            'msg' => 'New Password must be at least 6 characters long!'
+        ]);
     }
 
     $result = $model->change_passwordNow($us_Id, $current_password, $new_password);

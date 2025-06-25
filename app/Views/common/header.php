@@ -101,7 +101,7 @@
                         <?php endif; ?>
 
                         <a href="javascript:void(0);" class="searchbox">
-                            <input type="text" name="keyword" id="search" placeholder="Search products"
+                            <input type="text" name="keyword" id="search" placeholder="Search Products/Category/Sub:Cat"
                                 autocomplete="off" value="<?= esc($search ?? '') ?>" style="padding:5px;"
                                 onkeydown="checkEnter(event)" />
                             <a href="javascript:void(0);" onclick="searchProduct()">

@@ -88,7 +88,7 @@
                                 <div class="form-group" style="position: relative;">
                                     <label>Current Password <span style="color: red;">*</span></label>
                                     <input type="password" name="current_password" id="current_password"
-                                        class="form-control" placeholder="Current Password" required>
+                                        class="form-control" maxlength="15" minlength="6" placeholder="Current Password" required>
                                     <i class="toggle-password fa fa-eye-slash position-absolute"
                                         style="top: 45px; right: 10px; cursor: pointer;"
                                         data-target="current_password"></i>
@@ -96,7 +96,7 @@
                                 <div class="form-group" style="position: relative;">
                                     <label>New Password <span style="color: red;">*</span></label>
                                     <input type="password" name="new_password" id="new_password" class="form-control"
-                                        placeholder="New Password" required>
+                                         maxlength="15" minlength="6" placeholder="New Password" required>
                                     <i class="toggle-password fa fa-eye-slash  position-absolute"
                                         style="top: 45px; right: 10px; cursor: pointer;" data-target="new_password"></i>
                                 </div>
@@ -104,7 +104,7 @@
                                 <div class="form-group" style="position: relative;">
                                     <label>Confirm New Password <span style="color: red;">*</span></label>
                                     <input type="password" name="confirm_password" id="confirm_password"
-                                        class="form-control" placeholder="Confirm New Password" required>
+                                        class="form-control"  maxlength="15" minlength="6" placeholder="Confirm New Password" required>
                                     <i class="toggle-password fa fa-eye-slash position-absolute"
                                         style="top: 45px; right: 10px; cursor: pointer;"
                                         data-target="confirm_password"></i>

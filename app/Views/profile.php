@@ -31,8 +31,11 @@
 			                        <input type="email" name="email" id="email" class="form-control"
 			                            value="<?= esc($user['cust_Email']) ?>" />
 			                        <div>&nbsp;</div>
-			                        <input type="phone" name="phone" id="phone" class="form-control"
-			                            value="<?= esc($user['cust_Phone']) ?>" />
+			                        <input type="tel" name="phone" id="phone" class="form-control"
+										value="<?= esc($user['cust_Phone']) ?>"
+										pattern="^\d{7,15}$" maxlength="15" required
+										oninvalid="this.setCustomValidity('Phone number must be between 7 to 15 digits.')"
+										oninput="this.setCustomValidity('')" />
 			                        <div>&nbsp;</div>
 			                        <?php else: ?>
 			                        <div class="alert alert-danger">User information not found.</div>
@@ -92,11 +95,12 @@
 			                                    </div>
 			                                    <div class="mb-2"><input type="email" class="form-control" id="newEmail"
 			                                            name="newEmail" placeholder="Email" required></div>
-			                                    <div class="mb-2">
-			                                        <input type="tel" class="form-control" id="newPhone" name="newPhone"
-			                                            placeholder="Phone" maxlength="10" pattern="[0-9]{10}" required>
-			                                    </div>
-
+			                                   <div class="mb-2">
+												<input type="tel" class="form-control" id="newPhone" name="newPhone"
+													placeholder="Phone" maxlength="15" minlength="7"
+													pattern="^\d{7,15}$" required>
+													<small id="phoneError" style="color:red;">Phone Number Must Be Minimum 7 Digit</small>
+											</div>
 			                                    <div class="mb-2"><input type="text" class="form-control" id="newBuilding"
 			                                            name="newBuilding" placeholder="Building No." required></div>
 			                                    <div class="mb-2"><input type="text" class="form-control" id="newStreet"
@@ -173,20 +177,20 @@
 			                    <form id="changePasswordForm" method="post">
 			                        <div class="mb-2 position-relative">
 			                            <input type="password" name="oldPassword" id="oldPassword" class="form-control"
-			                                placeholder="Old Password">
-			                            <i class="toggle-password fa fa-eye position-absolute"
+			                                  maxlength="15"  placeholder="Old Password">
+			                            <i class="toggle-password fa fa-eye-slash position-absolute"
 			                                style="top: 12px; right: 10px; cursor: pointer;" data-target="oldPassword"></i>
 			                        </div>
 			                        <div class="mb-2 position-relative">
 			                            <input type="password" name="newPassword" id="newPassword" class="form-control"
-			                                placeholder="New Password">
-			                            <i class="toggle-password fa fa-eye position-absolute"
+			                                  maxlength="15" placeholder="New Password">
+			                            <i class="toggle-password fa fa-eye-slash position-absolute"
 			                                style="top: 12px; right: 10px; cursor: pointer;" data-target="newPassword"></i>
 			                        </div>
 			                        <div class="mb-2 position-relative">
 			                            <input type="password" name="confirmPassword" id="confirmPassword" class="form-control"
-			                                placeholder="Confirm Password">
-			                            <i class="toggle-password fa fa-eye position-absolute"
+			                                  maxlength="15"  placeholder="Confirm Password">
+			                            <i class="toggle-password fa fa-eye-slash position-absolute"
 			                                style="top: 12px; right: 10px; cursor: pointer;" data-target="confirmPassword"></i>
 			                        </div>
 			                        <div class="text-end">

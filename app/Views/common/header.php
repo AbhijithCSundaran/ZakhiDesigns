@@ -49,8 +49,8 @@
                         <a href="<?= base_url(); ?>" class="active">Home</a>
                         <a href="<?= base_url('aboutus'); ?>">About Us</a>
                         <!-- Fashion dropdown -->
-                        <div class="dropdown-wrapper a fashion-menu position-relative" >
-                            <span class="dropbtn">Fashion</span>
+                        <div class="dropdown-wrapper a fashion-menu position-relative" style = " cursor: pointer;">
+                            <span class="dropbtn" >Fashion</span>
                             <div class="cat-dropdown">
                                 <?php if (!empty($categories)): ?>
                                 <?php foreach (array_slice($categories , 0,10) as $category): ?>

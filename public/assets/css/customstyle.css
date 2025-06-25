@@ -229,62 +229,36 @@ header,
     z-index: 1;
 }
 
-.dropdown-wrapper{
+/* *********************************************************************************************************** */
+/* FASHION DROP DOWN*/
+
+.cat-dropdown,
+.sub-dropdown {
+    display: none;
+}
+
+
+.dropdown-wrapper:hover .cat-dropdown {
+    display: flex;
+}
+.hidden-cat {
+    display: none;
+}
+.cat-item.view-all a {
+    display: block;
+    width: 100%;
     cursor: pointer;
 }
-.cat-dropdown {
-    position: absolute;
-    display: none;
-    top: 100%;
-    left: 0;
-
-    max-height: 250px;
-
-    /* ✅ Increase width so there's space for subcategories */
-    min-width: 700px; /* Increase as needed */
-    background: #fff;
-    border: 1px solid #ccc;
-    z-index: 1000;
-    width:290px;
-    max-height: 180px;
-    overflow-y: auto;
-    overflow-x: hidden;
-
-    column-count: 2;
-    column-gap: 20px;
-    padding: 10px;
-}
-
-
-.cat-item {
-    break-inside: avoid; /* Prevent breaking category items between columns */
-    padding: 2px;
-    white-space: nowrap;
-    position: relative;
-    max-width:135px;
-}
-
-.cat-item :hover .sub-item{
-     max-width:180px; 
-     
-}
-/* .sub-dropdown {
-    display: none;
-    position: absolute;
-    top: 0;
-    left: 120%; 
-    background: #fff;
-    border: 1px solid #ccc;
-    z-index: 1001;
-    white-space: nowrap;
-    max-height: 150px;
-    overflow-y: auto;
-    overflow-x: hidden;
-} */
-
 
 .cat-item:hover .sub-dropdown {
     display: block;
+    position: absolute;
+    top: 0;
+    left: 100%;
+    background: #fff;
+    border: 1px solid #ccc;
+    min-width: 180px;
+    z-index: 1001;
 }
 
 .cat-dropdown a,
@@ -295,9 +269,9 @@ header,
     color: #333;
 }
 
-.cat-item:hover,
-.sub-item:hover {
-    background-color: rgba(0, 0, 0, 0.05);
+.cat-dropdown a:hover,
+.sub-dropdown a:hover {
+    background-color: #f0f0f0;
 }
 
 
@@ -312,7 +286,6 @@ header,
 	}
 }
 
-/* .topnav a, */
 .topnav .fashion-menu a{
     color: #000;
     text-decoration: none;
@@ -321,7 +294,6 @@ header,
     float: none;
     text-align: left !important;
 }
-
 
 
 .cat-dropdown {
@@ -360,7 +332,7 @@ header,
     left: 100%;
     background: #fff;
     border: 1px solid #ccc;
-    min-width: 128px;
+    min-width: 180px;
     z-index: 1001;
 }
 
@@ -379,7 +351,7 @@ header,
     background-color: #f4f4f4;
 }
 
-
+/***********************************************************************************************/
 
 .gold {
     color: gold;

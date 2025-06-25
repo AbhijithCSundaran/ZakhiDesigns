@@ -229,35 +229,62 @@ header,
     z-index: 1;
 }
 
-/* Inline CSS for dropdown */
-
-.cat-dropdown,
-.sub-dropdown {
+.dropdown-wrapper{
+    cursor: pointer;
+}
+.cat-dropdown {
+    position: absolute;
     display: none;
+    top: 100%;
+    left: 0;
+
+    max-height: 250px;
+
+    /* ✅ Increase width so there's space for subcategories */
+    min-width: 700px; /* Increase as needed */
+    background: #fff;
+    border: 1px solid #ccc;
+    z-index: 1000;
+    width:290px;
+    max-height: 180px;
+    overflow-y: auto;
+    overflow-x: hidden;
+
+    column-count: 2;
+    column-gap: 20px;
+    padding: 10px;
 }
 
 
-.dropdown-wrapper:hover .cat-dropdown {
-    display: flex;
-}
-
-/* .cat-item {
-    position: relative;
-    padding: 8px 15px;
+.cat-item {
+    break-inside: avoid; /* Prevent breaking category items between columns */
+    padding: 2px;
     white-space: nowrap;
-} */
+    position: relative;
+    max-width:135px;
+}
 
+.cat-item :hover .sub-item{
+     max-width:180px; 
+     
+}
+/* .sub-dropdown {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 120%; 
+    background: #fff;
+    border: 1px solid #ccc;
+    z-index: 1001;
+    white-space: nowrap;
+    max-height: 150px;
+    overflow-y: auto;
+    overflow-x: hidden;
+} */
 
 
 .cat-item:hover .sub-dropdown {
     display: block;
-    position: absolute;
-    top: 0;
-    left: 100%;
-    background: #fff;
-    border: 1px solid #ccc;
-    min-width: 180px;
-    z-index: 1001;
 }
 
 .cat-dropdown a,
@@ -268,46 +295,12 @@ header,
     color: #333;
 }
 
-.cat-dropdown a:hover,
-.sub-dropdown a:hover {
-    background-color: #f0f0f0;
+.cat-item:hover,
+.sub-item:hover {
+    background-color: rgba(0, 0, 0, 0.05);
 }
 
 
-
-
-
-
-
-
-
-
-
-
-/* Inline CSS for dropdown */
-/* .topnav a {
-       color: #000 !important;
-    text-align: left !important;
-    padding: 14px 16px !important;
-    text-decoration: none !important;
-    font-size: 17px !important;
-    text-transform: uppercase !important;
-		} */
-/* .topnav {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-} */
-
-/* .topnav .a {
-	float: left;
-	color: #000;
-	text-align: center;
-	padding: 14px 16px;
-	text-decoration: none;
-	font-size: 17px;
-	text-transform:uppercase;
-} */
 @media screen and (max-width: 600px) {
 	.topnav .a{
 		display: none;
@@ -329,9 +322,6 @@ header,
     text-align: left !important;
 }
 
-/* .topnav a:hover, .topnav .fashion-menu:hover {
-            background-color: #f4f4f4;
-        } */
 
 
 .cat-dropdown {
@@ -370,7 +360,7 @@ header,
     left: 100%;
     background: #fff;
     border: 1px solid #ccc;
-    min-width: 180px;
+    min-width: 128px;
     z-index: 1001;
 }
 

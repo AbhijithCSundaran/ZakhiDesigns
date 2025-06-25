@@ -49,46 +49,34 @@
                         <a href="<?= base_url(); ?>" class="active">Home</a>
                         <a href="<?= base_url('aboutus'); ?>">About Us</a>
                         <!-- Fashion dropdown -->
-                        <div class="dropdown-wrapper a fashion-menu position-relative">
+                        <div class="dropdown-wrapper a fashion-menu position-relative" >
                             <span class="dropbtn">Fashion</span>
                             <div class="cat-dropdown">
                                 <?php if (!empty($categories)): ?>
-                                    <?php
-                                        $totalCategories = count($categories);
-                                        $displayLimit = 5;
-                                        $hiddenIndex = 0;
-                                    ?>
-                                    <?php foreach ($categories as $index => $category): ?>
-                                        <?php
-                                            // Add a class to hide elements after the limit
-                                            $isHidden = $index >= $displayLimit;
-                                            if ($isHidden) $hiddenIndex++;
-                                        ?>
-                                        <div class="cat-item position-relative <?= $isHidden ? 'hidden-cat' : '' ?>" <?= $isHidden ? 'style="display:none;"' : '' ?>>
-                                            <a href="<?= base_url('product/product_list/category/' . $category['cat_Id']) ?>">
-                                                <?= esc($category['cat_Name']) ?>
-                                            </a>
-                                            <?php if (!empty($category['subcategories'])): ?>
-                                                <div class="sub-dropdown">
-                                                    <?php foreach ($category['subcategories'] as $sub): ?>
-                                                        <a href="<?= base_url('product/product_list/subcategory/' . $sub['sub_Id']) ?>">
-                                                            <?= esc($sub['sub_Category_Name']) ?>
-                                                        </a>
-                                                    <?php endforeach; ?>
-                                                </div>
-                                            <?php endif; ?>
-                                        </div>
-                                    <?php endforeach; ?>
-                                <?php endif; ?>
+                                <?php foreach (array_slice($categories , 0,10) as $category): ?>
+                                <div class="cat-item position-relative">
+                                    <a href="<?= base_url('product/product_list/category/' . $category['cat_Id']) ?>">
+                                        <?= esc($category['cat_Name']) ?>
+                                    </a>
 
-                                <?php if ($totalCategories > $displayLimit): ?>
-                                   <div class="cat-item view-all" style="cursor: pointer;">
-                                        <a href="javascript:void(0);" style="display: block; width: 100%;">All Categories</a>
+                                    <?php if (!empty($category['subcategories'])): ?>
+                                    <div class="sub-dropdown">
+                                        <?php foreach ($category['subcategories'] as $sub): ?>
+                                        <a href="<?= base_url('product/product_list/subcategory/' . $sub['sub_Id']) ?>">
+                                            <?= esc($sub['sub_Category_Name']) ?>
+                                        </a>
+                                        <?php endforeach; ?>
                                     </div>
+                                    <?php endif; ?>
+                                </div>
+
+                                <?php endforeach; ?>
                                 <?php endif; ?>
+                                <div class="cat-item">
+                                    <a href="<?= base_url('category/category_list') ?>">All Category</a>
+                                </div>
                             </div>
                         </div>
-
                         <a href="<?= base_url('contact'); ?>">Contact</a>
 
                         <?php if (session()->get('zd_uname')): ?>
@@ -159,32 +147,18 @@
 
 
 
-   document.addEventListener('DOMContentLoaded', function () {
+    document.addEventListener('DOMContentLoaded', function () {
     const fashionMenu = document.querySelector('.dropdown-wrapper');
     if (!fashionMenu) return;
 
     const catDropdown = fashionMenu.querySelector('.cat-dropdown');
 
-    // Show/hide dropdown on hover
     fashionMenu.addEventListener('mouseenter', () => {
         if (catDropdown) catDropdown.style.display = 'flex';
     });
     fashionMenu.addEventListener('mouseleave', () => {
         if (catDropdown) catDropdown.style.display = 'none';
     });
-
-    // View All toggle
-    const viewAllBtn = fashionMenu.querySelector('.view-all');
-    if (viewAllBtn) {
-        viewAllBtn.addEventListener('click', function () {
-            const hiddenCats = fashionMenu.querySelectorAll('.hidden-cat');
-            hiddenCats.forEach(el => {
-                el.style.display = 'block';
-            });
-            viewAllBtn.style.display = 'none';
-        });
-    }
 });
-
 
     </script>

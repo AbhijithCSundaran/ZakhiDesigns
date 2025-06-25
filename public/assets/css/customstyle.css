@@ -241,14 +241,7 @@ header,
 .dropdown-wrapper:hover .cat-dropdown {
     display: flex;
 }
-.hidden-cat {
-    display: none;
-}
-.cat-item.view-all a {
-    display: block;
-    width: 100%;
-    cursor: pointer;
-}
+
 
 .cat-item:hover .sub-dropdown {
     display: block;

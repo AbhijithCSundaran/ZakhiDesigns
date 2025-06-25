@@ -34,7 +34,7 @@
 			                        <input type="tel" name="phone" id="phone" class="form-control"
 										value="<?= esc($user['cust_Phone']) ?>"
 										pattern="^\d{7,15}$" maxlength="15" required
-										oninvalid="this.setCustomValidity('Phone number must be between 7 to 15 digits.')"
+										oninvalid="this.setCustomValidity('Phone Number Must Be Minimum of 7 Digits.')"
 										oninput="this.setCustomValidity('')" />
 			                        <div>&nbsp;</div>
 			                        <?php else: ?>
@@ -98,9 +98,10 @@
 			                                   <div class="mb-2">
 												<input type="tel" class="form-control" id="newPhone" name="newPhone"
 													placeholder="Phone" maxlength="15" minlength="7"
-													pattern="^\d{7,15}$" required>
-													<small id="phoneError" style="color:red;">Phone Number Must Be Minimum 7 Digit</small>
-											</div>
+													pattern="^\d{7,15}$" required
+													oninvalid="this.setCustomValidity('Phone Number Must Be Minimum of 7 Digits.')"
+													oninput="this.setCustomValidity('')">
+											   </div>
 			                                    <div class="mb-2"><input type="text" class="form-control" id="newBuilding"
 			                                            name="newBuilding" placeholder="Building No." required></div>
 			                                    <div class="mb-2"><input type="text" class="form-control" id="newStreet"
@@ -115,7 +116,6 @@
 			                                        <input type="text" class="form-control" id="newPincode" name="newPincode"
 			                                            placeholder="Pincode" maxlength="6" pattern="[1-9][0-9]{5}" required>
 			                                    </div>
-
 			                                    <label><input type="checkbox" name="is_default" /> Default</label>
 			                                    <div class="text-end">
 			                                        <button class="btn btn-secondary mt-2 me-2" type="button"

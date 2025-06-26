@@ -30,13 +30,11 @@ $routes->post('OrderNow/saveNewAddress', 'OrderNow::saveNewAddress');
 $routes->post('OrderNow/submitfrm', 'OrderNow::submitfrm');
 
 // ordernow user
-//$routes->get('ordernow', 'OrderNow::index');
+
 $routes->get('ordernow/product/(:any)', 'OrderNow::orderproduct/$1');
-//$routes->post('ordernow/submit', 'OrderNow::submit');
-//$routes->post('ordernow/saveAddress', 'OrderNow::saveNewAddress');
+
 $routes->get('ordernow/getAddress/(:num)', 'OrderNow::getAddress/$1');
 
-//$routes->get('ordernow/product/(:any)&(:any)','OrderNow::orderproduct/$1/$2');
 
 // products user
 $routes->get('product', 'Product::index');
@@ -85,8 +83,8 @@ $routes->get('ordernow/product/(:any)', 'OrderNow::orderproduct/$1');
 $routes->post('ordernow/submitfrm', 'OrderNow::submitfrm');
 //$routes->post('ordernow/submitfrm', 'OrderNow::submitfrm');
 
-
-
+$routes->get('category/category_list', 'Category::category_list');
+$routes->get('category/catProducts/(:num)', 'Category::catProducts/$1');
 
 //About Us
 $routes->get('aboutus', 'AboutUs::index');

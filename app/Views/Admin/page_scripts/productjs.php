@@ -6,6 +6,7 @@ var csrfHash = "<?= csrf_hash() ?>";
 $('#productList').DataTable({
     processing: true,
     serverSide: true,
+    order: [ ], 
     ajax: {
         url: baseUrl + "admin/product/List",
         type: "POST",
@@ -13,10 +14,11 @@ $('#productList').DataTable({
             d[csrfTokenName] = csrfHash;
         }
     },
-    columns: [{
+    columns: [
+        {
             data: null,
             render: function(data, type, row, meta) {
-                return meta.row + meta.settings._iDisplayStart + 1; // Serial number
+                return meta.row + meta.settings._iDisplayStart + 1;
             },
             orderable: false,
             searchable: false
@@ -49,7 +51,8 @@ $('#productList').DataTable({
             data: 'actions'
         }
     ],
-    columnDefs: [{
+    columnDefs: [
+        {
             targets: [6, 7, 8],
             orderable: false,
             searchable: false
@@ -62,6 +65,7 @@ $('#productList').DataTable({
         }
     ]
 });
+
 
 //Add product
 
@@ -80,7 +84,7 @@ $('#productSubmit').click(function(e) {
             $('#messageBox')
                 .removeClass('alert-danger')
                 .addClass('alert-success')
-                .text(response.msg || 'Product created successfully!')
+                .text(response.msg || 'Product Created Successfully!')
                 .show();
 
             setTimeout(function() {
@@ -88,7 +92,7 @@ $('#productSubmit').click(function(e) {
             }, 3000);
         } else {
 
-            let message = response.message || 'Please fill all the required fields.';
+            let message = response.message || 'Please Fill All The rrequired fields.';
             if (response.field === 'product_name') {
                 message = response.message;
             }

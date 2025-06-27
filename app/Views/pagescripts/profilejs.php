@@ -92,7 +92,7 @@ function editAddress(id) {
             const modal = new bootstrap.Modal(document.getElementById('editAddressModal'));
             modal.show();
         } else {
-            showMessage(res.msg || 'Failed to load address data.', 'danger');
+            showMessage(res.msg || 'Failed To Load Address Data.', 'danger');
         }
     }, 'json');
 }
@@ -100,11 +100,11 @@ $('#editAddressForm').submit(function(e) {
     e.preventDefault();
     $.post("<?= base_url('profile/address/edit') ?>", $(this).serialize(), function(res) {
         if (res.status === 'success') {
-            showMessage('Address updated successfully!', 'success');
+            showMessage('Address Updated Successfully!', 'success');
             $('#editAddressModal').modal('hide');
             setTimeout(() => location.reload(), 3000);
         } else {
-            showMessage(res.msg || 'Failed to update address.', 'danger');
+            showMessage(res.msg || 'Failed To Update Address.', 'danger');
         }
     }, 'json');
 });
@@ -117,7 +117,7 @@ $('#addressForm').submit(function(e) {
     const phonePattern = /^\d{7,15}$/;
 
     if (!phonePattern.test(phone)) {
-        showMessage('Phone number must be between 7 to 15 digits.', 'danger');
+        showMessage('Phone Number Must Be Between 7 To 15 Digits.', 'danger');
         $('#newPhone').focus();
         return;
     }
@@ -125,36 +125,63 @@ $('#addressForm').submit(function(e) {
     const url = id ? 'profile/address/edit' : 'profile/address/add';
     $.post("<?= base_url() ?>" + url, $(this).serialize(), function(res) {
         if (res.status === 'success') {
-            showMessage('Address saved successfully!', 'success');
+            showMessage('Address Saved Successfully!', 'success');
             setTimeout(() => location.reload(), 3000);
         } else {
-            showMessage(res.msg || 'Failed to save address.', 'danger');
+            showMessage(res.msg || 'Failed To Save Address.', 'danger');
         }
     }, 'json');
 });
 
 
-function deleteAddress(id) {
-    if (confirm("Are you sure to delete this address?")) {
-        $.post("<?= base_url('profile/address/delete') ?>", { add_Id: id }, function(res) {
-            if (res.status === 'success') {
-                showMessage('Address deleted.', 'success');
-                setTimeout(() => location.reload(), 3000);
-            } else {
-                showMessage(res.msg || 'Failed to delete address.', 'danger');
-            }
-        }, 'json');
-    }
+function openDeleteModal(id) {
+    document.getElementById('delete_add_id').value = id;
+    var modal = new bootstrap.Modal(document.getElementById('deleteModal'));
+    modal.show();
 }
+function confirmDeleteAddress() {
+    const addId = document.getElementById('delete_add_id').value;
+
+    setTimeout(function () {
+        $.ajax({
+            url: '<?= base_url("profile/deleteAddress") ?>',
+            type: 'POST',
+            data: { add_Id: addId },
+            dataType: 'json',
+            success: function (response) {
+                if (response.status === 'success') {
+                    const modal = bootstrap.Modal.getInstance(document.getElementById('deleteModal'));
+                    modal.hide();
+                    window.location.href = "<?= base_url('profile#address') ?>";
+                } else {
+                    alert(response.message);
+                }
+            },
+            error: function () {
+                alert('Something Went Wrong. Please Try Again.');
+            }
+        });
+    },1000);
+}
+
+    // Wait until page is fully loaded
+    window.addEventListener('DOMContentLoaded', function () {
+        const flashMsg = document.getElementById('flashMessage');
+        if (flashMsg) {
+            setTimeout(() => {
+                flashMsg.style.display = 'none';
+            }, 3000); // 3 seconds
+        }
+    });
 
 
 function setDefaultAddress(id) {
     $.post("<?= base_url('profile/setDefaultAddress') ?>", { add_Id: id }, function(res) {
         if (res.status === 'success') {
-            showMessage('Default address updated.', 'success');
+            showMessage('Default Address Updated.', 'success');
             setTimeout(() => location.reload(), 3000);
         } else {
-            showMessage(res.msg || 'Failed to update default address.', 'danger');
+            showMessage(res.msg || 'Failed To Update Default Address.', 'danger');
         }
     }, 'json');
 }
@@ -225,7 +252,7 @@ $('#changePasswordForm').on('submit', function(e) {
         messageBox
             .removeClass('alert-success alert-danger')
             .addClass('alert alert-danger')
-            .html('New Password must be at least 6 characters long!')
+            .html('New Password Must Be At Least 6 Characters Long!')
             .fadeIn();
 
         setTimeout(() => messageBox.fadeOut(), 4000);
@@ -236,7 +263,7 @@ $('#changePasswordForm').on('submit', function(e) {
         messageBox
             .removeClass('alert-success alert-danger')
             .addClass('alert alert-danger')
-            .html('New Password and Confirm Password do not match!')
+            .html('New Password And Confirm Password Do Not Match!')
             .fadeIn();
 
         setTimeout(() => messageBox.fadeOut(), 4000);

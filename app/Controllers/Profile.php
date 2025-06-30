@@ -76,12 +76,12 @@ class Profile extends BaseController
             session()->set('zd_uname', $newName);
             return $this->response->setJSON([
                 'status' => 'success',
-                'msg' => 'Profile updated successfully.'
+                'msg' => 'Profile Updated Successfully.'
             ]);
         } else {
             return $this->response->setJSON([
                 'status' => 'error',
-                'msg' => 'Failed to update profile.'
+                'msg' => 'Failed To Update Profile.'
             ]);
         }
     }
@@ -119,19 +119,19 @@ class Profile extends BaseController
 		if ($success) {
 			return $this->response->setJSON(['status' => 'success']);
 		} else {
-			return $this->response->setJSON(['status' => 'error', 'msg' => 'Failed to update address.']);
+			return $this->response->setJSON(['status' => 'error', 'msg' => 'Failed To Update Address.']);
 		}
 	}
-    public function deleteAddress() 
-	{
-		$add_Id = $this->request->getPost('add_Id');
-		$modified_by = session()->get('zd_uid');
-		
-		$addressModel = new AddressProfileModel();
-		$addressModel->deleteAddress(3, $add_Id, $modified_by);
 
-		return $this->response->setJSON(['status' => 'success']);
-	}
+    public function deleteAddress(){
+    $add_Id = $this->request->getPost('add_Id');
+    $modified_by = session()->get('zd_uid');
+
+    $addressModel = new AddressProfileModel();
+    $addressModel->deleteAddress(3, $add_Id, $modified_by);
+
+    return redirect()->to(base_url('profile#address'))->with('message', 'Address Deleted SSuccessfully.');
+}
 
 	public function getAddress()
 	{
@@ -144,7 +144,7 @@ class Profile extends BaseController
 		if ($address) {
 			return $this->response->setJSON(['status' => 'success', 'data' => $address]);
 		} else {
-			return $this->response->setJSON(['status' => 'error', 'msg' => 'Address not found.']);
+			return $this->response->setJSON(['status' => 'error', 'msg' => 'Address Not Found.']);
 		}
 	}
 	
@@ -158,23 +158,23 @@ public function changePassword()
 
     // Validation: check empty fields
     if (empty($oldPassword)) {
-        return $this->response->setJSON(['status' => 0, 'msg' => 'Please enter the old password.']);
+        return $this->response->setJSON(['status' => 0, 'msg' => 'Please Enter The Old Password.']);
     }
     if (empty($newPassword)) {
-        return $this->response->setJSON(['status' => 0, 'msg' => 'Please enter a new password.']);
+        return $this->response->setJSON(['status' => 0, 'msg' => 'Please Enter A New Password.']);
     }
     if (empty($confirmPassword)) {
-        return $this->response->setJSON(['status' => 0, 'msg' => 'Please confirm your new password.']);
+        return $this->response->setJSON(['status' => 0, 'msg' => 'Please Confirm Your New Password.']);
     }
 
     // Check new password matches confirm password
     if ($newPassword !== $confirmPassword) {
-        return $this->response->setJSON(['status' => 0, 'msg' => 'New password and confirm password do not match.']);
+        return $this->response->setJSON(['status' => 0, 'msg' => 'New Password And Confirm Password Do Not Match.']);
     }
     if (!empty($new_password) && (strlen($new_password) < 6 || strlen($new_password) > 15)) {
         return $this->response->setJSON([
             'status' => 'error',
-            'msg' => 'Password must be between 6 to 15 characters.'
+            'msg' => 'Password Must Be Between 6 To 15 Characters.'
         ]);
     }
 

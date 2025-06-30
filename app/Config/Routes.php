@@ -60,11 +60,13 @@ $routes->get('profile', 'Profile::index');
 $routes->post('profile/update', 'Profile::update');
 $routes->post('profile/address/add', 'Profile::addAddress');
 $routes->post('profile/address/edit', 'Profile::editAddress');
-$routes->post('profile/address/delete', 'Profile::deleteAddress');
+//$routes->post('profile/address/delete', 'Profile::deleteAddress');
+$routes->post('profile/deleteAddress', 'Profile::deleteAddress');
 $routes->post('/profile/setDefaultAddress', 'Profile::setDefaultAddress');
 $routes->post('profile/update', 'Profile::update');
 $routes->post('profile/getAddress', 'Profile::getAddress');
 //$routes->get('profile/editprofile', 'Profile::editProfile');
+$routes->post('profile/editprofile', 'Profile::editProfile');
 $routes->match(['get', 'post'], 'profile/editprofile', 'Profile::add');
 $routes->match(['get', 'post'],'profile/change_password', 'Profile::changePassword');
 

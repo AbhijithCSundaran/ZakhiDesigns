@@ -21,11 +21,7 @@
        
 <!-- Favicon icon -->
       <link rel="icon" href="<?php echo base_url().ASSET_PATH; ?>assets/images/logo.jpg" >
-        <!-- Swiper CSS -->
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
 
-        <!-- Swiper JS -->
-        <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 
 
 </head>

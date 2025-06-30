@@ -125,6 +125,7 @@ textarea {
     font-weight: 500;
     color: #333;
     margin-bottom: 5px;
+    
 }
 
 .product-carousel .item-price {
@@ -226,12 +227,29 @@ header,
 .main-container {
     overflow: visible !important;
     position: relative;
-    z-index: 1;
+    z-index: 2;
 }
-
+.swiper {
+  overflow: hidden !important; /* optional, helps when slides are clipped */
+  
+}
+.swiper-button-prev,
+.swiper-button-next{
+    color:#b6b6b6 !important; 
+    
+}
+.swiper-button-next::after,
+.swiper-button-prev::after {
+  font-size: 30px !important; 
+}
+.swiper-button-next{
+     padding-left:90px !important;
+}
+.swiper-button-prev{
+    padding-right:90px !important;
+}
 /* *********************************************************************************************************** */
 /* FASHION DROP DOWN*/
-
 .cat-dropdown,
 .sub-dropdown {
     display: none;
@@ -240,7 +258,7 @@ header,
 
 .dropdown-wrapper:hover .cat-dropdown {
     display: flex;
-}
+    }
 
 
 .cat-item:hover .sub-dropdown {
@@ -300,6 +318,7 @@ header,
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     border: 1px solid #ccc;
     z-index: 1000;
+     /* pointer-events: auto; */
 }
 
 .cat-item a {
@@ -343,9 +362,30 @@ header,
 .sub-dropdown a:hover {
     background-color: #f4f4f4;
 }
-
+.heading-left{
+    text-align: left !important;
+}
 /***********************************************************************************************/
+.subcat-image-wrapper {
+    width: 140px;              /* Adjust as needed */
+    height: 160px;             /* Adjust as needed */
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #eee;    /* Optional border */
+    background-color: #fff;
+    margin: auto;
+}
 
+.subcat-image-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;       /* Use 'cover' to crop, 'contain' to fit */
+}
+
+
+/*******************************************************************************************/
 .gold {
     color: gold;
 }

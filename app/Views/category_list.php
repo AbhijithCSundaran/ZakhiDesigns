@@ -1,8 +1,8 @@
 <section class="top-prod">
     <div class="container-lg">
         <div class="row">
-            <div class="col-12">
-                <h3>CATEGORIES</h3>
+            <div class="col-12 " Style="padding:10px;" >
+                <h3 class="heading-left" Style = "padding-left:2px;">EXPLORE THE FASHION</h3>
             </div>
         </div>
 

@@ -86,7 +86,7 @@ $routes->post('ordernow/submitfrm', 'OrderNow::submitfrm');
 
 $routes->get('category/category_list', 'Category::category_list');
 $routes->get('category/catProducts/(:num)', 'Category::catProducts/$1');
-
+$routes->get('subcategory/subcategoryProducts/(:num)', 'Subcategory::subcategoryProducts/$1');
 //About Us
 $routes->get('aboutus', 'AboutUs::index');
 

@@ -4,7 +4,7 @@
 <head>
     <title>Zakhi Designs</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
+    <meta name="google-signin-client_id" content="980312560634-kksn59gmuu5p4rg68tnd2vaooe7lfdfu.apps.googleusercontent.com">
 
     <link rel="stylesheet" href="<?= base_url() . ASSET_PATH; ?>assets/css/bootstrap.min.css">
     <link rel="stylesheet" href="<?= base_url() . ASSET_PATH; ?>assets/css/customstyle.css">

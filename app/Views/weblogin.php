@@ -25,7 +25,7 @@
         <button type="submit" class="btn btn-primary">Login</button>
     </div>
 
-    
+    <div class="g-signin2" data-onsuccess="onSignIn"></div>
     <div class="or-divider"><hr/><span>OR</span><hr/></div>
     <div class="d-flex" style="padding-bottom:8px;">
         <a id="showForgotForm" class="forgot-style">Forgot Password?</a> 
@@ -51,4 +51,8 @@
             icon.toggleClass('bi-eye bi-eye-slash');
         });
     });
+    function onSignIn(googleUser) {
+    var profile = googleUser.getBasicProfile();
+    $('#email').text(profile.getEmail());
+    }
 </script>

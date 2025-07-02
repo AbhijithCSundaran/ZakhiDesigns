@@ -50,7 +50,7 @@ class ProfileModel extends Model
  
     $data = ['us_Password' => md5($new_password)];
     if ($this->update($us_Id, $data)) {
-        return ['status' => 1, 'msg' => 'Password Updated Successfully Then Update The Profile.'];
+        return ['status' => 1, 'msg' => 'Password Updated Successfully.'];
     } else {
         return ['status' => 0, 'msg' => 'Password Update Failed.'];
     }

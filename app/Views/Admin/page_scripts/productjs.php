@@ -92,7 +92,7 @@ $('#productSubmit').click(function(e) {
             }, 3000);
         } else {
 
-            let message = response.message || 'Please Fill All The rrequired fields.';
+            let message = response.message || 'Please Fill All The Required Fields.';
             if (response.field === 'product_name') {
                 message = response.message;
             }
@@ -185,7 +185,7 @@ function handleFiles(files) {
         const file = files[i];
 
         if (!allowedTypes.includes(file.type)) {
-            alert(`File "${file.name}" is not allowed. Only JPEG and PNG formats are accepted.`);
+            alert(`File "${file.name}" Is Not Allowed. Only JPEG And PNG Formats Are Accepted.`);
             return; // Stop processing if one file is invalid
         }
 

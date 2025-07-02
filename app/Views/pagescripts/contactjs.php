@@ -13,25 +13,25 @@ document.querySelector("#contactForm").addEventListener("submit", function(e) {
 
 	// === VALIDATION ===
 	const nameRegex = /^[a-zA-Z\s]+$/;
-	const phoneRegex = /^\d{10}$/;
+	const phoneRegex = /^\d{7,15}$/;
 
 	if (!nameRegex.test(name)) {
-		showMessage("Name must contain only letters and spaces.", "danger");
+		showMessage("Name Must Contain Only Letters And Spaces.", "danger");
 		return;
 	}
 
 	if (!phoneRegex.test(phone)) {
-		showMessage("Contact number must be exactly 10 digits.", "danger");
+		showMessage("Contact Number Must Be Between 7 To 15 Digits.", "danger");
 		return;
 	}
 
 	if (email === '' || !email.includes("@")) {
-		showMessage("Enter a valid email address.", "danger");
+		showMessage("Enter A Valid Email Address.", "danger");
 		return;
 	}
 
 	if (message === '') {
-		showMessage("Message cannot be empty.", "danger");
+		showMessage("Message Cannot Be Empty.", "danger");
 		return;
 	}
 
@@ -53,7 +53,7 @@ document.querySelector("#contactForm").addEventListener("submit", function(e) {
 		}
 	})
 	.catch(error => {
-		showMessage("Something went wrong. Please try again later.", "danger");
+		showMessage("Something Went Wrong. Please Try Again Later.", "danger");
 	});
 
 	// === Helper: Show Message, Scroll to Top, and Auto-hide ===

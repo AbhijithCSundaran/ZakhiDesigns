@@ -52,56 +52,16 @@ class Profile extends BaseController
 
     return $template;
 }
-// public function update()
-// {
-//     $us_Id = $this->session->get('ad_uid'); 
-
-//     $name  = ucwords(strtolower($this->request->getPost('us_Name')));
-//     $email = $this->request->getPost('us_Email');
-
-//     $data = [
-//         'us_Name'  => $name,
-//         'us_Email' => $email,
-//     ];
-
-//     $model = new \App\Models\Admin\ProfileModel();
-
-//     if ($model->updateProfile($us_Id, $data)) {
-//         // Update session value
-//         $this->session->set('ad_name', $name);
-
-//         return $this->response->setJSON([
-//             'status'   => 1,
-//             'msg'      => 'Profile Updated Successfully.',
-//             'ad_name'  => $name
-//         ]);
-//     } else {
-//         return $this->response->setJSON([
-//             'status' => 0,
-//             'msg'    => 'Failed To Update Profile.'
-//         ]);
-//     }
-// }
- public function update()
+public function update()
 {
     $us_Id = $this->session->get('ad_uid'); 
 
-    $name   = ucwords(strtolower($this->request->getPost('us_Name')));
-    $email  = $this->request->getPost('us_Email');
-    $phone  = $this->request->getPost('us_Phone');
-
-    // Optional: Validate phone number format (7 to 15 digits)
-    if (!preg_match('/^\d{7,15}$/', $phone)) {
-        return $this->response->setJSON([
-            'status' => 0,
-            'msg'    => 'Invalid phone number format.'
-        ]);
-    }
+    $name  = ucwords(strtolower($this->request->getPost('us_Name')));
+    $email = $this->request->getPost('us_Email');
 
     $data = [
         'us_Name'  => $name,
         'us_Email' => $email,
-        'us_Phone' => $phone
     ];
 
     $model = new \App\Models\Admin\ProfileModel();
@@ -122,8 +82,6 @@ class Profile extends BaseController
         ]);
     }
 }
-
-
 
 
 public function change_password()

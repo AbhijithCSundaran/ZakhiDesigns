@@ -41,7 +41,7 @@ $(document).ready(function () {
                 }
             },
             error: function () {
-                alert('An error occurred while updating the profile.');
+                alert('An Error Occurred While Updating The Profile.');
             }
         });
     });

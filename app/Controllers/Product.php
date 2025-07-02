@@ -284,7 +284,6 @@ class Product extends Controller
         if (empty($zd_uid)) {
             return redirect()->to(base_url('weblogin'));
         }
-
         $cust_id  = $this->request->getPost('cust_Id');
         $pr_Id    = $this->request->getPost('pr_Id');
         $size     = $this->request->getPost('size');

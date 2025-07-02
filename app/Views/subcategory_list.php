@@ -1,57 +1,13 @@
-<?php if (isset($cat_id)): ?>
+<?php if (isset($subcat_id)): ?>
 
     <section class="top-prod">
         <div class="container-lg">
             <div class="row">
-                <div class="col-12" Style="padding:10px;" >
-                    <h3 class="heading-left" style="padding-left:2px;"><?= esc($cat_Name) ?></h3>
+                <div class="col-12 " Style="padding:10px;" >
+                    <h3 class="heading-left" Style = "padding-left:2px;"><?= esc($subcat_id['sub_Category_Name']) ?></h3>
                 </div>
             </div>
-            <?php if (empty($product)): ?>
-                <div class="alert alert-warning text-center">No Category found.</div>
-            <?php else: ?>
-                <!-- show sub categories--->
-                <?php if (!empty($subcategory)): ?>
-                    <div class="swiper mySwiper" style="padding:0px;">
-                        <div class="swiper-button-next" ></div>
-                        <div class="swiper-wrapper">
-                            <?php
-                            $uniqueIds = [];
-                            foreach ($subcategory as $item):
-                                if (in_array($item['sub_Id'], $uniqueIds)) {
-                                    continue;
-                                }
-                                $uniqueIds[] = $item['sub_Id'];
-                                $images = json_decode($item['product_images'], true);
-                                $firstImage = isset($images[0]['name'][0]) ? $images[0]['name'][0] : 'default.jpg';
-                            ?>
-                            <div class="swiper-slide" style="width: 120px;">
-                                <div class="card text-center" style="height: 170px; max-width: 120px;">
-                                    <div class="card-body p-2 position-relative"  style="overflow: hidden; z-index:2px;" >
-                                        <a href="<?= base_url('subcategory/subcategoryProducts/' .$item['sub_Id'] . '?cat_id=' . $cat_id); ?>">
-                                            <img class="product-img img-fluid mb-2"
-                                                src="<?= base_url('uploads/productmedia/') . $firstImage; ?>"
-                                                alt="<?= esc($item['sub_Category_Name']); ?>"
-                                                style="height: 120px; object-fit: contain;" />
-                                        </a>
-                                        <div class="item-name p-1" style="font-size: 11px;">
-                                            <?= esc($item['sub_Category_Name']); ?>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <?php endforeach; ?>
-                        </div>
-                        <div class="swiper-button-prev" ></div>
-
-                    </div>
-
-
-                <?php endif; ?>
-                
-
-
-                 <br/>               
+            <?php if ($subcat_id): ?>
                 <div class="row">
                     <?php
                     $uniqueIds = [];
@@ -121,24 +77,15 @@
                         </div>
                     <?php endforeach; ?>
                 </div>
+            <?php else: ?>
+                <div class="alert alert-warning text-center">No Sub Category found.</div>
             <?php endif; ?>
 
 
         </div>
     </section>
+  
 <?php else: ?>
-    <div>Category ID not found.</div>
+    <div>Subcategory ID not found.</div>
 <?php endif; ?>
-<script>
- var swiper = new Swiper(".mySwiper", {
-  slidesPerView: 'auto',
-  spaceBetween: 10,
-  freeMode: true,
-  grabCursor: true,
-  navigation: {
-    nextEl: ".swiper-button-next",
-    prevEl: ".swiper-button-prev",
-  },
-});
-
-</script>
+<!-- //****************************************************************************************************************// -->

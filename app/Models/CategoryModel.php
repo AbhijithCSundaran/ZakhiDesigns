@@ -38,6 +38,16 @@ class CategoryModel extends Model
     public function getAllProductUnderCategory($id){
         return $this->db->query("select * from product where cat_Id = '".$id."' and pr_Status = 1 ")->getResultArray();
     }
+ 
+    public function getAllSubcategoryUnderCategory($id) {
+    return $this->db->query("
+        SELECT DISTINCT s.sub_Id, s.sub_Category_Name, p.product_images
+        FROM subcategory s
+        JOIN product p ON p.sub_Id = s.sub_Id
+        WHERE p.cat_Id = '".$id."' AND p.pr_Status = 1 AND p.product_images!='' AND s.sub_Status = 1 ORDER BY RAND()
+    ")->getResultArray();
+}
+
 }
 
 ?>

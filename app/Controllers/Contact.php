@@ -22,7 +22,7 @@ class Contact extends BaseController
     {
 		$this->productdisplayModel = new ProductDisplayModel();
         $this->categories = $this->productdisplayModel->getAllCategoriesAndSub();
-		 $data['categories'] = $this->categories;
+		$data['categories'] = $this->categories;
         $data['title'] = 'Contact Us';
 
         $data['product'] = $this->productdisplayModel->getAllProducts();
@@ -152,7 +152,7 @@ public function submit()
             $mail->setFrom('smartloungework@gmail.com', 'Zakhi Designs');
 
             // === Send Email to Admin ===
-            $mail->addAddress('smartloungework@gmail.com', 'Admin');
+            $mail->addAddress('asnaat05112001@gmail.com', 'Admin');
             $mail->addReplyTo($data['email'], $data['fullname']);
             $mail->isHTML(true);
             $mail->Subject = 'New Contact Enquiry Received';

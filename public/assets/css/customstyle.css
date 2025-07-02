@@ -236,6 +236,7 @@ header,
 .swiper-button-prev,
 .swiper-button-next{
     color:#b6b6b6 !important; 
+    z-index: 10;
     
 }
 .swiper-button-next::after,
@@ -248,6 +249,11 @@ header,
 .swiper-button-prev{
     padding-right:90px !important;
 }
+.similarSwiper .swiper-slide {
+    display: flex;
+    justify-content: center;
+}
+
 /* *********************************************************************************************************** */
 /* FASHION DROP DOWN*/
 .cat-dropdown,

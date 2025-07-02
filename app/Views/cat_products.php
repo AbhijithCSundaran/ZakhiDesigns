@@ -18,6 +18,7 @@
                             <?php
                             $uniqueIds = [];
                             foreach ($subcategory as $item):
+                 
                                 if (in_array($item['sub_Id'], $uniqueIds)) {
                                     continue;
                                 }

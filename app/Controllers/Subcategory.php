@@ -61,6 +61,7 @@ public function subcategoryProducts($id){
     }
 
     $data['similar'] = $this->subcategoryModel->getSimilarProducts( $cat_id,$id);
+    
     return view('common/header' , $data)
         . view('subcategory_list'   , $data)
         . view('common/footer');

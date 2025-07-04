@@ -18,18 +18,18 @@
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-       
-<!-- Favicon icon -->
-    <link rel="icon" href="<?php echo base_url().ASSET_PATH; ?>assets/images/logo.jpg" >
-    
+
+    <!-- Favicon icon -->
+    <link rel="icon" href="<?php echo base_url().ASSET_PATH; ?>assets/images/logo.jpg">
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-        <!-- Swiper CSS -->
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <!-- Swiper CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
 
-        <!-- Swiper JS -->
-        <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <!-- Swiper JS -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 
 
 </head>
@@ -58,28 +58,28 @@
                         <a href="<?= base_url(); ?>" class="active">Home</a>
                         <a href="<?= base_url('aboutus'); ?>">About Us</a>
                         <!-- Fashion dropdown -->
-                        <div class="dropdown-wrapper a fashion-menu position-relative " style = " cursor: pointer;">
-                            <span class="dropbtn" >Fashion</span>
+                        <div class="dropdown-wrapper a fashion-menu position-relative " style=" cursor: pointer;">
+                            <span class="dropbtn">Fashion</span>
                             <div class="cat-dropdown">
                                 <?php if (!empty($categories)): ?>
-                                <?php foreach (array_slice($categories , 0,10) as $category): ?>
-                                <div class="cat-item position-relative">
-                                    <a href="<?= base_url('category/catProducts/' . $category['cat_Id']) ?>">
-                                        <?= esc($category['cat_Name']) ?>
-                                    </a>
+                                    <?php foreach (array_slice($categories, 0, 10) as $category): ?>
+                                        <div class="cat-item position-relative">
+                                            <a href="<?= base_url('category/catProducts/' . $category['cat_Id']) ?>">
+                                                <?= esc($category['cat_Name']) ?>
+                                            </a>
 
-                                    <?php if (!empty($category['subcategories'])): ?>
-                                    <div class="sub-dropdown">
-                                        <?php foreach ($category['subcategories'] as $sub): ?>
-                                        <a href="<?= base_url('subcategory/subcategoryProducts/' . $sub['sub_Id']) ?>">
-                                            <?= esc($sub['sub_Category_Name']) ?>
-                                        </a>
-                                        <?php endforeach; ?>
-                                    </div>
-                                    <?php endif; ?>
-                                </div>
+                                            <?php if (!empty($category['subcategories'])): ?>
+                                                <div class="sub-dropdown">
+                                                    <?php foreach ($category['subcategories'] as $sub): ?>
+                                                        <a href="<?= base_url('subcategory/subcategoryProducts/' . $sub['sub_Id']) ?>">
+                                                            <?= esc($sub['sub_Category_Name']) ?>
+                                                        </a>
+                                                    <?php endforeach; ?>
+                                                </div>
+                                            <?php endif; ?>
+                                        </div>
 
-                                <?php endforeach; ?>
+                                    <?php endforeach; ?>
                                 <?php endif; ?>
                                 <div class="cat-item">
                                     <a href="<?= base_url('category/category_list') ?>">All Category</a>
@@ -89,26 +89,26 @@
                         <a href="<?= base_url('contact'); ?>">Contact</a>
 
                         <?php if (session()->get('zd_uname')): ?>
-                        <div class="dropdown a">
-                            <div class="dropdown-toggle drop-menu p-0" href="#" role="button" id="customerDropdown"
-                                data-bs-toggle="dropdown" aria-expanded="false">
-                                <?= session()->get('zd_uname'); ?>
+                            <div class="dropdown a">
+                                <div class="dropdown-toggle drop-menu p-0" href="#" role="button" id="customerDropdown"
+                                    data-bs-toggle="dropdown" aria-expanded="false">
+                                    <?= session()->get('zd_uname'); ?>
+                                </div>
+                                <ul class="dropdown-menu" aria-labelledby="customerDropdown">
+                                    <li><a class="dropdown-item" href="<?= base_url('profile#profile'); ?>"><i
+                                                class="bi bi-person-circle"></i> My Profile</a></li>
+                                    <li><a class="dropdown-item" href="<?= base_url('logout') ?>"><i
+                                                class="bi bi-escape"></i> Logout</a></li>
+                                </ul>
                             </div>
-                            <ul class="dropdown-menu" aria-labelledby="customerDropdown">
-                                <li><a class="dropdown-item" href="<?= base_url('profile#profile'); ?>"><i
-                                            class="bi bi-person-circle"></i> My Profile</a></li>
-                                <li><a class="dropdown-item" href="<?= base_url('logout') ?>"><i
-                                            class="bi bi-escape"></i> Logout</a></li>
-                            </ul>
-                        </div>
 
 
                         <?php else: ?>
-                        <a href="#" id="loginBtn">Login</a>
-                        <a href="#" id="registerBtn">Register</a>
+                            <a href="#" id="loginBtn">Login</a>
+                            <a href="#" id="registerBtn">Register</a>
                         <?php endif; ?>
 
-                        <a href="javascript:void(0);" class="searchbox">
+                        <!-- <a href="javascript:void(0);" class="searchbox">
                             <input type="text" name="keyword" id="search" placeholder="Search products"
                                 autocomplete="off" value="<?= esc($search ?? '') ?>" style="padding:5px;"
                                 onkeydown="checkEnter(event)" />
@@ -118,7 +118,20 @@
                         </a>
                         <a href="javascript:void(0);" class="icon" onclick="openRespMenu()">
                             <i class="bi bi-list"></i>
-                        </a>
+                        </a> -->
+                        <div class="searchbox"
+                            style="display: flex; align-items: center; gap: 5px; position: relative; top: -5px;">
+                            <input type="text" name="keyword" id="search" placeholder="Search products/Category/Sub:cate"
+                                autocomplete="off" value="<?= esc($search ?? '') ?>" style="padding: 5px; "
+                                onkeydown="checkEnter(event)" />
+
+                            <a href="javascript:void(0);" onclick="searchProduct()"
+                                style="text-decoration: none; color: inherit;">
+                                <i class="bi bi-search" style="position: relative; top: -6px;"></i>
+                            </a>
+
+                        </div>
+
                     </nav>
                 </div>
             </div>
@@ -140,34 +153,34 @@
     </div>
 
     <script>
-    function searchProduct() {
-        const keyword = document.getElementById('search').value.trim();
-        if (keyword !== '') {
-            window.location.href = "<?= base_url('product/search') ?>?keyword=" + encodeURIComponent(keyword);
+        function searchProduct() {
+            const keyword = document.getElementById('search').value.trim();
+            if (keyword !== '') {
+                window.location.href = "<?= base_url('product/search') ?>?keyword=" + encodeURIComponent(keyword);
+            }
         }
-    }
 
-    function checkEnter(event) {
-        if (event.key === 'Enter') {
-            event.preventDefault(); // Optional
-            searchProduct();
+        function checkEnter(event) {
+            if (event.key === 'Enter') {
+                event.preventDefault(); // Optional
+                searchProduct();
+            }
         }
-    }
 
 
 
-    document.addEventListener('DOMContentLoaded', function () {
-        const fashionMenu = document.querySelector('.dropdown-wrapper');
-        if (!fashionMenu) return;
+        document.addEventListener('DOMContentLoaded', function () {
+            const fashionMenu = document.querySelector('.dropdown-wrapper');
+            if (!fashionMenu) return;
 
-        const catDropdown = fashionMenu.querySelector('.cat-dropdown');
+            const catDropdown = fashionMenu.querySelector('.cat-dropdown');
 
-        fashionMenu.addEventListener('mouseenter', () => {
-            if (catDropdown) catDropdown.style.display = 'flex';
+            fashionMenu.addEventListener('mouseenter', () => {
+                if (catDropdown) catDropdown.style.display = 'flex';
+            });
+            fashionMenu.addEventListener('mouseleave', () => {
+                if (catDropdown) catDropdown.style.display = 'none';
+            });
         });
-        fashionMenu.addEventListener('mouseleave', () => {
-            if (catDropdown) catDropdown.style.display = 'none';
-        });
-    });
 
     </script>

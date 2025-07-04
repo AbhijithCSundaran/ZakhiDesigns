@@ -54,6 +54,10 @@
 
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
     <link rel="stylesheet" href="<?php echo base_url().ASSET_PATH; ?>Admin/assets/css/custom.css" />
+  
+
+<!-- <script src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit" async defer></script> -->
+
 </head>
   <body>
   <!-- Pre-loader start -->

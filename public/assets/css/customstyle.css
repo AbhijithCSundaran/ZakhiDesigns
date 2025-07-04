@@ -253,6 +253,11 @@ header,
     display: flex;
     justify-content: center;
 }
+.google-btn-wrapper {
+    display: flex;
+    justify-content: center;
+    margin: 16px 0;
+}
 
 /* *********************************************************************************************************** */
 /* FASHION DROP DOWN*/
@@ -268,6 +273,9 @@ header,
 
 
 .cat-item:hover .sub-dropdown {
+    max-height: 310px;       
+    overflow-y: auto;
+    overflow-x: hidden;
     display: block;
     position: absolute;
     top: 0;

@@ -25,7 +25,9 @@
         <button type="submit" class="btn btn-primary">Login</button>
     </div>
 
-    <div class="g-signin2" data-onsuccess="onSignIn"></div>
+    <!-- <div class="d-flex justify-content-center my-4">
+        <div class="g-signin2 d-flex" data-onsuccess="onSignIn"></div>
+    </div> -->
     <div class="or-divider"><hr/><span>OR</span><hr/></div>
     <div class="d-flex" style="padding-bottom:8px;">
         <a id="showForgotForm" class="forgot-style">Forgot Password?</a> 
@@ -37,6 +39,7 @@
 
    
 </form>
+<script src="https://apis.google.com/js/platform.js" async defer></script>
 <script>
     $(document).ready(function() {
         $('#togglePassword').on('click', function () {
@@ -51,8 +54,14 @@
             icon.toggleClass('bi-eye bi-eye-slash');
         });
     });
-    function onSignIn(googleUser) {
+  
+ function onSignIn(googleUser) {
     var profile = googleUser.getBasicProfile();
-    $('#email').text(profile.getEmail());
-    }
+    console.log("ID: " + profile.getId());
+    console.log("Name: " + profile.getName());
+    console.log("Email: " + profile.getEmail());
+
+    // Optional: Send this data to server via AJAX
+  }
+
 </script>

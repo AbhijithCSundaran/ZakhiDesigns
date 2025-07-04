@@ -83,6 +83,7 @@
 <!-- //****************************************************************************************************************// -->
 
         <?php if (isset($similar)):?>
+            <?php if(!empty($similar)):?>
             <div class="row">
                 <div class="col-12 " Style="padding: 0px 12px;" >
                     <h3><br/>SIMILAR PRODUCTS</h3>
@@ -103,7 +104,7 @@
                                 $images = json_decode($item['product_images'], true);
                                 $firstImage = isset($images[0]['name'][0]) ? $images[0]['name'][0] : 'default.jpg';
                                 ?>
-                                <div class="swiper-slide" style="width: 100%; max-width: 330px; margin: auto;">
+                                <div class="swiper-slide" style="width: 100%; ">
                                     <div class=" text-center" style="">
                                     <div class=" p-2 position-relative"  style="overflow: hidden; z-index:2px;" >
                                             <a href="<?= base_url('product/product_details/' . $item['pr_Id']); ?>">
@@ -163,6 +164,7 @@
                     <div class="swiper-button-prev" ></div>
                     </div>
                 </div>
+            <?php endif; ?>
         <?php endif; ?>
 <!-- //****************************************************************************************************************// -->
 

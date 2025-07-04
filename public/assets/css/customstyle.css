@@ -125,7 +125,7 @@ textarea {
     font-weight: 500;
     color: #333;
     margin-bottom: 5px;
-    
+
 }
 
 .product-carousel .item-price {
@@ -142,6 +142,7 @@ textarea {
 
 
 .pics {
+    max-width: 100%;
     display: flex;
     flex-direction: row;
     align-items: flex-start;
@@ -229,34 +230,36 @@ header,
     position: relative;
     z-index: 2;
 }
+
 .swiper {
-  overflow: hidden !important; /* optional, helps when slides are clipped */
-  
+    overflow: hidden !important;
+    /* optional, helps when slides are clipped */
+
 }
+
 .swiper-button-prev,
-.swiper-button-next{
-    color:#b6b6b6 !important; 
+.swiper-button-next {
+    color: #b6b6b6 !important;
     z-index: 10;
-    
+
 }
+
 .swiper-button-next::after,
 .swiper-button-prev::after {
-  font-size: 30px !important; 
+    font-size: 30px !important;
 }
-.swiper-button-next{
-     padding-left:90px !important;
+
+.swiper-button-next {
+    padding-left: 90px !important;
 }
-.swiper-button-prev{
-    padding-right:90px !important;
+
+.swiper-button-prev {
+    padding-right: 90px !important;
 }
+
 .similarSwiper .swiper-slide {
     display: flex;
     justify-content: center;
-}
-.google-btn-wrapper {
-    display: flex;
-    justify-content: center;
-    margin: 16px 0;
 }
 
 /* *********************************************************************************************************** */
@@ -269,13 +272,10 @@ header,
 
 .dropdown-wrapper:hover .cat-dropdown {
     display: flex;
-    }
+}
 
 
 .cat-item:hover .sub-dropdown {
-    max-height: 310px;       
-    overflow-y: auto;
-    overflow-x: hidden;
     display: block;
     position: absolute;
     top: 0;
@@ -301,17 +301,18 @@ header,
 
 
 @media screen and (max-width: 600px) {
-	.topnav .a{
-		display: none;
-	}
+    .topnav .a {
+        display: none;
+    }
+
     .topnav.responsive .a {
-		float: none;
-		display: block;
-		text-align: left;
-	}
+        float: none;
+        display: block;
+        text-align: left;
+    }
 }
 
-.topnav .fashion-menu a{
+.topnav .fashion-menu a {
     color: #000;
     text-decoration: none;
     position: relative;
@@ -332,7 +333,7 @@ header,
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     border: 1px solid #ccc;
     z-index: 1000;
-     /* pointer-events: auto; */
+    /* pointer-events: auto; */
 }
 
 .cat-item a {
@@ -343,7 +344,7 @@ header,
     padding: 5px 10px !important;
     color: #000;
     text-decoration: none;
-    width:100%;
+    width: 100%;
     text-align: left;
 }
 
@@ -376,18 +377,23 @@ header,
 .sub-dropdown a:hover {
     background-color: #f4f4f4;
 }
-.heading-left{
+
+.heading-left {
     text-align: left !important;
 }
+
 /***********************************************************************************************/
 .subcat-image-wrapper {
-    width: 140px;              /* Adjust as needed */
-    height: 160px;             /* Adjust as needed */
+    width: 140px;
+    /* Adjust as needed */
+    height: 160px;
+    /* Adjust as needed */
     overflow: hidden;
     display: flex;
     align-items: center;
     justify-content: center;
-    border: 1px solid #eee;    /* Optional border */
+    border: 1px solid #eee;
+    /* Optional border */
     background-color: #fff;
     margin: auto;
 }
@@ -395,7 +401,8 @@ header,
 .subcat-image-wrapper img {
     width: 100%;
     height: 100%;
-    object-fit: contain;       /* Use 'cover' to crop, 'contain' to fit */
+    object-fit: contain;
+    /* Use 'cover' to crop, 'contain' to fit */
 }
 
 
@@ -429,30 +436,30 @@ header,
 
 
 html {
-  scroll-behavior: smooth;
+    scroll-behavior: smooth;
 }
 
-.forgot-style{
-    
-}
-.forgot-style:hover{
-    cursor:pointer !important;
+
+.forgot-style:hover {
+    cursor: pointer !important;
     pointer-events: display;
 }
-.or-divider{
+
+.or-divider {
     display: flex;
     align-items: center;
     text-align: center;
     margin: 20px 0;
     padding-top: -3;
 }
+
 .or-divider hr {
     flex: 1;
     border: none;
     border-top: 1px solid #000;
-  }
+}
 
-  .or-divider span {
+.or-divider span {
     padding: 0 10px;
     color: rgba(0, 0, 0, 0.5);
     font-weight: bold;
@@ -460,4 +467,4 @@ html {
     margin-left: 10px;
     margin-right: 10px;
 
-  }
+}

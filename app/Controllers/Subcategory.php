@@ -29,15 +29,15 @@ class Subcategory extends Controller
         . view('subcategory_list', $data)
         . view('common/footer');
 }
-public function subcategoryProducts($id){
+public function subcategoryProducts($id, $catId){
     $this->productdisplayModel = new ProductDisplayModel();
     $reviewModel = new ReviewModel();
 
     $this->categories = $this->productdisplayModel->getAllCategoriesAndSub();
 	$data['categories'] = $this->categories;
     
-    $cat_id = $this->request->getGet('cat_id');
-    $data['cat_id'] = $cat_id;
+    // $cat_id = $this->request->getGet('cat_id');
+    $data['cat_id'] = $catId;
     $data['subcat_id'] = $this->subcategoryModel->getAllSubcategory($id);
     $data['product']   = $this->subcategoryModel->getAllProductUnderSubcategory($id);
 
@@ -60,7 +60,8 @@ public function subcategoryProducts($id){
         }
     }
 
-    $data['similar'] = $this->subcategoryModel->getSimilarProducts( $cat_id,$id);
+    $data['similar'] = $this->subcategoryModel->getSimilarProducts( $catId,$id);
+    
     return view('common/header' , $data)
         . view('subcategory_list'   , $data)
         . view('common/footer');

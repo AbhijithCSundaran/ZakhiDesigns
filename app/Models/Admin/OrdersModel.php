@@ -52,6 +52,7 @@ public function getDatatables($searchValue = null, $start = 0, $length = 10){
     $filtered = $filteredBuilder->countAllResults(false);
 
     // Pagination
+    $builder->orderBy('order_detail.od_Id', 'DESC');
     $builder->limit($length, $start);
     $query = $builder->get();
     $data = $query->getResult();

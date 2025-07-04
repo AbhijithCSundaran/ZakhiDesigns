@@ -162,7 +162,18 @@
 									Date: <?= date('d M Y', strtotime($order['od_createdon'])) ?><br>
 									Size: <?= esc($order['od_Size']) ?><br>
 									Quantity: <?= esc($order['od_Quantity']) ?><br>
-									<b>Track your product:</b> <?= esc($order['tracker_Link']) ?><br>
+									<?php
+                                    $statusMap = [
+                                        1 => 'New',
+                                        2 => 'Confirmed',
+                                        3 => 'Packed',
+                                        4 => 'Dispatched'
+                                    ];
+                                    ?>
+                                    <b>Status:</b> <?= esc($statusMap[$order['od_Status']] ?? 'Unknown') ?><br>
+                                    <?php if ($order['od_Status'] == 4): ?>
+                                        <b>Track your product:</b> <a href="<?= esc($order['tracker_Link']) ?>" target="_blank"><?= esc($order['tracker_Link']) ?></a><br>
+                                    <?php endif; ?>
 									<a href="<?= base_url('review/' . $order['cus_Id'] . '/' . $order['pr_Id']) ?>"
 										class="btn btn-link p-0 mt-2">Write Review</a>
 

@@ -18,6 +18,7 @@
                             <?php
                             $uniqueIds = [];
                             foreach ($subcategory as $item):
+                 
                                 if (in_array($item['sub_Id'], $uniqueIds)) {
                                     continue;
                                 }
@@ -28,7 +29,7 @@
                             <div class="swiper-slide" style="width: 120px;">
                                 <div class="card text-center" style="height: 170px; max-width: 120px;">
                                     <div class="card-body p-2 position-relative"  style="overflow: hidden; z-index:2px;" >
-                                        <a href="<?= base_url('subcategory/subcategoryProducts/' .$item['sub_Id'] . '?cat_id=' . $cat_id); ?>">
+                                        <a href="<?= base_url('subcategory/subcategoryProducts/' . $item['sub_Id'] . '/' . $cat_id); ?>">
                                             <img class="product-img img-fluid mb-2"
                                                 src="<?= base_url('uploads/productmedia/') . $firstImage; ?>"
                                                 alt="<?= esc($item['sub_Category_Name']); ?>"

@@ -32,39 +32,38 @@ class Orders extends BaseController
 		
 	}
 	// Listing table data
-       public function ajaxList()
-{
-    $model = new \App\Models\Admin\OrdersModel();
+       public function ajaxList(){
+        $model = new \App\Models\Admin\OrdersModel();
 
-    $start = $this->request->getPost('start');
-    $length = $this->request->getPost('length');
-    $searchValue = $this->request->getPost('search')['value'];
+        $start = $this->request->getPost('start');
+        $length = $this->request->getPost('length');
+        $searchValue = $this->request->getPost('search')['value'];
 
-    // Get paginated data
-    $data = $model->getDatatables($searchValue, $start, $length);
+        // Get paginated data
+        $data = $model->getDatatables($searchValue, $start, $length);
 
-    $formattedData = [];
-    foreach ($data['data'] as $row) {
-        $formattedData[] = [
-            'cust_Name'     => $row->cust_Name ?? 'N/A',
-            'cust_Email'    => $row->cust_Email ?? 'N/A',
-            'cust_Phone'    => $row->cust_Phone ?? 'N/A',
-            'pr_Code'       => $row->pr_Code ?? 'N/A',
-            'od_Quantity'   => $row->od_Quantity ?? 'N/A',
-            'od_createdon'  => !empty($row->od_createdon) ? date('d M Y, h:i A', strtotime($row->od_createdon)) : 'N/A',
-            'od_Status'     => $this->getStatusLabel($row->od_Status),
-            'actions'       => '<a href="' . base_url('admin/orders/view/' . $row->od_Id). '">
-                                <i class="fa fa-eye"></i></a>'
-        ];
+        $formattedData = [];
+        foreach ($data['data'] as $row) {
+            $formattedData[] = [
+                'cust_Name'     => $row->cust_Name ?? 'N/A',
+                'cust_Email'    => $row->cust_Email ?? 'N/A',
+                'cust_Phone'    => $row->cust_Phone ?? 'N/A',
+                'pr_Code'       => $row->pr_Code ?? 'N/A',
+                'od_Quantity'   => $row->od_Quantity ?? 'N/A',
+                'od_createdon'  => !empty($row->od_createdon) ? date('d M Y, h:i A', strtotime($row->od_createdon)) : 'N/A',
+                'od_Status'     => $this->getStatusLabel($row->od_Status),
+                'actions'       => '<a href="' . base_url('admin/orders/view/' . $row->od_Id). '">
+                                    <i class="fa fa-eye"></i></a>'
+            ];
+        }
+
+        return $this->response->setJSON([
+            'draw' => intval($this->request->getPost('draw')),
+            'recordsTotal' => $data['total'],        // total records without filtering
+            'recordsFiltered' => $data['filtered'],  // total records after filtering
+            'data' => $formattedData
+        ]);
     }
-
-    return $this->response->setJSON([
-        'draw' => intval($this->request->getPost('draw')),
-        'recordsTotal' => $data['total'],        // total records without filtering
-        'recordsFiltered' => $data['filtered'],  // total records after filtering
-        'data' => $formattedData
-    ]);
-}
 
 // for Labeling the Status
 
@@ -146,7 +145,7 @@ class Orders extends BaseController
                 }
                 return $this->response->setJSON([
                     'status' => true,
-                    'message' => 'Status Updation successful'
+                    'message' => 'Status Updated Successfully.'
                 ]);
             }
             return $this->response->setJSON([

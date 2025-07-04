@@ -71,7 +71,8 @@
                                     <?php if (!empty($category['subcategories'])): ?>
                                     <div class="sub-dropdown">
                                         <?php foreach ($category['subcategories'] as $sub): ?>
-                                        <a href="<?= base_url('subcategory/subcategoryProducts/' . $sub['sub_Id']) ?>">
+                                        <a href="<?= base_url('subcategory/subcategoryProducts/'. $sub['sub_Id'] . '/' . $category['cat_Id'])  ?>">
+
                                             <?= esc($sub['sub_Category_Name']) ?>
                                         </a>
                                         <?php endforeach; ?>

@@ -167,20 +167,40 @@ public function searchProducts($keyword)
         $db = \Config\Database::connect();
 
         // Fetch categories
+        // $categories = $db->table('category')
+        //     ->select('cat_Id, cat_Name')
+        //     ->where('cat_Status', 1)
+        //     ->orderBy('cat_Name', 'ASC')
+        //     ->get()
+        //     ->getResultArray();
         $categories = $db->table('category')
-            ->select('cat_Id, cat_Name')
-            ->where('cat_Status', 1)
-            ->orderBy('cat_Name', 'ASC')
+            ->select('category.cat_Id, category.cat_Name')
+            ->join('product', 'product.cat_Id = category.cat_Id', 'inner')
+            ->where('category.cat_Status', 1)
+            ->where('product.pr_Status', 1) 
+            ->where('product.product_images!=', '')
+            ->groupBy('category.cat_Id, category.cat_Name') 
+            ->orderBy('category.cat_Name', 'ASC')
+            ->get()
+            ->getResultArray();
+        // Fetch subcategories grouped by category
+        // $subcategories = $db->table('subcategory')
+        //     ->select('sub_Id, sub_Category_Name, cat_Id')
+        //     ->where('sub_Status', 1)
+        //     ->orderBy('sub_Category_Name', 'ASC')
+        //     ->get()
+        //     ->getResultArray();
+        $subcategories = $db->table('subcategory')
+            ->select('subcategory.sub_Id, subcategory.sub_Category_Name, subcategory.cat_Id')
+            ->join('product', 'product.sub_Id = subcategory.sub_Id', 'inner')
+            ->where('subcategory.sub_Status', 1)
+            ->where('product.pr_Status', 1)
+            ->where('product.product_images!=', '')
+            ->groupBy('subcategory.sub_Id, subcategory.sub_Category_Name, subcategory.cat_Id')
+            ->orderBy('subcategory.sub_Category_Name', 'ASC')
             ->get()
             ->getResultArray();
 
-        // Fetch subcategories grouped by category
-        $subcategories = $db->table('subcategory')
-            ->select('sub_Id, sub_Category_Name, cat_Id')
-            ->where('sub_Status', 1)
-            ->orderBy('sub_Category_Name', 'ASC')
-            ->get()
-            ->getResultArray();
 
         // Map subcategories to categories
         $catMap = [];

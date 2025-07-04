@@ -102,27 +102,19 @@
                                             class="bi bi-escape"></i> Logout</a></li>
                             </ul>
                         </div>
- 
- 
+
                         <?php else: ?>
                             <a href="#" id="loginBtn">Login</a>
                             <a href="#" id="registerBtn">Register</a>
                         <?php endif; ?>
  
-                        <a href="javascript:void(0);" class="searchbox">
-                            <input type="text" name="keyword" id="search" placeholder="Search products/Category/Sub:Cate"
-                                autocomplete="off" value="<?= esc($search ?? '') ?>" style="padding:5px;"
-                                onkeydown="checkEnter(event)" />
-                            <a href="javascript:void(0);" onclick="searchProduct()">
-                                <i class="bi bi-search"></i>
-                            </a>
-                        </a>
+                      
                         <a href="javascript:void(0);" class="icon" onclick="openRespMenu()">
                             <i class="bi bi-list"></i>
-                        </a> -->
+                        </a> 
                         <div class="searchbox"
                             style="display: flex; align-items: center; gap: 5px; position: relative; top: -5px;">
-                            <input type="text" name="keyword" id="search" placeholder="Search products/Category/Sub:cate"
+                            <input type="text" name="keyword" id="search" placeholder="Search products/Category/Sub:Cate"
                                 autocomplete="off" value="<?= esc($search ?? '') ?>" style="padding: 5px; "
                                 onkeydown="checkEnter(event)" />
 

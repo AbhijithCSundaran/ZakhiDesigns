@@ -61,6 +61,20 @@ public function subcategoryProducts($id, $catId){
     }
 
     $data['similar'] = $this->subcategoryModel->getSimilarProducts( $catId,$id);
+    if (!empty($data['similar'])) {
+        $productIds = array_column($data['similar'], 'pr_Id');
+
+        $avgRatings = $reviewModel->getAverageRatingForProducts($productIds);
+
+        $ratingsMap = [];
+        foreach ($avgRatings as $rating) {
+            $ratingsMap[$rating['pr_Id']] = round($rating['avg_rating'], 1);
+        }
+
+        foreach ($data['similar'] as &$product) {
+            $product['avg_rating'] = $ratingsMap[$product['pr_Id']] ?? 0;
+        }
+    }
     
     return view('common/header' , $data)
         . view('subcategory_list'   , $data)

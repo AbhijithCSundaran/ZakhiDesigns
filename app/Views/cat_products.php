@@ -26,16 +26,16 @@
                                 $images = json_decode($item['product_images'], true);
                                 $firstImage = isset($images[0]['name'][0]) ? $images[0]['name'][0] : 'default.jpg';
                             ?>
-                            <div class="swiper-slide" style="width: 120px;">
-                                <div class="card text-center" style="height: 170px; max-width: 120px;">
+                            <div class="swiper-slide card-slide" style="width: 120px;">
+                                <div class="card text-center" style="height: 210px; max-width: 120px;">
                                     <div class="card-body p-2 position-relative"  style="overflow: hidden; z-index:2px;" >
                                         <a href="<?= base_url('subcategory/subcategoryProducts/' . $item['sub_Id'] . '/' . $cat_id); ?>">
                                             <img class="product-img img-fluid mb-2"
                                                 src="<?= base_url('uploads/productmedia/') . $firstImage; ?>"
                                                 alt="<?= esc($item['sub_Category_Name']); ?>"
-                                                style="height: 120px; object-fit: contain;" />
+                                                style="height: 150px; object-fit: cover;" />
                                         </a>
-                                        <div class="item-name p-1" style="font-size: 11px;">
+                                        <div class="item-name p-1" style="font-size: 11px; word-wrap: break-word; white-space: normal;">
                                             <?= esc($item['sub_Category_Name']); ?>
                                         </div>
                                     </div>
@@ -132,14 +132,25 @@
 <?php endif; ?>
 <script>
  var swiper = new Swiper(".mySwiper", {
-  slidesPerView: 'auto',
-  spaceBetween: 10,
+  slidesPerView: 'auto', // keep 'auto' so card width determines layout
+  spaceBetween: 10.5,
   freeMode: true,
   grabCursor: true,
   navigation: {
     nextEl: ".swiper-button-next",
     prevEl: ".swiper-button-prev",
   },
+  breakpoints: {
+  0: {
+    slidesPerView: 3,
+    spaceBetween: 6
+  },
+  768: {
+    slidesPerView: '10',
+    spaceBetween: 10
+  }
+}
 });
+
 
 </script>

@@ -284,7 +284,7 @@ $zd_uid = session()->get('zd_uid');
                                     <div class="p-2 position-relative" style="overflow: hidden; z-index: 2;">
                                         <a href="<?= base_url('product/product_details/' . $item['pr_Id']); ?>">
                                             <img class="product-img img-fluid mb-2"
-                                                style="max-width: 159px; max-height: 240px; object-fit: contain;"
+                                                style="max-width: 159px; max-height: 240px; object-fit: cover;"
                                                 src="<?= $firstImage; ?>"
                                                 alt="<?= esc($item['pr_Name']); ?>" />
                                         </a>

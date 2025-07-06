@@ -240,7 +240,7 @@ class Product extends Controller
 
     // Get similar products
     $data['similar'] = $this->productdisplayModel->getSimilarProducts($product['cat_Id'], $id);
-
+    
     // Product data for main view
     $data['product'] = $product;
 	

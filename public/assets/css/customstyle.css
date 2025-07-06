@@ -299,7 +299,12 @@ header,
     background-color: #f0f0f0;
 }
 
-
+.sub-dropdown {
+    max-height: 310px !important;           
+    overflow-y: auto !important;             
+    overflow-x: hidden; 
+    position: absolute; 
+}
 @media screen and (max-width: 600px) {
     .topnav .a {
         display: none;

@@ -108,7 +108,7 @@
                                     <div class=" text-center" style="">
                                     <div class=" p-2 position-relative"  style="overflow: hidden; z-index:2px;" >
                                             <a href="<?= base_url('product/product_details/' . $item['pr_Id']); ?>">
-                                                <img class="product-img img-fluid mb-2"   style="max-width: 159px; max-height: 240px; object-fit: contain;"
+                                                <img class="product-img img-fluid mb-2"   style="max-width: 159px; max-height: 240px; object-fit: cover;"
                                                     src="<?= base_url('uploads/productmedia/') . $firstImage; ?>"
                                                     alt="<?= esc($item['pr_Name']); ?>" />
                                             </a>

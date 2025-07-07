@@ -116,9 +116,8 @@
                         </a>
                         <div class="searchbox"
                             style="display: flex; align-items: center; gap: 5px; position: relative; top: -5px;">
-                            <input type="text" name="keyword" id="search"
-                                placeholder="Search products/Category/Sub:Cate" autocomplete="off"
-                                value="<?= esc($search ?? '') ?>" style="padding: 5px; "
+                            <input type="text" name="keyword" id="search" placeholder="Search Products/Category/Sub:Cate"
+                                autocomplete="off" value="<?= esc($search ?? '') ?>" style="padding: 5px; "
                                 onkeydown="checkEnter(event)" />
 
                             <a href="javascript:void(0);" onclick="searchProduct()"

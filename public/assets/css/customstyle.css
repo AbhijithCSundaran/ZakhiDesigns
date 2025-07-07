@@ -438,6 +438,17 @@ header,
     width: auto !important;
     max-width: 100%;
 }
+#top-prod-owl,
+#top-prod-owl-two {
+    position: relative;
+}
+
+#top-prod-owl .owl-next,
+#top-prod-owl-two .owl-next {
+    position: absolute;
+    right: 25px!important;
+   
+}
 
 
 html {

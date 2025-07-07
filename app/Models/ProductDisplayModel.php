@@ -19,14 +19,7 @@ class ProductDisplayModel extends Model
 	}
 
    
-/* 	public function searchProducts($keyword)
-	{
-		return $this->distinct()
-			->where('pr_Status !=', 3)
-			->like('pr_Name', $keyword)
-			->findAll();
-	} */
-	
+
 	///// view collection ////
 	public function getSimilarProducts($cat_Id, $excludeId)
 {
@@ -83,35 +76,46 @@ class ProductDisplayModel extends Model
             ->findAll();
 
     }
-//    public function searchProducts($keyword)
+
+// public function searchProducts($keyword)
 // {
+//     // Normalize keyword
+//     $keyword = trim($keyword);
+//     $keywordNoSpace = str_replace(' ', '', $keyword);
+
 //     return $this->select('product.*, AVG(reviews.rating) AS ratings')
 //         ->join('reviews', 'reviews.pr_Id = product.pr_Id', 'left')
 //         ->where('product.pr_Status', 1)
 //         ->groupStart()
-//             ->like('product.pr_Name', $keyword)
-//             ->orLike('product.pr_Description', $keyword)
-//             ->orLike('product.pr_Code', $keyword)
+//             ->like('REPLACE(product.pr_Name, " ", "")', $keywordNoSpace) // Match without spaces
+//             ->orLike('product.pr_Name', $keyword)                       // Match with spaces
 //         ->groupEnd()
 //         ->groupBy('product.pr_Id')
 //         ->findAll();
 // }
 public function searchProducts($keyword)
 {
-    // Normalize keyword
     $keyword = trim($keyword);
     $keywordNoSpace = str_replace(' ', '', $keyword);
 
     return $this->select('product.*, AVG(reviews.rating) AS ratings')
         ->join('reviews', 'reviews.pr_Id = product.pr_Id', 'left')
+        ->join('category', 'category.cat_Id = product.cat_Id', 'left')
+        ->join('subcategory', 'subcategory.sub_Id = product.sub_Id', 'left')
         ->where('product.pr_Status', 1)
         ->groupStart()
-            ->like('REPLACE(product.pr_Name, " ", "")', $keywordNoSpace) // Match without spaces
-            ->orLike('product.pr_Name', $keyword)                       // Match with spaces
+            ->like('REPLACE(product.pr_Name, " ", "")', $keywordNoSpace) 
+            ->orlike('REPLACE(category.cat_Name, " ", "")', $keywordNoSpace) 
+            ->orlike('REPLACE(subcategory.sub_Category_Name, " ", "")', $keywordNoSpace) 
+            ->orLike('product.pr_Name', $keyword)                        
+            ->orLike('product.pr_Code', $keyword)
+            ->orLike('category.cat_Name', $keyword)                      
+            ->orLike('subcategory.sub_Category_Name', $keyword)          
         ->groupEnd()
         ->groupBy('product.pr_Id')
         ->findAll();
 }
+
 
 
 	 public function getProductById($id)

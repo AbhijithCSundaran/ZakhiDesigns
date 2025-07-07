@@ -24,6 +24,7 @@ class CategoryModel extends Model
             WHERE p.cat_Id = c.cat_Id 
               AND p.product_images IS NOT NULL
               AND p.product_images != ''
+              AND c.cat_Status = 1
             ORDER BY RAND()
             LIMIT 1
         ) AS product_images

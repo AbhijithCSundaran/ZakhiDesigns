@@ -22,27 +22,27 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <!-- Favicon icon -->
 
-    <link rel="icon" href="<?php echo base_url().ASSET_PATH; ?>Admin/assets/images/favicon.jpg" type="image/x-icon">
+    <link rel="icon" href="<?php echo base_url() . ASSET_PATH; ?>Admin/assets/images/favicon.jpg" type="image/x-icon">
     <!-- Google font-->
     <link href="https://fonts.googleapis.com/css?family=Roboto:400,500" rel="stylesheet">
     <!-- Required Fremwork -->
     <link rel="stylesheet" type="text/css"
-        href="<?php echo base_url().ASSET_PATH; ?>Admin/assets/css/bootstrap/css/bootstrap.min.css">
+        href="<?php echo base_url() . ASSET_PATH; ?>Admin/assets/css/bootstrap/css/bootstrap.min.css">
     <!-- waves.css -->
-    <link rel="stylesheet" href="<?php echo base_url().ASSET_PATH; ?>Admin/assets/pages/waves/css/waves.min.css"
+    <link rel="stylesheet" href="<?php echo base_url() . ASSET_PATH; ?>Admin/assets/pages/waves/css/waves.min.css"
         type="text/css" media="all">
     <!-- themify-icons line icon -->
     <link rel="stylesheet" type="text/css"
-        href="<?php echo base_url().ASSET_PATH; ?>Admin/assets/icon/themify-icons/themify-icons.css">
+        href="<?php echo base_url() . ASSET_PATH; ?>Admin/assets/icon/themify-icons/themify-icons.css">
     <!-- ico font -->
     <link rel="stylesheet" type="text/css"
-        href="<?php echo base_url().ASSET_PATH; ?>Admin/assets/icon/icofont/css/icofont.css">
+        href="<?php echo base_url() . ASSET_PATH; ?>Admin/assets/icon/icofont/css/icofont.css">
     <!-- Font Awesome -->
     <link rel="stylesheet" type="text/css"
-        href="<?php echo base_url().ASSET_PATH; ?>Admin/assets/icon/font-awesome/css/font-awesome.min.css">
+        href="<?php echo base_url() . ASSET_PATH; ?>Admin/assets/icon/font-awesome/css/font-awesome.min.css">
     <!-- Style.css -->
-    <link rel="stylesheet" type="text/css" href="<?php echo base_url().ASSET_PATH; ?>Admin/assets/css/style.css">
-        <link rel="stylesheet" href="<?php echo base_url().ASSET_PATH; ?>Admin/assets/css/custom.css" />
+    <link rel="stylesheet" type="text/css" href="<?php echo base_url() . ASSET_PATH; ?>Admin/assets/css/style.css">
+    <link rel="stylesheet" href="<?php echo base_url() . ASSET_PATH; ?>Admin/assets/css/custom.css" />
 </head>
 
 <body themebg-pattern="theme1">
@@ -109,24 +109,21 @@
 
                         <!-- <div class="text-center">
                             <div class="d-flex">
-                            <img src="<?php echo base_url().ASSET_PATH; ?>Admin/assets/images/favicon.jpg" > 
+                            <img src="<?php echo base_url() . ASSET_PATH; ?>Admin/assets/images/favicon.jpg" > 
                            <h5 class="text-white">Zakhi Designs</h5>
                            </div>
                         </div> -->
-
-
                         <div class="auth-box card">
                             <div class="card-block">
                                 <div id="alertbox" class="alert alert-danger" style="display:none;"></div>
                                 <div class="row m-b-20">
                                     <div class="col-md-12">
-
                                         <!-- <h3 class="text-center txt-primary">Please Login</h3> -->
                                         <div class="text-center">
                                             <div class="justify-content-center align-items-center">
-                                                <img class="login-logo" src="<?php echo base_url().ASSET_PATH; ?>Admin/assets/images/favicon.jpg"
-                                                    >
-                                                    <div class="clearfix">&nbsp</div>
+                                                <img class="login-logo"
+                                                    src="<?php echo base_url() . ASSET_PATH; ?>Admin/assets/images/favicon.jpg">
+                                                <div class="clearfix">&nbsp</div>
                                                 <h5 class="text-b m-0">Administration Login </h5>
                                             </div>
                                         </div>
@@ -152,6 +149,13 @@
                                         </div>
                                     </div>
                                 </div>
+                           
+                           
+                                  <div class="g-recaptcha" data-sitekey="6Le-VXcrAAAAAFdEqJLtM5DxM6GoGl7cJdV6hknL"></div>
+
+                         
+<br>
+                                  
                                 <div class="row m-t-30">
                                     <div class="col-md-12">
                                         <button type="button" name="submitBtn" id="submitBtn"
@@ -171,81 +175,90 @@
         <!-- end of container-fluid -->
     </section>
     <!--------alert box script------------>
+        <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+        
 
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 
-    <script src="https://www.google.com/recaptcha/api.js"></script>
+  
     <!-- Warning Section Starts -->
     <!-- Older IE warning message -->
     <!-- Warning Section Ends -->
     <!-- Required Jquery -->
-    <script type="text/javascript" src="<?php echo base_url().ASSET_PATH; ?>Admin/assets/js/jquery/jquery.min.js">
+    <script type="text/javascript" src="<?php echo base_url() . ASSET_PATH; ?>Admin/assets/js/jquery/jquery.min.js">
     </script>
     <script type="text/javascript"
-        src="<?php echo base_url().ASSET_PATH; ?>Admin/assets/js/jquery-ui/jquery-ui.min.js "></script>
-    <script type="text/javascript" src="<?php echo base_url().ASSET_PATH; ?>Admin/assets/js/popper.js/popper.min.js">
+        src="<?php echo base_url() . ASSET_PATH; ?>Admin/assets/js/jquery-ui/jquery-ui.min.js "></script>
+    <script type="text/javascript" src="<?php echo base_url() . ASSET_PATH; ?>Admin/assets/js/popper.js/popper.min.js">
     </script>
     <script type="text/javascript"
-        src="<?php echo base_url().ASSET_PATH; ?>Admin/assets/js/bootstrap/js/bootstrap.min.js "></script>
+        src="<?php echo base_url() . ASSET_PATH; ?>Admin/assets/js/bootstrap/js/bootstrap.min.js "></script>
     <!-- waves js -->
-    <script src="<?php echo base_url().ASSET_PATH; ?>Admin/assets/pages/waves/js/waves.min.js"></script>
+    <script src="<?php echo base_url() . ASSET_PATH; ?>Admin/assets/pages/waves/js/waves.min.js"></script>
     <!-- jquery slimscroll js -->
     <script type="text/javascript"
-        src="<?php echo base_url().ASSET_PATH; ?>Admin/assets/js/jquery-slimscroll/jquery.slimscroll.js "></script>
+        src="<?php echo base_url() . ASSET_PATH; ?>Admin/assets/js/jquery-slimscroll/jquery.slimscroll.js "></script>
     <!-- modernizr js -->
-    <!-- <script type="text/javascript" src="<?php echo base_url().ASSET_PATH; ?>assets/js/SmoothScroll.js"></script>      -->
-    <script src="<?php echo base_url().ASSET_PATH; ?>Admin/assets/js/jquery.mCustomScrollbar.concat.min.js "></script>
+    <!-- <script type="text/javascript" src="<?php echo base_url() . ASSET_PATH; ?>assets/js/SmoothScroll.js"></script>      -->
+    <script src="<?php echo base_url() . ASSET_PATH; ?>Admin/assets/js/jquery.mCustomScrollbar.concat.min.js "></script>
     <!-- i18next.min.js 
-	<script type="text/javascript" src="bower_components/i18next/js/i18next.min.js"></script>
-	<script type="text/javascript" src="bower_components/i18next-xhr-backend/js/i18nextXHRBackend.min.js"></script>
-	<script type="text/javascript" src="bower_components/i18next-browser-languagedetector/js/i18nextBrowserLanguageDetector.min.js"></script>
-	<script type="text/javascript" src="bower_components/jquery-i18next/js/jquery-i18next.min.js"></script>-->
-    <script type="text/javascript" src="<?php echo base_url().ASSET_PATH; ?>Admin/assets/js/common-pages.js"></script>
+    <script type="text/javascript" src="bower_components/i18next/js/i18next.min.js"></script>
+    <script type="text/javascript" src="bower_components/i18next-xhr-backend/js/i18nextXHRBackend.min.js"></script>
+    <script type="text/javascript" src="bower_components/i18next-browser-languagedetector/js/i18nextBrowserLanguageDetector.min.js"></script>
+    <script type="text/javascript" src="bower_components/jquery-i18next/js/jquery-i18next.min.js"></script>-->
+    <script type="text/javascript" src="<?php echo base_url() . ASSET_PATH; ?>Admin/assets/js/common-pages.js"></script>
 </body>
-<script>
-function authenticate() {
 
-    var url = '<?php echo base_url('admin/Auth'); ?>';
-    $.post(url, $('#form-id').serialize(), function(data) {
-        if (data.status == 1) {
-            window.location.href = "<?php echo base_url('admin/dashboard'); ?>";
-        } else {
+
+<script>
+$(document).ready(function () {
+    $('#submitBtn').click(function (event) {
+        event.preventDefault();
+
+        var response = grecaptcha.getResponse();
+        if (response.length == 0) {
             $('#alertbox')
-                .html(data.msg)
+                .html('Please complete the reCAPTCHA')
                 .removeClass('alert-success')
                 .addClass('alert-danger')
                 .fadeIn();
-
-            setTimeout(function() {
-                $('#alertbox').fadeOut().empty();
-            }, 2000);
+            setTimeout(() => $('#alertbox').fadeOut().empty(), 3000);
+            return;
         }
-    }, 'json');
-}
 
-$(document).ready(function() {
-    $('#submitBtn').click(function(event) {
-        event.preventDefault();
-        authenticate();
+        // Submit login form via AJAX
+        var url = '<?php echo base_url('admin/Auth'); ?>';
+        $.post(url, $('#form-id').serialize(), function (data) {
+            if (data.status == 1) {
+                window.location.href = "<?php echo base_url('admin/dashboard'); ?>";
+            } else {
+                $('#alertbox')
+                    .html(data.msg)
+                    .removeClass('alert-success')
+                    .addClass('alert-danger')
+                    .fadeIn();
+                setTimeout(() => $('#alertbox').fadeOut().empty(), 3000);
+            }
+        }, 'json');
     });
 });
 </script>
-<script>
-document.getElementById('togglePassword').addEventListener('click', function() {
-    const passwordInput = document.getElementById('password');
-    const icon = this;
 
-    if (passwordInput.type === 'password') {
-        passwordInput.type = 'text';
-        icon.classList.remove('fa-eye-slash');
-        icon.classList.add('fa-eye');
-    } else {
-        passwordInput.type = 'password';
-        icon.classList.remove('fa-eye');
-        icon.classList.add('fa-eye-slash');
-    }
-});
+<script>
+    document.getElementById('togglePassword').addEventListener('click', function () {
+        const passwordInput = document.getElementById('password');
+        const icon = this;
+
+        if (passwordInput.type === 'password') {
+            passwordInput.type = 'text';
+            icon.classList.remove('fa-eye-slash');
+            icon.classList.add('fa-eye');
+        } else {
+            passwordInput.type = 'password';
+            icon.classList.remove('fa-eye');
+            icon.classList.add('fa-eye-slash');
+        }
+    });
 </script>
 
 </html>

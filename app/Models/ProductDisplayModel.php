@@ -87,28 +87,81 @@ class ProductDisplayModel extends Model
 
     }
 
+// public function searchProducts($keyword)
+// {
+//     $keyword = trim($keyword);
+//     $keywordNoSpace = str_replace(' ', '', $keyword);
+
+//     return $this->select('product.*, AVG(reviews.rating) AS ratings')
+//         ->join('reviews', 'reviews.pr_Id = product.pr_Id', 'left')
+//         ->join('category', 'category.cat_Id = product.cat_Id', 'left')
+//         ->join('subcategory', 'subcategory.sub_Id = product.sub_Id', 'left')
+//         ->where('product.pr_Status', 1)
+//         ->groupStart()
+//             ->like('REPLACE(product.pr_Name, " ", "")', $keywordNoSpace) 
+//             ->orlike('REPLACE(category.cat_Name, " ", "")', $keywordNoSpace) 
+//             ->orlike('REPLACE(subcategory.sub_Category_Name, " ", "")', $keywordNoSpace) 
+//             ->orLike('product.pr_Name', $keyword)                        
+//             ->orLike('product.pr_Code', $keyword)
+//             ->orLike('category.cat_Name', $keyword)                      
+//             ->orLike('subcategory.sub_Category_Name', $keyword)          
+//         ->groupEnd()
+//         ->groupBy('product.pr_Id')
+//         ->findAll();
+// }
 public function searchProducts($keyword)
 {
-    $keyword = trim($keyword);
+    $keyword = strtolower(trim($keyword));
     $keywordNoSpace = str_replace(' ', '', $keyword);
 
-    return $this->select('product.*, AVG(reviews.rating) AS ratings')
+    // Step 1: Get all active products with their ratings
+    $products = $this->select('product.*,category.cat_Name, subcategory.sub_Category_Name, AVG(reviews.rating) AS ratings')
         ->join('reviews', 'reviews.pr_Id = product.pr_Id', 'left')
         ->join('category', 'category.cat_Id = product.cat_Id', 'left')
         ->join('subcategory', 'subcategory.sub_Id = product.sub_Id', 'left')
         ->where('product.pr_Status', 1)
-        ->groupStart()
-            ->like('REPLACE(product.pr_Name, " ", "")', $keywordNoSpace) 
-            ->orlike('REPLACE(category.cat_Name, " ", "")', $keywordNoSpace) 
-            ->orlike('REPLACE(subcategory.sub_Category_Name, " ", "")', $keywordNoSpace) 
-            ->orLike('product.pr_Name', $keyword)                        
-            ->orLike('product.pr_Code', $keyword)
-            ->orLike('category.cat_Name', $keyword)                      
-            ->orLike('subcategory.sub_Category_Name', $keyword)          
-        ->groupEnd()
         ->groupBy('product.pr_Id')
         ->findAll();
+
+    $matched = [];
+
+    foreach ($products as $product) {
+        $name = strtolower(trim($product['pr_Name']));
+        $code = strtolower(trim($product['pr_Code']));
+        $cat = strtolower(trim($product['cat_Name']));
+        $subcat = strtolower(trim($product['sub_Category_Name']));
+
+        // Remove spaces for better matching
+        $nameNoSpace = str_replace(' ', '', $name);
+        $codeNoSpace = str_replace(' ', '', $code);
+        $catNoSpace = str_replace(' ', '', $cat);
+        $subcatNoSpace = str_replace(' ', '', $subcat);
+
+        // Similarity scores
+        similar_text($keyword, $name, $score1);
+        similar_text($keywordNoSpace, $nameNoSpace, $score2);
+
+        // Levenshtein distances
+        $lev1 = levenshtein($keyword, $name);
+        $lev2 = levenshtein($keywordNoSpace, $nameNoSpace);
+
+        // Matching logic
+        if (
+            max($score1, $score2) >= 50 ||
+            min($lev1, $lev2) <= 3 ||
+            strpos($name, $keyword) !== false ||
+            strpos($nameNoSpace, $keywordNoSpace) !== false ||
+            strpos($code, $keyword) !== false ||
+            strpos($cat, $keyword) !== false ||
+            strpos($subcat, $keyword) !== false
+        ) {
+            $matched[] = $product;
+        }
+    }
+
+    return $matched;
 }
+
 
 
 

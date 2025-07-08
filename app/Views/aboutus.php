@@ -1,5 +1,4 @@
-
-<section class="hero-banner">
+<section class="hero-banner" style="margin-bottom:125px;">
     <div class="container-lg">
         <h4>ABOUT US</h4>
         <div class="row order-box">

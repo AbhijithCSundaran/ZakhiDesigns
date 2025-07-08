@@ -21,16 +21,26 @@ class ProductDisplayModel extends Model
    
 
 	///// view collection ////
-	public function getSimilarProducts($cat_Id, $excludeId)
-{
-    return $this->select('product.pr_Id, product.pr_Name, product.product_images, product.pr_Selling_Price, AVG(reviews.rating) as ratings')               ->join('reviews', 'reviews.pr_Id = product.pr_Id', 'left')
-                ->where('product.cat_Id', $cat_Id)
-                ->where('product.pr_Status', 1)
-                ->where('product.pr_Id !=', $excludeId)
-                ->groupBy('product.pr_Id, product.pr_Name, product.product_images, product.pr_Selling_Price')
-                ->orderBy('product.pr_createdon', 'DESC')
-                ->findAll(8);
-}
+// 	public function getSimilarProducts($cat_Id, $excludeId){
+//     return $this->select('product.pr_Id, product.pr_Name, product.product_images, product.pr_Selling_Price, AVG(rw.rating) as avg_ratings')               ->join('reviews', 'reviews.pr_Id = product.pr_Id', 'left')
+//                 ->where('product.cat_Id', $cat_Id)
+//                 ->where('product.pr_Status', 1)
+//                 ->where('product.pr_Id !=', $excludeId)
+//                 ->join('reviews', 'reviews.pr_Id = product.pr_Id', 'left')
+//                 ->groupBy('product.pr_Id, product.pr_Name, product.product_images, product.pr_Selling_Price')
+//                 ->orderBy('product.pr_createdon', 'DESC')
+//                 ->findAll(8);
+// }
+    public function getSimilarProducts($cat_Id, $excludeId){
+        return $this->select('product.pr_Id, product.pr_Name, product.product_images, product.pr_Selling_Price, AVG(reviews.rating) as avg_rating')
+            ->join('reviews', 'reviews.pr_Id = product.pr_Id', 'left')
+            ->where('product.cat_Id', $cat_Id)
+            ->where('product.pr_Status', 1)
+            ->where('product.pr_Id !=', $excludeId)
+            ->groupBy('product.pr_Id, product.pr_Name, product.product_images, product.pr_Selling_Price')
+            ->orderBy('product.pr_createdon', 'DESC')
+            ->findAll(8);
+    }
 
 	public function getProductsByModifiedDate()
     {
@@ -77,22 +87,6 @@ class ProductDisplayModel extends Model
 
     }
 
-// public function searchProducts($keyword)
-// {
-//     // Normalize keyword
-//     $keyword = trim($keyword);
-//     $keywordNoSpace = str_replace(' ', '', $keyword);
-
-//     return $this->select('product.*, AVG(reviews.rating) AS ratings')
-//         ->join('reviews', 'reviews.pr_Id = product.pr_Id', 'left')
-//         ->where('product.pr_Status', 1)
-//         ->groupStart()
-//             ->like('REPLACE(product.pr_Name, " ", "")', $keywordNoSpace) // Match without spaces
-//             ->orLike('product.pr_Name', $keyword)                       // Match with spaces
-//         ->groupEnd()
-//         ->groupBy('product.pr_Id')
-//         ->findAll();
-// }
 public function searchProducts($keyword)
 {
     $keyword = trim($keyword);
@@ -137,46 +131,12 @@ public function searchProducts($keyword)
 		return $this->db->insertID(); // return the inserted ID
 	}
 
-  /*   public function getAllCategoriesWithSub()
-    {
-
-        $builder = $this->db->table('category');
-        $builder->select('category.id as cat_id, category.cat_Name, subcategory.id as sub_id, subcategory.sub_Name');
-        $builder->join('subcategory', 'subcategory.cat_id = category.id', 'left');
-        $query = $builder->get();
-
-        $result = [];
-        foreach ($query->getResultArray() as $row) {
-            $catId = $row['cat_id'];
-            if (!isset($result[$catId])) {
-                $result[$catId] = [
-                    'id' => $catId,
-                    'cat_Name' => $row['cat_Name'],
-                    'subcategory' => [],
-                ];
-            }
-            if (!empty($row['sub_id'])) {
-                $result[$catId]['subcategory'][] = [
-                    'id' => $row['sub_id'],
-                    'sub_Name' => $row['sub_Name'],
-                ];
-            }
-        }
-
-        return array_values($result);
-    }
- */
+  
     public function getAllCategoriesAndSub()
     {
         $db = \Config\Database::connect();
 
-        // Fetch categories
-        // $categories = $db->table('category')
-        //     ->select('cat_Id, cat_Name')
-        //     ->where('cat_Status', 1)
-        //     ->orderBy('cat_Name', 'ASC')
-        //     ->get()
-        //     ->getResultArray();
+
         $categories = $db->table('category')
             ->select('category.cat_Id, category.cat_Name')
             ->join('product', 'product.cat_Id = category.cat_Id', 'inner')
@@ -187,13 +147,7 @@ public function searchProducts($keyword)
             ->orderBy('category.cat_Name', 'ASC')
             ->get()
             ->getResultArray();
-        // Fetch subcategories grouped by category
-        // $subcategories = $db->table('subcategory')
-        //     ->select('sub_Id, sub_Category_Name, cat_Id')
-        //     ->where('sub_Status', 1)
-        //     ->orderBy('sub_Category_Name', 'ASC')
-        //     ->get()
-        //     ->getResultArray();
+        
         $subcategories = $db->table('subcategory')
             ->select('subcategory.sub_Id, subcategory.sub_Category_Name, subcategory.cat_Id')
             ->join('product', 'product.sub_Id = subcategory.sub_Id', 'inner')

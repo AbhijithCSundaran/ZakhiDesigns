@@ -24,8 +24,8 @@ $zd_uid = session()->get('zd_uid');
                             <?php foreach ($imageList as $imgName): ?>
                                 <div class="prod-preview">
                                     <a href="#" class="thumb-link" data-type="image"
-                                       data-src="<?= base_url('uploads/productmedia/' . $imgName); ?>"
-                                       data-title="<?= esc($product['pr_Name']); ?>">
+                                        data-src="<?= base_url('uploads/productmedia/' . $imgName); ?>"
+                                        data-title="<?= esc($product['pr_Name']); ?>">
                                         <img src="<?= base_url('uploads/productmedia/' . $imgName); ?>" alt="" />
                                     </a>
                                 </div>
@@ -34,8 +34,9 @@ $zd_uid = session()->get('zd_uid');
                             <?php if (!empty($videoName)): ?>
                                 <div class="prod-preview">
                                     <a href="#" class="thumb-link" data-type="video"
-                                       data-src="<?= base_url('uploads/productmedia/' . $videoName); ?>">
-                                        <video src="<?= base_url('uploads/productmedia/' . $videoName); ?>" muted preload="metadata"></video>
+                                        data-src="<?= base_url('uploads/productmedia/' . $videoName); ?>">
+                                        <video src="<?= base_url('uploads/productmedia/' . $videoName); ?>" muted
+                                            preload="metadata"></video>
                                     </a>
                                 </div>
                             <?php endif; ?>
@@ -43,11 +44,11 @@ $zd_uid = session()->get('zd_uid');
 
                         <div id="main-preview">
                             <?php if (!empty($imageList)): ?>
-                                <img id="main-image"
-                                     src="<?= base_url('uploads/productmedia/' . $imageList[0]); ?>"
-                                     alt="<?= esc($product['pr_Name']); ?>" />
+                                <img id="main-image" src="<?= base_url('uploads/productmedia/' . $imageList[0]); ?>"
+                                    alt="<?= esc($product['pr_Name']); ?>" />
                             <?php elseif (!empty($videoName)): ?>
-                                <video src="<?= base_url('uploads/productmedia/' . $videoName); ?>" controls autoplay></video>
+                                <video src="<?= base_url('uploads/productmedia/' . $videoName); ?>" controls
+                                    autoplay></video>
                             <?php endif; ?>
                         </div>
 
@@ -57,10 +58,10 @@ $zd_uid = session()->get('zd_uid');
 
             <div class="col-md-6 prod-detail-block">
                 <div class="row">
-				 <div id="messageBox" class="alert" style="display: none;"></div>
+                    <div id="messageBox" class="alert" style="display: none;"></div>
                     <form action="<?= base_url('product/submit') ?>" method="post" id="orderNowForm">
                         <div class="clearfix">&nbsp;</div>
-                       
+
                         <div class="col-md-12">
                             <div class="prod-name"><?= esc($product['pr_Name']); ?></div>
                             <div class="star-rate text-left">
@@ -76,10 +77,10 @@ $zd_uid = session()->get('zd_uid');
                                     }
                                 }
                                 ?>
-								<a href="#reviewsSection">
-									<i class="bi bi text-warning"></i>
-									<?= $total_reviews_count ?> Review<?= $total_reviews_count != 1 ? 's' : '' ?>
-								</a>
+                                <a href="#reviewsSection">
+                                    <i class="bi bi text-warning"></i>
+                                    <?= $total_reviews_count ?> Review<?= $total_reviews_count != 1 ? 's' : '' ?>
+                                </a>
                             </div>
 
                             <?php if (!empty($product['pr_Description'])): ?>
@@ -93,11 +94,13 @@ $zd_uid = session()->get('zd_uid');
                             <?php endif; ?>
 
                             <?php if (!empty($product['pr_Sleeve_Style'])): ?>
-                                <div class="col-md-12"><b>Sleeve</b><span>: <?= esc($product['pr_Sleeve_Style']); ?></span></div>
+                                <div class="col-md-12"><b>Sleeve</b><span>: <?= esc($product['pr_Sleeve_Style']); ?></span>
+                                </div>
                             <?php endif; ?>
 
                             <?php if (!empty($product['pr_Stitch_Type'])): ?>
-                                <div class="col-md-12"><b>Stitch Type</b><span>: <?= esc($product['pr_Stitch_Type']); ?></span></div>
+                                <div class="col-md-12"><b>Stitch Type</b><span>:
+                                        <?= esc($product['pr_Stitch_Type']); ?></span></div>
                             <?php endif; ?>
 
                             <div class="col-md-12"><b>Size</b></div>
@@ -118,53 +121,52 @@ $zd_uid = session()->get('zd_uid');
                         <?php $colors = explode(',', $product['pr_Aval_Colors']); ?>
                         <div class="col-md-12 color-box">
                             <?php foreach ($colors as $color): ?>
-                                <div class="col-md-1 cpicker"
-                                     style="background-color:<?= esc(trim($color)); ?>"
-                                     onclick="selectColor('<?= trim($color); ?>', this)">&nbsp;
+                                <div class="col-md-1 cpicker" style="background-color:<?= esc(trim($color)); ?>"
+                                    onclick="selectColor('<?= trim($color); ?>', this)">&nbsp;
                                 </div>
                             <?php endforeach; ?>
                         </div>
 
                         <div class="col-md-12 price-block">
-							<?php if (!empty($product['pr_Discount_Value']) && $product['pr_Discount_Value'] > 0): ?>
-								<!-- MRP with strikethrough -->
-								<span class="actualprice text-muted" style="text-decoration: line-through;">
-									<i class="bi bi-currency-rupee"></i><?= esc($product['mrp']); ?>
-								</span>
+                            <?php if (!empty($product['pr_Discount_Value']) && $product['pr_Discount_Value'] > 0): ?>
+                                <!-- MRP with strikethrough -->
+                                <span class="actualprice text-muted" style="text-decoration: line-through;">
+                                    <i class="bi bi-currency-rupee"></i><?= esc($product['mrp']); ?>
+                                </span>
 
-								<!-- Selling Price -->
-								<span class="offerprice">
-									<i class="bi bi-currency-rupee"></i><?= esc($product['pr_Selling_Price']); ?>
-								</span>
+                                <!-- Selling Price -->
+                                <span class="offerprice">
+                                    <i class="bi bi-currency-rupee"></i><?= esc($product['pr_Selling_Price']); ?>
+                                </span>
 
-								<!-- Discount Value -->
-								<span class="offer text-success ms-2">
-									<?= esc($product['pr_Discount_Value']); ?><?= esc($product['pr_Discount_Type']); ?> off
-								</span>
-							<?php else: ?>
-								<!-- Only Selling Price if no discount -->
-								<span class="offerprice fw-bold ">
-									<i class="bi bi-currency-rupee"></i><?= esc($product['pr_Selling_Price']); ?>
-								</span>
-							<?php endif; ?>
-						</div>
+                                <!-- Discount Value -->
+                                <span class="offer text-success ms-2">
+                                    <?= esc($product['pr_Discount_Value']); ?>    <?= esc($product['pr_Discount_Type']); ?> off
+                                </span>
+                            <?php else: ?>
+                                <!-- Only Selling Price if no discount -->
+                                <span class="offerprice fw-bold ">
+                                    <i class="bi bi-currency-rupee"></i><?= esc($product['pr_Selling_Price']); ?>
+                                </span>
+                            <?php endif; ?>
+                        </div>
 
 
                         <?php
-							$resetStock = $product['pr_Reset_Stock'];
-							$currentStock = $product['pr_Stock'];
-							$isOutOfStock = ($resetStock == $currentStock) || ($resetStock > $currentStock);
-							?>
+                        $resetStock = $product['pr_Reset_Stock'];
+                        $currentStock = $product['pr_Stock'];
+                        $isOutOfStock = ($resetStock == $currentStock) || ($resetStock > $currentStock);
+                        ?>
 
-							<?php if (!$isOutOfStock && $currentStock > 0): ?>
+                        <?php if (!$isOutOfStock && $currentStock > 0): ?>
                             <div class="col-md-12 stock-block">
                                 <select name="qty" id="qty">
                                     <option value="">Quantity</option>
                                     <?php
-										$maxQty = ($currentStock > 5) ? 5 : $currentStock;
-										for ($i = 1; $i <= $maxQty; $i++): ?>
-											<option value="<?= $i; ?>"><?= $i; ?></option>
-										<?php endfor; ?>
+                                    $maxQty = ($currentStock > 5) ? 5 : $currentStock;
+                                    for ($i = 1; $i <= $maxQty; $i++): ?>
+                                        <option value="<?= $i; ?>"><?= $i; ?></option>
+                                    <?php endfor; ?>
                                 </select>
 
                                 <input type="hidden" name="pr_Id" value="<?= $product['pr_Id']; ?>">
@@ -172,21 +174,22 @@ $zd_uid = session()->get('zd_uid');
 
                                 <button class="btn btn-dark" name="orderNowBtn" id="orderNowBtn">Order Now</button>
                             </div>
-                       <?php else: ?>
-							<div class="col-md-12">
-								<button class="btn btn-secondary" disabled>Out of Stock</button>
-								<div class="text-danger mt-2">This product is currently out of stock.</div>
-							</div>
-						<?php endif; ?>
+                        <?php else: ?>
+                            <div class="col-md-12">
+                                <button class="btn btn-secondary" disabled>Out of Stock</button>
+                                <div class="text-danger mt-2">This product is currently out of stock.</div>
+                            </div>
+                        <?php endif; ?>
 
 
-                      <?php if (!$isOutOfStock): ?>
-						<?php if ($currentStock > 1): ?>
-							<div class="col-md-12"><span class="badge bg-success">In stock</span></div>
-						<?php elseif ($currentStock == 1): ?>
-							<div class="col-md-12"><span class="badge bg-warning text-dark" style="padding:10px;">Only 1 left in stock</span></div>
-						<?php endif; ?>
-					<?php endif; ?>
+                        <?php if (!$isOutOfStock): ?>
+                            <?php if ($currentStock > 1): ?>
+                                <div class="col-md-12"><span class="badge bg-success">In stock</span></div>
+                            <?php elseif ($currentStock == 1): ?>
+                                <div class="col-md-12"><span class="badge bg-warning text-dark" style="padding:10px;">Only 1
+                                        left in stock</span></div>
+                            <?php endif; ?>
+                        <?php endif; ?>
                     </form>
 
                     <div class="col-md-12">
@@ -195,15 +198,15 @@ $zd_uid = session()->get('zd_uid');
                         <div class="col-md-12 imp-text"><i class="bi bi-truck"></i> Free Delivery</div>
                         <div class="col-md-12 imp-text"><i class="bi bi-arrow-return-left"></i> 7 Days Replacement</div>
                     </div>
-					
 
-</div>
+
                 </div>
-				
-				
-				
             </div>
+
+
+
         </div>
+    </div>
     </div>
 </section>
 
@@ -213,21 +216,22 @@ $zd_uid = session()->get('zd_uid');
             <h5>Customer Ratings and Reviews</h5>
             <div class="row order-box">
                 <div class="col-md-12">
-				<div>&nbsp; </div>
+                    <div>&nbsp; </div>
                     <?php if (!empty($reviews)): ?>
                         <?php foreach (array_chunk($reviews, 2) as $reviewPair): ?>
                             <div class="row mb-4">
                                 <?php foreach ($reviewPair as $rev): ?>
                                     <div class="col-md-6">
-                                     
-                                            <h6 class="card-title mb-1"><?= esc($rev['name']) ?></h6>
-                                            <div class="mb-2 text-warning" style="font-size: 1.2em;">
-                                                <?= str_repeat('★', (int) $rev['rating']) . str_repeat('☆', 5 - (int) $rev['rating']) ?>
-												<span style="font-size:12px; color:#000;">Posted on <?= date('d M Y', strtotime($rev['created_at'])) ?></span>
 
-                                            </div>
-                                            <p class="card-text"><?= esc($rev['review']) ?></p>
-                                       
+                                        <h6 class="card-title mb-1"><?= esc($rev['name']) ?></h6>
+                                        <div class="mb-2 text-warning" style="font-size: 1.2em;">
+                                            <?= str_repeat('★', (int) $rev['rating']) . str_repeat('☆', 5 - (int) $rev['rating']) ?>
+                                            <span style="font-size:12px; color:#000;">Posted on
+                                                <?= date('d M Y', strtotime($rev['created_at'])) ?></span>
+
+                                        </div>
+                                        <p class="card-text"><?= esc($rev['review']) ?></p>
+
                                     </div>
                                 <?php endforeach; ?>
                             </div>
@@ -277,54 +281,59 @@ $zd_uid = session()->get('zd_uid');
                                 }
 
                                 // Rating average
-                                $avg = round($item['avg_rating'] ?? 0, 1);
-                            ?>
-                            <div class="swiper-slide" style="width: 100%;">
-                                <div class="text-center">
-                                    <div class="p-2 position-relative" style="overflow: hidden; z-index: 2;">
-                                        <a href="<?= base_url('product/product_details/' . $item['pr_Id']); ?>">
-                                            <img class="product-img img-fluid mb-2"
-                                                style="max-width: 159px; max-height: 240px; object-fit: cover;"
-                                                src="<?= $firstImage; ?>"
-                                                alt="<?= esc($item['pr_Name']); ?>" />
-                                        </a>
+                               
+                                ?>
+                                <div class="swiper-slide" style="width: 100%;">
+                                    <div class="text-center">
+                                        <div class="p-2 position-relative" style="overflow: hidden; z-index: 2;">
+                                            <a href="<?= base_url('product/product_details/' . $item['pr_Id']); ?>">
+                                                <img class="product-img img-fluid mb-2"
+                                                    style="max-width: 159px; max-height: 240px; object-fit: cover;"
+                                                    src="<?= $firstImage; ?>" alt="<?= esc($item['pr_Name']); ?>" />
+                                            </a>
 
-                                        <!-- Rating Stars -->
-                                        <div class="star-rate p-1">
-                                            <?php for ($i = 1; $i <= 5; $i++): ?>
-                                                <?php if ($avg >= $i): ?>
-                                                    <i class="bi bi-star-fill gold"></i>
-                                                <?php elseif ($avg >= ($i - 0.5)): ?>
-                                                    <i class="bi bi-star-half gold"></i>
+                                            <!-- Rating Stars -->
+                                            
+                                            <div class="star-rate p-1">
+                                                <?php
+                                                $avg = round($item['avg_rating'] ?? 0, 1);
+                                                for ($i = 1; $i <= 5; $i++) {
+                                                    if ($avg >= $i) {
+                                                        echo '<i class="bi bi-star-fill gold"></i>';
+                                                    } elseif ($avg >= ($i - 0.5)) {
+                                                        echo '<i class="bi bi-star-half gold"></i>';
+                                                    } else {
+                                                        echo '<i class="bi bi-star"></i>';
+                                                    }
+                                                }
+                                                ?>
+                                            </div>
+
+                                            <!-- Product Name -->
+                                            <div class="item-name p-1"><?= esc($item['pr_Name']); ?></div>
+
+                                            <!-- Price Section -->
+                                            <div class="item-price">
+                                                <?php if (!empty($item['pr_Discount_Value']) && $item['pr_Discount_Value'] > 0): ?>
+                                                    <span style="color: #999;">
+                                                        <del><i class="bi bi-currency-rupee"></i><?= esc($item['mrp']); ?></del>
+                                                    </span>&nbsp;
+                                                    <span><i
+                                                            class="bi bi-currency-rupee"></i><?= esc($item['pr_Selling_Price']); ?></span>
                                                 <?php else: ?>
-                                                    <i class="bi bi-star"></i>
+                                                    <span><i
+                                                            class="bi bi-currency-rupee"></i><?= esc($item['pr_Selling_Price']); ?></span>
                                                 <?php endif; ?>
-                                            <?php endfor; ?>
-                                        </div>
+                                            </div>
 
-                                        <!-- Product Name -->
-                                        <div class="item-name p-1"><?= esc($item['pr_Name']); ?></div>
-
-                                        <!-- Price Section -->
-                                        <div class="item-price">
-                                            <?php if (!empty($item['pr_Discount_Value']) && $item['pr_Discount_Value'] > 0): ?>
-                                                <span style="color: #999;">
-                                                    <del><i class="bi bi-currency-rupee"></i><?= esc($item['mrp']); ?></del>
-                                                </span>&nbsp;
-                                                <span><i class="bi bi-currency-rupee"></i><?= esc($item['pr_Selling_Price']); ?></span>
-                                            <?php else: ?>
-                                                <span><i class="bi bi-currency-rupee"></i><?= esc($item['pr_Selling_Price']); ?></span>
-                                            <?php endif; ?>
-                                        </div>
-
-                                        <!-- Order Button -->
-                                        <div class="text-center mt-2">
-                                            <button class="order-btn"
-                                                onclick="window.location.href='<?= base_url('product/product_details/' . $item['pr_Id']); ?>'"></button>
+                                            <!-- Order Button -->
+                                            <div class="text-center mt-2">
+                                                <button class="order-btn"
+                                                    onclick="window.location.href='<?= base_url('product/product_details/' . $item['pr_Id']); ?>'"></button>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
                             <?php endforeach; ?>
                         </div>
                     </div>
@@ -344,64 +353,64 @@ $zd_uid = session()->get('zd_uid');
         element.style.border = '3px solid #000';
     }
 
-  $(document).ready(function () {
-    let tempOrder = sessionStorage.getItem('tempOrder');
-    if (tempOrder) {
-        tempOrder = JSON.parse(tempOrder);
-        
-        if (tempOrder.size) {
-            $('#size').val(tempOrder.size);
-        }
+    $(document).ready(function () {
+        let tempOrder = sessionStorage.getItem('tempOrder');
+        if (tempOrder) {
+            tempOrder = JSON.parse(tempOrder);
 
-        if (tempOrder.color) {
-            $('#selected_color').val(tempOrder.color);
-            
-            $('.cpicker').removeClass('selected'); 
-            $('.cpicker').each(function() {
-                if ($(this).css('background-color') === tempOrder.color || 
-                    rgb2hex($(this).css('background-color')) === tempOrder.color.toLowerCase()) {
-                    $(this).addClass('selected');
-                }
-            });
-        }
+            if (tempOrder.size) {
+                $('#size').val(tempOrder.size);
+            }
 
-        if (tempOrder.qty) {
-            $('#qty').val(tempOrder.qty);
-        }
+            if (tempOrder.color) {
+                $('#selected_color').val(tempOrder.color);
 
-        sessionStorage.removeItem('tempOrder');
+                $('.cpicker').removeClass('selected');
+                $('.cpicker').each(function () {
+                    if ($(this).css('background-color') === tempOrder.color ||
+                        rgb2hex($(this).css('background-color')) === tempOrder.color.toLowerCase()) {
+                        $(this).addClass('selected');
+                    }
+                });
+            }
+
+            if (tempOrder.qty) {
+                $('#qty').val(tempOrder.qty);
+            }
+
+            sessionStorage.removeItem('tempOrder');
+        }
+    });
+
+    // Helper function to convert rgb() to hex
+    function rgb2hex(rgb) {
+        if (!rgb.startsWith("rgb")) return rgb;
+        rgb = rgb.match(/\d+/g);
+        return "#" + rgb.map(x => ('0' + parseInt(x).toString(16)).slice(-2)).join('');
     }
-});
-
-// Helper function to convert rgb() to hex
-function rgb2hex(rgb) {
-    if (!rgb.startsWith("rgb")) return rgb;
-    rgb = rgb.match(/\d+/g);
-    return "#" + rgb.map(x => ('0' + parseInt(x).toString(16)).slice(-2)).join('');
-}
- var swiper = new Swiper(".mySwiper", {
-    loop: true,
-    spaceBetween: 10,
-    slidesPerView: 1, // On mobile
-    breakpoints: {
-        576: {
-            slidesPerView: 2,
-            spaceBetween: 10,
+    var swiper = new Swiper(".mySwiper", {
+        loop: true,
+        spaceBetween: 10,
+        slidesPerView: 1, // On mobile
+        breakpoints: {
+            576: {
+                slidesPerView: 2,
+                spaceBetween: 10,
+            },
+            768: {
+                slidesPerView: 3,
+                spaceBetween: 15,
+            },
+            992: {
+                slidesPerView: 4,
+                spaceBetween: 20,
+            }
         },
-        768: {
-            slidesPerView: 3,
-            spaceBetween: 15,
+        navigation: {
+            nextEl: ".swiper-button-next",
+            prevEl: ".swiper-button-prev",
         },
-        992: {
-            slidesPerView: 4,
-            spaceBetween: 20,
-        }
-    },
-    navigation: {
-        nextEl: ".swiper-button-next",
-        prevEl: ".swiper-button-prev",
-    },
-});
+    });
 
 
 

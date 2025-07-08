@@ -1,5 +1,14 @@
- .product-img {
-     height: 500px;
+body {
+     display: flex;
+     flex-direction: column;
+     min-height: 100vh;
+ }
+ 
+ footer {
+     margin-top: auto;
+ }
+.product-img {
+     height: 420px;
      width: 100%;
      object-fit: cover;
  }

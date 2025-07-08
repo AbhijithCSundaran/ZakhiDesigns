@@ -16,8 +16,8 @@ class Product extends BaseController
     public function index()
     {
         if (!$this->session->get('ad_uid')) {
-           return redirect()->to(base_url('admin'));
-    }
+            return redirect()->to(base_url('admin'));
+        }
 
         $allproducts = $this->productModel->getAllProducts();
         $data['product'] = $allproducts;
@@ -205,26 +205,26 @@ class Product extends BaseController
                 'message' => 'All Required Fields Must Be Filled.'
             ]);
         }
-// Check if product name already exists (excluding current ID)
-if ($this->productModel->isProductExists($product_name, $pr_id)) {
-    return $this->response->setJSON([
-        'status' => 'error',
-        'field'  => 'product_name',
-        'message' => 'Product Name Already Exists.'
-    ]);
-}
+        // Check if product name already exists (excluding current ID)
+        if ($this->productModel->isProductExists($product_name, $pr_id)) {
+            return $this->response->setJSON([
+                'status' => 'error',
+                'field' => 'product_name',
+                'message' => 'Product Name Already Exists.'
+            ]);
+        }
 
-// Check if product code already exists (excluding current ID)
-if ($this->productModel->isProductCodeExists($product_code, $pr_id)) {
-    return $this->response->setJSON([
-        'status' => 'error',
-        'field'  => 'pr_Code',
-        'message' => 'Product Code Already Exists.'
-    ]);
-}
+        // Check if product code already exists (excluding current ID)
+        if ($this->productModel->isProductCodeExists($product_code, $pr_id)) {
+            return $this->response->setJSON([
+                'status' => 'error',
+                'field' => 'pr_Code',
+                'message' => 'Product Code Already Exists.'
+            ]);
+        }
 
-        
-        if (($discount_type == "%" && $discount_value > 100) || ($discount_type == "Rs" && $discount_value >= $mrp) || ($discount_value >= $mrp) ) {
+
+        if (($discount_type == "%" && $discount_value > 100) || ($discount_type == "Rs" && $discount_value >= $mrp) || ($discount_value >= $mrp)) {
             return $this->response->setJSON([
                 'status' => 'error',
                 'message' => 'Enter A Valid Discount'
@@ -263,12 +263,11 @@ if ($this->productModel->isProductCodeExists($product_code, $pr_id)) {
                     $DisCountFrom = 3;
                 }
             }
-        }
-        else{
-            $DisCountFrom =1;
+        } else {
+            $DisCountFrom = 1;
         }
 
-        
+
         $data = [
             'pr_Name' => $product_name,
             'pr_Code' => $product_code,
@@ -286,14 +285,13 @@ if ($this->productModel->isProductCodeExists($product_code, $pr_id)) {
             'pr_Sleeve_Style' => $sleeve_style,
             'pr_Fabric' => $fabric,
             'pr_Stitch_Type' => $stitching,
-            'pr_Status' => 1,
             'pr_modifyby' => $this->session->get('ad_uid'),
             'pr_modifyon' => date("Y-m-d H:i:s"),
             'discount_from' => $DisCountFrom,
         ];
 
         if (empty($pr_id)) {
-            // Insert new product
+            $data['pr_Status'] = 1; 
             $data['pr_createdon'] = date("Y-m-d H:i:s");
             $data['pr_createdby'] = $this->session->get('ad_uid');
 
@@ -452,11 +450,11 @@ if ($this->productModel->isProductCodeExists($product_code, $pr_id)) {
 
             // Check file size (max 4MB = 4 * 1024 * 1024 = 4194304 bytes)
             if ($videoFile->getSize() > 10485760) { // 10 * 1024 * 1024
-    return $this->response->setStatusCode(400)->setJSON([
-        'status' => 'error',
-        'message' => 'Your video size is too large. Please upload a video within 10MB.'
-    ]);
-}
+                return $this->response->setStatusCode(400)->setJSON([
+                    'status' => 'error',
+                    'message' => 'Your video size is too large. Please upload a video within 10MB.'
+                ]);
+            }
 
             // Check MIME type (allow only video formats)
             $allowedMimeTypes = ['video/mp4', 'video/avi', 'video/mpeg', 'video/quicktime', 'video/x-matroska'];
@@ -587,9 +585,9 @@ if ($this->productModel->isProductCodeExists($product_code, $pr_id)) {
 
     public function viewProduct($id)
     {
-         if (!$this->session->get('ad_uid')) {
-           return redirect()->to(base_url('admin'));
-    }
+        if (!$this->session->get('ad_uid')) {
+            return redirect()->to(base_url('admin'));
+        }
 
         $product = $this->productModel->getProductByid($id);
         $data['product'] = $product;

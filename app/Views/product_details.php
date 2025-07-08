@@ -136,7 +136,7 @@ $zd_uid = session()->get('zd_uid');
 
                                 <!-- Selling Price -->
                                 <span class="offerprice">
-                                    <i class="bi bi-currency-rupee"></i><?= esc($product['pr_Selling_Price']); ?>
+                                    <i class="bi bi-currency-rupee"></i><?= esc(round($product['pr_Selling_Price'])); ?>
                                 </span>
 
                                 <!-- Discount Value -->
@@ -146,7 +146,7 @@ $zd_uid = session()->get('zd_uid');
                             <?php else: ?>
                                 <!-- Only Selling Price if no discount -->
                                 <span class="offerprice fw-bold ">
-                                    <i class="bi bi-currency-rupee"></i><?= esc($product['pr_Selling_Price']); ?>
+                                    <i class="bi bi-currency-rupee"></i><?= esc(round($product['pr_Selling_Price'])); ?>
                                 </span>
                             <?php endif; ?>
                         </div>
@@ -319,10 +319,10 @@ $zd_uid = session()->get('zd_uid');
                                                         <del><i class="bi bi-currency-rupee"></i><?= esc($item['mrp']); ?></del>
                                                     </span>&nbsp;
                                                     <span><i
-                                                            class="bi bi-currency-rupee"></i><?= esc($item['pr_Selling_Price']); ?></span>
+                                                            class="bi bi-currency-rupee"></i><?= esc(round($item['pr_Selling_Price'])); ?></span>
                                                 <?php else: ?>
                                                     <span><i
-                                                            class="bi bi-currency-rupee"></i><?= esc($item['pr_Selling_Price']); ?></span>
+                                                            class="bi bi-currency-rupee"></i><?= esc(round($item['pr_Selling_Price'])); ?></span>
                                                 <?php endif; ?>
                                             </div>
 

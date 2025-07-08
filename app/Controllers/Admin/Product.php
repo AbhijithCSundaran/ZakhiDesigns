@@ -179,6 +179,11 @@ class Product extends BaseController
         $product_name = ucwords(strtolower(trim($product_name)));
         $product_code = trim($this->input->getPost('product_code'));
         $product_description = $this->input->getPost('product_description');
+
+        $product_description = preg_replace_callback('/([.!?]\s*)([a-z])/',
+                                            fn($m) => $m[1] . strtoupper($m[2]), 
+                                            ucfirst(strtolower(trim($product_description))));
+
         $mrp = $this->input->getPost('mrp');
         $selling_price = $this->input->getPost('selling_price');
         $product_stock = $this->input->getPost('product_stock');
@@ -187,11 +192,13 @@ class Product extends BaseController
         $discount_type = $this->input->getPost('discount_type');
         $available_color = $this->input->getPost('aval_colors');
         $size = $this->input->getPost('size');
-        $sleeve_style = $this->input->getPost('sleeve_style');
-        $fabric = $this->input->getPost('fabric');
-        $stitching = $this->input->getPost('stitching');
-        $DisCountFrom = 0;
 
+        $sleeve_style   = ucwords(strtolower(trim($this->request->getPost('sleeve_style'))));
+        $fabric   = ucwords(strtolower(trim($this->request->getPost('fabric'))));
+        $stitching   = ucwords(strtolower(trim($this->request->getPost('stitching'))));
+        
+        $DisCountFrom = 0;     
+        
         if (empty($cat_id) || empty($product_name) || empty($product_code) || empty($product_stock) || empty($reset_stock) || empty($mrp) || empty($available_color) || empty($size)) {
             return $this->response->setJSON([
                 'status' => 'error',

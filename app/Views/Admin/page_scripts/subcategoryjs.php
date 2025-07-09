@@ -32,7 +32,10 @@ $('#subcategoryList').DataTable({
             data: 'sub_Discount_Value'
         },
         {
-            data: 'sub_Discount_Type'
+            data: 'sub_Discount_Type',
+            render: function(data, type, row) {
+                return (data === null || data === undefined || data.trim() === '') ? 'N/A' : data;
+            }
         },
         {
             data: 'status_switch'

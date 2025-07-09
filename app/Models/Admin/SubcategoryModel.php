@@ -163,6 +163,7 @@ class SubcategoryModel extends Model
     {
 		$product = $this->db->table('product')
 							->where('sub_Id', $sub_id)	
+                            ->where('pr_Status!=',3)
 							->select('pr_Id')
 							->get()
 							->getRow();

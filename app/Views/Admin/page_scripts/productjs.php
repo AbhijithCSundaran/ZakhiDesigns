@@ -307,37 +307,46 @@ function loadProductImages(productId) {
                     delIcon.style.fontSize = '18px';
                     delIcon.title = 'Delete this image';
 
-
                     // Delete click event
-                    delIcon.onclick = function() {
-                        if (confirm('Are you sure you want to delete this image?')) {
+                    delIcon.onclick = function () {
+                        
+                    Swal.fire({
+                        title: 'Are you sure?',
+                        text: 'You want to delete this image?',
+                        icon: 'warning',
+                        showCancelButton: true,
+                        confirmButtonText: 'Delete',
+                        cancelButtonText: 'Cancel',
+                        reverseButtons: true,
+                    }).then((result) => {
+                        if (result.isConfirmed) {
                             fetch(`<?= base_url('admin/product/delete-product-image') ?>`, {
-                                    method: 'POST',
-                                    headers: {
-                                        'Content-Type': 'application/json',
-                                        'X-Requested-With': 'XMLHttpRequest'
-                                    },
-                                    body: JSON.stringify({
-                                        product_id: productId,
-                                        image: imgName
-                                    })
+                                method: 'POST',
+                                headers: {
+                                    'Content-Type': 'application/json',
+                                    'X-Requested-With': 'XMLHttpRequest'
+                                },
+                                body: JSON.stringify({
+                                    product_id: productId,
+                                    image: imgName
                                 })
-                                .then(res => res.json())
-                                .then(result => {
-                                    if (result.success) {
-                                        wrapper.remove(); // Remove image from DOM
-                                        $('#productList').DataTable().ajax.reload(null, false);
-                                    } else {
-                                        alert('Failed to delete image.');
-                                    }
-                                })
-                                .catch(err => {
-                                    console.error('Delete error:', err);
-                                    alert('Error deleting image.');
-                                });
+                            })
+                            .then(res => res.json())
+                            .then(response => {
+                                if (response.success) {
+                                    Swal.fire('Deleted!', 'Image has been deleted.', 'success');
+                                    wrapper.remove(); // Remove image from DOM
+                                    $('#productList').DataTable().ajax.reload(null, false);
+                                } else {
+                                    Swal.fire('Error!', 'Failed to delete the image.', 'error');
+                                }
+                            })
+                            .catch(() => {
+                                Swal.fire('Error!', 'Something went wrong.', 'error');
+                            });
                         }
-                    };
-
+                    });
+                };
                     wrapper.appendChild(img);
                     wrapper.appendChild(delIcon);
                     imageContainer.appendChild(wrapper);

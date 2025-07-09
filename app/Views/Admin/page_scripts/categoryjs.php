@@ -25,7 +25,11 @@ $(document).ready(function () {
             },
             { data: 'cat_Name' },
             { data: 'cat_Discount_Value' },
-            { data: 'cat_Discount_Type' },
+            { data: 'cat_Discount_Type' ,
+            render: function(data, type, row) {
+                return (data === null || data === undefined || data.trim() === '') ? 'N/A' : data;
+            }
+            },
             { data: 'status_switch' },
             { data: 'actions' }
         ],

@@ -1,24 +1,24 @@
-
 <footer>
 
     <div class="container-lg">
         <div class="row">
             <div class="col-md-3">
                 <h4>Your Account<h4>
-                       <ul>
-    <li><i class="bi bi-arrow-right"></i> 
-        <a href="<?= base_url('profile#profile'); ?>" class="foot-link login-check">Profile</a>
-    </li>
-    <li><i class="bi bi-arrow-right"></i> 
-        <a href="<?= base_url('profile#orders'); ?>" class="foot-link login-check">My Orders</a>
-    </li>
-    <li><i class="bi bi-arrow-right"></i> 
-        <a href="<?= base_url('profile#address'); ?>" class="foot-link login-check">Address</a>
-    </li>
-    <li><i class="bi bi-arrow-right"></i> 
-        <a href="<?= base_url('profile#orders'); ?>" class="foot-link login-check">Track Orders</a>
-    </li>
-</ul>
+                        <ul>
+                            <li><i class="bi bi-arrow-right"></i>
+                                <a href="<?= base_url('profile#profile'); ?>" class="foot-link login-check">Profile</a>
+                            </li>
+                            <li><i class="bi bi-arrow-right"></i>
+                                <a href="<?= base_url('profile#orders'); ?>" class="foot-link login-check">My Orders</a>
+                            </li>
+                            <li><i class="bi bi-arrow-right"></i>
+                                <a href="<?= base_url('profile#address'); ?>" class="foot-link login-check">Address</a>
+                            </li>
+                            <li><i class="bi bi-arrow-right"></i>
+                                <a href="<?= base_url('profile#orders'); ?>" class="foot-link login-check">Track
+                                    Orders</a>
+                            </li>
+                        </ul>
 
             </div>
             <div class="col-md-3">
@@ -29,9 +29,9 @@
                             <li><i class="bi bi-arrow-right"></i><a class="foot-link"
                                     href="<?= base_url('product/product_list'); ?>">Products</a></li>
                             <li>
-							<i class="bi bi-arrow-right"></i>
-							<a class="foot-link" href="<?= base_url('/#top-products'); ?>">Best Sellers</a>
-						</li>
+                                <i class="bi bi-arrow-right"></i>
+                                <a class="foot-link" href="<?= base_url('/#top-products'); ?>">Best Sellers</a>
+                            </li>
                             <li><i class="bi bi-arrow-right"></i><a class="foot-link"
                                     href="<?= base_url(); ?>">Sitemap</a></li>
                         </ul>
@@ -60,10 +60,10 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-md-12 text-center social-ico">
-                <i class="bi bi-facebook"></i>
+                <div class="col-md-12 text-center social-ico">
+                <a href="https://www.facebook.com/zakhidesigns" target="_blank"  style="color:white;"><i class="bi bi-facebook"></i></a>
                 <i class="bi bi-twitter"></i>
-                <i class="bi bi-instagram"></i>
+                <a href="https://www.instagram.com/zakhidesigns/?hl=en" target="_blank" style="color:white;"><i class="bi bi-instagram"></i></a>
                 <i class="bi bi-youtube"></i>
             </div>
         </div>
@@ -149,7 +149,7 @@
         });
 
         //when forgot password Clicked inside login modal
-         $(document).on('click', '#showForgotForm', function (e) {
+        $(document).on('click', '#showForgotForm', function (e) {
             e.preventDefault();
 
             // Load Forgot form in the same modal
@@ -166,7 +166,7 @@
                 $('#mainModal').modal('show');
             });
         });
-        
+
 
 
         // Login form submission (delegated because it's loaded dynamically)
@@ -223,10 +223,11 @@
             }
 
             // Validate phone number (10 digits only)
-            if (!/^\d{10}$/.test(phone)) {
-                $('#regError').html('Phone number must be exactly 10 digits.');
+            if (!/^\d{7,15}$/.test(phone)) {
+                $('#regError').html('Phone number must be between 7 and 15 digits.');
                 return;
             }
+
 
             // Validate name (only letters and space)
             const nameRegex = /^[a-zA-Z ]+$/;
@@ -264,24 +265,24 @@
         });
 
     });
-	
-	document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
-        const href = this.getAttribute('href');
 
-        // Skip if href is exactly '#' or empty
-        if (href === '#' || href.length < 2) {
-            return;
-        }
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            const href = this.getAttribute('href');
 
-        e.preventDefault();
+            // Skip if href is exactly '#' or empty
+            if (href === '#' || href.length < 2) {
+                return;
+            }
 
-        const target = document.querySelector(href);
-        if (target) {
-            target.scrollIntoView({ behavior: 'smooth' });
-        }
+            e.preventDefault();
+
+            const target = document.querySelector(href);
+            if (target) {
+                target.scrollIntoView({ behavior: 'smooth' });
+            }
+        });
     });
-});
 
 
 </script>

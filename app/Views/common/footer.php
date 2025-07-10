@@ -223,7 +223,7 @@
             }
 
             // Validate phone number (10 digits only)
-            if (!/^\d{7,15}$/.test(phone)) {
+            if (!/^\d{7,20}$/.test(phone)) {
                 $('#regError').html('Phone number must be between 7 and 15 digits.');
                 return;
             }

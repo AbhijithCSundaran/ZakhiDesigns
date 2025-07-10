@@ -60,10 +60,10 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-md-12 text-center social-ico">
-                <i class="bi bi-facebook"></i>
+                <div class="col-md-12 text-center social-ico">
+                <a href="https://www.facebook.com/zakhidesigns" target="_blank"  style="color:white;"><i class="bi bi-facebook"></i></a>
                 <i class="bi bi-twitter"></i>
-                <i class="bi bi-instagram"></i>
+                <a href="https://www.instagram.com/zakhidesigns/?hl=en" target="_blank" style="color:white;"><i class="bi bi-instagram"></i></a>
                 <i class="bi bi-youtube"></i>
             </div>
         </div>

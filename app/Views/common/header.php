@@ -4,8 +4,7 @@
 <head>
     <title>Zakhi Designs</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="google-signin-client_id"
-        content="980312560634-kksn59gmuu5p4rg68tnd2vaooe7lfdfu.apps.googleusercontent.com">
+    
 
     <link rel="stylesheet" href="<?= base_url() . ASSET_PATH; ?>assets/css/bootstrap.min.css">
     <link rel="stylesheet" href="<?= base_url() . ASSET_PATH; ?>assets/css/customstyle.css">
@@ -31,7 +30,8 @@
 
     <!-- Swiper JS -->
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-
+    <!-- google sign  -->
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
 
 </head>
 
@@ -40,7 +40,9 @@
         <div class="container-lg" style="top:0px;">
             <div class="row head-row">
                 <div class="col-6 logo">
-                    <img src="<?= base_url() . ASSET_PATH; ?>assets/images/logo.jpg" alt="Logo" />
+                    <a href="<?= base_url(); ?>">
+                        <img src="<?= base_url() . ASSET_PATH; ?>assets/images/logo.jpg" alt="Logo" />
+                    </a>
                 </div>
                 <div class="col-6">
                     <div class="row">

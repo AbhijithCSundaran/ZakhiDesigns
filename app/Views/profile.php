@@ -175,7 +175,7 @@
                                         <b>Track your product:</b> <a href="<?= esc($order['tracker_Link']) ?>" target="_blank"><?= esc($order['tracker_Link']) ?></a><br>
                                     <?php endif; ?>
 									<a href="<?= base_url('review/' . $order['cus_Id'] . '/' . $order['pr_Id']) ?>"
-										class="btn btn-link p-0 mt-2">Write Review</a>
+										class="btn btn-link p-0 mt-2">Add Fedback</a>
 
 								</div>
 							</div>

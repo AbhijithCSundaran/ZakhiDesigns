@@ -32,22 +32,30 @@ document.getElementById("reviewForm").addEventListener("submit", function(e) {
     });
 });
 
-    document.addEventListener("DOMContentLoaded", function () {
-        const stars = document.querySelectorAll("#starRating i");
-        const ratingInput = document.getElementById("ratingInput");
-
-        stars.forEach(star => {
-            star.addEventListener("click", function () {
-                const rating = this.getAttribute("data-value");
-                ratingInput.value = rating;
-
-                // Highlight stars
-                stars.forEach(s => {
-                    s.classList.toggle("active", s.getAttribute("data-value") <= rating);
-                });
-            });
-        });
+  
+document.addEventListener("DOMContentLoaded", function () {
+  const stars = document.querySelectorAll('#starRating i');
+  const ratingInput = document.getElementById('ratingInput');
+ 
+  stars.forEach(star => {
+    star.addEventListener('click', function () {
+      const rating = this.getAttribute('data-value');
+      ratingInput.value = rating;
+ 
+      // Update star visuals
+      stars.forEach(s => {
+        if (s.getAttribute('data-value') <= rating) {
+          s.classList.remove('bi-star');
+          s.classList.add('bi-star-fill');
+        } else {
+          s.classList.remove('bi-star-fill');
+          s.classList.add('bi-star');
+        }
+      });
     });
+  });
+});
+
 
 
 </script>

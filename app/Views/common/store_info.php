@@ -1,0 +1,15 @@
+<div class="col-md-3">
+    <h4>Store Information</h4>
+    <ul>
+        <li style="display:flex;"><i class="bi bi-geo-alt-fill" ></i>
+            Zakhi Designs Store<br />
+             16/541P Muppathadam, Near Govt: GHS School Aluva, Ernakulam
+        </li>
+        <li><i class="bi bi-telephone-fill"></i>
+            <?= esc($user['us_Phone']) ?>
+        </li>
+        <li><i class="bi bi-envelope-fill"></i>
+            <?= esc($user['us_Email']) ?>
+        </li>
+    </ul>
+</div>

@@ -3,22 +3,24 @@
         <div class="alert p-2" id="messageBox" style="display:none;">message</div>
     </div>
     <div class="text-center logo ">
+         <a href="">
         <img class="img-align" src="<?php echo base_url() . ASSET_PATH; ?>assets/images/logo.jpg" />
+        </a>
     </div>
     <h5 class="text-center">Forgot Password</h5>
 </div>
 
 <form id="forgotEmailForm" method="post">
-    <p style="text-align:center;">Enter your email we'll send you a link to get back into your account.</p>  
+    <p style="text-align:center;">Enter your email address and we'll send you a link to reset your password.</p>  
     <div class="floating-label-group">
         <input type="email" class="form-control" id="forgotCustEmail" name="forgotCustEmail" placeholder=" " required />
         <label for="email">Email</label>
     </div>
     <div class="d-flex mt-2 justify-content-center" >
-        <button type= "button" class="btn btn-primary" id="forgotEmailSending">Send</button>
+        <button type= "button" class="btn btn-primary" id="forgotEmailSending">Reset Password </button>
     </div>
     <div class="text-end"> 
-        <a href="" class="ms-2" id="showLoginFromFrgt">Back to Login</a>
+        <a href="" class="ms-2" id="showLoginFromFrgt" style="text-decoration:none">Back to Login</a>
     </div>
 </form>
 <script>

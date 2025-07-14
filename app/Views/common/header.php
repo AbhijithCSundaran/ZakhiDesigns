@@ -30,6 +30,7 @@
 
     <!-- Swiper JS -->
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
     
 </head>
 
@@ -135,22 +136,20 @@
 
     <!-- Modal Skeleton -->
     <div class="modal fade" id="mainModal" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <div class="modal-header border-0">
-                        <button type="button" class="btn ms-auto p-0" data-bs-dismiss="modal" aria-label="Close"
-                            style="border: none; background: none;">
-                            <i class="bi bi-x"></i>
-                        </button>
-                    </div>
-                </div>
-                <div class="modal-body" id="modalBody">
-                    <!-- AJAX content will load here -->
-                </div>
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header border-0">
+                <button type="button" class="btn ms-auto p-0" data-bs-dismiss="modal" aria-label="Close" style="border: none; background: none;">
+                    <i class="bi bi-x fs-4"></i>
+                </button>
+            </div>
+            <div class="modal-body" id="modalBody">
+                <!-- AJAX content will load here -->
             </div>
         </div>
     </div>
+</div>
+
 
     <script>
         function searchProduct() {

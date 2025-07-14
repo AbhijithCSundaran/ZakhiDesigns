@@ -255,6 +255,10 @@ public function updateStockAfterOrder($pr_Id, $quantity)
             $this->update($pr_Id, ['pr_Stock' => $newStock]);
         }
     }
+    public function getProductsPaginated($limit, $offset)
+{
+    return $this->orderBy('pr_Id', 'DESC')->findAll($limit, $offset);
+}
 
 }
 ?>

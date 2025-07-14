@@ -1,6 +1,8 @@
 <div class="row">
     <div class="text-center logo">
+        <a href="">
         <img class="img-align" src="<?php echo base_url() . ASSET_PATH; ?>assets/images/logo.jpg" />
+        </a>
     </div>
     <h5 class="text-center">Sign in</h5>
     <!-- <h5 class="text-center">Login</h5> -->
@@ -37,7 +39,7 @@
     <div style="padding-bottom:8px;">
         <div class="d-flex justify-content-end" style="margin-bottom: 2px;">
             <a id="showForgotForm" class="forgot-style text-decoration-none"
-                style="font-size: 14px; margin-top: 10px; ">Forgot Password?</a>
+                style="font-size: 14px; margin-top: 10px; " style="text-decoration:none">Forgot Password?</a>
         </div>
         <div class="d-flex justify-content-end align-items-center" style="gap: 5px;">
             <p class="mb-0" style="font-size: 14px;">Don't have an account?</p>

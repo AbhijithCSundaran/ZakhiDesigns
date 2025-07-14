@@ -43,15 +43,8 @@
                                     href="<?= base_url('Return_refundpolicy'); ?>">Return and Refund Policy</a></li>
                         </ul>
             </div>
-            <div class="col-md-3">
-                <h4>Store Information<h4>
-                        <ul>
-                            <li><i class="bi bi-geo-alt-fill"></i>Zakhi Designs Store<br />16/541P Muppathadam, Near
-                                Govt: GHS School Aluva, Ernakulam</li>
-                            <li><i class="bi bi-telephone-fill"></i>+91 70348 53219</li>
-                            <li><i class="bi bi-envelope-fill"></i>zakhidesigns@gmail.com</li>
-                        </ul>
-            </div>
+            <?= view_cell('App\Cells\FooterCell::storeInfo') ?>
+           
         </div>
         <div class="row">
                 <div class="col-md-12 text-center social-ico">
@@ -286,6 +279,16 @@
             }
         });
     });
+
+document.addEventListener("DOMContentLoaded", function () {
+    const tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+    tooltipTriggerList.forEach(function (tooltipTriggerEl) {
+        const tooltip = bootstrap.Tooltip.getInstance(tooltipTriggerEl);
+        if (tooltip) {
+            tooltip.dispose();
+        }
+    });
+});
 
 
 </script>

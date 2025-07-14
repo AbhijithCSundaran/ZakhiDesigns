@@ -339,4 +339,24 @@ class Product extends Controller
             ]);
         }
     }
+    public function loadMore()
+{
+    try {
+        $page = (int) $this->request->getGet('page') ?? 1;
+        $limit = 12;
+        $offset = ($page - 1) * $limit;
+ 
+        $model = new ProductDisplayModel();
+        $products = $model->getProductsPaginated($limit, $offset);
+ 
+        if (empty($products)) {
+            return '';
+        }
+ 
+        return view('product/product_list', ['product' => $products]);
+    } catch (\Throwable $e) {
+        log_message('error', 'loadMore error: ' . $e->getMessage());
+        return $this->response->setStatusCode(500)->setBody('Server Error');
+    }
+}
 }

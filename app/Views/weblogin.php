@@ -40,24 +40,26 @@
         data-text="signin_with"
         data-size="large"
         data-logo_alignment="left">
-    </div>
-    
+    </div> 
    
-   
-    
-   
+    <div style="padding-bottom:8px;">
+        <div class="d-flex justify-content-end" style="margin-bottom: 2px;">
+            <a id="showForgotForm" class="forgot-style text-decoration-none"
+                style="font-size: 14px; margin-top: 10px; ">Forgot Password?</a>
+        </div>
+        <div class="d-flex justify-content-end align-items-center" style="gap: 5px;">
+            <p class="mb-0" style="font-size: 14px;">Don't have an account?</p>
+            <a href="#" class="text-decoration-none" id="showRegisterFromLogin" style="font-size: 14px;">Register</a>
+        </div>
+        <div class="text-center mt-2 px-3">
+            <small style="font-size: 13px; color: #6c757d;">
+                By continuing, you agree to ZakhiDesigns
+                <a href="<?= base_url('Termsandconditions'); ?>" class="text-decoration-none">Terms & Conditions</a> of
+                Use and
+                <a href="<?= base_url('Privacypolicy'); ?>" class="text-decoration-none">Privacy Policy</a> Notice.
+            </small>
+        </div>
     </div>
-    <div class="d-flex justify-content-end align-items-center" style="gap: 5px;">
-        <p class="mb-0" style="font-size: 14px;">Don't have an account?</p>
-        <a href="#" class="text-decoration-none" id="showRegisterFromLogin" style="font-size: 14px;">Register</a>
-    </div>
-    <div class="text-center mt-2 px-3">
-    <small style="font-size: 13px; color: #6c757d;">
-        By continuing, you agree to ZakhiDesigns 
-        <a href="<?= base_url('Termsandconditions'); ?>" class="text-decoration-none">Terms & Conditions</a> of Use and 
-        <a href="<?= base_url('Privacypolicy'); ?>" class="text-decoration-none">Privacy Policy</a> Notice.
-    </small>
-</div>
 
 
 </div>

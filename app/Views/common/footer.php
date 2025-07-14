@@ -24,16 +24,10 @@
             <div class="col-md-3">
                 <h4>Products<h4>
                         <ul>
-                            <li><i class="bi bi-arrow-right"></i><a class="foot-link"
-                                    href="<?= base_url('product/product_list'); ?>">Price Drop</li>
-                            <li><i class="bi bi-arrow-right"></i><a class="foot-link"
-                                    href="<?= base_url('product/product_list'); ?>">Products</a></li>
-                            <li>
-                                <i class="bi bi-arrow-right"></i>
-                                <a class="foot-link" href="<?= base_url('/#top-products'); ?>">Best Sellers</a>
-                            </li>
-                            <li><i class="bi bi-arrow-right"></i><a class="foot-link"
-                                    href="<?= base_url(); ?>">Sitemap</a></li>
+                            <li><i class="bi bi-arrow-right"></i><a class="foot-link" href="<?= base_url('product/product_list'); ?>">Price Drop</li>
+                            <li><i class="bi bi-arrow-right"></i><a class="foot-link" href="<?= base_url('product/product_list'); ?>">Products</a></li>
+                            <li><i class="bi bi-arrow-right"></i><a class="foot-link" href="<?= base_url('/#top-products'); ?>">Best Sellers</a></li>
+                            <li><i class="bi bi-arrow-right"></i><a class="foot-link" href="<?= base_url(); ?>">Sitemap</a></li>
                         </ul>
             </div>
             <div class="col-md-3">
@@ -61,9 +55,9 @@
         </div>
         <div class="row">
                 <div class="col-md-12 text-center social-ico">
-                <a href="https://www.facebook.com/zakhidesigns" target="_blank"  style="color:white;"><i class="bi bi-facebook"></i></a>
+                <i class="bi bi-facebook"></i>
                 <i class="bi bi-twitter"></i>
-                <a href="https://www.instagram.com/zakhidesigns/?hl=en" target="_blank" style="color:white;"><i class="bi bi-instagram"></i></a>
+                <i class="bi bi-instagram"></i>
                 <i class="bi bi-youtube"></i>
             </div>
         </div>
@@ -166,6 +160,15 @@
                 $('#mainModal').modal('show');
             });
         });
+
+        $(document).on('click', '#showLoginFromFrgt', function (e) {
+            e.preventDefault();
+
+            $('#modalBody').load("<?= base_url('weblogin'); ?>", function () {
+                $('#mainModal').modal('show');
+            });
+        });
+
 
 
 

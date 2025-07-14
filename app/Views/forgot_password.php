@@ -141,7 +141,7 @@
                 <i class="fa-solid fa-eye-slash toggle-password" toggle="#confirm_reset_password"></i>
             </div>
 
-            <button type="button" id="forgotSaveButton" class="submit-btn">Reset Password</button>
+            <button type="button" id="forgotSaveButton" class="submit-btn">Reset Link</button>
         </form>
     </div>
 

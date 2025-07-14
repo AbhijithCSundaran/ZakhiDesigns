@@ -17,6 +17,9 @@
     <div class="d-flex mt-2 justify-content-center" >
         <button type= "button" class="btn btn-primary" id="forgotEmailSending">Send</button>
     </div>
+    <div class="text-end"> 
+        <a href="" class="ms-2" id="showLoginFromFrgt">Back to Login</a>
+    </div>
 </form>
 <script>
     function forgotEmailSend(){

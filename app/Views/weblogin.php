@@ -25,9 +25,22 @@
         <button type="submit" class="btn btn-primary">Login</button>
     </div>
 
-    <!-- <div class="d-flex justify-content-center my-4">
-        <div class="g-signin2 d-flex" data-onsuccess="onSignIn"></div>
-    </div> -->
+   <div id="g_id_onload"
+        data-client_id="89279377857-k55fvvqvtbk9nib9mc04jfsdgb9k00gn.apps.googleusercontent.com"
+        data-context="signin"
+        data-login_uri="https://v4cstaging.co.in/zakhidesigns/google-login-callback"
+        data-auto_prompt="false">
+    </div><br/>
+ 
+    <div class="g_id_signin"
+        data-type="standard"
+        data-shape="rectangular"
+        data-theme="outline"
+        data-text="signin_with"
+        data-size="large"
+        data-logo_alignment="left">
+    </div>
+    
     <div class="or-divider"><hr/><span>OR</span><hr/></div>
     <div class="d-flex" style="padding-bottom:8px;">
         <a id="showForgotForm" class="forgot-style">Forgot Password?</a> 
@@ -39,7 +52,9 @@
 
    
 </form>
-<script src="https://apis.google.com/js/platform.js" async defer></script>
+<!-- google sign  -->
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+
 <script>
     $(document).ready(function() {
         $('#togglePassword').on('click', function () {

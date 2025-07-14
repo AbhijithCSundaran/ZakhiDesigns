@@ -57,133 +57,69 @@ class StaffModel extends Model {
     protected $allowedFields = ['us_Name', 'us_Email','us_Email2','us_Phone', 'us_Status']; // Adjust to your table
 
     // For DataTables
-//     public function getDatatables(){
-//     $postData = service('request')->getPost();
-//     $searchValue = '';
-   
-//     if (!empty($postData['search']['value'])) {
-//         $searchValue = str_replace([" ", "\t"], '', $postData['search']['value']);
-//     }
- 
-//     $builder = $this->db->table('user u');
-//     $builder->select('u.*');
-//     $builder->where('u.us_Status !=', 3);
-//     $builder->where('u.us_Role !=', 1); // Exclude admin
- 
-//     if (!empty($searchValue)) {
-//         $builder->groupStart();
-//         $builder->like("REPLACE(REPLACE(u.us_Name, ' ', ''), CHAR(9), '')", $searchValue, 'both', false);
-//         $builder->groupEnd();
-//     }
- 
-//     // Order
-//     $columns = ['u.us_Id', 'u.us_Name', 'u.us_Email', 'u.us_Email2', 'u.us_Phone', 'u.us_Status'];
-//     if (!empty($postData['order'])) {
-//         $orderCol = $columns[$postData['order'][0]['column']] ?? 'u.us_Id';
-//         $orderDir = $postData['order'][0]['dir'] ?? 'DESC';
-//         $builder->orderBy($orderCol, $orderDir);
-//     } else {
-//         $builder->orderBy('u.us_Id', 'DESC');
-//     }
- 
-//     // Pagination
-//     if (!empty($postData['length']) && $postData['length'] != -1) {
-//         $builder->limit($postData['length'], $postData['start']);
-//     }
- 
-//     return $builder->get()->getResultArray();
-// }
- 
- 
- 
-// public function countAll()
-// {
-//     return $this->db->table('user')
-//         ->where('us_Status !=', 3)
-//         ->where('us_Role !=', 1) // Exclude admin
-//         ->countAllResults();
-// }
-//    public function countFiltered()
-// {
-//     $postData = service('request')->getPost();
-//     $searchValue = '';
- 
-//     if (!empty($postData['search']['value'])) {
-//         $searchValue = str_replace([" ", "\t"], '', $postData['search']['value']);
-//     }
- 
-//     $builder = $this->db->table('user u');
-//     $builder->select('COUNT(*) as total');
-//     $builder->where('u.us_Status !=', 3);
-//     $builder->where('u.us_Role !=', 1); // Exclude admin
- 
-//     if (!empty($searchValue)) {
-//         $builder->groupStart();
-//         $builder->like("REPLACE(REPLACE(u.us_Name, ' ', ''), CHAR(9), '')", $searchValue, 'both', false);
-//         $builder->groupEnd();
-//     }
- 
-//     return $builder->get()->getRow()->total;
-// }
-    public function getDatatables() {
+    public function getDatatables(){
         $postData = service('request')->getPost();
         $searchValue = '';
+    
         if (!empty($postData['search']['value'])) {
-            $searchValue = str_replace([" ", "\t"], '', $postData['search']['value']); // Remove space and tab
+            $searchValue = str_replace([" ", "\t"], '', $postData['search']['value']);
         }
-
+    
         $builder = $this->db->table('user u');
         $builder->select('u.*');
-        $builder->where('u.us_Status !=', 3)
-                ->where('u.us_Role !=', 1);
-
+        $builder->where('u.us_Status !=', 3);
+        $builder->where('u.us_Role !=', 1); // Exclude admin
+    
         if (!empty($searchValue)) {
             $builder->groupStart();
-            $builder->where("REPLACE(REPLACE(u.us_Name, ' ', ''), CHAR(9), '') LIKE '%" . $this->db->escapeLikeString($searchValue) . "%'", null, false);
+            $builder->like("REPLACE(REPLACE(u.us_Name, ' ', ''), CHAR(9), '')", $searchValue, 'both', false);
             $builder->groupEnd();
         }
-
-        if (!empty($postData['length']) && $postData['length'] != -1) {
-            $builder->limit($postData['length'], $postData['start']);
-        }
-
+    
+        // Order
+        $columns = ['u.us_Id', 'u.us_Name', 'u.us_Email', 'u.us_Email2', 'u.us_Phone', 'u.us_Status'];
         if (!empty($postData['order'])) {
-            $columns = ['u.us_Id', 'u.us_Name', 'u.us_Email', 'u.us_Email2', 'u.us_Phone', 'u.us_Status'];
-            $orderCol = $columns[$postData['order'][0]['column']];
-            $orderDir = $postData['order'][0]['dir'];
+            $orderCol = $columns[$postData['order'][0]['column']] ?? 'u.us_Id';
+            $orderDir = $postData['order'][0]['dir'] ?? 'DESC';
             $builder->orderBy($orderCol, $orderDir);
         } else {
             $builder->orderBy('u.us_Id', 'DESC');
         }
-
+    
+        // Pagination
+        if (!empty($postData['length']) && $postData['length'] != -1) {
+            $builder->limit($postData['length'], $postData['start']);
+        }
+    
         return $builder->get()->getResultArray();
     }
-
-
-	public function countAll()
-	{
-		return $this->db->table('user')
-			->where('us_Status !=', 3)
-			->countAllResults();
-	}
-
-    public function countFiltered() {
+ 
+    public function countAll(){
+        return $this->db->table('user')
+            ->where('us_Status !=', 3)
+            ->where('us_Role !=', 1) // Exclude admin
+            ->countAllResults();
+    }
+    public function countFiltered(){
         $postData = service('request')->getPost();
         $searchValue = '';
+    
         if (!empty($postData['search']['value'])) {
-            $searchValue = str_replace([" ", "\t"], '', $postData['search']['value']); // Remove space and tab
+            $searchValue = str_replace([" ", "\t"], '', $postData['search']['value']);
         }
-
-        $sql = "SELECT COUNT(*) as total 
-                FROM user u 
-                WHERE u.us_Status != 3 AND u.us_Role != 1";
-
+    
+        $builder = $this->db->table('user u');
+        $builder->select('COUNT(*) as total');
+        $builder->where('u.us_Status !=', 3);
+        $builder->where('u.us_Role !=', 1); // Exclude admin
+    
         if (!empty($searchValue)) {
-            $sql .= " AND REPLACE(REPLACE(u.us_Name, ' ', ''), CHAR(9), '') LIKE '%" . $this->db->escapeLikeString($searchValue) . "%'";
+            $builder->groupStart();
+            $builder->like("REPLACE(REPLACE(u.us_Name, ' ', ''), CHAR(9), '')", $searchValue, 'both', false);
+            $builder->groupEnd();
         }
-
-        $query = $this->db->query($sql);
-        return $query->getRow()->total;
+    
+        return $builder->get()->getRow()->total;
     }
         
 }

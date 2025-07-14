@@ -57,7 +57,6 @@ class StaffModel extends Model {
     protected $allowedFields = ['us_Name', 'us_Email','us_Email2','us_Phone', 'us_Status']; // Adjust to your table
 
     // For DataTables
-
     public function getDatatables() {
         $postData = service('request')->getPost();
         $searchValue = '';
@@ -118,7 +117,7 @@ class StaffModel extends Model {
         $query = $this->db->query($sql);
         return $query->getRow()->total;
     }
-    
+        
 }
 
 ?>

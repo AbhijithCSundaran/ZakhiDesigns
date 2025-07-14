@@ -25,13 +25,27 @@
         <button type="submit" class="btn btn-primary">Login</button>
     </div >
 
-    <!-- <div class="d-flex justify-content-center my-4">
-        <div class="g-signin2 d-flex" data-onsuccess="onSignIn"></div>
-    </div> -->
+
+   <div id="g_id_onload"
+        data-client_id="89279377857-k55fvvqvtbk9nib9mc04jfsdgb9k00gn.apps.googleusercontent.com"
+        data-context="signin"
+        data-login_uri="https://v4cstaging.co.in/zakhidesigns/google-login-callback"
+        data-auto_prompt="false">
+    </div><br/>
+ 
+    <div class="g_id_signin"
+        data-type="standard"
+        data-shape="rectangular"
+        data-theme="outline"
+        data-text="signin_with"
+        data-size="large"
+        data-logo_alignment="left">
+    </div>
     
-   <div style="padding-bottom:8px;" >
-    <div class="d-flex justify-content-end" style="margin-bottom: 2px;">
-        <a id="showForgotForm" class="forgot-style text-decoration-none"  style="font-size: 14px; margin-top: 10px; ">Forgot Password?</a>
+   
+   
+    
+   
     </div>
     <div class="d-flex justify-content-end align-items-center" style="gap: 5px;">
         <p class="mb-0" style="font-size: 14px;">Don't have an account?</p>
@@ -51,7 +65,9 @@
 
    
 </form>
-<script src="https://apis.google.com/js/platform.js" async defer></script>
+<!-- google sign  -->
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+
 <script>
     $(document).ready(function() {
         $('#togglePassword').on('click', function () {

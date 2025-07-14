@@ -58,10 +58,12 @@ public function update()
 
     $name  = ucwords(strtolower($this->request->getPost('us_Name')));
     $email = $this->request->getPost('us_Email');
-
+    $phone = $this->request->getPost('us_Phone');
+    //  echo $phone;exit();
     $data = [
         'us_Name'  => $name,
         'us_Email' => $email,
+        'us_Phone' => $phone,
     ];
 
     $model = new \App\Models\Admin\ProfileModel();

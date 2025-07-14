@@ -102,12 +102,12 @@
                                             &nbsp;
                                             <!-- Selling Price -->
                                             <span>
-                                                <i class="bi bi-currency-rupee"></i><?= esc($item['pr_Selling_Price']); ?>
+                                                <i class="bi bi-currency-rupee"></i><?= esc(data: round($item['pr_Selling_Price'])); ?>
                                             </span>
                                         <?php else: ?>
                                             <!-- Only Selling Price -->
                                             <span>
-                                                <i class="bi bi-currency-rupee"></i><?= esc($item['pr_Selling_Price']); ?>
+                                                <i class="bi bi-currency-rupee"></i><?= esc(round($item['pr_Selling_Price'])); ?>
                                             </span>
                                         <?php endif; ?>
                                     </div>

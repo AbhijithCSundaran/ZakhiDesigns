@@ -31,7 +31,10 @@ $('#staffList').DataTable({
             data: 'us_Email2'
         },
         {
-            data: 'us_Phone'
+            data: 'us_Phone',
+            render: function(data, type, row) {
+                return (data === null || data === undefined || data.trim() === '') ? 'N/A' : data;
+            }
         },
         {
             data: 'status_switch'

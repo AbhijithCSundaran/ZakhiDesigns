@@ -49,48 +49,99 @@ $(function() {
     });
 
     // Final Order Submit
+    // $('#confirmOrderBtn').on('click', function() {
+    //     const od_Id = $(this).data('odid');
+    //     const add_Id = $('input[name="address_id"]:checked').val();
+
+    //     if (!add_Id) {
+    //         $('#messageBox').html('<div class="alert alert-warning">Please select or add an address.</div>').fadeIn().delay(5000).fadeOut();
+    //         return;
+    //     }
+
+    //     $.ajax({
+    //         url: "<?= base_url('OrderNow/submitfrm') ?>",
+    //         type: "POST",
+    //         data: { od_Id, add_Id },
+    //         dataType: "json",
+    //         success: function(res) {
+    //             if (res.status == 1) {
+    //                 $('#messageBox')
+    //                     .html('<div class="alert alert-success">' + res.msg + '</div>')
+    //                     .fadeIn()
+    //                     .delay(5000)
+    //                     .fadeOut(function(){
+    //                         window.location.href = res.redirect;
+    //                     });
+    //             } else {
+    //                 $('#messageBox')
+    //                     .html('<div class="alert alert-danger">' + res.msg + '</div>')
+    //                     .fadeIn()
+    //                     .delay(5000)
+    //                     .fadeOut();
+    //             }
+    //             $('html, body').animate({
+    //                 scrollTop: $('#messageBox').offset().top - 100
+    //             }, 'slow');
+    //         },
+    //         error: function() {
+    //             $('#messageBox').html('<div class="alert alert-danger">Failed to submit order.</div>').fadeIn().delay(5000).fadeOut();
+
+    //             $('html, body').animate({
+    //                 scrollTop: $('#messageBox').offset().top - 100
+    //             }, 'slow');
+    //         }
+    //     });
+    // });
     $('#confirmOrderBtn').on('click', function() {
-        const od_Id = $(this).data('odid');
-        const add_Id = $('input[name="address_id"]:checked').val();
+    const $btn = $(this);             
+    const od_Id = $btn.data('odid');
+    const add_Id = $('input[name="address_id"]:checked').val();
 
-        if (!add_Id) {
-            $('#messageBox').html('<div class="alert alert-warning">Please select or add an address.</div>').fadeIn().delay(5000).fadeOut();
-            return;
-        }
+    if (!add_Id) {
+        $('#messageBox').html('<div class="alert alert-warning">Please select or add an address.</div>').fadeIn().delay(5000).fadeOut();
+        return;
+    }
 
-        $.ajax({
-            url: "<?= base_url('OrderNow/submitfrm') ?>",
-            type: "POST",
-            data: { od_Id, add_Id },
-            dataType: "json",
-            success: function(res) {
-                if (res.status == 1) {
-                    $('#messageBox')
-                        .html('<div class="alert alert-success">' + res.msg + '</div>')
-                        .fadeIn()
-                        .delay(5000)
-                        .fadeOut(function(){
-                            window.location.href = res.redirect;
-                        });
-                } else {
-                    $('#messageBox')
-                        .html('<div class="alert alert-danger">' + res.msg + '</div>')
-                        .fadeIn()
-                        .delay(5000)
-                        .fadeOut();
-                }
-                $('html, body').animate({
-                    scrollTop: $('#messageBox').offset().top - 100
-                }, 'slow');
-            },
-            error: function() {
-                $('#messageBox').html('<div class="alert alert-danger">Failed to submit order.</div>').fadeIn().delay(5000).fadeOut();
+    $btn.prop('disabled', true);      
+    $btn.text('Processing...');      
 
-                $('html, body').animate({
-                    scrollTop: $('#messageBox').offset().top - 100
-                }, 'slow');
+    $.ajax({
+        url: "<?= base_url('OrderNow/submitfrm') ?>",
+        type: "POST",
+        data: { od_Id, add_Id },
+        dataType: "json",
+        success: function(res) {
+            if (res.status == 1) {
+                $('#messageBox')
+                    .html('<div class="alert alert-success">' + res.msg + '</div>')
+                    .fadeIn()
+                    .delay(5000)
+                    .fadeOut(function() {
+                        window.location.href = res.redirect;
+                    });
+            } else {
+                $('#messageBox')
+                    .html('<div class="alert alert-danger">' + res.msg + '</div>')
+                    .fadeIn()
+                    .delay(5000)
+                    .fadeOut();
+                $btn.prop('disabled', false).text('Confirm Order'); 
             }
-        });
+
+            $('html, body').animate({
+                scrollTop: $('#messageBox').offset().top - 100
+            }, 'slow');
+        },
+        error: function() {
+            $('#messageBox').html('<div class="alert alert-danger">Failed to submit order.</div>').fadeIn().delay(5000).fadeOut();
+            $btn.prop('disabled', false).text('Confirm Order'); 
+
+            $('html, body').animate({
+                scrollTop: $('#messageBox').offset().top - 100
+            }, 'slow');
+        }
     });
+});
+
 });
 </script>

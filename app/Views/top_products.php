@@ -49,12 +49,12 @@ $next20 = array_slice($latestProducts, 20, 20);
                                     &nbsp;
                                     <!-- Selling Price -->
                                     <span>
-                                        <i class="bi bi-currency-rupee"></i><?= esc($item['pr_Selling_Price']); ?>
+                                        <i class="bi bi-currency-rupee"></i><?= esc(round($item['pr_Selling_Price'])); ?>
                                     </span>
                                 <?php else: ?>
                                     <!-- Only Selling Price -->
                                     <span>
-                                        <i class="bi bi-currency-rupee"></i><?= esc($item['pr_Selling_Price']); ?>
+                                        <i class="bi bi-currency-rupee"></i><?= esc(round($item['pr_Selling_Price'])); ?>
                                     </span>
                                 <?php endif; ?>
                             </div>
@@ -93,7 +93,7 @@ $next20 = array_slice($latestProducts, 20, 20);
                                 </div>
                                 <div class="item-name p-1"><?= esc($item['pr_Name']); ?></div>
                                 <div class="item-price"><i
-                                        class="bi bi-currency-rupee"></i>&nbsp;<?= esc($item['pr_Selling_Price']); ?></div>
+                                        class="bi bi-currency-rupee"></i>&nbsp;<?= esc(round($item['pr_Selling_Price'])); ?></div>
                                 <div class="col-md-12 text-center">
                                     <button class="order-btn"
                                         onclick="window.location.href='<?= base_url('product/product_details/' . $item['pr_Id']); ?>'"></button>

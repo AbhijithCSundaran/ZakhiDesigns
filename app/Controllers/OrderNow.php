@@ -194,86 +194,128 @@ class OrderNow extends Controller
         require 'vendors/src/Exception.php';
         require 'vendors/src/PHPMailer.php';
         require 'vendors/src/SMTP.php';
-
         $mail = new PHPMailer(true);
-
-        try {
+       try {
+            // === SHARED CONFIGURATION ===
+            $mail = new PHPMailer(true);
             $mail->isSMTP();
-            $mail->Host       = 'smtp.gmail.com';  
+            $mail->Host       = 'smtp.gmail.com';
             $mail->SMTPAuth   = true;
-            $mail->Username   = 'smartloungework@gmail.com'; 
+            $mail->Username   = 'smartloungework@gmail.com';
             $mail->Password   = 'peetkiqeqbgxaxqs';
-            $mail->SMTPSecure = 'tls'; 
+            $mail->SMTPSecure = 'tls';
             $mail->Port       = 587;
 
+            // === CUSTOMER EMAIL ===
             $mail->setFrom('smartloungework@gmail.com', 'Smart Lounge');
             $mail->addAddress($customer['add_Email'], $customer['add_Name']);
             $mail->addReplyTo('smartloungework@gmail.com', 'Smart Lounge');
-            $mail->addBCC('smartloungework@gmail.com');
+            // $mail->addBCC('smartloungework@gmail.com');
 
             $mail->isHTML(true);
             $mail->Subject = 'Order Confirmation From Zakhi Designs';
 
-            $addressDetails = implode('<br>', array_filter([
-                $customer['add_BuldingNo'] ?? '',
-                $customer['add_Street'] ?? '',
-                $customer['add_Landmark'] ?? '',
-                $customer['add_City'] ?? '',
-                $customer['add_State'] ?? '',
-                $customer['add_Pincode'] ?? ''
-            ]));
+            $addressParts = array_filter([
+                htmlspecialchars($customer['add_BuldingNo'] ?? ''),
+                htmlspecialchars($customer['add_Street'] ?? ''),
+                htmlspecialchars($customer['add_Landmark'] ?? ''),
+                htmlspecialchars($customer['add_City'] ?? ''),
+                htmlspecialchars($customer['add_State'] ?? ''),
+                htmlspecialchars($customer['add_Pincode'] ?? '')
+            ]);
+
+            $addressDetails = implode('<br>', $addressParts);
+
 
             $logoUrl = base_url(ASSET_PATH . 'assets/images/logo.jpg');
 
-            $mail->Body = "
-                <h3>🛒 Order Confirmation</h3>
-                <table border='1' cellpadding='10' cellspacing='0' style='border-collapse: collapse; width: 100%; font-family: Arial, sans-serif;'>
-                    <tr style='background-color: #f5f5f5;'>
-                        <td colspan='2' align='center'>
-                            <img src='{$logoUrl}' alt='Zakhi Designs Logo' style='height: 60px;'><br>
-                            <strong style='font-size: 18px;'>Zakhi Designs</strong>
-                        </td>
-                    </tr>
-                    <tr><th>Order ID</th><td>{$od_Id}</td></tr>
-                    <tr><th>Product</th><td>{$product->pr_Name}</td></tr>
-                    <tr><th>Product Code</th><td>{$product->pr_Code}</td></tr>
-                    <tr><th>Quantity</th><td>{$order->od_Quantity}</td></tr>
-                    <tr><th>Actual Price</th><td>₹{$order->od_Original_Price}</td></tr>
-                    <tr><th>Discount</th><td>{$order->od_DiscountValue} {$order->od_DiscountType}</td></tr>
-                    <tr><th>Total Price</th><td>₹{$order->od_Grand_Total}</td></tr>
-                    <tr><th>Customer Name</th><td>{$customer['add_Name']}</td></tr>
-                    <tr><th>Email</th><td>{$customer['add_Email']}</td></tr>
-                    <tr><th>Phone</th><td>{$customer['add_Phone']}</td></tr>
-                    <tr><th>Delivery Address</th><td>{$addressDetails}</td></tr>
+            $mail->Body = '
+            <div style="font-family:Arial,sans-serif; max-width:600px; margin:auto; border:1px solid #ccc; padding:20px;">
+                <div style="text-align:center;">
+                    <img src="' . $logoUrl . '" alt="Zakhi Designs Logo" style="max-width:150px;">
+                    <h2 style="color:#d81b60;">Order Confirmation</h2>
+                    <p>Thank you for shopping with Zakhi Designs.</p>
+                </div>
+                <table width="100%" cellpadding="8" cellspacing="0" style="border-collapse:collapse; border:1px solid #ddd; font-size:14px;">
+                    <tr><th align="left" style="padding:6px;">Order ID</th><td style="padding:6px;">' . htmlspecialchars($od_Id) . '</td></tr>
+                    <tr><th align="left" style="padding:6px;">Product</th><td style="padding:6px;">' . htmlspecialchars($product->pr_Name) . '</td></tr>
+                    <tr><th align="left" style="padding:6px;">Product Code</th><td style="padding:6px;">' . htmlspecialchars($product->pr_Code) . '</td></tr>
+                    <tr><th align="left" style="padding:6px;">Quantity</th><td style="padding:6px;">' . htmlspecialchars($order->od_Quantity) . '</td></tr>
+                    <tr><th align="left" style="padding:6px;">Actual Price</th><td style="padding:6px;">₹' . htmlspecialchars($order->od_Original_Price) . '</td></tr>
+                    <tr><th align="left" style="padding:6px;">Discount</th><td style="padding:6px;">' . htmlspecialchars($order->od_DiscountValue . ' ' . $order->od_DiscountType) . '</td></tr>
+                    <tr><th align="left" style="padding:6px;">Total Price</th><td style="padding:6px;"><b>₹' . htmlspecialchars($order->od_Grand_Total) . '</b></td></tr>
+                    <tr><th align="left" style="padding:6px;">Customer Name</th><td style="padding:6px;">' . htmlspecialchars($customer['add_Name']) . '</td></tr>
+                    <tr><th align="left" style="padding:6px;">Email</th><td style="padding:6px;">' . htmlspecialchars($customer['add_Email']) . '</td></tr>
+                    <tr><th align="left" style="padding:6px;">Phone</th><td style="padding:6px;">' . htmlspecialchars($customer['add_Phone']) . '</td></tr>
+                    <tr><th align="left" style="padding:6px;">Delivery Address</th><td style="padding:6px; ">' .$addressDetails . '</td></tr>
+                    
                 </table>
-                <p style='text-align: center; font-size: 16px; margin-top: 20px;'>
+                <p style="margin-top:20px; text-align:center; font-size:15px;">
                     <strong>Thank you for purchasing with Zakhi Designs!</strong><br>
-                    We’re excited to prepare your order. Your item will be delivered in the next 5–7 business days.
+                    Your item will be delivered in the next 5–7 business days.
                 </p>
-                <p style='text-align: center; margin-top: 20px;'>
-                    <a href='https://zakhidesigns.com' style='padding: 10px 20px; background-color: #d81b60; color: white; text-decoration: none; border-radius: 5px;'>Visit Our Website</a>
+                <p style="text-align:center; margin-top:15px;">
+                    <a href="https://v4cstaging.co.in/zakhidesigns_dev/" style="padding:10px 20px; background-color:#d81b60; color:white; text-decoration:none; border-radius:5px;">Visit Our Website</a>
                 </p>
-                <p style='text-align: center; font-size: 14px; color: #555; margin-top: 30px;'>
-                    For any queries, reach us at <a href='mailto:support@zakhidesigns.com'>support@zakhidesigns.com</a>
+                <p style="text-align:center; font-size:13px; color:#555; margin-top:25px;">
+                    For any queries, reach us at <a href="mailto:support@zakhidesigns.com">support@zakhidesigns.com</a>
                 </p>
-            ";
+            </div>';
 
             $mail->AltBody = "Thank you for your order from Zakhi Designs. Order ID: {$od_Id}. Product: {$product->pr_Name}, Quantity: {$order->od_Quantity}. Total: ₹{$order->od_Grand_Total}.";
-
             $mail->send();
+
+            // === ADMIN EMAIL ===
+            $adminMail = new PHPMailer(true);
+            $adminMail->isSMTP();
+            $adminMail->Host       = 'smtp.gmail.com';
+            $adminMail->SMTPAuth   = true;
+            $adminMail->Username   = 'smartloungework@gmail.com';
+            $adminMail->Password   = 'peetkiqeqbgxaxqs';
+            $adminMail->SMTPSecure = 'tls';
+            $adminMail->Port       = 587;
+
+            $adminMail->setFrom('smartloungework@gmail.com', 'Zakhi Designs - Orders');
+            $adminMail->addAddress('smartloungework@gmail.com'); // Admin recipient
+            $adminMail->isHTML(true);
+            $adminMail->Subject = '📦 New Order Received - Order ID: ' . $od_Id;
+
+            $adminMail->Body = '
+            <div style="font-family:Arial,sans-serif; max-width:600px; margin:auto; border:1px solid #ddd; padding:20px;">
+                <div style="text-align:center; margin-bottom:20px;">
+                    <img src="' . $logoUrl . '" alt="Zakhi Designs Logo" style="max-width:180px;">
+
+                    <h2 style="color:#0055a5; margin-top:10px;">New Order Notification</h2>
+                </div>
+
+                <table width="100%" cellpadding="10" cellspacing="0" style="border-collapse:collapse; font-size:14px; border:1px solid #ccc;">
+                    <tr style="background:#f9f9f9;"><th align="left">Order ID</th><td>' . htmlspecialchars($od_Id) . '</td></tr>
+                    <tr><th align="left">Customer</th><td>' . htmlspecialchars($customer['add_Name']) . '</td></tr>
+                    <tr><th align="left">Email</th><td>' . htmlspecialchars($customer['add_Email']) . '</td></tr>
+                    <tr><th align="left">Phone</th><td>' . htmlspecialchars($customer['add_Phone']) . '</td></tr>
+                    <tr><th align="left">Address</th><td>' . nl2br(htmlspecialchars($customer['add_Address'] ?? '')) . '</td></tr>
+                    <tr><th align="left">Product</th><td>' . htmlspecialchars($product->pr_Name) . ' (' . htmlspecialchars($product->pr_Code) . ')</td></tr>
+                    <tr><th align="left">Quantity</th><td>' . htmlspecialchars($order->od_Quantity) . '</td></tr>
+                    <tr><th align="left">Total</th><td><strong>₹' . number_format($order->od_Grand_Total) . '</strong></td></tr>
+                </table>
+
+                <p style="margin-top:20px;">Please check the admin panel for full details.</p>
+                <p><strong>Thank you,<br>Team Zakhi Designs</strong></p>
+            </div>';
+
+            $adminMail->AltBody = "Kindly proceed to pack the item and update the order status accordingly.";
+            $adminMail->send();
 
             return $this->response->setJSON([
                 'status' => 1,
                 'msg'    => 'Thank You! Your Order is Confirmed. Continue Shopping To Explore More Great Products',
                 'redirect' => base_url('product/viewcollection')
             ]);
-
         } catch (Exception $e) {
-            return $this->response->setJSON([
-                'status' => 0,
-                'msg'    => 'Failed to send order email. Mailer Error: ' . $mail->ErrorInfo
-            ]);
-        }
-
+                    return $this->response->setJSON([
+                        'status' => 0,
+                        'msg'    => 'Failed to send order email. Mailer Error: ' . $mail->ErrorInfo
+                    ]);
+                }
     }
 }

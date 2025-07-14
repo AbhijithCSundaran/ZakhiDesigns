@@ -1,25 +1,9 @@
 <script>
-    const phoneInput = document.querySelector("#phone");
-    const iti = window.intlTelInput(phoneInput, {
-        initialCountry: "in",
-        separateDialCode: true,
-        utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.19/js/utils.js"
-    });
-
-    document.querySelector("#updateProfileForm").addEventListener("submit", function (e) {
-        const fullNumber = iti.getNumber();
-        phoneInput.value = fullNumber;
-    });
-    
   $(document).ready(function () {
     const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
     // Profile Update Validation
-	 $('#phone').on('input', function () {
-        let value = $(this).val();
-        let filtered = value.replace(/[^0-9\s\-]/g, '');
-        $(this).val(filtered);
-    });
+	
 $(document).ready(function () {
     $('#updateProfileForm').on('submit', function (e) {
         e.preventDefault();

@@ -8,7 +8,7 @@ class ProfileModel extends Model
 {
     protected $table = 'user';
     protected $primaryKey = 'us_Id';
-    protected $allowedFields = ['us_Name', 'us_Email', 'us_Password','us_Phone'];
+    protected $allowedFields = ['us_Name', 'us_Email', 'us_Password'];
 	protected $returnType = 'array'; 
     public function getProfileById($us_Id)
     {

@@ -24,10 +24,16 @@
             <div class="col-md-3">
                 <h4>Products<h4>
                         <ul>
-                            <li><i class="bi bi-arrow-right"></i><a class="foot-link" href="<?= base_url('product/product_list'); ?>">Price Drop</li>
-                            <li><i class="bi bi-arrow-right"></i><a class="foot-link" href="<?= base_url('product/product_list'); ?>">Products</a></li>
-                            <li><i class="bi bi-arrow-right"></i><a class="foot-link" href="<?= base_url('/#top-products'); ?>">Best Sellers</a></li>
-                            <li><i class="bi bi-arrow-right"></i><a class="foot-link" href="<?= base_url(); ?>">Sitemap</a></li>
+                            <li><i class="bi bi-arrow-right"></i><a class="foot-link"
+                                    href="<?= base_url('product/product_list'); ?>">Price Drop</li>
+                            <li><i class="bi bi-arrow-right"></i><a class="foot-link"
+                                    href="<?= base_url('product/product_list'); ?>">Products</a></li>
+                            <li>
+                                <i class="bi bi-arrow-right"></i>
+                                <a class="foot-link" href="<?= base_url('/#top-products'); ?>">Best Sellers</a>
+                            </li>
+                            <li><i class="bi bi-arrow-right"></i><a class="foot-link"
+                                    href="<?= base_url(); ?>">Sitemap</a></li>
                         </ul>
             </div>
             <div class="col-md-3">
@@ -55,9 +61,9 @@
         </div>
         <div class="row">
                 <div class="col-md-12 text-center social-ico">
-                <i class="bi bi-facebook"></i>
+                <a href="https://www.facebook.com/zakhidesigns" target="_blank"  style="color:white;"><i class="bi bi-facebook"></i></a>
                 <i class="bi bi-twitter"></i>
-                <i class="bi bi-instagram"></i>
+                <a href="https://www.instagram.com/zakhidesigns/?hl=en" target="_blank" style="color:white;"><i class="bi bi-instagram"></i></a>
                 <i class="bi bi-youtube"></i>
             </div>
         </div>
@@ -75,8 +81,6 @@
 <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
-<!-- Bootstrap 5 Bundle -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
 <script>
     function openRespMenu() {
@@ -163,15 +167,6 @@
             });
         });
 
-        $(document).on('click', '#showLoginFromFrgt', function (e) {
-            e.preventDefault();
-
-            $('#modalBody').load("<?= base_url('weblogin'); ?>", function () {
-                $('#mainModal').modal('show');
-            });
-        });
-
-
 
 
         // Login form submission (delegated because it's loaded dynamically)
@@ -228,7 +223,7 @@
             }
 
             // Validate phone number (10 digits only)
-            if (!/^\d{7,20}$/.test(phone)) {
+            if (!/^\d{7,15}$/.test(phone)) {
                 $('#regError').html('Phone number must be between 7 and 15 digits.');
                 return;
             }

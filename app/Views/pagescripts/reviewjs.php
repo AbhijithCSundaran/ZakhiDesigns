@@ -31,4 +31,23 @@ document.getElementById("reviewForm").addEventListener("submit", function(e) {
         }, 3000);
     });
 });
+
+    document.addEventListener("DOMContentLoaded", function () {
+        const stars = document.querySelectorAll("#starRating i");
+        const ratingInput = document.getElementById("ratingInput");
+
+        stars.forEach(star => {
+            star.addEventListener("click", function () {
+                const rating = this.getAttribute("data-value");
+                ratingInput.value = rating;
+
+                // Highlight stars
+                stars.forEach(s => {
+                    s.classList.toggle("active", s.getAttribute("data-value") <= rating);
+                });
+            });
+        });
+    });
+
+
 </script>

@@ -135,17 +135,19 @@
 
     <!-- Modal Skeleton -->
     <div class="modal fade" id="mainModal" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                </div>
-                <div class="modal-body" id="modalBody">
-                    <!-- AJAX content will load here -->
-                </div>
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="btn ms-auto" data-bs-dismiss="modal" aria-label="Close" style="border: none; background: none;">
+                 <i class="bi bi-x"></i>
+                </button>
+            </div>
+            <div class="modal-body" id="modalBody">
+                <!-- AJAX content will load here -->
             </div>
         </div>
     </div>
+</div>
 
     <script>
         function searchProduct() {

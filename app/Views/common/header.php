@@ -138,7 +138,12 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    <div class="modal-header border-0">
+                        <button type="button" class="btn ms-auto p-0" data-bs-dismiss="modal" aria-label="Close"
+                            style="border: none; background: none;">
+                            <i class="bi bi-x"></i>
+                        </button>
+                    </div>
                 </div>
                 <div class="modal-body" id="modalBody">
                     <!-- AJAX content will load here -->

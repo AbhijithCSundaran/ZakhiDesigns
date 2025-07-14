@@ -41,8 +41,15 @@
         <button type="submit" class="btn btn-primary">Create Now</button>
     </div>
     <div class="d-flex mt-2">
-        <p> Already have an account with us ? </p>
-        <a href="" class="ms-2" id="showLoginFromRegister">Login</a>
+        <p class="mb-0">Already have an account with us?</p>
+        <a href="#" class="ms-2 text-decoration-none" id="showLoginFromRegister">Login</a>
+    </div>
+    <div class="text-center mt-2 px-3">
+        <small style="font-size: 13px; color: #6c757d;">
+            By continuing, you agree to ZakhiDesigns
+            <a href="Termsandconditions" class="text-decoration-none">Terms & Conditions</a> of Use and
+            <a href="Privacypolicy" class="text-decoration-none"> Privacy Policy </a> Notice.
+        </small>
     </div>
 
 </form>

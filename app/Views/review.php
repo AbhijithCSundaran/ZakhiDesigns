@@ -14,15 +14,36 @@
 				<label>Email</label>
 				<input name="email" class="form-control" value="<?= esc($customer['cust_Email'] ?? '') ?>" required />
 			</div>
-        <div class="form-group col-md-6">
-            <label>Rating</label>
-            <select name="rating" class="form-control" required>
-                <option value="">Select Rating</option>
-                <?php for ($i = 1; $i <= 5; $i++): ?>
-                    <option value="<?= $i ?>"><?= $i ?> Star<?= $i > 1 ? 's' : '' ?></option>
-                <?php endfor; ?>
-            </select>
-        </div>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+
+<style>
+    .star-rating {
+        direction: ltr;
+        display: flex;
+        gap: 5px;
+        cursor: pointer;
+    }
+
+    .star-rating i {
+        font-size: 24px;
+        color: #ccc;
+    }
+
+    .star-rating i.active {
+        color: #f8e007f6;
+    }
+</style>
+
+<div class="form-group">
+    <label for="rating">Your Rating</label>
+    <div class="star-rating" id="starRating">
+        <?php for ($i = 1; $i <= 5; $i++): ?>
+            <i class="bi bi-star-fill" data-value="<?= $i ?>"></i>
+        <?php endfor; ?>
+    </div>
+    <input type="hidden" name="rating" id="ratingInput" required>
+</div>
+
         <div class="form-group col-md-6">
             <label>Review</label>
             <textarea name="review" class="form-control" required></textarea>

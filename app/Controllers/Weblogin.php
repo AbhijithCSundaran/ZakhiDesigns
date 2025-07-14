@@ -149,6 +149,16 @@ class Weblogin extends BaseController
 			]);
 		}
 	}
+	public function termsandconditions()
+{
+    return view('terms_and_conditions'); // view file: app/Views/terms_and_conditions.php
+}
+
+public function privacypolicy()
+{
+    return view('privacy_policy'); // view file: app/Views/privacy_policy.php
+}
+
 
 
 	public function logout()

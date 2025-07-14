@@ -52,27 +52,26 @@
 
 		<!-- Address Tab -->
 		<div class="tab-pane fade" id="address" role="tabpanel">
-			<div>&nbsp;</div>
 			
 
-
 			<?php if (session()->getFlashdata('message')): ?>
-    <div class="alert alert-success" id="flashMessage">
-        <?= session()->getFlashdata('message') ?>
-    </div>
-<?php endif; ?>
+				<div class="alert alert-success" id="flashMessage">
+					<?= session()->getFlashdata('message') ?>
+				</div>
+			<?php endif; ?>
 
 			<div id="addressList">
 				<div class="row">
-					<div class="col-md-6">
-						<?php foreach ($addresses as $addr): ?>
-							<div class="card p-2 mb-2">
+					<?php foreach ($addresses as $addr): ?>
+						<div class="col-md-6 mb-3">
+							<div class="card p-3 h-100">
 								<strong><?= esc($addr['add_Name']) ?></strong><br>
 								<?= esc($addr['add_BuldingNo']) ?>, <?= esc($addr['add_Street']) ?><br>
 								<?= esc($addr['add_Landmark']) ?><br>
 								<?= esc($addr['add_City']) ?>, <?= esc($addr['add_State']) ?> -
 								<?= esc($addr['add_Pincode']) ?><br>
 								Phone: <?= esc($addr['add_Phone']) ?> | Email: <?= esc($addr['add_Email']) ?><br>
+
 								<div class="mt-2">
 									<a href="javascript:void(0)" onclick="editAddress(<?= $addr['add_Id'] ?>)">Edit</a> |
 									<a href="#" onclick="openDeleteModal(<?= $addr['add_Id'] ?>)">Remove</a>
@@ -84,141 +83,145 @@
 									<?php endif; ?>
 								</div>
 							</div>
-							<div> &nbsp; </div>
-						<?php endforeach; ?>
+						</div>
+					<?php endforeach; ?>
+
+					<div class="col-12">
 						<button class="btn btn-success mb-2" onclick="openAddAddressForm()">+ Add Address</button>
-
 					</div>
-					<div id="addressFormContainer" style="display:none">
-						<div class="row">
-							<div class="col-md-6">
-								<form id="addressForm">
-									<input type="hidden" name="id" id="addressId" />
-									<div class="mb-2">
-										<input type="text" class="form-control" id="newName" name="newName"
-											placeholder="Full Name" required>
-									</div>
-									<div class="mb-2"><input type="email" class="form-control" id="newEmail"
-											name="newEmail" placeholder="Email" required></div>
-									<div class="mb-2">
-										<input type="tel" class="form-control" id="newPhone" name="newPhone"
-											placeholder="Phone" maxlength="15" minlength="7" pattern="^\d{7,15}$"
-											required
-											oninvalid="this.setCustomValidity('Phone Number Must Be Minimum of 7 Digits.')"
-											oninput="this.setCustomValidity('')">
-									</div>
-									<div class="mb-2"><input type="text" class="form-control" id="newBuilding"
-											name="newBuilding" placeholder="Building No." required></div>
-									<div class="mb-2"><input type="text" class="form-control" id="newStreet"
-											name="newStreet" placeholder="Street" required></div>
-									<div class="mb-2"><input type="text" class="form-control" id="newLandmark"
-											name="newLandmark" placeholder="Landmark" required></div>
-									<div class="mb-2"><input type="text" class="form-control" id="newCity"
-											name="newCity" placeholder="City" required></div>
-									<div class="mb-2"><input type="text" class="form-control" id="newState"
-											name="newState" placeholder="State" required></div>
-									<div class="mb-2">
-										<input type="text" class="form-control" id="newPincode" name="newPincode"
-											placeholder="Pincode" maxlength="6" pattern="[1-9][0-9]{5}" required>
-									</div>
-									<label><input type="checkbox" name="is_default" /> Default</label>
-									<div class="text-end">
-										<button class="btn btn-secondary mt-2 me-2" type="button"
-											onclick="discardAddressForm()">Discard</button>
-										<button class="btn btn-success mt-2" type="submit">Save Address</button>
-									</div>
-								</form>
-							</div>
+				</div>
+
+				<div id="addressFormContainer" style="display:none">
+					<div class="row">
+						<div class="col-md-6">
+							<form id="addressForm">
+								<input type="hidden" name="id" id="addressId" />
+								<div class="mb-2">
+									<input type="text" class="form-control" id="newName" name="newName"
+										placeholder="Full Name" required>
+								</div>
+								<div class="mb-2"><input type="email" class="form-control" id="newEmail" name="newEmail"
+										placeholder="Email" required></div>
+								<div class="mb-2">
+									<input type="tel" class="form-control" id="newPhone" name="newPhone"
+										placeholder="Phone" maxlength="15" minlength="7" pattern="^\d{7,15}$" required
+										oninvalid="this.setCustomValidity('Phone Number Must Be Minimum of 7 Digits.')"
+										oninput="this.setCustomValidity('')">
+								</div>
+								<div class="mb-2"><input type="text" class="form-control" id="newBuilding"
+										name="newBuilding" placeholder="Building No." required></div>
+								<div class="mb-2"><input type="text" class="form-control" id="newStreet"
+										name="newStreet" placeholder="Street" required></div>
+								<div class="mb-2"><input type="text" class="form-control" id="newLandmark"
+										name="newLandmark" placeholder="Landmark" required></div>
+								<div class="mb-2"><input type="text" class="form-control" id="newCity" name="newCity"
+										placeholder="City" required></div>
+								<div class="mb-2"><input type="text" class="form-control" id="newState" name="newState"
+										placeholder="State" required></div>
+								<div class="mb-2">
+									<input type="text" class="form-control" id="newPincode" name="newPincode"
+										placeholder="Pincode" maxlength="6" pattern="[1-9][0-9]{5}" required>
+								</div>
+								<label><input type="checkbox" name="is_default" /> Default</label>
+								<div class="text-end">
+									<button class="btn btn-secondary mt-2 me-2" type="button"
+										onclick="discardAddressForm()">Discard</button>
+									<button class="btn btn-success mt-2" id="saveAddressBtn" type="submit">Save
+										Address</button>
+								</div>
+							</form>
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
-		<!-- Orders Tab -->
-		<div class="tab-pane fade" id="orders" role="tabpanel">
-			<div>&nbsp;</div>
-			<div class="row">
-				<?php foreach ($orders as $order): ?>
-					<?php
-					$decoded = json_decode($order['product_images'], true);
-					$firstImage = is_array($decoded) && isset($decoded[0]['name'][0])
-						? base_url('uploads/productmedia/' . $decoded[0]['name'][0])
-						: base_url('assets/img/no-image.png');
-					?>
-					<div class="col-md-6 mb-4">
-						<div class="card p-3 shadow-sm h-100">
-							<div class="row g-3 align-items-center">
-								<div class="col-md-4">
-									<a href="<?= base_url('product/product_details/' . $order['pr_Id']); ?>">
-										<img src="<?= esc($firstImage) ?>" class="img-fluid rounded"
-											style="max-width: 100%;" alt="Product Image" />
-									</a>
-								</div>
-								<div class="col-md-8">
-									<a href="<?= base_url('product/product_details/' . $order['pr_Id']); ?>"
-										class="text-decoration-none text-dark">
-										<strong><?= esc($order['pr_Name']) ?></strong><br>
-									</a>
-									Date: <?= date('d M Y', strtotime($order['od_createdon'])) ?><br>
-									Size: <?= esc($order['od_Size']) ?><br>
-									Quantity: <?= esc($order['od_Quantity']) ?><br>
-									<?php
-                                    $statusMap = [
-                                        1 => 'New',
-                                        2 => 'Confirmed',
-                                        3 => 'Packed',
-                                        4 => 'Dispatched'
-                                    ];
-                                    ?>
-                                    <b>Status:</b> <?= esc($statusMap[$order['od_Status']] ?? 'Unknown') ?><br>
-                                    <?php if ($order['od_Status'] == 4): ?>
-                                        <b>Track your product:</b> <a href="<?= esc($order['tracker_Link']) ?>" target="_blank"><?= esc($order['tracker_Link']) ?></a><br>
-                                    <?php endif; ?>
-									<a href="<?= base_url('review/' . $order['cus_Id'] . '/' . $order['pr_Id']) ?>"
-										class="btn btn-link p-0 mt-2">Write Review</a>
+	</div>
+	<!-- Orders Tab -->
+	<div class="tab-pane fade" id="orders" role="tabpanel">
+		<div>&nbsp;</div>
+		<div class="row">
+			<?php foreach ($orders as $order): ?>
+				<?php
+				$decoded = json_decode($order['product_images'], true);
+				$firstImage = is_array($decoded) && isset($decoded[0]['name'][0])
+					? base_url('uploads/productmedia/' . $decoded[0]['name'][0])
+					: base_url('assets/img/no-image.png');
+				?>
+				<div class="col-md-6 mb-4">
+					<div class="card p-3 shadow-sm h-100">
+						<div class="row g-3 align-items-center">
+							<div class="col-md-4">
+								<a href="<?= base_url('product/product_details/' . $order['pr_Id']); ?>">
+									<img src="<?= esc($firstImage) ?>" class="img-fluid rounded" style="max-width: 100%;"
+										alt="Product Image" />
+								</a>
+							</div>
+							<div class="col-md-8">
+								<a href="<?= base_url('product/product_details/' . $order['pr_Id']); ?>"
+									class="text-decoration-none text-dark">
+									<strong><?= esc($order['pr_Name']) ?></strong><br>
+								</a>
+								Date: <?= date('d M Y', strtotime($order['od_createdon'])) ?><br>
+								Size: <?= esc($order['od_Size']) ?><br>
+								Quantity: <?= esc($order['od_Quantity']) ?><br>
+								<?php
+								$statusMap = [
+									1 => 'New',
+									2 => 'Confirmed',
+									3 => 'Packed',
+									4 => 'Dispatched'
+								];
+								?>
+								<b>Status:</b> <?= esc($statusMap[$order['od_Status']] ?? 'Unknown') ?><br>
+								<?php if ($order['od_Status'] == 4): ?>
+									<b>Track your product:</b> <a href="<?= esc($order['tracker_Link']) ?>"
+										target="_blank"><?= esc($order['tracker_Link']) ?></a><br>
+								<?php endif; ?>
+								<a href="<?= base_url('review/' . $order['cus_Id'] . '/' . $order['pr_Id']) ?>"
+									class="btn btn-link p-0 mt-2">Write Review</a>
 
-								</div>
 							</div>
 						</div>
 					</div>
-				<?php endforeach; ?>
-			</div>
-
-		</div>
-		<!-- Change Password Tab -->
-		<div class="tab-pane fade" id="password" role="tabpanel">
-			<div>&nbsp;</div>
-			<div class="row">
-				<div class="col-md-6">
-					<form id="changePasswordForm" method="post">
-						<div class="mb-2 position-relative">
-							<input type="password" name="oldPassword" id="oldPassword" class="form-control"
-								maxlength="15" placeholder="Old Password">
-							<i class="toggle-password fa fa-eye-slash position-absolute"
-								style="top: 12px; right: 10px; cursor: pointer;" data-target="oldPassword"></i>
-						</div>
-						<div class="mb-2 position-relative">
-							<input type="password" name="newPassword" id="newPassword" class="form-control"
-								maxlength="15" placeholder="New Password">
-							<i class="toggle-password fa fa-eye-slash position-absolute"
-								style="top: 12px; right: 10px; cursor: pointer;" data-target="newPassword"></i>
-						</div>
-						<div class="mb-2 position-relative">
-							<input type="password" name="confirmPassword" id="confirmPassword" class="form-control"
-								maxlength="15" placeholder="Confirm Password">
-							<i class="toggle-password fa fa-eye-slash position-absolute"
-								style="top: 12px; right: 10px; cursor: pointer;" data-target="confirmPassword"></i>
-						</div>
-						<div class="text-end">
-							<button class="btn btn-primary mt-2" type="submit">Update Password</button>
-						</div>
-						<div id="passwordResponse" class="mt-2"></div>
-					</form>
 				</div>
-			</div>
+			<?php endforeach; ?>
 		</div>
 
 	</div>
+	<!-- Change Password Tab -->
+	<div class="tab-pane fade" id="password" role="tabpanel">
+		<div>&nbsp;</div>
+		<div class="row">
+			<div class="col-md-6">
+				<form id="changePasswordForm" method="post">
+					<div class="mb-2 position-relative">
+						<input type="password" name="oldPassword" id="oldPassword" class="form-control" maxlength="15"
+							placeholder="Old Password">
+						<i class="toggle-password fa fa-eye-slash position-absolute"
+							style="top: 12px; right: 10px; cursor: pointer;" data-target="oldPassword"></i>
+					</div>
+					<div class="mb-2 position-relative">
+						<input type="password" name="newPassword" id="newPassword" class="form-control" maxlength="15"
+							placeholder="New Password">
+						<i class="toggle-password fa fa-eye-slash position-absolute"
+							style="top: 12px; right: 10px; cursor: pointer;" data-target="newPassword"></i>
+					</div>
+					<div class="mb-2 position-relative">
+						<input type="password" name="confirmPassword" id="confirmPassword" class="form-control"
+							maxlength="15" placeholder="Confirm Password">
+						<i class="toggle-password fa fa-eye-slash position-absolute"
+							style="top: 12px; right: 10px; cursor: pointer;" data-target="confirmPassword"></i>
+					</div>
+					<div class="text-end">
+						<button class="btn btn-primary mt-2" type="submit">Update Password</button>
+					</div>
+					<div id="passwordResponse" class="mt-2"></div>
+				</form>
+			</div>
+		</div>
+	</div>
+
+</div>
 </div>
 <div>&nbsp; </div>
 </div>
@@ -278,7 +281,7 @@
 				<form method="post" action="<?= base_url('profile/deleteAddress') ?>">
 					<input type="hidden" id="delete_add_id" name="add_Id">
 					<div class="d-flex justify-content-center gap-2">
-						 <button type="submit"  onclick="confirmDeleteAddress()"  class="btn btn-primary px-4">Yes</button>
+						<button type="submit" onclick="confirmDeleteAddress()" class="btn btn-primary px-4">Yes</button>
 						<button type="button" class="btn px-4" style="background-color: black; color: white;"
 							data-bs-dismiss="modal">No</button>
 					</div>

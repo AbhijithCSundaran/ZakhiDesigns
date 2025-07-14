@@ -56,6 +56,11 @@
                                     <input type="text" name="us_Email" class="form-control"
                                         value="<?= esc($user['us_Email'] ?? '') ?>" required>
                                 </div>
+                                <div class="form-group">
+                                    <label>Phone number</label>
+                                    <input type="tel" id="phone" name="us_Phone" class="form-control"
+                                        value="<?= esc($user['us_Phone'] ?? '') ?>" required>
+                                </div> 
                                 <button type="submit" class="btn btn-primary">Update Profile</button>
                             </form>
                         </div>

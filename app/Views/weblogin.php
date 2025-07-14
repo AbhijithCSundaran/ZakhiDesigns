@@ -26,11 +26,11 @@
     </div>
 
    <div id="g_id_onload"
-        data-client_id="YOUR_GOOGLE_CLIENT_ID"
+        data-client_id="89279377857-k55fvvqvtbk9nib9mc04jfsdgb9k00gn.apps.googleusercontent.com"
         data-context="signin"
-        data-login_uri="https://v4cstaging.co.in/google-login-callback.php"
+        data-login_uri="https://v4cstaging.co.in/zakhidesigns/google-login-callback"
         data-auto_prompt="false">
-    </div>
+    </div><br/>
  
     <div class="g_id_signin"
         data-type="standard"
@@ -52,6 +52,8 @@
 
    
 </form>
+<!-- google sign  -->
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
 
 <script>
     $(document).ready(function() {

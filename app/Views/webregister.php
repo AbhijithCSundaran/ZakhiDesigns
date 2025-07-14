@@ -2,7 +2,7 @@
     <div class="text-center logo ">
         <img class="img-align" src="<?php echo base_url() . ASSET_PATH; ?>assets/images/logo.jpg" />
     </div>
-    <h5 class="text-center">Welcome to ZakhiDesigns </h5>
+    <h5 class="text-center">Create New Account</h5>
 </div>
 <div id="regError" class="text-danger text-center p-2"></div>
 <form id="registerForm" method="post">
@@ -17,7 +17,7 @@
     </div>
 
     <div class="floating-label-group">
-        <input type="text" class="form-control" id="number" name="mobile" maxlength="20"  minlength="7" placeholder=" " required />
+        <input type="text" class="form-control" id="number" name="mobile" maxlength="15"  minlength="7" placeholder=" " required />
         <label for="number">Phone Number</label>
     </div>
 
@@ -41,17 +41,9 @@
         <button type="submit" class="btn btn-primary">Create Now</button>
     </div>
     <div class="d-flex mt-2">
-    <p class="mb-0">Already have an account with us?</p>
-    <a href="#" class="ms-2 text-decoration-none" id="showLoginFromRegister">Login</a>
-</div>
-<div class="text-center mt-2 px-3">
-    <small style="font-size: 13px; color: #6c757d;">
-        By continuing, you agree to ZakhiDesigns 
-        <a href="Termsandconditions" class="text-decoration-none">Terms & Conditions</a> of Use and 
-        <a href="Privacypolicy" class="text-decoration-none"> Privacy Policy </a> Notice.
-    </small>
-</div>
-
+        <p> Already have an account with us ? </p>
+        <a href="" class="ms-2" id="showLoginFromRegister">Login</a>
+    </div>
 
 </form>
 

@@ -70,7 +70,6 @@ function discardAddressForm() {
     $('#addressFormContainer').hide();
     $('#addressForm')[0].reset();
     $('#addressId').val('');
-    $('#saveAddressBtn').prop('disabled', false);
 }
 
 
@@ -126,7 +125,6 @@ $('#addressForm').submit(function(e) {
     const url = id ? 'profile/address/edit' : 'profile/address/add';
     $.post("<?= base_url() ?>" + url, $(this).serialize(), function(res) {
         if (res.status === 'success') {
-            $('#saveAddressBtn').prop('disabled', true); 
             showMessage('Address Saved Successfully!', 'success');
             setTimeout(() => location.reload(), 3000);
         } else {

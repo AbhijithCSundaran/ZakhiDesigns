@@ -106,7 +106,7 @@ $zd_uid = session()->get('zd_uid');
                             <div class="col-md-12"><b>Size</b></div>
                             <?php $sizes = explode(',', $product['pr_Size']); ?>
                             <select name="size" id="size" style="width: 100px;" required>
-                                <option value=""></option>
+                                <option value="">Size</option>
                                 <?php foreach ($sizes as $size): ?>
                                     <option value="<?= esc(trim($size)) ?>" <?= trim($size) == ($selectedSize ?? '') ? 'selected' : '' ?>>
                                         <?= esc(trim($size)) ?>

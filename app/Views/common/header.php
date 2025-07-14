@@ -4,7 +4,8 @@
 <head>
     <title>Zakhi Designs</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    
+    <meta name="google-signin-client_id"
+        content="980312560634-kksn59gmuu5p4rg68tnd2vaooe7lfdfu.apps.googleusercontent.com">
 
     <link rel="stylesheet" href="<?= base_url() . ASSET_PATH; ?>assets/css/bootstrap.min.css">
     <link rel="stylesheet" href="<?= base_url() . ASSET_PATH; ?>assets/css/customstyle.css">
@@ -30,7 +31,8 @@
 
     <!-- Swiper JS -->
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-    
+
+
 </head>
 
 <body>
@@ -38,9 +40,7 @@
         <div class="container-lg" style="top:0px;">
             <div class="row head-row">
                 <div class="col-6 logo">
-                    <a href="<?= base_url(); ?>">
-                        <img src="<?= base_url() . ASSET_PATH; ?>assets/images/logo.jpg" alt="Logo" />
-                    </a>
+                    <img src="<?= base_url() . ASSET_PATH; ?>assets/images/logo.jpg" alt="Logo" />
                 </div>
                 <div class="col-6">
                     <div class="row">
@@ -135,19 +135,17 @@
 
     <!-- Modal Skeleton -->
     <div class="modal fade" id="mainModal" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="btn ms-auto" data-bs-dismiss="modal" aria-label="Close" style="border: none; background: none;">
-                 <i class="bi bi-x"></i>
-                </button>
-            </div>
-            <div class="modal-body" id="modalBody">
-                <!-- AJAX content will load here -->
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body" id="modalBody">
+                    <!-- AJAX content will load here -->
+                </div>
             </div>
         </div>
     </div>
-</div>
 
     <script>
         function searchProduct() {

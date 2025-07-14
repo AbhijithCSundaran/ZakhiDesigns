@@ -210,7 +210,7 @@ class OrderNow extends Controller
             $mail->setFrom('smartloungework@gmail.com', 'Smart Lounge');
             $mail->addAddress($customer['add_Email'], $customer['add_Name']);
             $mail->addReplyTo('smartloungework@gmail.com', 'Smart Lounge');
-            // $mail->addBCC('smartloungework@gmail.com');
+            $mail->addBCC('smartloungework@gmail.com');
 
             $mail->isHTML(true);
             $mail->Subject = 'Order Confirmation From Zakhi Designs';
@@ -281,29 +281,18 @@ class OrderNow extends Controller
             $adminMail->Subject = '📦 New Order Received - Order ID: ' . $od_Id;
 
             $adminMail->Body = '
-            <div style="font-family:Arial,sans-serif; max-width:600px; margin:auto; border:1px solid #ddd; padding:20px;">
-                <div style="text-align:center; margin-bottom:20px;">
-                    <img src="' . $logoUrl . '" alt="Zakhi Designs Logo" style="max-width:180px;">
+                <p style="font-family:Arial,sans-serif;">You have received a new order:</p>
+                <ul style="font-family:Arial,sans-serif;">
+                    <li><strong>Order ID:</strong> ' . htmlspecialchars($od_Id) . '</li>
+                    <li><strong>Customer:</strong> ' . htmlspecialchars($customer['add_Name']) . '</li>
+                    <li><strong>Email:</strong> ' . htmlspecialchars($customer['add_Email']) . '</li>
+                    <li><strong>Phone:</strong> ' . htmlspecialchars($customer['add_Phone']) . '</li>
+                    <li><strong>Product:</strong> ' . htmlspecialchars($product->pr_Name) . ' (' . htmlspecialchars($product->pr_Code) . ')</li>
+                    <li><strong>Quantity:</strong> ' . htmlspecialchars($order->od_Quantity) . '</li>
+                    <li><strong>Total:</strong> ₹' . htmlspecialchars($order->od_Grand_Total) . '</li>
+                </ul>';
 
-                    <h2 style="color:#0055a5; margin-top:10px;">New Order Notification</h2>
-                </div>
-
-                <table width="100%" cellpadding="10" cellspacing="0" style="border-collapse:collapse; font-size:14px; border:1px solid #ccc;">
-                    <tr style="background:#f9f9f9;"><th align="left">Order ID</th><td>' . htmlspecialchars($od_Id) . '</td></tr>
-                    <tr><th align="left">Customer</th><td>' . htmlspecialchars($customer['add_Name']) . '</td></tr>
-                    <tr><th align="left">Email</th><td>' . htmlspecialchars($customer['add_Email']) . '</td></tr>
-                    <tr><th align="left">Phone</th><td>' . htmlspecialchars($customer['add_Phone']) . '</td></tr>
-                    <tr><th align="left">Address</th><td>' . nl2br(htmlspecialchars($customer['add_Address'] ?? '')) . '</td></tr>
-                    <tr><th align="left">Product</th><td>' . htmlspecialchars($product->pr_Name) . ' (' . htmlspecialchars($product->pr_Code) . ')</td></tr>
-                    <tr><th align="left">Quantity</th><td>' . htmlspecialchars($order->od_Quantity) . '</td></tr>
-                    <tr><th align="left">Total</th><td><strong>₹' . number_format($order->od_Grand_Total) . '</strong></td></tr>
-                </table>
-
-                <p style="margin-top:20px;">Please check the admin panel for full details.</p>
-                <p><strong>Thank you,<br>Team Zakhi Designs</strong></p>
-            </div>';
-
-            $adminMail->AltBody = "Kindly proceed to pack the item and update the order status accordingly.";
+            $adminMail->AltBody = "New Order Received: Order ID {$od_Id}, Customer: {$customer['add_Name']}, Product: {$product->pr_Name}, Quantity: {$order->od_Quantity}, Total: ₹{$order->od_Grand_Total}.";
             $adminMail->send();
 
             return $this->response->setJSON([
@@ -311,11 +300,11 @@ class OrderNow extends Controller
                 'msg'    => 'Thank You! Your Order is Confirmed. Continue Shopping To Explore More Great Products',
                 'redirect' => base_url('product/viewcollection')
             ]);
-        } catch (Exception $e) {
-                    return $this->response->setJSON([
-                        'status' => 0,
-                        'msg'    => 'Failed to send order email. Mailer Error: ' . $mail->ErrorInfo
-                    ]);
-                }
+            } catch (Exception $e) {
+                        return $this->response->setJSON([
+                            'status' => 0,
+                            'msg'    => 'Failed to send order email. Mailer Error: ' . $mail->ErrorInfo
+                        ]);
+                    }
     }
 }

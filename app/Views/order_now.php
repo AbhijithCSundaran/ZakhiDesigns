@@ -127,6 +127,6 @@
 }
 
 .accordion-button:not(.collapsed) {
-    color:black ;
+    color: goldenrod;
 }
 </style>

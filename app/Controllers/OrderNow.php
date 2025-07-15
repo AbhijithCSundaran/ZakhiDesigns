@@ -309,7 +309,7 @@ class OrderNow extends Controller
             return $this->response->setJSON([
                 'status' => 1,
                 'msg'    => 'Thank You! Your Order is Confirmed. Continue Shopping To Explore More Great Products',
-                'redirect' => base_url('product/viewcollection')
+                'redirect' => base_url('/')
             ]);
         } catch (Exception $e) {
                     return $this->response->setJSON([

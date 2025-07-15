@@ -77,11 +77,12 @@ $zd_uid = session()->get('zd_uid');
                                     }
                                 }
                                 ?>
-                                <a href="#reviewsSection">
+                                <a href="#reviewsSection" style="text-decoration: none;">
                                     <i class="bi bi text-warning"></i>
                                     <?= $total_reviews_count ?> Review<?= $total_reviews_count != 1 ? 's' : '' ?>
                                 </a>
                             </div>
+
 
                             <?php if (!empty($product['pr_Description'])): ?>
                                 <div class="col-md-12">
@@ -103,10 +104,10 @@ $zd_uid = session()->get('zd_uid');
                                         <?= esc($product['pr_Stitch_Type']); ?></span></div>
                             <?php endif; ?>
 
-                            <div class="col-md-12"><b>Size</b></div>
+                            <div class="col-md-12"><b> Select Size</b></div>
                             <?php $sizes = explode(',', $product['pr_Size']); ?>
                             <select name="size" id="size" style="width: 100px;" required>
-                                <option value=""></option>
+                                <option value="">Select Size</option>
                                 <?php foreach ($sizes as $size): ?>
                                     <option value="<?= esc(trim($size)) ?>" <?= trim($size) == ($selectedSize ?? '') ? 'selected' : '' ?>>
                                         <?= esc(trim($size)) ?>
@@ -115,7 +116,7 @@ $zd_uid = session()->get('zd_uid');
                             </select>
                         </div>
 
-                        <div class="col-md-12 colorblock"><b>Color</b></div>
+                        <div class="col-md-12 colorblock"><b> Choose Color</b></div>
                         <input type="hidden" name="selected_color" id="selected_color">
 
                         <?php $colors = explode(',', $product['pr_Aval_Colors']); ?>
@@ -141,7 +142,7 @@ $zd_uid = session()->get('zd_uid');
 
                                 <!-- Discount Value -->
                                 <span class="offer text-success ms-2">
-                                    <?= esc($product['pr_Discount_Value']); ?>    <?= esc($product['pr_Discount_Type']); ?> off
+                                    <?= esc($product['pr_Discount_Value']); ?>     <?= esc($product['pr_Discount_Type']); ?> off
                                 </span>
                             <?php else: ?>
                                 <!-- Only Selling Price if no discount -->
@@ -213,7 +214,7 @@ $zd_uid = session()->get('zd_uid');
 <section class="hero-banner">
     <div id="reviewsSection" class="mt-5">
         <div class="container-lg">
-            <h5>Customer Ratings and Reviews</h5>
+            <h5>Customer Ratings and t</h5>
             <div class="row order-box">
                 <div class="col-md-12">
                     <div>&nbsp; </div>
@@ -226,12 +227,10 @@ $zd_uid = session()->get('zd_uid');
                                         <h6 class="card-title mb-1"><?= esc($rev['name']) ?></h6>
                                         <div class="mb-2 text-warning" style="font-size: 1.2em;">
                                             <?= str_repeat('★', (int) $rev['rating']) . str_repeat('☆', 5 - (int) $rev['rating']) ?>
-                                            <span style="font-size:12px; color:#000;">Posted on
-                                                <?= date('d M Y', strtotime($rev['created_at'])) ?></span>
-
                                         </div>
                                         <p class="card-text"><?= esc($rev['review']) ?></p>
-
+                                        <span style="font-size:12px; color:#000;">Posted on
+                                            <?= date('d M Y', strtotime($rev['created_at'])) ?></span>
                                     </div>
                                 <?php endforeach; ?>
                             </div>
@@ -281,7 +280,7 @@ $zd_uid = session()->get('zd_uid');
                                 }
 
                                 // Rating average
-                               
+                        
                                 ?>
                                 <div class="swiper-slide" style="width: 100%;">
                                     <div class="text-center">
@@ -293,7 +292,7 @@ $zd_uid = session()->get('zd_uid');
                                             </a>
 
                                             <!-- Rating Stars -->
-                                            
+
                                             <div class="star-rate p-1">
                                                 <?php
                                                 $avg = round($item['avg_rating'] ?? 0, 1);
@@ -310,8 +309,12 @@ $zd_uid = session()->get('zd_uid');
                                             </div>
 
                                             <!-- Product Name -->
-                                            <div class="item-name p-1"><?= esc($item['pr_Name']); ?></div>
-
+                                            <div class="item-name p-1">
+                                                <a href="<?= base_url('product/product_details/' . $item['pr_Id']); ?>"
+                                                    class="text-dark text-decoration-none">
+                                                    <?= esc($item['pr_Name']); ?>
+                                                </a>
+                                            </div>
                                             <!-- Price Section -->
                                             <div class="item-price">
                                                 <?php if (!empty($item['pr_Discount_Value']) && $item['pr_Discount_Value'] > 0): ?>

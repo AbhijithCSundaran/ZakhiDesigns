@@ -35,9 +35,12 @@ $next20 = array_slice($latestProducts, 20, 20);
                                 <?php endfor; ?>
                             </div>
 
-                            <div class="item-name p-1" title="<?= esc($item['pr_Name']); ?>"><?= esc($item['pr_Name']); ?>
+                            <div class="item-name p-1" title="<?= esc($item['pr_Name']); ?>">
+                                <a href="<?= base_url('product/product_details/' . $item['pr_Id']); ?>"
+                                    class="text-dark text-decoration-none">
+                                    <?= esc($item['pr_Name']); ?>
+                                </a>
                             </div>
-
                             <div class="item-price">
                                 <?php if (!empty($item['pr_Discount_Value']) && $item['pr_Discount_Value'] > 0): ?>
                                     <!-- MRP with strikethrough -->
@@ -91,9 +94,15 @@ $next20 = array_slice($latestProducts, 20, 20);
                                     endfor;
                                     ?>
                                 </div>
-                                <div class="item-name p-1"><?= esc($item['pr_Name']); ?></div>
+                                <div class="item-name p-1">
+                                    <a href="<?= base_url('product/product_details/' . $item['pr_Id']); ?>"
+                                        class="text-dark text-decoration-none">
+                                        <?= esc($item['pr_Name']); ?>
+                                    </a>
+                                </div>
                                 <div class="item-price"><i
-                                        class="bi bi-currency-rupee"></i>&nbsp;<?= esc(round($item['pr_Selling_Price'])); ?></div>
+                                        class="bi bi-currency-rupee"></i>&nbsp;<?= esc(round($item['pr_Selling_Price'])); ?>
+                                </div>
                                 <div class="col-md-12 text-center">
                                     <button class="order-btn"
                                         onclick="window.location.href='<?= base_url('product/product_details/' . $item['pr_Id']); ?>'"></button>
@@ -110,7 +119,7 @@ $next20 = array_slice($latestProducts, 20, 20);
 
 
 <script>
-    $(document).ready(function() {
+    $(document).ready(function () {
         $('#top-prod-owl, #top-prod-owl-two').owlCarousel({
             loop: true,
             margin: 10,

@@ -1,6 +1,8 @@
 <div class="row">
     <div class="text-center logo ">
+        <a href="">
         <img class="img-align" src="<?php echo base_url() . ASSET_PATH; ?>assets/images/logo.jpg" />
+        </a>
     </div>
     <h5 class="text-center">Create New Account</h5>
 </div>
@@ -42,7 +44,7 @@
     </div>
     <div class="d-flex mt-2">
         <p class="mb-0">Already have an account with us?</p>
-        <a href="#" class="ms-2 text-decoration-none" id="showLoginFromRegister">Login</a>
+        <a href="#" class="ms-2 text-decoration-none" id="showLoginFromRegister" style="text-decoration:none">Login</a>
     </div>
     <div class="text-center mt-2 px-3">
         <small style="font-size: 13px; color: #6c757d;">

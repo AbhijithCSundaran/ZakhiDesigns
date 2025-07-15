@@ -14,7 +14,7 @@
                 Password</a>
         </li>
     </ul>
- 
+
     <div class="tab-content" id="profileTabContent">
         <div id="messageBox" class="alert" style="display: none;"></div>
         <div> &nbsp; </div>
@@ -46,24 +46,24 @@
                         </div>
                         <div>&nbsp;</div>
                     </form>
- 
+
                     <div>&nbsp;</div>
                 </div>
             </div>
         </div>
- 
+
         <!-- Address Tab -->
         <div class="tab-pane fade" id="address" role="tabpanel">
             <div>&nbsp;</div>
- 
- 
- 
+
+
+
             <?php if (session()->getFlashdata('message')): ?>
                 <div class="alert alert-success" id="flashMessage">
                     <?= session()->getFlashdata('message') ?>
                 </div>
             <?php endif; ?>
- 
+
             <div id="addressList">
                 <div class="row">
                     <?php if (!empty($addresses)): ?>
@@ -140,7 +140,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    
     <!-- Orders Tab -->
     <div class="tab-pane fade" id="orders" role="tabpanel">
         <div>&nbsp;</div>
@@ -184,14 +184,14 @@
                                 <?php endif; ?>
                                 <a href="<?= base_url('review/' . $order['cus_Id'] . '/' . $order['pr_Id']) ?>"
                                     class="btn btn-link p-0 mt-2">Write Review</a>
- 
+
                             </div>
                         </div>
                     </div>
                 </div>
             <?php endforeach; ?>
         </div>
- 
+
     </div>
     <!-- Change Password Tab -->
     <div class="tab-pane fade" id="password" role="tabpanel">
@@ -225,13 +225,10 @@
             </div>
         </div>
     </div>
- 
+    </div>
+
 </div>
-</div>
-<div>&nbsp; </div>
-</div>
-</div>
-</div>
+
 <!-- Edit Address Modal -->
 <div class="modal fade" id="editAddressModal" tabindex="-1" aria-labelledby="editAddressModalLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -279,7 +276,7 @@
     </div>
 </div>
 <!-- Bootstrap Modal -->
- 
+
 <div class="modal fade" id="deleteModal" tabindex="-1">
     <div class="modal-dialog" style="max-width: 500px; margin: 10px auto;">
         <div class="modal-content text-center p-4">
@@ -299,4 +296,3 @@
         </div>
     </div>
 </div>
- 

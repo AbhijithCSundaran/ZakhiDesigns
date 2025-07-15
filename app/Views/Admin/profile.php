@@ -9,7 +9,7 @@
                         <p class="m-b-0">Welcome to Zakhi Designs</p>
                     </div>
                 </div>
-                <div class="col-md-4" >
+                <div class="col-md-4">
                     <ul class="breadcrumb-title">
                         <li class="breadcrumb-item">
                             <a href="<?= base_url('admin/dashboard'); ?>"> <i class="fa fa-home"></i> </a>
@@ -36,10 +36,10 @@
                         </div>
                         <div class="card-block">
                             <?php if (session()->getFlashdata('success')): ?>
-                            <div class="alert alert-success" id="tog-alert"><?= session()->getFlashdata('success') ?>
-                            </div>
+                                <div class="alert alert-success" id="tog-alert"><?= session()->getFlashdata('success') ?>
+                                </div>
                             <?php elseif (session()->getFlashdata('error')): ?>
-                            <div class="alert alert-danger"><?= session()->getFlashdata('error') ?></div>
+                                <div class="alert alert-danger"><?= session()->getFlashdata('error') ?></div>
                             <?php endif; ?>
 
                             <form method="post" id="updateProfileForm"
@@ -48,13 +48,18 @@
                                 <div class="form-group">
                                     <label>Name</label>
                                     <input type="text" name="us_Name" class="form-control"
-                                         value="<?= esc($user['us_Name'] ?? '') ?>" required>
+                                        value="<?= esc($user['us_Name'] ?? '') ?>" required>
 
                                 </div>
                                 <div class="form-group">
                                     <label>Email</label>
                                     <input type="text" name="us_Email" class="form-control"
                                         value="<?= esc($user['us_Email'] ?? '') ?>" required>
+                                </div>
+                                <div class="form-group phn_code ">
+                                    <label style="width:100%;">Phone number</label>
+                                    <input type="tel" id="phone" name="us_Phone" style="padding-left: 472px;" class="form-control"
+                                        value="<?= esc($user['us_Phone'] ?? '') ?>" required>
                                 </div>
                                 <button type="submit" class="btn btn-primary">Update Profile</button>
                             </form>
@@ -74,21 +79,22 @@
                             <div id="messageBox" class="alert" style="display: none;"></div>
                             <form method="post" id="changePasswordForm"
                                 action="<?= base_url('admin/profile/change_password'); ?>">
-                                <?php 
-							if (session()->getFlashdata('error')): ?>
-                                <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                                    <?= session()->getFlashdata('error') ?>
-                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                                <?php 
-							endif; 
-							?>
+                                <?php
+                                if (session()->getFlashdata('error')): ?>
+                                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                        <?= session()->getFlashdata('error') ?>
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                <?php
+                                endif;
+                                ?>
                                 <div class="form-group" style="position: relative;">
                                     <label>Current Password <span style="color: red;">*</span></label>
                                     <input type="password" name="current_password" id="current_password"
-                                        class="form-control" maxlength="15" minlength="6" placeholder="Current Password" required>
+                                        class="form-control" maxlength="15" minlength="6" placeholder="Current Password"
+                                        required>
                                     <i class="toggle-password fa fa-eye-slash position-absolute"
                                         style="top: 45px; right: 10px; cursor: pointer;"
                                         data-target="current_password"></i>
@@ -96,7 +102,7 @@
                                 <div class="form-group" style="position: relative;">
                                     <label>New Password <span style="color: red;">*</span></label>
                                     <input type="password" name="new_password" id="new_password" class="form-control"
-                                         maxlength="15" minlength="6" placeholder="New Password" required>
+                                        maxlength="15" minlength="6" placeholder="New Password" required>
                                     <i class="toggle-password fa fa-eye-slash  position-absolute"
                                         style="top: 45px; right: 10px; cursor: pointer;" data-target="new_password"></i>
                                 </div>
@@ -104,7 +110,8 @@
                                 <div class="form-group" style="position: relative;">
                                     <label>Confirm New Password <span style="color: red;">*</span></label>
                                     <input type="password" name="confirm_password" id="confirm_password"
-                                        class="form-control"  maxlength="15" minlength="6" placeholder="Confirm New Password" required>
+                                        class="form-control" maxlength="15" minlength="6"
+                                        placeholder="Confirm New Password" required>
                                     <i class="toggle-password fa fa-eye-slash position-absolute"
                                         style="top: 45px; right: 10px; cursor: pointer;"
                                         data-target="confirm_password"></i>

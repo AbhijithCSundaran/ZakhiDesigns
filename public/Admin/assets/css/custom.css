@@ -140,6 +140,6 @@
  .iti__selected-dial-code {
     display: none!important;
 }
-.phone-number{
-    
+.phn_code div.iti--allow-dropdown {
+    width: 100%;
 }

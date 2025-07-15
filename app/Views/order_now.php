@@ -61,11 +61,8 @@
                         <div class="row">
                             <div class="col-md-6 mb-2"><input type="text" name="newName" class="form-control" placeholder="Full Name" required></div>
                             <div class="col-md-6 mb-2"><input type="email" name="newEmail" class="form-control" placeholder="Email" required></div>
-                           <div class="col-md-6 mb-2">
-                            <input type="tel" maxlength="15" pattern="^\d{7,15}$" name="newPhone" class="form-control" placeholder="Phone" required
-                                    oninvalid="this.setCustomValidity('Phone number must be minimum of  7 digits')"
-                                    oninput="this.setCustomValidity('')">
-                            </div>
+                          <div class="col-md-6 mb-2 phn_code">
+                                <input type="tel" maxlength="15" name="newPhone" id="newPhone" class="form-control" placeholder="Phone" required>
                             <div class="col-md-6 mb-2"><input type="text" name="newBuilding" class="form-control" placeholder="Building No" required></div>
                             <div class="col-md-6 mb-2"><input type="text" name="newStreet" class="form-control" placeholder="Street" required></div>
                             <div class="col-md-6 mb-2"><input type="text" name="newLandmark" class="form-control" placeholder="Landmark"></div>

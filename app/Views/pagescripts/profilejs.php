@@ -13,9 +13,75 @@ $(document).ready(function () {
         }
     });
 });
+const itiInstances = {};
+function setupIntlTelInput(selector) {
+    const input = document.querySelector(selector);
+    if (!input) return;
+
+    // Destroy existing if already initialized
+    if (itiInstances[selector]) {
+        itiInstances[selector].destroy();
+    }
+
+    itiInstances[selector] = window.intlTelInput(input, {
+        initialCountry: "in",
+        separateDialCode: true,
+        utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.19/js/utils.js"
+    });
+
+    // Restrict characters
+    $(selector).on('input', function () {
+        let filtered = $(this).val().replace(/[^0-9\s\-]/g, '');
+        $(this).val(filtered);
+    });
+}
+$(document).ready(function () {
+    setupIntlTelInput("#newPhone");          
+    setupIntlTelInput("#add_Phone");        
+    setupIntlTelInput("#phone");      
+    setupIntlTelInput("#number"); 
+});
+
+function validatePhoneNumber(selector, alertBoxId = "messageBox") {
+    const iti = itiInstances[selector];
+    if (!iti) return false;
+
+    // Extract national number (without country code)
+    let number = iti.getNumber(intlTelInputUtils.numberFormat.NATIONAL);
+    number = number.replace(/\D/g, ''); // Strip all non-digit characters
+
+    // Validate 7 to 15 digit length
+    if (number.length < 7 || number.length > 20) {
+        const errorHtml = `
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                Phone Number must be between 7 to 15 digits (excluding country code).
+            </div>
+        `;
+
+        $(`#${alertBoxId}`).html(errorHtml).fadeIn();
+
+        // Auto-hide alert after 3 seconds
+        setTimeout(() => {
+            $(`#${alertBoxId} .alert`).fadeOut(300, function () {
+                $(this).remove();
+            });
+        }, 3000);
+
+        $(selector).focus();
+        return false;
+    }
+
+    // Set full international number (with country code) into the input value
+    document.querySelector(selector).value = iti.getNumber();
+    return true;
+}
+
+
 
 $('#profileForm').on('submit', function(e) {
     e.preventDefault();
+     const isValid = validatePhoneNumber("#phone");
+    if (!isValid) return;
 
     $.ajax({
         type: 'POST',
@@ -96,15 +162,34 @@ function editAddress(id) {
         }
     }, 'json');
 }
+let originalPhone = $('#add_Phone').val().trim();
+
 $('#editAddressForm').submit(function(e) {
     e.preventDefault();
+
+    const currentPhone = $('#add_Phone').val().trim();
+
+    // Validate only if the phone was changed
+    if (currentPhone !== originalPhone && !validatePhoneNumber("#add_Phone", "editAlert")) {
+        return;
+    }
+
     $.post("<?= base_url('profile/address/edit') ?>", $(this).serialize(), function(res) {
         if (res.status === 'success') {
             showMessage('Address Updated Successfully!', 'success');
             $('#editAddressModal').modal('hide');
             setTimeout(() => location.reload(), 3000);
         } else {
-            showMessage(res.msg || 'Failed To Update Address.', 'danger');
+            $('#editAlert').html(`
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    ${res.msg || 'Failed To Update Address.'}
+                </div>
+            `);
+            setTimeout(() => {
+                $('#editAlert .alert').fadeOut(300, function () {
+                    $(this).remove();
+                });
+            }, 3000);
         }
     }, 'json');
 });
@@ -113,14 +198,14 @@ $('#addressForm').submit(function(e) {
     e.preventDefault();
     
     const id = $('#addressId').val();
-    const phone = $('#newPhone').val().trim();
-    const phonePattern = /^\d{7,15}$/;
-
-    if (!phonePattern.test(phone)) {
-        showMessage('Phone Number Must Be Between 7 To 15 Digits.', 'danger');
-        $('#newPhone').focus();
-        return;
-    }
+    // const phone = $('#newPhone').val().trim();
+    // const phonePattern = /^\d{7,15}$/;
+     if (!validatePhoneNumber("#newPhone")) return;
+    // if (!phonePattern.test(phone)) {
+    //     showMessage('Phone Number Must Be Between 7 To 15 Digits.', 'danger');
+    //     $('#newPhone').focus();
+    //     return;
+    // }
 
     const url = id ? 'profile/address/edit' : 'profile/address/add';
     $.post("<?= base_url() ?>" + url, $(this).serialize(), function(res) {

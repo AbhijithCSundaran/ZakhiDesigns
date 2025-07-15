@@ -1,6 +1,22 @@
 <!-- pagescripts/OrderNowjs.php -->
 <script>
+    const phoneInput = document.querySelector("#newPhone");
+    const iti = window.intlTelInput(phoneInput, {
+        initialCountry: "in",
+        separateDialCode: true,
+        utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.19/js/utils.js"
+    });
+ 
+    document.querySelector("#newAddressForm").addEventListener("submit", function (e) {
+        const fullNumber = iti.getNumber();
+        phoneInput.value = fullNumber;
+    });
 $(function() {
+    $('#newPhone').on('input', function () {
+        let value = $(this).val();
+        let filtered = value.replace(/[^0-9\s\-]/g, '');
+        $(this).val(filtered);
+    });
     // Save new address and then confirm order
     $('#newAddressForm').on('submit', function(e) {
         e.preventDefault();

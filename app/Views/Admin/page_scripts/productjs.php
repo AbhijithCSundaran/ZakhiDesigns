@@ -217,12 +217,30 @@ function handleFiles(files) {
                         .then(response => response.json())
                         .then(data => {
                             if (data.success === true) {
-                                alert(data.msg || 'Images uploaded successfully!');
-                                loadProductImages(productId);
-                                $('#productList').DataTable().ajax.reload(null, false);
-                            } else {
-                                alert(data.msg || 'Upload failed.');
-                            }
+    $('#uploadMsg')
+        .removeClass('alert-danger')
+        .addClass('alert-success')
+        .html(data.msg || 'Images Uploaded Successfully!')
+        .fadeIn();
+
+    loadProductImages(productId);
+    $('#productList').DataTable().ajax.reload(null, false);
+    
+    setTimeout(function () {
+        $('#uploadMsg').fadeOut();
+    }, 3000); // hide after 3 seconds
+} else {
+    $('#uploadMsg')
+        .removeClass('alert-success')
+        .addClass('alert-danger')
+        .html(data.msg || 'Upload failed.')
+        .fadeIn();
+
+    setTimeout(function () {
+        $('#uploadMsg').fadeOut();
+    }, 3000);
+}
+
                         })
                         .catch(error => {
                             console.error('Upload error:', error);

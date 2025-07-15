@@ -126,10 +126,10 @@ class Weblogin extends BaseController
 					<a href='$frgtpswd'>Click Here To Reset The Password.</a>
 				</p>
 				<p style='text-align: center; margin-top: 20px;'>
-					<a href='https://zakhidesigns.com' style='padding: 10px 20px; background-color: #d81b60; color: white; text-decoration: none; border-radius: 5px;'>Visit Our Website</a>
+					<a href='https://v4cstaging.co.in/zakhidesigns/' style='padding: 10px 20px; background-color: #d81b60; color: white; text-decoration: none; border-radius: 5px;'>Visit Our Website</a>
 				</p>
 				<p style='text-align: center; font-size: 14px; color: #555; margin-top: 30px;'>
-					For any queries, reach us at <a href='mailto:support@zakhidesigns.com'>support@zakhidesigns.com</a>
+					For any queries, reach us at <a href='mailto:zakhidesigns@gmail.com'>zakhidesigns@gmail.com</a>
 				</p>
 			";
 

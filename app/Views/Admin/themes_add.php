@@ -83,7 +83,6 @@
 																Main Banner and Link
 															</span>
 														</div>
-
 														<div id="sectionOne" class="collapse"
 															data-parent="#themeAccordion">
 															<div class="card-body p-2" id="section1">
@@ -120,7 +119,7 @@
 																				<div class="col-12 mt-2 text-end">
 																					<button type="button"
 																						class="btn btn-danger btn-sm"
-																						onclick="removeEntry(this)">−</button>
+																						onclick="removeEntry(this)">-</button>
 																				</div>
 																			</div>
 																		<?php endforeach; ?>
@@ -147,7 +146,7 @@
 																			<div class="col-12 mt-2 text-end">
 																				<button type="button"
 																					class="btn btn-danger btn-sm"
-																					onclick="removeEntry(this)">−</button>
+																					onclick="removeEntry(this)">-</button>
 																			</div>
 																		</div>
 																	<?php endif; ?>

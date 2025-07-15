@@ -111,7 +111,7 @@ body {
      cursor: pointer;
      color: #666;
      font-size: 1.1rem;
-     z-index: 2;
+     z-index: 1;
  }
 
  /* Fix: Allow label to float even if not directly next to input */
@@ -145,3 +145,10 @@ body {
          overflow-x: hidden;
      }
  }
+ .iti__selected-dial-code {
+    display: none !important;
+}
+ 
+.phn_code div.iti--allow-dropdown {
+    width: 100%;
+}

@@ -80,7 +80,7 @@ class Customer extends BaseController
 				]);
 			}
 			// Validate mobile
-			if (!ctype_digit($mobile) || strlen($mobile) < 7 || strlen($mobile) > 15) {
+			if (strlen($mobile) < 7 || strlen($mobile) > 15) {
 				return $this->response->setJSON([
 					'status' => 'error',
 					'msg'    => 'Phone number must contain between 7 to 15 digits.'

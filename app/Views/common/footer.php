@@ -193,72 +193,7 @@
             });
         });
 
-        // Register form submission (delegated)
-        $(document).on('submit', '#registerForm', function (e) {
-            e.preventDefault();
-
-            $('#regError').html(''); // clear previous messages
-
-            const password = $('#password').val();
-            const cpassword = $('#cpassword').val();
-            const email = $('#email').val();
-            const phone = $('#number').val();
-            const name = $('#name').val();
-
-            // Validate password match
-            if (password !== cpassword) {
-                $('#regError').html('Passwords do not match.');
-                return;
-            }
-
-            // Validate email format
-            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            if (!emailRegex.test(email)) {
-                $('#regError').html('Please enter a valid email address.');
-                return;
-            }
-
-            // Validate phone number (10 digits only)
-            if (!/^\d{7,15}$/.test(phone)) {
-                $('#regError').html('Phone number must be between 7 and 15 digits.');
-                return;
-            }
-
-
-            // Validate name (only letters and space)
-            const nameRegex = /^[a-zA-Z ]+$/;
-            if (!nameRegex.test(name)) {
-                $('#regError').html('Name must contain only letters and spaces.');
-                return;
-            }
-
-            // Submit via AJAX
-            $.ajax({
-                url: '<?= base_url('admin/customer/save') ?>',
-                type: 'POST',
-                data: $(this).serialize(),
-                dataType: 'json',
-                success: function (response) {
-                    if (response.status === 1) {
-                        $('#regError').removeClass('text-danger').addClass('text-success').html(
-                            response.msg);
-                        $('#registerForm')[0].reset(); // reset form
-                        setTimeout(function () {
-                            $('#registerModal').modal('hide');
-                        }, 1000);
-
-                        // window.location.reload();
-                    } else {
-                        $('#regError').removeClass('text-success').addClass('text-danger').html(
-                            response.msg);
-                    }
-                },
-                error: function (xhr) {
-                    $('#regError').removeClass('text-success').addClass('text-danger').html(
-                        'An error occurred. Please try again.');
-                }
-            });
-        });
+     
 
     });
 

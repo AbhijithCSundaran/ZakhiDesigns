@@ -372,7 +372,61 @@ $('#changePasswordForm').on('submit', function(e) {
         }
     }, 'json');
 });
-
+/////////////////////////////////////////////////////////////////////
+const newPasswordInput = document.getElementById('newPassword');
+        const strengthBar = document.getElementById('new-password-strength-bar');
+        const strengthFill = document.getElementById('new-password-strength-fill');
+        const strengthText = document.getElementById('new-password-strength-text');
+ 
+        newPasswordInput.addEventListener('input', function () {
+            const value = newPasswordInput.value;
+            const result = calculatePasswordStrength(value);
+ 
+            if (value.length > 0) {
+                strengthBar.style.display = 'block';
+            } else {
+                strengthBar.style.display = 'none';
+                strengthText.innerText = '';
+                strengthText.style.color = '';
+                return;
+            }
+ 
+            strengthFill.style.width = result.percent + '%';
+            strengthFill.className = 'progress-bar bg-' + result.color;
+            strengthText.innerText = result.label;
+            strengthText.style.color = getTextColor(result.color);
+        });
+ 
+        function calculatePasswordStrength(password) {
+            let score = 0;
+            if (password.length >= 8) score++;
+            if (/[A-Z]/.test(password)) score++;
+            if (/[a-z]/.test(password)) score++;
+            if (/\d/.test(password)) score++;
+            if (/[^A-Za-z0-9]/.test(password)) score++;
+ 
+            switch (score) {
+                case 0:
+                case 1: return { percent: 20, color: 'danger', label: 'Very Weak' };
+                case 2: return { percent: 40, color: 'warning', label: 'Weak' };
+                case 3: return { percent: 60, color: 'info', label: 'Moderate' };
+                case 4: return { percent: 80, color: 'primary', label: 'Strong' };
+                case 5: return { percent: 100, color: 'success', label: 'Very Strong' };
+                default: return { percent: 0, color: 'secondary', label: '' };
+            }
+        }
+ 
+        function getTextColor(color) {
+            switch (color) {
+                case 'danger': return '#dc3545';
+                case 'warning': return '#ffc107';
+                case 'info': return '#17a2b8';
+                case 'primary': return '#007bff';
+                case 'success': return '#28a745';
+                default: return '#6c757d';
+            }
+        }
+   
 
 
 </script>

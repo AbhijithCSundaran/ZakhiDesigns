@@ -55,20 +55,30 @@ class Product extends Controller
     public function ajaxSearch()
     {
 				$zd_uid = $this->session->get('zd_uid');
-    $data = [];
+        $data = [];
 
-    // Load categories for header
-    $data['categories'] = $this->productdisplayModel->getAllCategoriesAndSub();
-
-    // Load all products
-    $products = $this->productdisplayModel->getAllProducts();
-    $reviewModel = new ReviewModel();
-    $data['product'] = $products;
-		$data['avg_rating'] = 1;
-      //  $keyword = $this->request->getGet('keyword');
+        // Load categories for header
+        $data['categories'] = $this->productdisplayModel->getAllCategoriesAndSub();
         
-    $keyword = trim($this->request->getGet('keyword'));
+        // Load all products
+        $products = $this->productdisplayModel->getAllProducts();
+        $reviewModel = new ReviewModel();
+        $data['product'] = $products;
+            $data['avg_rating'] = 1;
+        //  $keyword = $this->request->getGet('keyword');
+            
+        $keyword = trim($this->request->getGet('keyword'));
+        ////pagination
+        $page = (int) $this->request->getGet('page');
+        $page = ($page >= 1) ? $page : 1; // Prevent negative offset
 
+        $limit = 12;
+        $offset = ($page - 1) * $limit;
+
+        $productsForPagination = $keyword ? $this->productdisplayModel->searchProductsPaginated($keyword, $limit, $offset) : [];
+
+        $data['product'] = $productsForPagination;
+        
         $products = $keyword ? $this->productdisplayModel->searchProducts($keyword) : [];
 
         $products = array_values(array_unique($products, SORT_REGULAR));

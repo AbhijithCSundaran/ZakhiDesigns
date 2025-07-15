@@ -10,6 +10,7 @@
                 </button>
             </div>
             <div class="modal-body">
+			<div id="uploadMsg" class="alert" style="display: none;"></div>
                 <h5 class="mb-3">Image upload for: <span id="productName" class="text-primary"></span></h5>
                 <form class="fileUpload" method="post" enctype="multipart/form-data">
 

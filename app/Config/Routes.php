@@ -10,7 +10,7 @@ $routes->get('/', 'Home::index');
 // google sign
 // $routes->post('google-login-callback', 'GoogleLoginCallback::index');
 // $routes->match(['get', 'post'], 'google-login-callback', 'GoogleLoginCallback::index');
-$routes->match(['get', 'post'], 'zakhidesigns/google-login-callback', 'GoogleLoginCallback::index');
+$routes->match(['get', 'post'], 'zakhidesigns/google-login-callback', 'Googlelogincallback::index');
 
 // login register logout
 $routes->get('weblogin', 'Weblogin::index');

@@ -58,7 +58,8 @@ $(function() {
              complete: function() {
             // Optional: Re-enable and show the button after 5 seconds
             setTimeout(() => {
-                $submitBtn.prop('disabled', false).show();
+                // $submitBtn.prop('disabled', false).show();
+                $submitBtn.prop('disabled', true).hide();
             }, 5000);
         }
         });

@@ -4,7 +4,7 @@ namespace App\Controllers;
 
 use CodeIgniter\Controller;
 
-class GoogleLoginCallback extends Controller
+class Googlelogincallback extends Controller
 {
     public function index()
     {
@@ -14,7 +14,7 @@ class GoogleLoginCallback extends Controller
         // Load Google API
         require_once ROOTPATH . 'vendor/autoload.php';
 
-        $client = new \Google_Client(['client_id' => '89279377857-k55fvvqvtbk9nib9mc04jfsdgb9k00gn.apps.googleusercontent.com']);
+        $client = new Google_Client(['client_id' => '89279377857-k55fvvqvtbk9nib9mc04jfsdgb9k00gn.apps.googleusercontent.com']);
 
         $request = service('request');
         $credential = $request->getPost('credential');

@@ -1,7 +1,10 @@
-<section class="hero-banner py-5" style="background-color: #f8f9fa;">
+<section class="hero-banner py-5" style="background-color: #fff;">
     <div class="container-lg">
-        <h4 class="text-center mb-5"><strong><u>DELIVERY POLICY</u></strong></h4>
-        <div class="row justify-content-center">
+        <img src="<?= base_url() . ASSET_PATH; ?>assets/images/young-business-woman-walking-up-stairs" 
+             alt="Delivery Banner" class="img-fluid rounded shadow-sm mb-4" 
+             style="height: 400px; width: 1310px; object-fit: cover;" />
+        <h2 class="text-center mb-5">DELIVERY POLICY</h2>
+        <div class="row justify-content-left">
             <div class="col-md-8 ms-4">
                 <div class="policy-section mb-4">
                     <h5 class="mb-3">Shipping Options</h5>

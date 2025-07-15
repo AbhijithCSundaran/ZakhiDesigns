@@ -1,3 +1,22 @@
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+<style>
+    #password-strength-bar {
+        border-radius: 5px;
+    }
+
+    #password-strength-fill {
+        transition: width 0.3s ease;
+    }
+
+    #password-strength-text {
+        font-weight: bold;
+        transition: color 0.3s ease;
+    }
+
+    .progress .progress-bar {
+        height: 100%
+    }
+</style>
 <div class="container mt-4">
     <ul class="nav nav-tabs" id="profileTabs" role="tablist">
         <li class="nav-item">
@@ -14,7 +33,7 @@
                 Password</a>
         </li>
     </ul>
- 
+
     <div class="tab-content" id="profileTabContent">
         <div id="messageBox" class="alert" style="display: none;"></div>
         <div> &nbsp; </div>
@@ -46,24 +65,24 @@
                         </div>
                         <div>&nbsp;</div>
                     </form>
- 
+
                     <div>&nbsp;</div>
                 </div>
             </div>
         </div>
- 
+
         <!-- Address Tab -->
         <div class="tab-pane fade" id="address" role="tabpanel">
             <div>&nbsp;</div>
- 
- 
- 
+
+
+
             <?php if (session()->getFlashdata('message')): ?>
                 <div class="alert alert-success" id="flashMessage">
                     <?= session()->getFlashdata('message') ?>
                 </div>
             <?php endif; ?>
- 
+
             <div id="addressList">
                 <div class="row">
                     <?php if (!empty($addresses)): ?>
@@ -183,15 +202,14 @@
                                         target="_blank"><?= esc($order['tracker_Link']) ?></a><br>
                                 <?php endif; ?>
                                 <a href="<?= base_url('review/' . $order['cus_Id'] . '/' . $order['pr_Id']) ?>"
-                                    class="btn btn-link p-0 mt-2">Write Review</a>
- 
+                                    class="btn btn-link p-0 mt-2" style="text-decoration: none;">Add Review</a>
                             </div>
                         </div>
                     </div>
                 </div>
             <?php endforeach; ?>
         </div>
- 
+
     </div>
     <!-- Change Password Tab -->
     <div class="tab-pane fade" id="password" role="tabpanel">
@@ -205,12 +223,24 @@
                         <i class="toggle-password fa fa-eye-slash position-absolute"
                             style="top: 12px; right: 10px; cursor: pointer;" data-target="oldPassword"></i>
                     </div>
+                    <!-- <div class="mb-2 position-relative">
+                        <input type="password" name="newPassword" id="newPassword" class="form-control" maxlength="15"
+                            placeholder="New Password">
+                        <i class="toggle-password fa fa-eye-slash position-absolute"
+                            style="top: 12px; right: 10px; cursor: pointer;" data-target="newPassword"></i>
+                    </div> -->
                     <div class="mb-2 position-relative">
                         <input type="password" name="newPassword" id="newPassword" class="form-control" maxlength="15"
                             placeholder="New Password">
                         <i class="toggle-password fa fa-eye-slash position-absolute"
                             style="top: 12px; right: 10px; cursor: pointer;" data-target="newPassword"></i>
                     </div>
+                    <div class="progress mt-2" id="new-password-strength-bar" style="height: 8px; display: none;">
+                        <div class="progress-bar" role="progressbar" style="width: 0%;" id="new-password-strength-fill">
+                        </div>
+                    </div>
+                    <small id="new-password-strength-text" class="fw-bold"></small>
+
                     <div class="mb-2 position-relative">
                         <input type="password" name="confirmPassword" id="confirmPassword" class="form-control"
                             maxlength="15" placeholder="Confirm Password">
@@ -225,7 +255,7 @@
             </div>
         </div>
     </div>
- 
+
 </div>
 </div>
 <div>&nbsp; </div>
@@ -279,7 +309,7 @@
     </div>
 </div>
 <!-- Bootstrap Modal -->
- 
+
 <div class="modal fade" id="deleteModal" tabindex="-1">
     <div class="modal-dialog" style="max-width: 500px; margin: 10px auto;">
         <div class="modal-content text-center p-4">
@@ -299,4 +329,3 @@
         </div>
     </div>
 </div>
- 

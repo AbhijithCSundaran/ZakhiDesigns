@@ -1,7 +1,8 @@
 <section class="hero-banner py-5" style="background-color: #fff;">
     <div class="container-lg ">
-         <img src="<?= base_url() . ASSET_PATH; ?>assets/images/shocked-ginger-girl-listening-friend-two-women-talking-pink-background" alt="Policy Banner" class="img-fluid rounded shadow-sm" />
-        <h2 class="text-center mb-5 margin-top": -20px;>RETURN AND REFUND POLICY</h2>
+        <img src="<?= base_url() . ASSET_PATH; ?>assets/images/happy-lady-stylish-skirt-boater-posing-pink-wall (1)" 
+                              alt="Policy Banner" class="img-fluid rounded shadow-sm" style="height: 400px;     width: 1310px; object-fit: cover;" />
+        <h2 class="text-center mb-5" style=" margin-top: 20px;">RETURN AND REFUND POLICY</h2>
         <div class="row justify-content-right">
             <div class="col-md-9 ms-4" > 
                 <div class="policy-section mb-4">

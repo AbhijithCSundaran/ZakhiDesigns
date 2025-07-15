@@ -105,9 +105,9 @@
                                 </div>
                                 <ul class="dropdown-menu" aria-labelledby="customerDropdown">
                                     <li><a class="dropdown-item" href="<?= base_url('profile#profile'); ?>"><i
-                                                class="bi bi-person-circle"></i> My Profile</a></li>
+                                                class="bi bi-person-circle"  style="font-size: 14px;" ></i> My Profile</a></li>
                                     <li><a class="dropdown-item" href="<?= base_url('logout') ?>"><i
-                                                class="bi bi-escape"></i> Logout</a></li>
+                                                class="bi bi-escape" style="font-size: 14px;" ></i> Logout</a></li>
                                 </ul>
                             </div>
 

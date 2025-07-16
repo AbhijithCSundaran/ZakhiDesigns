@@ -7,7 +7,7 @@
         <img class="img-align" src="<?php echo base_url() . ASSET_PATH; ?>assets/images/logo.jpg" />
         </a>
     </div>
-    <h5 class="text-center">Forgot Password</h5>
+   <h5 class="text-center" style="margin-top: 7px;">Forgot Password</h5>
 </div>
 
 <form id="forgotEmailForm" method="post">

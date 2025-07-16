@@ -1,22 +1,22 @@
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 <style>
-    #password-strength-bar {
-        border-radius: 5px;
-    }
- 
-    #password-strength-fill {
-        transition: width 0.3s ease;
-    }
- 
-    #password-strength-text {
-        font-weight: bold;
-        transition: color 0.3s ease;
-    }
- 
-    .progress .progress-bar {
-        height: 100%
-    }
-</style><div class="container mt-4">
+#password-strength-bar {
+    border-radius: 5px;
+}
+
+#password-strength-fill {
+    transition: width 0.3s ease;
+}
+
+#password-strength-text {
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+.progress .progress-bar {
+    height: 100%
+}
+</style>
+<div class="container mt-4">
     <ul class="nav nav-tabs" id="profileTabs" role="tablist">
         <li class="nav-item">
             <a class="nav-link active" id="profile-tab" data-bs-toggle="tab" href="#profile" role="tab">Profile</a>

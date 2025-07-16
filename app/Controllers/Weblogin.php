@@ -39,6 +39,30 @@ class Weblogin extends BaseController
 	{
 		$email = $this->request->getPost('cust_Email');
 		$password = md5($this->request->getPost('cust_Password'));
+		$recaptcha = $this->request->getPost('g-recaptcha-response');
+
+		if (!$recaptcha) {
+			echo json_encode([
+				'status' => 0,
+				'msg' => 'Please complete the reCAPTCHA.'
+			]);
+			return;
+		}
+
+		// Verify reCAPTCHA v2
+		$secretKey = '6Le-VXcrAAAAAKSXShzC3A8GxolszKELxQ1S-9q9';
+		$verifyURL = 'https://www.google.com/recaptcha/api/siteverify';
+
+		$response = file_get_contents($verifyURL . '?secret=' . $secretKey . '&response=' . $recaptcha);
+		$responseData = json_decode($response);
+
+		if (!$responseData->success) {
+			echo json_encode([
+				'status' => 0,
+				'msg' => 'reCAPTCHA verification failed.'
+			]);
+			return;
+		}
 		if ($email && $password) {
 			$userLog = $this->customerLoginModel->getLoginAccount($email, $password);
 			if ($userLog) {
@@ -65,7 +89,15 @@ class Weblogin extends BaseController
 			));
 		}
 	}
+	private function reCaptcha($recaptcha)    {
+		
+        $secretKey = '6Le-VXcrAAAAAKSXShzC3A8GxolszKELxQ1S-9q9';
+        $url = 'https://www.google.com/recaptcha/api/siteverify';
+        $response = file_get_contents($url . '?secret=' . $secretKey . '&response=' . $recaptcha);
+        $result = json_decode($response, true);
 
+        return $result['success'] ?? false;
+    }
 
 
 	public function webForgotEmailSend(){

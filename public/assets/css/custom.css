@@ -19,6 +19,7 @@ body {
  }
  .modal-header {
      border-bottom: none !important;
+     margin-top: -15px;
  }
 
  .floating-label-group {
@@ -65,7 +66,7 @@ body {
  }
 
  .img-align {
-     width: 65px !important;
+     width: 75px !important;
  }
 
  

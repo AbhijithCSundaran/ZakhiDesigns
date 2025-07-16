@@ -23,7 +23,7 @@
         <img class="img-align" src="<?php echo base_url() . ASSET_PATH; ?>assets/images/logo.jpg" />
         </a>
     </div>
-    <h5 class="text-center">Your Fashion Journey Starts Here  </h5>
+    <h5 class="text-center" style="margin-top: 5px;">Your Fashion Journey Starts Here  </h5>
 </div>
 <div id="regError" class="text-danger text-center p-2" style="color:red;"></div>
 <form id="registerForm" method="post">

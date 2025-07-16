@@ -1,10 +1,12 @@
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>
 <div class="row">
     <div class="text-center logo">
         <a href="">
         <img class="img-align" src="<?php echo base_url() . ASSET_PATH; ?>assets/images/logo.jpg" />
         </a>
     </div>
-    <h5 class="text-center">Sign in</h5>
+    <h5 class="text-center" style="margin-top: 5px;">Sign In</h5>
+ 
     <!-- <h5 class="text-center">Login</h5> -->
 </div>
 <div id="loginError" class="text-danger text-center" style="padding:6px;"></div>
@@ -26,6 +28,8 @@
     <div class="d-flex justify-content-center">
         <button type="submit" class="btn btn-primary">Login</button>
     </div>
+    <!-- captcha -->
+    <div class="g-recaptcha" data-sitekey="6Le-VXcrAAAAAFdEqJLtM5DxM6GoGl7cJdV6hknL"></div>
 
     <div id="g_id_onload" data-client_id="89279377857-k55fvvqvtbk9nib9mc04jfsdgb9k00gn.apps.googleusercontent.com"
         data-context="signin" data-login_uri="https://v4cstaging.co.in/zakhidesigns/google-login-callback"

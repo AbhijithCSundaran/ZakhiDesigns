@@ -66,7 +66,6 @@
     <link rel="stylesheet" href="<?php echo base_url() . ASSET_PATH; ?>Admin/assets/css/custom.css" />
     <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 
-    <!-- <script src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit" async defer></script> -->
     <!-- Get country code  CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.19/css/intlTelInput.css" />
 

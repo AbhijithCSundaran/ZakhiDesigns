@@ -68,7 +68,7 @@
 <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
-
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>
 <script>
     function openRespMenu() {
         var x = document.getElementById("respTopnav");
@@ -166,32 +166,89 @@
 
 
         // Login form submission (delegated because it's loaded dynamically)
+        // $(document).on('submit', '#loginForm', function (e) {
+        //     e.preventDefault();
+
+        //     let email = $('#email').val();
+        //     let password = $('#password').val();
+
+        //     $.ajax({
+        //         url: '<?= base_url('customerauth'); ?>',
+        //         type: 'POST',
+        //         data: {
+        //             cust_Email: email,
+        //             cust_Password: password
+        //         },
+        //         success: function (res) {
+        //             let data = JSON.parse(res);
+        //             if (data.status == 1) {
+        //                 window.location.reload();
+        //             } else {
+        //                 $('#loginError').text(data.msg);
+        //             }
+        //         },
+        //         error: function () {
+        //             $('#loginError').text('Something went wrong. Please try again.');
+        //         }
+        //     });
+        // });
         $(document).on('submit', '#loginForm', function (e) {
-            e.preventDefault();
+        e.preventDefault();
 
-            let email = $('#email').val();
-            let password = $('#password').val();
+        // Clear any existing errors
+        $('#loginError').text('');
 
-            $.ajax({
-                url: '<?= base_url('customerauth'); ?>',
-                type: 'POST',
-                data: {
-                    cust_Email: email,
-                    cust_Password: password
-                },
-                success: function (res) {
-                    let data = JSON.parse(res);
-                    if (data.status == 1) {
-                        window.location.reload();
-                    } else {
-                        $('#loginError').text(data.msg);
-                    }
-                },
-                error: function () {
-                    $('#loginError').text('Something went wrong. Please try again.');
+        // Get form input values
+        let email = $('#email').val().trim();
+        let password = $('#password').val().trim();
+
+        // Get reCAPTCHA response
+        let recaptchaResponse = grecaptcha.getResponse();
+
+        // Validate inputs
+        if (!email || !password) {
+            $('#loginError').text('Email and Password are required.');
+            return;
+        }
+
+        if (!recaptchaResponse) {
+            $('#loginError').text('Please complete the reCAPTCHA.');
+            return;
+        }
+
+        // Send AJAX login request
+        $.ajax({
+            url: '<?= base_url('customerauth'); ?>',
+            type: 'POST',
+            data: {
+                cust_Email: email,
+                cust_Password: password,
+                'g-recaptcha-response': recaptchaResponse
+            },
+            success: function (res) {
+                let data;
+                try {
+                    data = JSON.parse(res);
+                } catch (e) {
+                    $('#loginError').text('Invalid server response.');
+                    return;
                 }
-            });
+
+                if (data.status == 1) {
+                    // Success — reload or redirect
+                    location.reload();
+                } else {
+                    // Display error message
+                    $('#loginError').text(data.msg);
+                    grecaptcha.reset(); // Reset the reCAPTCHA for retry
+                }
+            },
+            error: function () {
+                $('#loginError').text('Something went wrong. Please try again.');
+                grecaptcha.reset(); // Reset reCAPTCHA in case of failure
+            }
         });
+    });
 
      
 

@@ -259,12 +259,12 @@ public function updateStockAfterOrder($pr_Id, $quantity)
         return $this->orderBy('pr_Id', 'DESC')->findAll($limit, $offset);
     }
     
-    public function searchProductsPaginated($keyword, $limit, $offset){
-        return $this->like('pr_Name', $keyword)
-                    ->orLike('pr_Description', $keyword)
-                    ->orderBy('pr_Id', 'DESC')
-                    ->findAll($limit, $offset);
-    }
+    // public function searchProductsPaginated($keyword, $limit, $offset){
+    //     return $this->like('pr_Name', $keyword)
+    //                 ->orLike('pr_Description', $keyword)
+    //                 ->orderBy('pr_Id', 'DESC')
+    //                 ->findAll($limit, $offset);
+    // }
 
 }
 ?>

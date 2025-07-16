@@ -69,15 +69,15 @@ class Product extends Controller
             
         $keyword = trim($this->request->getGet('keyword'));
         ////pagination
-        $page = (int) $this->request->getGet('page');
-        $page = ($page >= 1) ? $page : 1; // Prevent negative offset
+        // $page = (int) $this->request->getGet('page');
+        // $page = ($page >= 1) ? $page : 1; // Prevent negative offset
 
-        $limit = 12;
-        $offset = ($page - 1) * $limit;
+        // $limit = 12;
+        // $offset = ($page - 1) * $limit;
 
-        $productsForPagination = $keyword ? $this->productdisplayModel->searchProductsPaginated($keyword, $limit, $offset) : [];
+        // $productsForPagination = $keyword ? $this->productdisplayModel->searchProductsPaginated($keyword, $limit, $offset) : [];
 
-        $data['product'] = $productsForPagination;
+        // $data['product'] = $productsForPagination;
         
         $products = $keyword ? $this->productdisplayModel->searchProducts($keyword) : [];
 

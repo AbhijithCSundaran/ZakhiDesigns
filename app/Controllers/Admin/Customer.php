@@ -64,9 +64,9 @@ class Customer extends BaseController
 		$cust_id = $this->input->getPost('cust_id');
 		$custname = $this->input->getPost('custname');
 		$custname = ucwords(strtolower(trim($custname)));
-
+		// $cust_phcode = $this->input->getPost('cust_phcode'); 
 		$custemail = $this->input->getPost('custemail');
-		$mobile = $this->input->getPost('mobile');
+		// $mobile = $this->input->getPost('mobile');
 	    $password =$this->input->getPost('password');
 		 if (!preg_match('/^[a-zA-Z ]+$/', $custname)) {
 			return $this->response->setJSON(['status' => 'error', 'msg' => 'Please Enter Name Correctly.']);
@@ -79,14 +79,6 @@ class Customer extends BaseController
 					'msg' => 'Invalid Email Format.'
 				]);
 			}
-			// Validate mobile
-			if (strlen($mobile) < 7 || strlen($mobile) > 15) {
-				return $this->response->setJSON([
-					'status' => 'error',
-					'msg'    => 'Phone number must contain between 7 to 15 digits.'
-				]);
-			}
-
 			//validate password length
 			
 			if (!empty($password) && (strlen($password) < 6 || strlen($password) > 15)) {
@@ -95,15 +87,9 @@ class Customer extends BaseController
 					'msg' => 'Password Must Be Between 6 to 15 Characters.'
 				]);
 			}
-/* 				   // Allow only letters, numbers, @ and _
-			if (!preg_match('/^[a-zA-Z0-9@_]+$/', $password)) {
-				return $this->response->setJSON([
-					'status' => 'error',
-					'msg' => 'Password can only contain letters, numbers, @, and _.'
-				]);
-			} */
+
 			$customerModel = new \App\Models\Admin\CustomerModel();
-			if($custname && $custemail && $mobile) {
+			if($custname && $custemail ) {
 			if (empty($cust_id)) {
 				// INSERT
 			// Check if email already exists
@@ -113,7 +99,8 @@ class Customer extends BaseController
 				$data = [
 				'cust_Name'          => $custname,
 				'cust_Email'         => $custemail,
-				'cust_Phone'	     => $mobile,
+				// 'cust_Phone'	     => $mobile,
+				// 'cust_Phcode'        => $cust_phcode,
 				'cust_Password'      => md5($password),
 				'cust_Status'	   	 => 1,
 				'cust_createdon'     => date("Y-m-d H:i:s"),
@@ -121,13 +108,6 @@ class Customer extends BaseController
 				'cust_modifyby'      => $this->session->get('ad_uid'),
 			];
 				$CreateCust = $this->customerModel->createcust($data);
-				//echo json_encode(array("status" => 1, "msg" => "Customer Created successfully."));
-
-// 				$this->session->set([
-//     'ad_uid' => $CreateCust, // or the actual ID if your model returns it
-//     'ad_uname' => $custname,
-//     'ad_email' => $custemail,
-// ]);
 				echo json_encode(array(
 					"status" => 1,
 					"msg" => "Account Created Successfully. Please Login To Your Account To Start Shopping.",
@@ -146,14 +126,14 @@ class Customer extends BaseController
 				$data = [
 				'cust_Name'          => $custname,
 				'cust_Email'         => $custemail,
-				'cust_Phone'	     => $mobile,
+				// 'cust_Phone'	     => $mobile,
+				// 'cust_Phcode'        => $cust_phcode,
 				'cust_createdon'     => date("Y-m-d H:i:s"),
 				'cust_createdby'     => $this->session->get('ad_uid'),
 				'cust_modifyby'      => $this->session->get('ad_uid'),  
 			];	
 					
 				$modifycust = $this->customerModel->modifycust($cust_id,$data);
-				//echo json_encode(array("status" => 1, "msg" => "Customer details updated successfully."));	
 				echo json_encode(array(
 					"status" => 1,
 					"msg" => "Customer Details Updated Successfully.",

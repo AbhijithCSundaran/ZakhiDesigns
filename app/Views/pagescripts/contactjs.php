@@ -11,31 +11,36 @@ document.querySelector("#contactForm").addEventListener("submit", function(e) {
 	const message = formData.get("message").trim();
 	const responseDiv = document.getElementById("formResponse");
 
-	// === VALIDATION ===
 	const nameRegex = /^[a-zA-Z\s]+$/;
 	const phoneRegex = /^\d{7,15}$/;
+	const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 
 	if (!nameRegex.test(name)) {
-		showMessage("Name Must Contain Only Letters And Spaces.", "danger");
+		showMessage("Name must contain only letters and spaces.", "danger");
 		return;
 	}
 
 	if (!phoneRegex.test(phone)) {
-		showMessage("Contact Number Must Be Between 7 To 15 Digits.", "danger");
+		showMessage("Contact number must be between 7 to 15 digits.", "danger");
 		return;
 	}
 
-	if (email === '' || !email.includes("@")) {
-		showMessage("Enter A Valid Email Address.", "danger");
+	if (!emailRegex.test(email)) {
+		showMessage("Enter a valid email ID.", "danger");
 		return;
 	}
 
 	if (message === '') {
-		showMessage("Message Cannot Be Empty.", "danger");
+		showMessage("Message cannot be empty.", "danger");
 		return;
 	}
 
-	// === SUBMIT ===
+	// Optional: Disable submit button for better UX
+	const submitBtn = form.querySelector('button[type="submit"]');
+	submitBtn.disabled = true;
+	submitBtn.innerText = "Please wait...";
+
+	// Submit via Fetch
 	fetch("<?= base_url('contact/submit') ?>", {
 		method: "POST",
 		body: formData,
@@ -53,16 +58,20 @@ document.querySelector("#contactForm").addEventListener("submit", function(e) {
 		}
 	})
 	.catch(error => {
-		showMessage("Something Went Wrong. Please Try Again Later.", "danger");
+		showMessage("Something went wrong. Please try again later.", "danger");
+	})
+	.finally(() => {
+		submitBtn.disabled = false;
+		submitBtn.innerText = "Submit";
 	});
 
-	// === Helper: Show Message, Scroll to Top, and Auto-hide ===
+	// Show message helper
 	function showMessage(msg, type) {
 		responseDiv.innerHTML = `<div class="alert alert-${type}">${msg}</div>`;
 		window.scrollTo({ top: 0, behavior: "smooth" });
 		setTimeout(() => {
 			responseDiv.innerHTML = "";
-		}, 5000); // 5 seconds
+		}, 5000);
 	}
 });
 </script>

@@ -54,7 +54,10 @@ $routes->get('product/product_list/subcategory/(:num)', 'Product::product_list_b
 //$routes->post('product/product_list/search', 'Product::search_products');
 $routes->post('product/submit', 'Product::submit');
 $routes->get('product/viewcollection', 'Product::view_collection');
+$routes->get('review/loadRandomSimilar/(:num)', 'Review::loadRandomSimilar/$1');
+$routes->get('product/loadMoreSearch', 'Product::loadMoreSearch');
 
+$routes->get('product/loadMoreByDate', 'Product::loadMoreByDate');
 
 
 $routes->get('contact','Contact::index'); 

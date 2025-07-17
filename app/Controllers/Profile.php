@@ -19,6 +19,7 @@ class Profile extends BaseController
 
   public function index() 
 {
+    
     $userId = session()->get('zd_uid');
 
     // If not logged in and JS is bypassed    

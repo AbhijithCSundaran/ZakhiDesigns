@@ -162,6 +162,11 @@ public function searchProducts($keyword)
     return $matched;
 }
 
+public function getProductsByModifiedDatePaginated($limit, $offset)
+{
+    return $this->orderBy('pr_modifyon', 'DESC')
+                ->findAll($limit, $offset);
+}
 
 
 
@@ -265,6 +270,12 @@ public function updateStockAfterOrder($pr_Id, $quantity)
     //                 ->orderBy('pr_Id', 'DESC')
     //                 ->findAll($limit, $offset);
     // }
-
+public function searchProductsPaginated($keyword, $limit, $offset)
+{
+    return $this->like('pr_Name', $keyword)
+                ->orLike('pr_Description', $keyword)
+                ->orderBy('pr_Id', 'DESC')
+                ->findAll($limit, $offset);
+}
 }
 ?>

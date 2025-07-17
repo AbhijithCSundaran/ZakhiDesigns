@@ -3,14 +3,11 @@
 namespace App\Controllers;
 use App\Models\CustomerLoginModel;
 
- 
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
- 
- 
+
 class Weblogin extends BaseController
 {
-
 	public function __construct()
 	{
 		$this->session = \Config\Services::session();
@@ -18,51 +15,28 @@ class Weblogin extends BaseController
 		$this->customerLoginModel = new CustomerLoginModel();
 	}
 
-
 	public function index()
 	{
-
+		if ($this->session->has('zd_uid')) {
+			return redirect()->to(base_url('dashboard'));
+		}
 		return view('weblogin');
-		
 	}
 
 	public function webReg()
 	{
 		return view('webregister');
-		   
 	}
 
-	public function webForgot(){
+	public function webForgot()
+	{
 		return view('webforgot');
 	}
+
 	public function customerAuthen()
 	{
 		$email = $this->request->getPost('cust_Email');
 		$password = md5($this->request->getPost('cust_Password'));
-		$recaptcha = $this->request->getPost('g-recaptcha-response');
-
-		if (!$recaptcha) {
-			echo json_encode([
-				'status' => 0,
-				'msg' => 'Please complete the reCAPTCHA.'
-			]);
-			return;
-		}
-
-		// Verify reCAPTCHA v2
-		$secretKey = '6Le-VXcrAAAAAKSXShzC3A8GxolszKELxQ1S-9q9';
-		$verifyURL = 'https://www.google.com/recaptcha/api/siteverify';
-
-		$response = file_get_contents($verifyURL . '?secret=' . $secretKey . '&response=' . $recaptcha);
-		$responseData = json_decode($response);
-
-		if (!$responseData->success) {
-			echo json_encode([
-				'status' => 0,
-				'msg' => 'reCAPTCHA verification failed.'
-			]);
-			return;
-		}
 		if ($email && $password) {
 			$userLog = $this->customerLoginModel->getLoginAccount($email, $password);
 			if ($userLog) {
@@ -71,7 +45,6 @@ class Weblogin extends BaseController
 					'zd_uname' => $userLog->cust_Name,
 					'role' => 'user',
 				]);
-
 				echo json_encode(array(
 					"status" => 1,
 					"msg" => null
@@ -89,31 +62,17 @@ class Weblogin extends BaseController
 			));
 		}
 	}
-	private function reCaptcha($recaptcha)    {
-		
-        $secretKey = '6Le-VXcrAAAAAKSXShzC3A8GxolszKELxQ1S-9q9';
-        $url = 'https://www.google.com/recaptcha/api/siteverify';
-        $response = file_get_contents($url . '?secret=' . $secretKey . '&response=' . $recaptcha);
-        $result = json_decode($response, true);
 
-        return $result['success'] ?? false;
-    }
-
-
-	public function webForgotEmailSend(){
+	public function webForgotEmailSend()
+	{
 		$forgotCustEmail = $this->request->getPost("forgotCustEmail");
-		if (!$forgotCustEmail) {
+		if (!$forgotCustEmail || !filter_var($forgotCustEmail, FILTER_VALIDATE_EMAIL)) {
 			return $this->response->setJSON([
 				"status" => 0,
-				"msg" => "Enter Your Email Address."
+				"msg" => "Enter a valid Email Address."
 			]);
 		}
-		if (!filter_var($forgotCustEmail, FILTER_VALIDATE_EMAIL)) {
-			return $this->response->setJSON([
-				'status' => 0,
-				'msg' => 'Invalid Email Format.'
-			]);
-		}
+
 		$emailExist = $this->customerLoginModel->getEmailExist($forgotCustEmail);
 		if (!$emailExist) {
 			return $this->response->setJSON([
@@ -126,21 +85,20 @@ class Weblogin extends BaseController
 		$logoUrl = base_url(ASSET_PATH . 'assets/images/logo.jpg');
 		$frgtpswd = base_url('forgotPassword?email=' . urlencode($forgotCustEmail));
 
-		// Load PHPMailer files
 		require 'vendors/src/Exception.php';
 		require 'vendors/src/PHPMailer.php';
 		require 'vendors/src/SMTP.php';
 
-		$mail = new \PHPMailer\PHPMailer\PHPMailer(true);
+		$mail = new PHPMailer(true);
 
 		try {
 			$mail->isSMTP();
-			$mail->Host       = 'smtp.gmail.com';
-			$mail->SMTPAuth   = true;
-			$mail->Username   = 'smartloungework@gmail.com'; // Your Gmail
-			$mail->Password   = 'peetkiqeqbgxaxqs'; // App Password
+			$mail->Host = 'smtp.gmail.com';
+			$mail->SMTPAuth = true;
+			$mail->Username = 'smartloungework@gmail.com';
+			$mail->Password = 'peetkiqeqbgxaxqs';
 			$mail->SMTPSecure = 'tls';
-			$mail->Port       = 587;
+			$mail->Port = 587;
 
 			$mail->setFrom('smartloungework@gmail.com', 'Smart Lounge');
 			$mail->addAddress($forgotCustEmail, $name);
@@ -149,31 +107,22 @@ class Weblogin extends BaseController
 			$mail->isHTML(true);
 			$mail->Subject = 'Password Reset Link - Zakhi Designs';
 
-			$mail->Body = "
-				<center>
-					<img src='{$logoUrl}' alt='Zakhi Designs Logo' style='height: 60px;'>
-					<h2>Forgot Password</h2>
-				</center><br>
+			$mail->Body = "<center><img src='{$logoUrl}' alt='Zakhi Designs Logo' style='height: 60px;'>
+				<h2>Forgot Password</h2></center><br>
 				<p style='text-align: center; font-size: 16px; margin-top: 20px;'>
-					<a href='$frgtpswd'>Click Here To Reset The Password.</a>
-				</p>
+				<a href='$frgtpswd'>Click Here To Reset The Password.</a></p>
 				<p style='text-align: center; margin-top: 20px;'>
-					<a href='https://v4cstaging.co.in/zakhidesigns/' style='padding: 10px 20px; background-color: #d81b60; color: white; text-decoration: none; border-radius: 5px;'>Visit Our Website</a>
-				</p>
+				<a href='https://v4cstaging.co.in/zakhidesigns/' style='padding: 10px 20px; background-color: #d81b60; color: white; text-decoration: none; border-radius: 5px;'>Visit Our Website</a></p>
 				<p style='text-align: center; font-size: 14px; color: #555; margin-top: 30px;'>
-					For any queries, reach us at <a href='mailto:zakhidesigns@gmail.com'>zakhidesigns@gmail.com</a>
-				</p>
-			";
+				For any queries, reach us at <a href='mailto:zakhidesigns@gmail.com'>zakhidesigns@gmail.com</a></p>";
 
 			$mail->AltBody = "Dear $name,\n\nPlease follow the link to reset your password: $frgtpswd\n\n";
-
 			$mail->send();
 
 			return $this->response->setJSON([
 				'status' => 1,
 				'msg' => 'A Reset Link Has Been Sent To Your Email Address.'
 			]);
-
 		} catch (Exception $e) {
 			return $this->response->setJSON([
 				'status' => 0,
@@ -181,24 +130,21 @@ class Weblogin extends BaseController
 			]);
 		}
 	}
+
 	public function termsandconditions()
-    {
-        return view('terms_and_conditions');
-    }
- 
-    public function privacypolicy()
-    {
-        return view('privacy_policy');
-    }
- 
- 
+	{
+		return view('terms_and_conditions');
+	}
+
+	public function privacypolicy()
+	{
+		return view('privacy_policy');
+	}
 
 	public function logout()
 	{
-		$session = session();
-		$session->remove(['zd_uid', 'zd_uname']);
+		$this->session->destroy();
 		return redirect()->to(base_url('/'));
 	}
-
 
 }

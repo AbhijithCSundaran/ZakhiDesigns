@@ -4,7 +4,9 @@
 <head>
     <title>Zakhi Designs</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    
+     <meta name="google-signin-client_id"
+         content="980312560634-kksn59gmuu5p4rg68tnd2vaooe7lfdfu.apps.googleusercontent.com">
+
 
     <link rel="stylesheet" href="<?= base_url() . ASSET_PATH; ?>assets/css/bootstrap.min.css">
     <link rel="stylesheet" href="<?= base_url() . ASSET_PATH; ?>assets/css/customstyle.css">
@@ -31,12 +33,8 @@
     <!-- Swiper JS -->
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
-     <!-- Get country code  CSS -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.19/css/intlTelInput.css" />
-    <!-- JS -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.19/js/intlTelInput.min.js"></script>
-    <!-- captcha -->
-    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+   <!-----------------------------Country code---------------------------------->
+
 
 </head>
 
@@ -104,12 +102,19 @@
                                     data-bs-toggle="dropdown" aria-expanded="false">
                                     <?= session()->get('zd_uname'); ?>
                                 </div>
-                                <ul class="dropdown-menu" aria-labelledby="customerDropdown">
-                                    <li><a class="dropdown-item" href="<?= base_url('profile#profile'); ?>"><i
-                                                class="bi bi-person-circle"  style="font-size: 14px;" ></i> My Profile</a></li>
-                                    <li><a class="dropdown-item" href="<?= base_url('logout') ?>"><i
-                                                class="bi bi-escape" style="font-size: 14px;" ></i> Logout</a></li>
-                                </ul>
+                               <ul class="dropdown-menu" aria-labelledby="customerDropdown">
+    <li>
+        <a class="dropdown-item small-menu-item" href="<?= base_url('profile#profile'); ?>">
+            <i class="bi bi-person-circle me-1"></i> My Profile
+        </a>
+    </li>
+    <li>
+        <a class="dropdown-item small-menu-item" href="<?= base_url('logout') ?>">
+            <i class="bi bi-escape me-1"></i> Logout
+        </a>
+    </li>
+</ul>
+
                             </div>
 
                         <?php else: ?>

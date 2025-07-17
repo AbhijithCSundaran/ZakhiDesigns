@@ -203,3 +203,159 @@ $('#orderNowBtn').click(function (e) {
         });
     });
 </script>
+
+<script>
+function searchProduct() {
+  const keyword = document.getElementById('search').value.trim();
+  if (keyword !== '') {
+    window.location.href = "<?= base_url('product/search') ?>?keyword=" + encodeURIComponent(keyword);
+  }
+}
+
+
+</script>
+
+<script>
+
+let loading = false;
+let page = 2;
+let keyword = "<?= esc($keyword ?? '') ?>";
+let lastScrollTop = 0;
+
+$(document).ready(function () {
+  const $loadMore = $('#load-more');
+  const $noMoreMsg = $('#no-more-products');
+  const $productList = $('#product-list');
+
+  // Scroll Event
+  $(window).on('scroll', function () {
+    const scrollTop = $(this).scrollTop();
+    const windowHeight = $(this).height();
+    const documentHeight = $(document).height();
+
+    // Load next batch if near bottom
+    if (!loading && scrollTop + windowHeight >= documentHeight - 200) {
+      loadNextBatch();
+    }
+
+    // Scroll up — remove previous batch to save memory
+    if (scrollTop < lastScrollTop && page > 2) {
+      const prevBatch = page - 1;
+      const $lastBatch = $(`.product-batch[data-batch="${prevBatch}"]`);
+      if ($lastBatch.length && scrollTop < $lastBatch.offset().top) {
+        $lastBatch.remove();
+        page--;
+        $loadMore.fadeIn().html('<i class="bi bi-arrow-down-circle" style="font-size: 1.4rem;"></i>');
+        $noMoreMsg.addClass('d-none');
+      }
+    }
+
+    lastScrollTop = scrollTop;
+  });
+
+  function loadNextBatch() {
+    loading = true;
+    $loadMore.html('<span class="spinner-border spinner-border-sm"></span>');
+
+    const ajaxURL = keyword !== '' 
+      ? "<?= base_url('product/loadMoreSearch') ?>" 
+      : "<?= base_url('product/loadMoreByDate') ?>";
+
+    const requestData = keyword !== ''
+      ? { keyword: keyword, page: page }
+      : { page: page };
+
+    $.ajax({
+      url: ajaxURL,
+      type: "GET",
+      data: requestData,
+      success: function (html) {
+        if ($.trim(html) === '') {
+          $loadMore.hide();
+          $noMoreMsg.removeClass('d-none').text('No more products to show.');
+        } else {
+          $productList.append(`<div class="product-batch" data-batch="${page}">${html}</div>`);
+          $loadMore.html('<i class="bi bi-arrow-down-circle" style="font-size: 1.4rem;"></i>').fadeIn();
+          page++;
+        }
+        loading = false;
+      },
+      error: function () {
+        alert("Failed to load more products.");
+        $loadMore.html('<i class="bi bi-arrow-down-circle" style="font-size: 1.4rem;"></i>').fadeIn();
+        loading = false;
+      }
+    });
+  }
+});
+
+
+    function selectColor(color, element) {
+        document.getElementById('selected_color').value = color;
+        document.querySelectorAll('.cpicker').forEach(el => el.style.border = 'none');
+        element.style.border = '3px solid #000';
+    }
+
+    $(document).ready(function () {
+        let tempOrder = sessionStorage.getItem('tempOrder');
+        if (tempOrder) {
+            tempOrder = JSON.parse(tempOrder);
+
+            if (tempOrder.size) {
+                $('#size').val(tempOrder.size);
+            }
+
+            if (tempOrder.color) {
+                $('#selected_color').val(tempOrder.color);
+
+                $('.cpicker').removeClass('selected');
+                $('.cpicker').each(function () {
+                    if ($(this).css('background-color') === tempOrder.color ||
+                        rgb2hex($(this).css('background-color')) === tempOrder.color.toLowerCase()) {
+                        $(this).addClass('selected');
+                    }
+                });
+            }
+
+            if (tempOrder.qty) {
+                $('#qty').val(tempOrder.qty);
+            }
+
+            sessionStorage.removeItem('tempOrder');
+        }
+    });
+
+    // Helper function to convert rgb() to hex
+    function rgb2hex(rgb) {
+        if (!rgb.startsWith("rgb")) return rgb;
+        rgb = rgb.match(/\d+/g);
+        return "#" + rgb.map(x => ('0' + parseInt(x).toString(16)).slice(-2)).join('');
+    }
+    var swiper = new Swiper(".mySwiper", {
+        loop: true,
+        spaceBetween: 10,
+        slidesPerView: 1, // On mobile
+        breakpoints: {
+            576: {
+                slidesPerView: 2,
+                spaceBetween: 10,
+            },
+            768: {
+                slidesPerView: 3,
+                spaceBetween: 15,
+            },
+            992: {
+                slidesPerView: 4,
+                spaceBetween: 20,
+            }
+        },
+        navigation: {
+            nextEl: ".swiper-button-next",
+            prevEl: ".swiper-button-prev",
+        },
+    });
+
+
+
+
+</script>

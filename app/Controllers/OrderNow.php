@@ -59,7 +59,7 @@ class OrderNow extends Controller
         $address = $model->findAddress($id);
 
         if (!$address) {
-            return $this->response->setStatusCode(404)->setJSON(['error' => 'Address not found']);
+            return $this->response->setStatusCode(404)->setJSON(['error' => 'Address Not Found']);
         }
 
         return $this->response->setJSON($address);
@@ -68,6 +68,7 @@ class OrderNow extends Controller
     public function saveNewAddress()
     {
         $zd_uid = session()->get('zd_uid');
+        $add_id = $this->request->getPost('$add_Id');
         $model = new AddressModel();
 
         $data = [
@@ -97,12 +98,12 @@ class OrderNow extends Controller
                 'success'  => 1,
                 'insertId' => $insertId,
                 'details'  => $details,
-                'message'  => 'Address saved successfully.'
+                'message'  => 'Address Saved Successfully.'
             ]);
         } else {
             return $this->response->setJSON([
                 'success' => 0,
-                'message' => 'Failed to save address.',
+                'message' => 'Failed To Save Address.',
                 'errors'  => $model->errors()
             ]);
         }
@@ -126,7 +127,7 @@ class OrderNow extends Controller
         $orders = $orderModel->getOrdersById($od_Id);
 
         if (empty($orders)) {
-            return redirect()->to(base_url())->with('error', 'Order not found');
+            return redirect()->to(base_url())->with('error', 'Order Not Found');
         }
 
         $pr_Id     = $orders->pr_Id;
@@ -161,12 +162,12 @@ class OrderNow extends Controller
         $add_Id = $this->request->getPost('add_Id') ?? $this->request->getPost('address_id');
 
         if (empty($zd_uid) || empty($od_Id) || empty($add_Id)) {
-            return $this->response->setJSON(['status' => 0, 'msg' => 'Missing required information.']);
+            return $this->response->setJSON(['status' => 0, 'msg' => 'Missing Required Information.']);
         }
 
         $order = $orderModel->getOrdersById($od_Id);
         if (!$order) {
-            return $this->response->setJSON(['status' => 0, 'msg' => 'Order not found.']);
+            return $this->response->setJSON(['status' => 0, 'msg' => 'Order Not Found.']);
         }
 
         // Update stock
@@ -186,7 +187,7 @@ class OrderNow extends Controller
         $customer = $addressModel->find($add_Id);
 
         if (!$customer) {
-            return $this->response->setJSON(['status' => 0, 'msg' => 'Customer address not found.']);
+            return $this->response->setJSON(['status' => 0, 'msg' => 'Customer Address Not Found.']);
         }
 
 

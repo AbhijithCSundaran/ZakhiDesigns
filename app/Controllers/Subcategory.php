@@ -27,7 +27,8 @@ class Subcategory extends Controller
     $data = [];  
     return view('common/header', $data)
         . view('subcategory_list', $data)
-        . view('common/footer');
+        . view('common/footer')
+         . view('pagescripts/subcategoryjs');
 }
 public function subcategoryProducts($id, $catId){
     $this->productdisplayModel = new ProductDisplayModel();
@@ -78,7 +79,8 @@ public function subcategoryProducts($id, $catId){
     
     return view('common/header' , $data)
         . view('subcategory_list'   , $data)
-        . view('common/footer');
+        . view('common/footer')
+        . view('pagescripts/subcategoryjs');
 }
   
 }

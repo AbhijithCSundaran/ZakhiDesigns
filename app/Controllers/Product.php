@@ -39,56 +39,32 @@ class Product extends Controller
         . view('common/footer')
         . view('pagescripts/productjs');
 }
- /* public function similarProducts($pr_Id)
-    {
-        $model = new ProductModel();
-        $product = $model->find($pr_Id);
-        $similar = $model->getSimilarProducts($product['cat_Id'], $pr_Id);
-		$data['similar']=$similar;
-         return view('common/header', $data)
-        . view('product_details', $data)
+
+  public function ajaxSearch()
+{
+    $zd_uid = $this->session->get('zd_uid');
+
+    $data = [];
+    $data['categories'] = $this->productdisplayModel->getAllCategoriesAndSub();
+    $data['avg_rating'] = 1;
+
+    $keyword = trim($this->request->getGet('keyword'));
+    $page = (int) $this->request->getGet('page');
+    $page = ($page >= 1) ? $page : 1; // Prevent negative offset
+
+    $limit = 12;
+    $offset = ($page - 1) * $limit;
+
+    $products = $keyword ? $this->productdisplayModel->searchProductsPaginated($keyword, $limit, $offset) : [];
+
+    $data['product'] = $products;
+    $data['keyword'] = $keyword;
+
+    return view('common/header', $data)
+        . view('products_list', $data)
         . view('common/footer')
         . view('pagescripts/productjs');
-    } */
-
-    // Handles AJAX search
-    public function ajaxSearch()
-    {
-				$zd_uid = $this->session->get('zd_uid');
-        $data = [];
-
-        // Load categories for header
-        $data['categories'] = $this->productdisplayModel->getAllCategoriesAndSub();
-        
-        // Load all products
-        $products = $this->productdisplayModel->getAllProducts();
-        $reviewModel = new ReviewModel();
-        $data['product'] = $products;
-            $data['avg_rating'] = 1;
-        //  $keyword = $this->request->getGet('keyword');
-            
-        $keyword = trim($this->request->getGet('keyword'));
-        ////pagination
-        // $page = (int) $this->request->getGet('page');
-        // $page = ($page >= 1) ? $page : 1; // Prevent negative offset
-
-        // $limit = 12;
-        // $offset = ($page - 1) * $limit;
-
-        // $productsForPagination = $keyword ? $this->productdisplayModel->searchProductsPaginated($keyword, $limit, $offset) : [];
-
-        // $data['product'] = $productsForPagination;
-        
-        $products = $keyword ? $this->productdisplayModel->searchProducts($keyword) : [];
-
-        $products = array_values(array_unique($products, SORT_REGULAR));
-
-        return view('common/header',$data)
-            . view('products_list', ['product' => $products])
-            . view('common/footer')
-            . view('pagescripts/productjs');
-    }
-
+}
     public function product_list()
     {
        // $data['product'] = $this->productdisplayModel->getAllProducts();
@@ -130,6 +106,8 @@ class Product extends Controller
             . view('common/footer')
             . view('pagescripts/productjs');
     }
+
+
 
     public function product_list_by_category($cat_Id)
 	{
@@ -232,12 +210,13 @@ class Product extends Controller
             . view('pagescripts/productjs');
     }
 
+
    public function product_details($id)
 {
 	$reviewModel = new ReviewModel();
     $zd_uid = $this->session->get('zd_uid');
     $data = [];
-
+// $data['pr_Id'] = $id;
     // Load categories for header
     $data['categories'] = $this->productdisplayModel->getAllCategoriesAndSub();
 
@@ -284,7 +263,7 @@ class Product extends Controller
             'similar' => $data['similar'],
 			'total_reviews_count' => $data['total_reviews_count']			// explicitly pass if needed
         ])
-        . view('common/footer')
+        . view('common/footer', ['pr_Id' => $id])
         . view('pagescripts/productjs');
 }
 
@@ -349,24 +328,48 @@ class Product extends Controller
             ]);
         }
     }
-    public function loadMore()
+
+    // Load products by latest modified date with pagination
+public function loadMoreByDate()
 {
-    try {
-        $page = (int) $this->request->getGet('page') ?? 1;
-        $limit = 12;
-        $offset = ($page - 1) * $limit;
- 
-        $model = new ProductDisplayModel();
-        $products = $model->getProductsPaginated($limit, $offset);
- 
-        if (empty($products)) {
-            return '';
-        }
- 
-        return view('product/product_list', ['product' => $products]);
-    } catch (\Throwable $e) {
-        log_message('error', 'loadMore error: ' . $e->getMessage());
-        return $this->response->setStatusCode(500)->setBody('Server Error');
+    $page = (int) $this->request->getGet('page');
+    $page = ($page >= 1) ? $page : 1;
+
+    $limit = 12;
+    $offset = ($page - 1) * $limit;
+
+    $products = $this->productdisplayModel->getProductsByModifiedDatePaginated($limit, $offset);
+
+    if (!empty($products)) {
+        return view('product/_product_items', [
+            'product' => $products,
+            'currentBatch' => $page
+        ]);
+    } else {
+        return ''; // No more products
     }
 }
+
+// Load search results with pagination
+public function loadMoreSearch()
+{
+    $keyword = trim($this->request->getGet('keyword'));
+    $page = (int) $this->request->getGet('page');
+    $page = ($page >= 1) ? $page : 1;
+
+    $limit = 12;
+    $offset = ($page - 1) * $limit;
+
+    $products = $this->productdisplayModel->searchProductsPaginated($keyword, $limit, $offset);
+
+    if (!empty($products)) {
+        return view('product/_product_items', [
+            'product' => $products,
+            'currentBatch' => $page
+        ]);
+    } else {
+        return ''; // No more products
+    }
+}
+
 }

@@ -11,9 +11,17 @@
                             <li><i class="bi bi-arrow-right"></i>
                                 <a href="<?= base_url('profile#orders'); ?>" class="foot-link login-check">My Orders</a>
                             </li>
-                            <li><i class="bi bi-arrow-right"></i>
-                                <a href="<?= base_url('profile#address'); ?>" class="foot-link login-check">Address</a>
-                            </li>
+                            <?php if (!empty($pr_Id)): ?>
+                                <li><i class="bi bi-arrow-right"></i>
+                                    <a href="<?= base_url('profile?pr_Id=' . $pr_Id . '#address'); ?>"
+                                        class="foot-link login-check">Address</a>
+                                </li>
+                            <?php else: ?>
+                                <li><i class="bi bi-arrow-right"></i>
+                                    <a href="<?= base_url('profile#address'); ?>" class="foot-link login-check">Address</a>
+                                </li>
+                            <?php endif; ?>
+
                             <li><i class="bi bi-arrow-right"></i>
                                 <a href="<?= base_url('profile#orders'); ?>" class="foot-link login-check">Track
                                     Orders</a>
@@ -24,10 +32,14 @@
             <div class="col-md-3">
                 <h4>Products<h4>
                         <ul>
-                            <li><i class="bi bi-arrow-right"></i><a class="foot-link" href="<?= base_url('product/product_list'); ?>">Price Drop</li>
-                            <li><i class="bi bi-arrow-right"></i><a class="foot-link" href="<?= base_url('product/product_list'); ?>">Products</a></li>
-                            <li><i class="bi bi-arrow-right"></i><a class="foot-link" href="<?= base_url('/#top-products'); ?>">Best Sellers</a></li>
-                            <li><i class="bi bi-arrow-right"></i><a class="foot-link" href="<?= base_url(); ?>">Sitemap</a></li>
+                            <li><i class="bi bi-arrow-right"></i><a class="foot-link"
+                                    href="<?= base_url('product/product_list'); ?>">Price Drop</li>
+                            <li><i class="bi bi-arrow-right"></i><a class="foot-link"
+                                    href="<?= base_url('product/product_list'); ?>">Products</a></li>
+                            <li><i class="bi bi-arrow-right"></i><a class="foot-link"
+                                    href="<?= base_url('/#top-products'); ?>">Best Sellers</a></li>
+                            <li><i class="bi bi-arrow-right"></i><a class="foot-link"
+                                    href="<?= base_url(); ?>">Sitemap</a></li>
                         </ul>
             </div>
             <div class="col-md-3">
@@ -44,10 +56,10 @@
                         </ul>
             </div>
             <?= view_cell('App\Cells\FooterCell::storeInfo') ?>
-           
+
         </div>
         <div class="row">
-                <div class="col-md-12 text-center social-ico">
+            <div class="col-md-12 text-center social-ico">
                 <i class="bi bi-facebook"></i>
                 <i class="bi bi-twitter"></i>
                 <i class="bi bi-instagram"></i>
@@ -57,8 +69,15 @@
     </div>
 </footer>
 </body>
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>
 
+<!-- intlTelInput CSS -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.19/css/intlTelInput.css" />
 
+<!-- intlTelInput JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.19/js/intlTelInput.min.js"></script>
+<!-- Utility script for validation -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.19/js/utils.js"></script>
 
 
 <!-- <script src="<?php echo base_url() . ASSET_PATH; ?>assets/js/jquery-3.7.1.min.js"></script> -->
@@ -68,8 +87,10 @@
 <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
-<script src="https://www.google.com/recaptcha/api.js" async defer></script>
+<script src="https://apis.google.com/js/platform.js" async defer></script>
 <script>
+
+
     function openRespMenu() {
         var x = document.getElementById("respTopnav");
         if (x.className === "topnav") {
@@ -166,91 +187,33 @@
 
 
         // Login form submission (delegated because it's loaded dynamically)
-        // $(document).on('submit', '#loginForm', function (e) {
-        //     e.preventDefault();
-
-        //     let email = $('#email').val();
-        //     let password = $('#password').val();
-
-        //     $.ajax({
-        //         url: '<?= base_url('customerauth'); ?>',
-        //         type: 'POST',
-        //         data: {
-        //             cust_Email: email,
-        //             cust_Password: password
-        //         },
-        //         success: function (res) {
-        //             let data = JSON.parse(res);
-        //             if (data.status == 1) {
-        //                 window.location.reload();
-        //             } else {
-        //                 $('#loginError').text(data.msg);
-        //             }
-        //         },
-        //         error: function () {
-        //             $('#loginError').text('Something went wrong. Please try again.');
-        //         }
-        //     });
-        // });
         $(document).on('submit', '#loginForm', function (e) {
-        e.preventDefault();
+            e.preventDefault();
 
-        // Clear any existing errors
-        $('#loginError').text('');
+            let email = $('#email').val();
+            let password = $('#password').val();
 
-        // Get form input values
-        let email = $('#email').val().trim();
-        let password = $('#password').val().trim();
-
-        // Get reCAPTCHA response
-        let recaptchaResponse = grecaptcha.getResponse();
-
-        // Validate inputs
-        if (!email || !password) {
-            $('#loginError').text('Email and Password are required.');
-            return;
-        }
-
-        if (!recaptchaResponse) {
-            $('#loginError').text('Please complete the reCAPTCHA.');
-            return;
-        }
-
-        // Send AJAX login request
-        $.ajax({
-            url: '<?= base_url('customerauth'); ?>',
-            type: 'POST',
-            data: {
-                cust_Email: email,
-                cust_Password: password,
-                'g-recaptcha-response': recaptchaResponse
-            },
-            success: function (res) {
-                let data;
-                try {
-                    data = JSON.parse(res);
-                } catch (e) {
-                    $('#loginError').text('Invalid server response.');
-                    return;
+            $.ajax({
+                url: '<?= base_url('customerauth'); ?>',
+                type: 'POST',
+                data: {
+                    cust_Email: email,
+                    cust_Password: password
+                },
+                success: function (res) {
+                    let data = JSON.parse(res);
+                    if (data.status == 1) {
+                        window.location.reload();
+                    } else {
+                        $('#loginError').text(data.msg);
+                    }
+                },
+                error: function () {
+                    $('#loginError').text('Something went wrong. Please try again.');
                 }
-
-                if (data.status == 1) {
-                    // Success — reload or redirect
-                    location.reload();
-                } else {
-                    // Display error message
-                    $('#loginError').text(data.msg);
-                    grecaptcha.reset(); // Reset the reCAPTCHA for retry
-                }
-            },
-            error: function () {
-                $('#loginError').text('Something went wrong. Please try again.');
-                grecaptcha.reset(); // Reset reCAPTCHA in case of failure
-            }
+            });
         });
-    });
 
-     
 
     });
 
@@ -272,15 +235,15 @@
         });
     });
 
-document.addEventListener("DOMContentLoaded", function () {
-    const tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
-    tooltipTriggerList.forEach(function (tooltipTriggerEl) {
-        const tooltip = bootstrap.Tooltip.getInstance(tooltipTriggerEl);
-        if (tooltip) {
-            tooltip.dispose();
-        }
+    document.addEventListener("DOMContentLoaded", function () {
+        const tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+        tooltipTriggerList.forEach(function (tooltipTriggerEl) {
+            const tooltip = bootstrap.Tooltip.getInstance(tooltipTriggerEl);
+            if (tooltip) {
+                tooltip.dispose();
+            }
+        });
     });
-});
 
 
 </script>

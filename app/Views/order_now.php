@@ -29,9 +29,12 @@
                             <div class="accordion-body">
                                 <?php if (!empty($addresses)): ?>
                                     <?php foreach ($addresses as $address): ?>
-                                        <div class="form-check mb-2">
+                                       <div class="form-check mb-2 position-relative">
                                             <input class="form-check-input" type="radio" name="address_id"
-                                                value="<?= $address['add_Id'] ?>" <?= $address['add_Default'] ? 'checked' : '' ?>>
+                                                value="<?= $address['add_Id'] ?>" <?= $address['add_Default'] ? 'checked' : '' ?>
+                                                data-id="<?= $address['add_Id'] ?>" onchange="toggleEditLinks()">
+                                            <input type="hidden" name="edit_address_id" id="edit_address_id" value="">
+                                            <input type="hidden" name="edit_product_id" id="edit_product_id" value="">
                                             <label class="form-check-label">
                                                 <?= esc($address['add_Name']) ?> - <?= esc($address['add_Phone']) ?><br>
                                                 <?= esc($address['add_BuldingNo']) ?>,
@@ -40,6 +43,12 @@
                                                 <?= esc($address['add_City']) ?> - <?= esc($address['add_Pincode']) ?><br>
                                                 <?= esc($address['add_State']) ?>
                                             </label>
+ 
+                                            <a href="<?= base_url('profile#address') ?>" class="edit-link btn btn-sm btn-link"
+                                                data-id="<?= $address['add_Id'] ?>"
+                                                data-product-id="<?= $product->pr_Id ?? '' ?>" onclick="storeEditInfo(event)"
+                                                style="display:none;">Edit</a>
+ 
                                         </div>
                                     <?php endforeach; ?>
                                 <?php else: ?>

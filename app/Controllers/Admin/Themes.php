@@ -195,57 +195,91 @@ public function save_file()
         return $newName;
     };
 
-    $uploadPath = ROOTPATH . 'public/uploads/themes/';
+     $uploadPath = ROOTPATH . 'public/uploads/themes/';
+     helper('url'); // Ensure base_url() is available
+
+    $baseUrl = base_url(); // Get your site base URL
+
+    function isValidBaseLink($link, $baseUrl) {
+        return strpos($link, $baseUrl) === 0;
+    }
+
 
     // SECTION 1 (1200x300 to 1300x400, resize to 1300x400)
-    $section1 = [];
-    if (isset($files['section1_image'])) {
-        foreach ($files['section1_image'] as $i => $file) {
-            if ($file->isValid() && !$file->hasMoved()) {
-                if (!$validateDimensions($file, 1200, 300, 1300, 400, $errors, 'Banner', $i)) {
-                    continue; // skip invalid image
-                }
-                $section1[$i]['image'] = $uploadAndResize($file, 1300, 400, $uploadPath);
-            } else {
-                $section1[$i]['image'] = $mainData['section1_image_old'][$i] ?? null;
+     $section1 = [];
+if (isset($files['section1_image'])) {
+    foreach ($files['section1_image'] as $i => $file) {
+        if ($file->isValid() && !$file->hasMoved()) {
+            if (!$validateDimensions($file, 1200, 300, 1300, 400, $errors, 'Banner', $i)) {
+                continue;
             }
-            $section1[$i]['link'] = !empty($mainData['section1_link'][$i]) ? $mainData['section1_link'][$i] : null;
+            $section1[$i]['image'] = $uploadAndResize($file, 1300, 400, $uploadPath);
+        } else {
+            $section1[$i]['image'] = $mainData['section1_image_old'][$i] ?? null;
+        }
+
+        $link = $mainData['section1_link'][$i] ?? null;
+        $section1[$i]['link'] = (isValidBaseLink($link, $baseUrl)) ? $link : null;
+
+        if (!$section1[$i]['link']) {
+            $errors[] = "Please enter valid internal page links for Main Banner section.";
         }
     }
+}
+
 
     // SECTION 2 (300x200 to 400x300, resize to 400x300)
-    $section2 = [];
-    if (isset($files['section2_image'])) {
-        foreach ($files['section2_image'] as $i => $file) {
-            if ($file->isValid() && !$file->hasMoved()) {
-                if (!$validateDimensions($file, 300, 200, 400, 300, $errors, 'Offer', $i)) {
-                    continue;
-                }
-                $section2[$i]['image'] = $uploadAndResize($file, 400, 300, $uploadPath);
-            } else {
-                $section2[$i]['image'] = $mainData['section2_image_old'][$i] ?? null;
+  $section2 = [];
+if (isset($files['section2_image'])) {
+    foreach ($files['section2_image'] as $i => $file) {
+        if ($file->isValid() && !$file->hasMoved()) {
+            if (!$validateDimensions($file, 300, 200, 400, 300, $errors, 'Offer', $i)) {
+                continue;
             }
-            $section2[$i]['name'] = !empty($mainData['section2_name'][$i]) ? $mainData['section2_name'][$i] : null;
-            $section2[$i]['link'] = !empty($mainData['section2_link'][$i]) ? $mainData['section2_link'][$i] : null;
+            $section2[$i]['image'] = $uploadAndResize($file, 400, 300, $uploadPath);
+        } else {
+            $section2[$i]['image'] = $mainData['section2_image_old'][$i] ?? null;
+        }
+
+        $section2[$i]['name'] = $mainData['section2_name'][$i] ?? null;
+        $link = $mainData['section2_link'][$i] ?? null;
+        $section2[$i]['link'] = (isValidBaseLink($link, $baseUrl)) ? $link : null;
+
+        if (!$section2[$i]['link']) {
+            $errors[] = "Please enter valid internal page links for Offer Image Section.";
         }
     }
+}
+
 
     // SECTION 3 (1300x400 to 1400x500, resize to 1350x400)
-    $section3 = [];
-    if (isset($files['section3_image'])) {
-        foreach ($files['section3_image'] as $i => $file) {
-            if ($file->isValid() && !$file->hasMoved()) {
-                if (!$validateDimensions($file, 1200, 400, 1400, 500, $errors, 'Banner', $i)) {
-                    continue;
-                }
-                $section3[$i]['image'] = $uploadAndResize($file, 1400, 500, $uploadPath);
-            } else {
-                $section3[$i]['image'] = $mainData['section3_image_old'][$i] ?? null;
+  $section3 = [];
+
+if (isset($files['section3_image'])) {
+    foreach ($files['section3_image'] as $i => $file) {
+        if ($file->isValid() && !$file->hasMoved()) {
+            if (!$validateDimensions($file, 1200, 400, 1400, 500, $errors, 'Banner', $i)) {
+                continue;
             }
-            $section3[$i]['name'] = !empty($mainData['section3_name'][$i]) ? $mainData['section3_name'][$i] : null;
-            $section3[$i]['link'] = !empty($mainData['section3_link'][$i]) ? $mainData['section3_link'][$i] : null;
+            $section3[$i]['image'] = $uploadAndResize($file, 1400, 500, $uploadPath);
+        } else {
+            $section3[$i]['image'] = $mainData['section3_image_old'][$i] ?? null;
         }
+
+        $section3[$i]['name'] = $mainData['section3_name'][$i] ?? null;
+        $link = $mainData['section3_link'][$i] ?? null;
+
+        if (!isValidBaseLink($link, $baseUrl)) {
+            $section3Invalid = true;
+        }
+
+        $section3[$i]['link'] = $link;
     }
+
+    if ($section3Invalid) {
+        $errors[] = "Please enter valid internal page links for Bottom Image Section.";
+    }
+}
 
     // Stop if validation errors exist
     if (!empty($errors)) {
@@ -254,7 +288,6 @@ public function save_file()
             'msg' => implode('<br>', $errors)
         ]);
     }
-
     // Prepare data for saving
     $data = [
         'theme_Name'        => $mainData['theme_name'],

@@ -161,4 +161,67 @@ $(function() {
 });
 
 });
+
+function toggleEditLinks() {
+        document.querySelectorAll('.form-check-input[name="address_id"]').forEach(radio => {
+            const editLink = radio.closest('.form-check').querySelector('.edit-link');
+            if (radio.checked) {
+                editLink.style.display = 'inline';
+            } else {
+                editLink.style.display = 'none';
+            }
+        });
+    }
+    function storeEditInfo(event) {
+        event.preventDefault();
+ 
+        const addressId = event.currentTarget.getAttribute('data-id');
+        const productId = event.currentTarget.getAttribute('data-product-id');
+ 
+        if (addressId) {
+            sessionStorage.setItem('edit_address_id', addressId);
+        }
+ 
+        if (productId) {
+            sessionStorage.setItem('edit_product_id', productId);
+        }
+ 
+        // Redirect to the address section
+        window.location.href = event.currentTarget.href;
+    }
+ 
+    document.addEventListener('DOMContentLoaded', toggleEditLinks);
+ 
+    $(document).ready(function () {
+        const editAddressId = sessionStorage.getItem('edit_address_id');
+        const editProductId = sessionStorage.getItem('edit_product_id');
+ 
+        if (editAddressId) {
+            // Switch to address tab
+            const addressTabTrigger = document.querySelector('#address-tab');
+            if (addressTabTrigger) {
+                const tab = new bootstrap.Tab(addressTabTrigger);
+                tab.show();
+            }
+ 
+            // Load address data via existing function
+            setTimeout(() => {
+                if (typeof editAddress === 'function') {
+                    editAddress(editAddressId);
+                }
+ 
+                // OPTIONAL: use the product ID
+                if (editProductId) {
+                    console.log("Editing product ID:", editProductId);
+                    // You can pre-fill hidden fields or do more here
+                    $('#edit_product_id').val(editProductId); // example
+                }
+            }, 300);
+ 
+            // Clean up
+            sessionStorage.removeItem('edit_address_id');
+            sessionStorage.removeItem('edit_product_id');
+        }
+    });
+ 
 </script>

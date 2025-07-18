@@ -239,18 +239,24 @@ function editAddress(id) {
         }
     }, 'json');
 }
-$('#editAddressForm').submit(function(e) {
-    e.preventDefault();
-    $.post("<?= base_url('profile/address/edit') ?>", $(this).serialize(), function(res) {
-        if (res.status === 'success') {
-            showMessage('Address Updated Successfully!', 'success');
-            $('#editAddressModal').modal('hide');
-            setTimeout(() => location.reload(), 3000);
-        } else {
-            showMessage(res.msg || 'Failed To Update Address.', 'danger');
-        }
-    }, 'json');
-});
+ $('#editAddressForm').submit(function (e) {
+        e.preventDefault();
+        $.post("<?= base_url('profile/address/edit') ?>", $(this).serialize(), function (res) {
+            if (res.status === 'success') {
+                showMessage('Address Updated Successfully!', 'success');
+                $('#editAddressModal').modal('hide');
+                setTimeout(() => location.reload(), 3000);
+                const prId = $('#pr_Id').val()?.trim();
+                const addId = $('#display_add_Id').val()?.trim();
+                if (addId && prId) {
+ 
+                    window.location.href = "<?= base_url('ordernow/product') ?>/" + prId;
+                }
+            } else {
+                showMessage(res.msg || 'Failed To Update Address.', 'danger');
+            }
+        }, 'json');
+    });
 function openDeleteModal(id) {
     document.getElementById('delete_add_id').value = id;
     var modal = new bootstrap.Modal(document.getElementById('deleteModal'));
@@ -320,4 +326,38 @@ function showMessage(msg, type = 'success') {
         $box.fadeOut();
     }, 3000);
 }
+
+$(document).ready(function () {
+        const addId = sessionStorage.getItem('edit_address_id');
+        const prId = sessionStorage.getItem('edit_product_id');
+ 
+        if (addId || prId) {
+            // Switch to address tab
+            const addressTabTrigger = document.querySelector('#address-tab');
+            if (addressTabTrigger) {
+                const tab = new bootstrap.Tab(addressTabTrigger);
+                tab.show();
+            }
+ 
+            // Load the address data
+            setTimeout(() => {
+                if (addId && typeof editAddress === 'function') {
+                    editAddress(addId); // fill other fields
+                    $('#display_add_Id').val(addId);                 // hidden input
+                }
+ 
+                if (prId) {
+                    $('#pr_Id').val(prId);
+                }
+ 
+                // Open modal
+                const modal = new bootstrap.Modal(document.getElementById('editAddressModal'));
+                modal.show();
+            }, 300);
+ 
+            // Remove sessionStorage after everything is used
+            sessionStorage.removeItem('edit_address_id');
+            sessionStorage.removeItem('edit_product_id');
+        }
+    });
 </script>

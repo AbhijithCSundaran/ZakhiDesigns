@@ -19,7 +19,7 @@ body {
  }
  .modal-header {
      border-bottom: none !important;
-     margin-top: -15px;
+     margin-top: 15px;
  }
 
  .floating-label-group {
@@ -154,3 +154,19 @@ body {
 .phn_code div.iti--allow-dropdown {
     width: 100%;
 }
+    #password-strength-bar {
+        border-radius: 5px;
+    }
+ 
+    #password-strength-fill {
+        transition: width 0.3s ease;
+    }
+ 
+    #password-strength-text {
+        font-weight: bold;
+        transition: color 0.3s ease;
+    }
+ 
+    .progress .progress-bar {
+        height: 100%
+    }

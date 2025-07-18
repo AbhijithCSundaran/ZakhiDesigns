@@ -65,9 +65,9 @@ class Customer extends BaseController
 		$custname = $this->input->getPost('custname');
 		$custname = ucwords(strtolower(trim($custname)));
 		// $cust_phcode = $this->input->getPost('cust_phcode'); 
-		$custemail = $this->input->getPost('custemail');
+		$custemail = $this->input->getPost('useremail');
 		// $mobile = $this->input->getPost('mobile');
-	    $password =$this->input->getPost('password');
+	    $password =$this->input->getPost('userpassword');
 		 if (!preg_match('/^[a-zA-Z ]+$/', $custname)) {
 			return $this->response->setJSON(['status' => 'error', 'msg' => 'Please Enter Name Correctly.']);
 		}

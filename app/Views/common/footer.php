@@ -129,94 +129,9 @@
     });
     //Login form open
 
-    $(document).ready(function () {
-
-        // Load login form into modal
-        $('#loginBtn').on('click', function (e) {
-            e.preventDefault();
-            $('#modalBody').load("<?= base_url('weblogin'); ?>", function () {
-                $('#mainModal').modal('show');
-            });
-        });
-
-        // Load register form into modal
-        $('#registerBtn').on('click', function (e) {
-            e.preventDefault();
-            $('#modalBody').load("<?= base_url('webreg'); ?>", function () {
-                $('#mainModal').modal('show');
-            });
-        });
-
-        // When "Register" is clicked inside login modal
-        $(document).on('click', '#showRegisterFromLogin', function (e) {
-            e.preventDefault();
-
-            // Load register form in the same modal
-            $('#modalBody').load("<?= base_url('webreg'); ?>", function () {
-                $('#mainModal').modal('show');
-            });
-        });
-
-        //when forgot password Clicked inside login modal
-        $(document).on('click', '#showForgotForm', function (e) {
-            e.preventDefault();
-
-            // Load Forgot form in the same modal
-            $('#modalBody').load("<?= base_url('webforgot'); ?>", function () {
-                $('#mainModal').modal('show');
-            });
-        });
-
-        // When "Login" is clicked inside register modal
-        $(document).on('click', '#showLoginFromRegister', function (e) {
-            e.preventDefault();
-
-            $('#modalBody').load("<?= base_url('weblogin'); ?>", function () {
-                $('#mainModal').modal('show');
-            });
-        });
-
-        $(document).on('click', '#showLoginFromFrgt', function (e) {
-            e.preventDefault();
-
-            $('#modalBody').load("<?= base_url('weblogin'); ?>", function () {
-                $('#mainModal').modal('show');
-            });
-        });
 
 
 
-
-        // Login form submission (delegated because it's loaded dynamically)
-        $(document).on('submit', '#loginForm', function (e) {
-            e.preventDefault();
-
-            let email = $('#email').val();
-            let password = $('#password').val();
-
-            $.ajax({
-                url: '<?= base_url('customerauth'); ?>',
-                type: 'POST',
-                data: {
-                    cust_Email: email,
-                    cust_Password: password
-                },
-                success: function (res) {
-                    let data = JSON.parse(res);
-                    if (data.status == 1) {
-                        window.location.reload();
-                    } else {
-                        $('#loginError').text(data.msg);
-                    }
-                },
-                error: function () {
-                    $('#loginError').text('Something went wrong. Please try again.');
-                }
-            });
-        });
-
-
-    });
 
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
@@ -246,6 +161,169 @@
         });
     });
 
+
+</script>
+<script>
+ 
+
+
+    let iti = null;
+
+    $(document).ready(function () {
+
+        // Submit Handler
+      $(document).on('submit', '#registerForm', function (e) {
+    e.preventDefault();
+    $('#regError').stop(true, true).hide().removeClass('text-danger text-success').html('');
+
+    const password = $('#userpassword').val().trim();
+    const cpassword = $('#cpassword').val().trim();
+    const email = $('#useremail').val().trim();
+    const name = $('#name').val().trim();
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+        showError('Please enter a valid email address.');
+        return;
+    }
+
+    if (password !== cpassword) {
+        showError('Passwords do not match.');
+        return;
+    }
+
+    $.ajax({
+        url: '<?= base_url('admin/customer/save') ?>',
+        type: 'POST',
+        data: $(this).serialize(),
+        dataType: 'json',
+        success: function (response) {
+            if (response.status === 1) {
+                $('#regError').removeClass('text-danger').addClass('text-success').html(response.msg).fadeIn();
+                $('#registerForm')[0].reset();
+                setTimeout(() => $('#registerModal').modal('hide'), 1000);
+                setTimeout(() => {
+                    $('#regError').fadeOut('slow', function () {
+                        $(this).removeClass('text-success').html('').show();
+                    });
+                }, 3000);
+            } else {
+                showError(response.msg);
+            }
+        },
+        error: function () {
+            showError('An error occurred. Please try again.');
+        }
+    });
+});
+
+function showError(message) {
+    $('#regError')
+        .removeClass('text-success')
+        .addClass('text-danger')
+        .html(message)
+        .fadeIn();
+
+    setTimeout(() => {
+        $('#regError').fadeOut('slow', function () {
+            $(this).removeClass('text-danger').html('').show();
+        });
+    }, 3000);
+}
+
+
+    });
+
+</script>
+<script>
+    const passwordInput = document.getElementById('userpassword');
+    const strengthBar = document.getElementById('password-strength-bar');
+    const strengthFill = document.getElementById('password-strength-fill');
+    const strengthText = document.getElementById('password-strength-text');
+
+    $(document).on('input', '#userpassword', function () {
+        const value = this.value;
+        const result = calculatePasswordStrength(value);
+
+        if (value.length > 0) {
+            $('#password-strength-bar').show();
+            $('#password-strength-fill')
+                .css('width', result.percent + '%')
+                .removeClass()
+                .addClass('progress-bar bg-' + result.color);
+
+            $('#password-strength-text')
+                .text(result.label)
+                .css('color', getTextColor(result.color));
+        } else {
+            $('#password-strength-bar').hide();
+            $('#password-strength-fill').css('width', '0%');
+            $('#password-strength-text').text('').css('color', '');
+        }
+    });
+    $('#registerModal').on('hidden.bs.modal', function () {
+        $('#password-strength-bar').hide();
+        $('#password-strength-fill').css('width', '0%').removeClass();
+        $('#password-strength-text').text('');
+    });
+
+
+    function calculatePasswordStrength(password) {
+        let score = 0;
+
+        if (password.length >= 8) score++;                  // ✔️ Proper length
+        if (/[A-Z]/.test(password)) score++;                // ✔️ Uppercase
+        if (/[a-z]/.test(password)) score++;                // ✔️ Lowercase
+        if (/\d/.test(password)) score++;                   // ✔️ Number
+        if (/[^A-Za-z0-9]/.test(password)) score++;         // ✔️ Special character
+
+        switch (score) {
+            case 0:
+            case 1:
+                return { percent: 20, color: 'danger', label: 'Very Weak' };
+            case 2:
+                return { percent: 40, color: 'warning', label: 'Weak' };
+            case 3:
+                return { percent: 60, color: 'info', label: 'Moderate' };
+            case 4:
+                return { percent: 80, color: 'primary', label: 'Strong' };
+            case 5:
+                return { percent: 100, color: 'success', label: 'Very Strong' };
+            default:
+                return { percent: 0, color: 'secondary', label: '' };
+        }
+    }
+
+
+    // Match Bootstrap contextual colors to text hex codes
+    function getTextColor(color) {
+        switch (color) {
+            case 'danger': return '#dc3545';   // red
+            case 'warning': return '#ffc107';  // yellow
+            case 'info': return '#17a2b8';     // light blue
+            case 'primary': return '#007bff';  // blue
+            case 'success': return '#28a745';  // green
+            default: return '#6c757d';         // gray (secondary)
+        }
+    }
+
+
+    $('#registerModal').on('shown.bs.modal', function () {
+        const value = passwordInput.value;
+        if (value.length > 0) {
+            strengthBar.style.display = 'block';
+            const result = calculatePasswordStrength(value);
+
+            strengthFill.style.width = result.percent + '%';
+            strengthFill.className = 'progress-bar bg-' + result.color;
+            strengthText.innerText = result.label;
+            strengthText.style.color = getTextColor(result.color);
+        } else {
+            strengthBar.style.display = 'none';
+            strengthText.innerText = '';
+            strengthText.style.color = '';
+        }
+    });
 
 </script>
 

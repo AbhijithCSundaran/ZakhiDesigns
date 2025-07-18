@@ -6,10 +6,10 @@
              16/541P Muppathadam, Near Govt: GHS School Aluva, Ernakulam
         </li>
         <li><i class="bi bi-telephone-fill"></i>
-            <?= esc($user['us_Phone']) ?>
+            <?= esc( $admin_user['us_Phone']) ?>
         </li>
-        <li><i class="bi bi-envelope-fill"></i>
-            <?= esc($user['us_Email']) ?>
+        <li class="gmail"><i class="bi bi-envelope-fill"></i>
+            <?= esc(strtolower($admin_user['us_Email'])) ?>
         </li>
     </ul>
 </div>

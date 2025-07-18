@@ -51,7 +51,7 @@ body {
 	padding:0px 3px;
 }
 .logo img {
-	width:100px;
+	width:120px;
 }
 .head-row {
 	border-bottom:#efefef 1px solid;
@@ -188,6 +188,9 @@ section h3 {
 }
 footer {
 	background-color:#333333;
+}
+footer ul .gmail{
+	text-transform: lowercase !important;
 }
 footer .col-md-3 {
 	margin-top:50px;

@@ -97,11 +97,11 @@ class Orders extends BaseController
                     'message' => 'Order not found'
                 ]);
             }
-            
-            $cust_Id = $order->cus_Id;
+             $cust_Id = $order->cus_Id;
+            $add_Id = $order->add_Id;
             $customer = $model->getCustomer($cust_Id);
-            $address = $model->getAddress($cust_Id);
-
+            $address = $model->getAddress($add_Id);
+ 
             return $this->response->setJSON([
                 'status' => true,
                 'data' => [

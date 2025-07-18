@@ -1,4 +1,8 @@
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+<!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"> -->
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/css/intlTelInput.min.css"/>
+
+
 <style>
     #password-strength-bar {
         border-radius: 5px;
@@ -37,14 +41,14 @@
         <label for="email">Email</label>
     </div>
 
-    <div class="floating-label-group phn_code">
+    <!-- <div class="floating-label-group phn_code">
        <input type="tel" class="form-control" id="phn_number" name="mobile" placeholder=""
     maxlength="15" minlength="7" required pattern="^\+?\d{7,20}$"
     oninvalid="this.setCustomValidity('Phone Number must be at least 7 digits in valid format.')"
-    oninput="this.setCustomValidity('')" />
+    oninput="this.setCustomValidity('')" /> -->
 
         <!-- <label for="phn_number">Phone Number</label> -->
-    </div>
+    <!-- </div> -->
 
 
     <!-- <div class="floating-label-group password-wrapper">
@@ -54,6 +58,17 @@
             <i class="bi bi-eye-slash toggle-password" id="toggleCurrentPassword"></i>
         </div>
     </div> -->
+<!-- <div class="floating-label-group" style="width: 100%;">
+ <input type="tel" id="phone" class="form-control" name="cust_Phone" placeholder="81234 56789" required>
+<input type="hidden" name="phcode" id="phcode">
+<small id="phone-valid-msg" class="text-success d-none">Valid</small>
+<small id="phone-error-msg" class="text-danger d-none">Invalid</small>
+
+</div> -->
+
+<input type="hidden" name="phcode" id="phcode">
+
+
     <div class="floating-label-group password-wrapper">
         <div class="password-input-wrapper">
             <input type="password" class="form-control" id="password" name="password" placeholder=" " required
@@ -70,7 +85,7 @@
 
     <div class="floating-label-group password-wrapper">
         <div class="password-input-wrapper">
-            <input type="password" class="form-control" id="cpassword" name="cust_cpassword" placeholder=" " required />
+            <input type="password" class="form-control" id="cpassword" name="cust_cpassword" max-length="15" placeholder=" " required />
             <label for="cpassword">Confirm Password</label>
             <i class="bi bi-eye-slash toggle-password" id="toggleConfirmPassword"></i>
         </div>
@@ -91,12 +106,6 @@
     </div>
 
 </form>
-<style>
-    .iti.iti--allow-dropdown.iti--separate-dial-code label {
-        margin-left: 35px;
-    }
-</style>
-
 <script>
     function togglePassword(id, iconId) {
         const input = document.getElementById(id);
@@ -115,114 +124,60 @@
     document.getElementById('toggleConfirmPassword').addEventListener('click', function () {
         togglePassword('cpassword', 'toggleConfirmPassword');
     });
-    $(document).ready(function () {
-        const phoneInput = document.querySelector("#phn_number");
-        if (phoneInput) {
-            iti = window.intlTelInput(phoneInput, {
-                separateDialCode: true,
-                initialCountry: "in",
-                nationalMode: false,
-                utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.19/js/utils.js"
-            });
-            // debugger;
-            // const label = $('label[for="phn_number"]');
-            const label = '<label for="phn_number">Phone Number</label>';
-            const itiWrapper = $(phoneInput).closest('.iti');
-            if (itiWrapper.length && label.length) {
-                itiWrapper.append(label); // move label to same level
-                // itiWrapper.parent().append(label); // move label to same level
-            }
-            setTimeout(() => {
-                $(phoneInput).attr('placeholder', '')
-            }, 10);
-        }
-    });
-    $(document).ready(function () {
-        $('#phn_number').on('input', function () {
-            const sanitized = $(this).val().replace(/[^\d\s-]/g, '');
-            $(this).val(sanitized);
-        });
- 
-        $('#phn_number').on('paste', function (e) {
-            const pastedData = e.originalEvent.clipboardData.getData('text');
-            if (!/^[\d\s-]+$/.test(pastedData)) {
-                e.preventDefault();
-            }
-        });
-    });
+    
+let iti = null;
+
 $(document).ready(function () {
-    $(document).on('submit', '#registerForm', function (e) {
-        e.preventDefault();
-        $('#regError').stop(true, true).hide().removeClass('text-danger text-success').html('');
 
-        const password = $('#password').val().trim();
-        const cpassword = $('#cpassword').val().trim();
-        const email = $('#email').val().trim();
-        const name = $('#name').val().trim();
-        const phone = iti.getNumber().trim(); // full intl number
-        const nationalPhone = iti.getNumber(intlTelInputUtils.numberFormat.NATIONAL).trim();
+    // Submit Handler
+  $(document).on('submit', '#registerForm', function (e) {
+    e.preventDefault();
+    $('#regError').stop(true, true).hide().removeClass('text-danger text-success').html('');
 
-        // Validate name
-        const nameRegex = /^[a-zA-Z ]+$/;
-        if (!nameRegex.test(name)) {
-            showError('Name must contain only letters and spaces.');
-            return;
-        }
+    const password = $('#password').val().trim();
+    const cpassword = $('#cpassword').val().trim();
+    const email = $('#email').val().trim();
+    const name = $('#name').val().trim();
 
-        // Validate email format
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        if (!emailRegex.test(email)) {
-            showError('Please enter a valid email address.');
-            return;
-        }
+    // Validate email
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+        showError('Please enter a valid email address.');
+        return;
+    }
 
-        // Validate phone
-        if (!/^\+\d{7,20}$/.test(phone)) {
-            showError('Phone number must be at least 7 digits and in international format.');
-            return;
-        }
+    // Validate passwords
+    if (password !== cpassword) {
+        showError('Passwords do not match.');
+        return;
+    }
 
-        // Validate password match
-        if (password !== cpassword) {
-            showError('Passwords do not match.');
-            return;
-        }
+    // Submit via AJAX
+    $.ajax({
+        url: '<?= base_url('admin/customer/save') ?>',
+        type: 'POST',
+        data: $(this).serialize(),
+        dataType: 'json',
+        success: function (response) {
+            if (response.status === 1) {
+                $('#regError').removeClass('text-danger').addClass('text-success').html(response.msg).fadeIn();
+                $('#registerForm')[0].reset();
 
-        // Set the hidden phone number field
-        $('#phn_number').val(phone);
-
-        // Submit the form via AJAX
-        $.ajax({
-            url: '<?= base_url('admin/customer/save') ?>',
-            type: 'POST',
-            data: $(this).serialize(),
-            dataType: 'json',
-            success: function (response) {
-                if (response.status === 1) {
-                    $('#regError')
-                        .removeClass('text-danger')
-                        .addClass('text-success')
-                        .html(response.msg)
-                        .fadeIn();
-
-                    $('#registerForm')[0].reset();
-                    setTimeout(() => $('#registerModal').modal('hide'), 1000);
-
-                    // Hide success message after 3s
-                    setTimeout(() => {
-                        $('#regError').fadeOut('slow', function () {
-                            $(this).removeClass('text-success').html('').show();
-                        });
-                    }, 3000);
-                } else {
-                    showError(response.msg);
-                }
-            },
-            error: function () {
-                showError('An error occurred. Please try again.');
+                setTimeout(() => $('#registerModal').modal('hide'), 1000);
+                setTimeout(() => {
+                    $('#regError').fadeOut('slow', function () {
+                        $(this).removeClass('text-success').html('').show();
+                    });
+                }, 3000);
+            } else {
+                showError(response.msg);
             }
-        });
+        },
+        error: function () {
+            showError('An error occurred. Please try again.');
+        }
     });
+});
 
     function showError(message) {
         $('#regError')
@@ -245,28 +200,33 @@ $(document).ready(function () {
     const strengthBar = document.getElementById('password-strength-bar');
     const strengthFill = document.getElementById('password-strength-fill');
     const strengthText = document.getElementById('password-strength-text');
- 
-    passwordInput.addEventListener('input', function () {
-        const value = passwordInput.value;
-        const result = calculatePasswordStrength(value);
- 
-        if (value.length > 0) {
-            strengthBar.style.display = 'block';
-        } else {
-            strengthBar.style.display = 'none';
-            strengthText.innerText = '';
-            strengthText.style.color = '';
-            return;
-        }
- 
-        // Update bar
-        strengthFill.style.width = result.percent + '%';
-        strengthFill.className = 'progress-bar bg-' + result.color;
- 
-        // Update text + color
-        strengthText.innerText = result.label;
-        strengthText.style.color = getTextColor(result.color);
-    });
+
+    $(document).on('input', '#password', function () {
+    const value = this.value;
+    const result = calculatePasswordStrength(value);
+
+    if (value.length > 0) {
+        $('#password-strength-bar').show();
+        $('#password-strength-fill')
+            .css('width', result.percent + '%')
+            .removeClass()
+            .addClass('progress-bar bg-' + result.color);
+
+        $('#password-strength-text')
+            .text(result.label)
+            .css('color', getTextColor(result.color));
+    } else {
+        $('#password-strength-bar').hide();
+        $('#password-strength-fill').css('width', '0%');
+        $('#password-strength-text').text('').css('color', '');
+    }
+});
+$('#registerModal').on('hidden.bs.modal', function () {
+    $('#password-strength-bar').hide();
+    $('#password-strength-fill').css('width', '0%').removeClass();
+    $('#password-strength-text').text('');
+});
+
  
     function calculatePasswordStrength(password) {
         let score = 0;
@@ -307,4 +267,25 @@ $(document).ready(function () {
         }
     }
     
+
+    $('#registerModal').on('shown.bs.modal', function () {
+    const value = passwordInput.value;
+    if (value.length > 0) {
+        strengthBar.style.display = 'block';
+        const result = calculatePasswordStrength(value);
+
+        strengthFill.style.width = result.percent + '%';
+        strengthFill.className = 'progress-bar bg-' + result.color;
+        strengthText.innerText = result.label;
+        strengthText.style.color = getTextColor(result.color);
+    } else {
+        strengthBar.style.display = 'none';
+        strengthText.innerText = '';
+        strengthText.style.color = '';
+    }
+});
+
 </script>
+
+
+

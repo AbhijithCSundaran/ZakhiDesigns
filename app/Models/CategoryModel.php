@@ -50,6 +50,25 @@ class CategoryModel extends Model
     ")->getResultArray();
 }
 
+
+public function getPaginatedProductsByCategory($catId, $limit, $offset)
+{
+    return $this->db->table('product')
+        ->where('cat_Id', $catId)
+        ->where('pr_Status',1)
+        ->orderBy('pr_Id', 'DESC')
+        ->limit($limit, $offset)
+        ->get()
+        ->getResultArray();
+}
+
+public function getProductCountByCategory($catId)
+{
+    return $this->db->table('product')
+        ->where('cat_Id', $catId)
+        ->countAllResults();
+}
+
 }
 
 ?>

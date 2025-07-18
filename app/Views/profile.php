@@ -1,21 +1,3 @@
-<style>
-#password-strength-bar {
-    border-radius: 5px;
-}
-
-#password-strength-fill {
-    transition: width 0.3s ease;
-}
-
-#password-strength-text {
-    font-weight: bold;
-    transition: color 0.3s ease;
-}
-
-.progress .progress-bar {
-    height: 100%
-}
-</style>
 <div class="container mt-4">
     <ul class="nav nav-tabs" id="profileTabs" role="tablist">
         <li class="nav-item">
@@ -48,12 +30,16 @@
                             <input type="email" name="email" id="email" class="form-control"
                                 value="<?= esc($user['cust_Email']) ?>" />
                             <div>&nbsp;</div>
-                            <div class="phn_code">
-                                <input type="tel" name="phone" id="phone" class="form-control"
-                                    value="<?= esc($user['cust_Phone']) ?>" maxlength="15" required pattern="^\d{7,20}$"
-                                    oninvalid="this.setCustomValidity('Phone Number Must Be Minimum of 7 Digits.')"
-                                    oninput="this.setCustomValidity('')" />
-                            </div>
+
+                            <input id="phone" name="phone" type="tel" class="form-control" placeholder=""
+                                value="<?= esc($user['cust_Phone']) ?>" required>
+                            <small class="form-text text-muted d-block">
+                                Enter your phone number exactly as shown in the placeholder (e.g., <strong>098765
+                                    43210</strong>), including the country code.
+                            </small>
+                            <div id="phone_error" class="text-danger small" style="display:none;"></div>
+                            <div id="phone_valid" class="text-success small" style="display:none;">Valid Number</div>
+                            <input type="hidden" name="cust_phcode" id="cust_phcode">
                             <div>&nbsp;</div>
                         <?php else: ?>
                             <div class="alert alert-danger">User information not found.</div>
@@ -112,7 +98,10 @@
                     <?php endif; ?>
                     <div class="col-md-12">
                         <button class="btn btn-success mb-2" onclick="openAddAddressForm()">+ Add Address</button>
+
+                        <!-- <a href="#" style="text-align:right;">Continue...</a> -->
                     </div>
+
                 </div>
                 <div id="addressFormContainer" style="display:none">
                     <div class="row">
@@ -126,11 +115,20 @@
                                 <div class="mb-2"><input type="email" class="form-control" id="newEmail" name="newEmail"
                                         placeholder="Email" required></div>
                                 <div class="mb-2 phn_code">
-                                    <input type="tel" class="form-control" id="newPhone" name="newPhone"
-                                        placeholder="Phone" maxlength="15" minlength="7" required pattern="^\d{7,20}$"
-                                        oninvalid="this.setCustomValidity('Phone Number Must Be Minimum of 7 Digits.')"
-                                        oninput="this.setCustomValidity('')">
+
+
+
+                                    <input type="tel" class="form-control" id="newPhone" name="newPhone" placeholder=""
+                                        required>
+                                    <small class="form-text text-muted d-block">
+                                        Enter your phone number exactly as shown in the placeholder (e.g.,
+                                        <strong>098765 43210</strong>), including the country code.
+                                    </small>
+                                    <div id="newPhone_error" class="text-danger small" style="display:none;"></div>
+                                    <div id="newPhone_valid" class="text-success small" style="display:none;">Valid
+                                        Number</div>
                                 </div>
+
                                 <div class="mb-2"><input type="text" class="form-control" id="newBuilding"
                                         name="newBuilding" placeholder="Building No." required></div>
                                 <div class="mb-2"><input type="text" class="form-control" id="newStreet"
@@ -152,102 +150,104 @@
                                     <button class="btn btn-success mt-2" type="submit">Save Address</button>
                                 </div>
                             </form>
+                            <div>&nbsp;</div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    
-    <!-- Orders Tab -->
-    <div class="tab-pane fade" id="orders" role="tabpanel">
-        <div>&nbsp;</div>
-        <div class="row">
-            <?php foreach ($orders as $order): ?>
-                <?php
-                $decoded = json_decode($order['product_images'], true);
-                $firstImage = is_array($decoded) && isset($decoded[0]['name'][0])
-                    ? base_url('uploads/productmedia/' . $decoded[0]['name'][0])
-                    : base_url('assets/img/no-image.png');
-                ?>
-                <div class="col-md-6 mb-4">
-                    <div class="card p-3 shadow-sm h-100">
-                        <div class="row g-3 align-items-center">
-                            <div class="col-md-4">
-                                <a href="<?= base_url('product/product_details/' . $order['pr_Id']); ?>">
-                                    <img src="<?= esc($firstImage) ?>" class="img-fluid rounded" style="max-width: 100%;"
-                                        alt="Product Image" />
-                                </a>
-                            </div>
-                            <div class="col-md-8">
-                                <a href="<?= base_url('product/product_details/' . $order['pr_Id']); ?>"
-                                    class="text-decoration-none text-dark">
-                                    <strong><?= esc($order['pr_Name']) ?></strong><br>
-                                </a>
-                                Date: <?= date('d M Y', strtotime($order['od_createdon'])) ?><br>
-                                Size: <?= esc($order['od_Size']) ?><br>
-                                Quantity: <?= esc($order['od_Quantity']) ?><br>
-                                <?php
-                                $statusMap = [
-                                    1 => 'New',
-                                    2 => 'Confirmed',
-                                    3 => 'Packed',
-                                    4 => 'Dispatched'
-                                ];
-                                ?>
-                                <b>Status:</b> <?= esc($statusMap[$order['od_Status']] ?? 'Unknown') ?><br>
-                                <?php if ($order['od_Status'] == 4): ?>
-                                    <b>Track your product:</b> <a href="<?= esc($order['tracker_Link']) ?>"
-                                        target="_blank"><?= esc($order['tracker_Link']) ?></a><br>
-                                <?php endif; ?>
-                                <a href="<?= base_url('review/' . $order['cus_Id'] . '/' . $order['pr_Id']) ?>"
-                                    class="btn btn-link p-0 mt-2" style="text-decoration:none;">Add Review</a>
 
+        <!-- Orders Tab -->
+        <div class="tab-pane fade" id="orders" role="tabpanel">
+            <div>&nbsp;</div>
+            <div class="row">
+                <?php foreach ($orders as $order): ?>
+                    <?php
+                    $decoded = json_decode($order['product_images'], true);
+                    $firstImage = is_array($decoded) && isset($decoded[0]['name'][0])
+                        ? base_url('uploads/productmedia/' . $decoded[0]['name'][0])
+                        : base_url('assets/img/no-image.png');
+                    ?>
+                    <div class="col-md-6 mb-4">
+                        <div class="card p-3 shadow-sm h-100">
+                            <div class="row g-3 align-items-center">
+                                <div class="col-md-4">
+                                    <a href="<?= base_url('product/product_details/' . $order['pr_Id']); ?>">
+                                        <img src="<?= esc($firstImage) ?>" class="img-fluid rounded"
+                                            style="max-width: 100%;" alt="Product Image" />
+                                    </a>
+                                </div>
+                                <div class="col-md-8">
+                                    <a href="<?= base_url('product/product_details/' . $order['pr_Id']); ?>"
+                                        class="text-decoration-none text-dark">
+                                        <strong><?= esc($order['pr_Name']) ?></strong><br>
+                                    </a>
+                                    Date: <?= date('d M Y', strtotime($order['od_createdon'])) ?><br>
+                                    Size: <?= esc($order['od_Size']) ?><br>
+                                    Quantity: <?= esc($order['od_Quantity']) ?><br>
+                                    <?php
+                                    $statusMap = [
+                                        1 => 'New',
+                                        2 => 'Confirmed',
+                                        3 => 'Packed',
+                                        4 => 'Dispatched'
+                                    ];
+                                    ?>
+                                    <b>Status:</b> <?= esc($statusMap[$order['od_Status']] ?? 'Unknown') ?><br>
+                                    <?php if ($order['od_Status'] == 4): ?>
+                                        <b>Track your product:</b> <a href="<?= esc($order['tracker_Link']) ?>"
+                                            target="_blank"><?= esc($order['tracker_Link']) ?></a><br>
+                                    <?php endif; ?>
+                                    <a href="<?= base_url('review/' . $order['cus_Id'] . '/' . $order['pr_Id']) ?>"
+                                        class="btn btn-link p-0 mt-2" style="text-decoration:none;">Add Feedback</a>
+
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            <?php endforeach; ?>
+                <?php endforeach; ?>
+            </div>
+
         </div>
-
-    </div>
-    <!-- Change Password Tab -->
-    <div class="tab-pane fade" id="password" role="tabpanel">
-        <div>&nbsp;</div>
-        <div class="row">
-            <div class="col-md-6">
-                <form id="changePasswordForm" method="post">
-                    <div class="mb-2 position-relative">
-                        <input type="password" name="oldPassword" id="oldPassword" class="form-control" maxlength="15"
-                            placeholder="Old Password">
-                        <i class="toggle-password fa fa-eye-slash position-absolute"
-                            style="top: 12px; right: 10px; cursor: pointer;" data-target="oldPassword"></i>
-                    </div>
-                    <div class="mb-2 position-relative">
-                        <input type="password" name="newPassword" id="newPassword" class="form-control" maxlength="15"
-                            placeholder="New Password">
-                        <i class="toggle-password fa fa-eye-slash position-absolute"
-                            style="top: 12px; right: 10px; cursor: pointer;" data-target="newPassword"></i>
-                    </div>
-                     <div class="progress mt-2" id="new-password-strength-bar" style="height: 8px; display: none;">
-                        <div class="progress-bar" role="progressbar" style="width: 0%;" id="new-password-strength-fill">
+        <!-- Change Password Tab -->
+        <div class="tab-pane fade" id="password" role="tabpanel">
+            <div>&nbsp;</div>
+            <div class="row">
+                <div class="col-md-6">
+                    <form id="changePasswordForm" method="post">
+                        <div class="mb-2 position-relative">
+                            <input type="password" name="oldPassword" id="oldPassword" class="form-control"
+                                maxlength="15" placeholder="Old Password">
+                            <i class="toggle-password fa fa-eye-slash position-absolute"
+                                style="top: 12px; right: 10px; cursor: pointer;" data-target="oldPassword"></i>
                         </div>
-                    </div>
-                    <small id="new-password-strength-text" class="fw-bold"></small>
- 
-                    <div class="mb-2 position-relative">
-                        <input type="password" name="confirmPassword" id="confirmPassword" class="form-control"
-                            maxlength="15" placeholder="Confirm Password">
-                        <i class="toggle-password fa fa-eye-slash position-absolute"
-                            style="top: 12px; right: 10px; cursor: pointer;" data-target="confirmPassword"></i>
-                    </div>
-                    <div class="text-end">
-                        <button class="btn btn-primary mt-2" type="submit">Update Password</button>
-                    </div>
-                    <div id="passwordResponse" class="mt-2"></div>
-                </form>
+                        <div class="mb-2 position-relative">
+                            <input type="password" name="newPassword" id="newPassword" class="form-control"
+                                maxlength="15" placeholder="New Password">
+                            <i class="toggle-password fa fa-eye-slash position-absolute"
+                                style="top: 12px; right: 10px; cursor: pointer;" data-target="newPassword"></i>
+                        </div>
+                        <div class="progress mt-2" id="new-password-strength-bar" style="height: 8px; display: none;">
+                            <div class="progress-bar" role="progressbar" style="width: 0%;"
+                                id="new-password-strength-fill">
+                            </div>
+                        </div>
+                        <small id="new-password-strength-text" class="fw-bold"></small>
+
+                        <div class="mb-2 position-relative">
+                            <input type="password" name="confirmPassword" id="confirmPassword" class="form-control"
+                                maxlength="15" placeholder="Confirm Password">
+                            <i class="toggle-password fa fa-eye-slash position-absolute"
+                                style="top: 12px; right: 10px; cursor: pointer;" data-target="confirmPassword"></i>
+                        </div>
+                        <div class="text-end">
+                            <button class="btn btn-primary mt-2" type="submit">Update Password</button>
+                        </div>
+                        <div id="passwordResponse" class="mt-2"></div>
+                    </form>
+                </div>
             </div>
         </div>
-    </div>
     </div>
 
 </div>
@@ -269,9 +269,13 @@
                 <div>&nbsp</div>
                 <div class="phn_code">
                     <input type="tel" maxlength="15" minlength="7" name="add_Phone" id="add_Phone" class="form-control"
-                        placeholder="Phone"
-                        oninvalid="this.setCustomValidity('Phone Number Must Be Minimum of 7 Digits.')"
-                        oninput="this.setCustomValidity('')">
+                        placeholder="" required>
+                    <small class="form-text text-muted d-block">
+                        Enter your phone number exactly as shown in the placeholder (e.g., <strong>098765
+                            43210</strong>), including the country code.
+                    </small>
+                    <div id="add_Phone_error" class="text-danger small" style="display:none;"></div>
+                    <div id="add_Phone_valid" class="text-success small" style="display:none;">Valid Number</div>
                 </div>
                 <div>&nbsp</div>
                 <input type="email" name="add_Email" id="add_Email" class="form-control" placeholder="Email" required>
@@ -290,8 +294,11 @@
                 <input name="add_Pincode" id="add_Pincode" class="form-control" placeholder="Pincode" maxlength="6"
                     pattern="[1-9][0-9]{5}" required>
                 <div>&nbsp</div>
-                <input type="checkbox" class="form-check-input" id="is_default" name="add_Default">
+                <input type="checkbox" class="form-check-input" id="is_default" name="add_Default"> &nbsp; Default
+                <input type="hidden" name="display_add_Id" id="display_add_Id" />
+                <input type="hidden" name="pr_Id" id="pr_Id" />
                 <div class="modal-footer">
+
                     <button type="submit" class="btn btn-info mt-2">Update Address</button>
                 </div>
             </div>

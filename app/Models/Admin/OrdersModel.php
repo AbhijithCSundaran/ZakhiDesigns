@@ -88,11 +88,11 @@ public function getCustomer($cust_Id)
         ->getRow();
 }
 
-public function getAddress($cust_Id)
+public function getAddress($add_Id)
 {
     return $this->db->table('address')
-        ->where('add_CustId', $cust_Id)
-        ->where('add_default', '1')
+        ->where('add_Id ', $add_Id)
+        // ->where('add_default', '1')
         ->get()
         ->getRow();
 }

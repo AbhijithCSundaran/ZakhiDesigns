@@ -122,7 +122,7 @@ $zd_uid = session()->get('zd_uid');
                         <?php $colors = explode(',', $product['pr_Aval_Colors']); ?>
                         <div class="col-md-12 color-box">
                             <?php foreach ($colors as $color): ?>
-                                <div class="col-md-1 cpicker" style="background-color:<?= esc(trim($color)); ?>"
+                                <div class=" cpicker" style="background-color:<?= esc(trim($color)); ?>"
                                     onclick="selectColor('<?= trim($color); ?>', this)">&nbsp;
                                 </div>
                             <?php endforeach; ?>
@@ -214,21 +214,23 @@ $zd_uid = session()->get('zd_uid');
 <section class="hero-banner">
     <div id="reviewsSection" class="mt-5">
         <div class="container-lg">
-            <h5>Customer Ratings and t</h5>
+            <h5>Customer Reviews</h5>
             <div class="row order-box">
                 <div class="col-md-12">
-                    <div>&nbsp; </div>
+				<div>&nbsp; </div>
                     <?php if (!empty($reviews)): ?>
                         <?php foreach (array_chunk($reviews, 2) as $reviewPair): ?>
                             <div class="row mb-4">
                                 <?php foreach ($reviewPair as $rev): ?>
                                     <div class="col-md-6">
+                                     
+                                            <h6 class="card-title mb-1"><?= esc($rev['name']) ?></h6>
+                                            <div class="mb-2 text-warning" style="font-size: 1.2em;">
+                                                <?= str_repeat('★', (int) $rev['rating']) . str_repeat('☆', 5 - (int) $rev['rating']) ?>
+												<span style="font-size:12px; color:#000;">Posted on <?= date('d M Y', strtotime($rev['created_at'])) ?></span>
 
-                                        <h6 class="card-title mb-1"><?= esc($rev['name']) ?></h6>
-                                        <div class="mb-2 text-warning" style="font-size: 1.2em;">
-                                            <?= str_repeat('★', (int) $rev['rating']) . str_repeat('☆', 5 - (int) $rev['rating']) ?>
-                                        </div>
-                                        <p class="card-text"><?= esc($rev['review']) ?></p>
+                                            </div>
+                                            <p class="card-text"><?= esc($rev['review']) ?></p>
                                         <span style="font-size:12px; color:#000;">Posted on
                                             <?= date('d M Y', strtotime($rev['created_at'])) ?></span>
                                     </div>
@@ -349,73 +351,3 @@ $zd_uid = session()->get('zd_uid');
     </div>
 </section>
 
-<script>
-    function selectColor(color, element) {
-        document.getElementById('selected_color').value = color;
-        document.querySelectorAll('.cpicker').forEach(el => el.style.border = 'none');
-        element.style.border = '3px solid #000';
-    }
-
-    $(document).ready(function () {
-        let tempOrder = sessionStorage.getItem('tempOrder');
-        if (tempOrder) {
-            tempOrder = JSON.parse(tempOrder);
-
-            if (tempOrder.size) {
-                $('#size').val(tempOrder.size);
-            }
-
-            if (tempOrder.color) {
-                $('#selected_color').val(tempOrder.color);
-
-                $('.cpicker').removeClass('selected');
-                $('.cpicker').each(function () {
-                    if ($(this).css('background-color') === tempOrder.color ||
-                        rgb2hex($(this).css('background-color')) === tempOrder.color.toLowerCase()) {
-                        $(this).addClass('selected');
-                    }
-                });
-            }
-
-            if (tempOrder.qty) {
-                $('#qty').val(tempOrder.qty);
-            }
-
-            sessionStorage.removeItem('tempOrder');
-        }
-    });
-
-    // Helper function to convert rgb() to hex
-    function rgb2hex(rgb) {
-        if (!rgb.startsWith("rgb")) return rgb;
-        rgb = rgb.match(/\d+/g);
-        return "#" + rgb.map(x => ('0' + parseInt(x).toString(16)).slice(-2)).join('');
-    }
-    var swiper = new Swiper(".mySwiper", {
-        loop: true,
-        spaceBetween: 10,
-        slidesPerView: 1, // On mobile
-        breakpoints: {
-            576: {
-                slidesPerView: 2,
-                spaceBetween: 10,
-            },
-            768: {
-                slidesPerView: 3,
-                spaceBetween: 15,
-            },
-            992: {
-                slidesPerView: 4,
-                spaceBetween: 20,
-            }
-        },
-        navigation: {
-            nextEl: ".swiper-button-next",
-            prevEl: ".swiper-button-prev",
-        },
-    });
-
-
-
-
-</script>

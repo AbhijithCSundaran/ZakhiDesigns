@@ -461,29 +461,36 @@ html {
     pointer-events: display;
 }
 
-.or-divider {
-    display: flex;
-    align-items: center;
-    text-align: center;
-    margin: 20px 0;
-    padding-top: -3;
-}
-
-.or-divider hr {
-    flex: 1;
-    border: none;
-    border-top: 1px solid #000;
-}
-
-.or-divider span {
-    padding: 0 10px;
-    color: rgba(0, 0, 0, 0.5);
-    font-weight: bold;
-    line-height: 0.5;
-    margin-left: 10px;
-    margin-right: 10px;
-
-}
 a {
     text-decoration: none;
+}
+.small-menu-item {
+    font-size: 14px !important;
+}
+   .accordion-button {
+        font-weight: bold;
+        font-size: 1.1rem;
+        color: #000;
+        transition: all 0.3s ease;
+    }
+
+    .accordion-button:not(.collapsed) {
+        color: black;
+    }
+
+#password-strength-bar {
+    border-radius: 5px;
+}
+
+#password-strength-fill {
+    transition: width 0.3s ease;
+}
+
+#password-strength-text {
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+.progress .progress-bar {
+    height: 100%
 }

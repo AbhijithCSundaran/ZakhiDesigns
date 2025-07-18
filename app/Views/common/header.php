@@ -34,6 +34,7 @@
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
    <!-----------------------------Country code---------------------------------->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/intl-tel-input@18/build/css/intlTelInput.css" />
 
 
 </head>
@@ -47,15 +48,8 @@
                         <img src="<?= base_url() . ASSET_PATH; ?>assets/images/logo.jpg" alt="Logo" />
                     </a>
                 </div>
-                <div class="col-6">
-                    <div class="row">
-                        <div class="col-12 callnow tel-ico">
-                            <i class="bi bi-telephone-fill"></i>
-                            <span>Call Us Now</span><br />
-                            <small>+91 70348 53219</small>
-                        </div>
-                    </div>
-                </div>
+         <?= view_cell('App\Cells\FooterCell::footerInfo') ?>
+
 
             </div>
             <div class="row">

@@ -27,6 +27,7 @@ class Weblogin extends BaseController
 		$password = md5($this->request->getPost('cust_Password'));
 		if ($email && $password) {
 			$userLog = $this->customerLoginModel->getLoginAccount($email, $password);
+			//echo $userLog;exit();
 			if ($userLog) {
 				$this->session->set([
 					'zd_uid' => $userLog->cust_Id,

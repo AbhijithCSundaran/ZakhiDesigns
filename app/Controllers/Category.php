@@ -31,18 +31,26 @@ class Category extends Controller
         . view('common/footer')
         . view('pagescripts/category_listjs');
 }
-public function category_list(){
-     $this->productdisplayModel = new ProductDisplayModel();
-     $this->categories = $this->productdisplayModel->getAllCategoriesAndSub();
-	 $data['categories'] = $this->categories;
+public function category_list()
+{
+    $category_id = 1; // or fetch dynamically if you have logic
+    $perPage = 12;
 
-     $data['category'] = $this->categoryModel->getAllCategory();
+    $productModel = new ProductDisplayModel();
+
+    $data['categories'] = $productModel->getAllCategoriesAndSub();
+    $data['category'] = $this->categoryModel->getAllCategory();
+    $data['category_id'] = $category_id;
+
+    // Load first batch of products
+    $data['product'] = $productModel->getPaginatedProductsByCategory($category_id, $perPage, 0);
 
     return view('common/header', $data)
         . view('category_list', $data)
         . view('common/footer')
         . view('pagescripts/category_listjs');
 }
+
 public function catProducts($id = null)
 {
     $this->productdisplayModel = new ProductDisplayModel();
@@ -88,14 +96,56 @@ $offset = ($page - 1) * $perPage;
         }
     }
 
-    $data['product'] = $products;
-    $data['pager'] = $this->pager->makeLinks($page, $perPage, $total);
-    $data['subcategory'] = $this->categoryModel->getAllSubcategoryUnderCategory($id);
+  $data['product'] = $products;
+$data['pager'] = $this->pager->makeLinks($page, $perPage, $total);
+$data['subcategory'] = $this->categoryModel->getAllSubcategoryUnderCategory($id);
 
-    return view('common/header', $data)
-        . view('cat_products', $data)
-        . view('common/footer')
-        . view('pagescripts/category_listjs');
+if ($this->request->isAJAX()) {
+    return view('product/_cat_product_items', ['product' => $products]);
+}
+
+return view('common/header', $data)
+    . view('cat_products', $data)
+    . view('common/footer')
+    . view('pagescripts/category_listjs');
+}
+
+public function loadMoreByDate()
+{
+    $page = (int) $this->request->getGet('page');
+    $page = ($page >= 1) ? $page : 1;
+
+    $limit = 12;
+    $offset = ($page - 1) * $limit;
+
+    $products = $this->CategoryModel->getProductsByModifiedDatePaginated($limit, $offset);
+
+    if (!empty($products)) {
+        return view('product/_cat_product_items', [
+            'product' => $products,
+            'currentBatch' => $page
+        ]);
+    } else {
+        return ''; // No more products
+    }
+}
+
+// Load search results with pagination
+public function loadMoreSearch()
+{
+    $page = $this->request->getGet('page');
+    $cat_id = $this->request->getGet('id');
+    $perPage = 12;
+    $offset = ($page - 1) * $perPage;
+
+    $model = new CategoryModel();
+    $products = $model->getPaginatedProductsByCategory($cat_id, $perPage, $offset); // Fix function name
+
+    if (empty($products)) {
+        return '';
+    }
+
+    return view('product/_cat_product_items', ['product' => $products]);
 }
 
 

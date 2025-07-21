@@ -62,8 +62,8 @@ class Customer extends BaseController
 	
 		
 		$cust_id = $this->input->getPost('cust_id');
-		$custname = $this->input->getPost('custname');
-		$custname = ucwords(strtolower(trim($custname)));
+		// $custname = ;
+		$custname = ucwords(strtolower(trim($this->input->getPost('custname'))));
 		// $cust_phcode = $this->input->getPost('cust_phcode'); 
 		$custemail = $this->input->getPost('useremail');
 		// $mobile = $this->input->getPost('mobile');

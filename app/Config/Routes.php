@@ -58,9 +58,12 @@ $routes->get('review/loadRandomSimilar/(:num)', 'Review::loadRandomSimilar/$1');
 $routes->get('product/loadMoreSearch', 'Product::loadMoreSearch');
 
 $routes->get('product/loadMoreByDate', 'Product::loadMoreByDate');
+$routes->get('category/loadMoreSearch', 'Category::loadMoreSearch');
+$routes->post('category/loadMoreByDate/(:num)', 'Category::loadMoreByDate/$1');
 
 
-$routes->get('contact','Contact::index'); 
+
+$routes->get('contact', 'Contact::index');
 $routes->post('contact/submit', 'Contact::submit');
 $routes->post('review/submit', 'Review::submit');
 $routes->get('review/(:num)/(:num)', 'Review::loaddetails/$1/$2');
@@ -73,10 +76,9 @@ $routes->post('profile/deleteAddress', 'Profile::deleteAddress');
 $routes->post('/profile/setDefaultAddress', 'Profile::setDefaultAddress');
 $routes->post('profile/update', 'Profile::update');
 $routes->post('profile/getAddress', 'Profile::getAddress');
-//$routes->get('profile/editprofile', 'Profile::editProfile');
 $routes->post('profile/editprofile', 'Profile::editProfile');
-$routes->match(['get', 'post'], 'profile/editprofile', 'Profile::add');
-$routes->match(['get', 'post'],'profile/change_password', 'Profile::changePassword');
+// $routes->match(['get', 'post'], 'profile/editprofile', 'Profile::add');
+$routes->match(['get', 'post'], 'profile/change_password', 'Profile::changePassword');
 
 
 

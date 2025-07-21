@@ -40,31 +40,45 @@ class Product extends Controller
         . view('pagescripts/productjs');
 }
 
-  public function ajaxSearch()
+public function ajaxSearch()
 {
+    $this->productdisplayModel = new ProductDisplayModel(); // Ensure model is loaded
     $zd_uid = $this->session->get('zd_uid');
-
-    $data = [];
-    $data['categories'] = $this->productdisplayModel->getAllCategoriesAndSub();
-    $data['avg_rating'] = 1;
 
     $keyword = trim($this->request->getGet('keyword'));
     $page = (int) $this->request->getGet('page');
-    $page = ($page >= 1) ? $page : 1; // Prevent negative offset
+    $page = ($page >= 1) ? $page : 1;
 
     $limit = 12;
     $offset = ($page - 1) * $limit;
 
-    $products = $keyword ? $this->productdisplayModel->searchProductsPaginated($keyword, $limit, $offset) : [];
+    // Get product results
+    $products = ($keyword !== '') 
+        ? $this->productdisplayModel->searchProductsPaginated($keyword, $limit, $offset)
+        : [];
 
-    $data['product'] = $products;
-    $data['keyword'] = $keyword;
+    // For pagination: get total count
+    $totalCount = ($keyword !== '') 
+        ? $this->productdisplayModel->countSearchedProducts($keyword)
+        : 0;
+
+    // Prepare data for view
+    $data = [
+        'zd_uid'     => $zd_uid,
+        'categories' => $this->productdisplayModel->getAllCategoriesAndSub(),
+        'avg_rating' => 1,
+        'keyword'    => $keyword,
+        'product'    => $products,
+        'page'       => $page,
+        'totalCount' => $totalCount
+    ];
 
     return view('common/header', $data)
         . view('products_list', $data)
         . view('common/footer')
         . view('pagescripts/productjs');
 }
+
     public function product_list()
     {
        // $data['product'] = $this->productdisplayModel->getAllProducts();
@@ -87,26 +101,32 @@ class Product extends Controller
             . view('pagescripts/productjs');
     }
 
-    public function view_collection()
-    {
-	$zd_uid = $this->session->get('zd_uid');
+   public function view_collection()
+{
+    $zd_uid = $this->session->get('zd_uid');
     $data = [];
 
     // Load categories for header
     $data['categories'] = $this->productdisplayModel->getAllCategoriesAndSub();
 
-    // Load all products
-    $products = $this->productdisplayModel->getAllProducts();
-    $reviewModel = new ReviewModel();
-    $data['product'] = $products;
-		$data['avg_rating'] = 1;
-        $data['product'] = $this->productdisplayModel->getProductsByModifiedDate();
-        return view('common/header',$data)
-            . view('products_list', $data)
-            . view('common/footer')
-            . view('pagescripts/productjs');
-    }
+    // Pagination setup
+    $page = (int) $this->request->getGet('page');
+    $page = ($page >= 1) ? $page : 1;
 
+    $limit = 12;
+    $offset = ($page - 1) * $limit;
+
+    // Get paginated products with average rating
+    $data['product'] = $this->productdisplayModel->getAllProducts($limit, $offset);
+
+    // Optional: set current batch/page (for JS or frontend)
+    $data['currentBatch'] = $page;
+
+    return view('common/header', $data)
+         . view('products_list', $data)
+         . view('common/footer')
+         . view('pagescripts/productjs');
+}
 
 
     public function product_list_by_category($cat_Id)

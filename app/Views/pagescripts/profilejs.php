@@ -1,5 +1,5 @@
 <script>
-
+window.phoneInputs = {};
 $(document).ready(function () {
     $('.login-check').click(function (e) {
         const zd_uid = "<?= session()->get('zd_uid'); ?>";
@@ -14,30 +14,15 @@ $(document).ready(function () {
         }
     });
 });
-  function openAddAddressForm() {
-    $('#addressFormContainer').show();
-    $('#addressForm')[0].reset();
-    $('#addressId').val('');
 
-    // Smooth scroll to the form
-    $('html, body').animate({
-        scrollTop: $('#addressFormContainer').offset().top - 100 // adjust offset if needed
-    }, 500); // 500ms duration
-}
-function discardAddressForm() {
-    $('#addressFormContainer').hide();
-    $('#addressForm')[0].reset();
-    $('#addressId').val('');
-}
-$(document).ready(function () {
-    const phoneInputs = {
-        "#phone": null,
-        "#newPhone": null,
-        "#add_Phone": null
-    };
+//window.phoneInputs = {}; // ✅ Make phoneInputs globally available
 
+document.addEventListener("DOMContentLoaded", function () {
+    
     function initPhoneInput(selector) {
         const input = document.querySelector(selector);
+        if (!input) return;
+
         const iti = window.intlTelInput(input, {
             initialCountry: "auto",
             geoIpLookup: function (callback) {
@@ -50,51 +35,68 @@ $(document).ready(function () {
         });
 
         input.dataset.original = input.value.trim(); // Save original for change check
-
+ updatePhoneFormatHint(selector);
         input.addEventListener("countrychange", function () {
             input.value = ""; // Clear number if flag changes
+             updatePhoneFormatHint(selector);
         });
 
         input.addEventListener("input", function () {
             const errorDiv = document.querySelector(selector + "_error");
             const validDiv = document.querySelector(selector + "_valid");
             if (!input.value.trim()) {
-                errorDiv.style.display = "none";
-                validDiv.style.display = "none";
+                errorDiv && (errorDiv.style.display = "none");
+                validDiv && (validDiv.style.display = "none");
                 return;
             }
             if (iti.isValidNumber()) {
-                errorDiv.style.display = "none";
-                validDiv.style.display = "block";
+                errorDiv && (errorDiv.style.display = "none");
+                validDiv && (validDiv.style.display = "block");
             } else {
-                validDiv.style.display = "none";
-                errorDiv.textContent = "Invalid phone number.";
-                errorDiv.style.display = "block";
+                validDiv && (validDiv.style.display = "none");
+                if (errorDiv) {
+                    errorDiv.textContent = "Invalid phone number.";
+                    errorDiv.style.display = "block";
+                }
             }
         });
 
-        phoneInputs[selector] = iti;
+        window.phoneInputs[selector] = iti; // ✅ Save globally
+    }
+  function updatePhoneFormatHint(selector) {
+    const input = document.querySelector(selector);
+    const iti = window.phoneInputs[selector];
+    const formatDivId = selector + "_format";
+
+    let formatDiv = document.querySelector(formatDivId);
+    if (!formatDiv) {
+        formatDiv = document.createElement("div");
+        formatDiv.id = formatDivId;
+        formatDiv.className = "phone-format-hint text-muted mt-1";
+        input.parentNode.insertBefore(formatDiv, input.nextSibling);
     }
 
-    initPhoneInput("#phone");
-    initPhoneInput("#newPhone");
-    initPhoneInput("#add_Phone");
-
+    if (iti && window.intlTelInputUtils) {
+        const countryIso2 = iti.getSelectedCountryData().iso2;
+        const exampleNumber = intlTelInputUtils.getExampleNumber(countryIso2, true, intlTelInputUtils.numberFormat.INTERNATIONAL);
+        formatDiv.textContent = `Phone Number Format: ${exampleNumber}`;
+    } else {
+        formatDiv.textContent = ''; // fallback
+    }
+}
     function isPhoneValid(selector) {
         const input = document.querySelector(selector);
-        const iti = phoneInputs[selector];
+        const iti = window.phoneInputs[selector];
         const original = input.dataset.original || "";
 
-        // No changes made
         if (input.value.trim() === original) return true;
-
-        // Validate if changed
         return iti && iti.isValidNumber();
     }
 
     function appendPhoneData(formSelector, selector, codeField) {
         const input = document.querySelector(selector);
-        const iti = phoneInputs[selector];
+        const iti = window.phoneInputs[selector];
+
         if (iti) {
             const number = iti.getNumber();
             const code = iti.getSelectedCountryData().dialCode;
@@ -103,7 +105,16 @@ $(document).ready(function () {
         }
     }
 
-    // Profile Form Submission
+    // Initialize all phone inputs
+    initPhoneInput("#phone");
+    initPhoneInput("#newPhone");
+    initPhoneInput("#add_Phone");
+
+    // Export functions
+    window.isPhoneValid = isPhoneValid;
+    window.appendPhoneData = appendPhoneData;
+});
+  // Profile Form Submission
     $('#profileForm').on('submit', function (e) {
         e.preventDefault();
         if (!isPhoneValid("#phone")) return;
@@ -141,13 +152,78 @@ $(document).ready(function () {
         });
     });
 
+  function openAddAddressForm() {
+    $('#addressFormContainer').show();
+    $('#addressForm')[0].reset();
+    $('#addressId').val('');
+
+    // Smooth scroll to the form
+    $('html, body').animate({
+        scrollTop: $('#addressFormContainer').offset().top - 100 // adjust offset if needed
+    }, 500); // 500ms duration
+}
+function discardAddressForm() {
+    $('#addressFormContainer').hide();
+    $('#addressForm')[0].reset();
+    $('#addressId').val('');
+}
+$(document).ready(function () {
+
+$('#editAddressModal').on('show.bs.modal', function (e) {
+    const button = $(e.relatedTarget);
+    const addId = button.data('add_id');
+
+    if (!addId) return;
+
+    $.get("<?= base_url('profile/address/get') ?>/" + addId, function (res) {
+        if (res.status === 'success' && res.data) {
+            const addr = res.data;
+
+            $('#add_Phone').val(addr.add_Phone);
+setTimeout(() => {
+    const phoneSelector = '#add_Phone';
+    const phoneVal = addr.add_Phone ? addr.add_Phone.trim() : '';
+
+    if (window.phoneInputs && window.phoneInputs[phoneSelector]) {
+        const iti = window.phoneInputs[phoneSelector];
+
+        if (phoneVal) {
+            let rawNumber = phoneVal;
+
+            // Ensure number starts with + and not 0-prefixed
+            if (!rawNumber.startsWith('+')) {
+                const selectedCountry = iti.getSelectedCountryData();
+                const dialCode = selectedCountry?.dialCode || '91';
+                rawNumber = '+' + dialCode + rawNumber.replace(/^0+/, '');
+            }
+
+            iti.setNumber(rawNumber); // ✅ sets flag and number
+        } else {
+            iti.setNumber('');
+        }
+    } else {
+        $(phoneSelector).val(phoneVal); // fallback
+    }
+}, 300);
+
+
+        } else {
+            showMessage('Failed to load address details.', 'danger');
+        }
+    }, 'json');
+});
+
+
+
+
+   
     // Address Form Submission (Add New)
   
     $('#addressForm').on('submit', function (e) {
         e.preventDefault();
-        if (!isPhoneValid("#add_Phone")) return;
+        if (!isPhoneValid("#NewPhone")) return;
 
-        appendPhoneData("#addressForm", "#add_Phone", "add_phcode");
+        appendPhoneData("#addressForm", "#newPhone", "new_phcode");
 
         const id = $('#addressId').val();
         const url = id ? 'profile/address/edit' : 'profile/address/add';
@@ -220,10 +296,12 @@ function editAddress(id) {
     $.post("<?= base_url('profile/getAddress') ?>", { add_Id: id }, function(res) {
         if (res.status === 'success') {
             const addr = res.data;
+
             $('#add_Id').val(addr.add_Id);
-			$('#add_CustId').val(addr.add_CustId);
+            $('#add_CustId').val(addr.add_CustId);
             $('#add_Name').val(addr.add_Name);
             $('#add_Phone').val(addr.add_Phone);
+
             $('#add_Email').val(addr.add_Email);
             $('#add_BuldingNo').val(addr.add_BuldingNo);
             $('#add_Street').val(addr.add_Street);
@@ -232,15 +310,48 @@ function editAddress(id) {
             $('#add_State').val(addr.add_State);
             $('#add_Pincode').val(addr.add_Pincode);
             $('#is_default').prop('checked', addr.is_default == 1);
+
             const modal = new bootstrap.Modal(document.getElementById('editAddressModal'));
             modal.show();
+
+            // Delay to ensure input is ready before setting phone
+            setTimeout(() => {
+             
+                const phoneSelector = '#add_Phone';
+                const phoneVal = addr.add_Phone ? addr.add_Phone.trim() : '';
+
+                if (window.phoneInputs && phoneInputs[phoneSelector]) {
+                    const iti = phoneInputs[phoneSelector];
+
+                    if (phoneVal) {
+                        let rawNumber = phoneVal;
+
+                        if (!rawNumber.startsWith('+')) {
+                            const selectedCountry = iti.getSelectedCountryData();
+                            const dialCode = selectedCountry?.dialCode || '91'; // fallback to IN
+                            rawNumber = '+' + dialCode + rawNumber.replace(/^0+/, '');
+                        }
+
+                        iti.setNumber(rawNumber); // set number and flag
+                    } else {
+                        iti.setNumber(''); // clear if empty
+                    }
+                } else {
+                    $(phoneSelector).val(phoneVal); // fallback
+                }
+            }, 300); // give intlTelInput time to initialize
         } else {
             showMessage(res.msg || 'Failed To Load Address Data.', 'danger');
         }
     }, 'json');
 }
+
  $('#editAddressForm').submit(function (e) {
         e.preventDefault();
+         if (!isPhoneValid("#add_Phone")) return;
+
+        appendPhoneData("#editAddressForm", "#add_Phone", "add_phcode");
+
         $.post("<?= base_url('profile/address/edit') ?>", $(this).serialize(), function (res) {
             if (res.status === 'success') {
                 showMessage('Address Updated Successfully!', 'success');

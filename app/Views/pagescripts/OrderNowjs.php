@@ -1,27 +1,121 @@
 <!-- pagescripts/OrderNowjs.php -->
 <script>
-    const phoneInput = document.querySelector("#newPhone");
-    const iti = window.intlTelInput(phoneInput, {
-        initialCountry: "in",
+    function initPhoneInput() {
+    const input = document.querySelector("#newPhone");
+    if (!input) return;
+
+    const iti = window.intlTelInput(input, {
+        nationalMode: false,
+        initialCountry: "in", // or "auto"
+        preferredCountries: ["in", "us", "gb"],
         separateDialCode: true,
-        utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.19/js/utils.js"
+        utilsScript: "https://cdn.jsdelivr.net/npm/intl-tel-input@18/build/js/utils.js", // required for validation
     });
+
+    // Save dial code to hidden input
+    input.addEventListener("countrychange", function () {
+        document.querySelector("#newphcode").value = "+" + iti.getSelectedCountryData().dialCode;
+    });
+
+    // On blur, validate number
+    input.addEventListener("blur", function () {
+        if (iti.isValidNumber()) {
+            document.querySelector("#phone_valid").style.display = "block";
+            document.querySelector("#phone_error").style.display = "none";
+        } else {
+            document.querySelector("#phone_error").textContent = "Invalid phone number";
+            document.querySelector("#phone_error").style.display = "block";
+            document.querySelector("#phone_valid").style.display = "none";
+        }
+    });
+}
+
+   window.phoneInputs = window.phoneInputs || {};
+initPhoneInput("#newPhone"); // already in your DOMContentLoaded
+
+    document.addEventListener("DOMContentLoaded", function () {
+        const input = document.querySelector("#newPhone");
+        const formatDiv = document.querySelector("#phone_format");
+
+        if (!input || !formatDiv) return;
+
+        const iti = window.intlTelInput(input, {
+            initialCountry: "in",
+            preferredCountries: ["in", "us", "ae"],
+            nationalMode: false,
+            separateDialCode: true,
+            utilsScript: "https://cdn.jsdelivr.net/npm/intl-tel-input@18/build/js/utils.js"
+        });
+
+        // Store reference
+        window.phoneInputs = window.phoneInputs || {};
+        window.phoneInputs["#newPhone"] = iti;
+
+        // Update hidden input on country change
+        input.addEventListener("countrychange", function () {
+            document.querySelector("#newphcode").value = "+" + iti.getSelectedCountryData().dialCode;
+            updatePhoneFormatHint("#newPhone");
+        });
+
+        // Validate on input
+        input.addEventListener("input", function () {
+            if (iti.isValidNumber()) {
+                document.querySelector("#phone_valid").style.display = "block";
+                document.querySelector("#phone_error").style.display = "none";
+            } else {
+                document.querySelector("#phone_valid").style.display = "none";
+                document.querySelector("#phone_error").style.display = "block";
+                document.querySelector("#phone_error").innerText = "Invalid phone number";
+            }
+        });
+
+        // Initial setup
+        document.querySelector("#newphcode").value = "+" + iti.getSelectedCountryData().dialCode;
+        updatePhoneFormatHint("#newPhone");
+    });
+
+    function updatePhoneFormatHint(selector) {
+        const input = document.querySelector(selector);
+        const iti = window.phoneInputs[selector];
+        const formatDiv = document.querySelector("#phone_format");
+
+        if (iti && window.intlTelInputUtils && formatDiv) {
+            const iso2 = iti.getSelectedCountryData().iso2;
+            const example = intlTelInputUtils.getExampleNumber(iso2, true, intlTelInputUtils.numberFormat.INTERNATIONAL);
+            formatDiv.textContent = "Phone Format Example: " + example;
+        } else {
+            formatDiv.textContent = "";
+        }
+    }
+
+
  
     document.querySelector("#newAddressForm").addEventListener("submit", function (e) {
         const fullNumber = iti.getNumber();
         phoneInput.value = fullNumber;
     });
 $(function() {
-    $('#newPhone').on('input', function () {
-        let value = $(this).val();
-        let filtered = value.replace(/[^0-9\s\-]/g, '');
-        $(this).val(filtered);
-    });
+ 
     // Save new address and then confirm order
-    $('#newAddressForm').on('submit', function(e) {
-        e.preventDefault();
-         const $submitBtn = $('#newAddressForm button[type="submit"]');
-        $submitBtn.prop('disabled', true).hide();
+   $('#newAddressForm').on('submit', function (e) {
+    e.preventDefault();
+
+    const phoneSelector = "#newPhone"; // Case-sensitive
+    const phoneInput = $(phoneSelector)[0];
+    const iti = window.phoneInputs[phoneSelector];
+
+    if (!iti || !iti.isValidNumber()) {
+        $('#phone_error').text("Invalid phone number").show();
+        $('#phone_valid').hide();
+        return;
+    }
+
+    // Set hidden input with full number (e.g. +91 9876543210)
+    const fullPhone = iti.getNumber();
+    $('#newphcode').val(fullPhone); // use this to send full number (not just dial code)
+
+    const $submitBtn = $('#newAddressForm button[type="submit"]');
+    $submitBtn.prop('disabled', true).hide();
         $.ajax({
             url: "<?= base_url('OrderNow/saveNewAddress') ?>",
             type: "POST",

@@ -196,6 +196,7 @@ class ProductDisplayModel extends Model
     public function getProductsByModifiedDatePaginated($limit, $offset)
     {
         return $this->orderBy('pr_modifyon', 'DESC')
+            ->where('pr_Status',1)
             ->findAll($limit, $offset);
     }
 
@@ -293,7 +294,9 @@ class ProductDisplayModel extends Model
     }
     public function getProductsPaginated($limit, $offset)
     {
-        return $this->orderBy('pr_Id', 'DESC')->findAll($limit, $offset);
+        return $this->orderBy('pr_Id', 'DESC')
+        ->where('pr_Status',1)
+        ->findAll($limit, $offset);
     }
 
     // public function searchProductsPaginated($keyword, $limit, $offset){

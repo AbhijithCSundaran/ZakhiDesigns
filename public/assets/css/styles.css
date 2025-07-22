@@ -345,6 +345,7 @@ a.fancybox-item.fancybox-close {
 }
 .order-box {
 	border:#CCC 1px solid;
+	padding:20px;
 }
 .order-box form .row {
 	margin:15px 0px;

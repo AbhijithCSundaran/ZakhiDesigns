@@ -257,8 +257,10 @@ public function ajaxSearch()
 	//$data['reviews'] = $this->reviewModel->getLimitedReviewsByProductId($id, 5);
 	// Get the total count of reviews for the product
 	//$data['total_reviews_count'] = $this->reviewModel->getReviewCountByProductId($id);
-		$data['reviews'] = $this->reviewModel->getLimitedReviewsByProductId($id, 5);
+		// $data['reviews'] = $this->reviewModel->getLimitedReviewsByProductId($id, 5);
+         $data['reviews'] = $this->reviewModel->getLimitedReviewsByProductId($id, 4, 0);
 		$data['total_reviews_count'] = $this->reviewModel->getReviewCountByProductId($id);
+        //$data['total_reviews_count'] = $this->reviewModel->getReviewCountByProductId($id);
 
 
 
@@ -285,6 +287,19 @@ public function ajaxSearch()
         ])
         . view('common/footer', ['pr_Id' => $id])
         . view('pagescripts/productjs');
+}
+
+public function loadMoreReviews($productId)
+{
+    $offset = $this->request->getGet('offset');
+
+    $reviews = $this->reviewModel->getLimitedReviewsByProductId($productId, 1000, $offset); // or next 5
+
+    if (empty($reviews)) {
+        return '';
+    }
+
+    return view('product/_review_items', ['reviews' => $reviews]);
 }
 
     public function submit()

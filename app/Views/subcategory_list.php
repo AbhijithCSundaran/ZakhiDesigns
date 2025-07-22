@@ -8,7 +8,7 @@
                 </div>
             </div>
             <?php if ($subcat_id): ?>
-                <div class="row">
+               <div id="productContainer" class="row">
                     <?php
                     $uniqueIds = [];
 
@@ -82,6 +82,15 @@
                         </div>
                     <?php endforeach; ?>
                 </div>
+
+                 <div class="row" id="product-container">
+               <?= view('product/_subcategory_product_items', ['product' => $product]); ?>
+
+            </div>
+          
+
+            <!-- Load More Button -->
+      
             <?php else: ?>
                 <div class="alert alert-warning text-center">No Sub Category found.</div>
             <?php endif; ?>

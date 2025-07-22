@@ -74,7 +74,7 @@ class OrderNow extends Controller
         $data = [
             'add_Name'       => ucwords(strtolower(trim($this->request->getPost('newName')))),
             'add_Email'      => $this->request->getPost('newEmail'),
-            'add_Phone'      => $this->request->getPost('newPhone'),
+            'add_Phone'      => $this->request->getPost('newphcode'),
             'add_BuldingNo'  => $this->request->getPost('newBuilding'),
             'add_Street'     => ucwords(strtolower(trim($this->request->getPost('newStreet')))),
             'add_Landmark'   => ucwords(strtolower(trim($this->request->getPost('newLandmark')))),

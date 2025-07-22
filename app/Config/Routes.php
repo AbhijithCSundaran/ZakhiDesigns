@@ -56,6 +56,13 @@ $routes->post('product/submit', 'Product::submit');
 $routes->get('product/viewcollection', 'Product::view_collection');
 $routes->get('review/loadRandomSimilar/(:num)', 'Review::loadRandomSimilar/$1');
 $routes->get('product/loadMoreSearch', 'Product::loadMoreSearch');
+//$routes->get('product/loadMoreReviews/(:num)', 'Product::loadMoreReviews/$1');
+$routes->get('product/load-more-reviews/(:num)', 'Product::loadMoreReviews/$1');
+$routes->get('subcategory/subcategoryProducts/(:num)/(:num)', 'Subcategory::subcategoryProducts/$1/$2');
+$routes->get('subcategory/loadMoreSubcategoryProducts/(:num)/(:num)', 'Subcategory::loadMoreSubcategoryProducts/$1/$2');
+
+
+
 
 $routes->get('product/loadMoreByDate', 'Product::loadMoreByDate');
 $routes->get('category/loadMoreSearch', 'Category::loadMoreSearch');

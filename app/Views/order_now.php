@@ -77,9 +77,19 @@
                                         <div class="col-md-6 mb-2">
                                             <input type="email" name="newEmail" class="form-control" placeholder="Email" required>
                                         </div>
-                                        <div class="col-md-6 mb-2 phn_code">
-                                            <input type="tel" maxlength="15" name="newPhone" id="newPhone" class="form-control" placeholder="" required>
-                                        </div>
+                                        
+                                           <div class="col-md-6 mb-2 phn_code">
+                                <input name="newPhone" id="newPhone" type="tel" class="form-control" placeholder="" required>
+                            </div>
+                            <!-- <small class="form-text text-muted d-block">
+                                Enter your phone number exactly as shown in the placeholder (e.g., <strong>098765
+                                    43210</strong>), including the country code.
+                            </small> -->
+                            <div id="phone_error" class="text-danger small" style="display:none;"></div>
+                            <div id="phone_valid" class="text-success small" style="display:none;">Valid Number</div>
+                            <input type="hidden" name="newphcode" id="newphcode">
+                              <div id="phone_format" class="text-muted small mt-1"></div>
+                            <div>&nbsp;</div>
                                         <div class="col-md-6 mb-2">
                                             <input type="text" name="newBuilding" class="form-control" placeholder="Building No" required>
                                         </div>

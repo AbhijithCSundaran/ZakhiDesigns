@@ -133,7 +133,14 @@ class Weblogin extends BaseController
 	public function logout()
 	{
 		$this->session->destroy();
+		
 		return redirect()->to(base_url('/'));
 	}
+	public function checkLoginStatus()
+{
+    $isLoggedIn = session()->has('cust_Id'); // adjust session key to yours
+    return $this->response->setJSON(['loggedIn' => $isLoggedIn]);
+}
+
 
 }

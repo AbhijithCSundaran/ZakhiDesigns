@@ -37,7 +37,12 @@ $(document).ready(function () {
                 orderable: false,
                 searchable: false
             },
-            { data: 'cust_Name' },
+            {
+                data: 'cust_Name',
+                    render: function (data, type, row) {
+                        return data.length > 20 ? data.substring(0, 20) + '...' : data;
+                    }
+                }, 
             { data: 'cust_Email' },
             { data: 'cust_Phone' },
             { data: 'status_switch' },

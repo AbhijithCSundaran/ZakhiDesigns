@@ -296,12 +296,10 @@
         $.post("<?= base_url('profile/getAddress') ?>", { add_Id: id }, function (res) {
             if (res.status === 'success') {
                 const addr = res.data;
-
                 $('#add_Id').val(addr.add_Id);
                 $('#add_CustId').val(addr.add_CustId);
                 $('#add_Name').val(addr.add_Name);
                 $('#add_Phone').val(addr.add_Phone);
-
                 $('#add_Email').val(addr.add_Email);
                 $('#add_BuldingNo').val(addr.add_BuldingNo);
                 $('#add_Street').val(addr.add_Street);
@@ -310,13 +308,10 @@
                 $('#add_State').val(addr.add_State);
                 $('#add_Pincode').val(addr.add_Pincode);
                 $('#is_default').prop('checked', addr.is_default == 1);
-
                 const modal = new bootstrap.Modal(document.getElementById('editAddressModal'));
                 modal.show();
-
                 // Delay to ensure input is ready before setting phone
                 setTimeout(() => {
-
                     const phoneSelector = '#add_Phone';
                     const phoneVal = addr.add_Phone ? addr.add_Phone.trim() : '';
 

@@ -65,7 +65,7 @@ class Customer extends BaseController
 		// $custname = ;
 		$custname = ucwords(strtolower(trim($this->input->getPost('custname'))));
 		// $cust_phcode = $this->input->getPost('cust_phcode'); 
-		$custemail = $this->input->getPost('useremail');
+		$custemail = $this->input->getPost('custemail');
 		// $mobile = $this->input->getPost('mobile');
 	    $password =$this->input->getPost('userpassword');
 		 if (!preg_match('/^[a-zA-Z ]+$/', $custname)) {

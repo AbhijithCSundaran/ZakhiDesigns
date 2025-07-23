@@ -81,9 +81,9 @@
                         <div id="regError" class="text-danger text-center p-2" style="color:red;"></div>
                         <form id="registerForm" method="post">
                             <div class="floating-label-group">
-                                <input type="text" class="form-control" id="name" name="custname" placeholder=""
+                                <input type="text" class="form-control" id="custname" name="custname" placeholder=""
                                     required oninput="truncateName(this.value)" />
-                                <label for="name">Name</label>
+                                <label for="custname">Name</label>
                             </div>
 
                             <div class="floating-label-group">
@@ -172,6 +172,7 @@
             <div class="col-md-3">
                 <h4>Your Account<h4>
                         <ul>
+                            
                             <li><i class="bi bi-arrow-right"></i>
                                 <a href="<?= base_url('profile#profile'); ?>" class="foot-link login-check">Profile</a>
                             </li>
@@ -200,9 +201,9 @@
                 <h4>Products<h4>
                         <ul>
                             <li><i class="bi bi-arrow-right"></i><a class="foot-link"
-                                    href="<?= base_url('product/product_list'); ?>">Price Drop</li>
+                                    href="<?= base_url('product/viewcollection'); ?>">Price Drop</li>
                             <li><i class="bi bi-arrow-right"></i><a class="foot-link"
-                                    href="<?= base_url('product/product_list'); ?>">Products</a></li>
+                                    href="<?= base_url('product/viewcollection'); ?>">Products</a></li>
                             <li><i class="bi bi-arrow-right"></i><a class="foot-link"
                                     href="<?= base_url('/#top-products'); ?>">Best Sellers</a></li>
                             <li><i class="bi bi-arrow-right"></i><a class="foot-link"
@@ -602,6 +603,30 @@
         }
     }
 
+</script>
+
+<script>
+    $(document).on('click', '.login-check', function (e) {
+        e.preventDefault();
+
+        const targetUrl = $(this).attr('href');
+
+        $.ajax({
+            url: "<?= base_url('weblogin/checkLoginStatus') ?>",
+            method: "GET",
+            dataType: "json",
+            success: function (res) {
+                if (res.loggedIn) {
+                    window.location.href = targetUrl;
+                } else {
+                    $('#exampleModal').modal('show'); // Open login modal
+                }
+            },
+            error: function () {
+                alert("Something went wrong while checking login.");
+            }
+        });
+    });
 </script>
 
 </html>

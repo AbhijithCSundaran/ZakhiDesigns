@@ -82,6 +82,7 @@
                                         </div>
                                         <div class="col-md-6 mb-2">
                                             <input type="email" name="newEmail" class="form-control" placeholder="Email" required>
+                                           
                                         </div>
                                         
                                            <div class="col-md-6 mb-2 phn_code">

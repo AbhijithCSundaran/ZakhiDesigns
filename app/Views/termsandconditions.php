@@ -1,6 +1,6 @@
 <section class="hero-banner py-5" style="background-color: #fff;">
     <div class="container-lg">
-        <img src="<?= base_url() . ASSET_PATH; ?>assets/images/copy-space-woman-carrying-lemons" 
+        <img src="<?= base_url() . ASSET_PATH; ?>assets/images/copy-space-woman-carrying-lemons.jpg" 
              alt="Terms Banner" class="img-fluid rounded shadow-sm" style="height: 435px; width: 1300px; object-fit: cover;" />
         <h2 class="text-center mb-4" style="margin-top: 20px;">TERMS AND CONDITIONS</h2>
         <div class="row justify-content-right">

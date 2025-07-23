@@ -1,6 +1,6 @@
 <section class="hero-banner py-5" style="background-color: #fff; margin-bottom:125px;">
     <div class="container-lg">
-        <img src="<?= base_url() . ASSET_PATH; ?>assets/images/magnificent-woman-long-bright-skirt-dancing-studio-carefree-inspired-female-model-posing-with-pleasure-yellow" 
+        <img src="<?= base_url() . ASSET_PATH; ?>assets/images/magnificent-woman-long-bright-skirt-dancing-studio-carefree-inspired-female-model-posing-with-pleasure-yellow.jpg" 
              alt="About Banner" class="img-fluid rounded shadow-sm mb-4" 
              style="height: 430px; width: 1310px; object-fit: cover;" />
         <h2 class="text-center mb-4" style="margin-top: -5px;">ABOUT US</h2>

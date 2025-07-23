@@ -4,8 +4,8 @@
 <head>
     <title>Zakhi Designs</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-     <meta name="google-signin-client_id"
-         content="980312560634-kksn59gmuu5p4rg68tnd2vaooe7lfdfu.apps.googleusercontent.com">
+    <meta name="google-signin-client_id"
+        content="980312560634-kksn59gmuu5p4rg68tnd2vaooe7lfdfu.apps.googleusercontent.com">
 
 
     <link rel="stylesheet" href="<?= base_url() . ASSET_PATH; ?>assets/css/bootstrap.min.css">
@@ -33,8 +33,8 @@
     <!-- Swiper JS -->
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
-   <!-----------------------------Country code---------------------------------->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/intl-tel-input@18/build/css/intlTelInput.css" />
+    <!-----------------------------Country code---------------------------------->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/intl-tel-input@18/build/css/intlTelInput.css" />
 
 
 </head>
@@ -48,7 +48,7 @@
                         <img src="<?= base_url() . ASSET_PATH; ?>assets/images/logo.jpg" alt="Logo" />
                     </a>
                 </div>
-         <?= view_cell('App\Cells\FooterCell::footerInfo') ?>
+                <?= view_cell('App\Cells\FooterCell::footerInfo') ?>
 
 
             </div>
@@ -90,30 +90,35 @@
                         </div>
                         <a href="<?= base_url('contact'); ?>">Contact</a>
 
-                        <?php if (session()->get('zd_uname')): ?>
+                        <?php if (session()->get('zd_uname')):
+                            ?>
                             <div class="dropdown a">
                                 <div class="dropdown-toggle drop-menu p-0" href="#" role="button" id="customerDropdown"
                                     data-bs-toggle="dropdown" aria-expanded="false">
-                                    <?= session()->get('zd_uname'); ?>
+                                    <?php
+                                    $username = session()->get('zd_uname');
+                                    echo (strlen($username) > 6) ? substr($username, 0, 10) . '...' : $username;
+                                    ?>
                                 </div>
-                               <ul class="dropdown-menu" aria-labelledby="customerDropdown">
-    <li>
-        <a class="dropdown-item small-menu-item" href="<?= base_url('profile#profile'); ?>">
-            <i class="bi bi-person-circle me-1"></i> My Profile
-        </a>
-    </li>
-    <li>
-        <a class="dropdown-item small-menu-item" href="<?= base_url('logout') ?>">
-            <i class="bi bi-escape me-1"></i> Logout
-        </a>
-    </li>
-</ul>
+                                <ul class="dropdown-menu" aria-labelledby="customerDropdown">
+                                    <li>
+                                        <a class="dropdown-item small-menu-item" href="<?= base_url('profile#profile'); ?>">
+                                            <i class="bi bi-person-circle me-1"></i> My Profile
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item small-menu-item" href="<?= base_url('logout') ?>">
+                                            <i class="bi bi-escape me-1"></i> Logout
+                                        </a>
+                                    </li>
+                                </ul>
 
                             </div>
 
                         <?php else: ?>
-                            <a href="#" id="loginBtn">Login</a>
-                            <a href="#" id="registerBtn">Register</a>
+                            <a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal" id="loginBtn">Login</a>
+
+                            <!-- <a href="#" id="registerBtn">Register</a> -->
                         <?php endif; ?>
 
 
@@ -122,8 +127,9 @@
                         </a>
                         <div class="searchbox"
                             style="display: flex; align-items: center; gap: 5px; position: relative; top: -5px;">
-                            <input type="text" name="keyword" id="search" placeholder="Search Products/Category/Sub:Cate"
-                                autocomplete="off" value="<?= esc($search ?? '') ?>" style="padding: 5px; "
+                            <input type="text" name="keyword" id="search"
+                                placeholder="Search Products/Category/Sub:Cate" autocomplete="off"
+                                value="<?= esc($search ?? '') ?>" style="padding: 5px; "
                                 onkeydown="checkEnter(event)" />
 
                             <a href="javascript:void(0);" onclick="searchProduct()"
@@ -139,21 +145,10 @@
         </div>
     </header>
 
-    <!-- Modal Skeleton -->
-    <div class="modal fade" id="mainModal" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header border-0">
-                <button type="button" class="btn ms-auto p-0" data-bs-dismiss="modal" aria-label="Close" style="border: none; background: none;">
-                    <i class="bi bi-x fs-4"></i>
-                </button>
-            </div>
-            <div class="modal-body" id="modalBody">
-                <!-- AJAX content will load here -->
-            </div>
-        </div>
+
     </div>
-</div>
+    </div>
+    </div>
 
 
     <script>
@@ -166,7 +161,7 @@
 
         function checkEnter(event) {
             if (event.key === 'Enter') {
-                event.preventDefault(); 
+                event.preventDefault();
                 searchProduct();
             }
         }
@@ -219,6 +214,7 @@
                 }
             });
         });
+
 
 
     </script>

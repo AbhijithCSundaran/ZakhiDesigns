@@ -10,8 +10,9 @@ $routes->get('/', 'Home::index');
 // google sign
 // $routes->post('google-login-callback', 'GoogleLoginCallback::index');
 // $routes->match(['get', 'post'], 'google-login-callback', 'GoogleLoginCallback::index');
-$routes->match(['get', 'post'], 'zakhidesigns/google-login-callback', 'Googlelogincallback::index');
 
+$routes->match(['get', 'post'], 'zakhidesigns/google-login-callback', 'Googlelogincallback::googleLogin');
+ 
 // login register logout
 $routes->get('weblogin', 'Weblogin::index');
 $routes->get('webreg', 'Weblogin::webReg');
@@ -35,7 +36,7 @@ $routes->post('OrderNow/submitfrm', 'OrderNow::submitfrm');
 
 // ordernow user
 
-$routes->get('ordernow/product/(:any)', 'OrderNow::orderproduct/$1');
+// $routes->get('ordernow/product/(:any)', 'OrderNow::orderproduct/$1');
 
 $routes->get('ordernow/getAddress/(:num)', 'OrderNow::getAddress/$1');
 
@@ -56,11 +57,21 @@ $routes->post('product/submit', 'Product::submit');
 $routes->get('product/viewcollection', 'Product::view_collection');
 $routes->get('review/loadRandomSimilar/(:num)', 'Review::loadRandomSimilar/$1');
 $routes->get('product/loadMoreSearch', 'Product::loadMoreSearch');
+//$routes->get('product/loadMoreReviews/(:num)', 'Product::loadMoreReviews/$1');
+$routes->get('product/load-more-reviews/(:num)', 'Product::loadMoreReviews/$1');
+$routes->get('subcategory/subcategoryProducts/(:num)/(:num)', 'Subcategory::subcategoryProducts/$1/$2');
+$routes->get('subcategory/loadMoreSubcategoryProducts/(:num)/(:num)', 'Subcategory::loadMoreSubcategoryProducts/$1/$2');
+
+
+
 
 $routes->get('product/loadMoreByDate', 'Product::loadMoreByDate');
+$routes->get('category/loadMoreSearch', 'Category::loadMoreSearch');
+$routes->post('category/loadMoreByDate/(:num)', 'Category::loadMoreByDate/$1');
 
 
-$routes->get('contact','Contact::index'); 
+
+$routes->get('contact', 'Contact::index');
 $routes->post('contact/submit', 'Contact::submit');
 $routes->post('review/submit', 'Review::submit');
 $routes->get('review/(:num)/(:num)', 'Review::loaddetails/$1/$2');
@@ -73,10 +84,9 @@ $routes->post('profile/deleteAddress', 'Profile::deleteAddress');
 $routes->post('/profile/setDefaultAddress', 'Profile::setDefaultAddress');
 $routes->post('profile/update', 'Profile::update');
 $routes->post('profile/getAddress', 'Profile::getAddress');
-//$routes->get('profile/editprofile', 'Profile::editProfile');
 $routes->post('profile/editprofile', 'Profile::editProfile');
-$routes->match(['get', 'post'], 'profile/editprofile', 'Profile::add');
-$routes->match(['get', 'post'],'profile/change_password', 'Profile::changePassword');
+// $routes->match(['get', 'post'], 'profile/editprofile', 'Profile::add');
+$routes->match(['get', 'post'], 'profile/change_password', 'Profile::changePassword');
 
 
 

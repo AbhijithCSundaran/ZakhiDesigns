@@ -2,85 +2,91 @@
 namespace App\Controllers;
 
 use App\Models\SubcategoryModel;
-use CodeIgniter\Controller;
 use App\Models\ProductDisplayModel;
 use App\Models\ReviewModel;
-
+use CodeIgniter\Controller;
 
 class Subcategory extends Controller
 {
-    protected $SubcategoryModel;
     protected $session;
     protected $request;
+    protected $subcategoryModel;
     protected $productdisplayModel;
-    protected $categories;
 
     public function __construct()
     {
         $this->session = \Config\Services::session();
         $this->request = \Config\Services::request();
         $this->subcategoryModel = new SubcategoryModel();
+        $this->productdisplayModel = new ProductDisplayModel();
     }
 
-   
-   public function index(){
-    $data = [];  
-    return view('common/header', $data)
-        . view('subcategory_list', $data)
-        . view('common/footer')
-         . view('pagescripts/subcategoryjs');
-}
-public function subcategoryProducts($id, $catId){
-    $this->productdisplayModel = new ProductDisplayModel();
-    $reviewModel = new ReviewModel();
+    public function index()
+    {
+        return view('common/header')
+            . view('subcategory_list') // can show category list page
+            . view('common/footer')
+            . view('pagescripts/subcategoryjs');
+    }
 
-    $this->categories = $this->productdisplayModel->getAllCategoriesAndSub();
-	$data['categories'] = $this->categories;
-    
-    // $cat_id = $this->request->getGet('cat_id');
-    $data['cat_id'] = $catId;
-    $data['subcat_id'] = $this->subcategoryModel->getAllSubcategory($id);
-    $data['product']   = $this->subcategoryModel->getAllProductUnderSubcategory($id);
+    public function subcategoryProducts($subcatId, $catId)
+    {
+        $reviewModel = new ReviewModel();
 
-    if (!empty($data['product'])) {
-        // Step 1: Get all product IDs
-        $productIds = array_column($data['product'], 'pr_Id');
+        $data['cat_id'] = $catId;
+        $data['subcat_id'] = $this->subcategoryModel->getAllSubcategory($subcatId);
+        $data['categories'] = $this->productdisplayModel->getAllCategoriesAndSub();
 
-        // Step 2: Get average ratings for all products
+        $limit = 12;
+        $offset = 0;
+
+        $products = $this->subcategoryModel->getProductsBySubcategoryPaginated($subcatId, $limit, $offset);
+
+        $data['product'] = $this->attachRatings($products, $reviewModel);
+
+        $data['similar'] = $this->subcategoryModel->getSimilarProducts($catId, $subcatId);
+        $data['similar'] = $this->attachRatings($data['similar'], $reviewModel);
+
+        return view('common/header', $data)
+            . view('subcategory_list', $data)
+            . view('common/footer')
+            . view('pagescripts/subcategoryjs');
+    }
+
+    public function loadMoreSubcategoryProducts()
+    {
+        if ($this->request->isAJAX()) {
+            $subcatId = $this->request->getGet('subcat_id');
+            $page = (int) $this->request->getGet('page') ?? 1;
+            $limit = 12;
+            $offset = ($page - 1) * $limit;
+
+            $reviewModel = new ReviewModel();
+            $products = $this->subcategoryModel->getProductsBySubcategoryPaginated($subcatId, $limit, $offset);
+            $productsWithRatings = $this->attachRatings($products, $reviewModel);
+
+            return view('product/_subcategory_product_items', ['product' => $productsWithRatings]);
+        }
+
+        return $this->response->setStatusCode(400)->setJSON(['error' => 'Invalid request']);
+    }
+
+    private function attachRatings(array $products, ReviewModel $reviewModel)
+    {
+        if (empty($products)) return [];
+
+        $productIds = array_column($products, 'pr_Id');
         $avgRatings = $reviewModel->getAverageRatingForProducts($productIds);
 
-        // Step 3: Map ratings by pr_Id
         $ratingsMap = [];
         foreach ($avgRatings as $rating) {
             $ratingsMap[$rating['pr_Id']] = round($rating['avg_rating'], 1);
         }
 
-        // Step 4: Attach avg_rating to each product
-        foreach ($data['product'] as &$product) {
+        foreach ($products as &$product) {
             $product['avg_rating'] = $ratingsMap[$product['pr_Id']] ?? 0;
         }
+
+        return $products;
     }
-
-    $data['similar'] = $this->subcategoryModel->getSimilarProducts( $catId,$id);
-    if (!empty($data['similar'])) {
-        $productIds = array_column($data['similar'], 'pr_Id');
-
-        $avgRatings = $reviewModel->getAverageRatingForProducts($productIds);
-
-        $ratingsMap = [];
-        foreach ($avgRatings as $rating) {
-            $ratingsMap[$rating['pr_Id']] = round($rating['avg_rating'], 1);
-        }
-
-        foreach ($data['similar'] as &$product) {
-            $product['avg_rating'] = $ratingsMap[$product['pr_Id']] ?? 0;
-        }
-    }
-    
-    return view('common/header' , $data)
-        . view('subcategory_list'   , $data)
-        . view('common/footer')
-        . view('pagescripts/subcategoryjs');
-}
-  
 }

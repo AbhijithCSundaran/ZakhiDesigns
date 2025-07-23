@@ -24,22 +24,26 @@
                     <form id="profileForm" method="post">
                         <?php if (!empty($user)): ?>
                             <div>&nbsp;</div>
-                            <input type="text" name="name" id="name" class="form-control"
-                                value="<?= esc($user['cust_Name']) ?>" />
+                            <input type="text" name="profilename" id="profilename" class="form-control"
+                                 value="<?= esc($user['cust_Name']) ?>" pattern="[A-Za-z\s]+"
+                                title="Only letters are allowed"
+                                oninput="this.value = this.value.replace(/[^A-Za-z\s]/g, '')" />
                             <div>&nbsp;</div>
                             <input type="email" name="email" id="email" class="form-control"
                                 value="<?= esc($user['cust_Email']) ?>" />
                             <div>&nbsp;</div>
-
-                            <input id="phone" name="phone" type="tel" class="form-control" placeholder=""
-                                value="<?= esc($user['cust_Phone']) ?>" required>
-                            <small class="form-text text-muted d-block">
+                            <div class="phn_code">
+                                <input id="phone" name="phone" type="tel" class="form-control" placeholder=""
+                                    value="<?= esc($user['cust_Phone']) ?>" required>
+                            </div>
+                            <!-- <small class="form-text text-muted d-block">
                                 Enter your phone number exactly as shown in the placeholder (e.g., <strong>098765
                                     43210</strong>), including the country code.
-                            </small>
+                            </small> -->
                             <div id="phone_error" class="text-danger small" style="display:none;"></div>
                             <div id="phone_valid" class="text-success small" style="display:none;">Valid Number</div>
                             <input type="hidden" name="cust_phcode" id="cust_phcode">
+                            <div id="phone_format" class="text-muted small mt-1"></div>
                             <div>&nbsp;</div>
                         <?php else: ?>
                             <div class="alert alert-danger">User information not found.</div>
@@ -120,13 +124,15 @@
 
                                     <input type="tel" class="form-control" id="newPhone" name="newPhone" placeholder=""
                                         required>
-                                    <small class="form-text text-muted d-block">
+                                    <!-- <small class="form-text text-muted d-block">
                                         Enter your phone number exactly as shown in the placeholder (e.g.,
                                         <strong>098765 43210</strong>), including the country code.
-                                    </small>
+                                    </small> -->
                                     <div id="newPhone_error" class="text-danger small" style="display:none;"></div>
                                     <div id="newPhone_valid" class="text-success small" style="display:none;">Valid
                                         Number</div>
+                                    <div id="newPhone_format" class="text-muted small mt-1"></div>
+                                    <input type="hidden" name="new_phcode" id="new_phcode">
                                 </div>
 
                                 <div class="mb-2"><input type="text" class="form-control" id="newBuilding"
@@ -270,12 +276,14 @@
                 <div class="phn_code">
                     <input type="tel" maxlength="15" minlength="7" name="add_Phone" id="add_Phone" class="form-control"
                         placeholder="" required>
-                    <small class="form-text text-muted d-block">
+                    <!-- <small class="form-text text-muted d-block">
                         Enter your phone number exactly as shown in the placeholder (e.g., <strong>098765
                             43210</strong>), including the country code.
-                    </small>
+                    </small> -->
                     <div id="add_Phone_error" class="text-danger small" style="display:none;"></div>
                     <div id="add_Phone_valid" class="text-success small" style="display:none;">Valid Number</div>
+                    <div id="add_Phone_format" class="text-muted small mt-1"></div>
+                    <input type="hidden" name="add_phcode" id="add_phcode">
                 </div>
                 <div>&nbsp</div>
                 <input type="email" name="add_Email" id="add_Email" class="form-control" placeholder="Email" required>
@@ -295,8 +303,8 @@
                     pattern="[1-9][0-9]{5}" required>
                 <div>&nbsp</div>
                 <input type="checkbox" class="form-check-input" id="is_default" name="add_Default"> &nbsp; Default
-                <input type="hidden" name="display_add_Id" id="display_add_Id" />
-                <input type="hidden" name="pr_Id" id="pr_Id" />
+                <input type="" name="display_add_Id" id="display_add_Id" />
+                <input type="" name="pr_Id" id="pr_Id" />
                 <div class="modal-footer">
 
                     <button type="submit" class="btn btn-info mt-2">Update Address</button>

@@ -27,7 +27,7 @@
         </div>
         <div class="form-group col-md-6">
             <label>Review</label>
-            <textarea name="review" class="form-control" required></textarea>
+            <textarea name="review" class="form-control" ></textarea>
         </div>
         <div class="form-group col-md-6">
             <div> &nbsp;</div>
@@ -49,7 +49,10 @@
                             <div class="mb-2 text-warning" style="font-size: 1.2em;">
                                 <?= str_repeat('★', (int) $rev['rating']) . str_repeat('☆', 5 - (int) $rev['rating']) ?>
                             </div>
-                            <p class="card-text"><?= esc($rev['review']) ?></p>
+                             <div class="card-text p-2"
+                                style="background-color: #f1f1f1; border-radius: 8px; white-space: pre-wrap;">
+                                <?= esc($rev['review']) ?>
+                            </div>
                             <p class="text-muted mb-0" style="font-size: 0.9em;">
                                 <?= date('F d, Y', strtotime($rev['created_at'])) ?>
                             </p>

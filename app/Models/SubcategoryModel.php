@@ -25,8 +25,24 @@ public function getSimilarProducts($cat_Id, $excludeId){
                 ->where('product.sub_Id !=', $excludeId)
                 ->groupBy('product.pr_Id, product.pr_Name, product.product_images, product.pr_Selling_Price')
                 ->orderBy('product.pr_createdon', 'DESC')
+        
+        
                 ->findAll(8);
 }
+
+public function getProductsBySubcategoryPaginated($subcatId, $limit, $offset)
+{
+    return $this->db->table('product')
+        ->where('sub_Id', $subcatId)
+        ->where('pr_Status', 1) // ✅ Only active products
+        ->orderBy('pr_Id', 'DESC')
+        ->limit($limit, $offset) // ✅ (limit, offset)
+        ->get()
+        ->getResultArray();
+}
+
+
+
 
 }
 

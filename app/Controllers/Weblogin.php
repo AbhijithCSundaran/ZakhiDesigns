@@ -20,25 +20,14 @@ class Weblogin extends BaseController
 		if ($this->session->has('zd_uid')) {
 			return redirect()->to(base_url('dashboard'));
 		}
-		return view('weblogin');
 	}
-
-	public function webReg()
-	{
-		return view('webregister');
-	}
-
-	public function webForgot()
-	{
-		return view('webforgot');
-	}
-
 	public function customerAuthen()
 	{
 		$email = $this->request->getPost('cust_Email');
 		$password = md5($this->request->getPost('cust_Password'));
 		if ($email && $password) {
 			$userLog = $this->customerLoginModel->getLoginAccount($email, $password);
+			//echo $userLog;exit();
 			if ($userLog) {
 				$this->session->set([
 					'zd_uid' => $userLog->cust_Id,

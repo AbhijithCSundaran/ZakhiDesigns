@@ -216,41 +216,28 @@ $zd_uid = session()->get('zd_uid');
         <div class="container-lg">
             <h5>Customer Reviews</h5>
             <div class="row order-box">
-                <div class="col-md-12">
-				<div>&nbsp; </div>
-                    <?php if (!empty($reviews)): ?>
-                        <?php foreach (array_chunk($reviews, 2) as $reviewPair): ?>
-                            <div class="row mb-4">
-                                <?php foreach ($reviewPair as $rev): ?>
-                                    <div class="col-md-6">
-                                     
-                                            <h6 class="card-title mb-1"><?= esc($rev['name']) ?></h6>
-                                            <div class="mb-2 text-warning" style="font-size: 1.2em;">
-                                                <?= str_repeat('★', (int) $rev['rating']) . str_repeat('☆', 5 - (int) $rev['rating']) ?>
-												<span style="font-size:12px; color:#000;">Posted on <?= date('d M Y', strtotime($rev['created_at'])) ?></span>
-
-                                            </div>
-                                            <p class="card-text"><?= esc($rev['review']) ?></p>
-                                        <span style="font-size:12px; color:#000;">Posted on
-                                            <?= date('d M Y', strtotime($rev['created_at'])) ?></span>
-                                    </div>
-                                <?php endforeach; ?>
-                            </div>
-                        <?php endforeach; ?>
-                    <?php else: ?>
-                        <div class="col-12">
-                            <p class="text-muted">No reviews yet.</p>
-                        </div>
-                    <?php endif; ?>
+                <div class="col-md-12" id="review-container">
+                    <?= view('product/_review_items', ['reviews' => $reviews]) ?>
                 </div>
+
+              
+
+<?php if ($total_reviews_count > 5): ?>
+    <div class="text-center mt-3">
+        <i class="bi bi-chevron-double-down fs-5" id="toggleReviewIcon"
+           style="cursor: pointer;"
+           data-product-id="<?= esc($product['pr_Id']) ?>"
+           data-offset="4"
+           data-expanded="false"></i>
+    </div>
+<?php endif; ?>
+
             </div>
         </div>
     </div>
 </section>
 
 <div>&nbsp; </div>
-
-
 
 <section class="top-prod">
     <div class="container-lg">
@@ -350,4 +337,3 @@ $zd_uid = session()->get('zd_uid');
         </div>
     </div>
 </section>
-

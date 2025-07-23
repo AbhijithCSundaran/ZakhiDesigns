@@ -51,13 +51,14 @@ class CategoryModel extends Model
 }
 
 
-public function getPaginatedProductsByCategory($catId, $limit, $offset)
+
+public function getPaginatedProductsByCategory($cat_id, $limit, $offset)
 {
     return $this->db->table('product')
-        ->where('cat_Id', $catId)
-        ->where('pr_Status',1)
-        ->orderBy('pr_Id', 'DESC')
+        ->where('cat_Id', $cat_id)
+        ->where('pr_Status', 1)
         ->limit($limit, $offset)
+        ->orderBy('pr_Id', 'DESC')
         ->get()
         ->getResultArray();
 }
@@ -68,6 +69,12 @@ public function getProductCountByCategory($catId)
         ->where('cat_Id', $catId)
         ->countAllResults();
 }
+
+    public function getProductsByModifiedDatePaginated($limit, $offset)
+    {
+        return $this->orderBy('pr_modifyon', 'DESC')
+            ->findAll($limit, $offset);
+    }
 
 }
 

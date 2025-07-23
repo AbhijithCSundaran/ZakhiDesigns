@@ -21,12 +21,14 @@
 
 							</div>
 							<div class="clearfix">&nbsp;</div>
-							<div class="form-group">
-								<label>Contact No.</label>
-								<input type="tel" class="form-control" name="contact_no" id="contact_no" required
-									maxlength="15" minlength="7" pattern="^\d{7,15}$" inputmode="numeric"
-									title="Contact number must be between 7 to 15 digits.">
-							</div>
+						<div class="form-group">
+                                <label>Contact No.</label>
+                                <input type="tel" class="form-control" name="contact_no" id="contact_no" required
+                                    maxlength="15" minlength="7" inputmode="numeric" pattern="^[0-9]{7,15}$"
+                                    oninput="this.value = this.value.replace(/[^0-9]/g, '')"
+                                    title="Contact number must be between 7 to 15 digits.">
+                                <div id="contactError" class="text-danger mt-1" style="display: none;"></div>
+                            </div>
 
 							<div class="clearfix">&nbsp;</div>
 							<div class="form-group">
@@ -52,7 +54,7 @@
 					<div class="col-md-12">
 						<iframe
 							src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3928.1095273253873!2d76.3164831!3d10.090110999999998!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3b080f69034110c7%3A0xbbcac9930d9c8556!2sZakhi%20Designs!5e0!3m2!1sen!2sin!4v1748510926454!5m2!1sen!2sin"
-							width="100%" height="200" style="border:0;" allowfullscreen="" loading="lazy"
+							width="100%" height="275" style="border:0;" allowfullscreen="" loading="lazy"
 							referrerpolicy="no-referrer-when-downgrade"></iframe>
 					</div>
 				</div>

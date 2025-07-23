@@ -26,28 +26,34 @@
                         </h2>
                         <div id="collapseSelect" class="accordion-collapse collapse show"
                             data-bs-parent="#addressAccordion">
-                            <div class="accordion-body">
+                            <div class="accordion-body" id="selectExistAddress">
                                 <?php if (!empty($addresses)): ?>
                                     <?php foreach ($addresses as $address): ?>
-                                       <div class="form-check mb-2 position-relative">
-                                            <input class="form-check-input" type="radio" name="address_id"
-                                                value="<?= $address['add_Id'] ?>" <?= $address['add_Default'] ? 'checked' : '' ?>
-                                                data-id="<?= $address['add_Id'] ?>" onchange="toggleEditLinks()">
+                                        <div class="form-check mb-2 position-relative">
+ 
                                             <input type="hidden" name="edit_address_id" id="edit_address_id" value="">
                                             <input type="hidden" name="edit_product_id" id="edit_product_id" value="">
-                                            <label class="form-check-label">
-                                                <?= esc($address['add_Name']) ?> - <?= esc($address['add_Phone']) ?><br>
-                                                <?= esc($address['add_BuldingNo']) ?>,
-                                                <?= esc($address['add_Street']) ?>,
-                                                <?= esc($address['add_Landmark']) ?>,<br>
-                                                <?= esc($address['add_City']) ?> - <?= esc($address['add_Pincode']) ?><br>
-                                                <?= esc($address['add_State']) ?>
+                                            <input class="form-check-input" type="radio" name="address_id"
+                                                value="<?= $address['add_Id'] ?>" <?= $address['add_Default'] ? 'checked' : '' ?>
+                                                data-id="<?= $address['add_Id'] ?>" data-name="<?= esc($address['add_Name']) ?>"
+                                                data-phone="<?= esc($address['add_Phone']) ?>"
+                                                data-building="<?= esc($address['add_BuldingNo']) ?>"
+                                                data-street="<?= esc($address['add_Street']) ?>"
+                                                data-landmark="<?= esc($address['add_Landmark']) ?>"
+                                                data-city="<?= esc($address['add_City']) ?>"
+                                                data-pincode="<?= esc($address['add_Pincode']) ?>"
+                                                data-state="<?= esc($address['add_State']) ?>"
+                                                onchange="renderAddressLabel(this); toggleEditLinks();  saveSelectedAddress(this);">
+                                            <label class="form-check-label" id="address-label-<?= $address['add_Id'] ?>">
+                                                <!-- You can add some visible address preview if needed here -->
+                                                <?= esc($address['add_Name']) ?>, <?= esc($address['add_City']) ?> -
+                                                <?= esc($address['add_Pincode']) ?>                                                
                                             </label>
  
                                             <a href="<?= base_url('profile#address') ?>" class="edit-link btn btn-sm btn-link"
                                                 data-id="<?= $address['add_Id'] ?>"
-                                                data-product-id="<?= $product->pr_Id ?? '' ?>" onclick="storeEditInfo(event)"
-                                                style="display:none;">Edit</a>
+                                                data-product-id="<?= esc($od_Id) ?>" onclick="storeEditInfo(event)"
+                                                style="display:none;"><span class="edit-address-orders" style="text-decoration: none;">Edit</span></a>
  
                                         </div>
                                     <?php endforeach; ?>
@@ -157,7 +163,3 @@
         </div>
     </div>
 </section>
-
-<style>
- 
-</style>

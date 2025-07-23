@@ -14,56 +14,66 @@ class OrdersModel extends Model {
     protected $primaryKey = 'od_Id';
     protected $allowedFields = ['tracker_Link','od_Status','cus_Id']; 
 
-public function getDatatables($searchValue = null, $start = 0, $length = 10){
-    $builder = $this->db->table('order_detail')
-        ->select([
-            'order_detail.od_Id',
-            'order_detail.od_Quantity',
-            'order_detail.od_Status',
-            'order_detail.od_createdon',
-            'product.pr_Name',
-            'product.pr_Code',
-            'customer.cust_Name',
-            'customer.cust_Email',
-            'customer.cust_Phone'
-        ])
-        ->where('od_Status!=', '')
-        ->join('product', 'product.pr_Id = order_detail.pr_Id', 'left')
-        ->join('customer', 'customer.cust_Id = order_detail.cus_Id', 'left');
-
-    // Total records before filter
-    $totalBuilder = clone $builder;
-    $total = $totalBuilder->countAllResults(false);
-
-    // Apply search filter with space + tab removal
-    if (!empty($searchValue)) {
-        $search = str_replace([" ", "\t"], '', $searchValue); // remove normal & tab spaces from input
-
-        $builder->groupStart()
-            ->like("REPLACE(REPLACE(customer.cust_Name, ' ', ''), CHAR(9), '')", $search, false)
-            ->orLike("REPLACE(REPLACE(customer.cust_Email, ' ', ''), CHAR(9), '')", $search, false)
-            ->orLike("REPLACE(REPLACE(customer.cust_Phone, ' ', ''), CHAR(9), '')", $search, false)
-            ->orLike("REPLACE(REPLACE(product.pr_Code, ' ', ''), CHAR(9), '')", $search, false)
-            ->groupEnd();
+public function getDatatables($searchValue = null, $start = 0, $length = 10, $orderBy = 'order_detail.od_Id', $orderDir = 'DESC')
+    {
+ 
+        $builder = $this->db->table('order_detail')
+            ->select([
+                'order_detail.od_Id',
+                'order_detail.od_Quantity',
+                'order_detail.od_Status',
+                'order_detail.od_createdon',
+                'product.pr_Name',
+                'product.pr_Code',
+                'customer.cust_Name',
+                // 'customer.cust_Email',
+                // 'customer.cust_Phone'
+                'address.add_Email',
+                'address.add_Phone'
+            ])
+            ->where('od_Status!=', '')
+            ->join('product', 'product.pr_Id = order_detail.pr_Id', 'left')
+            ->join('customer', 'customer.cust_Id = order_detail.cus_Id', 'left')
+            ->join('address','address.add_Id = order_detail.add_Id', 'left');
+ 
+        // Total records before filter
+        $totalBuilder = clone $builder;
+        $total = $totalBuilder->countAllResults(false);
+ 
+        // Apply search filter with space + tab removal
+        if (!empty($searchValue)) {
+            $search = str_replace([" ", "\t"], '', $searchValue); // remove normal & tab spaces from input
+ 
+            $builder->groupStart()
+                ->like("REPLACE(REPLACE(customer.cust_Name, ' ', ''), CHAR(9), '')", $search, false)
+                ->orLike("REPLACE(REPLACE(address.add_Email, ' ', ''), CHAR(9), '')", $search, false)
+                ->orLike("REPLACE(REPLACE(address.add_Phone, ' ', ''), CHAR(9), '')", $search, false)
+                ->orLike("REPLACE(REPLACE(product.pr_Code, ' ', ''), CHAR(9), '')", $search, false)
+                ->groupEnd();
+        }
+ 
+        // Filtered count after search
+        $filteredBuilder = clone $builder;
+        $filtered = $filteredBuilder->countAllResults(false);
+        if (!empty($orderBy)) {
+            $builder->orderBy($orderBy, $orderDir);
+        } else {
+            $builder->orderBy('order_detail.od_createdon', 'DESC');
+        }
+ 
+        // Pagination
+        // $builder->orderBy('order_detail.od_Id', 'DESC');
+        $builder->limit($length, $start);
+        $query = $builder->get();
+        $data = $query->getResult();
+ 
+        return [
+            'data' => $data,
+            'total' => $total,
+            'filtered' => $filtered
+        ];
     }
-
-    // Filtered count after search
-    $filteredBuilder = clone $builder;
-    $filtered = $filteredBuilder->countAllResults(false);
-
-    // Pagination
-    $builder->orderBy('order_detail.od_Id', 'DESC');
-    $builder->limit($length, $start);
-    $query = $builder->get();
-    $data = $query->getResult();
-
-    return [
-        'data'     => $data,
-        'total'    => $total,
-        'filtered' => $filtered
-    ];
-}
-
+ 
 
 
    

@@ -66,37 +66,6 @@
         });
     });
 
-//for saving pick details
-
-/* document.getElementById('orderNowBtn').addEventListener('click', function () {
-    const formData = {
-        size: document.getElementById('size').value,
-        selected_color: document.getElementById('selected_color').value,
-        quantity: document.getElementById('quantity').value,
-        pr_Id: document.getElementById('pr_Id').value
-    };
-
-    fetch("<?= base_url('ordernow/submit') ?>", {
-    method: "POST",
-        headers: {
-        'Content-Type': 'application/json',
-            'X-Requested-With': 'XMLHttpRequest' // Important for CodeIgniter request->isAJAX()
-    },
-    body: JSON.stringify(formData)
-    })
-    .then(response => response.json())
-        .then(result => {
-            if (result.success) {
-                window.location.href = "<?= base_url('order_now') ?>"; // Redirect on success
-            } else {
-                alert('Order submission failed. Please try again.');
-            }
-        })
-        .catch(err => {
-            console.error('AJAX error:', err);
-        });
-}); */
-
 
     /*********************************************/
 
@@ -124,7 +93,7 @@
             // $('#modalBody').load("<?= base_url('weblogin'); ?>", function () {
             //     $('#mainModal').modal('show');
             // });
-             $('#exampleModal').modal('show');
+            $('#exampleModal').modal('show');
             $('#orderNowBtn').prop('disabled', false);
             return;
         }
@@ -401,4 +370,26 @@
             }
         });
     });
+    document.addEventListener('DOMContentLoaded', function () {
+        document.querySelectorAll('.toggle-review').forEach(function (btn) {
+            btn.addEventListener('click', function () {
+                const parent = this.closest('.card-text');
+                const shortText = parent.querySelector('.short-text');
+                const fullText = parent.querySelector('.full-text');
+
+                const isHidden = fullText.classList.contains('d-none');
+
+                if (isHidden) {
+                    shortText.classList.add('d-none');
+                    fullText.classList.remove('d-none');
+                    this.textContent = 'Read less';
+                } else {
+                    shortText.classList.remove('d-none');
+                    fullText.classList.add('d-none');
+                    this.textContent = 'Read more';
+                }
+            });
+        });
+    });
+
 </script>

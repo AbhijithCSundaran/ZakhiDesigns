@@ -170,3 +170,34 @@ body {
     .progress .progress-bar {
         height: 100%
     }
+    .hero-banner {
+    background-color: #fff;
+    margin-bottom: 125px;
+}
+ 
+.about-banner-img {
+    height: 430px;
+    width: 100%;
+    object-fit: cover;
+    border-radius: 0.25rem;
+    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+    margin-bottom: 1.5rem;
+}
+ 
+.section-title {
+    margin-top: -5px;
+    margin-bottom: 1.5rem;
+}
+ 
+.text-justify {
+    text-align: justify;
+}
+ 
+.ms-4 {
+    margin-left:0px !important;
+}
+.col-md-9 {
+        flex: 0 0 auto;
+        width: 90%;
+}
+ 

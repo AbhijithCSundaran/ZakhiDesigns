@@ -102,7 +102,7 @@ class Review extends BaseController
         'name'   => 'required',
         'email'  => 'required|valid_email',
         'rating' => 'required|in_list[1,2,3,4,5]',
-        'review' => 'required'
+       // 'review' => 'required'
     ]);
 
     if (!$validation->run($this->request->getPost())) {

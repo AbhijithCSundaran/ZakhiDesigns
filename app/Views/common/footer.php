@@ -1,5 +1,5 @@
 <footer>
-   <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
         aria-hidden="true">
 
         <div class="modal-dialog" role="document">
@@ -42,7 +42,7 @@
                                         id="togglePassword" style="cursor:pointer;"></i>
                                 </div>
                             </div>
-                
+
 
                             <div class="g-recaptcha" data-sitekey="6Le-VXcrAAAAAFdEqJLtM5DxM6GoGl7cJdV6hknL"></div>
                             <div>&nbsp;</div>
@@ -81,8 +81,8 @@
                         <div id="regError" class="text-danger text-center p-2" style="color:red;"></div>
                         <form id="registerForm" method="post">
                             <div class="floating-label-group">
-                                <input type="text" class="form-control" id="custname" name="custname" placeholder=""
-                                    required />
+                                <input type="text" class="form-control" id="name" name="custname" placeholder=""
+                                    required oninput="truncateName(this.value)" />
                                 <label for="name">Name</label>
                             </div>
 
@@ -331,174 +331,174 @@
 
 </script>
 <script>
- 
-       $(document).ready(function () {
-            // Show Register form from Login
-            $('#showRegisterFromLogin').click(function (e) {
-                e.preventDefault();
-                $('#loginFormContainer').hide();
-                $('#forgotFormContainer').hide();
-                $('#registerFormContainer').show();
-            });
 
-            // Show Login form from Register
-            $('#showLoginFromRegister').click(function (e) {
-                e.preventDefault();
-                $('#registerFormContainer').hide();
-                $('#forgotFormContainer').hide();
-                $('#loginFormContainer').show();
-            });
-
-            // Show Forgot form from Login
-            $('#showForgotForm').click(function (e) {
-                e.preventDefault();
-                $('#loginFormContainer').hide();
-                $('#registerFormContainer').hide();
-                $('#forgotFormContainer').show();
-            });
-
-            // Show Login from Forgot
-            $('#showLoginFromFrgt').click(function (e) {
-                e.preventDefault();
-                $('#registerFormContainer').hide();
-                $('#forgotFormContainer').hide();
-                $('#loginFormContainer').show();
-            });
-        });
-
-
-        $(document).on('submit', '#loginForm', function (e) {
+    $(document).ready(function () {
+        // Show Register form from Login
+        $('#showRegisterFromLogin').click(function (e) {
             e.preventDefault();
+            $('#loginFormContainer').hide();
+            $('#forgotFormContainer').hide();
+            $('#registerFormContainer').show();
+        });
 
-            let email = $('#cust_email').val();
-            let password = $('#cust_password').val();
+        // Show Login form from Register
+        $('#showLoginFromRegister').click(function (e) {
+            e.preventDefault();
+            $('#registerFormContainer').hide();
+            $('#forgotFormContainer').hide();
+            $('#loginFormContainer').show();
+        });
 
-            $.ajax({
-                url: '<?= base_url('customerauth'); ?>',
-                type: 'POST',
-                data: {
-                    cust_Email: email,
-                    cust_Password: password
-                },
-                success: function (res) {
-                    let data = JSON.parse(res);
-                    if (data.status == 1) {
-                        window.location.reload();
-                    } else {
-                        $('#loginError').text(data.msg);
-                    }
-                },
-                error: function () {
-                    $('#loginError').text('Something went wrong. Please try again.');
+        // Show Forgot form from Login
+        $('#showForgotForm').click(function (e) {
+            e.preventDefault();
+            $('#loginFormContainer').hide();
+            $('#registerFormContainer').hide();
+            $('#forgotFormContainer').show();
+        });
+
+        // Show Login from Forgot
+        $('#showLoginFromFrgt').click(function (e) {
+            e.preventDefault();
+            $('#registerFormContainer').hide();
+            $('#forgotFormContainer').hide();
+            $('#loginFormContainer').show();
+        });
+    });
+
+
+    $(document).on('submit', '#loginForm', function (e) {
+        e.preventDefault();
+
+        let email = $('#cust_email').val();
+        let password = $('#cust_password').val();
+
+        $.ajax({
+            url: '<?= base_url('customerauth'); ?>',
+            type: 'POST',
+            data: {
+                cust_Email: email,
+                cust_Password: password
+            },
+            success: function (res) {
+                let data = JSON.parse(res);
+                if (data.status == 1) {
+                    window.location.reload();
+                } else {
+                    $('#loginError').text(data.msg);
                 }
+            },
+            error: function () {
+                $('#loginError').text('Something went wrong. Please try again.');
+            }
+        });
+    });
+
+    // Add this FIRST
+    function togglePassword(inputId, toggleId) {
+        const input = document.getElementById(inputId);
+        const icon = document.getElementById(toggleId);
+
+        if (!input || !icon) return;
+
+        if (input.type === "password") {
+            input.type = "text";
+            icon.classList.remove("bi-eye-slash");
+            icon.classList.add("bi-eye");
+        } else {
+            input.type = "password";
+            icon.classList.remove("bi-eye");
+            icon.classList.add("bi-eye-slash");
+        }
+    }
+
+    document.addEventListener('DOMContentLoaded', function () {
+        const toggleLogin = document.getElementById('togglePassword');
+        const toggleCurrent = document.getElementById('toggleCurrentPassword');
+        const toggleConfirm = document.getElementById('toggleConfirmPassword');
+
+        if (toggleLogin) {
+            toggleLogin.addEventListener('click', function () {
+                togglePassword('cust_password', 'togglePassword');
             });
-        });
-   
-// Add this FIRST
-function togglePassword(inputId, toggleId) {
-    const input = document.getElementById(inputId);
-    const icon = document.getElementById(toggleId);
+        }
 
-    if (!input || !icon) return;
+        if (toggleCurrent) {
+            toggleCurrent.addEventListener('click', function () {
+                togglePassword('userpassword', 'toggleCurrentPassword');
+            });
+        }
 
-    if (input.type === "password") {
-        input.type = "text";
-        icon.classList.remove("bi-eye-slash");
-        icon.classList.add("bi-eye");
-    } else {
-        input.type = "password";
-        icon.classList.remove("bi-eye");
-        icon.classList.add("bi-eye-slash");
-    }
-}
-
-document.addEventListener('DOMContentLoaded', function () {
-    const toggleLogin = document.getElementById('togglePassword');
-    const toggleCurrent = document.getElementById('toggleCurrentPassword');
-    const toggleConfirm = document.getElementById('toggleConfirmPassword');
-
-    if (toggleLogin) {
-        toggleLogin.addEventListener('click', function () {
-            togglePassword('cust_password', 'togglePassword');
-        });
-    }
-
-    if (toggleCurrent) {
-        toggleCurrent.addEventListener('click', function () {
-            togglePassword('userpassword', 'toggleCurrentPassword');
-        });
-    }
-
-    if (toggleConfirm) {
-        toggleConfirm.addEventListener('click', function () {
-            togglePassword('cpassword', 'toggleConfirmPassword');
-        });
-    }
-});
+        if (toggleConfirm) {
+            toggleConfirm.addEventListener('click', function () {
+                togglePassword('cpassword', 'toggleConfirmPassword');
+            });
+        }
+    });
 
     let iti = null;
 
     $(document).ready(function () {
 
         // Submit Handler
-      $(document).on('submit', '#registerForm', function (e) {
-    e.preventDefault();
-    $('#regError').stop(true, true).hide().removeClass('text-danger text-success').html('');
+        $(document).on('submit', '#registerForm', function (e) {
+            e.preventDefault();
+            $('#regError').stop(true, true).hide().removeClass('text-danger text-success').html('');
 
-    const password = $('#userpassword').val().trim();
-    const cpassword = $('#cpassword').val().trim();
-    const email = $('#useremail').val().trim();
-    const name = $('#custname').val().trim();
+            const password = $('#userpassword').val().trim();
+            const cpassword = $('#cpassword').val().trim();
+            const email = $('#useremail').val().trim();
+            const name = $('#custname').val().trim();
 
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(email)) {
-        showError('Please enter a valid email address.');
-        return;
-    }
-
-    if (password !== cpassword) {
-        showError('Passwords do not match.');
-        return;
-    }
-
-    $.ajax({
-        url: '<?= base_url('admin/customer/save') ?>',
-        type: 'POST',
-        data: $(this).serialize(),
-        dataType: 'json',
-        success: function (response) {
-            if (response.status === 1) {
-                $('#regError').removeClass('text-danger').addClass('text-success').html(response.msg).fadeIn();
-                $('#registerForm')[0].reset();
-                setTimeout(() => $('#registerModal').modal('hide'), 1000);
-                setTimeout(() => {
-                    $('#regError').fadeOut('slow', function () {
-                        $(this).removeClass('text-success').html('').show();
-                    });
-                }, 3000);
-            } else {
-                showError(response.msg);
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(email)) {
+                showError('Please enter a valid email address.');
+                return;
             }
-        },
-        error: function () {
-            showError('An error occurred. Please try again.');
-        }
-    });
-});
 
-function showError(message) {
-    $('#regError')
-        .removeClass('text-success')
-        .addClass('text-danger')
-        .html(message)
-        .fadeIn();
+            if (password !== cpassword) {
+                showError('Passwords do not match.');
+                return;
+            }
 
-    setTimeout(() => {
-        $('#regError').fadeOut('slow', function () {
-            $(this).removeClass('text-danger').html('').show();
+            $.ajax({
+                url: '<?= base_url('admin/customer/save') ?>',
+                type: 'POST',
+                data: $(this).serialize(),
+                dataType: 'json',
+                success: function (response) {
+                    if (response.status === 1) {
+                        $('#regError').removeClass('text-danger').addClass('text-success').html(response.msg).fadeIn();
+                        $('#registerForm')[0].reset();
+                        setTimeout(() => $('#registerModal').modal('hide'), 1000);
+                        setTimeout(() => {
+                            $('#regError').fadeOut('slow', function () {
+                                $(this).removeClass('text-success').html('').show();
+                            });
+                        }, 3000);
+                    } else {
+                        showError(response.msg);
+                    }
+                },
+                error: function () {
+                    showError('An error occurred. Please try again.');
+                }
+            });
         });
-    }, 3000);
-}
+
+        function showError(message) {
+            $('#regError')
+                .removeClass('text-success')
+                .addClass('text-danger')
+                .html(message)
+                .fadeIn();
+
+            setTimeout(() => {
+                $('#regError').fadeOut('slow', function () {
+                    $(this).removeClass('text-danger').html('').show();
+                });
+            }, 3000);
+        }
 
 
     });
@@ -593,6 +593,14 @@ function showError(message) {
             strengthText.style.color = '';
         }
     });
+    function truncateName(name) {
+        const preview = document.getElementById("namePreview");
+        if (name.length > 6) {
+            preview.textContent = name.substring(0, 6) + "...";
+        } else {
+            preview.textContent = name;
+        }
+    }
 
 </script>
 

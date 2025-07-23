@@ -25,7 +25,9 @@
                         <?php if (!empty($user)): ?>
                             <div>&nbsp;</div>
                             <input type="text" name="profilename" id="profilename" class="form-control"
-                                value="<?= esc($user['cust_Name']) ?>" />
+                                 value="<?= esc($user['cust_Name']) ?>" pattern="[A-Za-z\s]+"
+                                title="Only letters are allowed"
+                                oninput="this.value = this.value.replace(/[^A-Za-z\s]/g, '')" />
                             <div>&nbsp;</div>
                             <input type="email" name="email" id="email" class="form-control"
                                 value="<?= esc($user['cust_Email']) ?>" />
@@ -301,8 +303,8 @@
                     pattern="[1-9][0-9]{5}" required>
                 <div>&nbsp</div>
                 <input type="checkbox" class="form-check-input" id="is_default" name="add_Default"> &nbsp; Default
-                <input type="hidden" name="display_add_Id" id="display_add_Id" />
-                <input type="hidden" name="pr_Id" id="pr_Id" />
+                <input type="" name="display_add_Id" id="display_add_Id" />
+                <input type="" name="pr_Id" id="pr_Id" />
                 <div class="modal-footer">
 
                     <button type="submit" class="btn btn-info mt-2">Update Address</button>

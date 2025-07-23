@@ -239,7 +239,7 @@ header,
 
 .swiper-button-prev,
 .swiper-button-next {
-    color: #b6b6b6 !important;
+    color: #111010 !important;
     z-index: 10;
 
 }
@@ -493,4 +493,7 @@ a {
 
 .progress .progress-bar {
     height: 100%
+}
+.edit-address-orders{
+    font-size:20px;
 }

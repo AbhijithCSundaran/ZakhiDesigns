@@ -10,8 +10,9 @@ $routes->get('/', 'Home::index');
 // google sign
 // $routes->post('google-login-callback', 'GoogleLoginCallback::index');
 // $routes->match(['get', 'post'], 'google-login-callback', 'GoogleLoginCallback::index');
-$routes->match(['get', 'post'], 'zakhidesigns/google-login-callback', 'Googlelogincallback::index');
 
+$routes->match(['get', 'post'], 'zakhidesigns/google-login-callback', 'Googlelogincallback::googleLogin');
+ 
 // login register logout
 $routes->get('weblogin', 'Weblogin::index');
 $routes->get('webreg', 'Weblogin::webReg');
@@ -35,7 +36,7 @@ $routes->post('OrderNow/submitfrm', 'OrderNow::submitfrm');
 
 // ordernow user
 
-$routes->get('ordernow/product/(:any)', 'OrderNow::orderproduct/$1');
+// $routes->get('ordernow/product/(:any)', 'OrderNow::orderproduct/$1');
 
 $routes->get('ordernow/getAddress/(:num)', 'OrderNow::getAddress/$1');
 

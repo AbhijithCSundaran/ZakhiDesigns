@@ -95,7 +95,10 @@
                             <div class="dropdown a">
                                 <div class="dropdown-toggle drop-menu p-0" href="#" role="button" id="customerDropdown"
                                     data-bs-toggle="dropdown" aria-expanded="false">
-                                    <?= session()->get('zd_uname'); ?>
+                                    <?php
+                                    $username = session()->get('zd_uname');
+                                    echo (strlen($username) > 6) ? substr($username, 0, 10) . '...' : $username;
+                                    ?>
                                 </div>
                                 <ul class="dropdown-menu" aria-labelledby="customerDropdown">
                                     <li>

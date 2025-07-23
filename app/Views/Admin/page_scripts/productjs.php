@@ -24,7 +24,10 @@
                 searchable: false
             },
             {
-                data: 'pr_Name'
+               data: 'pr_Name',
+                render: function (data, type, row) {
+                    return data.length > 20 ? '<span title="' + data + '">' + data.substring(0, 20) + '...' + '</span>' : data;
+                }
             },
             {
                 data: 'mrp'

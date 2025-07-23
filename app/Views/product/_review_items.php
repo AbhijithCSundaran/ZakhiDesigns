@@ -1,4 +1,4 @@
-<?php if (!empty($reviews)): ?>
+<div>&nbsp;</div><?php if (!empty($reviews)): ?>
     <?php foreach (array_chunk($reviews, 2) as $reviewPair): ?>
         <div class="row mb-4">
             <?php foreach ($reviewPair as $rev): ?>
@@ -10,8 +10,8 @@
                         <?= str_repeat('★', (int) $rev['rating']) . str_repeat('☆', 5 - (int) $rev['rating']) ?>
                     </div>
                     <p class="card-text">
-                        <?php if (strlen($rev['review']) > 100): ?>
-                            <span class="short-text"><?= esc(substr($rev['review'], 0, 100)) ?>...</span>
+                        <?php if (strlen($rev['review']) > 50): ?>
+                            <span class="short-text"><?= esc(substr($rev['review'], 0, 50)) ?>...</span>
                             <span class="full-text d-none"><?= esc($rev['review']) ?></span>
                             <a href="javascript:void(0);" class="toggle-review text-primary fw-bold">Read more</a>
                         <?php else: ?>
@@ -24,4 +24,8 @@
             <?php endforeach; ?>
         </div>
     <?php endforeach; ?>
+<?php else: ?>
+    <div class="col-12">
+        <p class="text-muted">No reviews yet.</p>
+    </div>
 <?php endif; ?>

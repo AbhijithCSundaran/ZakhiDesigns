@@ -97,7 +97,7 @@
                                     data-bs-toggle="dropdown" aria-expanded="false">
                                     <?php
                                     $username = session()->get('zd_uname');
-                                    echo (strlen($username) > 6) ? substr($username, 0, 10) . '...' : $username;
+                                    echo (strlen($username) > 10) ? substr($username, 0, 10) . '...' : $username;
                                     ?>
                                 </div>
                                 <ul class="dropdown-menu" aria-labelledby="customerDropdown">

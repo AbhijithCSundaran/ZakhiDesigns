@@ -21,8 +21,7 @@
     });
 
 
-</script>
-<script>
+
 const base_url = "<?= base_url(); ?>";
 let loading = false;
 let page = 2;
@@ -130,29 +129,7 @@ function loadNextBatch() {
         rgb = rgb.match(/\d+/g);
         return "#" + rgb.map(x => ('0' + parseInt(x).toString(16)).slice(-2)).join('');
     }
-    var swiper = new Swiper(".mySwiper", {
-        loop: true,
-        spaceBetween: 10,
-        slidesPerView: 1, // On mobile
-        breakpoints: {
-            576: {
-                slidesPerView: 2,
-                spaceBetween: 10,
-            },
-            768: {
-                slidesPerView: 3,
-                spaceBetween: 15,
-            },
-            992: {
-                slidesPerView: 4,
-                spaceBetween: 20,
-            }
-        },
-        navigation: {
-            nextEl: ".swiper-button-next",
-            prevEl: ".swiper-button-prev",
-        },
-    });
+    
 
 
 });

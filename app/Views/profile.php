@@ -303,8 +303,8 @@
                     pattern="[1-9][0-9]{5}" required>
                 <div>&nbsp</div>
                 <input type="checkbox" class="form-check-input" id="is_default" name="add_Default"> &nbsp; Default
-                <input type="" name="display_add_Id" id="display_add_Id" />
-                <input type="" name="pr_Id" id="pr_Id" />
+                <input type="hidden" name="display_add_Id" id="display_add_Id" />
+                <input type="hidden" name="pr_Id" id="pr_Id" />
                 <div class="modal-footer">
 
                     <button type="submit" class="btn btn-info mt-2">Update Address</button>

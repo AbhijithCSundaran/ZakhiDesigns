@@ -319,61 +319,67 @@
             prevEl: ".swiper-button-prev",
         },
     });
+    const base_url = "<?= base_url() ?>";
 
     document.addEventListener('DOMContentLoaded', function () {
         const toggleIcon = document.getElementById('toggleReviewIcon');
-        const reviewContainer = document.getElementById('review-container');
+        const reviewContainer = document.querySelector('.order-box');
 
-        let extraReviewWrapper = null; // to hold dynamically loaded reviews
+        let extraReviewWrapper = null;
+
+        if (!toggleIcon || !reviewContainer) return;
 
         toggleIcon.addEventListener('click', function () {
+            
             const productId = this.getAttribute('data-product-id');
-            const offset = parseInt(this.getAttribute('data-offset'), 10);
+            let offset = parseInt(this.getAttribute('data-offset'), 10) || 0;
             const isExpanded = this.getAttribute('data-expanded') === 'true';
 
             if (!isExpanded) {
-                // Load more reviews
-                fetch(`<?= base_url('product/load-more-reviews') ?>/${productId}?offset=${offset}`)
-
+              //  Load more reviews
+                fetch(`${base_url}product/load-more-reviews/${productId}?offset=${offset}`)
                     .then(response => response.text())
                     .then(data => {
                         if (data.trim() !== '') {
-                            // Create a container for extra reviews if not present
                             extraReviewWrapper = document.createElement('div');
                             extraReviewWrapper.id = 'extra-review-wrapper';
                             extraReviewWrapper.innerHTML = data;
-                            reviewContainer.appendChild(extraReviewWrapper);
 
-                            // Scroll to newly loaded reviews
+                            // Insert before icon so icon remains at the bottom
+                            reviewContainer.insertBefore(extraReviewWrapper, toggleIcon.parentElement);
+
+                            // Scroll into view of new content
                             extraReviewWrapper.scrollIntoView({ behavior: 'smooth' });
 
-                            // Change icon and state
-                            toggleIcon.classList.remove('bi-chevron-double-down');
-                            toggleIcon.classList.add('bi-chevron-double-up');
+                            // Update state
                             toggleIcon.setAttribute('data-expanded', 'true');
+
+                            //toggleIcon.setAttribute('data-offset', offset + 5);
+                            toggleIcon.classList.replace('bi-chevron-double-down', 'bi-chevron-double-up');
                         }
                     });
+
+
             } else {
-                // Collapse: Remove extra reviews
+                // Collapse the extra reviews
                 if (extraReviewWrapper) {
                     extraReviewWrapper.remove();
                     extraReviewWrapper = null;
 
-                    // Scroll back to top of reviews
+                    // Scroll back up to original review section
                     reviewContainer.scrollIntoView({ behavior: 'smooth' });
 
-                    // Change icon and state
-                    toggleIcon.classList.remove('bi-chevron-double-up');
-                    toggleIcon.classList.add('bi-chevron-double-down');
                     toggleIcon.setAttribute('data-expanded', 'false');
+                    toggleIcon.classList.replace('bi-chevron-double-up', 'bi-chevron-double-down');
                 }
             }
         });
-    });
-    document.addEventListener('DOMContentLoaded', function () {
-        document.querySelectorAll('.toggle-review').forEach(function (btn) {
-            btn.addEventListener('click', function () {
-                const parent = this.closest('.card-text');
+
+        // Handle 'Read more / Read less'
+        document.body.addEventListener('click', function (e) {
+            if (e.target && e.target.classList.contains('toggle-review')) {
+                const btn = e.target;
+                const parent = btn.closest('.card-text');
                 const shortText = parent.querySelector('.short-text');
                 const fullText = parent.querySelector('.full-text');
 
@@ -382,14 +388,50 @@
                 if (isHidden) {
                     shortText.classList.add('d-none');
                     fullText.classList.remove('d-none');
-                    this.textContent = 'Read less';
+                    btn.textContent = 'Read less';
                 } else {
                     shortText.classList.remove('d-none');
                     fullText.classList.add('d-none');
-                    this.textContent = 'Read more';
+                    btn.textContent = 'Read more';
                 }
-            });
+            }
         });
     });
 
+
+
+</script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    const loadMoreBtn = document.getElementById('load-more');
+    const productContainer = document.getElementById('product-container');
+    const noMore = document.getElementById('no-more-products');
+
+    if (!loadMoreBtn) return;
+
+    loadMoreBtn.addEventListener('click', function () {
+        const page = parseInt(this.getAttribute('data-page'), 10);
+        const catId = this.getAttribute('data-cat-id');
+
+        fetch(`${base_url}category/loadMoreSearch?id=${catId}&page=${page}`)
+            .then(response => response.text())
+            .then(data => {
+                if (data.trim() === '') {
+                    noMore.classList.remove('d-none');
+                    loadMoreBtn.style.display = 'none';
+                } else {
+                    const wrapper = document.createElement('div');
+                    wrapper.innerHTML = data;
+                    wrapper.querySelectorAll('.col-md-3').forEach(card => {
+                        productContainer.appendChild(card);
+                    });
+
+                    loadMoreBtn.setAttribute('data-page', page + 1);
+                }
+            })
+            .catch(() => {
+                alert('Failed to load more products. Try again.');
+            });
+    });
+});
 </script>

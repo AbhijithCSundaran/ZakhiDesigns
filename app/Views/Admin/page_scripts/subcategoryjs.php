@@ -26,7 +26,12 @@ $('#subcategoryList').DataTable({
             data: 'cat_Name'
         },
         {
-            data: 'sub_Category_Name'
+            data: 'sub_Category_Name',
+                render: function (data, type, row) {
+                    return data.length > 20
+                        ? '<span title="' + data + '">' + data.substring(0, 20) + '...</span>'
+                        : data;
+                }
         },
         {
             data: 'sub_Discount_Value',

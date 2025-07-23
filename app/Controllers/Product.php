@@ -289,11 +289,25 @@ public function ajaxSearch()
         . view('pagescripts/productjs');
 }
 
+// public function loadMoreReviews($productId)
+// {
+//     $offset = $this->request->getGet('offset');
+
+//     $reviews = $this->reviewModel->getLimitedReviewsByProductId($productId, 1000, $offset); // or next 5
+
+//     if (empty($reviews)) {
+//         return '';
+//     }
+
+//     return view('product/_review_items', ['reviews' => $reviews]). 
+//     view('pagescripts/productjs');
+// }
 public function loadMoreReviews($productId)
 {
-    $offset = $this->request->getGet('offset');
+    $offset = (int) $this->request->getGet('offset');
+    $limit = 5;
 
-    $reviews = $this->reviewModel->getLimitedReviewsByProductId($productId, 1000, $offset); // or next 5
+    $reviews = $this->reviewModel->getLimitedReviewsByProductId($productId, $limit, $offset);
 
     if (empty($reviews)) {
         return '';
@@ -301,6 +315,7 @@ public function loadMoreReviews($productId)
 
     return view('product/_review_items', ['reviews' => $reviews]);
 }
+
 
     public function submit()
     {

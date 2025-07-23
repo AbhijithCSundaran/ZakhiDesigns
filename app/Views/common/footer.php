@@ -81,9 +81,9 @@
                         <div id="regError" class="text-danger text-center p-2" style="color:red;"></div>
                         <form id="registerForm" method="post">
                             <div class="floating-label-group">
-                                <input type="text" class="form-control" id="name" name="custname" placeholder=""
+                                <input type="text" class="form-control" id="custname" name="custname" placeholder=""
                                     required oninput="truncateName(this.value)" />
-                                <label for="name">Name</label>
+                                <label for="custname">Name</label>
                             </div>
 
                             <div class="floating-label-group">
@@ -172,6 +172,7 @@
             <div class="col-md-3">
                 <h4>Your Account<h4>
                         <ul>
+                            
                             <li><i class="bi bi-arrow-right"></i>
                                 <a href="<?= base_url('profile#profile'); ?>" class="foot-link login-check">Profile</a>
                             </li>
@@ -603,5 +604,6 @@
     }
 
 </script>
+
 
 </html>

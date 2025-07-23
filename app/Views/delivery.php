@@ -1,6 +1,6 @@
 <section class="hero-banner py-5" style="background-color: #fff;">
     <div class="container-lg">
-        <img src="<?= base_url() . ASSET_PATH; ?>assets/images/young-business-woman-walking-up-stairs" 
+        <img src="<?= base_url() . ASSET_PATH; ?>assets/images/young-business-woman-walking-up-stairs.jpg" 
              alt="Delivery Banner" class="img-fluid rounded shadow-sm mb-4" 
              style="height: 400px; width: 1310px; object-fit: cover;" />
         <h2 class="text-center mb-5">DELIVERY POLICY</h2>

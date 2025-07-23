@@ -101,7 +101,8 @@ $data['pager'] = $this->pager->makeLinks($page, $perPage, $total);
 $data['subcategory'] = $this->categoryModel->getAllSubcategoryUnderCategory($id);
 
 if ($this->request->isAJAX()) {
-    return view('product/_cat_product_items', ['product' => $products]);
+    return view('product/_cat_product_items', ['product' => $products]).
+     view('pagescripts/category_listjs');
 }
 
 return view('common/header', $data)
@@ -124,7 +125,7 @@ public function loadMoreByDate()
         return view('product/_cat_product_items', [
             'product' => $products,
             'currentBatch' => $page
-        ]);
+        ]).view('pagescripts/category_listjs');
     } else {
         return ''; // No more products
     }
@@ -145,7 +146,8 @@ public function loadMoreSearch()
         return '';
     }
 
-    return view('product/_cat_product_items', ['product' => $products]);
+    return view('product/_cat_product_items', ['product' => $products]).
+     view('pagescripts/category_listjs');
 }
 
 

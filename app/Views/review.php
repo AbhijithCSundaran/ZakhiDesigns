@@ -49,8 +49,7 @@
                             <div class="mb-2 text-warning" style="font-size: 1.2em;">
                                 <?= str_repeat('★', (int) $rev['rating']) . str_repeat('☆', 5 - (int) $rev['rating']) ?>
                             </div>
-                             <div class="card-text p-2"
-                                style="background-color: #f1f1f1; border-radius: 8px; white-space: pre-wrap;">
+                             <div class="card-text">
                                 <?= esc($rev['review']) ?>
                             </div>
                             <p class="text-muted mb-0" style="font-size: 0.9em;">

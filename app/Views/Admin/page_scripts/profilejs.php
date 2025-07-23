@@ -14,11 +14,13 @@
     const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
  
     // Profile Update Validation
-	 $('#phone').on('input', function () {
-        let value = $(this).val();
-        let filtered = value.replace(/[^0-9\s\-]/g, '');
-        $(this).val(filtered);
-    });
+$('#phone').on('input', function () {
+    let value = $(this).val();
+    let filtered = value.replace(/[^0-9\s\-]/g, '').substring(0, 20); 
+    $(this).val(filtered);
+});
+
+
 $(document).ready(function () {
     $('#updateProfileForm').on('submit', function (e) {
         e.preventDefault();

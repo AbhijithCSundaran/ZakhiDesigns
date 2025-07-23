@@ -51,7 +51,7 @@
 											<div class="col-sm-7">
 												<input type="text" class="form-control" name="theme_name"
 													value="<?= isset($banner) ? $banner['theme_Name'] : '' ?>"
-													id="theme_name" maxlength="20" placeholder="Enter the Name"
+													id="theme_name"  placeholder="Enter the Name"
 													required>
 											</div>
 										</div>

@@ -20,6 +20,7 @@ class AddressProfileModel extends Model {
             'add_CustId'     => $userId,
             'add_Name' => ucwords(strtolower(trim($data['newName']))),
             'add_Phone'      => trim($data['newPhone']),
+         //   'add_phcode'  => trim($data['add_phcode'] ?? ''), 
             'add_Email'      => trim($data['newEmail']),
             'add_BuldingNo'  => ucwords(strtolower(trim($data['newBuilding']))),
             'add_Landmark'   => ucwords(strtolower(trim($data['newLandmark']))),
@@ -50,6 +51,7 @@ class AddressProfileModel extends Model {
         $updateData = [
            'add_Name' => ucwords(strtolower(trim($data['add_Name']))),
             'add_Phone' => $data['add_Phone'], 
+            'add_phcode'  => trim($data['add_phcode'] ?? ''), 
             'add_BuldingNo'  => trim($data['add_BuldingNo']),
             'add_Landmark'   => trim($data['add_Landmark']),
             'add_Street'     => trim($data['add_Street']),

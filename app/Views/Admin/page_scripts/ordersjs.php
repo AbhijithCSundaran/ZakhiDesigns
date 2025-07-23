@@ -1,8 +1,3 @@
-<!-- Add a custom search input bar -->
-<!-- <div style="margin-bottom: 10px;">
-    <input type="text" id="customSearchBox" placeholder="Search Orders..." class="form-control" style="width: 300px;" />
-</div> -->
-
 <script>
 var baseUrl = "<?= base_url() ?>";
 var csrfTokenName = "<?= csrf_token() ?>";

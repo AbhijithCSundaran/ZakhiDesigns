@@ -114,6 +114,15 @@ class Contact extends BaseController
 
 public function submit()
 {
+     $contact_no = $this->request->getPost('contact_no');
+if (!preg_match('/^\d{7,15}$/', $contact_no)) {
+    return $this->response->setJSON([
+        'status' => '0',
+        'message' => 'Invalid contact number. Must be 7 to 15 digits only.'
+    ]);
+}
+
+
     if ($this->request->isAJAX()) {
         $data = [
             'fullname'     => $this->request->getPost('fullname'),

@@ -23,5 +23,29 @@
         },
     });
 
+let currentPage = 1;
+const subcatId = $('#subcategory_id').val(); // Hidden input or JS var
+
+$('#loadMoreBtn').on('click', function () {
+    currentPage++;
+    $.ajax({
+        url: "/subcategory/loadMoreSubcategoryProducts",
+        type: "GET",
+        data: {
+            page: currentPage,
+            subcat_id: subcatId
+        },
+        success: function (data) {
+            if ($.trim(data) === '') {
+                $('#loadMoreBtn').hide();
+            } else {
+                $('#productContainer').append(data);
+            }
+        },
+        error: function () {
+            alert('Failed to load more products.');
+        }
+    });
+});
 
 </script>

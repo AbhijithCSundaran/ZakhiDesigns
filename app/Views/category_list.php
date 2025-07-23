@@ -7,6 +7,7 @@
         </div>
 
         <?php if (empty($category)): ?>
+            
             <div class="alert alert-warning text-center">No Category found.</div>
         <?php else: ?>
             <div class="row">
@@ -37,6 +38,17 @@
                     </div>
                 <?php endforeach; ?>
             </div>
+
+   <div class="row" id="product-container">
+               <?= view('product/_cat_product_items', ['product' => $product]); ?>
+
+            </div>
+            <!-- Load More Button -->
+            <div class="text-center mt-3">
+                  <button id="load-more" data-page="2" data-cat-id="<?= $category_id ?>" class="btn btn-primary">Load More</button>
+<div id="no-more-products" class="d-none text-center mt-3">No more products</div>
+            </div>
+
         <?php endif; ?>
     </div>
 </section>

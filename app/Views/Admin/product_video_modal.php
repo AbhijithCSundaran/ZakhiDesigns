@@ -11,6 +11,7 @@
             </div>
 
             <div class="modal-body">
+                <div class="alert" role="alert" id="UploadVideo" style="display:none;"></div>
                 <h5 class="mb-3">Video upload for: <span id="productsName" class="text-primary"></span></h5>
                 <form class="fileUpload" method="post" id="videoUploadForm" enctype="multipart/form-data">
 

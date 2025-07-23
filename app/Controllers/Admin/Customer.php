@@ -66,7 +66,7 @@ class Customer extends BaseController
 		$custname = ucwords(strtolower(trim($custname)));
 		// $cust_phcode = $this->input->getPost('cust_phcode'); 
 		$custemail = $this->input->getPost('custemail');
-		// $mobile = $this->input->getPost('mobile');
+		$mobile = $this->input->getPost('mobile');
 	    $password =$this->input->getPost('password');
 		 if (!preg_match('/^[a-zA-Z ]+$/', $custname)) {
 			return $this->response->setJSON(['status' => 'error', 'msg' => 'Please Enter Name Correctly.']);
@@ -99,7 +99,7 @@ class Customer extends BaseController
 				$data = [
 				'cust_Name'          => $custname,
 				'cust_Email'         => $custemail,
-				// 'cust_Phone'	     => $mobile,
+				 'cust_Phone'	     => $mobile,
 				// 'cust_Phcode'        => $cust_phcode,
 				'cust_Password'      => md5($password),
 				'cust_Status'	   	 => 1,
@@ -126,7 +126,7 @@ class Customer extends BaseController
 				$data = [
 				'cust_Name'          => $custname,
 				'cust_Email'         => $custemail,
-				// 'cust_Phone'	     => $mobile,
+				 'cust_Phone'	     => $mobile,
 				// 'cust_Phcode'        => $cust_phcode,
 				'cust_createdon'     => date("Y-m-d H:i:s"),
 				'cust_createdby'     => $this->session->get('ad_uid'),

@@ -56,10 +56,12 @@
                                     <input type="text" name="us_Email" class="form-control"
                                         value="<?= esc($user['us_Email'] ?? '') ?>" required>
                                 </div>
-                                <div class="form-group phn_code ">
+                                <div class="form-group phn_code">
                                     <label style="width:100%;">Phone number</label>
-                                    <input type="tel" id="phone" name="us_Phone" style="padding-left: 472px;" class="form-control"
-                                        value="<?= esc($user['us_Phone'] ?? '') ?>" required>
+                                    <input type="tel" id="phone" name="us_Phone" class="form-control"
+                                        pattern="^[0-9\s\-]{7,20}$" maxlength="20"
+                                        value="<?= esc($user['us_Phone'] ?? '') ?>" required
+                                        title="Phone number must be 7 to 20 characters long.">
                                 </div>
                                 <button type="submit" class="btn btn-primary">Update Profile</button>
                             </form>
@@ -87,7 +89,7 @@
                                             <span aria-hidden="true">&times;</span>
                                         </button>
                                     </div>
-                                <?php
+                                    <?php
                                 endif;
                                 ?>
                                 <div class="form-group" style="position: relative;">

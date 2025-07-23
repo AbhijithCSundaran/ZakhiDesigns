@@ -23,23 +23,37 @@ var table = $('#orderList').DataTable({
         }
     },
     columns: [
-        {
-            data: null,
-            render: function(data, type, row, meta) {
-                return meta.row + meta.settings._iDisplayStart + 1;
-            },
-            orderable: false,
-            searchable: false
+    {
+        data: null,
+        render: function(data, type, row, meta) {
+            return meta.row + meta.settings._iDisplayStart + 1;
         },
-        { data: 'cust_Name' },
-        { data: 'cust_Email' },
-        { data: 'cust_Phone' },
-        { data: 'pr_Code' },
-        { data: 'od_Quantity' },
-        { data: 'od_createdon' },
-        { data: 'od_Status' }, 
-        { data: 'actions' }
-    ]
+        orderable: false,
+        searchable: false
+    },
+    {
+        data: 'cust_Name',
+        render: function(data, type, row) {
+            if (!data) return 'N/A';
+            return data.length > 25
+                ? '<span title="' + data + '">' + data.substring(0, 25) + '...</span>'
+                : data;
+        }
+    },
+    { data: 'cust_Email' },
+    {
+    data: 'cust_Phone',
+    render: function (data, type, row) {
+        return data && data.trim() !== '' ? data : 'N/A';
+    }
+},
+
+    { data: 'pr_Code' },
+    { data: 'od_Quantity' },
+    { data: 'od_createdon' },
+    { data: 'od_Status' }, 
+    { data: 'actions' }
+]
 });
 // table.on('draw', function () {
 //     console.log('Table redrawn');

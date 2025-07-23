@@ -54,7 +54,7 @@
                                         <div class="form-group row">
                                            <label class="col-sm-2 col-form-label">Name <span style="color: red;">*</span></label>
                                             <div class="col-sm-6">
-                                                <input type="text" name="custname" id="custname" class="form-control" maxlength="30"
+                                                <input type="text" name="custname" id="custname" class="form-control" 
                                                     value="<?= isset($cust) ? ($cust['cust_Name']) : '' ?>" placeholder="Enter the customer name" *>
 											<span class="text-danger error-msg" id="error-custname"></span>
 											</div>

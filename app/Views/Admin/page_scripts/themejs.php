@@ -24,22 +24,30 @@ $('#productsLists').DataTable({
             console.error("DataTables AJAX Error:", xhr.responseText);
         }
     },
-    columns: [
-        { data: 'DT_RowIndex', orderable: false, searchable: false },
-        { data: 'theme_Name' },
-        { data: 'theme_Description' },
-        { data: 'status_switch' },
-        { data: 'actions' }
-    ],
-    columnDefs: [
-        { targets: [3, 4], orderable: false, searchable: false },
-        {
-            targets: 2,
-            render: function (data, type, row) {
-                return data; // Optional: adjust this if you're embedding HTML
-            }
-        }
-    ],
+   columns: [
+    { data: 'DT_RowIndex', orderable: false, searchable: false },
+    {
+        data: 'theme_Name',
+        render: function (data, type, row) {
+           return data.length > 20
+                        ? '<span title="' + data + '">' + data.substring(0, 20) + '...</span>'
+                        : data;
+                }
+            },
+    {
+    data: 'theme_Description',
+    render: function (data, type, row) {
+        if (!data) return 'N/A';
+        let formatted = data.match(/.{1,30}/g)?.join('<br>') ?? data;
+        return '<span title="' + data + '">' + formatted + '</span>';
+    }
+},
+    { data: 'status_switch' },
+    { data: 'actions' }
+],
+columnDefs: [
+    { targets: [3, 4], orderable: false, searchable: false }
+],
     language: {
         infoFiltered : ""
     }

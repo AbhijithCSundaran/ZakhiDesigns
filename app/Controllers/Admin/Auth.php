@@ -54,6 +54,7 @@ public function authenticate()
     if ($email && $password) {
         $userLog = $this->usModel->getLoginAccount($email, $password);
         if ($userLog) {
+            // echo "enter";exit();
             $this->session->set([
                 'ad_uid' => $userLog->us_Id,
                 'ad_uname' => $userLog->us_Name,

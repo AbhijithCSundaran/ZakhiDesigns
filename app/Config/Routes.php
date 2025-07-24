@@ -62,7 +62,8 @@ $routes->get('product/load-more-reviews/(:num)', 'Product::loadMoreReviews/$1');
 $routes->get('subcategory/subcategoryProducts/(:num)/(:num)', 'Subcategory::subcategoryProducts/$1/$2');
 $routes->get('subcategory/loadMoreSubcategoryProducts/(:num)/(:num)', 'Subcategory::loadMoreSubcategoryProducts/$1/$2');
 
-$routes->get('weblogin/checkLoginStatus', 'Weblogin::checkLoginStatus');
+$routes->match(['get', 'post'], 'weblogin/create', 'Weblogin::createnew');
+
 
 
 

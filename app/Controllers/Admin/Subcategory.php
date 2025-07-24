@@ -114,6 +114,12 @@ public function saveSubcategory() {
     $discount_type = $this->input->getPost('discount_type');
 
     if ($cat_id && $subcategory_name) {
+		 if (!preg_match('/^[a-zA-Z0-9 _-]+$/', $subcategory_name)) {
+        return $this->response->setJSON([
+            'status' => 'error',
+            'message' => 'Invalid SubCategory Name.'
+        ]);
+    }
 
         // Check if subcategory name already exists
         $exists = $this->subcategoryModel->issubCategoryExists($subcategory_name, $sub_id);

@@ -65,7 +65,15 @@ public function update()
         'us_Email' => $email,
         'us_Phone' => $phone, 
     ];
-
+ if (!preg_match('/^[a-zA-Z ]+$/', $name)) {
+			return $this->response->setJSON(['status' => 'error', 'msg' => 'Please Enter Name Correctly.']);
+		}
+        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+				return $this->response->setJSON([
+					'status' => 'error',
+					'msg' => 'Invalid Email Format.'
+				]);
+			}
     $model = new \App\Models\Admin\ProfileModel();
 
     if ($model->updateProfile($us_Id, $data)) {

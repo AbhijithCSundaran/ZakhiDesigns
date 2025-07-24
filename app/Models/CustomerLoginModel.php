@@ -5,6 +5,12 @@ namespace App\Models;
 use CodeIgniter\Model;
 
 class CustomerLoginModel extends Model {
+    protected $table = 'customer';
+protected $allowedFields = [
+    'cust_Name', 'cust_Email', 'cust_Phone', 'cust_Password',
+    'cust_Status', 'cust_createdon', 'cust_createdby', 'cust_modifyby'
+];
+
 	
         public function __construct() {
             $this->db = \Config\Database::connect();
@@ -23,6 +29,21 @@ class CustomerLoginModel extends Model {
                 ->where('cust_Email', $email)
                 ->update(['cust_Password' => $pass]);
         }
+        	  public function createcust($data)
+    {
+        return $this->insert($data);
+    }
+public function getCustomerByEmail($email)
+		{
+			// Use query builder to check if the email exists (ignoring 'cust_Status = 3' customers)
+			$builder = $this->db->table('customer');
+			$builder->where('cust_Email', $email);
+			$builder->where('cust_Status !=', 3);
+			$query = $builder->get();
+			
+			return $query->getRowArray(); // This will return a single record or null if not found
+		}
+
     }
 
         ?>

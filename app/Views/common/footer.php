@@ -1,4 +1,5 @@
 <footer>
+    <?php $session = session(); ?>
     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
         aria-hidden="true">
 
@@ -25,9 +26,9 @@
 
                         <div id="loginError" class="text-danger text-center" style="padding:6px;"></div>
 
-                        <form id="loginForm" method="post">
+                        <form id="loginForm" method="post" autocomplete="off">
                             <div class="floating-label-group mb-3">
-                                <input type="email" class="form-control" id="cust_email" name="cust_Email" required />
+                                <input type="email" class="form-control" id="login_email" name="login_mail" required />
 
                                 <label for="email">Enter the email address</label>
                                 <div id="emailError" class="text-danger small mt-1" style="display:none;"></div>
@@ -35,7 +36,7 @@
 
                             <div class="floating-label-group password-wrapper mb-3">
                                 <div class="password-input-wrapper position-relative">
-                                    <input type="password" class="form-control" id="cust_password" name="cust_Password"
+                                    <input type="password" class="form-control" id="login_password" name="login_password"
                                         required />
                                     <label for="password">Enter your password</label>
                                     <i class="bi bi-eye-slash toggle-password position-absolute top-50 end-0 translate-middle-y pe-3"
@@ -79,7 +80,7 @@
                         <h5 class="text-center" style="margin-top: 5px;">Your Fashion Journey Starts Here </h5>
 
                         <div id="regError" class="text-danger text-center p-2" style="color:red;"></div>
-                        <form id="registerForm" method="post">
+                        <form id="registerForm" method="post" autocomplete="off">
                             <div class="floating-label-group">
                                 <input type="text" class="form-control" id="custname" name="custname" placeholder=""
                                     required oninput="truncateName(this.value)" />
@@ -87,7 +88,7 @@
                             </div>
 
                             <div class="floating-label-group">
-                                <input type="email" class="form-control" id="useremail" name="useremail" placeholder=""
+                                <input type="email" class="form-control" id="custemail" name="custemail" placeholder=""
                                     required />
                                 <label for="useremail">Email</label>
                             </div>
@@ -132,7 +133,7 @@
                         <h5 class="text-center" style="margin-top: 7px;">Forgot Password</h5>
 
 
-                        <form id="forgotEmailForm" method="post">
+                        <form id="forgotEmailForm" method="post" autocomplete="off">
                             <div class="alert p-2" id="messageBox" style="display: none;"></div>
 
                             <p style="text-align:center;">Enter your email address and we'll send you a link to reset
@@ -143,7 +144,8 @@
                                 <label for="email">Email</label>
                             </div>
                             <div class="d-flex mt-2 justify-content-center">
-                                <button type="button" class="btn btn-primary" id="forgotEmailSending">Reset Password
+                                <button type="button" class="btn btn-primary" id="forgotEmailSending">
+                                    Reset Password
                                 </button>
                             </div>
                             <div class="text-end">
@@ -172,28 +174,62 @@
             <div class="col-md-3">
                 <h4>Your Account<h4>
                         <ul>
-                            
-                            <li><i class="bi bi-arrow-right"></i>
-                                <a href="<?= base_url('profile#profile'); ?>" class="foot-link login-check">Profile</a>
-                            </li>
-                            <li><i class="bi bi-arrow-right"></i>
-                                <a href="<?= base_url('profile#orders'); ?>" class="foot-link login-check">My Orders</a>
-                            </li>
-                            <?php if (!empty($pr_Id)): ?>
+                            <?php if (!empty($session->get('zd_uid'))): ?>
                                 <li><i class="bi bi-arrow-right"></i>
-                                    <a href="<?= base_url('profile?pr_Id=' . $pr_Id . '#address'); ?>"
-                                        class="foot-link login-check">Address</a>
+                                    <a href="<?= base_url('profile#profile'); ?>" class="foot-link login-check">Profile</a>
                                 </li>
                             <?php else: ?>
                                 <li><i class="bi bi-arrow-right"></i>
-                                    <a href="<?= base_url('profile#address'); ?>" class="foot-link login-check">Address</a>
+                                    <a href="javascript:void(0);" onclick="$('#exampleModal').modal('show');"
+                                        class="foot-link login-check">Profile</a>
                                 </li>
                             <?php endif; ?>
 
-                            <li><i class="bi bi-arrow-right"></i>
-                                <a href="<?= base_url('profile#orders'); ?>" class="foot-link login-check">Track
-                                    Orders</a>
-                            </li>
+
+
+                            <?php $session = session(); ?>
+
+                            <?php if (!empty($session->get('zd_uid'))): ?>
+                                <li><i class="bi bi-arrow-right"></i>
+                                    <a href="<?= base_url('profile#orders'); ?>" class="foot-link login-check">My Orders</a>
+                                </li>
+                            <?php else: ?>
+                                <li><i class="bi bi-arrow-right"></i>
+                                    <a href="javascript:void(0);" onclick="$('#exampleModal').modal('show');"
+                                        class="foot-link login-check">My Orders</a>
+                                </li>
+                            <?php endif; ?>
+
+                            <?php if (!empty($session->get('zd_uid'))): ?>
+                                <?php if (!empty($pr_Id)): ?>
+                                    <li><i class="bi bi-arrow-right"></i>
+                                        <a href="<?= base_url('profile?pr_Id=' . $pr_Id . '#address'); ?>"
+                                            class="foot-link login-check">Address</a>
+                                    </li>
+                                <?php else: ?>
+                                    <li><i class="bi bi-arrow-right"></i>
+                                        <a href="<?= base_url('profile#address'); ?>" class="foot-link login-check">Address</a>
+                                    </li>
+                                <?php endif; ?>
+                            <?php else: ?>
+                                <li><i class="bi bi-arrow-right"></i>
+                                    <a href="javascript:void(0);" onclick="$('#exampleModal').modal('show');"
+                                        class="foot-link login-check">Address</a>
+                                </li>
+                            <?php endif; ?>
+
+                            <?php if (!empty($session->get('zd_uid'))): ?>
+                                <li><i class="bi bi-arrow-right"></i>
+                                    <a href="<?= base_url('profile#orders'); ?>" class="foot-link login-check">Track
+                                        Orders</a>
+                                </li>
+                            <?php else: ?>
+                                <li><i class="bi bi-arrow-right"></i>
+                                    <a href="javascript:void(0);" onclick="$('#exampleModal').modal('show');"
+                                        class="foot-link login-check">Track Orders</a>
+                                </li>
+                            <?php endif; ?>
+
                         </ul>
 
             </div>
@@ -257,6 +293,47 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
 <script src="https://apis.google.com/js/platform.js" async defer></script>
+<script>
+    $(document).ready(function () {
+
+        $('#forgotEmailSending').on('click', function () {
+            var link = "<?= base_url('weblogin/webForgotEmailSend'); ?>";
+
+            $.post(link, $('#forgotEmailForm').serialize(), function (response) {
+                if (response.status == 1) {
+                    $('#messageBox')
+                        .removeClass('alert-danger')
+                        .addClass('alert-success')
+                        .text(response.msg)
+                        .show();
+                    setTimeout(() => {
+                        $('#messageBox').fadeOut();
+                    }, 3000);
+                } else if (response.status == 0) {
+                    $('#messageBox')
+                        .removeClass('alert-success')
+                        .addClass('alert-danger')
+                        .text(response.msg)
+                        .show();
+                    setTimeout(() => {
+                        $('#messageBox').fadeOut();
+                    }, 3000);
+                } else {
+                    $('#messageBox')
+                        .removeClass('alert-success')
+                        .addClass('alert-danger')
+                        .text("Invalid Email Format.")
+                        .show();
+                    setTimeout(() => {
+                        $('#messageBox').fadeOut();
+                    }, 3000);
+                }
+            }, 'json');
+        });
+
+    });
+</script>
+
 <script>
 
 
@@ -329,57 +406,69 @@
         });
     });
 
+$(document).ready(function () {
 
-</script>
-<script>
-
-    $(document).ready(function () {
-        // Show Register form from Login
-        $('#showRegisterFromLogin').click(function (e) {
-            e.preventDefault();
-            $('#loginFormContainer').hide();
-            $('#forgotFormContainer').hide();
-            $('#registerFormContainer').show();
-        });
-
-        // Show Login form from Register
-        $('#showLoginFromRegister').click(function (e) {
-            e.preventDefault();
-            $('#registerFormContainer').hide();
-            $('#forgotFormContainer').hide();
-            $('#loginFormContainer').show();
-        });
-
-        // Show Forgot form from Login
-        $('#showForgotForm').click(function (e) {
-            e.preventDefault();
-            $('#loginFormContainer').hide();
-            $('#registerFormContainer').hide();
-            $('#forgotFormContainer').show();
-        });
-
-        // Show Login from Forgot
-        $('#showLoginFromFrgt').click(function (e) {
-            e.preventDefault();
-            $('#registerFormContainer').hide();
-            $('#forgotFormContainer').hide();
-            $('#loginFormContainer').show();
-        });
+    // Switch to Register form
+    $('#showRegisterFromLogin').click(function (e) {
+        e.preventDefault();
+        $('#loginFormContainer').hide();
+        $('#forgotFormContainer').hide();
+        $('#registerFormContainer').show();
     });
+
+    // Switch back to Login from Register
+    $('#showLoginFromRegister').click(function (e) {
+        e.preventDefault();
+        $('#registerFormContainer').hide();
+        $('#forgotFormContainer').hide();
+        $('#loginFormContainer').show();
+    });
+
+    // Switch to Forgot form from Login
+    $('#showForgotForm').click(function (e) {
+        e.preventDefault();
+        $('#loginFormContainer').hide();
+        $('#registerFormContainer').hide();
+        $('#forgotFormContainer').show();
+    });
+
+    // Switch back to Login from Forgot
+    $('#showLoginFromFrgt').click(function (e) {
+        e.preventDefault();
+        $('#registerFormContainer').hide();
+        $('#forgotFormContainer').hide();
+        $('#loginFormContainer').show();
+    });
+
+    // ✅ Always reset to Login form when modal opens
+    $('#exampleModal').on('show.bs.modal', function () {
+        $('#registerFormContainer').hide();
+        $('#forgotFormContainer').hide();
+        $('#loginFormContainer').show();
+
+        // Optionally clear form inputs
+        $('#registerFormContainer input').val('');
+        $('#forgotFormContainer input').val('');
+        $('#loginFormContainer input').val('');
+        $('#messageBox').hide(); // Optional: hide alerts
+    });
+
+});
+
 
 
     $(document).on('submit', '#loginForm', function (e) {
         e.preventDefault();
 
-        let email = $('#cust_email').val();
-        let password = $('#cust_password').val();
+        let email = $('#login_email').val();
+        let password = $('#login_password').val();
 
         $.ajax({
             url: '<?= base_url('customerauth'); ?>',
             type: 'POST',
             data: {
-                cust_Email: email,
-                cust_Password: password
+                login_email: email,
+                login_password: password
             },
             success: function (res) {
                 let data = JSON.parse(res);
@@ -420,7 +509,7 @@
 
         if (toggleLogin) {
             toggleLogin.addEventListener('click', function () {
-                togglePassword('cust_password', 'togglePassword');
+                togglePassword('login_password', 'togglePassword');
             });
         }
 
@@ -448,7 +537,7 @@
 
             const password = $('#userpassword').val().trim();
             const cpassword = $('#cpassword').val().trim();
-            const email = $('#useremail').val().trim();
+            const email = $('#custemail').val().trim();
             const name = $('#custname').val().trim();
 
             const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -463,7 +552,7 @@
             }
 
             $.ajax({
-                url: '<?= base_url('admin/customer/save') ?>',
+                url: '<?= base_url('weblogin/create') ?>',
                 type: 'POST',
                 data: $(this).serialize(),
                 dataType: 'json',
@@ -603,30 +692,6 @@
         }
     }
 
-</script>
-
-<script>
-    $(document).on('click', '.login-check', function (e) {
-        e.preventDefault();
-
-        const targetUrl = $(this).attr('href');
-
-        $.ajax({
-            url: "<?= base_url('weblogin/checkLoginStatus') ?>",
-            method: "GET",
-            dataType: "json",
-            success: function (res) {
-                if (res.loggedIn) {
-                    window.location.href = targetUrl;
-                } else {
-                    $('#exampleModal').modal('show'); // Open login modal
-                }
-            },
-            error: function () {
-                alert("Something went wrong while checking login.");
-            }
-        });
-    });
 </script>
 
 </html>

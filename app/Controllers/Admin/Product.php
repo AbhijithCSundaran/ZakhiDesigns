@@ -170,14 +170,14 @@ class Product extends BaseController
     // Product save
     public function saveProduct()
     {
-        // print_r('hai');
-        //exit; 
+       
         $pr_id = $this->input->getPost('pr_id');
         $sub_id = $this->input->getPost('sub_id');
         $cat_id = $this->input->getPost('cat_id');
         $product_name = trim($this->input->getPost('product_name'));
         $product_name = ucwords(strtolower(trim($product_name)));
-        $product_code = trim($this->input->getPost('product_code'));
+        $product_code = trim($this->request->getPost('product_code')); // ✅ CodeIgniter 4
+
         $product_description = $this->input->getPost('product_description');
 
         $product_description = preg_replace_callback('/([.!?]\s*)([a-z])/',
@@ -205,6 +205,91 @@ class Product extends BaseController
                 'message' => 'All Required Fields Must Be Filled.'
             ]);
         }
+        if (!preg_match('/^[a-zA-Z0-9 _-]+$/', $product_name)) {
+    return $this->response->setJSON([
+        'status' => 'error',
+        'field' => 'product_name',
+        'message' => 'Invalid Product Name.'
+    ]);
+}
+if (!preg_match('/^[a-zA-Z0-9 _\-()\/\\\\]+$/', $product_code)) {
+    return $this->response->setJSON([
+        'status' => 'error',
+        'field' => 'product_code',
+        'message' => 'Invalid Product Code'
+    ]);
+}
+if(!empty($product_description)) {
+if (!preg_match('/^[a-zA-Z0-9\s.,;:()\'"\/&_@+-]+$/', $product_description)) {
+    return $this->response->setJSON([
+        'status' => 'error',
+        'field' => 'product_description',
+        'message' => 'Description contains invalid characters. Allowed: letters, numbers, spaces, and basic punctuation.'
+    ]);
+}
+}
+if (!ctype_digit($product_stock)) {
+    return $this->response->setJSON([
+        'status' => 'error',
+        'field' => 'product_stock',
+        'message' => 'Product Stock Must be a Number.'
+    ]);
+}
+
+// Validate reset_stock
+if (!ctype_digit($reset_stock)) {
+    return $this->response->setJSON([
+        'status' => 'error',
+        'field' => 'reset_stock',
+        'message' => 'Reset Stock Must be a Number.'
+    ]);
+}
+if(!empty($discount_value)){
+if (!preg_match('/^[0-9]+$/', $discount_value)) {
+    return $this->response->setJSON([
+        'status' => 'error',
+        'field' => 'discount_value',
+        'message' => 'Please Enter a Number Value.'
+    ]);
+}
+}
+
+if (!preg_match('/^[a-zA-Z, ]+$/', $available_color)) {
+    return $this->response->setJSON([
+        'status' => 'error',
+        'field' => 'aval_colors',
+        'message' => 'Invalid colors.'
+    ]);
+}
+$allowedPattern = '/^[a-zA-Z0-9\s\-\&\/()]+$/';
+if(!empty($sleeve_style)){
+if (!preg_match($allowedPattern, $sleeve_style)) {
+    return $this->response->setJSON([
+        'status' => 'error',
+        'field' => 'sleeve_style',
+        'message' => 'Invalid Sleeve Style.'
+    ]);
+}
+}
+if(!empty($fabric)){
+if (!preg_match($allowedPattern, $fabric)) {
+    return $this->response->setJSON([
+        'status' => 'error',
+        'field' => 'fabric',
+        'message' => 'Invalid Fabric Name.'
+    ]);
+}
+}
+if(!empty($stitching)){
+
+if (!preg_match($allowedPattern, $stitching)) {
+    return $this->response->setJSON([
+        'status' => 'error',
+        'field' => 'stitching',
+        'message' => 'Invalid Stitching Style.'
+    ]);
+}
+    }
         // Check if product name already exists (excluding current ID)
         if ($this->productModel->isProductExists($product_name, $pr_id)) {
             return $this->response->setJSON([

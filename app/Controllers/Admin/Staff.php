@@ -71,7 +71,7 @@ class Staff extends BaseController
 	{
 		$us_id         = $this->input->getPost('us_id');
 		$staffname     = $this->input->getPost('staffname');
-		$staffname = ucwords(strtolower(trim($staffname)));
+		// $staffname 		= ucwords(strtolower(trim($staffname)));
 		$staffemail    = $this->input->getPost('staffemail');
 		$staffotemail  = $this->input->getPost('staffotemail');
 		$mobile        = $this->input->getPost('mobile');
@@ -98,7 +98,7 @@ class Staff extends BaseController
 		}
 		//validate password length
 		
-		if (!empty($password) && (strlen($password) < 4 || strlen($password) > 10)) {
+		if (!empty($oldpass) && (strlen($oldpass) < 4 || strlen($oldpass) > 10)) {
 			return $this->response->setJSON([
 				'status' => 'error',
 				'msg' => 'Password must be between 4 to 10 characters.'
@@ -110,8 +110,8 @@ class Staff extends BaseController
 				'msg' => 'Password must be between 4 to 10 characters.'
 			]);
 		}
-	/* 	   // Allow only letters, numbers, @ and _
-		if (!preg_match('/^[a-zA-Z0-9@_]+$/', $password)) {
+	   // Allow only letters, numbers, @ and _
+		if (!preg_match('/^[a-zA-Z0-9@_]+$/', $oldpass)) {
 			return $this->response->setJSON([
 				'status' => 'error',
 				'msg' => 'Password can only contain letters, numbers, @, and _.'
@@ -124,7 +124,7 @@ class Staff extends BaseController
 				'msg' => 'Password can only contain letters, numbers, @, and _.'
 			]);
 		}
-	 */
+
 		$staffModel = new StaffModel();
 		// INSERT
 		if (empty($us_id)) {

@@ -66,7 +66,7 @@ class Customer extends BaseController
 		$custname = ucwords(strtolower(trim($this->input->getPost('custname'))));
 		// $cust_phcode = $this->input->getPost('cust_phcode'); 
 		$custemail = $this->input->getPost('custemail');
-		// $mobile = $this->input->getPost('mobile');
+		$mobile = $this->input->getPost('mobile');
 	    $password =$this->input->getPost('userpassword');
 		 if (!preg_match('/^[a-zA-Z ]+$/', $custname)) {
 			return $this->response->setJSON(['status' => 'error', 'msg' => 'Please Enter Name Correctly.']);
@@ -79,6 +79,13 @@ class Customer extends BaseController
 					'msg' => 'Invalid Email Format.'
 				]);
 			}
+			
+if (!preg_match('/^[0-9+\s\-() ]+$/', $mobile)) {
+    return $this->response->setJSON([
+        'status' => 0,
+        'msg' => 'Phone Number is Invalid.'
+    ]);
+}
 			//validate password length
 			
 			if (!empty($password) && (strlen($password) < 6 || strlen($password) > 15)) {
@@ -87,9 +94,16 @@ class Customer extends BaseController
 					'msg' => 'Password Must Be Between 6 to 15 Characters.'
 				]);
 			}
+			if(empty($password))
+			{
+			return $this->response->setJSON([
+					'status' => 'error',
+					'msg' => 'Please enter a password.'
+				]);
+			}
 
 			$customerModel = new \App\Models\Admin\CustomerModel();
-			if($custname && $custemail ) {
+			if($custname && $custemail && $password) {
 			if (empty($cust_id)) {
 				// INSERT
 			// Check if email already exists
@@ -99,7 +113,7 @@ class Customer extends BaseController
 				$data = [
 				'cust_Name'          => $custname,
 				'cust_Email'         => $custemail,
-				// 'cust_Phone'	     => $mobile,
+				 'cust_Phone'	     => $mobile,
 				// 'cust_Phcode'        => $cust_phcode,
 				'cust_Password'      => md5($password),
 				'cust_Status'	   	 => 1,

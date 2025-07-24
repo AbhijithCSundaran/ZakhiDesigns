@@ -380,30 +380,37 @@
                 data: { od_Id, add_Id },
                 dataType: "json",
                 success: function (res) {
-                    if (res.success) {
+                    if (res.status === 1) {
                         const newAddress = res.newAddress;
+                        if (newAddress && newAddress.add_Id) {
+                            // Remove previous address with same ID if exists (prevent duplicates)
+                            $(`.form-check input[value="${newAddress.add_Id}"]`).closest('.form-check').remove();
 
-                        // Remove previous address with same ID if exists (prevent duplicates)
-                        $(`.form-check input[value="${newAddress.add_Id}"]`).closest('.form-check').remove();
+                            const addressHtml = generateAddressHtml(newAddress); // Build new address radio + label block
+                            $('#selectExistAddress').append(addressHtml); // Append to container
 
-                        const addressHtml = generateAddressHtml(newAddress); // Build new address radio + label block
-                        $('#selectExistAddress').append(addressHtml); // Append to container
+                            // Re-render label content and set new radio as checked
+                            const newRadio = $(`input[name="address_id"][value="${newAddress.add_Id}"]`)[0];
+                            if (newRadio) {
+                                newRadio.checked = true;
+                                renderAddressLabel(newRadio);
+                                toggleEditLinks();
+                            }
 
-                        // Re-render label content and set new radio as checked
-                        const newRadio = $(`input[name="address_id"][value="${newAddress.add_Id}"]`)[0];
-                        if (newRadio) {
-                            newRadio.checked = true;
-                            renderAddressLabel(newRadio);
-                            toggleEditLinks();
+                            // toggleEditLinks(); // Ensure edit link shows on selected address
+
                         }
-
-                        toggleEditLinks(); // Ensure edit link shows on selected address
 
                         $('#messageBox')
                             .html('<div class="alert alert-success">' + res.msg + '</div>')
                             .fadeIn()
                             .delay(5000)
                             .fadeOut();
+                        setTimeout(function () {
+                            window.location.href = res.redirect;
+
+                        }, 3000);
+
 
                     } else {
                         $('#messageBox')
@@ -454,14 +461,14 @@
                 $radio.prop('checked', true);
             }
         }
- 
+
         // Render labels
         $('input[name="address_id"]').each(function () {
             renderAddressLabel(this);
         });
- 
+
         toggleEditLinks();
- 
+
         const editAddressId = sessionStorage.getItem('edit_address_id');
         const editProductId = sessionStorage.getItem('edit_product_id');
 
@@ -486,13 +493,13 @@
                 if ($editedRadio.length) {
                     $editedRadio.prop('checked', true);
                     sessionStorage.setItem('selectedAddressId', editAddressId);
- 
+
                     renderAddressLabel($editedRadio[0]);
                 }
- 
+
                 toggleEditLinks();
- 
- 
+
+
                 const $addressBlock = $('#address-' + editAddressId);
                 if ($addressBlock.length) {
                     $('html, body').animate({

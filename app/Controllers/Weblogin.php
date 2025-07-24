@@ -23,8 +23,8 @@ class Weblogin extends BaseController
 	}
 	public function customerAuthen()
 	{
-		$email = $this->request->getPost('cust_Email');
-		$password = md5($this->request->getPost('cust_Password'));
+		$email = $this->request->getPost('login_email');
+		$password = md5($this->request->getPost('login_password'));
 		if ($email && $password) {
 			$userLog = $this->customerLoginModel->getLoginAccount($email, $password);
 			//echo $userLog;exit();
@@ -141,6 +141,76 @@ class Weblogin extends BaseController
     $isLoggedIn = session()->has('cust_Id'); // adjust session key to yours
     return $this->response->setJSON(['loggedIn' => $isLoggedIn]);
 }
+ public function createnew() {
+	
+		
+		// $custname = ;
+		$custname = ucwords(strtolower(trim($this->input->getPost('custname'))));
+		// $cust_phcode = $this->input->getPost('cust_phcode'); 
+		$custemail = $this->input->getPost('custemail');
+		$mobile = $this->input->getPost('mobile');
+	    $password =$this->input->getPost('userpassword');
+		 if (!preg_match('/^[a-zA-Z ]+$/', $custname)) {
+			return $this->response->setJSON(['status' => 'error', 'msg' => 'Please Enter Name Correctly.']);
+		}
 
+		// Validate email formats
+			if (!filter_var($custemail, FILTER_VALIDATE_EMAIL)) {
+				return $this->response->setJSON([
+					'status' => 'error',
+					'msg' => 'Invalid Email Format.'
+				]);
+			}
+
+			//validate password length
+			
+			if (!empty($password) && (strlen($password) < 6 || strlen($password) > 15)) {
+				return $this->response->setJSON([
+					'status' => 'error',
+					'msg' => 'Password Must Be Between 6 to 15 Characters.'
+				]);
+			}
+			if(empty($password))
+			{
+			return $this->response->setJSON([
+					'status' => 'error',
+					'msg' => 'Please enter a password.'
+				]);
+			}
+
+			$customerModel = new CustomerLoginModel();
+			if($custname && $custemail && $password) {
+			if (empty($cust_id)) {
+				// INSERT
+			// Check if email already exists
+				if ($customerModel->getCustomerByEmail($custemail)) {
+					return $this->response->setJSON(['status' => 'error', 'msg' => 'User Email Already Exists. Please Login To Continue.']);
+				}
+				$data = [
+				'cust_Name'          => $custname,
+				'cust_Email'         => $custemail,
+				'cust_Password'      => md5($password),
+				'cust_Status'	   	 => 1,
+				'cust_createdon'     => date("Y-m-d H:i:s"),
+				'cust_createdby'     => $this->session->get('ad_uid'),
+				'cust_modifyby'      => $this->session->get('ad_uid'),
+			];
+				$customerModel->createcust($data);
+				echo json_encode(array(
+					"status" => 1,
+					"msg" => "Account Created Successfully. Please Login To Your Account To Start Shopping.",
+					"redirect" => base_url('customer')
+				));
+				
+			} 
+		}
+		else {
+			return $this->response->setJSON([
+				'status' => 'error',
+				'msg' => 'All Mandatory Fields Are Required.'
+			]);
+		}
+		
+	}
 
 }

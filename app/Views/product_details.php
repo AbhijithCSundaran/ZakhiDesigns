@@ -214,7 +214,7 @@ $zd_uid = session()->get('zd_uid');
 <section class="hero-banner">
     <div id="reviewsSection" class="mt-5">
         <div class="container-lg">
-            <h5>Customer Reviews</h5>
+            <h3 class="text-left">Customer Reviews</h3>
             <div class="row order-box">
                 <div>&nbsp;</div>
                 <?php if (!empty($reviews)): ?>

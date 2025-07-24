@@ -96,7 +96,7 @@ $(document).ready(function () {
         }
     });
 
-    $('#password').on('input', function () {
+    $('#userpassword').on('input', function () {
         const value = $(this).val().trim();
         $('#error-password').text(value ? '' : 'Password is required.');
     });
@@ -108,7 +108,11 @@ $(document).ready(function () {
 var baseUrl = "<?= base_url() ?>";
 
 $('#custSubmit').click(function(e) {
-	 let pwd = $('#password').val();
+    debugger;
+	 let pwd = $('#userpassword').val();
+     if(pwd==""){
+        $('#error-password').text('Please enter a password');
+     }
     let cpwd = $('#confirm_password').val();
     if (pwd !== cpwd) {
         $('#error-confirm-password').text('Passwords do not match');
